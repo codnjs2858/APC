@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragments/head::headFragment"></head>
+<body>
+	<div id="wrapper">
+		  <div th:replace="fragments/header::header1Fragment"></div>
+<div th:replace="fragments/leftmenu::leftmenuFragment"></div>
+		<div id="rightcolumn">
+			<th:block layout:fragment="customContents"></th:block>
+		 </div>
+		
+		<div th:replace="fragments/footer::footerFragment"></div>
+	</div>
+			<!-- 사용자지정 자바스크립트 라이블러리 파일 -->
+		<th:block layout:fragment="customFooterScript">
+			<!--===============================================================================================-->	
+				<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+			<!--===============================================================================================-->
+				<script src="vendor/animsition/js/animsition.min.js"></script>
+			<!--===============================================================================================-->
+				<script src="vendor/bootstrap/js/popper.js"></script>
+				<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+			<!--===============================================================================================-->
+				<script src="js/main.js"></script>
+		</th:block>
+</body>
+</html>
