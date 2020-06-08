@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- Begin Header1 -->
+<header id="header"  th:fragment="header1Fragment">
+		<!-- Header desktop -->
+		<div class="container-menu-desktop">
+			<div class="topbar">
+				<div class="content-topbar container h-100">
+					<div class="left-topbar">
+						<a href="/admin" class="left-topbar-item">
+							관리자모드
+						</a>
+
+						<a href="#" class="left-topbar-item">
+							Contact
+						</a>
+
+						<a href="/join" class="left-topbar-item">
+							회원가입
+						</a>
+
+						<a href="#" class="left-topbar-item">
+							로그인
+						</a>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Header Mobile -->
+			<div class="wrap-header-mobile">
+				<!-- Logo moblie -->		
+				<div class="logo-mobile">
+					<a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				</div>
+
+				<!-- Button show menu -->
+				<div class="btn-show-menu-mobile hamburger hamburger--squeeze m-r--8">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+				</div>
+			</div>
+
+			<!-- Menu Mobile -->
+			<div class="menu-mobile">
+				<ul class="topbar-mobile">
+					<li class="left-topbar">
+						<a href="#" class="left-topbar-item">
+							About
+						</a>
+
+						<a href="#" class="left-topbar-item">
+							Contact
+						</a>
+
+						<a href="#" class="left-topbar-item">
+							Sing up
+						</a>
+
+						<a href="#" class="left-topbar-item">
+							Log in
+						</a>
+					</li>
+
+					<li class="right-topbar">
+						<a href="#">
+							<span class="fab fa-facebook-f"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-twitter"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-pinterest-p"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-vimeo-v"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-youtube"></span>
+						</a>
+					</li>
+				</ul>
+
+				<ul class="main-menu-m">
+					<li>
+						<a href="index.html">Home</a>
+						<ul class="sub-menu-m">
+							<li><a href="index.html">Homepage v1</a></li>
+							<li><a href="home-02.html">Homepage v2</a></li>
+							<li><a href="home-03.html">Homepage v3</a></li>
+						</ul>
+
+						<span class="arrow-main-menu-m">
+							<i class="fa fa-angle-right" aria-hidden="true"></i>
+						</span>
+					</li>
+
+					<li>
+						<a href="#">News</a>
+					</li>
+
+					<li>
+						<a href="#">Entertainment </a>
+					</li>
+
+					<li>
+						<a href="#">Business</a>
+					</li>
+
+					<li>
+						<a href="#">Travel</a>
+					</li>
+
+					<li>
+						<a href="#">Life Style</a>
+					</li>
+
+					<li>
+						<a href="#">Video</a>
+					</li>
+
+					<li>
+						<a href="#">Features</a>
+						<ul class="sub-menu-m">
+							<li><a href="category-01.html">Category Page v1</a></li>
+							<li><a href="category-02.html">Category Page v2</a></li>
+							<li><a href="blog-grid.html">Blog Grid Sidebar</a></li>
+							<li><a href="blog-list-01.html">Blog List Sidebar v1</a></li>
+							<li><a href="blog-list-02.html">Blog List Sidebar v2</a></li>
+							<li><a href="blog-detail-01.html">Blog Detail Sidebar</a></li>
+							<li><a href="blog-detail-02.html">Blog Detail No Sidebar</a></li>
+							<li><a href="about.html">About Us</a></li>
+							<li><a href="contact.html">Contact Us</a></li>
+						</ul>
+
+						<span class="arrow-main-menu-m">
+							<i class="fa fa-angle-right" aria-hidden="true"></i>
+						</span>
+					</li>
+				</ul>
+			</div>
+			
+			<!--  -->
+			<div class="wrap-logo container">
+				<!-- Logo desktop -->		
+				<div class="logo">
+					<a href="#"><img src="images/dogs_logo02.jpg" alt="LOGO"></a>
+				</div>	
+			</div>	
+			
+			<!--  -->
+			<div class="wrap-main-nav">
+				<div class="main-nav show-main-nav">
+					<!-- Menu desktop -->
+					<nav class="menu-desktop">
+						<a class="logo-stick" href="#">
+							<img src="images/icons/logo-01.png" alt="LOGO">
+						</a>
+
+						<ul class="main-menu">
+							<li class="main-menu-active">
+								<a href="#">#유실공고</a>
+								<ul class="sub-menu">
+									<li><a href="#">#유기,유실 동물 등록(관)</a></li>
+									<li><a href="#">#공고 게시판</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">#분양</a>
+								<ul class="sub-menu">
+									<li><a href="#">#동물 분양 등록(관)</a></li>
+									<li><a href="#">#분양 신청 (심사 통과)</a></li>
+									<li><a href="#">#분양 동물 리스트</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">#입양</a>
+								<ul class="sub-menu">
+									<li><a href="#">#입양 심사</a></li>
+									<li><a href="#">#입양 신청 (심사 통과)</a></li>
+								</ul>
+							</li>
+
+							<li>
+								<a href="#">#보호동물 신고</a>
+								<ul class="sub-menu">
+									<li><a href="#">#신고 게시판</a></li>
+									<li><a href="#">#유기,유실 신고</a></li>
+									<li><a href="#">#분실 신고</a></li>
+									<li><a href="#">#반환(찾음) 신고</a></li>
+									<li><a href="#">#신고 종합관리(관)</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">#후기 리스트</a>
+								<ul class="sub-menu">
+									<li><a href="#">#후기 게시판</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">#마이 페이지</a>
+								<ul class="sub-menu">
+									<li><a href="#">#내 정보</a></li>
+									<li><a href="#">#신고 내역</a></li>
+									<li><a href="#">#분양 내역</a></li>
+									<li><a href="#">#보증금 내역</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>	
+		</div>
+	</header>
+
+<!-- End Header -->
+
+<!-- Begin Header2 -->
+<header id="header"  th:fragment="header2Fragment">
+		<!-- Header desktop -->
+		<div class="container-menu-desktop">
+			<div class="topbar">
+				<div class="content-topbar container h-100">
+					<div class="left-topbar">
+						<a href="/" class="left-topbar-item">
+							일반 모드
+						</a>
+
+						<a href="#" class="left-topbar-item">
+							Contact
+						</a>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Header Mobile -->
+			<div class="wrap-header-mobile">
+				<!-- Logo moblie -->		
+				<div class="logo-mobile">
+					<a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				</div>
+
+				<!-- Button show menu -->
+				<div class="btn-show-menu-mobile hamburger hamburger--squeeze m-r--8">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+				</div>
+			</div>
+
+			<!-- Menu Mobile -->
+			<div class="menu-mobile">
+				<ul class="topbar-mobile">
+					<li class="left-topbar">
+						<a href="#" class="left-topbar-item">
+							About
+						</a>
+
+						<a href="#" class="left-topbar-item">
+							Contact
+						</a>
+
+						<a href="#" class="left-topbar-item">
+							Sing up
+						</a>
+
+						<a href="#" class="left-topbar-item">
+							Log in
+						</a>
+					</li>
+
+					<li class="right-topbar">
+						<a href="#">
+							<span class="fab fa-facebook-f"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-twitter"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-pinterest-p"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-vimeo-v"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-youtube"></span>
+						</a>
+					</li>
+				</ul>
+
+				<ul class="main-menu-m">
+					<li>
+						<a href="index.html">Home</a>
+						<ul class="sub-menu-m">
+							<li><a href="index.html">Homepage v1</a></li>
+							<li><a href="home-02.html">Homepage v2</a></li>
+							<li><a href="home-03.html">Homepage v3</a></li>
+						</ul>
+
+						<span class="arrow-main-menu-m">
+							<i class="fa fa-angle-right" aria-hidden="true"></i>
+						</span>
+					</li>
+
+					<li>
+						<a href="#">News</a>
+					</li>
+
+					<li>
+						<a href="#">Entertainment </a>
+					</li>
+
+					<li>
+						<a href="#">Business</a>
+					</li>
+
+					<li>
+						<a href="#">Travel</a>
+					</li>
+
+					<li>
+						<a href="#">Life Style</a>
+					</li>
+
+					<li>
+						<a href="#">Video</a>
+					</li>
+
+					<li>
+						<a href="#">Features</a>
+						<ul class="sub-menu-m">
+							<li><a href="category-01.html">Category Page v1</a></li>
+							<li><a href="category-02.html">Category Page v2</a></li>
+							<li><a href="blog-grid.html">Blog Grid Sidebar</a></li>
+							<li><a href="blog-list-01.html">Blog List Sidebar v1</a></li>
+							<li><a href="blog-list-02.html">Blog List Sidebar v2</a></li>
+							<li><a href="blog-detail-01.html">Blog Detail Sidebar</a></li>
+							<li><a href="blog-detail-02.html">Blog Detail No Sidebar</a></li>
+							<li><a href="about.html">About Us</a></li>
+							<li><a href="contact.html">Contact Us</a></li>
+						</ul>
+
+						<span class="arrow-main-menu-m">
+							<i class="fa fa-angle-right" aria-hidden="true"></i>
+						</span>
+					</li>
+				</ul>
+			</div>
+			
+			<!--  -->
+			<div class="wrap-logo container">
+				<!-- Logo desktop -->		
+				<div class="logo">
+					<a href="#"><img src="images/dogs_logo02.jpg" alt="LOGO"></a>
+				</div>	
+			</div>	
+			
+			<!--  -->
+			<div class="wrap-main-nav">
+				<div class="main-nav show-main-nav">
+					<!-- Menu desktop -->
+					<nav class="menu-desktop">
+						<a class="logo-stick" href="#">
+							<img src="images/icons/logo-01.png" alt="LOGO">
+						</a>
+
+						<ul class="main-menu admin">
+							<li class="main-menu-active">
+								<a href="#">#센터 관리</a>
+								<ul class="sub-menu">
+									<li><a href="#">#직원 관리</a></li>
+									<li><a href="#">#직원 근태관리</a></li>
+									<li><a href="#">#직원 휴가, 외출 관리</a></li>
+									<li><a href="#">#시설 관리</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">#동물 관리</a>
+								<ul class="sub-menu">
+									<li><a href="#">#동물 종류</a></li>
+									<li><a href="#">#보호공간 관리</a></li>
+									<li><a href="#">#사료 관리</a></li>
+									<li><a href="#">#펫 용품, 소모품 관리</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">#보호동물 관리</a>
+								<ul class="sub-menu">
+									<li><a href="#">#보호동물 등록(센터등록관리)</a></li>
+									<li><a href="#">#보호동물 처리(상태관리)</a></li>
+								</ul>
+							</li>
+
+							<li>
+								<a href="#">#동물건강 관리</a>
+								<ul class="sub-menu">
+									<li><a href="#">#동물 진료기록</a></li>
+									<li><a href="#">#동물 진료내역</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">#입양, 분양 관리</a>
+								<ul class="sub-menu">
+									<li><a href="#">#입양 관리</a></li>
+									<li><a href="#">#분양 관리</a></li>
+									<li><a href="#">#후기 관리</a></li>
+									<li><a href="#">#서비스 관리</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">#회원 관리</a>
+								<ul class="sub-menu">
+									<li><a href="#">#회원 리스트</a></li>
+									<li><a href="#">#입양인 관리</a></li>
+									<li><a href="#">#블랙리스트 관리</a></li>
+									<li><a href="#">#보증금 관리</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">#심사 관리</a>
+								<ul class="sub-menu">
+									<li><a href="#">#심사문항 관리</a></li>
+									<li><a href="#">#심사 지표</a></li>
+									<li><a href="#">#입양인 점수</a></li>
+									<li><a href="#">#심사신청 내역</a></li>
+									<li><a href="#">#심사완료 내역</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">#게시판 관리</a>
+								<ul class="sub-menu">
+									<li><a href="#">#유실게시판</a></li>
+									<li><a href="#">#분실신고 게시판</a></li>
+									<li><a href="#">#발견신고 게시판</a></li>
+									<li><a href="#">#찾음신고 게시판</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>	
+		</div>
+	</header>
+
+<!-- End Header -->
+
+</html>
