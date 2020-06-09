@@ -19,37 +19,52 @@
 </script>
 </th:block>
  <th:block layout:fragment="customContents">
-	<div id="container" class="container">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-6.col-lg-offset-3 col-md-6 col-xs-12">
-				<form action="/login" method="post" id="loginform">
-					<div class="form-group">
-				    <label for="inputId" class="col-sm-2 control-label">ID</label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="memberId" id="inputId" placeholder="ID">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-				    <div class="col-sm-10">
-				      <input type="password" class="form-control" name="memberPw" id="inputPassword" placeholder="Password">
-				    </div>
-				   </div> 
-				   <button type="submit" class="btn btn-default" onkeyup="enteroption();">로그인 </button>
-				    <div class="col-lg-6.col-lg-offset-3 col-md-6 col-xs-12"> 
-				<!-- 	   
-						<span class="label label-danger">Danger</span> -->
-				    <a href="#" class="btn btn-default btn-lg active" role="button" ><span class="label label-warning" >비번/아이디찾기</span></a>
-			
-				  	</div>
-				  	</form>
-				  </div>
-			
-				</div>
-			</div>
-		</div>
-	</div>
+  <!-- Vertical Layout -->
+  <div style="height: 130px;">
+  
+  </div>
+  
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                            	   회원 로그인
+                            </h2>
+                           
+                        </div>
+                        <div class="body">
+                            <form id="loginform" action="/login" method="post">
+                                <label for="email_address">아이디</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="userId" name="memberId" class="form-control" placeholder="Enter your Id">
+                                    </div>
+                                </div>
+                                <label for="password">Password</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="password"id="userPw" name="memberPw" class="form-control" placeholder="Enter your password">
+                                    </div>
+                                </div>
+
+                               
+                                <br>
+                                <button class="btn btn-primary m-t-15 waves-effect">LOGIN</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+         </section>   
+            
+            
+            <!-- #END# Vertical Layout -->
+ 
+ 
  </th:block> 
   
  
