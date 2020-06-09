@@ -5,11 +5,19 @@ import java.util.Date;
 public class Member {
 	private String memberId;
 	private String memberPw;
+	private String memberName;
 	private String memberPhone;
 	private String memberAddr;
 	private String memberEmail;
 	private Date memberInDate;
-	private Level level;
+	private Level level;//levelCode연결
+	
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
@@ -54,9 +62,9 @@ public class Member {
 	}
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", memberPw=" + memberPw + ", memberPhone=" + memberPhone
-				+ ", memberAddr=" + memberAddr + ", memberEmail=" + memberEmail + ", memberInDate=" + memberInDate
-				+ ", level=" + level + "]";
+		return "Member [memberId=" + memberId + ", memberPw=" + memberPw + ", memberName=" + memberName
+				+ ", memberPhone=" + memberPhone + ", memberAddr=" + memberAddr + ", memberEmail=" + memberEmail
+				+ ", memberInDate=" + memberInDate + ", level=" + level + "]";
 	}
 	
 	
