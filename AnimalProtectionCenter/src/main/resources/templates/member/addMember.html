@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+  
+<th:block layout:fragment="customTitle">
+<title>회원가입</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<div class="container">
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-6">
+			<h1 class="f1-m-2 cl12 tab01-title">회원가입</h1>
+		</div>
+	</div>
+		<div class="row">
+			
+			<div class="col-lg-10.col-lg-offset-2 col-md-10 col-xs-12">
+				<form class="form-horizontal">
+				  <div class="form-group">
+				    <label for="inputId" class="col-sm-2 control-label">ID</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputId" placeholder="ID">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+				    <div class="col-sm-10">
+				      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputName" class="col-sm-2 control-label">Name</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputName" placeholder="Name">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputPhoneNum" class="col-sm-2 control-label">PhoneNum</label>
+				    <div class="col-sm-10">
+				      <input type="tel" class="form-control" id="inputPhoneNum" placeholder="PhoneNum">
+				    </div>
+				  </div>
+				    <div class="form-group">
+				    <label for="inputAddr" class="col-sm-2 control-label">Address</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputAddr" placeholder="Address">
+				    </div>
+				  </div>
+				    <div class="form-group">
+				    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+				    <div class="col-sm-10">
+				      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <div class="col-sm-offset-4 col-sm-8">
+				      <button type="button" class="btn btn-primary">회원가입</button>
+				    </div>
+				  </div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</th:block>
+	<th:block layout:fragment="customFooterScript">
+	
+	</th:block>
+	
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+	
+ <th:block layout:fragment="customTitle">
+ 	<title>유기동물발견신고</title>
+ </th:block> 
+
+ <th:block layout:fragment="customContents">
+ 	<div class="container">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-1 col-lg-offset-10">
+				 	<a th:href="@{/addSearchAnimal}" class="btn btn-primary btn-lg active" role="button">유기동물발견신고</a>
+				</div>
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="col-lg-offset-2 col-lg-8">
+			 	<table class="table table-hover">
+			 		<tr>
+			 			<th>사진</th>
+			 			<th>유기동물종류</th>
+			 			<th>유기동물성별</th>
+			 			<th>등록인</th>
+			 			<th>신고날짜</th>
+			 			<th>신고취소날짜</th>
+			 		</tr>
+			 		<tr>
+			 			<td></td>
+			 			<td></td>
+			 			<td></td>
+			 			<td></td>
+			 			<td></td>
+			 			<td></td>
+			 		</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+ </th:block> 
+ 
+  <th:block layout:fragment="customHeadScript">
+ 	
+ </th:block> 
+	 
+ <th:block layout:fragmnet="customFooterScript">
+
+ 
+ </th:block>
+ 
+</html>
