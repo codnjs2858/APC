@@ -10,21 +10,21 @@ public class CompanionAnimalRegisterController {
 	
 	@GetMapping("/companionAnimalRegisterList")
 	public String companionAnimalRegisterList() {
-		return "companionanimalregister/companionanimalregisterlist/companionAnimalRegisterList";
+		return "companionanimalregister/companionAnimalRegisterList";
 		
 	}
 	
-	@PostMapping("/addCompanionAnimalRegister")
+	@PostMapping("/companionAnimalRegisterInsert")
 	
-	public String addCompanionAnimalRegister() {
-		return "companionanimalregister/companionanimalregisterlist/companionAnimalRegisterList";
+	public String companionAnimalRegisterInsert() {
+		return "companionanimalregister/companionAnimalRegisterList";
 		
 	}
 	
-	@GetMapping("/addCompanionAnimalRegister")
+	@GetMapping("/companionAnimalRegisterInsert")
 	public String addCompanionAnimalRegister(Model model) {
 		
-		return "companionanimalregister/companionanimalregisterInsert/addCompanionAnimalRegister";
+		return "companionanimalregister/companionAnimalRegisterInsert";
 		
 	}
 	
