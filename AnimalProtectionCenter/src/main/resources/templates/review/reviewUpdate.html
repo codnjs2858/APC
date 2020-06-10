@@ -4,10 +4,10 @@
   layout:decorator="@{layout/default2}">
 
 <th:block layout:fragment="customTitle">
-	<title>입양 동물 기간 등록 관리</title>
+	<title>후기 수정 관리</title>
 </th:block>
 <th:block layout:fragment="customContents">
-	<form action="/petAdoptionInsert" method="post">
+	<form action="giftUpdate" method="post">
 
 <section class="content">
 <div class="container-fluid">		
@@ -15,7 +15,7 @@
        	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
            	<div class="card">
                	<div class="header">
-                   	<h2>입양 동물 기간 등록 관리</h2>
+                   	<h2>후기 수정 관리</h2>
 						<ul class="header-dropdown m-r--5">
                        		<li class="dropdown">
                            		<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -23,49 +23,45 @@
                    		</ul>
                	</div>
                	<div class="body">
-						<label>분양등록코드(데이터가져오기)</label>
+						<label for="center_regist">후기 코드</label>
+                       			<div class="form-group">
+                           			<div class="form-line">
+                               			<input type="text" id="center_regist" class="form-control" readonly>
+                           			</div>
+                       			</div>
+						<label>후기등록 횟수</label>
 							<div class="form-group">
 								<div class="form-line">
 									<select>
-									<option>#</option>
-									<option>#</option>
+									<option>1회</option>
+									<option>2회</option>
+									<option>3회</option>
+									<option>4회</option>
+									<option>5회</option>
+									<option>6회</option>
 									</select>
 								</div>
-							</div>
-							<label>관리등록번호(데이터가져오기)</label>
+						<label>후기 등록 누락 횟수</label>
 							<div class="form-group">
 								<div class="form-line">
 									<select>
-									<option>#</option>
-									<option>#</option>
+									<option>1회</option>
+									<option>2회</option>
+									<option>3회</option>
 									</select>
-								</div>
-							</div>
-							<label>입양인(데이터가져오기)</label>
-							<div class="form-group">
-								<div class="form-line">
-									<select>
-									<option>#</option>
-									<option>#</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="form-line">
-										<p>입양관리시작기간</p>
-									<input type="date">
 								</div>	
 							</div>
-							<label>담당자(데이터가져오기)</label>
-								<div class="form-group">
-									<div class="form-line">
-										<select>
-										<option>#</option>
-										<option>#</option>
-										</select>
-									</div>
-								</div>
-							<button type="submit" class="btn btn-primary m-t-15 waves-effect">등록</button>
+						<label>담당자(데이터 가져오기)</label>
+						<div class="form-group">
+							<div class="form-line">
+								<select>
+								<option>#</option>
+								<option>#</option>
+								<option>#</option>
+								</select>
+							</div>	
+						</div>
+							<button type="submit" class="btn btn-primary m-t-15 waves-effect">수정완료</button>
                        </div>
     			</div>               
 			</div>

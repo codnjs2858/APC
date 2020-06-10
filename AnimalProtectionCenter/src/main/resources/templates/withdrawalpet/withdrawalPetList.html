@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
+	layout:decorate="@{layout/default2}">
 
 <th:block layout:fragment="customTitle">
 	<title>회수 동물 리스트 관리</title>
@@ -45,7 +45,8 @@
                         <thead>
                             <tr>
 	                            <th rowspan="1" colspan="1">회수코드</th>
-	                            <th rowspan="1" colspan="1">분양코드</th>
+	                            <th rowspan="1" colspan="1">분양등록코드</th>
+	                            <th rowspan="1" colspan="1">관리등록번호</th>
 	                            <th rowspan="1" colspan="1">회수사유</th>
 	                            <th rowspan="1" colspan="1">입양인 이름</th>
 	                            <th rowspan="1" colspan="1">회수 날짜</th>
@@ -57,7 +58,8 @@
                         <tfoot>
                             <tr>
 	                            <th rowspan="1" colspan="1">회수코드</th>
-	                            <th rowspan="1" colspan="1">분양코드</th>
+	                            <th rowspan="1" colspan="1">분양등록코드</th>
+	                            <th rowspan="1" colspan="1">관리등록번호</th>
 	                            <th rowspan="1" colspan="1">회수사유</th>
 	                            <th rowspan="1" colspan="1">입양인 이름</th>
 	                            <th rowspan="1" colspan="1">회수 날짜</th>
@@ -67,6 +69,7 @@
 	                         </tr>
                         </tfoot>
                         <tbody><tr role="row" class="odd">
+                                <td>#</td>
                                 <td>#</td>
                                 <td>#</td>
                                 <td>#</td>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
+	layout:decorate="@{layout/default2}">
 
 <th:block layout:fragment="customTitle">
 	<title>기프트 리스트 관리</title>
@@ -50,6 +50,7 @@
 	                            <th rowspan="1" colspan="1">기프트 비용</th>
 	                            <th rowspan="1" colspan="1">기프트 이유(상세)</th>
 	                            <th rowspan="1" colspan="1">등록 날짜</th>
+	                            <th rowspan="1" colspan="1">담당자</th>
 	                            <th rowspan="1" colspan="1">수정</th>
 	                            <th rowspan="1" colspan="1">삭제</th>
 	                         </tr>
@@ -62,11 +63,13 @@
 	                            <th rowspan="1" colspan="1">기프트 비용</th>
 	                            <th rowspan="1" colspan="1">기프트 이유(상세)</th>
 	                            <th rowspan="1" colspan="1">등록 날짜</th>
+	                            <th rowspan="1" colspan="1">담당자</th>
 	                            <th rowspan="1" colspan="1">수정</th>
 	                            <th rowspan="1" colspan="1">삭제</th>
 	                         </tr>
                         </tfoot>
                         <tbody><tr role="row" class="odd">
+                                <td>#</td>
                                 <td>#</td>
                                 <td>#</td>
                                 <td>#</td>
