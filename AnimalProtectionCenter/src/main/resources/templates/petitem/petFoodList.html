@@ -33,13 +33,13 @@
 						        </tr>
 						    </thead>
 						    <tbody>
-						        <tr>
-						            <td>강아지</td>
-						            <td>50000</td>
-						            <td>2</td>
-						            <td>25</td>
-						            <td>건강한 사료</td>
-						            <td>하림</td>
+						        <tr th:each="pf : ${petFoodList}">
+						            <td>[[${pf.foodType}]]</td>
+						            <td>[[${pf.foodPrice}]]</td>
+						            <td th:text="${pf.foodAmount}"></td>
+						            <td th:text="${pf.foodRemain}"></td>
+						            <td th:text="${pf.foodName}"></td>
+						            <td>[[${pf.foodCompany}]]</td>
 						            <td>홍01</td>
 						            <td>
 						            	<a th:href="@{petFoodUpdate(type=0)}">수정</a>
@@ -48,97 +48,6 @@
 						            	<a href="#">삭제</a>
 						            </td>
 						        </tr>
-						        <tr>
-						            <td>강아지</td>
-						            <td>20000</td>
-						            <td>1</td>
-						            <td>25</td>
-						            <td>맛있는 사료</td>
-						            <td>하림</td>
-						            <td>홍02</td>
-						            <td>
-						            	<a th:href="@{petFoodUpdate(type=0)}">수정</a>
-						            </td>
-						            <td>
-						            	<a href="#">삭제</a>
-						            </td>
-						        </tr>
-						        <tr>
-						            <td>고양이</td>
-						            <td>50000</td>
-						            <td>2</td>
-						            <td>25</td>
-						            <td>맛난 사료</td>
-						            <td>동원</td>
-						            <td>홍03</td>
-						            <td>
-						            	<a th:href="@{petFoodUpdate(type=1)}">수정</a>
-						            </td>
-						            <td>
-						            	<a href="#">삭제</a>
-						            </td>
-						        </tr>
-						        <tr>
-						            <td>강아지</td>
-						            <td>20000</td>
-						            <td>1</td>
-						            <td>25</td>
-						            <td>맛있는 사료</td>
-						            <td>하림</td>
-						            <td>홍02</td>
-						            <td>
-						            	<a th:href="@{petFoodUpdate(type=0)}">수정</a>
-						            </td>
-						            <td>
-						            	<a href="#">삭제</a>
-						            </td>
-						        </tr>
-						        <tr>
-						            <td>고양이</td>
-						            <td>50000</td>
-						            <td>2</td>
-						            <td>25</td>
-						            <td>맛난 사료</td>
-						            <td>동원</td>
-						            <td>홍03</td>
-						            <td>
-						            	<a th:href="@{petFoodUpdate(type=1)}">수정</a>
-						            </td>
-						            <td>
-						            	<a href="#">삭제</a>
-						            </td>
-						        </tr>
-						        <tr>
-						            <td>강아지</td>
-						            <td>50000</td>
-						            <td>2</td>
-						            <td>25</td>
-						            <td>건강한 사료</td>
-						            <td>하림</td>
-						            <td>홍01</td>
-						            <td>
-						            	<a th:href="@{petFoodUpdate(type=0)}">수정</a>
-						            </td>
-						            <td>
-						            	<a href="#">삭제</a>
-						            </td>
-						        </tr>
-						         <tr>
-						            <td>고양이</td>
-						            <td>20000</td>
-						            <td>5</td>
-						            <td>25</td>
-						            <td>맛난 사료</td>
-						            <td>동원</td>
-						            <td>홍03</td>
-						            <td>
-						            	<a th:href="@{petFoodUpdate(type=1)}">수정</a>
-						            </td>
-						            <td>
-						            	<a href="#">삭제</a>
-						            </td>
-						        </tr>
-						        
 						    </tbody>
 						</table>
 					</div>
