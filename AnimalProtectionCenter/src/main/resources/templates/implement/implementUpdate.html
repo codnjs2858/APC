@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+	
+<th:block layout:fragment="customTitle">
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="container-fluid">
+			<div class="block-header">
+                <h2>
+                    	시설수정
+                </h2>
+            </div>
+
+			<div class="card">
+				<div class="body">
+					<form action="/implementList" method="POST">
+	                    <div class="input-group">
+	                        <div class="form-line">
+								시설종류
+	                            <input type="text" class="form-control" name="username" placeholder="Username">
+	                        </div>
+						</div>
+						<div class="input-group">
+	                        <div class="form-line">
+								총수량
+	                            <input type="text" class="form-control" name="username" placeholder="Username" th:value="${space}" readonly="readonly">
+	                        </div>
+						</div>
+						<div class="input-group">
+	                        <div class="form-line">
+								입고수량
+	                            <input type="number" class="form-control" name="username" placeholder="Username">
+	                        </div>
+						</div>
+						<div class="input-group">
+	                        <div class="form-line">
+								재고
+	                            <input type="number" class="form-control" name="username" placeholder="Username">
+	                        </div>
+						</div>
+						<div class="input-group">
+	                        <div class="form-line">
+								파손량
+	                            <input type="number" class="form-control" name="username" placeholder="Username">
+	                        </div>
+						</div>
+						<div class="input-group">
+	                        <div class="form-line">
+								단가
+	                            <input type="number" class="form-control" name="username" placeholder="Username">
+	                        </div>
+						</div>
+						<div class="input-group">
+	                        <div class="form-line">
+								구매인
+	                            <input type="number" class="form-control" name="username" placeholder="Username">
+	                        </div>
+						</div>
+						
+                        <button class="btn btn-block bg-pink waves-effect" type="submit">시설수정</button>
+                        
+                	</form>
+				</div>
+			</div>
+			
+		
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>
