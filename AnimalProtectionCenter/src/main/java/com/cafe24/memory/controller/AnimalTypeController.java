@@ -8,19 +8,19 @@ public class AnimalTypeController {
 
 	@GetMapping("/animaltypelist")
 	public String listAnimalType() {
-		return "animaltype/animaltypelist";
+		return "animaltype/animalTypeList";
 	}
 	@GetMapping("/animaltypeinsert")
 	public String insertAnimalType() {
-		return "animaltype/animaltypeinsert";
+		return "animaltype/animalTypeInsert";
 	}
 	@GetMapping("/animaltypeupdate")
 	public String updateAnimalType() {
-		return "animaltype/animaltypeupdate";
+		return "animaltype/animalTypeUpdate";
 	}
 	@GetMapping("/animaltypedelete")
 	public String deleteAnimalType() {
-		return "animaltype/animaltypelist";
+		return "animaltype/animalTypeList";
 	}
 	
 	
@@ -29,7 +29,10 @@ public class AnimalTypeController {
 	//animal center insert
 	@GetMapping("/animalcenterinsert")
 	public String insertAnimalCenter() {
-		return "animalcenter/animalcenterinsert";
+		return "animalcenter/animalCenterInsert";
 	}
-	
+	@GetMapping("/animalCenterList")
+	public String listAnimalCenter() {
+		return "animalcenter/animalCenterList";
+	}
 }
