@@ -22,7 +22,7 @@ public class CompanionAnimalRegisterController {
 	}
 	
 	@GetMapping("/companionAnimalRegisterInsert")
-	public String addCompanionAnimalRegister(Model model) {
+	public String companionAnimalRegisterInsert(Model model) {
 		
 		return "companionanimalregister/companionAnimalRegisterInsert";
 		
