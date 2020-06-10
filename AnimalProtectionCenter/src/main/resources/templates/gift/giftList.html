@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
+	layout:decorate="@{layout/default2}">
 
 <th:block layout:fragment="customTitle">
-	<title>반려동물등록리스트</title>
+	<title>기프트 리스트 관리</title>
 </th:block>
 <th:block layout:fragment="customContents">
 
@@ -21,7 +21,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>반려동물등록 리스트</h2>
+                <h2>기프트 리스트 관리</h2>
             </div>
             <div class="body">
                 <div class="table-responsive">
@@ -44,43 +44,44 @@
                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                         <thead>
                             <tr>
-	                            <th rowspan="1" colspan="1">관리등록번호</th>
-	                            <th rowspan="1" colspan="1">회원아이디</th>
-	                            <th rowspan="1" colspan="1">회원명</th>
-	                            <th rowspan="1" colspan="1">분양등록코드</th>
-	                            <th rowspan="1" colspan="1">상태</th>
-	                            <th rowspan="1" colspan="1">등록날짜</th>
-	                            <th rowspan="1" colspan="1">등록취소날짜</th>
-	                            <th rowspan="1" colspan="1">보호장소코드</th>
+	                            <th rowspan="1" colspan="1">기프트 코드</th>
+	                            <th rowspan="1" colspan="1">입양인 이름</th>
+	                            <th rowspan="1" colspan="1">기프트 종류</th>
+	                            <th rowspan="1" colspan="1">기프트 비용</th>
+	                            <th rowspan="1" colspan="1">기프트 이유(상세)</th>
+	                            <th rowspan="1" colspan="1">등록 날짜</th>
+	                            <th rowspan="1" colspan="1">담당자</th>
 	                            <th rowspan="1" colspan="1">수정</th>
 	                            <th rowspan="1" colspan="1">삭제</th>
-	                        </tr>
+	                         </tr>
                         </thead>
                         <tfoot>
                             <tr>
-	                            <th rowspan="1" colspan="1">관리등록번호</th>
-	                            <th rowspan="1" colspan="1">회원아이디</th>
-	                            <th rowspan="1" colspan="1">회원명</th>
-	                            <th rowspan="1" colspan="1">분양등록코드</th>
-	                            <th rowspan="1" colspan="1">상태</th>
-	                            <th rowspan="1" colspan="1">등록날짜</th>
-	                            <th rowspan="1" colspan="1">등록취소날짜</th>
-	                            <th rowspan="1" colspan="1">보호장소코드</th>
+	                            <th rowspan="1" colspan="1">기프트 코드</th>
+	                            <th rowspan="1" colspan="1">입양인 이름</th>
+	                            <th rowspan="1" colspan="1">기프트 종류</th>
+	                            <th rowspan="1" colspan="1">기프트 비용</th>
+	                            <th rowspan="1" colspan="1">기프트 이유(상세)</th>
+	                            <th rowspan="1" colspan="1">등록 날짜</th>
+	                            <th rowspan="1" colspan="1">담당자</th>
 	                            <th rowspan="1" colspan="1">수정</th>
 	                            <th rowspan="1" colspan="1">삭제</th>
-	                        </tr>
+	                         </tr>
                         </tfoot>
                         <tbody><tr role="row" class="odd">
-                                <td>E05-35</td>
-                                <td>id001</td>
-                                <td>홍길동</td>
-                                <td>Animal_01</td>
-                                <td>분양가능</td>
-                                <td>2008/11/28</td>
-                                <td></td> 
-                                <td>Cage01</td>
-                                <td>수정</td>
-                                <td>삭제</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <th>
+	                            	<a th:href="@{/giftUpdate}">수정</a>
+	                            </th>
+	                            <th>
+	                            	<a th:href="@{#}">삭제</a>
+	                            </th>
                             </tr></tbody>
                     </table>
                     </div>
@@ -113,41 +114,6 @@
        
     </div>
 </section>
-
-<!-- Jquery Core Js -->
-<script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="../../plugins/jquery/jquery.min.js"></script>
-
-<!-- Bootstrap Core Js -->
-<script src="../../plugins/bootstrap/js/bootstrap.js"></script>
-
-<!-- Select Plugin Js -->
-<script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
-
-<!-- Slimscroll Plugin Js -->
-<script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
-
-<!-- Waves Effect Plugin Js -->
-<script src="../../plugins/node-waves/waves.js"></script>
-
-<!-- Jquery DataTable Plugin Js -->
-<script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
-<script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-<script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-<script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-<script src="../../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-<script src="../../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
-<script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
-<script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-<script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
-
-<!-- Custom Js -->
-<script src="../../js/admin.js"></script>
-<script src="../../js/pages/tables/jquery-datatable.js"></script>
-
-<!-- Demo Js -->
-    <script src="../../js/demo.js"></script>
-
-
 </body></html>
 <!-- #END# Basic Examples -->
 
@@ -166,7 +132,3 @@
 		<a th:href="#">삭제</a>
 	</td>
 </tr> -->
-	
-	
-</th:block>
-</html>
