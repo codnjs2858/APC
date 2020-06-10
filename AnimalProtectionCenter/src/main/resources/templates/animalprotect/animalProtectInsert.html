@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+	
+<th:block layout:fragment="customTitle">
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="container-fluid">
+			<div class="block-header">
+                <h2>
+                    	유기동물보호등록
+                </h2>
+            </div>
+			
+			<div th:text="${space}"></div>
+			
+			
+			<div class="card">
+				<div class="body">
+					<form action="/animalProtection" method="POST">
+	                    <div class="input-group">
+	                        <div class="form-line">
+								센터등록된 유기동물번호
+	                            <input type="text" class="form-control" name="username" placeholder="Username" aria-required="true" aria-invalid="true">
+	                        </div>
+						</div>
+						<div class="input-group">
+	                        <div class="form-line">
+								보호공간
+	                            <input type="text" class="form-control" name="username" placeholder="Username" aria-required="true" aria-invalid="true">
+	                        </div>
+						</div>
+						<div class="input-group">
+	                        <div class="form-line">
+								보호상태
+	                            <input type="text" class="form-control" name="username" placeholder="Username" aria-required="true" aria-invalid="true">
+	                            
+	                            
+	                        </div>
+	                            
+						</div>
+						<div class="form-line">
+							<div class="btn-group bootstrap-select form-control show-tick"><button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" title="-- Please select --" aria-expanded="false"><span class="filter-option pull-left">-- Please select --</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" style="max-height: 556px; overflow: hidden; min-height: 92px;"><ul class="dropdown-menu inner" role="menu" style="max-height: 546px; overflow-y: auto; min-height: 82px;"><li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">-- Please select --</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">10</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">20</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">30</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="4" class=""><a tabindex="0" class="" style="" data-tokens="null"><span class="text">40</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">50</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="form-control show-tick" tabindex="-98">
+	                                       <option value="">-- Please select --</option>
+	                                       <option value="10">10</option>
+	                                       <option value="20">20</option>
+	                                       <option value="30">30</option>
+	                                       <option value="40">40</option>
+	                                       <option value="50">50</option>
+	                                   </select>
+							</div>
+                        </div>
+                        <button class="btn btn-block bg-pink waves-effect" type="submit">유기동물보호등록</button>
+                	</form>
+				</div>
+			</div>
+			
+		
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customCss">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+	<link href="../../plugins/multi-select/css/multi-select.css" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragmnet="customFooterScript">
+</th:block>
+ 
+</html>
