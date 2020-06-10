@@ -10,24 +10,30 @@ import com.cafe24.memory.domain.SearchReportAnimal;
 @Controller
 public class AnimalReportController {
 	
-	@GetMapping("/searhReportList")
+	@GetMapping("/searchReportList")
 	public String searhReport(SearchReportAnimal searchAni) {
 		
 		
-		return "search_report/searchReportList";
+		return "searchreport/searchReportList";
 	}
-	@PostMapping("/searcReport")
+	@PostMapping("/searchReport")
 	public String searcReport(AnimalType animalType) {
 	
 		return "index";
 	
 	}
 	
-	@GetMapping("/searcReport")
+	@GetMapping("/searchReport")
 	public String searhReport() {
 		
 		
-		return "search_report/searchReport";
+		return "searchreport/searchReport";
+	}
+	@GetMapping("/lostreport")
+	public String lostReport() {
+		
+		
+		return "lostreport/lostReportForm";
 	}
 	
 }
