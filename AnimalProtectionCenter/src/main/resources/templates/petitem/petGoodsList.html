@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+	
+<th:block layout:fragment="customTitle">
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="container-fluid">
+			<div class="block-header">
+                <h2>
+                    	펫용품리스트
+                </h2>
+            </div>
+			
+			<div class="card">
+				<div class="body">
+					<div class="table-responsive">
+						<table class="table table-bordered" style="text-align: center;">
+						    <thead>
+						        <tr>
+						            <th>용품</th>
+						            <th>강아지이름</th>
+						            <th>담당자</th>
+						            <th>수정</th>
+						        </tr>
+						    </thead>
+						    <tbody>
+						        <tr>
+						            <td>밥그릇</td>
+						            <td>5</td>
+						            <td>홍02</td>
+						            <td>
+						            	<a th:href="@{petFoodUpdate(type=0)}">수정</a>
+						            </td>
+						        </tr>
+						        <tr>
+						            <td>담요</td>
+						            <td>12</td>
+						            <td>홍02</td>
+						            <td>
+						            	<a th:href="@{petFoodUpdate(type=0)}">수정</a>
+						            </td>
+						        </tr>
+						        <tr>
+						            <td>밥그릇</td>
+						            <td>12</td>
+						            <td>홍02</td>
+						            <td>
+						            	<a th:href="@{petFoodUpdate(type=1)}">수정</a>
+						            </td>
+						        </tr>
+						        <tr>
+						            <td>담요</td>
+						            <td>5</td>
+						            <td>홍02</td>
+						            <td>
+						            	<a th:href="@{petFoodUpdate(type=0)}">수정</a>
+						            </td>
+						        </tr>
+						       
+						    </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>
