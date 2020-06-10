@@ -9,22 +9,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class CompanionAnimalRegisterController {
 	
 	@GetMapping("/companionAnimalRegisterList")
-	public String companionAnimalRegisterList() {
-		return "companionanimalregister/companionAnimalRegisterList";
+	
+		public String companionAnimalRegisterList() {
+			return "companionanimalregister/companionAnimalRegisterList";
 		
 	}
 	
 	@PostMapping("/companionAnimalRegisterInsert")
 	
-	public String companionAnimalRegisterInsert() {
-		return "companionanimalregister/companionAnimalRegisterList";
+		public String companionAnimalRegisterInsert() {
+			return "companionanimalregister/companionAnimalRegisterList";
 		
 	}
 	
 	@GetMapping("/companionAnimalRegisterInsert")
-	public String companionAnimalRegisterInsert(Model model) {
+	
+		public String companionAnimalRegisterInsert(Model model) {
+			return "companionanimalregister/companionAnimalRegisterInsert";
 		
-		return "companionanimalregister/companionAnimalRegisterInsert";
+	}
+	
+	@GetMapping("/companionAnimalRegisterUpdate")
+	
+		public String companionAnimalRegisterUpdate() {
+			return "companionanimalregister/companionAnimalRegisterUpdate";
+		
+	}
+	
+	@PostMapping("/companionAnimalRegisterUpdate")
+	
+		public String companionAnimalRegisterUpdate(Model model) {
+			return "companionanimalregister/companionAnimalRegisterList";
+			
 		
 	}
 	

@@ -9,27 +9,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class DepositController {
 	
 	@PostMapping("/depositInsert")
-	public String depositInsert(Model model) {
-		return "deposit/depositList";
-		
+		public String depositInsert(Model model) {
+			return "deposit/depositList";
 	}
 	
 	@GetMapping("/depositInsert")
-	public String depositInsert() {
-		return "deposit/depositInsert";
-		
+		public String depositInsert() {
+			return "deposit/depositInsert";
 	}
 	
 	@GetMapping("/depositList")
-	public String depositList() {
-		return "deposit/depositList";
-		
+		public String depositList() {
+			return "deposit/depositList";
 	}
 	
 	@GetMapping("/depositUpdate")
-	public String depositUpdate() {
-		return "deposit/depositUpdate";
-		
+		public String depositUpdate() {
+			return "deposit/depositUpdate";
 	}
+	
+	@PostMapping("/depositUpdate")
+		public String depositUpdate(Model model) {
+			return "deposit/depositList";
+	}
+	
 	
 }

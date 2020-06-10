@@ -8,25 +8,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AdopteeController {
 	
+	@PostMapping("adopteeUpdate")
+		public String adopteeUpdate(Model model) {
+			return "adoptee/adopteeList";
+	}
+	
 	@GetMapping("adopteeUpdate")
-	public String adopteeUpdate() {
-		return "adoptee/adopteeUpdate";
+		public String adopteeUpdate() {
+			return "adoptee/adopteeUpdate";
 	}
 	
 	@GetMapping("adopteeList")
-	public String adopteeList() {
-		return "adoptee/adopteeList";
+		public String adopteeList() {
+			return "adoptee/adopteeList";
 	}
 	
 	@GetMapping("adopteeInsert")
-	public String adopteeInsert() {
-		return "adoptee/adopteeInsert";
+		public String adopteeInsert() {
+			return "adoptee/adopteeInsert";
 		
 	}
 	
 	@PostMapping("adopteeInsert")
-	public String adopteeInsert(Model model) {
-		return "adoptee/adopteeList";
-		
+		public String adopteeInsert(Model model) {
+			return "adoptee/adopteeList";
 	}
 }

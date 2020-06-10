@@ -4,10 +4,10 @@
   layout:decorator="@{layout/default2}">
 
 <th:block layout:fragment="customTitle">
-	<title>반려동물분양등록관리</title>
+	<title>반려동물 분양 수정 관리</title>
 </th:block>
 <th:block layout:fragment="customContents">
-	<form action="/addCompanionAnimalRegister" method="post">
+	<form action="/companionAnimalRegisterUpdate" method="post">
 
 <section class="content">
 <div class="container-fluid">		
@@ -15,7 +15,7 @@
        	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
            	<div class="card">
                	<div class="header">
-                   	<h2>반려동물분양등록관리</h2>
+                   	<h2>반려동물 분양 수정 관리</h2>
 						<ul class="header-dropdown m-r--5">
                        		<li class="dropdown">
                            		<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -24,10 +24,28 @@
                	</div>
                	<div class="body">
 
-                       <label for="center_regist">관리번호</label>
+                       <label for="center_regist">관리등록번호</label>
                        <div class="form-group">
                            <div class="form-line">
-                               <input type="text" id="center_regist" class="form-control" placeholder="관리번호입력">
+                               <input type="text" id="center_regist" class="form-control" readonly>
+                           </div>
+                       </div>
+                       <label for="center_regist">회원 아이디</label>
+                       <div class="form-group">
+                           <div class="form-line">
+                               <input type="text" id="center_regist" class="form-control" readonly>
+                           </div>
+                       </div>
+                       <label for="center_regist">회원 이름</label>
+                       <div class="form-group">
+                           <div class="form-line">
+                               <input type="text" id="center_regist" class="form-control">
+                           </div>
+                       </div>
+                        <label for="center_regist">분양등록 코드</label>
+                       <div class="form-group">
+                           <div class="form-line">
+                               <input type="text" id="center_regist" class="form-control">
                            </div>
                        </div>
                        <label>동물상태</label>
@@ -39,25 +57,21 @@
                                 </select>
                            </div>
 						</div>
-						<label>분양받는 회원아이디(memberid 가져오기)</label>
+						<label for="center_regist">등록취소 날짜</label>
                        <div class="form-group">
                            <div class="form-line">
-								<select>
-                                    <option>#</option>
-                                    <option>#</option>
-                                </select>
+                               <input type="date" id="center_regist" class="form-control">
                            </div>
-						</div>
-						<label>보호장소 코드(데이터 가져오기)</label>
+                       </div>
+							<button type="submit" class="btn btn-primary m-t-15 waves-effect">수정완료</button>
+                       </div>
+						<label for="center_regist">보호장소 코드</label>
                        <div class="form-group">
                            <div class="form-line">
-								<select>
-                                    <option>#</option>
-                                    <option>#</option>
-                                </select>
+                               <input type="text" id="center_regist" class="form-control">
                            </div>
-						</div>
-							<button type="button" class="btn btn-primary m-t-15 waves-effect">등록</button>
+                       </div>
+							<button type="submit" class="btn btn-primary m-t-15 waves-effect">수정완료</button>
                        </div>
     			</div>               
 			</div>
