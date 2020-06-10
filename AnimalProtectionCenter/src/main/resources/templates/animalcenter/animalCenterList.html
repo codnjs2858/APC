@@ -7,6 +7,8 @@
 	<title>센터 등록 동물 리스트</title>
 </th:block>	
 <th:block layout:fragment="customCss">
+	<!-- JQuery DataTable Css -->
+    <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 </th:block> 
 
 <th:block layout:fragment="customContents">
@@ -17,18 +19,72 @@
 	                <h2>보호 동물 리스트</h2>
 				</div>
 				<div class="body">
-				</div>
+	                <div class="table-responsive" style="overflow: hidden;">
+	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
+	                        <thead>
+	                            <tr>
+		                            <th></th>
+		                            <th>동물 번호</th>
+		                            <th><div class="align-center">종류</div></th>
+		                            <th><div class="align-center">품종</div></th>
+		                            <th><div class="align-center">성별</div></th>
+		                            <th><div class="align-center">나이</div></th>
+		                            <th><div class="align-center">체중</div></th>
+		                            <th><div class="align-center">건강상태</div></th>
+		                            <th><div class="align-center">등록 날짜</div></th>
+		                            <th><div class="align-center">수정</div></th>
+		                            <th><div class="align-center">삭제</div></th>
+		                        </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr th:each="j : ${#numbers.sequence(1,100)}" class="odd">
+	                       			<td><div class="align-center"><span class="label label-warning">new</span></div></td>
+				                    <!-- <td class="sorting_1" th:text="${j}"></td> -->
+				                    <td><div class="align-center">[[${'000'+j}]]</div></td>
+		                            <td><div class="align-center">강아지</div></td>
+		                            <td><div class="align-center">말티즈</div></td>
+		                            <td><div class="align-center">암</div></td>
+		                            <td><div class="align-center">5세 추정</div></td>
+		                            <td><div class="align-center">4kg</div></td>
+		                            <td><div class="align-center"><a href="#">건강</a></div></td>
+		                            <td><div class="align-center">2020-06-10</div></td>
+		                            <td><div class="align-center"><a href="/animaltypeupdate">
+	                       				<i class="material-icons">update</i></a></div>
+	                      			</td>
+	                      			<td><div class="align-center">
+				                       	<a href="/animaltypedelete">
+				                       	<i class="material-icons">delete</i>
+				                       	</a></div>
+			                      	</td>
+	                        	</tr>
+	                        </tbody>
+	                    </table>
+	                </div>
+	            </div>
 			</div>
 		</div>
 	</section>
-
-
-
 </th:block> 
  
 <th:block layout:fragment="customHeadScript">
+
 </th:block> 
-<th:block layout:fragmnet="customFooterScript">
+<th:block layout:fragment="customFooterScript">
+	    <!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
+    	$(function(){
+    		$('#dataTabelEaxm1').dataTable();
+    	});
+    </script>
 </th:block>
  
 </html>

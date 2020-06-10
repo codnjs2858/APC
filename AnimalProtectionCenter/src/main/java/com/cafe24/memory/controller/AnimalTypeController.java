@@ -35,5 +35,4 @@ public class AnimalTypeController {
 	public String listAnimalCenter() {
 		return "animalcenter/animalCenterList";
 	}
-	
 }
