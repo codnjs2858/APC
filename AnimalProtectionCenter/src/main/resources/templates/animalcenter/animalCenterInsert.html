@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+
+<th:block layout:fragment="customTitle">
+	<title>보호 동물 센터 등록</title>	
+</th:block> 
+<th:block layout:fragment="customCss">
+    <!-- Bootstrap Select Css -->
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+</th:block>
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="col-lg-12">
+            <div class="block-header">
+                <h3>보호 동물 센터 등록</h3>
+            </div>
+			<div class="card">
+				<form action="/animalCenterList">
+					<div class="header">
+						<h2>신고인 정보</h2>
+					</div>
+		           	<div class="body">
+		           		<div class="row">
+		           			<div class="col-sm-3">
+			           			<b>신고자</b>
+			           			<div class="input-group ">
+					           		<div class="form-line m-t-10">
+						           		<input type="text" class="form-control" value="홍길동" readonly="readonly">
+					           		</div>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-3">
+			           			<b>신고자 연락처</b>
+			           			<div class="input-group ">
+					           		<div class="form-line m-t-10">
+						           		<input type="text" class="form-control" value="010-0000-0000" readonly="readonly">
+					           		</div>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-3">
+			           			<b>신고 장소</b>
+			           			<div class="input-group ">
+					           		<div class="form-line m-t-10">
+						           		<input type="text" class="form-control" value="전주시 금암동" readonly="readonly">
+					           		</div>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-3">
+			           			<b>신고 날짜</b>
+			           			<div class="input-group ">
+					           		<div class="form-line m-t-10">
+						           		<input type="text" class="form-control" value="2020-06-10" readonly="readonly">
+					           		</div>
+				           		</div>
+		           			</div>
+		           		</div>
+		           	</div>
+		           	<div class="header">
+		           		<h2>동물 정보</h2>
+		           	</div>
+		           	<div class="body">
+		           		<div class="row">
+			           		<div class="col-xs-6 col-md-3">
+								<b>동물 사진</b>
+								<div class="m-t-10">
+							    	<input type="file" name="animalPicture">
+								</div>
+							</div>
+		           		</div>
+		           		<div class="row">
+		           			<div class="col-xs-4 col-md-4">
+				           		<b>동물 번호</b>
+								<div class="input-group">
+					           		<div class="form-line m-t-10">
+						           		<input type="text" name="animalCenterNumber" class="form-control">
+					           		</div>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-4">
+				           		<b>축종</b>
+				           		<div class="input-group">
+					           		<select class="form-control">
+					           			<option>----축종 선택----</option>
+					           			<option>강아지</option>
+					           			<option>고양이</option>
+					           			<option>기타</option>
+					           		</select>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-4">
+				           		<b>품종</b>
+				           		<div class="input-group">
+					           		<select name="animalTypeCode">
+					           			<option>----품종 선택----</option>
+					           			<option>포메라니안</option>
+					           			<option>말티즈</option>
+					           			<option>비글</option>
+					           		</select>
+				           		</div>
+		           			</div>
+		           		</div>
+		           		<div class="row">
+		           			<div class="col-sm-4">
+				           		<b>나이</b>
+				           		<div class="input-group">
+				           			<div class="col-sm-6">
+						           		<div class="form-line">
+							           		<input type="text" class="form-control" name="animalAge">
+						           		</div>
+				           			</div>
+					           		<div class="col-sm-3">
+						           		<label>세 추정</label>
+					           		</div>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-4">
+				           		<b>체중</b>
+								<div class="input-group">
+				           			<div class="col-sm-6">
+						           		<div class="form-line">
+							           		<input type="text" class="form-control" name="animalWeight">
+						           		</div>
+				           			</div>
+					           		<div class="col-sm-3">
+						           		<label>kg</label>
+					           		</div>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-4">
+				           		<b>성별</b>
+				           		<div class="form-group">
+		                            <input type="radio" name="animalGender" id="male" class="with-gap">
+		                            <label for="male">암</label>
+		                            <input type="radio" name="animalGender" id="female" class="with-gap">
+		                            <label for="female" class="m-l-20">수</label>
+		                            <input type="radio" name="animalGender" id="unknown" class="with-gap">
+		                            <label for="unknown" class="m-l-20">미상 또는 중성화</label>
+		                        </div>
+		           			</div>
+		           		</div>
+			           		<b>특징</b>
+			           		<textarea class="form-control" rows="3" name="animalCharacter"></textarea>
+		           	</div>
+		           	<div class="body">
+		           		<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">보호 동물 센터 등록</button>
+		           	</div>
+				</form>
+	        </div>
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragmnet="customFooterScript">
+</th:block>
+</html>
