@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+	
+<th:block layout:fragment="customTitle">
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="container-fluid">
+			<div class="block-header">
+                <h2>
+                    	펫사료리스트
+                </h2>
+            </div>
+			
+			<div class="card">
+				<div class="body">
+					<div class="table-responsive">
+						<table class="table table-bordered" style="text-align: center;">
+						    <thead>
+						        <tr>
+						            <th>사료종류</th>
+						            <th>사료단가</th>
+						            <th>수량</th>
+						            <th>재고량</th>
+						            <th>사료이름</th>
+						            <th>사료회사</th>
+						            <th>구매인</th>
+						            <th>수정</th>
+						            <th>삭제</th>
+						        </tr>
+						    </thead>
+						    <tbody>
+						        <tr>
+						            <td>강아지</td>
+						            <td>50000</td>
+						            <td>2</td>
+						            <td>25</td>
+						            <td>건강한 사료</td>
+						            <td>하림</td>
+						            <td>홍01</td>
+						            <td>
+						            	<a th:href="@{petFoodUpdate(type=0)}">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						        <tr>
+						            <td>강아지</td>
+						            <td>20000</td>
+						            <td>1</td>
+						            <td>25</td>
+						            <td>맛있는 사료</td>
+						            <td>하림</td>
+						            <td>홍02</td>
+						            <td>
+						            	<a th:href="@{petFoodUpdate(type=0)}">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						        <tr>
+						            <td>고양이</td>
+						            <td>50000</td>
+						            <td>2</td>
+						            <td>25</td>
+						            <td>맛난 사료</td>
+						            <td>동원</td>
+						            <td>홍03</td>
+						            <td>
+						            	<a th:href="@{petFoodUpdate(type=1)}">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						        <tr>
+						            <td>강아지</td>
+						            <td>20000</td>
+						            <td>1</td>
+						            <td>25</td>
+						            <td>맛있는 사료</td>
+						            <td>하림</td>
+						            <td>홍02</td>
+						            <td>
+						            	<a th:href="@{petFoodUpdate(type=0)}">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						        <tr>
+						            <td>고양이</td>
+						            <td>50000</td>
+						            <td>2</td>
+						            <td>25</td>
+						            <td>맛난 사료</td>
+						            <td>동원</td>
+						            <td>홍03</td>
+						            <td>
+						            	<a th:href="@{petFoodUpdate(type=1)}">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						        <tr>
+						            <td>강아지</td>
+						            <td>50000</td>
+						            <td>2</td>
+						            <td>25</td>
+						            <td>건강한 사료</td>
+						            <td>하림</td>
+						            <td>홍01</td>
+						            <td>
+						            	<a th:href="@{petFoodUpdate(type=0)}">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						         <tr>
+						            <td>고양이</td>
+						            <td>20000</td>
+						            <td>5</td>
+						            <td>25</td>
+						            <td>맛난 사료</td>
+						            <td>동원</td>
+						            <td>홍03</td>
+						            <td>
+						            	<a th:href="@{petFoodUpdate(type=1)}">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						        
+						    </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>
