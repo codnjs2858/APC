@@ -9,8 +9,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PetItemController {
 	
-	@GetMapping("/petGoods")
-	public String petGoods() {
+	@GetMapping("/petGoodsUpdate")
+	public String petGoodsUpdate() {
+		
+		return "petitem/petGoodsUpdate";
+	}
+	
+	@PostMapping("/petGoodsList")
+	public String petGoodsList(Model model) {
+		
+		return "petitem/petGoodsList";
+	}
+	
+	@GetMapping("/petGoodsList")
+	public String petGoodsList() {
 		
 		return "petitem/petGoodsList";
 	}

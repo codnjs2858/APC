@@ -14,16 +14,16 @@ public class AdditionalCostController {
 		return "addtionalcost/additionCostUpdate";
 	}
 	
-	@PostMapping("/addtionalCost")
+	@PostMapping("/addtionalCostList")
 	public String addtionalCost(Model model) {
 		
-		return "addtionalcost/additionalCost";
+		return "addtionalcost/additionalCostList";
 	}
 	
-	@GetMapping("/addtionalCost")
+	@GetMapping("/addtionalCostList")
 	public String addtionalCost() {
 		
-		return "addtionalcost/additionalCost";
+		return "addtionalcost/additionalCostList";
 	}
 	
 	@GetMapping("/addtionalCostInsert")
