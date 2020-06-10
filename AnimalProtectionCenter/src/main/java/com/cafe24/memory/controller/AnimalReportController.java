@@ -29,5 +29,11 @@ public class AnimalReportController {
 		
 		return "searchreport/searchReport";
 	}
+	@GetMapping("/lostreport")
+	public String lostReport() {
+		
+		
+		return "lostreport/lostReportForm";
+	}
 	
 }
