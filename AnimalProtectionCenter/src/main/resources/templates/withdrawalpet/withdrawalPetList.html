@@ -4,7 +4,7 @@
 	layout:decorate="~{layout/default}">
 
 <th:block layout:fragment="customTitle">
-	<title>회수 동물 관리</title>
+	<title>회수 동물 리스트 관리</title>
 </th:block>
 <th:block layout:fragment="customContents">
 
@@ -73,8 +73,12 @@
                                 <td>#</td>
                                 <td>#</td>
                                 <td>#</td>
-                                <td>수정</td>
-                                <td>삭제</td>
+                                <th>
+	                            	<a th:href="@{#}">수정</a>
+	                            </th>
+	                            <th>
+	                            	<a th:href="@{#}">삭제</a>
+	                            </th>
                             </tr></tbody>
                     </table>
                     </div>

@@ -4,7 +4,7 @@
 	layout:decorate="~{layout/default}">
 
 <th:block layout:fragment="customTitle">
-	<title>블랙리스트 관리 리스트</title>
+	<title>블랙리스트 리스트 관리 </title>
 </th:block>
 <th:block layout:fragment="customContents">
 
@@ -21,7 +21,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>블랙리스트 관리 리스트</h2>
+                <h2>블랙리스트 리스트 관리 </h2>
             </div>
             <div class="body">
                 <div class="table-responsive">
@@ -67,8 +67,12 @@
                                 <td>#</td>
                                 <td>#</td>
                                 <td>#</td>
-                                <td>수정</td>
-                                <td>삭제</td>
+                                <th>
+	                            	<a th:href="@{#}">수정</a>
+	                            </th>
+	                            <th>
+	                            	<a th:href="@{#}">삭제</a>
+	                            </th>
                             </tr></tbody>
                     </table>
                     </div>

@@ -4,10 +4,10 @@
   layout:decorator="@{layout/default2}">
 
 <th:block layout:fragment="customTitle">
-	<title>보증금 관리 등록</title>
+	<title>보증금 등록 관리 </title>
 </th:block>
 <th:block layout:fragment="customContents">
-	<form action="#" method="post">
+	<form action="/depositInsert" method="post">
 
 <section class="content">
 <div class="container-fluid">		
@@ -15,7 +15,7 @@
        	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
            	<div class="card">
                	<div class="header">
-                   	<h2>보증금 관리 등록</h2>
+                   	<h2>보증금 등록 관리</h2>
 						<ul class="header-dropdown m-r--5">
                        		<li class="dropdown">
                            		<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -58,7 +58,7 @@
 									</select>
 								</div>
 							</div>	
-							<button type="button" class="btn btn-primary m-t-15 waves-effect">등록</button>
+							<button type="submit" class="btn btn-primary m-t-15 waves-effect">등록</button>
                        </div>
     			</div>               
 			</div>
