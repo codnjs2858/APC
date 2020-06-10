@@ -8,21 +8,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class PetAdoptionController {
 	
+	@PostMapping("/petAdoptionUpdate")
+		public String petAdoptionUpdate(Model model) {
+			return "petadoption/petAdoptionList";
+	}
+	
 	@GetMapping("/petAdoptionUpdate")
 		public String petAdoptionUpdate() {
-		return "petadoption/petAdoptionUpdate";
+			return "petadoption/petAdoptionUpdate";
 		
 	}
 	
 	@GetMapping("/petAdoptionList")
 		public String petAdoptionList() {
-		return "petadoption/petAdoptionList";
+			return "petadoption/petAdoptionList";
 		
 	}
 	
 	@GetMapping("/petAdoptionInsert")
 		public String petAdoptionInsert() {
-		return "petadoption/petAdoptionInsert";
+			return "petadoption/petAdoptionInsert";
 	}
 	
 	@PostMapping("/petAdoptionInsert")
