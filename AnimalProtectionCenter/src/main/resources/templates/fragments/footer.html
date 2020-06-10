@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-		<footer id="footer" th:fragment="footerFragment">
-		<div class="bg11">
-			<div class="container size-h-4 flex-c-c p-tb-15">
-				<span class="f1-s-1 cl0 txt-center">
-					Copyright ⓒ 2018 
-
-					<a href="#" class="f1-s-1 cl10 hov-link1"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright ⓒ<script>document.write(new Date().getFullYear());</script>2020 All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by </a><a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				</span>
-			</div>
-		</div>
-	</footer>
+	
+	  <!-- Footer1 -->
+            <div class="legal" id="footer" th:fragment="footerFragment">
+                <div class="copyright">
+                    &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.5
+                    <ul>
+                    <li class="pull-right"><a th:href="@{/admin}">관리자</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- #Footer -->
+            
+     
+	  <!-- Footer2 -->
+            <div class="legal" id="footer" th:fragment="footer2Fragment">
+                <div class="copyright">
+                    &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.5
+                    <ul>
+                    <li class="pull-right"><a th:href="@{/}">index</a></li>
+                    </ul>
+             	 </div>
+            </div>
+            <!-- #Footer -->       
+	
 </html>

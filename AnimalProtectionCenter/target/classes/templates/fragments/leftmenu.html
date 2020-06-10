@@ -1,7 +1,321 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
- 		<!-- Begin Left Column -->
-		 <div id="leftcolumn"  th:fragment="leftmenuFragment">
-		 </div>
-		 <!-- End Left Column -->
+
+
+  <!-- 관리자메뉴 Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar"  th:fragment="leftmenu2Fragment">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="../../images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[[session.SID]]</div>
+                    <div class="email">[[session.SNAME]]</div>
+                    <div class="btn-group user-helper-dropdown" >
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li role="seperator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu" >
+                <ul class="list">
+                    <li class="header">관리자 메뉴</li>
+                    <li class="active">
+                        <a href="@{/}">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    
+                    <li >
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#센터 관리</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#직원 관리</a>
+                            </li>
+                            <li>
+                                <a href="#">#직원 근태관리</a>
+                            </li>
+                            <li>
+                                <a href="#">#직원 휴가,외출관리</a>
+                            </li>
+                            <li>
+                                <a href="#">#시설관리</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#동물 관리</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#동물 종류</a>
+                            </li>
+                            <li>
+                                <a href="#">#보호공간 관리</a>
+                            </li>
+                            <li>
+                                <a href="#">#사료관리</a>
+                            </li>
+                            <li>
+                                <a href="#">#펫 용품,소모품 관리</a>
+                            </li>
+                        </ul>
+                    </li>
+             
+                      <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#보호동물 관리</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#보호동물 등록(센터등록 관리)</a>
+                            </li>
+                            <li>
+                                <a href="#">#보호동물 처리(상태관리)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#보호건강 관리</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#동물 진료기록</a>
+                            </li>
+                            <li>
+                                <a href="#">#동물 진료 내역</a>
+                            </li>
+                        </ul>
+                    </li>
+                     <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#입양,분양 관리</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#입양관리</a>
+                            </li>
+                            <li>
+                                <a href="#">#분양관리</a>
+                            </li>
+                            <li>
+                                <a href="#">#후기관리</a>
+                            </li>
+                            <li>
+                                <a href="#">#서비스관리</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#회원 관리</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#회원 리스트</a>
+                            </li>
+                            <li>
+                                <a href="#">#입양인 관리</a>
+                            </li>
+                            <li>
+                                <a href="#">#블랙리스트관리</a>
+                            </li>
+                            <li>
+                                <a href="#">#보증금 관리</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#심사 관리</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#심사문항관리</a>
+                            </li>
+                            <li>
+                                <a href="#">#심사지표</a>
+                            </li>
+                            <li>
+                                <a href="#">#입양인점수</a>
+                            </li>
+                            <li>
+                                <a href="#">#심사 신청 내역 </a>
+                            </li>
+                             <li>
+                                <a href="#">#심사 완료 내역 </a>
+                            </li>
+                        </ul>
+                    </li>
+                     <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#게시판 관리</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#유실게시판</a>
+                            </li>
+                            <li>
+                                <a href="#">#분실신고 게시판</a>
+                            </li>
+                            <li>
+                                <a href="#">#발견신고 게시판</a>
+                            </li>
+                            <li>
+                                <a href="#">#찾음신고 게시판 </a>
+                            </li>
+                        </ul>
+                    </li>
+                   
+               
+                </ul>
+            </div>
+            <div th:replace="fragments/footer::footer2Fragment"></div>
+            </aside>
+            <!-- #Menu -->
+  <!--인덱스 화면 Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar"  th:fragment="leftmenuFragment">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="../../images/user.png" width="48" height="48" alt="User" />
+                </div>
+                
+                
+                <div th:if="${session.SID}==null" class="info-container">
+                   <a th:href="@{/login}" style="color: yellow;">로그인</a>
+                   <a th:href="@{/addMember}" style="color: yellow;">회원가입</a>
+                   
+                </div>
+                <div th:if="${session.SID}!=null" class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">세션이름</div>
+                    <div class="email">세션이메일</div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>내정보</a></li>
+                            <li role="seperator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>작성글보기</a></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>로그아웃</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">회원메뉴</li>
+                    <li class="active">
+                        <a th:href="@{/}">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#유실공고</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">유기,유실 동물등록(관)</a>
+                            </li>
+                            <li>
+                                <a href="#">#공고게시판</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#분양</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#동물 분양 등록(관)</a>
+                            </li>
+                            <li>
+                                <a href="#">#분양 신청(심사 통과)</a>
+                            </li>
+                            <li>
+                                <a href="#">#동물 분양 리스트</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#입양</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#입양심사</a>
+                            </li>
+                            <li>
+                                <a href="#">#입양 신청(심사 통과)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#보호동물 신고<span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#신고게시판</a>
+                            </li>
+                            <li>
+                                <a href="@{/searcReport}">#유기,유실 신고</a>
+                            </li>
+                              <li>
+                                <a href="#">#분실 신고</a>
+                            </li>
+                             <li>
+                                <a href="#">#반환(찾음) 신고</a>
+                            </li>
+                            <li>
+                                <a href="#">#신고 종합관리(관)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>#후기 리스트</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">#후기 게시판</a>
+                            </li>
+                        </ul>
+                    </li>
+                 
+                   
+                </ul>
+            </div>
+            <div th:replace="fragments/footer::footerFragment"></div>
+            </aside>
+            <!-- #Menu -->         
 </html>

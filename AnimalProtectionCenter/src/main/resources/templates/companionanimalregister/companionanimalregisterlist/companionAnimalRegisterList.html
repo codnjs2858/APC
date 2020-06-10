@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>반려동물등록리스트</title>
+</th:block>
+<th:block layout:fragment="customContents">
+
+
+<body class="theme-red">
+
+
+
+<!-- Top Bar -->
+<section class="content">
+    <div class="container-fluid">
+       <!-- Basic Examples -->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>반려동물등록 리스트</h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                    <div class="row">
+                    <div class="col-sm-6">
+	                    <div class="dataTables_length" id="DataTables_Table_0_length">
+		                 </div>
+                    </div>
+                    <div class="col-sm-6">
+                    <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                    	<label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="DataTables_Table_0">
+                    		<button type="button">검색</button>
+                    	</label>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-sm-12">
+                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                        <thead>
+                            <tr>
+	                            <th rowspan="1" colspan="1">관리등록번호</th>
+	                            <th rowspan="1" colspan="1">회원아이디</th>
+	                            <th rowspan="1" colspan="1">회원명</th>
+	                            <th rowspan="1" colspan="1">분양등록코드</th>
+	                            <th rowspan="1" colspan="1">상태</th>
+	                            <th rowspan="1" colspan="1">등록날짜</th>
+	                            <th rowspan="1" colspan="1">등록취소날짜</th>
+	                            <th rowspan="1" colspan="1">보호장소코드</th>
+	                            <th rowspan="1" colspan="1">수정</th>
+	                            <th rowspan="1" colspan="1">삭제</th>
+	                        </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+	                            <th rowspan="1" colspan="1">관리등록번호</th>
+	                            <th rowspan="1" colspan="1">회원아이디</th>
+	                            <th rowspan="1" colspan="1">회원명</th>
+	                            <th rowspan="1" colspan="1">분양등록코드</th>
+	                            <th rowspan="1" colspan="1">상태</th>
+	                            <th rowspan="1" colspan="1">등록날짜</th>
+	                            <th rowspan="1" colspan="1">등록취소날짜</th>
+	                            <th rowspan="1" colspan="1">보호장소코드</th>
+	                            <th rowspan="1" colspan="1">수정</th>
+	                            <th rowspan="1" colspan="1">삭제</th>
+	                        </tr>
+                        </tfoot>
+                        <tbody><tr role="row" class="odd">
+                                <td>E05-35</td>
+                                <td>id001</td>
+                                <td>홍길동</td>
+                                <td>Animal_01</td>
+                                <td>분양가능</td>
+                                <td>2008/11/28</td>
+                                <td></td> 
+                                <td>Cage01</td>
+                                <td>수정</td>
+                                <td>삭제</td>
+                            </tr></tbody>
+                    </table>
+                    </div>
+                    </div>
+                    <div class="row">
+                    	<div class="col-sm-5">
+                    	</div>
+                    		<div class="col-sm-7">
+                    			<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                    				<ul class="pagination">
+                    					<li class="paginate_button active">
+                    						<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0">1</a>
+                    					</li>
+                    					<li class="paginate_button ">
+                    						<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0">2</a>
+                    					</li>
+                    					<li class="paginate_button next" id="DataTables_Table_0_next">
+                    						<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="7" tabindex="0">Next</a>
+                    					</li>
+                    				</ul>
+                    			</div>
+                    		</div>
+                    	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Basic Examples -->
+       
+    </div>
+</section>
+
+<!-- Jquery Core Js -->
+<script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="../../plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core Js -->
+<script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+<!-- Select Plugin Js -->
+<script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+<!-- Slimscroll Plugin Js -->
+<script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+<!-- Waves Effect Plugin Js -->
+<script src="../../plugins/node-waves/waves.js"></script>
+
+<!-- Jquery DataTable Plugin Js -->
+<script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
+<script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+<script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+<script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+<script src="../../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+<script src="../../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+<script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+<script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+<script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+<!-- Custom Js -->
+<script src="../../js/admin.js"></script>
+<script src="../../js/pages/tables/jquery-datatable.js"></script>
+
+<!-- Demo Js -->
+    <script src="../../js/demo.js"></script>
+
+
+</body></html>
+<!-- #END# Basic Examples -->
+
+<!-- 검색 -->
+<!-- <tr th:each="l : ${memberList}">
+	<td th:text="${l.memberId}"></td>
+	<td th:text="${l.memberPw}"></td>
+	<td th:text="${l.memberLevel}"></td>
+	<td th:text="${l.memberName}"></td>
+	<td th:text="${l.memberEmail}"></td>
+	<td>
+		/modifyMember?memberId="값"&memberPw="값"
+		<a th:href="#">수정</a>
+	</td>
+	<td>
+		<a th:href="#">삭제</a>
+	</td>
+</tr> -->
+	
+	
+</th:block>
+</html>
