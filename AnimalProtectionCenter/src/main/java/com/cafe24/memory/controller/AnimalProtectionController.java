@@ -11,7 +11,6 @@ public class AnimalProtectionController {
 	
 	@GetMapping("/animalProtection")
 	public String animalProtection(Model model) {
-		System.out.println("!!!");
 		
 		return "animalprotect/animalProctectSpace";
 	}
