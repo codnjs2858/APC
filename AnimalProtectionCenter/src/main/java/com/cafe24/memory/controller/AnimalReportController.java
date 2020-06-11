@@ -35,5 +35,19 @@ public class AnimalReportController {
 		
 		return "lostreport/lostReportForm";
 	}
+	@PostMapping("/lostReport")
+	public String lostReport(AnimalType animalType) {
+		
+		
+		return "index";
+	}
+	
+	@GetMapping("/reportManager")
+	public String reportManager() {
+		
+		
+		return "reportlist/reportManager";
+	}
+	
 	
 }
