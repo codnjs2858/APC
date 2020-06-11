@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+	
+<th:block layout:fragment="customTitle">
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="container-fluid">
+			<div class="block-header">
+                <h2>
+					팀원소개
+                </h2>
+            </div>
+            
+            <div class="card">
+            	<div class="header">
+            		<h2>이경진</h2>
+					<small>
+						담당업무 : 로그인, 회원가입, 입양신청, 반려동물분실신고, 유기동물발견신고, 신고종합관리, 신고처리, 마이페이지, 권한별 메뉴보기, 쪽지보내기
+					</small>            	
+            	</div>
+            	<div class="body">
+            		이경진님이 하고 싶은 말
+            	</div>
+            </div>
+            <div class="card">
+            	<div class="header">
+            		<h2>설채원</h2>
+            		<small>
+            			담당업무 : 동물종류, 유기동물센터에 등록, 유기동물진료관리, 유기동물처리관리, 직원관리, 근태관리, 휴가및외출관리
+            		</small>
+            	</div>
+            	<div class="body">
+            		설채원님이 하고 싶은 말
+            	</div>
+            </div>
+            <div class="card">
+            	<div class="header">
+            		<h2>손민용</h2>
+            		<small>
+            			담당업무 : 유기동물 분양등록관리, 입양관리, 입양인관리, 회수동물관리, 후기등록관리, 후기게시판, 보증금관리, 서비스관리, 블랙리스트
+            		</small>
+            	</div>
+            	<div class="body">
+					손민용님이 하고 싶은 말            		
+            	</div>
+            </div>
+            <div class="card">
+            	<div class="header">
+            		<h2>조성윤</h2>
+            		<small>
+            			담당업무 : 문항관리, 문항별보기관리, 입양심사관리, 입양심사완료관리, 반려동물입양신청관리, 공고게시판, 공고올리기, 공고알림
+            		</small>
+            	</div>
+            	<div class="body">
+            		조성윤님이 하고 싶은 말
+            	</div>
+            </div>
+            <div class="card">
+            	<div class="header">
+            		<h2>팀장 : 손충기</h2>
+            		<small>
+            			담당업무 : 유기동물보호관리, 보호공간관리, 사료관리, 펫용품관리, 시설관리, 유기동물추가비용관리, 유기동물소모품관리
+            		</small>
+            	</div>
+            	<div class="body">
+            		손충기님이 하고 싶은 말 
+            	</div>
+            </div>
+            
+            <div class="card">
+            	<div class="body">
+		            <form action="/index" method="post">
+		            	<button class="btn btn-block bg-pink waves-effect" type="submit">유기동물보호센터 가기</button>
+		            </form>
+            	</div>
+            </div>
+            
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>
