@@ -2,89 +2,89 @@
 <html xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/default2}">
-
-<th:block layout:fragment="customTitle">
-	<title>센터 등록 동물 리스트</title>
-</th:block>	
 <th:block layout:fragment="customCss">
 	<!-- JQuery DataTable Css -->
     <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+</th:block>
+<th:block layout:fragment="customTitle">
+	<title>직원 리스트</title>
 </th:block> 
-
+<th:block layout:fragment="customHeadScript">
+</th:block> 
 <th:block layout:fragment="customContents">
 	<section class="content">
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="header">
-	                <h2>보호 동물 리스트</h2>
+	                <h2>직원 리스트</h2>
 	                <ul class="header-dropdown m-r--5">
 	                    <li class="dropdown">
 	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a href="/animalcenterinsert" class=" waves-effect waves-block">보호 동물 센터 등록</a></li>
+	                            <li><a href="/staffinsert" class=" waves-effect waves-block">센터 직원 등록</a></li>
+	                            <li><a href="/staffcommutelist" class=" waves-effect waves-block">근태 내역</a></li>
+	                            <li><a href="/staffvacationlist" class=" waves-effect waves-block">휴가,외출 신청 내역</a></li>
 	                        </ul>
 	                    </li>
 	                </ul>
 				</div>
 				<div class="body">
-	                <div class="table-responsive" style="overflow: hidden;">
+					<div class="table-responsive" style="overflow: hidden;">
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
 	                        <thead>
 	                            <tr>
 		                            <th data-orderable="false"></th>
-		                            <th><div class="align-center">동물 번호</div></th>
-		                            <th><div class="align-center">종류</div></th>
-		                            <th><div class="align-center">품종</div></th>
-		                            <th><div class="align-center">성별</div></th>
-		                            <th><div class="align-center">나이</div></th>
-		                            <th><div class="align-center">체중</div></th>
-		                            <th><div class="align-center">건강상태</div></th>
-		                            <th><div class="align-center">건강 상태 기록</div></th>
-		                            <th><div class="align-center">등록 날짜</div></th>
-		                            <th><div class="align-center">담당자</div></th>
-		                            <th data-orderable="false"><div class="align-center">수정</div></th>
-		                            <th data-orderable="false"><div class="align-center">삭제</div></th>
+		                            <th><div class="align-center">직원 코드</div></th>
+		                            <th><div class="align-center">부서</div></th>
+		                            <th><div class="align-center">직급</div></th>
+		                            <th><div class="align-center">이름</div></th>
+		                            <th><div class="align-center">아이디</div></th>
+		                            <th><div class="align-center">연락처</div></th>
+		                            <th><div class="align-center">이메일</div></th>
+		                            <th><div class="align-center">근태 상태</div></th>
+		                            <th><div class="align-center">신청 상태</div></th>
+		                            <th><div class="align-center">입사 날짜</div></th>
+		                            <th><div class="align-center">퇴사 날짜</div></th>
+		                            <th data-orderable="false"><div class="align-center">직원 수정</div></th>
+		                            <th data-orderable="false"><div class="align-center">직원삭제</div></th>
 		                        </tr>
 	                        </thead>
 	                        <tbody>
 	                            <tr th:each="j : ${#numbers.sequence(1,100)}" class="odd">
 	                       			<td><div class="align-center"><span class="label label-warning">new</span></div></td>
 				                    <!-- <td class="sorting_1" th:text="${j}"></td> -->
-				                    <td><div class="align-center">[[${j}]]<a href="/animalcenterpage">(동물정보 상세보기)</a></div></td>
-		                            <td><div class="align-center">강아지</div></td>
-		                            <td><div class="align-center">말티즈</div></td>
-		                            <td><div class="align-center">암</div></td>
-		                            <td><div class="align-center">5세 추정</div></td>
-		                            <td><div class="align-center">4kg</div></td>
-		                            <td><div class="align-center">건강<a href="/animalhealthlist">(건강기록 상세보기)</a></div></td>
-		                            <td><div class="align-center"><a href="/animalhealthinsert">건강 기록 등록</a></div></td>
-		                            <td><div class="align-center">2020-06-10</div></td>
-		                            <td><div class="align-center">이경진</div></td>
-		                            <td><div class="align-center"><a href="/animalcenterupdate">
+				                    <td><div class="align-center">[[${j}]]</div></td>
+		                            <td><div class="align-center">부서1</div></td>
+		                            <td><div class="align-center">사원</div></td>
+		                            <td><div class="align-center">설채원</div></td>
+		                            <td><div class="align-center">id001</div></td>
+		                            <td><div class="align-center">010-0000-0000</div></td>
+		                            <td><div class="align-center">cmail@email.com</div></td>
+		                            <td><div class="align-center">출근<a href="#">(상세보기)</a></div></td>
+		                            <td><div class="align-center">휴가신청<a href="#">(상세보기)</a></div></td>
+		                            <td><div class="align-center">2020-06-01</div></td>
+		                            <td><div class="align-center"></div></td>
+		                            <td><div class="align-center">
+		                            	<a href="/staffupdate">
 	                       				<i class="material-icons">update</i></a></div>
 	                      			</td>
 	                      			<td><div class="align-center">
-				                       	<a href="/animalcenterdelete">
+				                       	<a href="/staffdelete">
 				                       	<i class="material-icons">delete</i>
 			                       	</a></div>
-		                            
 	                        	</tr>
 	                        </tbody>
 	                    </table>
 	                </div>
-	            </div>
+				</div>
 			</div>
 		</div>
 	</section>
 </th:block> 
- 
-<th:block layout:fragment="customHeadScript">
-
-</th:block> 
 <th:block layout:fragment="customFooterScript">
-    <!-- Jquery DataTable Plugin Js -->
+	<!-- Jquery DataTable Plugin Js -->
     <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
@@ -102,5 +102,4 @@
     	});
     </script>
 </th:block>
- 
 </html>
