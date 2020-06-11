@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+<th:block layout:fragment="customCss">
+    <!-- Bootstrap Select Css -->
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+</th:block>
+<th:block layout:fragment="customTitle">
+	<title>직원 등록</title>
+</th:block> 
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="col-lg-12">
+            <div class="block-header">
+                <h3>센터 직원 등록</h3>
+            </div>
+			<div class="card">
+				<form action="/stafflist">
+					<div class="header">
+						<h2>직원 아이디</h2>
+					</div>
+		           	<div class="body">
+		           		<div class="row">
+		           			<div class="col-sm-3">
+			           			<b>직원 아이디</b>
+			           			<div class="input-group ">
+					           		<div class="form-line m-t-10">
+						           		<input type="text" class="form-control" name="memberId">
+					           		</div>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-3">
+			           			<b>직원 입사일 hidden</b>
+			           			<div class="input-group ">
+					           		<div class="form-line m-t-10">
+						           		<input type="text" class="form-control" name="staffInDate" readonly="readonly">
+					           		</div>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-3">
+			           			<b>직원 퇴사일 hidden</b>
+			           			<div class="input-group ">
+					           		<div class="form-line m-t-10">
+						           		<input type="text" class="form-control" name="staffOutDate" readonly="readonly">
+					           		</div>
+				           		</div>
+		           			</div>
+		           		</div>
+		           	</div>
+		           	<div class="header">
+		           		<h2>직원 정보</h2>
+		           	</div>
+		           	<div class="body">
+		           		<div class="row">
+		           			<div class="col-xs-4 col-md-4">
+				           		<b>직원 이름</b>
+								<div class="input-group">
+					           		<div class="form-line m-t-10">
+						           		<input type="text" name="staffName" class="form-control">
+					           		</div>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-4">
+		           				<div class="m-b-10">
+					           		<b>부서</b>
+		           				</div>
+				           		<div class="input-group">
+					           		<select class="form-control" name="staffPart">
+					           			<option>----부서 선택----</option>
+					           			<option>부서1</option>
+					           			<option>부서2</option>
+					           			<option>부서3</option>
+					           		</select>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-4">
+		           				<div class="m-b-10">
+				           			<b>직원 직급</b>
+				           		</div>
+				           		<div class="input-group">
+					           		<select class="form-control" name="staffLevel">
+					           			<option>----직급 선택----</option>
+					           			<option>부장</option>
+					           			<option>과장</option>
+					           			<option>대리</option>
+					           			<option>사원</option>
+					           			<option>수의사</option>
+					           		</select>
+				           		</div>
+		           			</div>
+		           		</div>
+		           		<div class="row">
+		           			<div class="col-sm-4">
+				           		<b>직원 나이</b>
+				           		<div class="input-group">
+					           		<div class="form-line">
+						           		<input type="text" class="form-control" name="staffAge">
+					           		</div>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-4">
+				           		<b>연락처</b>
+								<div class="input-group">
+					           		<div class="form-line">
+						           		<input type="text" class="form-control" name="staffPhone">
+					           		</div>
+				           		</div>
+		           			</div>
+		           			<div class="col-sm-4">
+				           		<b>이메일</b>
+				           		<div class="input-group">
+					           		<div class="form-line">
+						           		<input type="text" class="form-control" name="staffEmail">
+					           		</div>
+				           		</div>
+		           			</div>
+		           		</div>
+		           	</div>
+		           	<div class="body">
+		           		<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">센터 직원 등록</button>
+		           	</div>
+				</form>
+	        </div>
+		</div>
+	</section>
+</th:block> 
+<th:block layout:fragment="customFooterScript">
+</th:block>
+</html>

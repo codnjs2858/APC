@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+<th:block layout:fragment="customCss">
+	<!-- JQuery DataTable Css -->
+    <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="customTitle">
+	<title>직원 출근, 퇴근 내역</title>
+</th:block> 
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="header">
+					<h2>직원 출근, 퇴근 내역</h2>
+				</div>
+	            <div class="body">
+	            	<table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
+	                    <thead>
+	                        <tr>
+		                         <th data-orderable="false"></th>
+		                         <th><div class="align-center">직원 코드</div></th>
+		                         <th><div class="align-center">부서</div></th>
+		                         <th><div class="align-center">직급</div></th>
+		                         <th><div class="align-center">이름</div></th>
+		                         <th><div class="align-center">출근 시간</div></th>
+	                         	 <th><div class="align-center">퇴근 시간</div></th>
+	                         	 <th><div class="align-center">근무 시간</div></th>
+		                	</tr>
+	                    </thead>
+	                    <tbody>
+	                        <tr th:each="j : ${#numbers.sequence(1,100)}" class="odd">
+	                   			<td><div class="align-center"><span class="label label-warning">new</span></div></td>
+	                   <!-- <td class="sorting_1" th:text="${j}"></td> -->
+	                   			<td><div class="align-center">[[${j}]]</div></td>
+		                        <td><div class="align-center">부서1</div></td>
+		                        <td><div class="align-center">사원</div></td>
+		                        <td><div class="align-center">설채원</div></td>
+		                        <td><div class="align-center">09:00</div></td>
+		                        <td><div class="align-center">17:30</div></td>
+		                        <td><div class="align-center">8:30</div></td>
+	                    	</tr>
+	                    </tbody>
+	                </table>
+	            </div>
+	        </div>
+       	</div>
+   	</section>
+</th:block> 
+<th:block layout:fragment="customFooterScript">
+	<!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
+    	$(function(){
+    		$('#dataTabelEaxm1').dataTable({
+    			"aaSorting": []
+    		});
+    	});
+    </script>
+</th:block>
+</html>
