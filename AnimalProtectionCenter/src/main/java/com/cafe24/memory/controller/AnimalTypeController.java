@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AnimalTypeController {
-
+	//animal type
 	@GetMapping("/animaltypelist")
 	public String listAnimalType() {
 		return "animaltype/animalTypeList";
@@ -20,19 +20,7 @@ public class AnimalTypeController {
 	}
 	@GetMapping("/animaltypedelete")
 	public String deleteAnimalType() {
+		//경로 delete
 		return "animaltype/animalTypeList";
-	}
-	
-	
-	
-	
-	//animal center insert
-	@GetMapping("/animalcenterinsert")
-	public String insertAnimalCenter() {
-		return "animalcenter/animalCenterInsert";
-	}
-	@GetMapping("/animalCenterList")
-	public String listAnimalCenter() {
-		return "animalcenter/animalCenterList";
 	}
 }
