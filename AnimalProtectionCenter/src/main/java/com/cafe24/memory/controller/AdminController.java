@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AdminController {
 	
 	@GetMapping("/")
+	public String intro() {
+		return "intro/intro";
+	}
+	
+	@PostMapping("/index")
 	public String index() {
 		return "index";
 	}
