@@ -48,6 +48,8 @@ public class Member {
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
+	
+	
 	public Date getMemberInDate() {
 		return memberInDate;
 	}
