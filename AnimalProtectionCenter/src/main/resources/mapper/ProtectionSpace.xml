@@ -15,4 +15,18 @@
 		ORDER BY CAST(SUBSTR(protect_space_code,14) as decimal) DESC;
 	</select>
 	
+	<select id="selectMemberId" resultType="Member">
+		SELECT 
+			 member_id		as memberId
+			,member_pw		as memberPw
+			,level_code		as level
+			,member_name	as memberName
+			,member_phone	as memberPhone
+			,member_addr	as memberAddr
+			,member_email	as memberEmail
+			,member_in_date	as memberInDate
+		FROM
+			tb_member
+	</select>
+	
 </mapper>
