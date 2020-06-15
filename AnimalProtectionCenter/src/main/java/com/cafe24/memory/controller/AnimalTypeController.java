@@ -16,15 +16,13 @@ public class AnimalTypeController {
 	
 	//animal type list
 	@GetMapping("/animaltypelist")
-	public String listAnimalType(Model model) {
+	public String listAnimalType(@RequestParam(name="send_type", required = false) String send_type, Model model) {
 		model.addAttribute("Cnt", animalTypeService.selectAnimalCnt());
-		model.addAttribute("TypeList", animalTypeService.selectAnimalType());
-		return "animaltype/animalTypeList";
-	}
-	@GetMapping("/animaltypeselect")
-	public String selectAnimalType(String animalType,Model model) {
-		model.addAttribute("Cnt", animalTypeService.selectAnimalCnt());
-		System.out.println(animalType);
+		if(send_type != null && !"".equals(send_type)) {
+			model.addAttribute("TypeList", animalTypeService.selectTypeList(send_type));
+		}else {
+			model.addAttribute("TypeList", animalTypeService.selectAnimalType());
+		}
 		return "animaltype/animalTypeList";
 	}
 	//animal type insert

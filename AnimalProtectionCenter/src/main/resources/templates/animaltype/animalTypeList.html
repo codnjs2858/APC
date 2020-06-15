@@ -31,13 +31,17 @@
 				<div class="body">
 					<div class="row clearfix">
 	                    <div class="col-xs-4 col-md-4" th:each="c:${Cnt}">
-	                        <button class="btn btn-primary btn-lg btn-block waves-effect" type="button">[[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
+	                    	<a th:href="@{/animaltypelist(send_type=${c.animalType})}">
+		                        <button class="btn btn-primary btn-lg btn-block waves-effect" type="button">
+		                        [[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
+	                    	</a>
 	                    </div>
 	                </div>
 	                <div class="table-responsive" style="overflow: hidden;">
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
 	                        <thead>
 		                            <tr role="row">
+		                            	<th></th>
 		                            	<th><div class="align-center">동물 종류 코드</div></th>
 		                            	<th><div class="align-center">동물 종류</div></th>
 		                            	<th><div class="align-center">동물종 종류</div></th>
@@ -47,7 +51,8 @@
 		                            </tr>
 		                        </thead>
 	                        <tbody>
-			                        <tr th:each="typelist : ${TypeList}" class="odd">
+			                        <tr th:each="typelist, i : ${TypeList}" class="odd">
+		                                <td><div class="align-center">[[${i.index+1}]]</div></td>
 		                                <td><div class="align-center">[[${typelist.animalTypeCode}]]</div></td>
 		                                <td><div class="align-center">[[${typelist.animalType}]]</div></td>
 		                                <td><div class="align-center">[[${typelist.animalTypeSub}]]</div></td>

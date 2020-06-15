@@ -18,6 +18,8 @@ public interface AnimalTypeMapper {
 	
 	public List<AnimalType> selectAnimalType();
 	
+	public List<AnimalType> selectTypeList(String send_type);
+	
 	public int insertAnimalType(AnimalType atype);
 	
 	public List<Map<String, Object>> selectAnimalCnt();

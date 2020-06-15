@@ -47,6 +47,17 @@
 		WHERE animal_type_code = #{send_code}
 	</select>
 	
+	<select id="selectTypeList" parameterType="String" resultMap="animalType">
+		SELECT 
+			animal_type_code, 
+			animal_type, 
+			animal_type_sub, 
+			animal_type_reg_date
+		FROM 
+			tb_animal_type
+		WHERE animal_type= #{send_type}
+	</select>
+	
 	<select id="selectAnimalType" resultMap="animalType">
 		SELECT 
 			animal_type_code, 
