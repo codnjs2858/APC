@@ -8,8 +8,8 @@
 			 companion_animal_register_code AS companionAnimalRegisterCode
 			,animal_information AS animalInformation
 			,m.member_name AS memberName
-			,aniI.animal_gender AS aniGender
-			,aniI.animal_age AS aniAge
+			,aniI.animal_gender AS animalGender
+			,aniI.animal_age AS animalAge
 			,companion_register_date AS companionRegisterDate
 			,cancle_companion_in_date AS cancleCompanionInDate
 			,pro_space_code AS proSpaceCode
