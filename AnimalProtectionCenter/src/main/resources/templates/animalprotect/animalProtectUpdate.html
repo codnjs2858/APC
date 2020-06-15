@@ -11,7 +11,7 @@
 		<div class="container-fluid">
 			<div class="block-header">
                 <h2>
-                    	유기동물보호등록
+                    	유기동물보호수정
                 </h2>
             </div>
             
@@ -49,11 +49,11 @@
 						<div class="input-group">
 	                        <div class="form-line">
 								보호기간
-	                            <input type="number" class="form-control" name="protectDate" placeholder="보호기간">
+	                            <input type="number" class="form-control" name="protectDate" placeholder="보호기간" th:value="${dDay}">
 	                        </div>
 						</div>
 						
-                        <button class="btn btn-block bg-pink waves-effect" type="submit">유기동물보호등록</button>
+                        <button class="btn btn-block bg-pink waves-effect" type="submit">유기동물보호수정</button>
                         
                 	</form>
 				</div>
@@ -78,13 +78,14 @@
 		$('#btnNamePet').click(function(){
 			var btnNamePet = $('#petName').val();
 			var request = $.ajax({
-				url: "/addProtectInsert",
+				url: "/modifyAnimalProtection",
 				method: "POST",
 				data: { "btnNamePet" : btnNamePet },
-				dataType: "json"
+				dataType: "text"
 			});
 			 
 			request.done(function( msg ) {
+				console.log(msg);
 				alert(JSON.stringify(msg));
 			});
 			 

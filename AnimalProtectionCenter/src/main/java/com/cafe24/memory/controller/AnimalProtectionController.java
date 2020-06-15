@@ -1,18 +1,15 @@
 package com.cafe24.memory.controller;
 
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,12 +22,7 @@ public class AnimalProtectionController {
 	
 	@Autowired
 	ProtectionService protectionService;
-	
-	//session 에 있는 id
-	String loginId = "id001"; 
 
-	
-	/* @RequestMapping(value = "addProtectInsert", method = RequestMethod.POST ) */
 	@PostMapping("/addProtectInsert")
 	@ResponseBody
 	public String addProtectInsert(@RequestParam(name = "btnNamePet") String petName) {
@@ -39,6 +31,20 @@ public class AnimalProtectionController {
 		petName = petName + "1213123";
 		
 		return petName;
+	}
+	
+	@PostMapping("/modifyAnimalProtection")
+	@ResponseBody
+	public String modifyAnimalProtection(@RequestParam(name = "btnNamePet") String petName) {
+		System.out.println(petName);
+		String result = "N";
+		
+		AnimalProtect ap = protectionService.selectAnimalProtect(petName);
+		if(ap != null) {
+			result = "Y";
+		}
+		
+		return result;
 	}
 	
 	@GetMapping("/animalProtection")
@@ -50,20 +56,66 @@ public class AnimalProtectionController {
 		return "animalprotect/animalProctectSpace";
 	}
 	
-	@GetMapping("/addAnimalProtection")
-	public String addAnimalProtection(Model model, 
+	@GetMapping("/modifyAnimalProtection")
+	public String modifyAnimalProtection(Model model, 
 			@RequestParam(value = "space", required = false) String space) {
-		model.addAttribute("space", space);
+		ProtectionSpace ps = protectionService.modifyProtectionSpaceBySpace(space);
+		long dDay = 0;
 		
+		if(ps != null) {
+			if(ps.getAnimalProtect() != null) {
+				dDay = getDday(ps.getAnimalProtect().getAnimalProtectExeDate());
+			}else {
+				ps.setAnimalProtect(new AnimalProtect());
+			}
+			
+			System.out.println(dDay);
+			
+			model.addAttribute("dDay", dDay);
+			model.addAttribute("ptSpace", ps);
+		}
+		
+		return "animalprotect/animalProtectUpdate";
+	}
+	
+	@GetMapping("/addAnimalProtection")
+	public String addAnimalProtection(Model model) {
 		return "animalprotect/animalProtectInsert";
 	}
 	
 	@PostMapping("/animalProtection")
 	public String animalProtection(AnimalProtect animalProtect, @RequestParam(name = "protectDate", required = false) String protectDate) {
 		
-		System.out.println(protectDate);
-		System.out.println(animalProtect.toString());
+		AnimalProtect ap = protectionService.selectAnimalProtect(animalProtect.getAnimalInsertCode());
+		Date exeDate = null;
+		if(protectDate != null) {
+			int ptDate = Integer.parseInt(protectDate);
+			
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, ptDate+2);
+			
+			//String exeDate = format.format(new Date(cal.getTimeInMillis()));
+			exeDate = new Date(cal.getTimeInMillis());
+		}
+		
+		System.out.println(exeDate);
+		animalProtect.setAnimalProtectExeDate(exeDate);
+		
+		ProtectionSpace proSpace = new ProtectionSpace();
+		proSpace.setAnimalProtect(animalProtect);
+		
+		protectionService.updateAnimalProtectionIn(proSpace);
 		
 		return "redirect:/animalProtection";
+	}
+	
+	private long getDday(Date date) {
+		Calendar today = Calendar.getInstance();
+		Calendar exeDate = Calendar.getInstance();
+		exeDate.setTime(date);
+		
+		long result = (exeDate.getTimeInMillis() - today.getTimeInMillis()) / (24 * 60 * 60 * 1000);
+		
+		return result;
 	}
 }

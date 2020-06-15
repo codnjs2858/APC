@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.ProtectionMapper">
+
+	<resultMap type="ProtectionSpace" id="psResultMap">
+		<result property="protectSpaceCode" column="protect_space_code"/>
+		<result property="animalInsertCode" column="animal_insert_code"/>
+		<result property="useState" column="use_state"/>
+		<result property="implementCode" column="implement_code"/>
+		<result property="protectSpaceRegDate" column="protect_space_reg_date"/>
+		<result property="animalProtectPeriod" column="animal_protect_period"/>
+	</resultMap>
+
+	<update id="updateAnimalProtectionExit" parameterType="String">
+		UPDATE
+			tb_protect_space AS s
+		SET
+			 s.animal_insert_code	=null
+			,s.use_state			='없음'
+		WHERE 
+			s.protect_space_code=#{proSpaceCode};
+	</update>
+
+	<update id="updateAnimalProtectionIn" parameterType="ProtectionSpace">
+		UPDATE 
+			 tb_animal_protect AS p
+			,tb_protect_space s
+		SET 
+			 p.protect_space_code=		#{animalProtect.protectSpaceCode}
+			,p.protect_state=			#{animalProtect.state}
+			,p.animal_protect_exe_date=	#{animalProtect.animalProtectExeDate}
+			,s.animal_insert_code=		#{animalProtect.animalInsertCode}
+			,s.use_state=				'사용중'
+		WHERE
+			s.protect_space_code=#{animalProtect.protectSpaceCode}; 
+	</update>
+
+	<!-- 
+	<update id="updateAnimalProtectionIn" parameterType="map">
+		UPDATE 
+			 tb_animal_protect AS p
+			,tb_protect_space s
+		SET 
+			 p.protect_space_code='protect_space_2'
+			,p.protect_state='보호중'
+			,p.animal_protect_exe_date='2020-09-13'
+			,s.animal_insert_code='animal_insert_1'
+			,s.use_state='사용중'
+		WHERE
+			s.protect_space_code='protect_space_2'; 
+	</update>
+	 -->
+	 
+	<select id="selectProtectionSpaceByAniInCode" parameterType="String" resultMap="psResultMap">
+		SELECT 
+			 s.protect_space_code
+			,s.animal_insert_code
+			,s.use_state
+			,s.implement_code
+			,s.protect_space_reg_date
+			,s.animal_protect_period
+		FROM 
+			tb_protect_space AS s
+		WHERE
+			s.animal_insert_code=#{aniInsertCode};
+	</select>
+	 
+	<select id="selectProtectionSpaceByCode" parameterType="String" resultMap="psResultMap">
+		SELECT 
+			 s.protect_space_code
+			,s.animal_insert_code
+			,s.use_state
+			,s.implement_code
+			,s.protect_space_reg_date
+			,s.animal_protect_period
+		FROM 
+			tb_protect_space AS s
+		WHERE
+			s.protect_space_code=#{proSpaceCode};
+	</select>
+	
+	<select id="selectAnimalProtect" parameterType="String" resultType="AnimalProtect">
+		SELECT 
+			 p.animal_protect_num		as animalProtectNum
+			,p.animal_insert_code		as animalInsertCode
+			,p.protect_space_code		as protectSpaceCode	
+			,p.protect_state			as state
+			,p.animal_protect_reg_date	as animalProtectRegDate
+			,p.animal_protect_exe_date	as animalProtectExeDate
+		FROM
+			tb_animal_protect AS p
+		WHERE
+			p.animal_insert_code=#{animalNum};
+	</select>
+	
+	<select id="selectProtectionSpace" resultType="ProtectionSpace">
+		SELECT 
+			 protect_space_code		as protectSpaceCode
+			,animal_insert_code		as animalInsertCode
+			,use_state				as useState
+			,implement_code			as implementCode
+			,protect_space_reg_date as protectSpaceRegDate
+			,animal_protect_period	as animalProtectPeriod
+		FROM 
+			tb_protect_space
+		ORDER BY CAST(SUBSTR(protect_space_code,14) as decimal) DESC;
+	</select>
+	
+	<select id="selectMemberId" resultType="Member">
+		SELECT 
+			 member_id		as memberId
+			,member_pw		as memberPw
+			,level_code		as level
+			,member_name	as memberName
+			,member_phone	as memberPhone
+			,member_addr	as memberAddr
+			,member_email	as memberEmail
+			,member_in_date	as memberInDate
+		FROM
+			tb_member
+	</select>
+	
+</mapper>

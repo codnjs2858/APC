@@ -18,10 +18,10 @@
 				<div th:each="ps : ${protectSpaceList}" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box hover-zoom-effect">
                         <div th:if="${ps.useState}=='사용중'" class="icon bg-cyan">
-                            <a th:href="@{/addAnimalProtection(space=${ps.protectSpaceCode})}"><i class="material-icons">pets</i></a>
+                            <a th:href="@{/modifyAnimalProtection(space=${ps.protectSpaceCode})}"><i class="material-icons">pets</i></a>
                         </div>
                         <div th:unless="${ps.useState}=='사용중'" class="icon bg-light-green">
-                            <a th:href="@{/addAnimalProtection(space=${ps.protectSpaceCode})}"><i class="material-icons">error</i></a>
+                            <a th:href="@{/modifyAnimalProtection(space=${ps.protectSpaceCode})}"><i class="material-icons">error</i></a>
                         </div>
                         <div class="content">
                             <div class="text">장소1</div>
