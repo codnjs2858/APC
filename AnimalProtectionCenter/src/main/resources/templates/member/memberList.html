@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+	
+ <th:block layout:fragment="customTitle">
+ 	<title>관리자화면</title>
+ </th:block> 
+<th:block layout:fragment="customCss">
+ 		<!-- JQuery DataTable Css -->
+    <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+ </th:block>
+<th:block layout:fragment="customHeadScript">
+ 	
+ </th:block> 
+	 
+ <th:block layout:fragment="customContents">
+ 	<section class="content">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="header">
+	                <h2>회원 리스트</h2>
+	                <ul class="header-dropdown m-r--5">
+	                    <li class="dropdown">
+	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	                            <i class="material-icons">more_vert</i>
+	                        </a>
+	                        <ul class="dropdown-menu pull-right">
+	                            <li><a th:href="@{/adminAddMember}" class=" waves-effect waves-block">센터 회원 등록</a></li>
+	                            <li><a th:href="@{/memberUpdate}" class=" waves-effect waves-block">센터 회원 수정</a></li>
+	                        
+	                        </ul>
+	                    </li>
+	                </ul>
+				</div>
+				<div class="body">
+					<div class="table-responsive" style="overflow: hidden;">
+	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
+	                        <thead>
+	                            <tr>
+		                            <th data-orderable="false"></th>
+		                            <th><div class="align-center">아이디</div></th>
+		                            <th><div class="align-center">비밀번호</div></th>
+		                            <th><div class="align-center">권한코드</div></th>
+		                            <th><div class="align-center">이름</div></th>
+		                            <th><div class="align-center">전화번호</div></th>
+		                            <th><div class="align-center">주소</div></th>
+		                            <th><div class="align-center">이메일</div></th>
+		                            <th><div class="align-center">등록날짜</div></th>
+		                            <th data-orderable="false"><div class="align-center">회원 수정</div></th>
+		                            <th data-orderable="false"><div class="align-center">회원 삭제</div></th>
+		                        </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr th:each="j,i : ${memberList}" class="odd">
+	                       			<td class="sorting_1" th:text="${i.count}"></td>
+				                    <td><div class="align-center">[[${j.memberId}]]</div></td>
+		                            <td><div class="align-center">[[${j.memberPw}]]</div></td>
+		                            <td><div class="align-center">[[${j.level.levelCode}]]</div></td>
+		                            <td><div class="align-center">[[${j.memberName}]]</div></td>
+		                            <td><div class="align-center">[[${j.memberPhone}]]</div></td>
+		                            <td><div class="align-center">[[${j.memberAddr}]]</div></td>
+		                            <td><div class="align-center">[[${j.memberEmail}]]</div></td>
+		                            <td><div class="align-center">[[${j.memberInDate}]]</div></td>
+		                            <td><div class="align-center">
+		                            	<a th:href="@{/memberUpdate(memberId=${j.memberId})}">
+	                       				<i class="material-icons">update</i></a></div>
+	                      			</td>
+	                      			<td><div class="align-center">
+				                      	<a th:href="@{/memberDelete(memberId=${j.memberId})}">
+				                       	<i class="material-icons">delete</i></a></div>
+	                        	</tr>
+	                        </tbody>
+	                    </table>
+	                </div>
+				</div>
+			</div>
+		</div>
+	</section>
+ </th:block> 
+ 
+
+ <th:block layout:fragment="customFooterScript">
+		<!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
+    	$(function(){
+    		$('#dataTabelEaxm1').dataTable();
+    	});
+    </script>
+ 
+ </th:block>
+
+</html>

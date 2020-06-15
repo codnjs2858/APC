@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+  
+<th:block layout:fragment="customTitle">
+<title>관리자회원수정</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+    <section class="content">
+        <div class="container-fluid">
+	<div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                	회원수정
+                            </h2>
+                          
+                        </div>
+                        <div class="body">
+                            <form action="/memberUpdate" method="post">
+                                <label for="email_address">dbid</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="userId" name="memberId" class="form-control" th:value="${mem}" readonly="readonly">
+                                    </div>
+                                </div>
+                                <label for="password">dbpw</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="password" id="userPw" name="memberPw" class="form-control" th:value="${mem.memberPw}" >
+                                    </div>
+                                </div>
+                                  <label for="password">dbLevel</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="userLevel" name="levelCode" class="form-control" placeholder="회원레벨">
+                                    </div>
+                                </div>
+                                 <label for="password">dbName</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="userName" name="memberName" class="form-control" placeholder="이름">
+                                    </div>
+                                </div>
+                                 <label for="password">dbPhone</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="userPhone" name="memberPhone" class="form-control" placeholder="전화번호">
+                                    </div>
+                                </div>
+                                 <label for="password">dbAddress</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="userAddress" name="memberAddr" class="form-control" placeholder="주소">
+                                    </div>
+                                </div>
+                                   <label for="password">dbEmail</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="userEmail" name="memberEmail" class="form-control" placeholder="이메일">
+                                    </div>
+                                </div>
+                                	<label for="date">dbDate</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="userInDate" name="memberInDate" class="form-control" placeholder="회원등록날짜">
+                                    </div>
+                                </div>
+                
+                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">회원수정</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        </section>   
+
+	<th:block layout:fragment="customFooterScript">
+	
+	</th:block>
+	
+</html>
