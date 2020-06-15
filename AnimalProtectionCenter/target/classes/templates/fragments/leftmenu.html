@@ -113,14 +113,14 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>#동물 관리</span>
+                            <span>!동물 관리</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/animaltypelist">#동물 종류</a>
+                                <a href="/animaltypelist">!동물 종류</a>
                             </li>
                             <li>
-                                <a href="/animalProtection">#보호공간 관리</a>
+                                <a href="/animalProtection">!보호공간 관리</a>
                             </li>
                             <li>
                                 <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
@@ -144,11 +144,11 @@
                       <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>#보호동물 관리</span>
+                            <span>!보호동물 관리</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/animalcenterinsert">#보호동물 등록(센터등록 관리)</a>
+                                <a href="/animalcenterinsert">!보호동물 등록(센터등록 관리)</a>
                             </li>
                             <li>
                                 <a href="/animaldisposallist">#보호동물 처리(상태관리)</a>
@@ -181,20 +181,20 @@
                                 </a>
                                 <ul class="ml-menu" style="display: none;">
                                     <li>
-                                        <a href="/petAdoptionInsert" class=" waves-effect waves-block">입양동물 기간 등록</a>
+                                        <a href="/petAdoptionInsert" class=" waves-effect waves-block">#입양동물 기간 등록</a>
                                     </li>
                                     <li>
-                                        <a href="petAdoptionList" class=" waves-effect waves-block">입양동물 기간 리스트</a>
+                                        <a href="petAdoptionList" class=" waves-effect waves-block">#입양동물 기간 리스트</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
-                                    <span>#분양동물관리</span>
+                                    <span>!분양동물관리</span>
                                 </a>
                                 <ul class="ml-menu">
                                     <li>
-                                        <a href="companionAnimalRegisterInsert" class=" waves-effect waves-block">#분양동물등록</a>
+                                        <a href="companionAnimalRegisterInsert" class=" waves-effect waves-block">!분양동물등록</a>
                                     </li>
                                     <li>
                                         <a href="companionAnimalRegisterList" class=" waves-effect waves-block">#분양동물리스트</a>
@@ -241,10 +241,10 @@
                                 </a>
                                 <ul class="ml-menu" style="display: none;">
                                     <li>
-                                        <a href="#" class=" waves-effect waves-block">회원 수정</a>
+                                        <a href="#" class=" waves-effect waves-block">#회원 수정</a>
                                     </li>
                                     <li>
-                                        <a href="#" class=" waves-effect waves-block">회원 리스트</a>
+                                        <a href="#" class=" waves-effect waves-block">#회원 리스트</a>
                                     </li>
                                 </ul>
                             </li>
@@ -293,23 +293,23 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>#심사 관리</span>
+                            <span>!심사 관리</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="#">#심사문항관리</a>
+                                <a href="#">!심사문항관리</a>
                             </li>
                             <li>
-                                <a href="#">#심사지표</a>
+                                <a href="#">!심사지표</a>
                             </li>
                             <li>
-                                <a href="#">#입양인점수</a>
+                                <a href="#">!입양인점수</a>
                             </li>
                             <li>
-                                <a href="#">#심사 신청 내역 </a>
+                                <a href="#">!심사 신청 내역 </a>
                             </li>
                              <li>
-                                <a href="#">#심사 완료 내역 </a>
+                                <a href="#">!심사 완료 내역 </a>
                             </li>
                         </ul>
                     </li>
@@ -344,7 +344,7 @@
                             </li>
                         </ul>
                     </li>
-                  
+                  </ul>
             </div>
             <div th:replace="fragments/footer::footer2Fragment"></div>
             </aside>
@@ -359,8 +359,8 @@
                 
                 
                 <div th:if="${session.SID}==null" class="info-container">
-                   <a th:href="@{/login}" style="color: yellow;">로그인</a>
-                   <a th:href="@{/addMember}" style="color: yellow;">회원가입</a>
+                   <a th:href="@{/login}" style="color: yellow;">!로그인</a>
+                   <a th:href="@{/addMember}" style="color: yellow;">!회원가입</a>
                    
                 </div>
                 <div th:if="${session.SID}!=null" class="info-container">
@@ -395,7 +395,7 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/addAnimal">유기,유실 동물등록(관)</a>
+                                <a href="/addAnimal">#유기,유실 동물등록(관)</a>
                             </li>
                             <li>
                                 <a href="#">#공고게시판</a>
