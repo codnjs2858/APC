@@ -8,7 +8,7 @@
 </th:block> 
 <th:block layout:fragment="customCss">
     <!-- Bootstrap Select Css -->
-    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 </th:block>
 <th:block layout:fragment="customContents">
 	<section class="content">
@@ -21,15 +21,16 @@
 				</div>
 				<div class="body">
 					<div class="row clearfix">
-	            		<form action="#">
+	            		<form action="/animaltypeupdate" method="post">
+	            		<input type="hidden" name="animalTypeCode" th:value="${type.animalTypeCode}">
 	            			<div class="col-md-2 col-md-offset-1">
 	            				<b>동물 품종</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="animaltype">
+		            				<select name="animalType">
 		            					<option>====== 선택 ======</option>
-		            					<option value="강아지">강아지</option>
-		            					<option value="고양이">고양이</option>
-		            					<option value="기타">기타</option>
+		            					<option th:value="강아지" th:selected="(${type.animalType} == '강아지')">강아지</option>
+		            					<option th:value="고양이" th:selected="(${type.animalType} == '고양이')">고양이</option>
+		            					<option th:value="기타" th:selected="(${type.animalType} == '기타')">기타</option>
 		            				</select>
 		            			</div>
 	            			</div>
@@ -37,7 +38,7 @@
 			                    <b>동물 품종</b>
 			                    <div class="input-group colorpicker colorpicker-element">
 			                        <div class="form-line">
-			                            <input type="text" name="animaltypesub" class="form-control">
+			                            <input type="text" th:value="${type.animalTypeSub}" name="animalTypeSub" class="form-control">
 			                        </div>
 			                    </div>
 			                </div>
