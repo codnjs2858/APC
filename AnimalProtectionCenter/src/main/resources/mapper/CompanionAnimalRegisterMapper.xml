@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.CompanionAnimalRegisterMapper">
+	<select id="selectCompanionAnimalRegisterList" 
+	resultType="CompanionAnimalRegister">
+		SELECT 
+			 companion_animal_register_code AS companionAnimalRegisterCode
+			,animal_information AS animalInformation
+			,m.member_name AS memberName
+			,aniI.animal_gender AS aniGender
+			,aniI.animal_age AS aniAge
+			,companion_register_date AS companionRegisterDate
+			,cancle_companion_in_date AS cancleCompanionInDate
+			,pro_space_code AS proSpaceCode
+		FROM
+			tb_animal_insert AS aniI
+			INNER join
+			tb_companion_animal_register AS car
+			INNER join
+			tb_member AS m
+			on
+			aniI.animal_insert_code=car.animal_insert_code
+			and
+			m.member_id=car.member_id;
+	</select>
+	
+	<select id="selectMemberAll" resultType="String">
+		SELECT 
+			 member_id	as memberId
+		FROM 
+			tb_member;
+	</select>
+	
+	<insert	id="addGoods1" parameterType="kr.or.ksmart35.springboot_mybatis.domain.Goods">
+ 		<selectKey keyProperty="goodsCode" resultType="String" order="BEFORE">
+ 			SELECT 
+ 				CONCAT('goods_', MAX(CAST(SUBSTRING(g_code,7) AS DECIMAL)+1)) AS gCode 
+			FROM tb_goods
+ 		</selectKey>
+ 		
+ 		INSERT INTO tb_goods(
+			 g_code
+			,m_id
+			,g_name
+			,g_cate
+			,g_price
+			,g_color
+			,g_size
+			,g_date
+			,g_desc
+		)VALUES(
+			 #{goodsCode}
+			,#{memberId}
+			,#{goodsName}
+			,#{goodsCate}
+			,#{goodsPrice}
+			,#{goodsColor}
+			,#{goodsSize}
+			,curdate()
+			,#{goodsDesc}
+		)
+ 	</insert>
+ </mapper>
+
+</mapper>
