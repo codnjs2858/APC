@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+	
+<th:block layout:fragment="customTitle">
+	<title>심사신청내역</title>
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="container-fluid">
+			<div class="block-header">
+                <h2>
+                	심사신청내역
+                </h2>
+            </div>
+			
+			<div class="card">
+				<div class="body">
+					<div class="table-responsive">
+						<table class="table table-bordered" style="text-align: center;">
+						    <thead>
+						        <tr>
+						            <th>아이디</th>
+						            <th>신청날짜</th>
+						            <th>상태</th>
+						        </tr>
+						    </thead>
+						    <tbody>
+						        <tr>
+						            <td>id001</td>
+						            <td>2020-05-28</td>
+						            <td>심사완료</td>
+						        </tr>
+						        <tr>
+						            <td>id002</td>
+						            <td>2020-05-29</td>
+						            <td>심사중</td>
+						        </tr>
+						    </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>

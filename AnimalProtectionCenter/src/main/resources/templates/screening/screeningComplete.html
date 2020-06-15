@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+	
+<th:block layout:fragment="customTitle">
+	<title>심사완료관리</title>
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="container-fluid">
+			<div class="block-header">
+                <h2>
+                	심사완료관리
+                </h2>
+            </div>
+			
+			<div class="card">
+				<div class="body">
+					<div class="table-responsive">
+						<table class="table table-bordered" style="text-align: center;">
+						    <thead>
+						        <tr>
+						            <th>아이디</th>
+						            <th>문항1 보기코드</th>
+						            <th>문항2 보기코드</th>
+						            <th>문항3 보기코드</th>
+						            <th>문항4 보기코드</th>
+						            <th>문항5 보기코드</th>
+						            <th>문항6 보기코드</th>
+						            <th>문항7 보기코드</th>
+						            <th>문항8 보기코드</th>
+						            <th>문항9 보기코드</th>
+						            <th>문항10 보기코드</th>
+						            <th>문항11 보기코드</th>
+						            <th>지표총점</th>
+						        </tr>
+						    </thead>
+						    <tbody>
+						        <tr>
+						            <td>id001</td>
+						            <td>5</td>
+						            <td>6</td>
+						            <td>4</td>
+						            <td>10</td>
+						            <td>6</td>
+						            <td>10</td>
+						            <td>7</td>
+						            <td>8</td>
+						            <td>7</td>
+						            <td>8</td>
+						            <td>5</td>
+						            <td>76</td>
+						        </tr>
+						    </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>
