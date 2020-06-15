@@ -30,21 +30,21 @@
                                <input type="text" id="center_regist" class="form-control" placeholder="관리번호입력">
                            </div>
                        </div>
-                       <label>동물상태</label>
+                       <label>분양상태</label>
                        <div class="form-group">
                            <div class="form-line">
 								<select>
-                                    <option>분양중</option>
-                                    <option>미분양</option>
+                                    <option>분양가능</option>
+                                    <option>분양완료</option>
                                 </select>
                            </div>
 						</div>
-						<label>분양받는 회원아이디(memberid 가져오기)</label>
+						<label>분양받는 회원아이디</label>
                        <div class="form-group">
                            <div class="form-line">
 								<select>
-                                    <option>#</option>
-                                    <option>#</option>
+									<option value="null">없음</option>
+                                    <option th:each="m : ${mlist}">[[${m}]]</option>
                                 </select>
                            </div>
 						</div>

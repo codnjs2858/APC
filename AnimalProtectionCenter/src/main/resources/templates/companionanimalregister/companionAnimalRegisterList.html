@@ -44,9 +44,10 @@
                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                         <thead>
                             <tr>
+                            	<th rowspan="1" colspan="1">분양등록코드</th>
 	                            <th rowspan="1" colspan="1">관리등록번호</th>
-	                            <th rowspan="1" colspan="1">회원아이디</th>
-	                            <th rowspan="1" colspan="1">회원명</th>
+	                            <th rowspan="1" colspan="1">반려동물성별</th>
+	                            <th rowspan="1" colspan="1">반려동물나이</th>
 	                            <th rowspan="1" colspan="1">상태</th>
 	                            <th rowspan="1" colspan="1">등록날짜</th>
 	                            <th rowspan="1" colspan="1">등록취소날짜</th>
@@ -58,9 +59,10 @@
                         </thead>
                         <tfoot>
                             <tr>
+                            	<th rowspan="1" colspan="1">분양등록코드</th>
 	                            <th rowspan="1" colspan="1">관리등록번호</th>
-	                            <th rowspan="1" colspan="1">회원아이디</th>
-	                            <th rowspan="1" colspan="1">회원명</th>
+	                            <th rowspan="1" colspan="1">반려동물성별</th>
+	                            <th rowspan="1" colspan="1">반려동물나이</th>
 	                            <th rowspan="1" colspan="1">상태</th>
 	                            <th rowspan="1" colspan="1">등록날짜</th>
 	                            <th rowspan="1" colspan="1">등록취소날짜</th>
@@ -70,22 +72,29 @@
 	                            <th rowspan="1" colspan="1">삭제</th>
 	                        </tr>
                         </tfoot>
-                        <tbody><tr role="row" class="odd">
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td> 
-                                <td>#</td>
-                                <td>#</td>
-                                <th>
-	                            	<a th:href="@{/companionAnimalRegisterUpdate}">수정</a>
-	                            </th>
-	                            <th>
-	                            	<a th:href="@{#}">삭제</a>
-	                            </th>
-                            </tr></tbody>
+                        <tbody>
+                        	<th:block th:each="carl:${companionAnimalRegisterList}">
+									<tr> 
+										<td th:text="${carl.companionAnimalRegisterCode}"></td>
+										<td th:text="${carl.companionAnimalRegisterCode}"></td>
+										<td th:text="${carl.animalGender}"></td>
+										<td th:text="${carl.animalAge}"></td>
+										<td th:text="${carl.animalInformation}"></td>
+										<td th:text="${carl.companionRegisterDate}"></td>
+										<td th:text="${carl.cancleCompanionInDate}"></td>
+										<td th:text="${carl.proSpaceCode}"></td>
+										<td th:text="${carl.memberId}"></td>
+										<td>
+											<a th:href="@{companionAnimalRegisterUpdate}">
+											수정
+											</a>
+										</td>
+										<!-- <td>
+											<a th:href="#">삭제</a>
+										</td> -->
+									</tr>
+							</th:block>
+						</tbody>
                     </table>
                     </div>
                     </div>

@@ -6,12 +6,47 @@ public class CompanionAnimalRegister {
 	
 	private String companionAnimalRegisterCode;
 	private String animalInsertCode;
-	private String animalInformationCode;
+	private String animalInformation;
 	private String memberId;
 	private Date companionRegisterDate;
 	private Date cancleCompanionInDate;
 	private String proSpaceCode;
+	private String memberName;
+	private int animalAge;
+	private String animalGender;
 	
+	public String getAnimalInformation() {
+		return animalInformation;
+	}
+	public void setAnimalInformation(String animalInformation) {
+		this.animalInformation = animalInformation;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public int getAnimalAge() {
+		return animalAge;
+	}
+	public void setAnimalAge(int animalAge) {
+		this.animalAge = animalAge;
+	}
+	public String getAnimalGender() {
+		return animalGender;
+	}
+	public void setAnimalGender(String animalGender) {
+		this.animalGender = animalGender;
+	}
+	private Member member;
+	
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
 	public String getCompanionAnimalRegisterCode() {
 		return companionAnimalRegisterCode;
 	}
@@ -23,12 +58,6 @@ public class CompanionAnimalRegister {
 	}
 	public void setAnimalInsertCode(String animalInsertCode) {
 		this.animalInsertCode = animalInsertCode;
-	}
-	public String getAnimalInformationCode() {
-		return animalInformationCode;
-	}
-	public void setAnimalInformationCode(String animalInformationCode) {
-		this.animalInformationCode = animalInformationCode;
 	}
 	public String getMemberId() {
 		return memberId;
@@ -57,7 +86,7 @@ public class CompanionAnimalRegister {
 	@Override
 	public String toString() {
 		return "CompanionAnimalRegister [companionAnimalRegisterCode=" + companionAnimalRegisterCode
-				+ ", animalInsertCode=" + animalInsertCode + ", animalInformationCode=" + animalInformationCode
+				+ ", animalInsertCode=" + animalInsertCode + ", animalInformationCode=" + animalInformation
 				+ ", memberId=" + memberId + ", companionRegisterDate=" + companionRegisterDate
 				+ ", cancleCompanionInDate=" + cancleCompanionInDate + ", proSpaceCode=" + proSpaceCode + "]";
 	}
