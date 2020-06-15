@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.AnimalTypeMapper">
+	<resultMap type="AnimalType" id="animalType">
+		<result property="animalTypeCode" column="animal_type_code"></result>
+		<result property="animalType" column="animal_type"></result>
+		<result property="animalTypeSub" column="animal_type_sub"></result>
+		<result property="animalTypeRegDate" column="animal_type_reg_date"></result>
+	</resultMap>
+	
+	<select id="selectAnimalCnt" resultType="map">
+		SELECT 
+			animal_type AS animalType,
+			COUNT(*) AS cnt
+		FROM
+			tb_animal_type
+		GROUP BY animal_type;
+	</select>	
+
+	<delete id="deleteAnimalType" parameterType="String">
+		DELETE FROM tb_animal_type 
+		<where>
+			<if test="animalTypeCode != null and animalTypeCode !=''.toString()">animal_type_code=#{animalTypeCode}</if>	
+		</where>
+	</delete>
+	
+	<update id="updateAnimalType" parameterType="AnimalType">
+		update tb_animal_type
+	  	<trim prefix="SET" suffixOverrides=",">
+		      	<if test="animalType != null and animalType !=''.toString()">animal_type=#{animalType},</if>
+		      	<if test="animalTypeSub != null and animalTypeSub !=''.toString()">animal_type_sub=#{animalTypeSub}</if>
+			<where>
+				<if test="animalTypeCode != null and animalTypeCode !=''.toString()">animal_type_code=#{animalTypeCode}</if>	  
+		  	</where>
+	  	</trim>
+	</update>
+	
+	<select id="selectType" parameterType="String" resultMap="animalType">
+		SELECT 
+			animal_type_code, 
+			animal_type, 
+			animal_type_sub, 
+			animal_type_reg_date
+		FROM 
+			tb_animal_type 
+		WHERE animal_type_code = #{send_code}
+	</select>
+	
+	<select id="selectAnimalType" resultMap="animalType">
+		SELECT 
+			animal_type_code, 
+			animal_type, 
+			animal_type_sub, 
+			animal_type_reg_date
+		FROM 
+			tb_animal_type
+	</select>
+	
+	<insert id="insertAnimalType" parameterType="AnimalType">
+		
+		<selectKey order="BEFORE" keyProperty="animalTypeCode" resultType="String">
+			SELECT
+				(case COUNT(*)
+				when 0 then'animal_type_code_1'
+				else CONCAT('animal_type_code_',MAX(CAST(SUBSTRING(animal_type_code,18) AS DECIMAL))+1) 
+				END)AS animal_type_code
+			FROM
+				tb_animal_type
+		</selectKey>
+		
+		INSERT INTO tb_animal_type
+		(animal_type_code, animal_type, animal_type_sub, animal_type_reg_date)
+		VALUES (#{animalTypeCode},
+				#{animalType}, 
+				#{animalTypeSub},
+				NOW())
+	</insert>
+	
+	
+</mapper>
