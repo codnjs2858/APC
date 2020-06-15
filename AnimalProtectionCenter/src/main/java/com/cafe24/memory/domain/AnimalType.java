@@ -7,6 +7,7 @@ public class AnimalType {
 	private String animalType;
 	private String animalTypeSub;
 	private Date animalTypeRegDate;
+
 	public String getAnimalTypeCode() {
 		return animalTypeCode;
 	}
@@ -36,5 +37,4 @@ public class AnimalType {
 		return "AnimalType [animalTypeCode=" + animalTypeCode + ", animalType=" + animalType + ", animalTypeSub="
 				+ animalTypeSub + ", animalTypeRegDate=" + animalTypeRegDate + "]";
 	}
-	
 }

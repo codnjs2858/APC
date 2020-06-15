@@ -8,7 +8,7 @@
 </th:block> 
 <th:block layout:fragment="customCss">
     <!-- Bootstrap Select Css -->
-    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 </th:block>
 <th:block layout:fragment="customContents">
 	<section class="content">
@@ -78,25 +78,22 @@
 					           		</div>
 				           		</div>
 		           			</div>
-		           			<div class="col-sm-4">
+		           			<div class="col-sm-4 m-t-10">
 				           		<b>축종</b>
 				           		<div class="input-group">
-					           		<select class="form-control">
-					           			<option>----축종 선택----</option>
-					           			<option>강아지</option>
-					           			<option>고양이</option>
-					           			<option>기타</option>
+					           		<select id="selectType" class="form-control">
+					           			<option value="">----축종 선택----</option>
+					           			<option value="강아지">강아지</option>
+					           			<option value="고양이">고양이</option>
+					           			<option value="기타">기타</option>
 					           		</select>
 				           		</div>
 		           			</div>
-		           			<div class="col-sm-4">
+		           			<div class="col-sm-4 m-t-10">
 				           		<b>품종</b>
 				           		<div class="input-group">
-					           		<select name="animalTypeCode">
-					           			<option>----품종 선택----</option>
-					           			<option>포메라니안</option>
-					           			<option>말티즈</option>
-					           			<option>비글</option>
+					           		<select id="subType" name="animalTypeCode" class="form-control">
+					           			<option value="">----축종을 선택해 주세요----</option>
 					           		</select>
 				           		</div>
 		           			</div>
@@ -153,8 +150,29 @@
 </th:block> 
 
 <th:block layout:fragment="customHeadScript">
+	<script>
+		var typeList ={
+				'강아지':['말티즈','푸들','비글'],
+				'고양이':['코렛','페르시안','러시안 블루'],
+				'기타':['햄스터','도마뱀','토끼']
+		}
+		
+	</script>	
 </th:block> 
-
 <th:block layout:fragment="customFooterScript">
+	<script>
+		$(function(){
+			$('#selectType').change(function(){
+				var type = $(this).val();
+				var subList = typeList[type];
+				var html='<option value="">----품종을 선택해 주세요----</option>';
+				for(var i=0;i<subList.length;i++){		
+					html += '<option value="'+subList[i]+'">'+subList[i]+'</option>';
+				}	
+				$('#subType').html(html);
+				$('#subType').selectpicker('refresh');
+			});
+		});
+	</script>
 </th:block>
 </html>

@@ -29,6 +29,11 @@
 	                </ul>
 				</div>
 				<div class="body">
+					<div class="row clearfix">
+	                    <div class="col-xs-4 col-md-4" th:each="c:${Cnt}">
+	                        <button class="btn btn-primary btn-lg btn-block waves-effect" type="button" onclick="location.href='/animaltypeselect'">[[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
+	                    </div>
+	                </div>
 	                <div class="table-responsive" style="overflow: hidden;">
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
 	                        <thead>
@@ -37,23 +42,22 @@
 		                            	<th><div class="align-center">동물 종류</div></th>
 		                            	<th><div class="align-center">동물종 종류</div></th>
 		                            	<th><div class="align-center">등록 날짜</div></th>
-		                            	<th><div class="align-center">등록인</div></th>
 		                            	<th data-orderable="false"><div class="align-center">수정</div></th>
 		                            	<th data-orderable="false"><div class="align-center">삭제</div></th>
 		                            </tr>
 		                        </thead>
 	                        <tbody>
-			                        <tr th:each="j : ${#numbers.sequence(1,100)}" class="odd">
-		                                <td><div class="align-center">[[${j}]]</div></td>
-		                                <td><div class="align-center">강아지</div></td>
-		                                <td><div class="align-center">말티즈</div></td>
-		                                <td><div class="align-center">2008/11/28</div></td>
-		                                <td><div class="align-center">설채원</div></td>
-		                                <td><div class="align-center"><a href="/animaltypeupdate">
+			                        <tr th:each="typelist : ${TypeList}" class="odd">
+		                                <td><div class="align-center">[[${typelist.animalTypeCode}]]</div></td>
+		                                <td><div class="align-center">[[${typelist.animalType}]]</div></td>
+		                                <td><div class="align-center">[[${typelist.animalTypeSub}]]</div></td>
+		                                <td><div class="align-center">[[${typelist.animalTypeRegDate}]]</div></td>
+		                                <td><div class="align-center">
+		                                	<a th:href="@{/animaltypeupdate(send_code=${typelist.animalTypeCode})}">
 		                       				<i class="material-icons">update</i></a></div>
 		                      			</td>
 		                      			<td><div class="align-center">
-					                       	<a href="/animaltypedelete">
+					                       	<a th:href="@{/animaltypedelete(send_code=${typelist.animalTypeCode})}">
 					                       	<i class="material-icons">delete</i>
 				                       	</a></div>
 			                      	</td>
@@ -71,7 +75,7 @@
 
 </th:block> 
 <th:block layout:fragment="customFooterScript">
-	    <!-- Jquery DataTable Plugin Js -->
+    <!-- Jquery DataTable Plugin Js -->
     <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
@@ -83,9 +87,7 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
     <script>
     	$(function(){
-    		$('#dataTabelEaxm1').dataTable({
-    			"aaSorting": []
-    		});
+    		$('#dataTabelEaxm1').dataTable();
     	});
     </script>
 </th:block>
