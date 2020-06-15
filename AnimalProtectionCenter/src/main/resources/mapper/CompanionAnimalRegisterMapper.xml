@@ -31,36 +31,5 @@
 		FROM 
 			tb_member;
 	</select>
-	
-	<insert	id="addGoods1" parameterType="kr.or.ksmart35.springboot_mybatis.domain.Goods">
- 		<selectKey keyProperty="goodsCode" resultType="String" order="BEFORE">
- 			SELECT 
- 				CONCAT('goods_', MAX(CAST(SUBSTRING(g_code,7) AS DECIMAL)+1)) AS gCode 
-			FROM tb_goods
- 		</selectKey>
- 		
- 		INSERT INTO tb_goods(
-			 g_code
-			,m_id
-			,g_name
-			,g_cate
-			,g_price
-			,g_color
-			,g_size
-			,g_date
-			,g_desc
-		)VALUES(
-			 #{goodsCode}
-			,#{memberId}
-			,#{goodsName}
-			,#{goodsCate}
-			,#{goodsPrice}
-			,#{goodsColor}
-			,#{goodsSize}
-			,curdate()
-			,#{goodsDesc}
-		)
- 	</insert>
- </mapper>
 
 </mapper>
