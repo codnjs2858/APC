@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+	
+<th:block layout:fragment="customTitle">
+	<title>심사지표</title>
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="container-fluid">
+			<div class="block-header">
+                <h2>
+                	심사지표
+                </h2>
+            </div>
+			
+			<div class="card">
+				<div class="body">
+					<div class="table-responsive">
+						<table class="table table-bordered" style="text-align: center;">
+						    <thead>
+						        <tr>
+						            <th>문항명</th>
+						            <th>보기내용</th>
+						            <th>점수분배</th>
+						            <th>수정</th>
+						            <th>삭제</th>
+						        </tr>
+						    </thead>
+						    <tbody>
+						        <tr>
+						            <td rowspan="4" style="vertical-align: middle">반려동물 키운 경험</td>
+						            <td>1년 미만 또는 없음</td>
+						            <td>3</td>
+						            <td>
+						            	<a href="#">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						        <tr>
+						            <td>1~3년</td>
+						            <td>5</td>
+						            <td>
+						            	<a href="#">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						        <tr>
+						            <td>3~7년</td>
+						            <td>7</td>
+						            <td>
+						            	<a href="#">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						        <tr>
+						            <td>7년 이상</td>
+						            <td>10</td>
+						            <td>
+						            	<a href="#">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						    </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>

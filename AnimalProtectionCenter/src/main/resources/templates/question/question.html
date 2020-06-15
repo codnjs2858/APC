@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+	
+<th:block layout:fragment="customTitle">
+	<title>심사문항관리</title>
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="container-fluid">
+			<div class="block-header">
+                <h2>
+                	심사문항관리
+                </h2>
+            </div>
+			
+			<div class="card">
+				<div class="body">
+					<div class="table-responsive">
+						<table class="table table-bordered" style="text-align: center;">
+						    <thead>
+						        <tr>
+						            <th>문항명</th>
+						            <th>문항내용</th>
+						            <th>문항점수</th>
+						            <th>등록날짜</th>
+						            <th>수정날짜</th>
+						            <th>수정</th>
+						            <th>삭제</th>
+						        </tr>
+						    </thead>
+						    <tbody>
+						        <tr>
+						            <td>반려동물 키운 경험</td>
+						            <td>1) 1년 미만 또는 없음 2) 1년 이상 3) 3년 이상 4) 7년 이상</td>
+						            <td>10</td>
+						            <td>2020-05-22</td>
+						            <td>2020-05-22</td>
+						            <td>
+						            	<a href="#">수정</a>
+						            </td>
+						            <td>
+						            	<a href="#">삭제</a>
+						            </td>
+						        </tr>
+						    </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>
