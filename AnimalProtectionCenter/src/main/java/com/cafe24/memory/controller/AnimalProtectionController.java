@@ -1,6 +1,5 @@
 package com.cafe24.memory.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -86,7 +85,6 @@ public class AnimalProtectionController {
 	@PostMapping("/animalProtection")
 	public String animalProtection(AnimalProtect animalProtect, @RequestParam(name = "protectDate", required = false) String protectDate) {
 		
-		AnimalProtect ap = protectionService.selectAnimalProtect(animalProtect.getAnimalInsertCode());
 		Date exeDate = null;
 		if(protectDate != null) {
 			int ptDate = Integer.parseInt(protectDate);
