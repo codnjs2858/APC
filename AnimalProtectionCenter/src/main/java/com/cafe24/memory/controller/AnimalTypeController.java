@@ -19,7 +19,7 @@ public class AnimalTypeController {
 	public String listAnimalType(@RequestParam(name="send_type", required = false) String send_type, Model model) {
 		model.addAttribute("Cnt", animalTypeService.selectAnimalCnt());
 		if(send_type != null && !"".equals(send_type)) {
-			model.addAttribute("TypeList", animalTypeService.selectTypeList(send_type));
+			model.addAttribute("TypeList", animalTypeService.selectAnimalType(send_type));
 		}else {
 			model.addAttribute("TypeList", animalTypeService.selectAnimalType());
 		}

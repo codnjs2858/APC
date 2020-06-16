@@ -29,6 +29,19 @@
 	                </ul>
 				</div>
 				<div class="body">
+	                <div class="row clearfix">
+	                	<div class="col-xs-3 col-md-3" >
+	                    	<a th:href="@{/animalcenterlist}">
+		                        <button class="btn btn-danger btn-lg btn-block waves-effect" type="button">전체보기</button>
+	                    	</a>
+	                    </div>
+	                    <div class="col-xs-3 col-md-3" th:each="c:${Cnt}">
+	                    	<a th:href="@{/animalcenterlist(send_type=${c.animalType})}">
+		                        <button class="btn btn-primary btn-lg btn-block waves-effect" type="button">
+		                        [[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
+	                    	</a>
+	                    </div>
+	                </div>
 	                <div class="table-responsive" style="overflow: hidden;">
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
 	                        <thead>
@@ -38,8 +51,6 @@
 		                            <th><div class="align-center">종류</div></th>
 		                            <th><div class="align-center">품종</div></th>
 		                            <th><div class="align-center">성별</div></th>
-		                            <th><div class="align-center">나이</div></th>
-		                            <th><div class="align-center">체중</div></th>
 		                            <th><div class="align-center">건강상태</div></th>
 		                            <th><div class="align-center">건강 상태 기록</div></th>
 		                            <th><div class="align-center">등록 날짜</div></th>
@@ -49,19 +60,17 @@
 		                        </tr>
 	                        </thead>
 	                        <tbody>
-	                            <tr th:each="j : ${#numbers.sequence(1,100)}" class="odd">
-	                       			<td><div class="align-center"><span class="label label-warning">new</span></div></td>
-				                    <!-- <td class="sorting_1" th:text="${j}"></td> -->
-				                    <td><div class="align-center">[[${j}]]<a href="/animalcenterpage">(동물정보 상세보기)</a></div></td>
-		                            <td><div class="align-center">강아지</div></td>
-		                            <td><div class="align-center">말티즈</div></td>
-		                            <td><div class="align-center">암</div></td>
-		                            <td><div class="align-center">5세 추정</div></td>
-		                            <td><div class="align-center">4kg</div></td>
-		                            <td><div class="align-center">건강<a href="/animalhealthlist">(건강기록 상세보기)</a></div></td>
+	                            <tr th:each="ac, i : ${AClist}" class="odd">
+	                       			<!-- <td><div class="align-center"><span class="label label-warning">new</span></div></td> -->
+				                    <td><div class="align-center">[[${i.size - i.index}]]</div></td>
+				                    <td><div class="align-center">[[${ac.animalCenterNumber}]]<a href="/animalcenterpage">(동물 상세보기)</a></div></td>
+		                            <td><div class="align-center">[[${ac.animalTypeCode.animalType}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalTypeCode.animalTypeSub}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalGender}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalState}]]<a href="/animalhealthlist">(건강 상세보기)</a></div></td>
 		                            <td><div class="align-center"><a href="/animalhealthinsert">건강 기록 등록</a></div></td>
-		                            <td><div class="align-center">2020-06-10</div></td>
-		                            <td><div class="align-center">이경진</div></td>
+		                            <td><div class="align-center">[[${ac.animalInsertRegDate}]]</div></td>
+		                            <td><div class="align-center">[[${ac.staffCode.staffName}]]</div></td>
 		                            <td><div class="align-center"><a href="/animalcenterupdate">
 	                       				<i class="material-icons">update</i></a></div>
 	                      			</td>

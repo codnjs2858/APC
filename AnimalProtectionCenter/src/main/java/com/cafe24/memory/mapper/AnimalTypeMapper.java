@@ -17,8 +17,7 @@ public interface AnimalTypeMapper {
 	public AnimalType selectType(String send_code);
 	
 	public List<AnimalType> selectAnimalType();
-	
-	public List<AnimalType> selectTypeList(String send_type);
+	public List<AnimalType> selectAnimalType(String send_type);
 	
 	public int insertAnimalType(AnimalType atype);
 	

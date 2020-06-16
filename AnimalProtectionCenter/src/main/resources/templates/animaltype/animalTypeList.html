@@ -30,7 +30,12 @@
 				</div>
 				<div class="body">
 					<div class="row clearfix">
-	                    <div class="col-xs-4 col-md-4" th:each="c:${Cnt}">
+	                    <div class="col-xs-3 col-md-3" >
+	                    	<a th:href="@{/animaltypelist}">
+		                        <button class="btn btn-danger btn-lg btn-block waves-effect" type="button">전체보기</button>
+	                    	</a>
+	                    </div>
+	                    <div class="col-xs-3 col-md-3" th:each="c:${Cnt}">
 	                    	<a th:href="@{/animaltypelist(send_type=${c.animalType})}">
 		                        <button class="btn btn-primary btn-lg btn-block waves-effect" type="button">
 		                        [[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
@@ -52,7 +57,7 @@
 		                        </thead>
 	                        <tbody>
 			                        <tr th:each="typelist, i : ${TypeList}" class="odd">
-		                                <td><div class="align-center">[[${i.index+1}]]</div></td>
+		                                <td><div class="align-center">[[${i.size - i.index}]]</div></td>
 		                                <td><div class="align-center">[[${typelist.animalTypeCode}]]</div></td>
 		                                <td><div class="align-center">[[${typelist.animalType}]]</div></td>
 		                                <td><div class="align-center">[[${typelist.animalTypeSub}]]</div></td>
@@ -92,7 +97,9 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
     <script>
     	$(function(){
-    		$('#dataTabelEaxm1').dataTable();
+    		$('#dataTabelEaxm1').dataTable({
+    			"aaSorting": []
+    		});
     	});
     </script>
 </th:block>

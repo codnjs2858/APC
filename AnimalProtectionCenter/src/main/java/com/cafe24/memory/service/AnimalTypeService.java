@@ -32,15 +32,14 @@ public class AnimalTypeService {
 	public AnimalType selectType(String send_code){
 		return animalTypeMapper.selectType(send_code);
 	}
-	
+	//
 	public List<AnimalType> selectAnimalType(){
 		return animalTypeMapper.selectAnimalType();
 	}
-	
-	public List<AnimalType> selectTypeList(String send_type){
-		return animalTypeMapper.selectTypeList(send_type);
+	public List<AnimalType> selectAnimalType(String send_type){
+		return animalTypeMapper.selectAnimalType(send_type);
 	}
-	
+	//
 	public int insertAnimalType(AnimalType atype) {
 		return animalTypeMapper.insertAnimalType(atype);
 	}
