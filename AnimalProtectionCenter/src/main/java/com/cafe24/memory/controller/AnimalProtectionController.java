@@ -67,10 +67,23 @@ public class AnimalProtectionController {
 	
 	@PostMapping("/addAnimalProtection")
 	public String addAnimalProtection(AnimalProtect animalProtect, @RequestParam(name = "protectDate", required = false) String protectDate) {
-
-	@GetMapping("/addAnimalProtection")
-	public String addAnimalProtection(Model model) {
-		return "animalprotect/animalProtectInsert";
+		Date exeDate = null;
+		if(protectDate != null) {
+			int ptDate = Integer.parseInt(protectDate);
+			
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, ptDate+2);
+			
+			//String exeDate = format.format(new Date(cal.getTimeInMillis()));
+			exeDate = new Date(cal.getTimeInMillis());
+		}
+		
+		animalProtect.setAnimalProtectExeDate(exeDate);
+		
+		System.out.println(animalProtect + " <-- addAnimalProtection() AnimalProtectionController.java");
+		protectionService.insertAniamlProtection(animalProtect);
+		
+		return "redirect:/animalProtection";
 	}
 	
 	@PostMapping("/animalProtection")
@@ -97,29 +110,6 @@ public class AnimalProtectionController {
 	@GetMapping("/addAnimalProtection")
 	public String addAnimalProtection(Model model) {
 		return "animalprotect/animalProtectInsert";
-	}
-	
-	@PostMapping("/animalProtection")
-	public String animalProtection(AnimalProtect animalProtect, @RequestParam(name = "protectDate", required = false) String protectDate) {
-		Date exeDate = null;
-		if(protectDate != null) {
-			int ptDate = Integer.parseInt(protectDate);
-			
-			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.DATE, ptDate+2);
-			
-			//String exeDate = format.format(new Date(cal.getTimeInMillis()));
-			exeDate = new Date(cal.getTimeInMillis());
-		}
-		
-		animalProtect.setAnimalProtectExeDate(exeDate);
-		
-		ProtectionSpace proSpace = new ProtectionSpace();
-		proSpace.setAnimalProtect(animalProtect);
-		
-		protectionService.updateAnimalProtectionIn(proSpace);
-		
-		return "redirect:/animalProtection";
 	}
 	
 	private long getDday(Date date) {
