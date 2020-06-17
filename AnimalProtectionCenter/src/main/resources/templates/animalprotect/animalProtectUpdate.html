@@ -78,7 +78,7 @@
 		$('#btnNamePet').click(function(){
 			var btnNamePet = $('#petName').val();
 			var request = $.ajax({
-				url: "/modifyAnimalProtection",
+				url: "/insertCodeCheck",
 				method: "POST",
 				data: { "btnNamePet" : btnNamePet },
 				dataType: "text"

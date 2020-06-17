@@ -23,17 +23,7 @@ public class AnimalProtectionController {
 	@Autowired
 	ProtectionService protectionService;
 
-	@PostMapping("/addProtectInsert")
-	@ResponseBody
-	public String addProtectInsert(@RequestParam(name = "btnNamePet") String petName) {
-		System.out.println(petName);
-		
-		petName = petName + "1213123";
-		
-		return petName;
-	}
-	
-	@PostMapping("/modifyAnimalProtection")
+	@PostMapping("/insertCodeCheck")
 	@ResponseBody
 	public String modifyAnimalProtection(@RequestParam(name = "btnNamePet") String petName) {
 		System.out.println(petName);
@@ -69,8 +59,6 @@ public class AnimalProtectionController {
 				ps.setAnimalProtect(new AnimalProtect());
 			}
 			
-			System.out.println(dDay);
-			
 			model.addAttribute("dDay", dDay);
 			model.addAttribute("ptSpace", ps);
 		}
@@ -78,15 +66,8 @@ public class AnimalProtectionController {
 		return "animalprotect/animalProtectUpdate";
 	}
 	
-	@GetMapping("/addAnimalProtection")
-	public String addAnimalProtection(Model model) {
-		return "animalprotect/animalProtectInsert";
-	}
-	
-	@PostMapping("/animalProtection")
-	public String animalProtection(AnimalProtect animalProtect, @RequestParam(name = "protectDate", required = false) String protectDate) {
-		
-		AnimalProtect ap = protectionService.selectAnimalProtect(animalProtect.getAnimalInsertCode());
+	@PostMapping("/addAnimalProtection")
+	public String addAnimalProtection(AnimalProtect animalProtect, @RequestParam(name = "protectDate", required = false) String protectDate) {
 		Date exeDate = null;
 		if(protectDate != null) {
 			int ptDate = Integer.parseInt(protectDate);
@@ -98,7 +79,32 @@ public class AnimalProtectionController {
 			exeDate = new Date(cal.getTimeInMillis());
 		}
 		
-		System.out.println(exeDate);
+		animalProtect.setAnimalProtectExeDate(exeDate);
+		
+		System.out.println(animalProtect + " <-- addAnimalProtection() AnimalProtectionController.java");
+		protectionService.insertAniamlProtection(animalProtect);
+		
+		return "redirect:/animalProtection";
+	}
+	
+	@GetMapping("/addAnimalProtection")
+	public String addAnimalProtection(Model model) {
+		return "animalprotect/animalProtectInsert";
+	}
+	
+	@PostMapping("/animalProtection")
+	public String animalProtection(AnimalProtect animalProtect, @RequestParam(name = "protectDate", required = false) String protectDate) {
+		Date exeDate = null;
+		if(protectDate != null) {
+			int ptDate = Integer.parseInt(protectDate);
+			
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, ptDate+2);
+			
+			//String exeDate = format.format(new Date(cal.getTimeInMillis()));
+			exeDate = new Date(cal.getTimeInMillis());
+		}
+		
 		animalProtect.setAnimalProtectExeDate(exeDate);
 		
 		ProtectionSpace proSpace = new ProtectionSpace();

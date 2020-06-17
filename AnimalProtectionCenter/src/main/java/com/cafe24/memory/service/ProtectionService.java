@@ -17,6 +17,13 @@ public class ProtectionService {
 	@Autowired
 	ProtectionMapper protectionMapper;
 	
+	public int insertAniamlProtection(AnimalProtect animalProtect) {
+		int result = 0;
+		result += protectionMapper.insertAniamlProtection(animalProtect);
+		result += protectionMapper.updateAnimalProtectionIn(animalProtect);
+		return result;
+	}
+	
 	public ProtectionSpace modifyProtectionSpaceBySpace(String space) {
 		ProtectionSpace ps = selectProtectionSpaceByCode(space);
 		AnimalProtect ap = selectAnimalProtect(ps.getAnimalInsertCode());
@@ -26,13 +33,14 @@ public class ProtectionService {
 	}
 	
 	public int updateAnimalProtectionIn(ProtectionSpace proSpace) {
-		ProtectionSpace ps = protectionMapper.selectProtectionSpaceByAniInCode(proSpace.getAnimalProtect().getAnimalInsertCode());
+		List<ProtectionSpace> ps = protectionMapper.selectProtectionSpaceByAniInCode(proSpace.getAnimalProtect().getAnimalInsertCode());
 		System.out.println(ps + " <-- ProtectionService.java");
-		if(ps != null && !"".equals(ps.getAnimalInsertCode())) {
-			System.out.println(ps.getProtectSpaceCode() + " <-- ProtectionService.java");
-			protectionMapper.updateAnimalProtectionExit(ps.getProtectSpaceCode());
+		if(ps != null) {
+			for(int i = 0; i < ps.size(); i++) {
+				protectionMapper.updateAnimalProtectionExit(ps.get(i).getProtectSpaceCode());				
+			}
 		}
-		return protectionMapper.updateAnimalProtectionIn(proSpace);
+		return protectionMapper.updateAnimalProtectionIn(proSpace.getAnimalProtect());
 	}
 	
 	public ProtectionSpace selectProtectionSpaceByCode(String proSpaceCode) {

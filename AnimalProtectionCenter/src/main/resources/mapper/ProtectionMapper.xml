@@ -11,6 +11,30 @@
 		<result property="protectSpaceRegDate" column="protect_space_reg_date"/>
 		<result property="animalProtectPeriod" column="animal_protect_period"/>
 	</resultMap>
+	
+	<insert id="insertAniamlProtection" parameterType="AnimalProtect">
+		<selectKey resultType="String" keyProperty="animalProtectNum" order="BEFORE">
+			SELECT 
+				CONCAT('animal_protect_', MAX(CAST(SUBSTR(p.animal_protect_num,16) AS DECIMAL))+1) AS animalProtectNum
+			FROM
+				tb_animal_protect AS p
+		</selectKey>
+		INSERT INTO tb_animal_protect(
+		 	 animal_protect_num
+			,animal_insert_code
+			,protect_space_code
+			,protect_state
+			,animal_protect_reg_date
+			,animal_protect_exe_date
+		)VALUES (
+			 #{animalProtectNum}
+			,#{animalInsertCode}
+			,#{protectSpaceCode}
+			,#{state}
+			,CURDATE()
+			,#{animalProtectExeDate}
+		)
+	</insert>
 
 	<update id="updateAnimalProtectionExit" parameterType="String">
 		UPDATE
@@ -22,18 +46,18 @@
 			s.protect_space_code=#{proSpaceCode};
 	</update>
 
-	<update id="updateAnimalProtectionIn" parameterType="ProtectionSpace">
+	<update id="updateAnimalProtectionIn" parameterType="AnimalProtect">
 		UPDATE 
 			 tb_animal_protect AS p
 			,tb_protect_space s
 		SET 
-			 p.protect_space_code=		#{animalProtect.protectSpaceCode}
-			,p.protect_state=			#{animalProtect.state}
-			,p.animal_protect_exe_date=	#{animalProtect.animalProtectExeDate}
-			,s.animal_insert_code=		#{animalProtect.animalInsertCode}
+			 p.protect_space_code=		#{protectSpaceCode}
+			,p.protect_state=			#{state}
+			,p.animal_protect_exe_date=	#{animalProtectExeDate}
+			,s.animal_insert_code=		#{animalInsertCode}
 			,s.use_state=				'사용중'
 		WHERE
-			s.protect_space_code=#{animalProtect.protectSpaceCode}; 
+			s.protect_space_code=#{protectSpaceCode}; 
 	</update>
 
 	<!-- 

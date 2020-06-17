@@ -20,17 +20,17 @@
 					
 				</div>
 				<div class="body">
-					<form action="/animalProtection" method="POST">
+					<form action="/addAnimalProtection" method="POST">
 						<div class="input-group">
 	                        <div class="form-line">
 								보호공간
-	                            <input type="text" class="form-control" name="protectSpaceCode" placeholder="보호공간" th:value="${ptSpace.protectSpaceCode}" readonly="readonly">
+	                            <input type="text" class="form-control" name="protectSpaceCode" placeholder="보호공간">
 	                        </div>
 						</div>
 	                    <div class="input-group">
 	                        <div class="form-line">
 								센터등록된 유기동물번호
-	                            <input id="petName" type="text" class="form-control" name="animalInsertCode" placeholder="유기동물이름" th:value="${ptSpace.animalProtect.animalInsertCode}">
+	                            <input id="petName" type="text" class="form-control" name="animalInsertCode" placeholder="유기동물이름">
 	                            <button type="button" id="btnNamePet" class="btn btn-block bg-green waves-effect">동물이름중복</button>
 	                        </div>
 						</div>
@@ -78,7 +78,7 @@
 		$('#btnNamePet').click(function(){
 			var btnNamePet = $('#petName').val();
 			var request = $.ajax({
-				url: "/addProtectInsert",
+				url: "/insertCodeCheck",
 				method: "POST",
 				data: { "btnNamePet" : btnNamePet },
 				dataType: "json"

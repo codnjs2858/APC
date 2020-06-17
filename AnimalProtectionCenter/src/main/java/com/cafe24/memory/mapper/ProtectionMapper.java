@@ -12,13 +12,15 @@ public interface ProtectionMapper {
 
 	ProtectionSpace selectProtectionSpaceByCode(String proSpaceCode);
 	
-	ProtectionSpace selectProtectionSpaceByAniInCode(String aniInsertCode);
+	List<ProtectionSpace> selectProtectionSpaceByAniInCode(String aniInsertCode);
 	
 	AnimalProtect selectAnimalProtect(String animalNum);
 	
 	List<ProtectionSpace> selectProtectionSpace();
 	
-	int updateAnimalProtectionIn(ProtectionSpace proSpace);
+	int updateAnimalProtectionIn(AnimalProtect animalProtect);
 	
 	int updateAnimalProtectionExit(String proSpaceCode);
+	
+	int insertAniamlProtection(AnimalProtect animalProtect);
 }
