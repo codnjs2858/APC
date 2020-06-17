@@ -10,6 +10,9 @@ import com.cafe24.memory.domain.AnimalCenter;
 @Mapper
 public interface AnimalCenterMapper {
 
+	//보호동물 센터 등록
+	public int insertAnimalCenter(AnimalCenter animal);
+	
 	//센터 동물 조회 (전체조회, 종류 선택조회)
 	public List<AnimalCenter> selectAnimalCenter();
 	public List<AnimalCenter> selectAnimalCenter(String send_type);

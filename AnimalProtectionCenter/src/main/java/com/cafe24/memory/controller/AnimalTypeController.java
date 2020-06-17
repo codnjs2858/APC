@@ -35,6 +35,7 @@ public class AnimalTypeController {
 		animalTypeService.insertAnimalType(atype);
 		return "redirect:/animaltypelist"; 
 	}
+	
 	//animal type update
 	@GetMapping("/animaltypeupdate")
 	public String updateAnimalForm(

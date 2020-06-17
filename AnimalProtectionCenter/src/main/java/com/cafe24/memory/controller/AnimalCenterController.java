@@ -28,10 +28,9 @@ public class AnimalCenterController {
 	}
 	@PostMapping("/animalcenterinsert")
 	public String insertAnimalCenter(Model model, AnimalType atype, Staff staff, AnimalCenter animal) {
-		animal.setAnimalType(atype);
 		animal.setStaff(staff);
-		
-		System.out.println(animal);
+		animal.setAnimalType(atype);
+		animalCenterService.insertAnimalCenter(animal);
 		return "redirect:/animalcenterlist";
 	}
 	@PostMapping("/animalcentertype")

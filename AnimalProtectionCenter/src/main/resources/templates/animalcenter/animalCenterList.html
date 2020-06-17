@@ -52,9 +52,9 @@
 		                            <th><div class="align-center">품종</div></th>
 		                            <th><div class="align-center">성별</div></th>
 		                            <th><div class="align-center">건강상태</div></th>
-		                            <th><div class="align-center">건강 상태 기록</div></th>
 		                            <th><div class="align-center">등록 날짜</div></th>
 		                            <th><div class="align-center">담당자</div></th>
+		                            <th><div class="align-center">건강 상태 기록</div></th>
 		                            <th data-orderable="false"><div class="align-center">수정</div></th>
 		                            <th data-orderable="false"><div class="align-center">삭제</div></th>
 		                        </tr>
@@ -64,14 +64,15 @@
 	                       			<!-- <td><div class="align-center"><span class="label label-warning">new</span></div></td> -->
 				                    <td><div class="align-center">[[${i.size - i.index}]]</div></td>
 				                    <td><div class="align-center">[[${ac.animalCenterNumber}]]<a href="/animalcenterpage">(동물 상세보기)</a></div></td>
-		                            <td><div class="align-center">[[${ac.animalTypeCode.animalType}]]</div></td>
-		                            <td><div class="align-center">[[${ac.animalTypeCode.animalTypeSub}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalType.animalType}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalType.animalTypeSub}]]</div></td>
 		                            <td><div class="align-center">[[${ac.animalGender}]]</div></td>
 		                            <td><div class="align-center">[[${ac.animalState}]]<a href="/animalhealthlist">(건강 상세보기)</a></div></td>
-		                            <td><div class="align-center"><a href="/animalhealthinsert">건강 기록 등록</a></div></td>
 		                            <td><div class="align-center">[[${ac.animalInsertRegDate}]]</div></td>
-		                            <td><div class="align-center">[[${ac.staffCode.staffName}]]</div></td>
-		                            <td><div class="align-center"><a href="/animalcenterupdate">
+		                            <td><div class="align-center">[[${ac.staff.staffName}]]</div></td>
+		                            <td><div class="align-center"><a href="/animalhealthinsert">건강 기록 등록</a></div></td>
+		                            <td><div class="align-center">
+		                            	<a href="/animalcenterupdate">
 	                       				<i class="material-icons">update</i></a></div>
 	                      			</td>
 	                      			<td><div class="align-center">

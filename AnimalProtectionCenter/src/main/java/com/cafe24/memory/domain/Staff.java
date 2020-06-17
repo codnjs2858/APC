@@ -10,7 +10,6 @@ public class Staff {
 	private String staffEmail;
 	private String staffInDate;
 	private String staffOutDate;
-	
 	public String getStaffCode() {
 		return staffCode;
 	}
@@ -71,4 +70,6 @@ public class Staff {
 				+ ", staffRank=" + staffRank + ", memberId=" + memberId + ", staffPhone=" + staffPhone + ", staffEmail="
 				+ staffEmail + ", staffInDate=" + staffInDate + ", staffOutDate=" + staffOutDate + "]";
 	}
+	
+
 }

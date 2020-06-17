@@ -1,7 +1,5 @@
 package com.cafe24.memory.domain;
 
-import java.sql.Date;
-
 public class AnimalCenter {
 	private String animalInsertCode;
 	private int animalCenterNumber;
@@ -11,12 +9,12 @@ public class AnimalCenter {
 	private int animalWeight;
 	private String animalCharacter;
 	private String animalState;
-	private Date animalInsertRegDate;
+	private String animalInsertRegDate;
 	//외래키
-	private AnimalType animalType; //AnimalType
+	private AnimalType animalType;
 	private Staff staff;
-	private String acceptCode;
 	
+	private String acceptCode;
 	
 	public String getAnimalInsertCode() {
 		return animalInsertCode;
@@ -66,17 +64,11 @@ public class AnimalCenter {
 	public void setAnimalState(String animalState) {
 		this.animalState = animalState;
 	}
-	public Date getAnimalInsertRegDate() {
+	public String getAnimalInsertRegDate() {
 		return animalInsertRegDate;
 	}
-	public void setAnimalInsertRegDate(Date animalInsertRegDate) {
+	public void setAnimalInsertRegDate(String animalInsertRegDate) {
 		this.animalInsertRegDate = animalInsertRegDate;
-	}
-	public String getAcceptCode() {
-		return acceptCode;
-	}
-	public void setAcceptCode(String acceptCode) {
-		this.acceptCode = acceptCode;
 	}
 	public AnimalType getAnimalType() {
 		return animalType;
@@ -90,6 +82,12 @@ public class AnimalCenter {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
+	public String getAcceptCode() {
+		return acceptCode;
+	}
+	public void setAcceptCode(String acceptCode) {
+		this.acceptCode = acceptCode;
+	}
 	@Override
 	public String toString() {
 		return "AnimalCenter [animalInsertCode=" + animalInsertCode + ", animalCenterNumber=" + animalCenterNumber
@@ -98,5 +96,4 @@ public class AnimalCenter {
 				+ animalState + ", animalInsertRegDate=" + animalInsertRegDate + ", animalType=" + animalType
 				+ ", staff=" + staff + ", acceptCode=" + acceptCode + "]";
 	}
-	
 }
