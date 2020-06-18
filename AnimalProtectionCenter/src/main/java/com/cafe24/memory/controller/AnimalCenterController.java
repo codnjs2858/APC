@@ -40,6 +40,12 @@ public class AnimalCenterController {
 		return animalTypeService.selectAnimalType(type);
 	}
 	
+	@GetMapping("/modals")
+	public String modals() {
+		return "animalcenter/modals";
+	}
+	
+	
 	//animal center list 
 	@GetMapping("/animalcenterlist")
 	public String listAnimalCenter(@RequestParam(name="send_type", required = false) String send_type ,Model model) {
