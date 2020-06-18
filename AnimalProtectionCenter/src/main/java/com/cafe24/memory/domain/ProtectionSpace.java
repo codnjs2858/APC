@@ -9,6 +9,13 @@ public class ProtectionSpace {
 	private String implementCode;
 	private Date protectSpaceRegDate;
 	private String animalProtectPeriod;
+	private AnimalProtect animalProtect;
+	public AnimalProtect getAnimalProtect() {
+		return animalProtect;
+	}
+	public void setAnimalProtect(AnimalProtect animalProtect) {
+		this.animalProtect = animalProtect;
+	}
 	public String getProtectSpaceCode() {
 		return protectSpaceCode;
 	}
@@ -49,7 +56,8 @@ public class ProtectionSpace {
 	public String toString() {
 		return "ProtectionSpace [protectSpaceCode=" + protectSpaceCode + ", animalInsertCode=" + animalInsertCode
 				+ ", useState=" + useState + ", implementCode=" + implementCode + ", protectSpaceRegDate="
-				+ protectSpaceRegDate + ", animalProtectPeriod=" + animalProtectPeriod + "]";
+				+ protectSpaceRegDate + ", animalProtectPeriod=" + animalProtectPeriod + ", animalProtect="
+				+ animalProtect + "]";
 	}
 	
 }

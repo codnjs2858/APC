@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cafe24.memory.domain.CompanionAnimalRegister;
 import com.cafe24.memory.domain.PetFood;
+import com.cafe24.memory.service.CompanionAnimalRegisterService;
 import com.cafe24.memory.service.PetItemService;
 
 @Controller
@@ -17,6 +19,9 @@ public class PetItemController {
 	
 	@Autowired
 	private PetItemService petItemService;
+	
+	@Autowired
+	private CompanionAnimalRegisterService companionAnimalRegisterService; 
 	
 	@GetMapping("/petGoodsUpdate")
 	public String petGoodsUpdate() {
@@ -46,6 +51,8 @@ public class PetItemController {
 	
 	@PostMapping("/petFoodList")
 	public String petFoodList() {
+		
+		List<CompanionAnimalRegister> lcar = companionAnimalRegisterService.selectCompanionAnimalRegisterList();
 		
 		return "petitem/petFoodList";
 	}
