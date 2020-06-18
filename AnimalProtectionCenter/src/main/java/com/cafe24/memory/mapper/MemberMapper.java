@@ -12,5 +12,7 @@ public interface MemberMapper {
 	
 	public List<Member> getMemberList(String Mid);
 	public List<Member> getMemberList();
-	
+	public int insertMember(Member M);
+	public int deleteMember(Member M);
+
 }

@@ -48,7 +48,6 @@
 		
 		<script src="../../js/demo.js"></script>
 
-
 <script type="text/javascript">
 
 
@@ -83,15 +82,16 @@
                     <div class="row">
                        
                         <div class="col-xs-4">
-                            <button class="btn btn-block bg-pink waves-effect" type="submit">로그인</button>
+                            <button class="btn btn-block bg-pink waves-effect" type="submit" id="loginBtn">로그인</button>
                         </div>
+                        
                     </div>
                     <div class="row m-t-15 m-b--20">
                         <div class="col-xs-6">
                             <a th:href="@{/addMember}">회원가입</a>
                         </div>
                         <div class="col-xs-6 align-right">
-                            <a href="forgot-password.html">비밀번호찾기</a>
+                            <a href="/forgotPassword">비밀번호찾기</a>
                         </div>
                     </div>
                 </form>
