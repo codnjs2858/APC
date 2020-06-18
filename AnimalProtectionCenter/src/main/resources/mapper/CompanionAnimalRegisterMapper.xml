@@ -31,5 +31,32 @@
 		FROM 
 			tb_member;
 	</select>
-
+	
+	<insert	id="insertCompanionAnimalRegister" parameterType="CompanionAnimalRegister">
+ 		
+ 		<selectKey resultType="String" order="BEFORE" keyProperty="companionAnimalRegisterCode">
+ 			SELECT 
+ 				CONCAT('CARC_', MAX(CAST(SUBSTRING(companion_animal_register_code,6) AS DECIMAL)+1)) AS companion_animal_register_code
+			FROM tb_companion_animal_register
+ 		</selectKey>
+ 		
+ 		INSERT INTO tb_companion_animal_register(
+			 companion_animal_register_code
+			,animal_insert_code
+			,animal_information
+			,member_id
+			,companion_register_date
+			,cancle_companion_in_date
+			,pro_space_code
+		)VALUES(
+			 #{companionAnimalRegisterCode}
+			,null
+			,null
+			,null
+			,curdate()
+			,null
+			,null
+			
+		)
+ 	</insert>
 </mapper>

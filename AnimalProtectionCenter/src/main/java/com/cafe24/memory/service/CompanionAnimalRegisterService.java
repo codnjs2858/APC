@@ -26,15 +26,13 @@ public class CompanionAnimalRegisterService {
 	public List<String> selectMemberAll(){
 		
 		 List<String> mlist = (List<String>) companionAnimalRegisterMapper.selectMemberAll();
-		
+		 
 		 return mlist;
 	}
 	
-	public int companionAnimalRegisterInsert(CompanionAnimalRegister
-	  companionAnimalRegister) {
+	public int insertCompanionAnimalRegister(CompanionAnimalRegister companionAnimalRegister) {
 	  
-	  int result = companionAnimalRegisterMapper.addCompanionAnimalRegisterInsert(
-	  companionAnimalRegister);
+	  int result = companionAnimalRegisterMapper.insertCompanionAnimalRegister(companionAnimalRegister);
 	  
 	  return result;
 	  

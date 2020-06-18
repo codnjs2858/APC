@@ -52,8 +52,8 @@
                        <div class="form-group">
                            <div class="form-line">
 								<select>
-                                    <option>#</option>
-                                    <option>#</option>
+                                    <option value="null">없음</option>
+                                    <option th:each="p : ${prolist}">[[${p.protectSpaceCode}]]</option>
                                 </select>
                            </div>
 						</div>
