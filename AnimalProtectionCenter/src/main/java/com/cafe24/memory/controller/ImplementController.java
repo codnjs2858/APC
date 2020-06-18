@@ -26,4 +26,10 @@ public class ImplementController {
 		return "implement/implementUpdate";
 	}
 	
+	@GetMapping("implementInsert")
+	public String implementInsert() {
+		
+		return "implement/implementInsert";
+	}
+	
 }
