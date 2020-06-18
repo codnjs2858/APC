@@ -10,5 +10,7 @@ import com.cafe24.memory.domain.Member;
 public interface MemberMapper {
 	public int deleteMember(String Mid);
 	
+	public List<Member> getMemberList(String Mid);
 	public List<Member> getMemberList();
+	
 }

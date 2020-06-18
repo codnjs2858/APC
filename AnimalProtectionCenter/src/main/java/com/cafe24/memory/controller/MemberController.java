@@ -1,5 +1,7 @@
 package com.cafe24.memory.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,8 +53,10 @@ public class MemberController {
 	}
 	@GetMapping("/memberUpdate")
 	public String memberUpdate(Model model,Member member) {
-		
-		model.addAttribute("mem", member.getMemberId());
+		System.out.println(member+"<-member");
+		List<Member> mem=memberService.getMemberList(member);
+		model.addAttribute("mem", mem.get(0));
+		System.out.println(mem+"<-model의 mem");
 		return "member/updateMember";
 	}
 	@PostMapping("/memberUpdate")

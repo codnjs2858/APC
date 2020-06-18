@@ -19,8 +19,19 @@
 		</association>
 	</resultMap>
 	
-	<select id="getMemberList" resultMap="getMemberMap">
+	<select id="getMemberList" parameterType="String" resultMap="getMemberMap">
 			SELECT * from tb_member
-	
+		<if test="memberId!=null and memberId !=''.toString()">
+			<where>
+			member_id=#{Mid}
+			</where>
+		</if>
 	</select>
+	
+	<insert id="insertMember" parameterType="Member">
+			INSERT INTO tb_member
+	(member_id, member_pw, level_code, member_name, member_phone, member_addr, member_email, member_in_date)
+	VALUES ('', '', '', '', '', '', '', NOW())
+	</insert>
+	
 </mapper>
