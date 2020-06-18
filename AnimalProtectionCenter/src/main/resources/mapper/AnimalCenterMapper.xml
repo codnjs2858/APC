@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.memory.mapper.AnimalCenterMapper">
+	<resultMap type="AnimalCenter" id="animalCenter">
+		<result property="animalInsertCode" column="animal_insert_code"></result>
+		<result property="animalCenterNumber" column="animal_center_number"></result>
+		<result property="animalPicture" column="animal_picture"></result>
+		<result property="animalGender" column="animal_gender"></result>
+		<result property="animalAge" column="animal_age"></result>
+		<result property="animalWeight" column="animal_weight"></result>
+		<result property="animalCharacter" column="animal_character"></result>
+		<result property="animalState" column="animal_state"></result>
+		<result property="animalInsertRegDate" column="animal_insert_reg_date"></result>
+		<result property="acceptCode" column="accept_code"></result>
+		
+		<association property="staff" javaType="Staff">
+			<result property="staffCode" column="staff_code"></result>
+			<result property="staffName" column="staff_name"></result>
+		</association>
+		
+		<association property="animalType" javaType="AnimalType">
+			<result property="animalTypeCode" column="animal_type_code"></result>
+			<result property="animalType" column="animal_type"></result>
+			<result property="animalTypeSub" column="animal_type_sub"></result>
+		</association>
+	</resultMap>
+
+	<insert id="insertAnimalCenter" parameterType="AnimalCenter">
+		<selectKey order="BEFORE" keyProperty="animalInsertCode" resultType="String">
+			SELECT
+				(case COUNT(*)
+				when 0 then'animal_insert_1'
+				else CONCAT('animal_insert_',MAX(CAST(SUBSTRING(animal_insert_code,15) AS DECIMAL))+1) 
+				END)AS animal_insert_code
+			FROM
+				tb_animal_insert
+		</selectKey>
+		INSERT INTO tb_animal_insert
+			(animal_insert_code
+			, animal_center_number
+			, animal_picture
+			, animal_gender
+			, animal_age
+			, animal_weight
+			, animal_character
+			, animal_state
+			, animal_insert_reg_date
+			, animal_type_code
+			, staff_code
+			, accept_code)
+		VALUES (#{animalInsertCode}
+				, #{animalCenterNumber}
+				, #{animalPicture}
+				, #{animalGender}
+				, #{animalAge}
+				, #{animalWeight}
+				, #{animalCharacter}
+				, #{animalState}
+				, NOW()
+				, #{animalType.animalTypeCode}
+				, #{staff.staffCode}
+				, #{acceptCode})
+	</insert>
+	
+	<select id="selectCenterCnt" resultType="map">
+		SELECT 
+			animal_type AS animalType,
+			COUNT(*) AS cnt
+		FROM
+			tb_animal_insert AS i
+			join
+			tb_animal_type AS t
+			ON i.animal_type_code = t.animal_type_code
+		GROUP BY animal_type;
+	</select>
+	
+	<select id="selectAnimalCenter" resultMap="animalCenter">
+		SELECT 
+			*
+		FROM 
+			tb_animal_insert AS i
+		JOIN tb_animal_type AS t on i.animal_type_code = t.animal_type_code
+		JOIN tb_staff AS s ON i.staff_code = s.staff_code
+		<if test="send_type !=null and send_type !=''.toString()">
+			<where>
+				animal_type= #{send_type}
+			</where>
+		</if>
+		ORDER BY i.animal_insert_reg_date DESC;
+	</select>	
+</mapper>
