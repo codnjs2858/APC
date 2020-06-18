@@ -6,42 +6,43 @@
 <th:block layout:fragment="customTitle">
 	<title>심사신청내역</title>
 </th:block> 
+<th:block layout:fragment="customCss">
+	<!-- JQuery DataTable Css -->
+    <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+</th:block> 
 
 <th:block layout:fragment="customContents">
 	<section class="content">
-		<div class="container-fluid">
-			<div class="block-header">
-                <h2>
-                	심사신청내역
-                </h2>
-            </div>
-			
+		<div class="col-lg-12">
 			<div class="card">
+				<div class="header">
+	                <h2>심사 신청 내역</h2>
+				</div>
 				<div class="body">
-					<div class="table-responsive">
-						<table class="table table-bordered" style="text-align: center;">
+	                <div class="table-responsive" style="overflow: hidden;">
+	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
 						    <thead>
 						        <tr>
 						            <th>아이디</th>
 						            <th>신청날짜</th>
 						            <th>상태</th>
+						            <th>수정</th>
 						        </tr>
 						    </thead>
 						    <tbody>
-						        <tr>
-						            <td>id001</td>
-						            <td>2020-05-28</td>
-						            <td>심사완료</td>
-						        </tr>
-						        <tr>
-						            <td>id002</td>
-						            <td>2020-05-29</td>
-						            <td>심사중</td>
+						        <tr th:each="i : ${selectScreeningApplication}">
+						            <td>[[${i.member_id}]]</td>
+						            <td>[[${i.screening_application_state}]]</td>
+						            <td>[[${i.screening_application_reg_date}]]</td>
+						            <td><div class="align-center">
+		                                	<a href="#" style="color: #9E9E9E">
+		                       				<i class="material-icons">update</i></a></div>
+		                      			</td>
 						        </tr>
 						    </tbody>
-						</table>
-					</div>
-				</div>
+	                    </table>
+	                </div>
+	            </div>
 			</div>
 		</div>
 	</section>
@@ -54,6 +55,23 @@
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
+    	$(function(){
+    		$('#dataTabelEaxm1').dataTable({
+    			"aaSorting": []
+    		});
+    	});
+    </script>
 </th:block>
  
 </html>

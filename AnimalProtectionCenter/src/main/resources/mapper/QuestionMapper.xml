@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.QuestionMapper">
+	<resultMap type="Question" id="getQuestionMap">
+		<result property="question_code" column="question_code"></result>
+		<result property="question_name" column="question_name"></result>
+		<result property="question_desc" column="question_desc"></result>
+		<result property="question_score" column="question_score"></result>
+		<result property="question_reg_date" column="question_reg_date"></result>
+		<result property="question_modify_date" column="question_modify_date"></result>
+	</resultMap>
+	
+	<delete id="deleteQuestion" parameterType="String">
+		DELETE FROM tb_question WHERE question_code = question_code
+	</delete>
+	
+	<select id="selectQuestion" resultMap="getQuestionMap">
+		SELECT * FROM tb_question
+	</select>
+</mapper>
