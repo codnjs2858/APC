@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.ScreeningCompleteMapper">
+	<resultMap type="ScreeningComplete" id="getScreeningCompleteMap">
+		<result property="screening_complete_code" column="screening_complete_code"></result>
+		<result property="screening_application_code" column="screening_application_code"></result>
+		<result property="screening_complete_first" column="screening_complete_first"></result>
+		<result property="screening_complete_second" column="screening_complete_second"></result>
+		<result property="screening_complete_therd" column="screening_complete_therd"></result>
+		<result property="screening_complete_fourth" column="screening_complete_fourth"></result>
+		<result property="screening_complete_fifth" column="screening_complete_fifth"></result>
+		<result property="screening_complete_sixth" column="screening_complete_sixth"></result>
+		<result property="screening_complete_seventh" column="screening_complete_seventh"></result>
+		<result property="screening_complete_eighth" column="screening_complete_eighth"></result>
+		<result property="screening_complete_ninth" column="screening_complete_ninth"></result>
+		<result property="screening_complete_tenth" column="screening_complete_tenth"></result>
+		<result property="screening_complete_eleventh" column="screening_complete_eleventh"></result>
+		<result property="screening_complete_totel" column="screening_complete_totel"></result>
+		<result property="member_id" column="member_id"></result>
+	</resultMap>
+	
+	<select id="selectScreeningComplete" resultMap="getScreeningCompleteMap">
+		SELECT
+		   *
+		FROM
+		   tb_screening_application AS a
+		   INNER JOIN
+		   tb_screening_complete AS c
+		   ON
+		   c.screening_application_code = a.screening_application_code;
+	</select>
+</mapper>
