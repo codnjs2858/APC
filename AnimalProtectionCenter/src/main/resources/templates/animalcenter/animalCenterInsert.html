@@ -17,7 +17,9 @@
                 <h3>보호 동물 센터 등록</h3>
             </div>
 			<div class="card">
-				<form action="/animalcenterlist">
+				<form action="/animalcenterinsert" method="post">
+					<!-- 직원 세션 아이디, 코드 -->
+					<input type="hidden" name="staffCode" value="staff_code_01">
 					<div class="header">
 						<h2>신고인 정보</h2>
 					</div>
@@ -27,7 +29,7 @@
 			           			<b>신고자</b>
 			           			<div class="input-group ">
 					           		<div class="form-line m-t-10">
-						           		<input type="text" class="form-control" value="홍길동" readonly="readonly">
+						           		<input type="text" class="form-control" value="홍길동">
 					           		</div>
 				           		</div>
 		           			</div>
@@ -35,7 +37,7 @@
 			           			<b>신고자 연락처</b>
 			           			<div class="input-group ">
 					           		<div class="form-line m-t-10">
-						           		<input type="text" class="form-control" value="010-0000-0000" readonly="readonly">
+						           		<input type="text" class="form-control" value="010-0000-0000">
 					           		</div>
 				           		</div>
 		           			</div>
@@ -43,15 +45,15 @@
 			           			<b>신고 장소</b>
 			           			<div class="input-group ">
 					           		<div class="form-line m-t-10">
-						           		<input type="text" class="form-control" value="전주시 금암동" readonly="readonly">
+						           		<input type="text" class="form-control" value="전주시 금암동">
 					           		</div>
 				           		</div>
 		           			</div>
 		           			<div class="col-sm-3">
-			           			<b>신고 날짜</b>
+			           			<b>신고 코드</b>
 			           			<div class="input-group ">
 					           		<div class="form-line m-t-10">
-						           		<input type="text" class="form-control" value="2020-06-10" readonly="readonly">
+						           		<input type="text" class="form-control" name="acceptCode" value="null" readonly="readonly">
 					           		</div>
 				           		</div>
 		           			</div>
@@ -99,7 +101,7 @@
 		           			</div>
 		           		</div>
 		           		<div class="row">
-		           			<div class="col-sm-4">
+		           			<div class="col-sm-3">
 				           		<b>나이</b>
 				           		<div class="input-group">
 				           			<div class="col-sm-6">
@@ -112,7 +114,7 @@
 					           		</div>
 				           		</div>
 		           			</div>
-		           			<div class="col-sm-4">
+		           			<div class="col-sm-3">
 				           		<b>체중</b>
 								<div class="input-group">
 				           			<div class="col-sm-6">
@@ -128,13 +130,21 @@
 		           			<div class="col-sm-4">
 				           		<b>성별</b>
 				           		<div class="form-group">
-		                            <input type="radio" name="animalGender" id="male" class="with-gap">
-		                            <label for="male">암</label>
-		                            <input type="radio" name="animalGender" id="female" class="with-gap">
-		                            <label for="female" class="m-l-20">수</label>
-		                            <input type="radio" name="animalGender" id="unknown" class="with-gap">
+		                            <input type="radio" name="animalGender" id="male" value="수컷" class="with-gap">
+		                            <label for="male">수컷</label>
+		                            <input type="radio" name="animalGender" id="female" value="암컷" class="with-gap">
+		                            <label for="female" class="m-l-20">암컷</label>
+		                            <input type="radio" name="animalGender" id="unknown" value="미상 또는 중성화" class="with-gap">
 		                            <label for="unknown" class="m-l-20">미상 또는 중성화</label>
 		                        </div>
+		           			</div>
+		           			<div class="col-sm-2">
+				           		<b>상태</b>
+								<div class="input-group">
+					           		<div class="form-line">
+						           		<input type="text" class="form-control" name="animalState">
+					           		</div>
+				           		</div>
 		           			</div>
 		           		</div>
 			           		<b>특징</b>
@@ -150,27 +160,33 @@
 </th:block> 
 
 <th:block layout:fragment="customHeadScript">
-	<script>
-		var typeList ={
-				'강아지':['말티즈','푸들','비글'],
-				'고양이':['코렛','페르시안','러시안 블루'],
-				'기타':['햄스터','도마뱀','토끼']
-		}
-		
-	</script>	
 </th:block> 
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
 			$('#selectType').change(function(){
 				var type = $(this).val();
-				var subList = typeList[type];
-				var html='<option value="">----품종을 선택해 주세요----</option>';
-				for(var i=0;i<subList.length;i++){		
-					html += '<option value="'+subList[i]+'">'+subList[i]+'</option>';
-				}	
-				$('#subType').html(html);
-				$('#subType').selectpicker('refresh');
+				var request = $.ajax({
+					url: "/animalcentertype",
+					method: "POST",
+					data: { "type" : type },
+					dataType: "json"
+				});
+				 
+				request.done(function( msg ) {
+					console.log(msg);
+					var html='<option value="">----품종을 선택해 주세요----</option>';
+					for(var i=0;i<msg.length;i++){		
+						html += '<option value="'+msg[i].animalTypeCode+'">'+msg[i].animalTypeSub+'</option>';
+					}	
+					$('#subType').html(html);
+					$('#subType').selectpicker('refresh');
+				});
+				 
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});
+				
 			});
 		});
 	</script>
