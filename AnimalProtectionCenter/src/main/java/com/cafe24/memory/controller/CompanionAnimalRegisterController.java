@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cafe24.memory.domain.CompanionAnimalRegister;
 import com.cafe24.memory.domain.ProtectionSpace;
+import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.CompanionAnimalRegisterService;
 import com.cafe24.memory.service.ProtectionService;
 
@@ -22,11 +23,15 @@ public class CompanionAnimalRegisterController {
 	@Autowired
 	ProtectionService protectionService;
 	
+	@Autowired
+	AnimalCenterService animalCenterService;
+	
+	
 	@GetMapping("/companionAnimalRegisterList")
 	
 		public String companionAnimalRegisterList(Model model) {
 			
-			model.addAttribute("companionAnimalRegisterList", companionAnimalRegisterService.selectCompanionAnimalRegisterList());
+			model.addAttribute("CARS", companionAnimalRegisterService.selectCompanionAnimalRegisterList());
 			return "companionanimalregister/companionAnimalRegisterList";
 		
 		}
