@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-
   <!-- 관리자메뉴 Left Sidebar -->
         <aside id="leftsidebar" class="sidebar"  th:fragment="leftmenu2Fragment">
             <!-- User Info -->
@@ -23,10 +22,10 @@
                 </div>
             </div>
             <!-- #User Info -->
-            <!-- Menu -->
+            <!-- 관리자 Menu -->
             <div class="menu" >
                 <ul class="list">
-                    <li class="header">관리자 메뉴</li>
+                    <li class="header">관리자</li>
                     <li class="active">
                         <a href="/admin">
                             <i class="material-icons">home</i>
@@ -113,30 +112,30 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>!동물 관리</span>
+                            <span>!동물 관리 - 채, 충</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/animaltypelist">!동물 종류</a>
+                                <a href="/animaltypelist">!동물 종류 - 설</a>
                             </li>
                             <li>
-                                <a href="/animalProtection">!보호공간 관리</a>
+                                <a href="/animalProtection">!보호공간 관리 - 충</a>
                             </li>
                             <li>
                                 <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
-                                    <span>#사료관리</span>
+                                    <span>!사료관리 - 충</span>
                                 </a>
                                 <ul class="ml-menu">
                                     <li>
-                                        <a href="/petFoodInsert" class=" waves-effect waves-block">#사료등록</a>
+                                        <a href="/petFoodInsert" class=" waves-effect waves-block">!사료등록 - 충</a>
                                     </li>
                                     <li>
-                                        <a href="/petFoodList" class=" waves-effect waves-block">#사료리스트</a>
+                                        <a href="/petFoodList" class=" waves-effect waves-block">!사료리스트 - 충</a>
                                     </li>
                                  </ul>
                             </li>
                             <li>
-                                <a href="/petGoodsList">#펫 용품,소모품 관리</a>
+                                <a href="/petGoodsList">!펫 용품,소모품 관리 - 충</a>
                             </li>
                         </ul>
                     </li>
@@ -144,146 +143,152 @@
                       <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>!보호동물 관리</span>
+                            <span>!보호동물 관리 - 채</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/animalcenterinsert">!보호동물 등록(센터등록 관리)</a>
+                                <a href="/animalcenterinsert">!보호동물 등록(센터등록 관리) - 채</a>
                             </li>
                             <li>
-                                <a href="/animaldisposallist">#보호동물 처리(상태관리)</a>
+                                <a href="/animalcenterlist">!보호동물 리스트(센터등록 관리) - 채</a>
+                            </li>
+                            <li>
+                                <a href="/animaldisposallist">!보호동물 처리(상태관리) - 채 </a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>#보호건강 관리</span>
+                            <span>!보호건강 관리 - 채</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/animalhealthlist">#동물 진료기록</a>
+                                <a href="/animalhealthlist">!동물 진료기록 - 채</a>
                             </li>
                             <li>
-                                <a href="/animalhealthhistorylist">#동물 진료 내역</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
-                            <i class="material-icons">widgets</i>
-                            <span>#입양,분양 관리</span>
-                        </a>
-                        <ul class="ml-menu" style="display: none;">
-                            <li>
-                                <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
-                                    <span>#입양동물 기간 관리</span>
-                                </a>
-                                <ul class="ml-menu" style="display: none;">
-                                    <li>
-                                        <a href="/petAdoptionInsert" class=" waves-effect waves-block">#입양동물 기간 등록</a>
-                                    </li>
-                                    <li>
-                                        <a href="petAdoptionList" class=" waves-effect waves-block">#입양동물 기간 리스트</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
-                                    <span>!분양동물관리</span>
-                                </a>
-                                <ul class="ml-menu">
-                                    <li>
-                                        <a href="companionAnimalRegisterInsert" class=" waves-effect waves-block">!분양동물등록</a>
-                                    </li>
-                                    <li>
-                                        <a href="companionAnimalRegisterList" class=" waves-effect waves-block">#분양동물리스트</a>
-                                    </li>
-                                 </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
-                                    <span>#후기관리</span>
-                                </a>
-                                <ul class="ml-menu">
-                                    <li>
-                                        <a href="reviewInsert" class=" waves-effect waves-block">#후기등록</a>
-                                    </li>
-                                    <li>
-                                        <a href="reviewList" class=" waves-effect waves-block">#후기리스트</a>
-                                    </li>
-                                 </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
-                                    <span>#기프트 관리</span>
-                                </a>
-                                <ul class="ml-menu">
-                                    <li>
-                                        <a href="giftInsert" class=" waves-effect waves-block">#기프트 등록</a>
-                                    </li>
-                                    <li>
-                                        <a href="giftList" class=" waves-effect waves-block">#기프트 리스트</a>
-                                    </li>
-                                 </ul>
+                                <a href="/animalhealthhistorylist">!동물 진료 내역 - 채</a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
                             <i class="material-icons">widgets</i>
-                            <span>!회원 관리</span>
+                            <span>!입양,분양 관리 - 민</span>
                         </a>
                         <ul class="ml-menu" style="display: none;">
                             <li>
                                 <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
-                                    <span>#</span>
+                                    <span>!입양동물 기간 관리 - 민</span>
                                 </a>
                                 <ul class="ml-menu" style="display: none;">
                                     <li>
-                                        <a href="/memberUpdate" class=" waves-effect waves-block">!회원 수정</a>
+                                        <a href="/petAdoptionInsert" class=" waves-effect waves-block">!입양동물 기간 등록 - 민</a>
                                     </li>
                                     <li>
-                                        <a href="/getMemberList" class=" waves-effect waves-block">!회원 리스트</a>
+                                        <a href="petAdoptionList" class=" waves-effect waves-block">!입양동물 기간 리스트 - 민</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
-                                    <span>#입양인 관리</</span>
+                                    <span>!분양동물관리 - 민</span>
                                 </a>
                                 <ul class="ml-menu">
                                     <li>
-                                        <a href="adopteeInsert" class=" waves-effect waves-block">#입양인 등록</a>
+                                        <a href="companionAnimalRegisterInsert" class=" waves-effect waves-block">!분양동물등록 - 민</a>
                                     </li>
                                     <li>
-                                        <a href="adopteeList" class=" waves-effect waves-block">#입양인 리스트</a>
+                                        <a href="companionAnimalRegisterList" class=" waves-effect waves-block">!분양동물리스트 - 민</a>
                                     </li>
                                  </ul>
                             </li>
                             <li>
                                 <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
-                                    <span>#블랙리스트 관리</span>
+                                    <span>!후기관리 - 민</span>
                                 </a>
                                 <ul class="ml-menu">
                                     <li>
-                                        <a href="blackListInsert" class=" waves-effect waves-block">#블랙리스트 등록</a>
+                                        <a href="reviewInsert" class=" waves-effect waves-block">!후기등록 - 민</a>
                                     </li>
                                     <li>
-                                        <a href="blackListList" class=" waves-effect waves-block">#블랙리스트 목록</a>
+                                        <a href="reviewList" class=" waves-effect waves-block">!후기리스트 - 민</a>
                                     </li>
                                  </ul>
                             </li>
                             <li>
                                 <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
-                                    <span>#보증금 관리</span>
+                                    <span>!기프트 관리 - 민</span>
                                 </a>
                                 <ul class="ml-menu">
                                     <li>
-                                        <a href="depositInsert" class=" waves-effect waves-block">#보증금 등록</a>
+                                        <a href="giftInsert" class=" waves-effect waves-block">!기프트 등록 - 민</a>
                                     </li>
                                     <li>
-                                        <a href="depositList" class=" waves-effect waves-block">#보증금 리스트</a>
+                                        <a href="giftList" class=" waves-effect waves-block">!기프트 리스트 - 민</a>
+                                    </li>
+                                 </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
+                            <i class="material-icons">widgets</i>
+                            <span>!회원 관리 - 경</span>
+                        </a>
+                        <ul class="ml-menu" style="display: none;">
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
+                                    <span>!회원 정보 - 경, 민</span>
+                                </a>
+                                <ul class="ml-menu" style="display: none;">
+                                	<li>
+                                        <a href="/memberUpdate" class=" waves-effect waves-block">!회원 등록 - 경</a>
+                                    </li>
+                                    <li>
+                                        <a href="/memberUpdate" class=" waves-effect waves-block">!회원 수정 - 경</a>
+                                    </li>
+                                    <li>
+                                        <a href="/getMemberList" class=" waves-effect waves-block">!회원 리스트 - 경</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
+                                    <span>!입양인 관리 - 민</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="adopteeInsert" class=" waves-effect waves-block">!입양인 등록 - 민</a>
+                                    </li>
+                                    <li>
+                                        <a href="adopteeList" class=" waves-effect waves-block">!입양인 리스트 - 민</a>
+                                    </li>
+                                 </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
+                                    <span>!블랙리스트 관리 - 민</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="blackListInsert" class=" waves-effect waves-block">!블랙리스트 등록 - 민</a>
+                                    </li>
+                                    <li>
+                                        <a href="blackListList" class=" waves-effect waves-block">!블랙리스트 목록 - 민</a>
+                                    </li>
+                                 </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
+                                    <span>!보증금 관리 - 민</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="depositInsert" class=" waves-effect waves-block">!보증금 등록 - 민</a>
+                                    </li>
+                                    <li>
+                                        <a href="depositList" class=" waves-effect waves-block">!보증금 리스트 - 민</a>
                                     </li>
                                  </ul>
                             </li>
@@ -293,20 +298,20 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>!심사 관리</span>
+                            <span>!심사 관리 - 성</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="#">!심사문항관리</a>
+                                <a href="/question">!심사문항관리 - 성</a>
                             </li>
                             <li>
-                                <a href="#">!심사지표</a>
+                                <a href="/questionExample">!심사지표 - 성</a>
                             </li>
                             <li>
-                                <a href="#">!심사 신청 내역 </a>
+                                <a href="/screeningApplication">!심사 신청 내역 - 성</a>
                             </li>
                              <li>
-                                <a href="#">!심사 완료 내역 </a>
+                                <a href="/screeningComplete">!심사 완료 내역 - 성</a>
                             </li>
                         </ul>
                     </li>
@@ -333,11 +338,11 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>#신고 관리</span>
+                            <span>!신고 관리 - 경</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/reportManager">#신고 종합관리</a>
+                                <a href="/reportManager">!신고 종합관리 - 경</a>
                             </li>
                         </ul>
                     </li>
@@ -345,8 +350,8 @@
             </div>
             <div th:replace="fragments/footer::footer2Fragment"></div>
             </aside>
-            <!-- #Menu -->
-  <!--인덱스 화면 Left Sidebar -->
+            
+  <!--회원 화면 Left Sidebar -->
         <aside id="leftsidebar" class="sidebar"  th:fragment="leftmenuFragment">
             <!-- User Info -->
             <div class="user-info">
@@ -356,8 +361,8 @@
                 
                 
                 <div th:if="${session.SID}==null" class="info-container">
-                   <a th:href="@{/login}" style="color: yellow;">!로그인</a>
-                   <a th:href="@{/addMember}" style="color: yellow;">!회원가입</a>
+                   <a th:href="@{/login}" style="color: yellow;">!로그인 - 경</a>
+                   <a th:href="@{/addMember}" style="color: yellow;">!회원가입 - 경</a>
                    
                 </div>
                 <div th:if="${session.SID}!=null" class="info-container">
@@ -375,10 +380,10 @@
                 </div>
             </div>
             <!-- #User Info -->
-            <!-- Menu -->
+            <!-- 회원Menu -->
             <div class="menu">
                 <ul class="list">
-                    <li class="header">회원메뉴</li>
+                    <li class="header">회원</li>
                     <li class="active">
                         <a th:href="@{/}">
                             <i class="material-icons">home</i>
@@ -392,7 +397,7 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/addAnimal">#유기,유실 동물등록(관)</a>
+                                <a href="#">#유기,유실 동물등록(관)</a>
                             </li>
                             <li>
                                 <a href="#">#공고게시판</a>
@@ -416,31 +421,31 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>#입양</span>
+                            <span>!입양 - 성</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/adoptionReview">#입양심사</a>
+                                <a href="/adoptionReview">!입양심사 - 성</a>
                             </li>
                             <li>
-                                <a href="/adoptionApply">#입양 신청(심사 통과)</a>
+                                <a href="/adoptionApply">!입양 신청(심사 통과) - 성</a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>#보호동물 신고<span>
+                            <span>!보호동물 신고 - 경</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
                                 <a href="#">#신고게시판</a>
                             </li>
                             <li>
-                                <a th:href="@{/searchReport}">#유기,유실 신고</a>
+                                <a th:href="@{/searchReport}">!유기,유실 신고 - 경</a>
                             </li>
                               <li>
-                                <a href="/lostreport">#분실 신고</a>
+                                <a href="/lostreport">!분실 신고 - 경</a>
                             </li>
                              <li>
                                 <a href="#">#반환(찾음) 신고</a>
@@ -450,11 +455,11 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>#후기 리스트</span>
+                            <span>!후기 리스트 - 성</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/notice">#후기 게시판</a>
+                                <a href="/notice">!후기 게시판 - 성</a>
                             </li>
                         </ul>
                     </li>
@@ -462,5 +467,5 @@
             </div>
             <div th:replace="fragments/footer::footerFragment"></div>
             </aside>
-            <!-- #Menu -->         
+                
 </html>
