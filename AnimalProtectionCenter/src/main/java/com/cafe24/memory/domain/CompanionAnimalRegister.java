@@ -7,46 +7,13 @@ public class CompanionAnimalRegister {
 	private String companionAnimalRegisterCode;
 	private String animalInsertCode;
 	private String animalInformation;
-	private String memberId;
 	private Date companionRegisterDate;
 	private Date cancleCompanionInDate;
-	private String proSpaceCode;
-	private String memberName;
-	private int animalAge;
-	private String animalGender;
+	//외래키
+	private ProtectionSpace protectionSpace;
+	private AnimalCenter animalCenter;
+	private Staff staff;
 	
-	public String getAnimalInformation() {
-		return animalInformation;
-	}
-	public void setAnimalInformation(String animalInformation) {
-		this.animalInformation = animalInformation;
-	}
-	public String getMemberName() {
-		return memberName;
-	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-	public int getAnimalAge() {
-		return animalAge;
-	}
-	public void setAnimalAge(int animalAge) {
-		this.animalAge = animalAge;
-	}
-	public String getAnimalGender() {
-		return animalGender;
-	}
-	public void setAnimalGender(String animalGender) {
-		this.animalGender = animalGender;
-	}
-	private Member member;
-	
-	public Member getMember() {
-		return member;
-	}
-	public void setMember(Member member) {
-		this.member = member;
-	}
 	public String getCompanionAnimalRegisterCode() {
 		return companionAnimalRegisterCode;
 	}
@@ -59,11 +26,11 @@ public class CompanionAnimalRegister {
 	public void setAnimalInsertCode(String animalInsertCode) {
 		this.animalInsertCode = animalInsertCode;
 	}
-	public String getMemberId() {
-		return memberId;
+	public String getAnimalInformation() {
+		return animalInformation;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setAnimalInformation(String animalInformation) {
+		this.animalInformation = animalInformation;
 	}
 	public Date getCompanionRegisterDate() {
 		return companionRegisterDate;
@@ -77,18 +44,34 @@ public class CompanionAnimalRegister {
 	public void setCancleCompanionInDate(Date cancleCompanionInDate) {
 		this.cancleCompanionInDate = cancleCompanionInDate;
 	}
-	public String getProSpaceCode() {
-		return proSpaceCode;
+	public ProtectionSpace getProtectionSpace() {
+		return protectionSpace;
 	}
-	public void setProSpaceCode(String proSpaceCode) {
-		this.proSpaceCode = proSpaceCode;
+	public void setProtectionSpace(ProtectionSpace protectionSpace) {
+		this.protectionSpace = protectionSpace;
 	}
+	public AnimalCenter getAnimalCenter() {
+		return animalCenter;
+	}
+	public void setAnimalCenter(AnimalCenter animalCenter) {
+		this.animalCenter = animalCenter;
+	}
+	public Staff getStaff() {
+		return staff;
+	}
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
+	
 	@Override
 	public String toString() {
 		return "CompanionAnimalRegister [companionAnimalRegisterCode=" + companionAnimalRegisterCode
-				+ ", animalInsertCode=" + animalInsertCode + ", animalInformationCode=" + animalInformation
-				+ ", memberId=" + memberId + ", companionRegisterDate=" + companionRegisterDate
-				+ ", cancleCompanionInDate=" + cancleCompanionInDate + ", proSpaceCode=" + proSpaceCode + "]";
+				+ ", animalInsertCode=" + animalInsertCode + ", animalInformation=" + animalInformation
+				+ ", companionRegisterDate=" + companionRegisterDate + ", cancleCompanionInDate="
+				+ cancleCompanionInDate + ", protectionSpace=" + protectionSpace + ", animalCenter=" + animalCenter
+				+ ", staff=" + staff + "]";
 	}
+	
+	
 	
 }

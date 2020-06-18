@@ -2,27 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cafe24.memory.mapper.CompanionAnimalRegisterMapper">
+	
+	<resultMap type="CompanionAnimalRegister" id="companionAnimalRegister">
+		<result property="companionAnimalRegisterCode" column="companion_animal_register_code"></result>
+		<result property="animalInformation" column="animal_information"></result>
+		<result property="companionRegisterDate" column="companion_register_date"></result>
+		<result property="cancleCompanionInDate" column="cancle_companion_in_date"></result>
+		
+		<association property="staff" javaType="Staff">
+			<result property="staffCode" column="staff_code"></result>
+			<result property="staffName" column="staff_name"></result>
+		</association>
+		
+		<association property="animalCenter" javaType="AnimalCenter">
+			<result property="animalGender" column="animal_gender"></result>
+			<result property="animalAge" column="animal_age"></result>
+			<result property="animalCenterNumber" column="animal_center_number"></result>
+		</association>
+		
+		<association property="protectionSpace" javaType="ProtectionSpace">
+			<result property="protectSpaceCode" column="protect_space_code"></result>
+		</association>
+	</resultMap>
+	
 	<select id="selectCompanionAnimalRegisterList" 
-	resultType="CompanionAnimalRegister">
+	resultType="CompanionAnimalRegister"
+	resultMap="companionAnimalRegister">
 		SELECT 
-			 companion_animal_register_code AS companionAnimalRegisterCode
-			,animal_information AS animalInformation
-			,m.member_name AS memberName
-			,aniI.animal_gender AS aniGender
-			,aniI.animal_age AS aniAge
-			,companion_register_date AS companionRegisterDate
-			,cancle_companion_in_date AS cancleCompanionInDate
-			,pro_space_code AS proSpaceCode
+			 companion_animal_register_code
+			,aniI.animal_center_number
+			,aniI.AnimalCenter.animal_gender
+			,aniI.animal_age
+			,animal_information
+			,companion_register_date
+			,cancle_companion_in_date
+			,pro_space_code
+			,s.staff_name
 		FROM
 			tb_animal_insert AS aniI
 			INNER join
 			tb_companion_animal_register AS car
 			INNER join
-			tb_member AS m
+			tb_staff AS s
 			on
 			aniI.animal_insert_code=car.animal_insert_code
 			and
-			m.member_id=car.member_id;
+			s.staff_code=car.staff_code;
 	</select>
 	
 	<select id="selectMemberAll" resultType="String">
@@ -31,5 +56,32 @@
 		FROM 
 			tb_member;
 	</select>
-
+	
+	<insert	id="insertCompanionAnimalRegister" parameterType="CompanionAnimalRegister">
+ 		
+ 		<selectKey resultType="String" order="BEFORE" keyProperty="companionAnimalRegisterCode">
+ 			SELECT 
+ 				CONCAT('CARC_', MAX(CAST(SUBSTRING(companion_animal_register_code,6) AS DECIMAL)+1)) AS companion_animal_register_code
+			FROM tb_companion_animal_register
+ 		</selectKey>
+ 		
+ 		INSERT INTO tb_companion_animal_register(
+			 companion_animal_register_code
+			,animal_insert_code
+			,animal_information
+			,member_id
+			,companion_register_date
+			,cancle_companion_in_date
+			,pro_space_code
+		)VALUES(
+			 #{companionAnimalRegisterCode}
+			,null
+			,null
+			,null
+			,curdate()
+			,null
+			,null
+			
+		)
+ 	</insert>
 </mapper>
