@@ -25,14 +25,13 @@
 		</association>
 	</resultMap>
 	
+	<!-- 리스트 -->
 	<select id="selectCompanionAnimalRegisterList" 
 	resultType="CompanionAnimalRegister"
 	resultMap="companionAnimalRegister">
 		SELECT 
 			 companion_animal_register_code
 			,aniI.animal_center_number
-			,aniI.animal_gender
-			,aniI.animal_age
 			,animal_information
 			,companion_register_date
 			,cancle_companion_in_date
