@@ -47,14 +47,14 @@
 	                        <thead>
 		                            <tr role="row">
 		                            	<th></th>
-		                            	<th><div class="align-center">분양등록코드</div></th>
+		                            	<th><div class="align-center">등록코드</div></th>
 		                            	<th><div class="align-center">동물번호</div></th>
-		                            	<th><div class="align-center">반려동물성별</div></th>
-		                            	<th><div class="align-center">반려동물나이</div></th>
+		                            	<th><div class="align-center">성별</div></th>
+		                            	<th><div class="align-center">나이</div></th>
 		                            	<th><div class="align-center">상태</div></th>
 		                            	<th><div class="align-center">등록날짜</div></th>
 		                            	<th><div class="align-center">분양날짜</div></th>
-		                            	<th><div class="align-center">보호장소코드</div></th>
+		                            	<th><div class="align-center">보호장소</div></th>
 		                            	<th><div class="align-center">담당자</div></th>
 		                            	<th data-orderable="false"><div class="align-center">수정</div></th>
 		                            	<th data-orderable="false"><div class="align-center">삭제</div></th>
@@ -64,14 +64,14 @@
 			                        <tr th:each="CARS, i : ${CARS}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
 		                              	<td><div class="align-center"></div>[[${CARS.companionAnimalRegisterCode}]]</td>
-		                                <td><div class="align-center"></div>#</td>
-		                               	<td><div class="align-center"></div>#</td>
-		                               	<td><div class="align-center"></div>#</td>
+		                                <td><div class="align-center"></div>[[${CARS.animalCenter.animalCenterNumber}]]</td>
+		                               	<td><div class="align-center"></div>[[${CARS.animalCenter.animalGender}]]</td>
+		                               	<td><div class="align-center"></div>[[${CARS.animalCenter.animalAge}]]</td>
 		                               	<td><div class="align-center"></div>[[${CARS.animalInformation}]]</td>
 		                               	<td><div class="align-center"></div>[[${CARS.companionRegisterDate}]]</td>
 		                               	<td><div class="align-center"></div>[[${CARS.cancleCompanionInDate}]]</td>
-		                               	<td><div class="align-center"></div>#</td>
-		                               	<td><div class="align-center"></div>#</td>
+		                               	<td><div class="align-center"></div>[[${CARS.protectionSpace.protectSpaceCode}]]</td>
+		                               	<td><div class="align-center"></div>[[${CARS.staff.staffName}]]</td>
 		                                <td><div class="align-center">
 		                                	<a th:href="@{/companionAnimalRegisterUpdate}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>
@@ -89,5 +89,27 @@
 		</div>
 	</section>
 </th:block>
+<th:block layout:fragment="customHeadScript">
 </th:block> 
+<th:block layout:fragment="customFooterScript">
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
+    	$(function(){
+	    	//데이터 테이블
+    		$('#dataTabelEaxm1').dataTable({
+    			"aaSorting": []
+    		});
+    	});
+	</script>
+</th:block>
+ 
 </html>

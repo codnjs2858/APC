@@ -21,7 +21,7 @@
 		</association>
 		
 		<association property="protectionSpace" javaType="ProtectionSpace">
-			<result property="protectSpaceCode" column="protect_space_code"></result>
+			<result property="protectSpaceCode" column="pro_space_code"></result>
 		</association>
 	</resultMap>
 	
@@ -31,7 +31,7 @@
 		SELECT 
 			 companion_animal_register_code
 			,aniI.animal_center_number
-			,aniI.AnimalCenter.animal_gender
+			,aniI.animal_gender
 			,aniI.animal_age
 			,animal_information
 			,companion_register_date
