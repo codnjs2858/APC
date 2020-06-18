@@ -1,12 +1,10 @@
 package com.cafe24.memory.domain;
 
-import java.util.Date;
-
 public class AnimalType {
 	private String animalTypeCode;
 	private String animalType;
 	private String animalTypeSub;
-	private Date animalTypeRegDate;
+	private String animalTypeRegDate;
 
 	public String getAnimalTypeCode() {
 		return animalTypeCode;
@@ -26,10 +24,10 @@ public class AnimalType {
 	public void setAnimalTypeSub(String animalTypeSub) {
 		this.animalTypeSub = animalTypeSub;
 	}
-	public Date getAnimalTypeRegDate() {
+	public String getAnimalTypeRegDate() {
 		return animalTypeRegDate;
 	}
-	public void setAnimalTypeRegDate(Date animalTypeRegDate) {
+	public void setAnimalTypeRegDate(String animalTypeRegDate) {
 		this.animalTypeRegDate = animalTypeRegDate;
 	}
 	@Override
