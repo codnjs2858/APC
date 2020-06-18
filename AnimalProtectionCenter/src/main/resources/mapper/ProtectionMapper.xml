@@ -4,19 +4,31 @@
 <mapper namespace="com.cafe24.memory.mapper.ProtectionMapper">
 
 	<resultMap type="ProtectionSpace" id="psResultMap">
-		<result property="protectSpaceCode" column="protect_space_code"/>
-		<result property="animalInsertCode" column="animal_insert_code"/>
-		<result property="useState" column="use_state"/>
-		<result property="implementCode" column="implement_code"/>
-		<result property="protectSpaceRegDate" column="protect_space_reg_date"/>
-		<result property="animalProtectPeriod" column="animal_protect_period"/>
+		<result property="protectSpaceCode" 	column="protect_space_code"/>
+		<result property="animalInsertCode" 	column="animal_insert_code"/>
+		<result property="useState" 			column="use_state"/>
+		<result property="implementCode" 		column="implement_code"/>
+		<result property="protectSpaceRegDate" 	column="protect_space_reg_date"/>
+		<result property="animalProtectPeriod" 	column="animal_protect_period"/>
 		<association property="animalProtect" javaType="AnimalProtect">
-			<result property="animalProtectNum" column="animal_protect_num"/>
-			<result property="animalInsertCode" column="animal_insert_code"/>
-			<result property="protectSpaceCode" column="protect_space_code"/>
-			<result property="state" column="protect_state"/>
+			<result property="animalProtectNum" 	column="animal_protect_num"/>
+			<result property="animalInsertCode" 	column="animal_insert_code"/>
+			<result property="protectSpaceCode" 	column="protect_space_code"/>
+			<result property="state" 				column="protect_state"/>
 			<result property="animalProtectRegDate" column="animal_protect_reg_date"/>
 			<result property="animalProtectExeDate" column="animal_protect_exe_date"/>
+		</association>
+		<association property="animalCenter" javaType="AnimalCenter">
+			<result property="animalInsertCode" 	column="animal_insert_code"></result>
+			<result property="animalCenterNumber" 	column="animal_center_number"></result>
+			<result property="animalPicture" 	 	column="animal_picture"></result>
+			<result property="animalGender" 		column="animal_gender"></result>
+			<result property="animalAge" 			column="animal_age"></result>
+			<result property="animalWeight" 		column="animal_weight"></result>
+			<result property="animalCharacter" 		column="animal_character"></result>
+			<result property="animalState" 			column="animal_state"></result>
+			<result property="animalInsertRegDate" 	column="animal_insert_reg_date"></result>
+			<result property="acceptCode" 			column="accept_code"></result>
 		</association>
 	</resultMap>
 	
@@ -142,12 +154,28 @@
 			,p.protect_state
 			,p.animal_protect_reg_date
 			,p.animal_protect_exe_date
+			,i.animal_insert_code
+			,i.animal_center_number
+			,i.animal_picture
+			,i.animal_gender
+			,i.animal_age
+			,i.animal_weight
+			,i.animal_character
+			,i.animal_state
+			,i.animal_insert_reg_date
+			,i.animal_type_code
+			,i.staff_code
+			,i.accept_code
 		FROM
 			tb_protect_space AS s
 			LEFT JOIN 
 			tb_animal_protect AS p
 			ON 
 			p.animal_insert_code = s.animal_insert_code
+			LEFT JOIN 
+			tb_animal_insert AS i
+			ON
+			p.animal_insert_code = i.animal_insert_code
 		ORDER BY CAST(SUBSTR(s.protect_space_code,15) as decimal) DESC;
 	</select>
 	

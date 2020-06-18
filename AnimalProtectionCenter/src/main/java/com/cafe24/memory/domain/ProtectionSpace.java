@@ -10,6 +10,13 @@ public class ProtectionSpace {
 	private Date protectSpaceRegDate;
 	private String animalProtectPeriod;
 	private AnimalProtect animalProtect;
+	private AnimalCenter animalCenter;
+	public AnimalCenter getAnimalCenter() {
+		return animalCenter;
+	}
+	public void setAnimalCenter(AnimalCenter animalCenter) {
+		this.animalCenter = animalCenter;
+	}
 	public AnimalProtect getAnimalProtect() {
 		return animalProtect;
 	}
@@ -57,7 +64,7 @@ public class ProtectionSpace {
 		return "ProtectionSpace [protectSpaceCode=" + protectSpaceCode + ", animalInsertCode=" + animalInsertCode
 				+ ", useState=" + useState + ", implementCode=" + implementCode + ", protectSpaceRegDate="
 				+ protectSpaceRegDate + ", animalProtectPeriod=" + animalProtectPeriod + ", animalProtect="
-				+ animalProtect + "]";
+				+ animalProtect + ", animalCenter=" + animalCenter + "]";
 	}
 	
 }

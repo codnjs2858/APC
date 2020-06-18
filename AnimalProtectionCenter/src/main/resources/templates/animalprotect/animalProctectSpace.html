@@ -17,22 +17,33 @@
 			<div class="row">
 				<div th:each="ps : ${protectSpaceList}" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box hover-zoom-effect">
-                        <div th:if="${ps.useState}=='사용중'" class="icon bg-cyan">
-                            <a th:href="@{/modifyAnimalProtection(space=${ps.protectSpaceCode})}">
-                            	<i class="material-icons">pets</i>
-                            </a>
-                        </div>
-                        <div th:unless="${ps.useState}=='사용중'" class="icon bg-light-green">
-                            <a th:href="@{/modifyAnimalProtection(space=${ps.protectSpaceCode})}">
-                            	<i class="material-icons">error</i>
-                            </a>
-                        </div>
-                        
-                        <div class="content">
-                            <div class="text">[[${ps.protectSpaceCode}]]</div>
-                            <div class="number">[[${ps.animalProtect.state}]]</div>
-                        </div> 
-                       
+                        <th:block th:if="${ps.useState}=='사용중'">
+                        	<div th:if="${ps.animalProtect.state}=='보호중'" class="icon bg-cyan">
+                        		<a th:href="@{/modifyAnimalProtection(space=${ps.protectSpaceCode})}">
+	                            	<i class="material-icons">pets</i>
+	                            </a>
+                            </div>
+                        	<div th:unless="${ps.animalProtect.state}=='보호중'" class="icon bg-red">
+	                            <a th:href="@{/modifyAnimalProtection(space=${ps.protectSpaceCode})}">
+	                            	<i class="material-icons">pets</i>
+	                            </a>
+                            </div>
+                            <div class="content">
+	                            <div class="text">[[${ps.protectSpaceCode}]]</div>
+	                            <div class="number">[[${ps.animalCenter.animalCenterNumber}]]([[${ps.animalProtect.state}]])</div>
+	                        </div> 
+                        </th:block>
+                        <th:block th:unless="${ps.useState}=='사용중'">
+                        	<div class="icon bg-green">
+	                            <a th:href="@{/modifyAnimalProtection(space=${ps.protectSpaceCode})}">
+	                            	<i class="material-icons">error</i>
+	                            </a>
+                            </div>
+                            <div class="content">
+	                            <div class="text">[[${ps.protectSpaceCode}]]</div>
+	                            <div class="number">[[${ps.animalProtect.state}]]</div>
+	                        </div> 
+                        </th:block>
                     </div>
                 </div>
                 

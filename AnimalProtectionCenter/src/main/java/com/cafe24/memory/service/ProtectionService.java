@@ -40,16 +40,22 @@ public class ProtectionService {
 	
 	public int updateAnimalProtectionIn(AnimalProtect animalProtect) {
 		List<ProtectionSpace> ps = protectionMapper.selectProtectionSpaceByAniInCode(animalProtect.getAnimalInsertCode());
+		int result = 0;
+		
 		System.out.println(ps + " <-- ProtectionService.java");
-		if(ps != null) {
+		if(ps != null && ps.size() != 0) {
 			for(int i = 0; i < ps.size(); i++) {
-				protectionMapper.updateAnimalProtectionExit(ps.get(i).getProtectSpaceCode());				
+				result += protectionMapper.updateAnimalProtectionExit(ps.get(i).getProtectSpaceCode());				
 			}
+		}else {
+			result += protectionMapper.insertAniamlProtection(animalProtect);
+			System.out.println("여기에서 추가가 되야함");
 		}
 		
 		System.out.println(animalProtect + " <-- animalProtect updateAnimalProtectionIn() ProtectionService.java");
+		result += protectionMapper.updateAnimalProtectionIn(animalProtect);
 		
-		return protectionMapper.updateAnimalProtectionIn(animalProtect);
+		return result;
 	}
 	
 	public ProtectionSpace selectProtectionSpaceByCode(String proSpaceCode) {
