@@ -13,5 +13,5 @@ public interface CompanionAnimalRegisterMapper {
 	
 	public List<String> selectMemberAll();
 	
-	public int addCompanionAnimalRegisterInsert(CompanionAnimalRegister companionAnimalRegister);
+	public int insertCompanionAnimalRegister(CompanionAnimalRegister companionAnimalRegister);
 }
