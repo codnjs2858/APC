@@ -32,12 +32,12 @@
 					<div class="row clearfix">
 	                    <div class="col-xs-3 col-md-3" >
 	                    	<a th:href="@{/animaltypelist}">
-		                        <button class="btn btn-danger btn-lg btn-block waves-effect" type="button">전체보기</button>
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
 	                    	</a>
 	                    </div>
 	                    <div class="col-xs-3 col-md-3" th:each="c:${Cnt}">
 	                    	<a th:href="@{/animaltypelist(send_type=${c.animalType})}">
-		                        <button class="btn btn-primary btn-lg btn-block waves-effect" type="button">
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
 		                        [[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
 	                    	</a>
 	                    </div>
@@ -63,13 +63,12 @@
 		                                <td><div class="align-center">[[${typelist.animalTypeSub}]]</div></td>
 		                                <td><div class="align-center">[[${typelist.animalTypeRegDate}]]</div></td>
 		                                <td><div class="align-center">
-		                                	<a th:href="@{/animaltypeupdate(send_code=${typelist.animalTypeCode})}">
+		                                	<a th:href="@{/animaltypeupdate(send_code=${typelist.animalTypeCode})}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>
 		                      			</td>
 		                      			<td><div class="align-center">
-					                       	<a th:href="@{/animaltypedelete(send_code=${typelist.animalTypeCode})}">
-					                       	<i class="material-icons">delete</i>
-				                       	</a></div>
+					                       	<a th:href="@{/animaltypedelete(send_code=${typelist.animalTypeCode})}" style="color: #F44336">
+					                       	<i class="material-icons">delete</i></a></div>
 			                      	</td>
 			                        </tr>
 		                    	</tbody>

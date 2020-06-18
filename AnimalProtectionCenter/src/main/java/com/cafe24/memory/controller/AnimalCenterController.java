@@ -28,6 +28,7 @@ public class AnimalCenterController {
 	}
 	@PostMapping("/animalcenterinsert")
 	public String insertAnimalCenter(Model model, AnimalType atype, Staff staff, AnimalCenter animal) {
+		animal.setAcceptCode(null);
 		animal.setStaff(staff);
 		animal.setAnimalType(atype);
 		animalCenterService.insertAnimalCenter(animal);
