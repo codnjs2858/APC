@@ -67,9 +67,9 @@
 		                       				<i class="material-icons">update</i></a></div>
 		                      			</td>
 		                      			<td><div class="align-center">
-					                       	<a th:href="@{/animaltypedelete(send_code=${typelist.animalTypeCode})}" style="color: #F44336">
-					                       	<i class="material-icons">delete</i></a></div>
-			                      	</td>
+		                      				<button type="button" class="delete" th:value="${typelist.animalTypeCode}" style="color: #F44336; border: 0; outline: 0; background: none;"><i class="material-icons">delete</i></button>
+					                       	</div>
+			                      		</td>
 			                        </tr>
 		                    	</tbody>
 	                    </table>
@@ -81,7 +81,6 @@
 </th:block> 
  
 <th:block layout:fragment="customHeadScript">
-
 </th:block> 
 <th:block layout:fragment="customFooterScript">
     <!-- Jquery DataTable Plugin Js -->
@@ -96,11 +95,23 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
     <script>
     	$(function(){
+	    	//데이터 테이블
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
     		});
-    	});
-    </script>
+    	
+	    	//삭제 유효성
+			$('.delete').click(function(){
+				var val = $(this).val();
+				console.log(val);
+				var url ="/animaltypedelete?send_code="+val;
+			    var msg = confirm('삭제');
+			    if(msg  == true){
+			    	$(location).attr('href',url);
+			    }
+			})
+		});
+	</script>
 </th:block>
  
 </html>

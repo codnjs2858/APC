@@ -17,7 +17,7 @@
                 <h3>보호 동물 센터 등록</h3>
             </div>
 			<div class="card">
-				<form action="/animalcenterinsert" method="post">
+				<form action="/animalcenterinsert" method="post" id="inputForm">
 					<!-- 직원 세션 아이디, 코드 -->
 					<input type="hidden" name="staffCode" value="staff_code_01">
 					<div class="header">
@@ -76,7 +76,7 @@
 				           		<b>동물 번호</b>
 								<div class="input-group">
 					           		<div class="form-line m-t-10">
-						           		<input type="text" name="animalCenterNumber" class="form-control">
+						           		<input type="text" name="animalCenterNumber" class="form-control onlyNumber">
 					           		</div>
 				           		</div>
 		           			</div>
@@ -106,11 +106,11 @@
 				           		<div class="input-group">
 				           			<div class="col-sm-6">
 						           		<div class="form-line">
-							           		<input type="text" class="form-control" name="animalAge">
+							           		<input type="text" name="animalAge" class="form-control onlyNumber">
 						           		</div>
 				           			</div>
 					           		<div class="col-sm-3">
-						           		<label>세 추정</label>
+						           		<label>세</label>
 					           		</div>
 				           		</div>
 		           			</div>
@@ -118,8 +118,8 @@
 				           		<b>체중</b>
 								<div class="input-group">
 				           			<div class="col-sm-6">
-						           		<div class="form-line">
-							           		<input type="text" class="form-control" name="animalWeight">
+						           		<div class="form-line onlyNum">
+							           		<input type="text" name="animalWeight" class="form-control onlyNumber">
 						           		</div>
 				           			</div>
 					           		<div class="col-sm-3">
@@ -129,14 +129,14 @@
 		           			</div>
 		           			<div class="col-sm-4">
 				           		<b>성별</b>
-				           		<div class="form-group">
-		                            <input type="radio" name="animalGender" id="male" value="수컷" class="with-gap">
-		                            <label for="male">수컷</label>
-		                            <input type="radio" name="animalGender" id="female" value="암컷" class="with-gap">
-		                            <label for="female" class="m-l-20">암컷</label>
-		                            <input type="radio" name="animalGender" id="unknown" value="미상 또는 중성화" class="with-gap">
-		                            <label for="unknown" class="m-l-20">미상 또는 중성화</label>
-		                        </div>
+				           		<div class="input-group">
+					           		<select id="animalGender" name="animalGender" class="form-control">
+					           			<option value="">----성별 선택----</option>
+					           			<option value="수컷">수컷</option>
+					           			<option value="암컷">암컷</option>
+					           			<option value="미상 또는 중성화">미상 또는 중성화</option>
+					           		</select>
+				           		</div>
 		           			</div>
 		           			<div class="col-sm-2">
 				           		<b>상태</b>
@@ -148,10 +148,10 @@
 		           			</div>
 		           		</div>
 			           		<b>특징</b>
-			           		<textarea class="form-control" rows="3" name="animalCharacter"></textarea>
+			           		<textarea rows="3" name="animalCharacter" class="form-control"></textarea>
 		           	</div>
 		           	<div class="body">
-		           		<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">보호 동물 센터 등록</button>
+		           		<button type="button" id="insertBtn" class="btn bg-amber btn-block btn-lg waves-effect">보호 동물 센터 등록</button>
 		           	</div>
 				</form>
 	        </div>
@@ -164,6 +164,8 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
+			
+			//품종 선택 ajax
 			$('#selectType').change(function(){
 				var type = $(this).val();
 				var request = $.ajax({
@@ -172,7 +174,6 @@
 					data: { "type" : type },
 					dataType: "json"
 				});
-				 
 				request.done(function( msg ) {
 					console.log(msg);
 					var html='<option value="">----품종을 선택해 주세요----</option>';
@@ -186,7 +187,52 @@
 				request.fail(function( jqXHR, textStatus ) {
 					alert( "Request failed: " + textStatus );
 				});
-				
+			});
+			
+			//키보드 입력 숫자만
+			$(".onlyNumber").keyup(function(event){
+	            if (!(event.keyCode >=37 && event.keyCode<=40)) {
+					alert('숫자만 입력 가능합니다');
+	            	var inputVal = $(this).val();
+	                $(this).val(inputVal.replace(/[^0-9]/gi,''));
+	            }
+	        });
+			
+			//등록 유효성 검사
+			$('#insertBtn').click(function(){
+				if($('input[name=animalPicture]').val() == ''){
+					alert('보호동물 사진을 등록 하세요.');
+					return;
+				}
+				if($('input[name=animalCenterNumber]').val() == ''){
+					alert('보호동물 번호를 입력 하세요.');
+					return;
+				}
+				if($('#subType').val() == ''){
+					alert('보호동물 품종을 선택 하세요.');
+					return;
+				}
+				if($('input[name=animalAge]').val() == ''){
+					alert('보호동물 나이를 입력 하세요.');
+					return;
+				}
+				if($('input[name=animalWeight]').val() == ''){
+					alert('보호동물 체중을 입력하세요.');
+					return;
+				}
+				if($('#animalGender').val() == ''){
+					alert('보호동물 성별을 선택하세요.');
+					return;
+				}
+				if($('input[name=animalState]').val() == ''){
+					alert('보호동물 상태를 입력하세요.');
+					return;
+				}
+				if($('textarea[name=animalCharacter]').val() == ''){
+					alert('보호동물 특징을 입력하세요.');
+					return;
+				}
+				$('#inputForm').submit();
 			});
 		});
 	</script>
