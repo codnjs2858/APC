@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.ScreeningApplicationMapper">
+	<resultMap type="ScreeningApplication" id="getScreeningApplicationMap">
+		<result property="screening_application_code" column="screening_application_code"></result>
+		<result property="member_id" column="member_id"></result>
+		<result property="screening_application_reg_date" column="screening_application_reg_date"></result>
+		<result property="screening_application_state" column="screening_application_state"></result>
+	</resultMap>
+	
+	<select id="selectScreeningApplication" resultMap="getScreeningApplicationMap">
+		SELECT * FROM tb_screening_application
+	</select>
+</mapper>

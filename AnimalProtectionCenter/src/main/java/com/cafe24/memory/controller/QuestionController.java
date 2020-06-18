@@ -25,7 +25,7 @@ public class QuestionController {
 	
 	@GetMapping("/questionDelete")
 	public String questionDelete(Question question) {
-		questionService.deleteQuestion(question.getQuestion_code());
+		//questionService.deleteQuestion(question.getQuestion_code());
 		return "redirect:question";
 	}
 }
