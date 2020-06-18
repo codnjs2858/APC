@@ -32,17 +32,17 @@
 						        </tr>
 						    </thead>
 						    <tbody>
-						        <tr>
-						            <td>반려동물 키운 경험</td>
-						            <td>1) 1년 미만 또는 없음 2) 1년 이상 3) 3년 이상 4) 7년 이상</td>
-						            <td>10</td>
-						            <td>2020-05-22</td>
-						            <td>2020-05-22</td>
+						        <tr th:each="i : ${selectQuestion}">
+						            <td>[[${i.question_name}]]</td>
+						            <td>[[${i.question_desc}]]</td>
+						            <td>[[${i.question_score}]]</td>
+						            <td>[[${i.question_reg_date}]]</td>
+						            <td>[[${i.question_modify_date}]]</td>
 						            <td>
 						            	<a href="#">수정</a>
 						            </td>
 						            <td>
-						            	<a href="#">삭제</a>
+						            	<a th:href="@{/questionDelete(question_code=${i.question_code})}">삭제</a>
 						            </td>
 						        </tr>
 						    </tbody>
