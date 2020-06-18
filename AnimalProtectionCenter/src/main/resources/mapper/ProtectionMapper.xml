@@ -10,6 +10,14 @@
 		<result property="implementCode" column="implement_code"/>
 		<result property="protectSpaceRegDate" column="protect_space_reg_date"/>
 		<result property="animalProtectPeriod" column="animal_protect_period"/>
+		<association property="animalProtect" javaType="AnimalProtect">
+			<result property="animalProtectNum" column="animal_protect_num"/>
+			<result property="animalInsertCode" column="animal_insert_code"/>
+			<result property="protectSpaceCode" column="protect_space_code"/>
+			<result property="state" column="protect_state"/>
+			<result property="animalProtectRegDate" column="animal_protect_reg_date"/>
+			<result property="animalProtectExeDate" column="animal_protect_exe_date"/>
+		</association>
 	</resultMap>
 	
 	<insert id="insertAniamlProtection" parameterType="AnimalProtect">
@@ -57,7 +65,9 @@
 			,s.animal_insert_code=		#{animalInsertCode}
 			,s.use_state=				'사용중'
 		WHERE
-			s.protect_space_code=#{protectSpaceCode}; 
+			s.protect_space_code=#{protectSpaceCode}
+			AND
+			p.animal_insert_code=#{animalInsertCode}; 
 	</update>
 
 	<!-- 
@@ -118,17 +128,27 @@
 			p.animal_insert_code=#{animalNum};
 	</select>
 	
-	<select id="selectProtectionSpace" resultType="ProtectionSpace">
+	<select id="selectProtectionSpace" resultMap="psResultMap">
 		SELECT 
-			 protect_space_code		as protectSpaceCode
-			,animal_insert_code		as animalInsertCode
-			,use_state				as useState
-			,implement_code			as implementCode
-			,protect_space_reg_date as protectSpaceRegDate
-			,animal_protect_period	as animalProtectPeriod
-		FROM 
-			tb_protect_space
-		ORDER BY CAST(SUBSTR(protect_space_code,14) as decimal) DESC;
+			 s.protect_space_code
+			,s.animal_insert_code
+			,s.use_state
+			,s.implement_code
+			,s.protect_space_reg_date
+			,s.animal_protect_period
+			,p.animal_protect_num	
+			,p.animal_insert_code
+			,p.protect_space_code
+			,p.protect_state
+			,p.animal_protect_reg_date
+			,p.animal_protect_exe_date
+		FROM
+			tb_protect_space AS s
+			LEFT JOIN 
+			tb_animal_protect AS p
+			ON 
+			p.animal_insert_code = s.animal_insert_code
+		ORDER BY CAST(SUBSTR(s.protect_space_code,15) as decimal) DESC;
 	</select>
 	
 	<select id="selectMemberId" resultType="Member">

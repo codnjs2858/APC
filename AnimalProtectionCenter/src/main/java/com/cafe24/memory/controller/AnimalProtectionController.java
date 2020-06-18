@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.AnimalProtect;
 import com.cafe24.memory.domain.ProtectionSpace;
+import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.ProtectionService;
 
 @Controller
@@ -21,6 +23,9 @@ public class AnimalProtectionController {
 	
 	@Autowired
 	ProtectionService protectionService;
+	
+	@Autowired
+	AnimalCenterService animalCenterService;
 
 	@PostMapping("/insertCodeCheck")
 	@ResponseBody
@@ -57,11 +62,13 @@ public class AnimalProtectionController {
 			}else {
 				ps.setAnimalProtect(new AnimalProtect());
 			}
-			
 			model.addAttribute("dDay", dDay);
 			model.addAttribute("ptSpace", ps);
 		}
 		
+		List<AnimalCenter> animalCenterList = animalCenterService.selectAnimalCenter();
+		model.addAttribute("acl", animalCenterList);
+ 		
 		return "animalprotect/animalProtectUpdate";
 	}
 	
@@ -72,7 +79,7 @@ public class AnimalProtectionController {
 			int ptDate = Integer.parseInt(protectDate);
 			
 			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.DATE, ptDate+2);
+			cal.add(Calendar.DATE, ptDate);
 			
 			//String exeDate = format.format(new Date(cal.getTimeInMillis()));
 			exeDate = new Date(cal.getTimeInMillis());
@@ -93,7 +100,7 @@ public class AnimalProtectionController {
 			int ptDate = Integer.parseInt(protectDate);
 			
 			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.DATE, ptDate+2);
+			cal.add(Calendar.DATE, ptDate+1);
 			
 			//String exeDate = format.format(new Date(cal.getTimeInMillis()));
 			exeDate = new Date(cal.getTimeInMillis());
@@ -102,13 +109,15 @@ public class AnimalProtectionController {
 		animalProtect.setAnimalProtectExeDate(exeDate);
 		
 		System.out.println(animalProtect + " <-- addAnimalProtection() AnimalProtectionController.java");
-		protectionService.insertAniamlProtection(animalProtect);
+		protectionService.updateAnimalProtectionIn(animalProtect);
 		
 		return "redirect:/animalProtection";
 	}
 	
 	@GetMapping("/addAnimalProtection")
 	public String addAnimalProtection(Model model) {
+		//select 되야되는 저장공간 공간안에 없어야 되는데
+		//select 되어야 되는 tb_animal_insert 애네들을 tb_animal_protect 에 있는 애들은 빼고 해야할듯
 		return "animalprotect/animalProtectInsert";
 	}
 	

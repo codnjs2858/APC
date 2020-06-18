@@ -30,8 +30,14 @@
 	                    <div class="input-group">
 	                        <div class="form-line">
 								센터등록된 유기동물번호
-	                            <input id="petName" type="text" class="form-control" name="animalInsertCode" placeholder="유기동물이름" th:value="${ptSpace.animalProtect.animalInsertCode}">
-	                            <button type="button" id="btnNamePet" class="btn btn-block bg-green waves-effect">동물이름중복</button>
+	                            <!-- <input id="petName" type="text" class="form-control" name="animalInsertCode" placeholder="유기동물이름" th:value="${ptSpace.animalProtect.animalInsertCode}">
+	                            <button type="button" id="btnNamePet" class="btn btn-block bg-green waves-effect">동물이름중복</button> -->
+	                            <div>
+		                            <select name="animalInsertCode">
+		                            	<option th:each="l : ${acl}" th:value="${l.animalInsertCode}" th:text="${l.animalInsertCode}" th:if="${l.animalInsertCode}==${ptSpace.animalInsertCode}" th:selected="selected"></option>
+		                            	<option th:each="l : ${acl}" th:value="${l.animalInsertCode}" th:text="${l.animalInsertCode}" th:unless="${l.animalInsertCode}==${ptSpace.animalInsertCode}"></option>
+		                            </select>
+	                            </div>
 	                        </div>
 						</div>
 						
