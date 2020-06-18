@@ -6,6 +6,7 @@
 	<resultMap type="CompanionAnimalRegister" id="companionAnimalRegister">
 		<result property="companionAnimalRegisterCode" column="companion_animal_register_code"></result>
 		<result property="animalInformation" column="animal_information"></result>
+		<result property="animalInsertCode" column="animal_insert_code"></result>
 		<result property="companionRegisterDate" column="companion_register_date"></result>
 		<result property="cancleCompanionInDate" column="cancle_companion_in_date"></result>
 		

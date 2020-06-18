@@ -62,14 +62,18 @@ public class CompanionAnimalRegisterController {
 	
 	@GetMapping("/companionAnimalRegisterUpdate")
 	
-		public String companionAnimalRegisterUpdate() {
+		public String companionAnimalRegisterUpdate(Model model, CompanionAnimalRegister companionAnimalRegister) {
+		
+		model.addAttribute("CARS", companionAnimalRegisterService.selectCompanionAnimalRegisterList());	
+		model.addAttribute("CARS", animalCenterService.selectAnimalCenter());
+			
 			return "companionanimalregister/companionAnimalRegisterUpdate";
 		
 		}
 	
 	@PostMapping("/companionAnimalRegisterUpdate")
 	
-		public String companionAnimalRegisterUpdate(Model model) {
+		public String companionAnimalRegisterUpdate() {
 			return "redirect:/companionAnimalRegisterList";
 			
 		
