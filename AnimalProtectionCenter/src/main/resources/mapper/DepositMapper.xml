@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.DepositMapper">
+	
+	<resultMap type="Deposit" id="deposit">
+		<result property="depositCode" column="deposit_code"></result>
+		<result property="depositAmount" column="deposit_amount"></result>
+		<result property="depositState" column="deposit_state"></result>
+		<result property="depositDate" column="deposit_date"></result>
+		<result property="depositReturnDate" column="deposit_return_date"></result>
+		
+		<association property="petAdoption" javaType="PetAdoption">
+			<result property="petAdoptionCode" column="pet_adoption_code"></result>
+		
+		</association>	
+		
+		<association property="review" javaType="Review">
+			<result property="reviewCount" column="review_count"></result>
+		</association>	
+		
+		<association property="staff" javaType="Staff">
+			<result property="staffName" column="staff_name"></result>
+		</association>	
+		
+		<association property="member" javaType="Member">
+			<result property="memberId" column="member_id"></result>
+			<result property="memberName" column="member_name"></result>
+		</association>
+		
+	</resultMap>
+	
+	<!-- 리스트 -->
+	<select id="selectDeposit"
+			resultType="Deposit"
+			resultMap="deposit">
+		SELECT 
+			deposit_code, 
+			m.member_id,
+			m.member_name, 
+			r.review_count, 
+			deposit_amount, 
+			deposit_state, 
+			deposit_date, 
+			deposit_return_date,
+			t.staff_name
+		FROM 
+			tb_deposit AS d
+		INNER JOIN
+			tb_review AS r
+		INNER JOIN
+			tb_member AS m
+		INNER JOIN 
+			tb_staff AS t		
+		ON
+		d.staff_code=t.staff_code
+		and
+		d.member_id=m.member_id
+		and
+		d.review_code=r.review_code		
+	</select>
+
+</mapper>

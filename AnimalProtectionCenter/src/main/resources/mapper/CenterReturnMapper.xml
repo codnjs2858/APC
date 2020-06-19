@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.CenterReturnMapper">
+
+	<resultMap type="CenterReturn" id="centerReturn">
+		<result property="centerReturnCode" column="center_return_code"></result>
+		<result property="centerReturnName" column="center_return_name"></result>
+		<result property="centerReturnAge" column="center_return_age"></result>
+		<result property="centerReturnAddress" column="center_return_address"></result>
+		<result property="centerReturnPhone" column="center_return_phone"></result>
+		<result property="centerReturnDate" column="center_return_date"></result>
+		
+		<association property="staff" javaType="Staff">
+			<result property="staffName" column="staff_name"></result>
+		</association>
+		
+		<association property="animalCenter" javaType="AnimalCenter">
+			<result property="animalInsertCode" column="animal_insert_code"></result>
+		</association>
+		
+	</resultMap>
+	
+	<!-- 리스트 -->
+	<select id="selectCenterReturn" 
+	resultType="CenterReturn"
+	resultMap="centerReturn">
+	
+	SELECT 
+		center_return_code, 
+		t.staff_name, 
+		r.animal_insert_code, 
+		center_return_name, 
+		center_return_age, 
+		center_return_address, 
+		center_return_phone,
+		center_return_date
+	FROM 
+		tb_center_return AS r
+	INNER JOIN
+		tb_animal_insert AS i
+	INNER JOIN 
+		tb_staff AS t
+	ON
+		r.animal_insert_code=i.animal_insert_code
+	AND
+		r.staff_code=t.staff_code;	
+	
+	</select>
+	
+</mapper>	

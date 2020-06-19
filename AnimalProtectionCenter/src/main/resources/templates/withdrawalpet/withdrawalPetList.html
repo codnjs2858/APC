@@ -1,9 +1,116 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="@{layout/default2}">
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+
 
 <th:block layout:fragment="customTitle">
+	<title>회수동물 리스트</title>
+</th:block>
+<th:block layout:fragment="customCss">
+	<!-- JQuery DataTable Css -->
+	<link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="header">
+	                <h2>회수동물 리스트</h2>
+	                <ul class="header-dropdown m-r--5">
+	                    <li class="dropdown">
+	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	                            <i class="material-icons">more_vert</i>
+	                        </a>
+	                        <ul class="dropdown-menu pull-right">
+	                            <li><a href="/withdrawalPetInsert" class=" waves-effect waves-block">회수동물 등록</a></li>
+	                        </ul>
+	                    </li>
+	                </ul>
+				</div>
+				<div class="body">
+					<div class="row clearfix">
+	                    <div class="col-xs-3 col-md-3" >
+	                    	<a th:href="@{/withdrawalPetList}">
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
+	                    	</a>
+	                    </div>
+	                    <div class="col-xs-3 col-md-3" th:each="c:${Cnt}">
+	                    	<a th:href="@{/animaltypelist(send_type=${c.animalType})}">
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
+		                        [[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
+	                    	</a>
+	                    </div>
+	                </div>
+	                <div class="table-responsive" style="overflow: hidden;">
+	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
+	                        <thead>
+		                            <tr role="row">
+		                            	<th></th>
+		                            	<th><div class="align-center">회수 코드</div></th>
+		                            	<th><div class="align-center">동물 등록번호</div></th>
+		                            	<th><div class="align-center">입양인 아이디</div></th>
+		                            	<th><div class="align-center">입양인 이름</div></th>
+		                            	<th><div class="align-center">회수 사유</div></th>
+		                            	<th><div class="align-center">회수 날짜</div></th>
+		                            	<th><div class="align-center">담당자</div></th>
+		                            	<th data-orderable="false"><div class="align-center">수정</div></th>
+		                            	<th data-orderable="false"><div class="align-center">삭제</div></th>
+		                            </tr>
+		                        </thead>
+	                        <tbody>
+			                        <tr th:each="WPL, i : ${WPL}" class="odd">
+			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
+		                              	<td><div class="align-center"></div>[[${WPL.withdrawalPetCode}]]</td>
+		                              	<td><div class="align-center"></div>[[${WPL.member.memberId}]]</td>
+		                              	<td><div class="align-center"></div>[[${WPL.member.memberName}]]</td>
+		                              	<td><div class="align-center"></div>[[${WPL.animalCenter.animalCenterNumber}]]</td>
+		                              	<td><div class="align-center"></div>[[${WPL.withdrawalPetReason}]]</td>
+		                              	<td><div class="align-center"></div>[[${WPL.withdrawalPetDate}]]</td>
+		                              	<td><div class="align-center"></div>[[${WPL.staff.staffName}]]</td>
+		                                <td><div class="align-center">
+		                                	<a th:href="@{/withdrawalPetUpdate}" style="color: #9E9E9E">
+		                       				<i class="material-icons">update</i></a></div>
+		                      			</td>
+		                      			<td><div class="align-center">
+					                       	<a th:href="@{#}" style="color: #F44336">
+					                       	<i class="material-icons">delete</i></a></div>
+			                      		</td>
+			                        </tr>
+		                    </tbody>
+	                    </table>
+	                </div>
+	            </div>
+			</div>
+		</div>
+	</section>
+</th:block>
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+<th:block layout:fragment="customFooterScript">
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
+    	$(function(){
+	    	//데이터 테이블
+    		$('#dataTabelEaxm1').dataTable({
+    			"aaSorting": []
+    		});
+    	});
+	</script>
+</th:block>
+ 
+</html>
+<!-- <th:block layout:fragment="customTitle">
 	<title>회수 동물 리스트 관리</title>
 </th:block>
 <th:block layout:fragment="customContents">
@@ -13,10 +120,10 @@
 
 
 
-<!-- Top Bar -->
+Top Bar
 <section class="content">
     <div class="container-fluid">
-       <!-- Basic Examples -->
+       Basic Examples
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
@@ -110,15 +217,15 @@
         </div>
     </div>
 </div>
-<!-- #END# Basic Examples -->
+#END# Basic Examples
        
     </div>
 </section>
 </body></html>
-<!-- #END# Basic Examples -->
+#END# Basic Examples
 
-<!-- 검색 -->
-<!-- <tr th:each="l : ${memberList}">
+검색
+<tr th:each="l : ${memberList}">
 	<td th:text="${l.memberId}"></td>
 	<td th:text="${l.memberPw}"></td>
 	<td th:text="${l.memberLevel}"></td>

@@ -6,6 +6,7 @@
 	<resultMap type="CompanionAnimalRegister" id="companionAnimalRegister">
 		<result property="companionAnimalRegisterCode" column="companion_animal_register_code"></result>
 		<result property="animalInformation" column="animal_information"></result>
+		<result property="animalInsertCode" column="animal_insert_code"></result>
 		<result property="companionRegisterDate" column="companion_register_date"></result>
 		<result property="cancleCompanionInDate" column="cancle_companion_in_date"></result>
 		
@@ -21,18 +22,17 @@
 		</association>
 		
 		<association property="protectionSpace" javaType="ProtectionSpace">
-			<result property="protectSpaceCode" column="protect_space_code"></result>
+			<result property="protectSpaceCode" column="pro_space_code"></result>
 		</association>
 	</resultMap>
 	
+	<!-- 리스트 -->
 	<select id="selectCompanionAnimalRegisterList" 
 	resultType="CompanionAnimalRegister"
 	resultMap="companionAnimalRegister">
 		SELECT 
 			 companion_animal_register_code
 			,aniI.animal_center_number
-			,aniI.AnimalCenter.animal_gender
-			,aniI.animal_age
 			,animal_information
 			,companion_register_date
 			,cancle_companion_in_date
@@ -50,7 +50,7 @@
 			s.staff_code=car.staff_code;
 	</select>
 	
-	<select id="selectMemberAll" resultType="String">
+	<!-- <select id="selectMemberAll" resultType="String">
 		SELECT 
 			 member_id	as memberId
 		FROM 
@@ -65,23 +65,6 @@
 			FROM tb_companion_animal_register
  		</selectKey>
  		
- 		INSERT INTO tb_companion_animal_register(
-			 companion_animal_register_code
-			,animal_insert_code
-			,animal_information
-			,member_id
-			,companion_register_date
-			,cancle_companion_in_date
-			,pro_space_code
-		)VALUES(
-			 #{companionAnimalRegisterCode}
-			,null
-			,null
-			,null
-			,curdate()
-			,null
-			,null
-			
-		)
- 	</insert>
+ 		
+ 	</insert> -->
 </mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.AdopteeMapper">
+	
+	<resultMap type="Adoptee" id="adoptee">
+		<result property="adopteeCode" column="adoptee_code"></result>
+		<result property="adopteeDate" column="adoptee_date"></result>
+		
+		<association property="staff" javaType="Staff">
+			<result property="staffCode" column="staff_code"></result>
+			<result property="staffName" column="staff_name"></result>
+		</association>
+		
+		<association property="member" javaType="Member">
+			<result property="memberId" column="member_id"></result>
+			<result property="memberName" column="member_name"></result>
+			<result property="memberAddr" column="member_addr"></result>
+			<result property="memberPhone" column="member_phone"></result>
+		</association>
+		
+		<association property="screeningComplete" javaType="ScreeningComplete">
+			<result property="screening_complete_totel" column="screening_complete_totel"></result>
+		</association>
+	
+	</resultMap>	
+	
+	<!-- 리스트 -->
+	<select id="selectAdoptee" 
+	resultType="Adoptee"
+	resultMap="adoptee">
+		SELECT 
+				adoptee_code
+				,t.staff_code
+				,m.member_id
+				,m.member_name
+				,m.member_addr
+				,m.member_phone
+		 		,c.screening_complete_totel
+			 	,adoptee_date
+			 	,staff_name
+		FROM 
+				tb_adoptee AS a
+				INNER JOIN
+				tb_member AS m
+				INNER JOIN
+				tb_staff AS t
+				INNER JOIN
+				tb_screening_complete AS c
+				ON
+				a.member_id=m.member_id
+				AND
+				a.staff_code=t.staff_code
+				AND
+				a.screening_complete_code=c.screening_complete_code
+	</select>
+
+</mapper>

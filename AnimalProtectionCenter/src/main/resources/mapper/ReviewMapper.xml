@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.ReviewMapper">
+	
+	<resultMap type="Review" id="review">
+		<result property="reviewCode" column="review_code"></result>
+		<result property="reviewCount" column="review_count"></result>
+		<result property="reviewOmissionCount" column="review_omission_count"></result>
+		<result property="reviewDate" column="review_date"></result>
+		<result property="reviewManagementPeriod" column="review_management_period"></result>
+		
+		<association property="staff" javaType="Staff">
+			<result property="staffName" column="staff_name"></result>
+		</association>	
+		
+		<association property="member" javaType="Member">
+			<result property="memberId" column="member_id"></result>
+			<result property="memberName" column="member_name"></result>
+		</association>
+		
+	</resultMap>
+	
+	<!-- 리스트 -->
+	<select id="selectReview"
+			resultType="Review"
+			resultMap="review">
+		SELECT 
+			review_code, 
+			m.member_id,
+			m.member_name, 
+			t.staff_name, 
+			review_count, 
+			review_omission_count, 
+			review_date, 
+			review_management_period
+		FROM
+			tb_review AS r
+		INNER JOIN
+			tb_member AS m
+		INNER JOIN
+			tb_staff AS t
+		ON
+			r.member_id=m.member_id
+		AND
+			r.staff_code=t.staff_code;
+					
+	</select>
+
+</mapper>

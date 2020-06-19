@@ -41,8 +41,11 @@ public class CompanionAnimalRegisterController {
 		public String insertCompanionAnimalRegister(Model model 
 													, CompanionAnimalRegister companionAnimalRegister) {
 			
-			model.addAttribute("mlist" , companionAnimalRegisterList(model));
-			companionAnimalRegisterService.insertCompanionAnimalRegister(companionAnimalRegister);
+		/*
+		 * model.addAttribute("mlist" , companionAnimalRegisterList(model));
+		 * companionAnimalRegisterService.insertCompanionAnimalRegister(
+		 * companionAnimalRegister);
+		 */
 			return "redirect:/companionAnimalRegisterList";
 		
 		}
@@ -50,26 +53,32 @@ public class CompanionAnimalRegisterController {
 	@GetMapping("/companionAnimalRegisterInsert")
 	
 		public String insertCompanionAnimalRegister(Model model) {
-			List<String> memberIdList = companionAnimalRegisterService.selectMemberAll();
-			List<ProtectionSpace> proList = protectionService.selectProtectionSpace();
-			System.out.println(memberIdList);
-			
-			model.addAttribute("mlist", memberIdList);
-			model.addAttribute("prolist" , proList);
+		/*
+		 * List<String> memberIdList = companionAnimalRegisterService.selectMemberAll();
+		 * List<ProtectionSpace> proList = protectionService.selectProtectionSpace();
+		 * System.out.println(memberIdList);
+		 * 
+		 * model.addAttribute("mlist", memberIdList); model.addAttribute("prolist" ,
+		 * proList);
+		 */
 			return "companionanimalregister/companionAnimalRegisterInsert";
 		
 		}
 	
 	@GetMapping("/companionAnimalRegisterUpdate")
 	
-		public String companionAnimalRegisterUpdate() {
+		public String companionAnimalRegisterUpdate(Model model, CompanionAnimalRegister companionAnimalRegister) {
+		
+		model.addAttribute("CARS", companionAnimalRegisterService.selectCompanionAnimalRegisterList());	
+		model.addAttribute("CARS", animalCenterService.selectAnimalCenter());
+			
 			return "companionanimalregister/companionAnimalRegisterUpdate";
 		
 		}
 	
 	@PostMapping("/companionAnimalRegisterUpdate")
 	
-		public String companionAnimalRegisterUpdate(Model model) {
+		public String companionAnimalRegisterUpdate() {
 			return "redirect:/companionAnimalRegisterList";
 			
 		

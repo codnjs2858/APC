@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.GiftMapper">
+	
+	<resultMap type="Gift" id="gift">
+		<result property="giftCode" column="gift_code"></result>
+		<result property="giftType" column="gift_type"></result>
+		<result property="giftCost" column="gift_cost"></result>
+		<result property="giftDate" column="gift_date"></result>
+		<result property="giftReason" column="gift_reason"></result>
+		
+		<association property="staff" javaType="Staff">
+			<result property="staffName" column="staff_name"></result>
+		</association>	
+		
+		<association property="member" javaType="Member">
+			<result property="memberId" column="member_id"></result>
+			<result property="memberName" column="member_name"></result>
+		</association>
+		
+	</resultMap>
+	
+	<!-- 리스트 -->
+	<select id="selectGift"
+			resultType="Gift"
+			resultMap="gift">
+		SELECT 
+			gift_code, 
+			m.member_id,
+			m.member_name, 
+			t.staff_name, 
+			gift_type, 
+			gift_cost, 
+			gift_date, 
+			gift_reason
+		FROM 
+			tb_gift AS g
+		INNER JOIN
+			tb_member AS m
+		INNER JOIN
+			tb_staff AS t
+		ON
+			g.member_id=m.member_id
+		AND
+			g.staff_code=t.staff_code;		
+	</select>
+
+</mapper>

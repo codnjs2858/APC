@@ -1,12 +1,18 @@
 package com.cafe24.memory.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.cafe24.memory.service.WithdrawalPetService;
+
 @Controller
 public class WithdrawalPetController {
+	
+	@Autowired
+	WithdrawalPetService withdrawalPetService;
 	
 	@PostMapping("/withdrawalPetInsert")
 		public String withdrawalPetInsert(Model model) {
@@ -20,7 +26,10 @@ public class WithdrawalPetController {
 	}
 	
 	@GetMapping("/withdrawalPetList")
-		public String withdrawalPetList() {
+		public String withdrawalPetList(Model model) {
+		
+			model.addAttribute("WPL", withdrawalPetService.selectWithdrawalPet());
+			
 			return "withdrawalpet/withdrawalPetList";
 		
 	}
