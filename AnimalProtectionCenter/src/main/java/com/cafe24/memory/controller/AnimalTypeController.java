@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cafe24.memory.domain.AnimalType;
 import com.cafe24.memory.service.AnimalTypeService;
@@ -25,6 +26,7 @@ public class AnimalTypeController {
 		}
 		return "animaltype/animalTypeList";
 	}
+	
 	//animal type insert
 	@GetMapping("/animaltypeinsert")
 	public String insertAnimalForm() {
@@ -51,9 +53,14 @@ public class AnimalTypeController {
 	
 	//animal type delete
 	@GetMapping("/animaltypedelete")
-	public String deleteAnimalType(@RequestParam(name="send_code", required = false) String send_code) {
+	public String deleteAnimalType(@RequestParam(name="send_code", required = false) String send_code, RedirectAttributes rattr) {
 		System.out.println(send_code);
-		animalTypeService.deleteAnimalType(send_code);
+		try {
+			animalTypeService.deleteAnimalType(send_code);
+		}catch (Exception e) {
+			rattr.addAttribute("alert", "N");
+			System.out.println("동물 종류 삭제 실패");
+		}
 		return "redirect:/animaltypelist";
 	}
 }
