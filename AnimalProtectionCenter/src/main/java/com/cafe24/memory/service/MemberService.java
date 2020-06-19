@@ -36,17 +36,5 @@ public class MemberService {
 		int result=memberMapper.deleteMember(m);
 		return result;
 	}
-	public String loginConfirm(String id,String pw,HttpSession session) {
-		List<Member>m=memberMapper.getMemberList(id);
-		Member result=m.get(0);
-		if(pw.equals(result.getMemberPw())) {
-			session.setAttribute("SID", result.getMemberId());
-			session.setAttribute("SNAME", result.getMemberName());
-			
-			return "로그인성공";
-			
-		}else {
-		return "아이디와 비밀번호를 다시 확인하세요";
-		}
-	}
+
 }
