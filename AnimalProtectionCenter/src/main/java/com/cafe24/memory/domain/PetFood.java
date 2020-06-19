@@ -56,4 +56,54 @@ public class PetFood {
 				+ ", foodPrice=" + foodPrice + ", foodAmount=" + foodAmount + ", foodRemain=" + foodRemain + ", foodName="
 				+ foodName + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + foodAmount;
+		result = prime * result + ((foodCode == null) ? 0 : foodCode.hashCode());
+		result = prime * result + ((foodCompany == null) ? 0 : foodCompany.hashCode());
+		result = prime * result + ((foodName == null) ? 0 : foodName.hashCode());
+		result = prime * result + foodPrice;
+		result = prime * result + foodRemain;
+		result = prime * result + ((foodType == null) ? 0 : foodType.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PetFood other = (PetFood) obj;
+		if (foodAmount != other.foodAmount)
+			return false;
+		if (foodCode == null) {
+			if (other.foodCode != null)
+				return false;
+		} else if (!foodCode.equals(other.foodCode))
+			return false;
+		if (foodCompany == null) {
+			if (other.foodCompany != null)
+				return false;
+		} else if (!foodCompany.equals(other.foodCompany))
+			return false;
+		if (foodName == null) {
+			if (other.foodName != null)
+				return false;
+		} else if (!foodName.equals(other.foodName))
+			return false;
+		if (foodPrice != other.foodPrice)
+			return false;
+		if (foodRemain != other.foodRemain)
+			return false;
+		if (foodType == null) {
+			if (other.foodType != null)
+				return false;
+		} else if (!foodType.equals(other.foodType))
+			return false;
+		return true;
+	}
 }

@@ -51,5 +51,58 @@ public class AnimalProtect {
 				+ ", protectSpaceCode=" + protectSpaceCode + ", state=" + state + ", animalProtectRegDate="
 				+ animalProtectRegDate + ", animalProtectExeDate=" + animalProtectExeDate + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((animalInsertCode == null) ? 0 : animalInsertCode.hashCode());
+		result = prime * result + ((animalProtectExeDate == null) ? 0 : animalProtectExeDate.hashCode());
+		result = prime * result + ((animalProtectNum == null) ? 0 : animalProtectNum.hashCode());
+		result = prime * result + ((animalProtectRegDate == null) ? 0 : animalProtectRegDate.hashCode());
+		result = prime * result + ((protectSpaceCode == null) ? 0 : protectSpaceCode.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AnimalProtect other = (AnimalProtect) obj;
+		if (animalInsertCode == null) {
+			if (other.animalInsertCode != null)
+				return false;
+		} else if (!animalInsertCode.equals(other.animalInsertCode))
+			return false;
+		if (animalProtectExeDate == null) {
+			if (other.animalProtectExeDate != null)
+				return false;
+		} else if (!animalProtectExeDate.equals(other.animalProtectExeDate))
+			return false;
+		if (animalProtectNum == null) {
+			if (other.animalProtectNum != null)
+				return false;
+		} else if (!animalProtectNum.equals(other.animalProtectNum))
+			return false;
+		if (animalProtectRegDate == null) {
+			if (other.animalProtectRegDate != null)
+				return false;
+		} else if (!animalProtectRegDate.equals(other.animalProtectRegDate))
+			return false;
+		if (protectSpaceCode == null) {
+			if (other.protectSpaceCode != null)
+				return false;
+		} else if (!protectSpaceCode.equals(other.protectSpaceCode))
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
+			return false;
+		return true;
+	}
 	
 }

@@ -27,6 +27,17 @@ public class AnimalProtectionController {
 	@Autowired
 	AnimalCenterService animalCenterService;
 
+	@GetMapping("/exitAnimalProtection")
+	public String exitAnimalProtection(
+			 @RequestParam(name = "protectSpaceCode", required = false) String protectSpaceCode
+			,@RequestParam(name = "aniProtectionNum", required = false) String aniProtectionNum) {
+		System.out.println(protectSpaceCode + " <-- protectSpaceCode exitAnimalProtection() AnimalProtectionController.java");
+		System.out.println(aniProtectionNum + " <-- aniProtectionNum exitAnimalProtection() AnimalProtectionController.java");
+		protectionService.exitProtectionSpace(protectSpaceCode, aniProtectionNum);
+		
+		return "redirect:/animalProtection";
+	}
+	
 	@PostMapping("/insertCodeCheck")
 	@ResponseBody
 	public String modifyAnimalProtection(@RequestParam(name = "btnNamePet") String petName) {
@@ -42,10 +53,30 @@ public class AnimalProtectionController {
 	}
 	
 	@GetMapping("/animalProtection")
-	public String animalProtection(Model model) {
-		List<ProtectionSpace> protectSpaceList = protectionService.selectProtectionSpace();
+	public String animalProtection(Model model,
+			@RequestParam(name = "sendSearch", required = false) String sendSearch) {
+		System.out.println(sendSearch);
+		
+		int useCount = protectionService.selectProtectionSpaceUseState("사용중").size();
+		int useNotCount = protectionService.selectProtectionSpaceUseState("없음").size();
+		int allCount = useCount + useNotCount;
+		int haveNotCount = protectionService.selectAnimalHaveNotSpace().size();
+		
+		List<ProtectionSpace> protectSpaceList = null; 
+		if("useing".equals(sendSearch)) {
+			protectSpaceList = protectionService.selectProtectionSpaceInAnimal();
+		}else if("useNot".equals(sendSearch)) {
+			protectSpaceList = protectionService.selectProtectionSpaceOutAnimal();
+		}else {
+			protectSpaceList = protectionService.selectProtectionSpace();
+		}
+			
 		System.out.println(protectSpaceList);
 		model.addAttribute("protectSpaceList", protectSpaceList);
+		model.addAttribute("allCount", allCount);
+		model.addAttribute("useNotCount", useNotCount);
+		model.addAttribute("haveNotCount", haveNotCount);
+		model.addAttribute("useCount", useCount);
 		
 		return "animalprotect/animalProctectSpace";
 	}
@@ -116,11 +147,18 @@ public class AnimalProtectionController {
 	
 	@GetMapping("/addAnimalProtection")
 	public String addAnimalProtection(Model model) {
-		//select 되야되는 저장공간 공간안에 없어야 되는데
-		//select 되어야 되는 tb_animal_insert 애네들을 tb_animal_protect 에 있는 애들은 빼고 해야할듯
+		List<ProtectionSpace> protectionSpaceUseState = protectionService.selectProtectionSpaceUseState("없음");
+		List<AnimalCenter> animalHaveNotSpace = protectionService.selectAnimalHaveNotSpace();
+		
+		System.out.println(protectionSpaceUseState + " <-- protectionSpaceUseState addAnimalProtection() AnimalProtectionController.java");
+		System.out.println(animalHaveNotSpace + " <-- animalHaveNotSpace addAnimalProtection() AnimalProtectionController.java");
+		
+		model.addAttribute("psus", protectionSpaceUseState);
+		model.addAttribute("ahns", animalHaveNotSpace);
+		
 		return "animalprotect/animalProtectInsert";
 	}
-	
+
 	private long getDday(Date date) {
 		Calendar today = Calendar.getInstance();
 		Calendar exeDate = Calendar.getInstance();
