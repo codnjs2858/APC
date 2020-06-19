@@ -12,19 +12,18 @@
 		<result property="animalState" column="animal_state"></result>
 		<result property="animalInsertRegDate" column="animal_insert_reg_date"></result>
 		<result property="acceptCode" column="accept_code"></result>
-		
 		<association property="staff" javaType="Staff">
 			<result property="staffCode" column="staff_code"></result>
 			<result property="staffName" column="staff_name"></result>
 		</association>
-		
 		<association property="animalType" javaType="AnimalType">
 			<result property="animalTypeCode" column="animal_type_code"></result>
 			<result property="animalType" column="animal_type"></result>
 			<result property="animalTypeSub" column="animal_type_sub"></result>
 		</association>
+		
 	</resultMap>
-
+	
 	<insert id="insertAnimalCenter" parameterType="AnimalCenter">
 		<selectKey order="BEFORE" keyProperty="animalInsertCode" resultType="String">
 			SELECT
@@ -87,5 +86,54 @@
 			</where>
 		</if>
 		ORDER BY i.animal_insert_reg_date DESC;
-	</select>	
+	</select>
+	<select id="selectCenterAnimal" resultMap="animalCenter">
+		SELECT
+			*
+		FROM 
+			tb_animal_insert AS a
+		JOIN 
+			tb_animal_type AS t
+		ON
+			a.animal_type_code = t.animal_type_code 
+		WHERE 
+			animal_insert_code = #{send_code}
+	</select>
+		
+	
+	
+	<!-- 신고 관련 부분  -->
+	<!-- result Type -->
+	<resultMap type="test_SearchReportAnimal" id="SearchReportAnimal">
+		<result property="searchReportCode" column="search_report_code"></result>
+		<result property="animalDetail" column="animal_detail"></result>
+		<result property="animalLocation" column="animal_location"></result>
+		<result property="animalPicture" column="animal_picture"></result>
+		
+		<association property="animalType" javaType="AnimalType">
+			<result property="animalTypeCode" column="animal_type_code"></result>
+			<result property="animalType" column="animal_type"></result>
+			<result property="animalTypeSub" column="animal_type_sub"></result>
+		</association>
+	</resultMap>
+
+	<!-- 이름&연락처로 신고코드 찾기 -->
+	<select id="selectCenterReport" parameterType="String" resultMap="SearchReportAnimal">
+		SELECT 
+		*
+		FROM 
+			tb_search_report AS s
+			JOIN 
+			tb_animal_type AS t
+			ON 
+			s.animal_code = t.animal_type_code
+			JOIN 
+			tb_member AS m
+			ON
+			m.member_id=s.member_id
+		WHERE 
+			m.member_name = #{memberName}
+			AND 
+			m.member_phone = #{memberPhone}
+	</select>
 </mapper>

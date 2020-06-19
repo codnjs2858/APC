@@ -36,35 +36,11 @@
 				        </tr>
 				    </thead>
 				    <tbody>
-				        <tr>
-				            <th scope="row">1</th>
-				            <td>12시 32분에 작성된 게시글입니다</td>
-				            <td>Otto</td>
-				            <td>2020-06-10</td>
-				        </tr>
-				        <tr>
-				            <th scope="row">2</th>
-				            <td>12시 32분에 작성된 게시글입니다</td>
-				            <td>Otto</td>
-				            <td>2020-06-10</td>
-				        </tr>
-				        <tr>
-				            <th scope="row">3</th>
-				            <td>12시 32분에 작성된 게시글입니다</td>
-				            <td>Otto</td>
-				            <td>2020-06-10</td>
-				        </tr>
-				        <tr>
-				            <th scope="row">4</th>
-				            <td>12시 32분에 작성된 게시글입니다</td>
-				            <td>Otto</td>
-				            <td>2020-06-10</td>
-				        </tr>
-				        <tr>
-				            <th scope="row">5</th>
-				            <td>12시 32분에 작성된 게시글입니다</td>
-				            <td>Otto</td>
-				            <td>2020-06-10</td>
+				        <tr th:each="i, j : ${selectNotice}">
+				            <th scope="row">[[${j.count}]]</th>
+				            <td>[[${i.board_title}]]</td>
+				            <td>[[${i.member_id}]]</td>
+				            <td>[[${i.board_date}]]</td>
 				        </tr>
 				    </tbody>
 				</table>

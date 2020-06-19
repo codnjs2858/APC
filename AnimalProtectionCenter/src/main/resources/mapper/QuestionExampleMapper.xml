@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.QuestionExampleMapper">
+	<resultMap type="QuestionExample" id="getQuestionExampleMap">
+		<result property="question_example_code" column="question_example_code"></result>
+		<result property="question_code" column="question_code"></result>
+		<result property="question_name" column="question_name"></result>
+		<result property="question_example_content" column="question_example_content"></result>
+		<result property="score_division" column="score_division"></result>
+	</resultMap>
+	
+	<select id="selectQuestionExample" resultMap="getQuestionExampleMap">
+		SELECT
+		   *
+		FROM
+		   tb_question AS q
+		   INNER JOIN
+		   tb_question_example AS e
+		   ON
+		   e.question_code = q.question_code
+	</select>
+</mapper>

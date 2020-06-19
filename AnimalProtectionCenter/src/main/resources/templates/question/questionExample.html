@@ -16,7 +16,7 @@
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="header">
-	                <h2>심사 문항 관리</h2>
+	                <h2>심사지표</h2>
 				</div>
 				<div class="body">
 	                <div class="table-responsive" style="overflow: hidden;">
@@ -31,52 +31,10 @@
 						        </tr>
 						    </thead>
 						    <tbody>
-						        <tr>
-						            <td rowspan="4" style="vertical-align: middle">반려동물 키운 경험</td>
-						            <td>1년 미만 또는 없음</td>
-						            <td>3</td>
-						            <td>
-						            	<div class="align-center">
-		                                <a href="#" style="color: #9E9E9E">
-		                       			<i class="material-icons">update</i></a></div>
-		                      		</td>
-		                      		<td>
-		                      			<div class="align-center">
-					                    <a href="#" style="color: #F44336">
-					                    <i class="material-icons">delete</i></a></div>
-			                      	</td>
-						        </tr>
-						        <tr>
-						            <td>1~3년</td>
-						            <td>5</td>
-						            <td>
-						            	<div class="align-center">
-		                                <a href="#" style="color: #9E9E9E">
-		                       			<i class="material-icons">update</i></a></div>
-		                      		</td>
-		                      		<td>
-		                      			<div class="align-center">
-					                    <a href="#" style="color: #F44336">
-					                    <i class="material-icons">delete</i></a></div>
-			                      	</td>
-						        </tr>
-						        <tr>
-						            <td>3~7년</td>
-						            <td>7</td>
-						            <td>
-						            	<div class="align-center">
-		                                <a href="#" style="color: #9E9E9E">
-		                       			<i class="material-icons">update</i></a></div>
-		                      		</td>
-		                      		<td>
-		                      			<div class="align-center">
-					                    <a href="#" style="color: #F44336">
-					                    <i class="material-icons">delete</i></a></div>
-			                      	</td>
-						        </tr>
-						        <tr>
-						            <td>7년 이상</td>
-						            <td>10</td>
+						        <tr th:each="i : ${selectQuestionExample}">
+						            <td>[[${i.question_name}]]</td>
+						            <td>[[${i.question_example_content}]]</td>
+						            <td>[[${i.score_division}]]</td>
 						            <td>
 						            	<div class="align-center">
 		                                <a href="#" style="color: #9E9E9E">
