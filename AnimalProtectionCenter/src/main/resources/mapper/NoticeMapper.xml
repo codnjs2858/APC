@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.NoticeMapper">
+	<resultMap type="Notice" id="getNoticeMap">
+		<result property="board_code" column="notice_board_code"></result>
+		<result property="member_id" column="member_id"></result>
+		<result property="board_title" column="notice_board_title"></result>
+		<result property="board_content" column="notice_board_content"></result>
+		<result property="board_addfile" column="notice_board_addfile"></result>
+		<result property="board_date" column="notice_board_date"></result>
+		<result property="board_delete_date" column="notice_board_delete_date"></result>
+		<result property="board_ip" column="notice_board_ip"></result>
+	</resultMap>
+	
+	<select id="selectNotice" resultMap="getNoticeMap">
+		SELECT *FROM tb_notice_board
+	</select>
+</mapper>
