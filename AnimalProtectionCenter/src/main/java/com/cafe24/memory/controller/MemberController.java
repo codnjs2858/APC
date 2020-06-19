@@ -1,5 +1,6 @@
 package com.cafe24.memory.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,18 +29,22 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	@ResponseBody
-	public String login(HttpServletRequest request,@RequestParam(name="id")String loginId,
-			@RequestParam(name="pw")String loginPw) {
+	public String login(HttpServletRequest request,Member member) {
 		
 			HttpSession session=request.getSession();
 			
-			String result=memberService.loginConfirm(loginId, loginPw,session);
-			if(result.equals("로그인성공")) {
-				return "index";
-			}else {
-				return "아이디와 비밀번호를 다시 확인하세요";
+			if((member.getMemberId())!=null&&!"".equals(member.getMemberId())&&(member.getMemberPw())!=null&&!"".equals(member.getMemberPw())) {
+				List<Member> result=memberService.getMemberList(member);
+				Member getMember=result.get(0);
+				if((getMember.getMemberPw()).equals(member.getMemberPw())) {
+					session.setAttribute("SID", getMember.getMemberId());
+					session.setAttribute("SNAME", getMember.getMemberName());
+					session.setAttribute("SEMAIL", getMember.getMemberEmail());
+					session.setAttribute("SLEVEL", getMember.getLevel().getLevelCode());
+				}
+				
 			}
+			return "redirect:/";
 		} 
 	
 	
@@ -91,6 +96,30 @@ public class MemberController {
 		
 		return "member/forgetPassword";
 	}
-	
-
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login";
+	}
+	@PostMapping(value="/indexlogin", produces="application/json")
+	@ResponseBody
+	public HashMap<String,String> indexlogin() {
+		HashMap<String,String>result=new HashMap();
+		List<Member>mList=memberService.getMemberList();
+		for(int i=0;i<mList.size();i++) {
+			if(("level_code_01".equals(mList.get(i).getLevel().getLevelCode()))||("level_code_02".equals(mList.get(i).getLevel().getLevelCode()))) {
+				result.put("관리자레벨", mList.get(i).getLevel().getLevelCode());
+				result.put("관리자아이디", mList.get(i).getMemberId());
+				result.put("관리자비밀번호",mList.get(i).getMemberPw());
+				
+			}if("level_code_03".equals(mList.get(i).getLevel().getLevelCode())) {
+				result.put("회원레벨", mList.get(i).getLevel().getLevelCode());
+				result.put("회원아이디", mList.get(i).getMemberId());
+				result.put("회원비밀번호",mList.get(i).getMemberPw());
+			}
+			
+			
+		}
+		return result;
+	}
 }

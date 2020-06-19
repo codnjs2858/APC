@@ -4,22 +4,44 @@ import java.util.Date;
 
 public class SearchReportAnimal {
 	private String searchReportCode;
-	private String animalCode;
+	private AnimalType animalType;
 	private String animalGender;
-	private String memberId;
+	private Member member;
+	private String animalDetail;
+	private String animalLocation;
+	private String animalPicture;
 	private Date searchReportInDate;
 	private Date searchReportOutDate;
+	
+	public String getAnimalDetail() {
+		return animalDetail;
+	}
+	public void setAnimalDetail(String animalDetail) {
+		this.animalDetail = animalDetail;
+	}
+	public String getAnimalLocation() {
+		return animalLocation;
+	}
+	public void setAnimalLocation(String animalLocation) {
+		this.animalLocation = animalLocation;
+	}
+	public String getAnimalPicture() {
+		return animalPicture;
+	}
+	public void setAnimalPicture(String animalPicture) {
+		this.animalPicture = animalPicture;
+	}
 	public String getSearchReportCode() {
 		return searchReportCode;
 	}
 	public void setSearchReportCode(String searchReportCode) {
 		this.searchReportCode = searchReportCode;
 	}
-	public String getAnimalCode() {
-		return animalCode;
+	public AnimalType getAnimalType() {
+		return animalType;
 	}
-	public void setAnimalCode(String animalCode) {
-		this.animalCode = animalCode;
+	public void setAnimalType(AnimalType animalType) {
+		this.animalType = animalType;
 	}
 	public String getAnimalGender() {
 		return animalGender;
@@ -27,11 +49,11 @@ public class SearchReportAnimal {
 	public void setAnimalGender(String animalGender) {
 		this.animalGender = animalGender;
 	}
-	public String getMemberId() {
-		return memberId;
+	public Member getMember() {
+		return member;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	public Date getSearchReportInDate() {
 		return searchReportInDate;
@@ -47,8 +69,9 @@ public class SearchReportAnimal {
 	}
 	@Override
 	public String toString() {
-		return "AnimalSearchReport [searchReportCode=" + searchReportCode + ", animalCode=" + animalCode
-				+ ", animalGender=" + animalGender + ", memberId=" + memberId + ", searchReportInDate="
+		return "SearchReportAnimal [searchReportCode=" + searchReportCode + ", animalType=" + animalType
+				+ ", animalGender=" + animalGender + ", member=" + member + ", animalDetail=" + animalDetail
+				+ ", animalLocation=" + animalLocation + ", animalPicture=" + animalPicture + ", searchReportInDate="
 				+ searchReportInDate + ", searchReportOutDate=" + searchReportOutDate + "]";
 	}
 	

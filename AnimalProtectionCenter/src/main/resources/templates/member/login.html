@@ -47,9 +47,29 @@
 		<!-- Demo Js -->
 		
 		<script src="../../js/demo.js"></script>
-
+<script src="../../plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
-
+	$(document).ready(function(){
+		$('#memberlogin').click(function(){
+		
+			var request = $.ajax({
+			  url: "/indexlogin",
+			  method: "POST",
+			//  data: { id : menuId },
+			  dataType: "json"
+			});
+			 					//result
+			request.done(function( msg ) {
+			console.log(msg);	
+			
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+			  alert( "Request failed: " + textStatus );
+			});			
+			
+		});
+	})
 
 </script>
 </head>
@@ -63,12 +83,18 @@
             <div class="body">
                 <form id="loginform" action="/login" method="post">
                     <div class="msg">아이디와 비번을 입력해주세요</div>
+                    <div class="demo-button">
+                    <button type="button" id="memberlogin"class="btn btn-block btn-lg btn-warning waves-effect">회원로그인</button>
+                    </div></br>
+                    <div class="demo-button">
+                    <button type="button" id="adminlogin" class="btn btn-block btn-lg btn-warning waves-effect">관리자로그인</button>
+                    </div></br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="memberId" placeholder="아이디를 입력해주세요" required autofocus>
+                            <input type="text" class="form-control" name="memberId" value="id001" placeholder="아이디를 입력해주세요" required autofocus>
                         </div>
                     </div>
                     <div class="input-group">
@@ -76,13 +102,13 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            <input type="password" class="form-control" name="memberPw" placeholder="비밀번호를 입력해주세요" required>
+                            <input type="password" class="form-control" name="memberPw" value="pw001" placeholder="비밀번호를 입력해주세요" required>
                         </div>
                     </div>
                     <div class="row">
                        
                         <div class="col-xs-4">
-                            <button class="btn btn-block bg-pink waves-effect" type="submit" id="loginBtn">로그인</button>
+                            <button class="btn btn-block bg-red waves-effect" type="submit" id="loginBtn">로그인</button>
                         </div>
                         
                     </div>
