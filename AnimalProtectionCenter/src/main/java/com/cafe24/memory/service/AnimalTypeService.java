@@ -14,17 +14,30 @@ import com.cafe24.memory.mapper.AnimalTypeMapper;
 @Transactional
 public class AnimalTypeService {
 	
-	@Autowired
-	private AnimalTypeMapper animalTypeMapper;
+	@Autowired private AnimalTypeMapper animalTypeMapper;
 	
+	/**
+	 * 축종별 개체수 조회
+	 * @return
+	 */
 	public List<Map<String,Object>> selectAnimalCnt(){
 		return animalTypeMapper.selectAnimalCnt();
 	}
 	
+	/**
+	 * 동물 종류 삭제
+	 * @param send_code
+	 * @return
+	 */
 	public int deleteAnimalType(String send_code) {
 		return animalTypeMapper.deleteAnimalType(send_code);
 	}
 	
+	/**
+	 * 동물 종류 수정
+	 * @param atype
+	 * @return
+	 */
 	public int updateAnimalType(AnimalType atype) {
 		return animalTypeMapper.updateAnimalType(atype);
 	}

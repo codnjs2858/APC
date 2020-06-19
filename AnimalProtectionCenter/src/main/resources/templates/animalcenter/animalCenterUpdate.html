@@ -7,155 +7,213 @@
 	<title>보호 동물 센터 등록</title>	
 </th:block> 
 <th:block layout:fragment="customCss">
+	<!-- Multi Select Css -->
+	<link href="../../plugins/multi-select/css/multi-select.css" rel="stylesheet">
     <!-- Bootstrap Select Css -->
     <link href="/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <style>
+    	::-webkit-scrollbar { display: none; }
+    	.modalbar {
+    		margin:0px 50px; 
+    		border:1px solid rgba(204, 204, 204, 0.35);
+    		padding:20px;
+    		padding-bottom:15px;
+    	}
+    	.resultlist{
+    		margin: 50px;
+    	}
+    	.modal .modal-footer {
+		    text-align : center;
+		}
+		[type="radio"]:not(:checked), [type="radio"]:checked{
+			left:auto;
+			opacity: 1;
+		}
+    </style>
 </th:block>
 <th:block layout:fragment="customContents">
 	<section class="content">
 		<div class="col-lg-12">
-            <div class="block-header">
-                <h3>보호 동물 센터 등록</h3>
-            </div>
-			<div class="card">
-				<form action="/animalcenterinsert" method="post" id="inputForm">
-					<!-- 직원 세션 아이디, 코드 -->
-					<input type="hidden" name="staffCode" value="staff_code_01">
-					<div class="header">
-						<h2>신고인 정보</h2>
-					</div>
-		           	<div class="body">
-		           		<div class="row">
-		           			<div class="col-sm-3">
-			           			<b>신고자</b>
-			           			<div class="input-group ">
-					           		<div class="form-line m-t-10">
-						           		<input type="text" class="form-control" value="홍길동">
-					           		</div>
-				           		</div>
-		           			</div>
-		           			<div class="col-sm-3">
-			           			<b>신고자 연락처</b>
-			           			<div class="input-group ">
-					           		<div class="form-line m-t-10">
-						           		<input type="text" class="form-control" value="010-0000-0000">
-					           		</div>
-				           		</div>
-		           			</div>
-		           			<div class="col-sm-3">
-			           			<b>신고 장소</b>
-			           			<div class="input-group ">
-					           		<div class="form-line m-t-10">
-						           		<input type="text" class="form-control" value="전주시 금암동">
-					           		</div>
-				           		</div>
-		           			</div>
-		           			<div class="col-sm-3">
-			           			<b>신고 코드</b>
-			           			<div class="input-group ">
-					           		<div class="form-line m-t-10">
-						           		<input type="text" class="form-control" name="acceptCode" value="null" readonly="readonly">
-					           		</div>
-				           		</div>
-		           			</div>
-		           		</div>
-		           	</div>
-		           	<div class="header">
-		           		<h2>동물 정보</h2>
-		           	</div>
-		           	<div class="body">
-		           		<div class="row">
-			           		<div class="col-xs-6 col-md-3">
-								<b>동물 사진</b>
-								<div class="m-t-10">
-							    	<input type="file" name="animalPicture">
-								</div>
+             <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="card">
+						<form action="/animalcenterupdate" method="post" id="inputForm">
+							<div class="header">
+								<h2>보호 동물 정보 수정</h2>
 							</div>
-		           		</div>
-		           		<div class="row">
-		           			<div class="col-xs-4 col-md-4">
-				           		<b>동물 번호</b>
-								<div class="input-group">
-					           		<div class="form-line m-t-10">
-						           		<input type="text" name="animalCenterNumber" class="form-control onlyNumber">
-					           		</div>
-				           		</div>
-		           			</div>
-		           			<div class="col-sm-4 m-t-10">
-				           		<b>축종</b>
-				           		<div class="input-group">
-					           		<select id="selectType" class="form-control">
-					           			<option value="">----축종 선택----</option>
-					           			<option value="강아지">강아지</option>
-					           			<option value="고양이">고양이</option>
-					           			<option value="기타">기타</option>
-					           		</select>
-				           		</div>
-		           			</div>
-		           			<div class="col-sm-4 m-t-10">
-				           		<b>품종</b>
-				           		<div class="input-group">
-					           		<select id="subType" name="animalTypeCode" class="form-control">
-					           			<option value="">----축종을 선택해 주세요----</option>
-					           		</select>
-				           		</div>
-		           			</div>
-		           		</div>
-		           		<div class="row">
-		           			<div class="col-sm-3">
-				           		<b>나이</b>
-				           		<div class="input-group">
-				           			<div class="col-sm-6">
-						           		<div class="form-line">
-							           		<input type="text" name="animalAge" class="form-control onlyNumber">
+				           	<div class="body">
+				           		<div class="row">
+				           			<div class="col-sm-3">
+					           			<b>신고 코드</b>
+					           			<div class="input-group ">
+							           		<div class="form-line m-t-10">
+								           		<input type="text" class="form-control" name="searchReportCode" th:value="${ac.acceptCode}">
+							           		</div>
 						           		</div>
 				           			</div>
-					           		<div class="col-sm-3">
-						           		<label>세</label>
-					           		</div>
+				           			<div class="m-t-20">
+					           			<button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#largeModal">신고 코드 찾기</button>
+				           			</div>
 				           		</div>
-		           			</div>
-		           			<div class="col-sm-3">
-				           		<b>체중</b>
-								<div class="input-group">
-				           			<div class="col-sm-6">
-						           		<div class="form-line onlyNum">
-							           		<input type="text" name="animalWeight" class="form-control onlyNumber">
+				           	</div>
+				           	<div class="header">
+				           		<h2>동물 정보</h2>
+				           	</div>
+				           	<div class="body">
+				           		<div class="row">
+					           		<div class="col-xs-6 col-md-3">
+										<b>동물 사진</b>
+										<div class="m-t-10">
+									    	<input type="file" name="animalPicture" th:value="${ac.animalPicture}">
+										</div>
+									</div>
+				           		</div>
+				           		<div class="row">
+				           			<div class="col-xs-4 col-md-4">
+						           		<b>동물 번호</b>
+										<div class="input-group">
+							           		<div class="form-line m-t-10">
+								           		<input type="text" name="animalCenterNumber" class="form-control onlyNumber" th:value="${ac.animalCenterNumber}">
+							           		</div>
 						           		</div>
 				           			</div>
-					           		<div class="col-sm-3">
-						           		<label>kg</label>
-					           		</div>
+				           			<div class="col-sm-4 m-t-10">
+						           		<b>축종</b>
+						           		<div class="input-group">
+							           		<select id="selectType" class="form-control">
+							           			<option value="">----축종 선택----</option>
+							           			<option value="강아지" th:selected="(${ac.animalType.animalType} == '강아지')">강아지</option>
+							           			<option value="고양이" th:selected="(${ac.animalType.animalType} == '고양이')">고양이</option>
+							           			<option value="기타" th:selected="(${ac.animalType.animalType} == '기타')">기타</option>
+							           		</select>
+						           		</div>
+				           			</div>
+				           			<div class="col-sm-4 m-t-10">
+						           		<b>품종</b>
+						           		<div class="input-group">
+							           		<select id="subType" name="animalTypeCode" class="form-control">
+							           			<option th:value="${ac.animalType.animalTypeSub}" >[[${ac.animalType.animalTypeSub}]]</option>
+							           		</select>
+						           		</div>
+				           			</div>
 				           		</div>
-		           			</div>
-		           			<div class="col-sm-4">
-				           		<b>성별</b>
-				           		<div class="input-group">
-					           		<select id="animalGender" name="animalGender" class="form-control">
-					           			<option value="">----성별 선택----</option>
-					           			<option value="수컷">수컷</option>
-					           			<option value="암컷">암컷</option>
-					           			<option value="미상 또는 중성화">미상 또는 중성화</option>
-					           		</select>
+				           		<div class="row">
+				           			<div class="col-sm-3">
+						           		<b>나이</b>
+						           		<div class="input-group">
+						           			<div class="col-sm-6">
+								           		<div class="form-line">
+									           		<input type="text" name="animalAge" class="form-control onlyNumber" th:value="${ac.animalAge}">
+								           		</div>
+						           			</div>
+							           		<div class="col-sm-3">
+								           		<label>세</label>
+							           		</div>
+						           		</div>
+				           			</div>
+				           			<div class="col-sm-3">
+						           		<b>체중</b>
+										<div class="input-group">
+						           			<div class="col-sm-6">
+								           		<div class="form-line onlyNum">
+									           		<input type="text" name="animalWeight" class="form-control onlyNumber" th:value="${ac.animalWeight}">
+								           		</div>
+						           			</div>
+							           		<div class="col-sm-3">
+								           		<label>kg</label>
+							           		</div>
+						           		</div>
+				           			</div>
+				           			<div class="col-sm-4">
+						           		<b>성별</b>
+						           		<div class="input-group">
+							           		<select id="animalGender" name="animalGender" class="form-control">
+							           			<option value="">----성별 선택----</option>
+							           			<option value="수컷" th:selected="(${ac.animalGender} == '수컷')">수컷</option>
+							           			<option value="암컷" th:selected="(${ac.animalGender} == '암컷')">암컷</option>
+							           			<option value="미상 또는 중성화" th:selected="(${ac.animalGender} == '미상 또는 중성화')">미상 또는 중성화</option>
+							           		</select>
+						           		</div>
+				           			</div>
+				           			<div class="col-sm-2">
+						           		<b>상태</b>
+										<div class="input-group">
+							           		<div class="form-line">
+								           		<input type="text" class="form-control" name="animalState" th:value="${ac.animalState}">
+							           		</div>
+						           		</div>
+				           			</div>
 				           		</div>
-		           			</div>
-		           			<div class="col-sm-2">
-				           		<b>상태</b>
-								<div class="input-group">
-					           		<div class="form-line">
-						           		<input type="text" class="form-control" name="animalState">
-					           		</div>
-				           		</div>
-		           			</div>
-		           		</div>
-			           		<b>특징</b>
-			           		<textarea rows="3" name="animalCharacter" class="form-control"></textarea>
-		           	</div>
-		           	<div class="body">
-		           		<button type="button" id="insertBtn" class="btn bg-amber btn-block btn-lg waves-effect">보호 동물 센터 등록</button>
-		           	</div>
-				</form>
-	        </div>
+				           		<b>특징</b>
+				           		<textarea rows="3" name="animalCharacter" class="form-control">[[${ac.animalCharacter}]]</textarea>
+				           	</div>
+				           	<div class="body">
+				           		<button type="button" id="insertBtn" class="btn bg-amber btn-block btn-lg waves-effect">보호 동물 수정</button>
+				           	</div>
+						</form>
+			        </div>
+				</div>
+			</div>
 		</div>
+		
+		
+		<!-- Large Size -->
+        <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="largeModalLabel">신고 코드 검색</h4>
+                    </div>
+                    <div class="modal-body">
+                    	<div class="row clearfix modalbar">
+                            <div class="col-md-4 col-md-offset-1 col-xs-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="memberName" value="홍길동">
+                                        <label class="form-label">신고인 성명</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="memberPhone" value="010-0000">
+                                        <label class="form-label">신고인 연락처</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-12">
+                                <input type="checkbox" id="remember_me_5" class="filled-in">
+                                <button type="button" id="searchBtn" class="btn btn-primary btn-lg m-l-15">신고 조회</button>
+                            </div>
+                        </div>
+                        <div class="row resultlist">
+	                       		신고 내역
+	                       		<table class="table table-hover" style="border: 1px solid #eee">
+	                       			<thead>
+	                       				<tr>
+	                       					<th></th>
+	                       					<th>동물 사진</th>
+	                       					<th>신고 동물 종류</th>
+	                       					<th>신고 지역</th>
+	                       					<th>발견 정황</th>
+	                       				</tr>
+	                       			</thead>
+	                       			<tbody id="tbContent">
+	        	               			<tr>
+	        	               				<td colspan="5">검색 결과가 존재하지 않습니다.</td>
+		                       			</tr>
+	                       			</tbody>
+	                       		</table>
+                        	</div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link waves-effect"  id="selectReportBtn">확인</button>
+                        <button type="button" class="btn btn-link waves-effect"  data-dismiss="modal">취소</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
 	</section>
 </th:block> 
 
@@ -189,10 +247,56 @@
 				});
 			});
 			
+			//모달에서 신고코드 조회
+			$('#searchBtn').click(function(){
+				var memberName = $('input[name=memberName]').val();
+				var memberPhone = $('input[name=memberPhone]').val();
+				var request = $.ajax({
+					url: "/animalcenterReport",
+					method: "POST",
+					data: { "memberName" : memberName,
+							"memberPhone" : memberPhone},
+					dataType: "json"
+				});
+				request.done(function( msg ) {
+					var html = null;
+					if(msg != null && msg != ''){
+						for(var i=0; i<msg.length;i++){
+							console.log(msg[i]);
+							html +="<tr><td><input type=\"radio\" class=\"valBtn\" name=\"selectReport\"value=\""+msg[i].animalType.animalTypeCode+"\"></td>";
+							html +="<td>"+msg[i].animalPicture+"</td>";
+							html +="<td>"+msg[i].animalType.animalType+":"+msg[i].animalType.animalTypeSub+"</td>";
+							html +="<td>"+msg[i].animalLocation+"</td>";
+							html +="<td>"+msg[i].animalDetail+"</td></tr>";
+						}
+					}else{
+						html += "<tr><td colspan=\"5\">검색 결과가 존재하지 않습니다.</td></tr>"
+					}
+					$('#tbContent').html(html);
+					$('#tbContent').selectpicker('refresh');
+				});
+				 
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});
+			});
+			
+			//모달에서 신고코드 가져오기
+			$('#selectReportBtn').click(function(){
+				var val = $('input[name=selectReport]:checked').val();
+					console.log(val);
+				if(val != null && val != '' && val != undefined){
+					console.log(val);
+					$('input[name=searchReportCode]').val(val);
+					$('.modal').modal('hide');
+				}else{
+					alert('신고를 선택해 주세요.');
+				}
+			})
+			
 			//키보드 입력 숫자만
 			$(".onlyNumber").keyup(function(event){
 	            if (!(event.keyCode >=37 && event.keyCode<=40)) {
-					alert('숫자만 입력 가능합니다');
 	            	var inputVal = $(this).val();
 	                $(this).val(inputVal.replace(/[^0-9]/gi,''));
 	            }
