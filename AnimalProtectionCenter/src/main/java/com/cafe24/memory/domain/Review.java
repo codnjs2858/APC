@@ -11,7 +11,14 @@ public class Review {
 	private Date reviewManagementPeriod;
 	//외래키
 	private Staff staff;
+	private Member member;
 	
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
 	public String getReviewCode() {
 		return reviewCode;
 	}
@@ -53,6 +60,7 @@ public class Review {
 	public String toString() {
 		return "Review [reviewCode=" + reviewCode + ", reviewCount=" + reviewCount + ", reviewOmissionCount="
 				+ reviewOmissionCount + ", reviewDate=" + reviewDate + ", reviewManagementPeriod="
-				+ reviewManagementPeriod + ", staff=" + staff + "]";
+				+ reviewManagementPeriod + ", staff=" + staff + ", member=" + member + "]";
 	}
-}
+	
+}	

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.WithdrawalPetMapper">
+	
+	<resultMap type="WithdrawalPet" id="withdrawalPet">
+		<result property="withdrawalPetCode" column="withdrawal_pet_code"></result>
+		<result property="withdrawalPetReason" column="withdrawal_pet_reason"></result>
+		<result property="withdrawalPetDate" column="withdrawal_pet_date"></result>
+		
+		<association property="staff" javaType="Staff">
+			<result property="staffName" column="staff_name"></result>
+		</association>	
+		
+		<association property="member" javaType="Member">
+			<result property="memberId" column="member_id"></result>
+			<result property="memberName" column="member_name"></result>
+		</association>
+		
+		<association property="animalCenter" javaType="AnimalCenter">
+			<result property="animalCenterNumber" column="animal_center_number"></result>
+		</association>
+	</resultMap>
+	
+	<!-- 리스트 -->
+	<select id="selectWithdrawalPet"
+			resultType="WithdrawalPet"
+			resultMap="withdrawalPet">
+		SELECT 
+			withdrawal_pet_code, 
+			t.staff_name, 
+			m.member_id,
+			m.member_name,
+			i.animal_center_number, 
+			withdrawal_pet_reason, 
+			withdrawal_pet_date
+		FROM 
+			tb_withdrawal_pet AS w
+		INNER join
+			tb_staff AS t
+		INNER JOIN
+			tb_member AS m
+		INNER JOIN
+			tb_animal_insert AS i
+		ON
+			w.staff_code=t.staff_code
+		AND
+			w.animal_insert_code=i.animal_insert_code
+		AND	
+			w.member_id=m.member_id;
+					
+	</select>
+
+</mapper>

@@ -41,8 +41,11 @@ public class CompanionAnimalRegisterController {
 		public String insertCompanionAnimalRegister(Model model 
 													, CompanionAnimalRegister companionAnimalRegister) {
 			
-			model.addAttribute("mlist" , companionAnimalRegisterList(model));
-			companionAnimalRegisterService.insertCompanionAnimalRegister(companionAnimalRegister);
+		/*
+		 * model.addAttribute("mlist" , companionAnimalRegisterList(model));
+		 * companionAnimalRegisterService.insertCompanionAnimalRegister(
+		 * companionAnimalRegister);
+		 */
 			return "redirect:/companionAnimalRegisterList";
 		
 		}
@@ -50,12 +53,14 @@ public class CompanionAnimalRegisterController {
 	@GetMapping("/companionAnimalRegisterInsert")
 	
 		public String insertCompanionAnimalRegister(Model model) {
-			List<String> memberIdList = companionAnimalRegisterService.selectMemberAll();
-			List<ProtectionSpace> proList = protectionService.selectProtectionSpace();
-			System.out.println(memberIdList);
-			
-			model.addAttribute("mlist", memberIdList);
-			model.addAttribute("prolist" , proList);
+		/*
+		 * List<String> memberIdList = companionAnimalRegisterService.selectMemberAll();
+		 * List<ProtectionSpace> proList = protectionService.selectProtectionSpace();
+		 * System.out.println(memberIdList);
+		 * 
+		 * model.addAttribute("mlist", memberIdList); model.addAttribute("prolist" ,
+		 * proList);
+		 */
 			return "companionanimalregister/companionAnimalRegisterInsert";
 		
 		}

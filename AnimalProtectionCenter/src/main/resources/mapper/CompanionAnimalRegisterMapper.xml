@@ -50,7 +50,7 @@
 			s.staff_code=car.staff_code;
 	</select>
 	
-	<select id="selectMemberAll" resultType="String">
+	<!-- <select id="selectMemberAll" resultType="String">
 		SELECT 
 			 member_id	as memberId
 		FROM 
@@ -65,23 +65,6 @@
 			FROM tb_companion_animal_register
  		</selectKey>
  		
- 		INSERT INTO tb_companion_animal_register(
-			 companion_animal_register_code
-			,animal_insert_code
-			,animal_information
-			,member_id
-			,companion_register_date
-			,cancle_companion_in_date
-			,pro_space_code
-		)VALUES(
-			 #{companionAnimalRegisterCode}
-			,null
-			,null
-			,null
-			,curdate()
-			,null
-			,null
-			
-		)
- 	</insert>
+ 		
+ 	</insert> -->
 </mapper>

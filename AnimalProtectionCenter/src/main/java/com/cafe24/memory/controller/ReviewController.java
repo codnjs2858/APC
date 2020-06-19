@@ -1,12 +1,18 @@
 package com.cafe24.memory.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.cafe24.memory.service.ReviewService;
+
 @Controller
 public class ReviewController {
+	
+	@Autowired
+	ReviewService reviewServiece;
 	
 	@GetMapping("/reviewInsert")
 		public String reviewInsert() {
@@ -19,7 +25,10 @@ public class ReviewController {
 	}
 	
 	@GetMapping("/reviewList")
-	public String reviewList() {
+	public String reviewList(Model model) {
+		
+		model.addAttribute("RVL", reviewServiece.selectReview());
+		
 		return "review/reviewList";
 	}
 	

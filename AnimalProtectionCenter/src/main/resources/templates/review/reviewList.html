@@ -1,133 +1,114 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="@{layout/default2}">
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
 
 <th:block layout:fragment="customTitle">
-	<title>후기 리스트 관리</title>
+	<title>후기 리스트</title>
 </th:block>
+<th:block layout:fragment="customCss">
+	<!-- JQuery DataTable Css -->
+	<link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+</th:block> 
+
 <th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="header">
+	                <h2>후기 리스트</h2>
+	                <ul class="header-dropdown m-r--5">
+	                    <li class="dropdown">
+	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	                            <i class="material-icons">more_vert</i>
+	                        </a>
+	                        <ul class="dropdown-menu pull-right">
+	                            <li><a href="/reviewInsert" class=" waves-effect waves-block">후기 관리 등록</a></li>
+	                        </ul>
+	                    </li>
+	                </ul>
+				</div>
+				<div class="body">
+					<div class="row clearfix">
+	                    <div class="col-xs-3 col-md-3" >
+	                    	<a th:href="@{/reviewList}">
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
+	                    	</a>
+	                    </div>
+	                    <div class="col-xs-3 col-md-3" th:each="c:${Cnt}">
+	                    	<a th:href="@{/animaltypelist(send_type=${c.animalType})}">
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
+		                        [[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
+	                    	</a>
+	                    </div>
+	                </div>
+	                <div class="table-responsive" style="overflow: hidden;">
+	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
+	                        <thead>
+		                            <tr role="row">
+		                            	<th></th>
+		                            	<th><div class="align-center">후기 코드</div></th>
+		                            	<th><div class="align-center">회원 아이디</div></th>
+		                            	<th><div class="align-center">회원 이름</div></th>
+		                            	<th><div class="align-center">등록 횟수</div></th>
+		                            	<th><div class="align-center">누락 횟수</div></th>
+		                            	<th><div class="align-center">등록 날짜</div></th>
+		                            	<th><div class="align-center">후기관리 날짜</div></th>
+		                            	<th><div class="align-center">담당자</div></th>
+		                            	<th data-orderable="false"><div class="align-center">수정</div></th>
+		                            	<th data-orderable="false"><div class="align-center">삭제</div></th>
+		                            </tr>
+		                        </thead>
+	                        <tbody>
+			                        <tr th:each="RVL, i : ${RVL}" class="odd">
+			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
+		                              	<td><div class="align-center"></div>[[${RVL.reviewCode}]]</td>
+		                              	<td><div class="align-center"></div>[[${RVL.member.memberId}]]</td>
+		                              	<td><div class="align-center"></div>[[${RVL.member.memberName}]]</td>
+		                              	<td><div class="align-center"></div>[[${RVL.reviewCount}]]</td>
+		                              	<td><div class="align-center"></div>[[${RVL.reviewOmissionCount}]]</td>
+		                              	<td><div class="align-center"></div>[[${RVL.reviewDate}]]</td>
+		                              	<td><div class="align-center"></div>[[${RVL.reviewManagementPeriod}]]</td>
+		                              	<td><div class="align-center"></div>[[${RVL.staff.staffName}]]</td>
+		                                <td><div class="align-center">
+		                                	<a th:href="@{/reviewUpdate}" style="color: #9E9E9E">
+		                       				<i class="material-icons">update</i></a></div>
+		                      			</td>
+		                      			<td><div class="align-center">
+					                       	<a th:href="@{#}" style="color: #F44336">
+					                       	<i class="material-icons">delete</i></a></div>
+			                      		</td>
+			                        </tr>
+		                    </tbody>
+	                    </table>
+	                </div>
+	            </div>
+			</div>
+		</div>
+	</section>
+</th:block>
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+<th:block layout:fragment="customFooterScript">
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
+    	$(function(){
+	    	//데이터 테이블
+    		$('#dataTabelEaxm1').dataTable({
+    			"aaSorting": []
+    		});
+    	});
+	</script>
+</th:block>
+ 
+</html>
 
-
-<body class="theme-red">
-
-
-
-<!-- Top Bar -->
-<section class="content">
-    <div class="container-fluid">
-       <!-- Basic Examples -->
-<div class="row clearfix">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="header">
-                <h2>후기 리스트 관리</h2>
-            </div>
-            <div class="body">
-                <div class="table-responsive">
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                    <div class="row">
-                    <div class="col-sm-6">
-	                    <div class="dataTables_length" id="DataTables_Table_0_length">
-		                 </div>
-                    </div>
-                    <div class="col-sm-6">
-                    <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                    	<label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="DataTables_Table_0">
-                    		<button type="button">검색</button>
-                    	</label>
-                    </div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-sm-12">
-                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-                        <thead>
-                            <tr>
-	                            <th rowspan="1" colspan="1">후기 코드</th>
-	                            <th rowspan="1" colspan="1">입양인 명</th>
-	                            <th rowspan="1" colspan="1">등록 횟수</th>
-	                            <th rowspan="1" colspan="1">등록 누락 횟수</th>
-	                            <th rowspan="1" colspan="1">등록 날짜</th>
-	                            <th rowspan="1" colspan="1">등록 관리 날짜</th>
-	                            <th rowspan="1" colspan="1">담당자</th>
-	                            <th rowspan="1" colspan="1">수정</th>
-	                            <th rowspan="1" colspan="1">삭제</th>
-	                         </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-	                            <th rowspan="1" colspan="1">후기 코드</th>
-	                            <th rowspan="1" colspan="1">입양인 명</th>
-	                            <th rowspan="1" colspan="1">등록 횟수</th>
-	                            <th rowspan="1" colspan="1">등록 누락 횟수</th>
-	                            <th rowspan="1" colspan="1">등록 날짜</th>
-	                            <th rowspan="1" colspan="1">등록 관리 날짜</th>
-	                            <th rowspan="1" colspan="1">담당자</th>
-	                            <th rowspan="1" colspan="1">수정</th>
-	                            <th rowspan="1" colspan="1">삭제</th>
-	                         </tr>
-                        </tfoot>
-                        <tbody><tr role="row" class="odd">
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <th>
-	                            	<a th:href="@{/reviewUpdate}">수정</a>
-	                            </th>
-	                            <th>
-	                            	<a th:href="@{#}">삭제</a>
-	                            </th>
-                            </tr></tbody>
-                    </table>
-                    </div>
-                    </div>
-                    <div class="row">
-                    	<div class="col-sm-5">
-                    	</div>
-                    		<div class="col-sm-7">
-                    			<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                    				<ul class="pagination">
-                    					<li class="paginate_button active">
-                    						<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0">1</a>
-                    					</li>
-                    					<li class="paginate_button ">
-                    						<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0">2</a>
-                    					</li>
-                    					<li class="paginate_button next" id="DataTables_Table_0_next">
-                    						<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="7" tabindex="0">Next</a>
-                    					</li>
-                    				</ul>
-                    			</div>
-                    		</div>
-                    	</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- #END# Basic Examples -->
-       
-    </div>
-</section>
-</body></html>
-<!-- #END# Basic Examples -->
-
-<!-- 검색 -->
-<!-- <tr th:each="l : ${memberList}">
-	<td th:text="${l.memberId}"></td>
-	<td th:text="${l.memberPw}"></td>
-	<td th:text="${l.memberLevel}"></td>
-	<td th:text="${l.memberName}"></td>
-	<td th:text="${l.memberEmail}"></td>
-	<td>
-		/modifyMember?memberId="값"&memberPw="값"
-		<a th:href="#">수정</a>
-	</td>
-	<td>
-		<a th:href="#">삭제</a>
-	</td>
-</tr> -->
