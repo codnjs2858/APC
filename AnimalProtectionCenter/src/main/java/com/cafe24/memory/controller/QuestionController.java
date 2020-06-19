@@ -6,11 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.cafe24.memory.domain.Question;
+import com.cafe24.memory.service.QuestionExampleService;
 import com.cafe24.memory.service.QuestionService;
 
 @Controller
 public class QuestionController {
 	@Autowired private QuestionService questionService;
+	@Autowired private QuestionExampleService questionExampleService;
 
 	@GetMapping("/question")
 	public String question(Model model) {
@@ -20,6 +22,7 @@ public class QuestionController {
 	
 	@GetMapping("/questionExample")
 	public String questionExample(Model model) {
+		model.addAttribute("selectQuestionExample", questionExampleService.selectQuestionExample());
 		return "question/questionExample";
 	}
 	
