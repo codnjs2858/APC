@@ -13,7 +13,7 @@ public class AnimalCenter {
 	//외래키
 	private AnimalType animalType;
 	private Staff staff;
-	
+	//도메인 미완료
 	private String acceptCode;
 	
 	public String getAnimalInsertCode() {
