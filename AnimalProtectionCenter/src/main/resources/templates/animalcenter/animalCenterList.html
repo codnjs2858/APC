@@ -72,11 +72,12 @@
 		                            <td><div class="align-center">[[${ac.staff.staffName}]]</div></td>
 		                            <td><div class="align-center"><a href="/animalhealthinsert">건강 기록 등록</a></div></td>
 		                            <td><div class="align-center">
-		                            	<a href="/animalcenterupdate">
-	                       				<i class="material-icons">update</i></a></div>
+		                            	<a th:href="@{/animalcenterupdate(send_code=${ac.animalInsertCode})}" style="color: #9E9E9E">
+	                       					<i class="material-icons">update</i>
+	                       				</a></div>
 	                      			</td>
 	                      			<td><div class="align-center">
-				                       	<a href="/animalcenterdelete">
+				                       	<a th:href="@{/animalcenterdelete(send_code=${ac.animalInsertCode})}">
 				                       	<i class="material-icons">delete</i>
 			                       	</a></div>
 		                            
