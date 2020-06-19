@@ -104,7 +104,7 @@
 	
 	<!-- 신고 관련 부분  -->
 	<!-- result Type -->
-	<resultMap type="test_SearchReportAnimal" id="SearchReportAnimal">
+	<resultMap type="SearchReportAnimal" id="SearchReportAnimal">
 		<result property="searchReportCode" column="search_report_code"></result>
 		<result property="animalDetail" column="animal_detail"></result>
 		<result property="animalLocation" column="animal_location"></result>
