@@ -30,9 +30,9 @@ public class CompanionAnimalRegisterService {
 		 return mlist;
 	}
 	
-	public int insertCompanionAnimalRegister(CompanionAnimalRegister companionAnimalRegister) {
+	public int insertCompanionAnimalRegister(CompanionAnimalRegister cAniReg) {
 	  
-	  int result = companionAnimalRegisterMapper.insertCompanionAnimalRegister(companionAnimalRegister);
+	  int result = companionAnimalRegisterMapper.insertCompanionAnimalRegister(cAniReg);
 	  
 	  return result;
 	  

@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.CompanionAnimalRegister;
 import com.cafe24.memory.domain.ProtectionSpace;
+import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.CompanionAnimalRegisterService;
 import com.cafe24.memory.service.ProtectionService;
@@ -38,14 +40,13 @@ public class CompanionAnimalRegisterController {
 	
 	@PostMapping("/companionAnimalRegisterInsert")
 	
-		public String insertCompanionAnimalRegister(Model model 
-													, CompanionAnimalRegister companionAnimalRegister) {
+		public String insertCompanionAnimalRegister(Model model, Staff staff, AnimalCenter animal, ProtectionSpace aniPro
+													, CompanionAnimalRegister cAniReg) {
 			
-		/*
-		 * model.addAttribute("mlist" , companionAnimalRegisterList(model));
-		 * companionAnimalRegisterService.insertCompanionAnimalRegister(
-		 * companionAnimalRegister);
-		 */
+			cAniReg.setAnimalCenter(animal);
+			cAniReg.setStaff(staff);
+			cAniReg.setProtectionSpace(aniPro);
+			companionAnimalRegisterService.insertCompanionAnimalRegister(cAniReg);
 			return "redirect:/companionAnimalRegisterList";
 		
 		}
@@ -53,14 +54,11 @@ public class CompanionAnimalRegisterController {
 	@GetMapping("/companionAnimalRegisterInsert")
 	
 		public String insertCompanionAnimalRegister(Model model) {
-		/*
-		 * List<String> memberIdList = companionAnimalRegisterService.selectMemberAll();
-		 * List<ProtectionSpace> proList = protectionService.selectProtectionSpace();
-		 * System.out.println(memberIdList);
-		 * 
-		 * model.addAttribute("mlist", memberIdList); model.addAttribute("prolist" ,
-		 * proList);
-		 */
+		
+		 List<ProtectionSpace> proList = protectionService.selectProtectionSpace();
+		 List<AnimalCenter> anicenter = animalCenterService.selectAnimalCenter();
+		 model.addAttribute("prolist" ,proList);
+		 model.addAttribute("aniCenNum", anicenter);
 			return "companionanimalregister/companionAnimalRegisterInsert";
 		
 		}

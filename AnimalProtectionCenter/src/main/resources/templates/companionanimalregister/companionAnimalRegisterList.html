@@ -35,12 +35,7 @@
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
 	                    	</a>
 	                    </div>
-	                    <div class="col-xs-3 col-md-3" th:each="c:${Cnt}">
-	                    	<a th:href="@{/animaltypelist(send_type=${c.animalType})}">
-		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
-		                        [[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
-	                    	</a>
-	                    </div>
+	                    
 	                </div>
 	                <div class="table-responsive" style="overflow: hidden;">
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
@@ -66,8 +61,8 @@
 		                               	<td><div class="align-center"></div>[[${CARS.animalInformation}]]</td>
 		                               	<td><div class="align-center"></div>[[${CARS.companionRegisterDate}]]</td>
 		                               	<td><div class="align-center"></div>[[${CARS.cancleCompanionInDate}]]</td>
-		                               	<td><div class="align-center"></div>[[${CARS.staff.staffName}]]</td>
 		                               	<td><div class="align-center"></div>[[${CARS.protectionSpace.protectSpaceCode}]]</td>
+		                               	<td><div class="align-center"></div>[[${CARS.staff.staffName}]]</td>
 		                                <td><div class="align-center">
 		                                	<a th:href="@{/companionAnimalRegisterUpdate}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>

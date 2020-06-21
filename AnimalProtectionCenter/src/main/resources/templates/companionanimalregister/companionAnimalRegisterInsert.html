@@ -21,36 +21,38 @@
 	            <div class="body">
 	            	<div class="row clearfix">
 	            		<form action="/companionAnimalRegisterInsert" method="post">
-	            			<div class="col-md-4">
-			                    <b>동물 번호</b>
+	            		<!-- 직원 세션 아이디, 코드 -->
+	            		<input type="hidden" name="staffCode" value="staff_code_01">
+	            			<div class="col-md-2 col-md-offset-1">
+	            				<b>동물 번호</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="text" name="animalCenterNumber" class="form-control">
-			                        </div>
-			                    </div>
-			                </div>
+		            				<select name="animalInsertCode">
+		            					<option value="">====== 선택 ======</option>
+		            					<option th:each="m : ${aniCenNum}">[[${m.animalInsertCode}]]</option>
+		            				</select>
+		            			</div>
+	            			</div>
 	            			<div class="col-md-2 col-md-offset-1">
 	            				<b>분양 상태</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="animalType">
+		            				<select name="animalInformation">
 		            					<option value="">====== 선택 ======</option>
-		            					<option value="#">분양 가능</option>
-		            					<option value="#">분양 완료</option>
-		            					<option value="#">기타</option>
+		            					<option value="분양 가능">분양 가능</option>
+		            					<option value="분양 완료">분양 완료</option>
+		            					<option value="기타">기타</option>
 		            				</select>
 		            			</div>
 	            			</div>
 	            			<div class="col-md-2 col-md-offset-1">
-	            				<b>담당자</b>
+	            				<b>보호공간 번호</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="staffName">
+		            				<select name="protectSpaceCode">
 		            					<option value="">====== 선택 ======</option>
-		            					<option th:each="m : ${mlist}">[[${m}]]</option>
+		            					<option th:each="p : ${prolist}">[[${p.protectSpaceCode}]]</option>
 		            				</select>
 		            			</div>
 	            			</div>
-			                
-			                <div class="col-md-4 col-md-offset-1 p-t-10">
+	            			<div class="col-md-4 col-md-offset-1 p-t-10">
 			                	<button type="submit" class="btn btn-primary btn-lg">반려동물 등록</button>
 			                </div>
 	            		</form>
