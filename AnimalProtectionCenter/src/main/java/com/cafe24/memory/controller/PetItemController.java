@@ -1,6 +1,7 @@
 package com.cafe24.memory.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.memory.domain.CompanionAnimalRegister;
 import com.cafe24.memory.domain.PetFood;
+import com.cafe24.memory.service.AnimalTypeService;
 import com.cafe24.memory.service.CompanionAnimalRegisterService;
 import com.cafe24.memory.service.PetItemService;
 
@@ -19,6 +21,9 @@ public class PetItemController {
 	
 	@Autowired
 	private PetItemService petItemService;
+	
+	@Autowired
+	private AnimalTypeService animalTypeService;
 	
 	@Autowired
 	private CompanionAnimalRegisterService companionAnimalRegisterService; 
@@ -43,16 +48,20 @@ public class PetItemController {
 	
 	@GetMapping("/petFoodUpdate")
 	public String petFoodUpdate(Model model, 
-			@RequestParam(value = "type", required = false) String type) {
-		model.addAttribute("type", type);
+			@RequestParam(value = "foodCode", required = false) String foodCode) {
+		PetFood petFood = petItemService.selectPetFoodByPetFoodCode(foodCode);
+		List<Map<String, Object>> animalTypeCnt = animalTypeService.selectAnimalCnt();
+		model.addAttribute("aniTypeCnt", animalTypeCnt);
+		model.addAttribute("petFood", petFood);
+		
+		System.out.println(animalTypeCnt + " <-- animalTypeCnt petFoodUpdate()");
+		System.out.println(petFood  + " <-- petFood petFoodUpdate()");
 		
 		return "petitem/petFoodUpdate"; 
 	}
 	
 	@PostMapping("/petFoodList")
 	public String petFoodList() {
-		
-		List<CompanionAnimalRegister> lcar = companionAnimalRegisterService.selectCompanionAnimalRegisterList();
 		
 		return "petitem/petFoodList";
 	}

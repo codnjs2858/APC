@@ -2,17 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cafe24.memory.mapper.PetItemMapper">
-	<select id="selectPetFood" resultType="PetFood">
+	<resultMap type="PetFood" id="pfResultMap">
+		<result property="foodCode" 		column="pet_food_code"/>
+		<result property="foodCompany"		column="pet_food_company"/>
+		<result property="foodType" 		column="pet_food_type"/>
+		<result property="foodPrice" 		column="pet_food_price"/>
+		<result property="foodAmount" 		column="pet_food_amount"/>
+		<result property="foodRemain" 		column="pet_food_remain"/>
+		<result property="foodName" 		column="pet_food_name"/>
+		<result property="foodBuyer" 		column="pet_food_buyer"/>
+		<result property="foodPurchaseDate" column="pet_food_purchase_date"/>
+	</resultMap>
+
+	<select id="selectPetFood" resultMap="pfResultMap">
 		SELECT 
-			 pet_food_code		as foodCode
-			,pet_food_company	as foodCompany
-			,pet_food_type		as foodType
-			,pet_food_price		as foodPrice
-			,pet_food_amount	as foodAmount
-			,pet_food_remain	as foodRemain
-			,pet_food_name		as foodName
+			 pet_food_code
+			,pet_food_company
+			,pet_food_type
+			,pet_food_price
+			,pet_food_amount
+			,pet_food_remain
+			,pet_food_name
+			,pet_food_buyer
+			,pet_food_purchase_date
 		FROM 
 			tb_pet_food
+	</select>
+	
+	<select id="selectPetFoodByPetFoodCode" parameterType="String" resultMap="pfResultMap">
+		SELECT 
+			 pet_food_code
+			,pet_food_company
+			,pet_food_type
+			,pet_food_price
+			,pet_food_amount
+			,pet_food_remain
+			,pet_food_name
+			,pet_food_buyer
+			,pet_food_purchase_date
+		FROM 
+			tb_pet_food
+		WHERE
+			pet_food_code=#{petFoodCode};
 	</select>
 	
 </mapper>

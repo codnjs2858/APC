@@ -9,64 +9,88 @@
 <th:block layout:fragment="customContents">
 	<section class="content">
 		<div class="container-fluid">
-			<div class="block-header">
-                <h2>
-                    	펫사료수정화면
-                </h2>
-            </div>
-            
             <div class="card">
+            	<div class="header">
+            		<h2>
+            			사료관리 수정
+            		</h2>
+            	</div>
             	<div class="body">
             		<form action="/petFoodList" method="post">
-	            		<div class="input-group">
-							<div class="form-line">
-								사료종류 [[${type}]]
-								<div>
-									<select>
-										<option value="">-- 강아지 --</option>
-										<option value="">-- 고양이 --</option>
-										<option value="">-- 코끼리 --</option>
-									</select>
+            			<div class="row">
+            				<div class="col-md-4">
+			            		<div class="input-group">
+									사료종류
+									<div>
+										<select>
+											<option>-- 종류선택 --</option>
+											<option th:each="aniType : ${aniTypeCnt}" th:value="${aniType.animalType}" th:selected="(${aniType.animalType} == ${petFood.foodType})">-- [[${aniType.animalType}]] --</option>
+										</select>
+									</div>
+								</div>
+            				</div>
+            				<div class="col-md-4">
+            					<div class="input-group">
+			                        <div class="form-line">
+										사료이름
+			                            <input type="text" class="form-control" name="username" th:value="${petFood.foodName}">
+			                        </div>
+								</div>
+            				</div>
+            				<div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										사료회사
+			                            <input type="text" class="form-control" name="username" th:value="${petFood.foodCompany}">
+			                        </div>
+								</div>
+            				</div>
+            			</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										사료단가
+			                            <input type="number" class="form-control" name="username" th:value="${petFood.foodPrice}">
+			                        </div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										총수량
+			                            <input type="number" class="form-control" name="username" th:value="${petFood.foodAmount}">
+			                        </div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										제고량
+			                            <input type="number" class="form-control" name="username" th:value="${petFood.foodRemain}">
+			                        </div>
 								</div>
 							</div>
 						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								사료단가
-	                            <input type="number" class="form-control" name="username" placeholder="Username">
-	                        </div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="input-group">
+									<div class="form-line">
+										사용량
+										<input type="number" class="form-control" name="usingPetFood" placeholder="number">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+			                        <div class="form-line">
+										구매인
+			                            <input type="text" class="form-control" name="username" th:value="${petFood.foodBuyer}">
+			                        </div>
+								</div>
+							</div>
 						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								수량
-	                            <input type="number" class="form-control" name="username" placeholder="Username">
-	                        </div>
-						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								제고량
-	                            <input type="number" class="form-control" name="username" placeholder="Username">
-	                        </div>
-						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								사료이름
-	                            <input type="text" class="form-control" name="username" placeholder="Username">
-	                        </div>
-						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								사료회사
-	                            <input type="text" class="form-control" name="username" placeholder="Username">
-	                        </div>
-						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								구매인
-	                            <input type="text" class="form-control" name="username" placeholder="Username">
-	                        </div>
-						</div>
-						<button class="btn btn-block bg-pink waves-effect" type="submit">유기동물보호등록</button>
+						<button class="btn btn-block bg-amber waves-effect" type="submit">유기동물보호등록</button>
 					</form>
             	</div>
             </div>	
