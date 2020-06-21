@@ -10,6 +10,19 @@ import com.cafe24.memory.domain.PetFood;
 public interface PetItemMapper {
 	
 	/**
+	 * 펫사료 등록
+	 * @return
+	 */
+	int insertPetFood(PetFood petFood);
+	
+	/**
+	 * 펫사료 수정처리
+	 * @param petFood
+	 * @return
+	 */
+	int updatePetFood(PetFood petFood);
+	
+	/**
 	 * 모든 사료 리스트
 	 * @return
 	 */
@@ -20,5 +33,5 @@ public interface PetItemMapper {
 	 * @return
 	 */
 	PetFood selectPetFoodByPetFoodCode(String petFoodCode);
-	
+
 }

@@ -60,10 +60,28 @@ public class PetItemController {
 		return "petitem/petFoodUpdate"; 
 	}
 	
-	@PostMapping("/petFoodList")
-	public String petFoodList() {
+	@PostMapping("/petFoodUpdate")
+	public String petFoodUpdate(PetFood petFood,
+			@RequestParam(value = "usingfoodAmount", required = false) String usingfoodAmount,
+			@RequestParam(value = "buyfoodAmount", required = false) String buyfoodAmount) {
+		System.out.println(usingfoodAmount + " <-- usingfoodAmount petFoodUpdate()");
+		System.out.println(buyfoodAmount + " <-- buyfoodAmount petFoodUpdate()");
 		
-		return "petitem/petFoodList";
+		if(buyfoodAmount != null && !"".equals(buyfoodAmount)) {
+			int amount = petFood.getFoodAmount() + Integer.parseInt(buyfoodAmount);
+			int remain = petFood.getFoodRemain() + Integer.parseInt(buyfoodAmount);
+			petFood.setFoodAmount(amount);			
+			petFood.setFoodRemain(remain);
+		}
+		if(usingfoodAmount != null && !"".equals(usingfoodAmount)) {
+			int remain = petFood.getFoodRemain() - Integer.parseInt(usingfoodAmount);
+			petFood.setFoodRemain(remain);
+		}
+		
+		System.out.println(petFood + " <-- petFood petFoodList()");
+		petItemService.updatePetFood(petFood);
+		
+		return "redirect:/petFoodList";
 	}
 	
 	@GetMapping("/petFoodList")
@@ -76,9 +94,19 @@ public class PetItemController {
 	}
 	
 	@GetMapping("/petFoodInsert")
-	public String petFoodInsert() {
+	public String petFoodInsert(Model model) {
+		List<Map<String, Object>> animalTypeCnt = animalTypeService.selectAnimalCnt();
+		model.addAttribute("aniTypeCnt", animalTypeCnt);
 		
 		return "petitem/petFoodInsert";
+	}
+	
+	@PostMapping("/petFoodInsert")
+	public String petFoodInsert(PetFood petFood) {
+		System.out.println(petFood + " <-- petFood petFoodInsert()");
+		petItemService.insertPetFood(petFood);
+		
+		return "redirect:/petFoodList";
 	}
 	
 }

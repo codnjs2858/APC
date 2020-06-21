@@ -16,16 +16,17 @@
             		</h2>
             	</div>
             	<div class="body">
-            		<form action="/petFoodList" method="post">
+            		<form action="/petFoodUpdate" method="post">
             			<div class="row">
             				<div class="col-md-4">
 			            		<div class="input-group">
 									사료종류
 									<div>
-										<select>
+										<select name="foodType">
 											<option>-- 종류선택 --</option>
 											<option th:each="aniType : ${aniTypeCnt}" th:value="${aniType.animalType}" th:selected="(${aniType.animalType} == ${petFood.foodType})">-- [[${aniType.animalType}]] --</option>
 										</select>
+										<input type="hidden" name="foodCode" th:value="${petFood.foodCode}">
 									</div>
 								</div>
             				</div>
@@ -33,7 +34,7 @@
             					<div class="input-group">
 			                        <div class="form-line">
 										사료이름
-			                            <input type="text" class="form-control" name="username" th:value="${petFood.foodName}">
+			                            <input type="text" class="form-control" name="foodName" th:value="${petFood.foodName}">
 			                        </div>
 								</div>
             				</div>
@@ -41,7 +42,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										사료회사
-			                            <input type="text" class="form-control" name="username" th:value="${petFood.foodCompany}">
+			                            <input type="text" class="form-control" name="foodCompany" th:value="${petFood.foodCompany}">
 			                        </div>
 								</div>
             				</div>
@@ -51,7 +52,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										사료단가
-			                            <input type="number" class="form-control" name="username" th:value="${petFood.foodPrice}">
+			                            <input type="number" class="form-control" name="foodPrice" th:value="${petFood.foodPrice}">
 			                        </div>
 								</div>
 							</div>
@@ -59,7 +60,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										총수량
-			                            <input type="number" class="form-control" name="username" th:value="${petFood.foodAmount}">
+			                            <input type="number" class="form-control" name="foodAmount" th:value="${petFood.foodAmount}" readonly="readonly">
 			                        </div>
 								</div>
 							</div>
@@ -67,25 +68,33 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										제고량
-			                            <input type="number" class="form-control" name="username" th:value="${petFood.foodRemain}">
+			                            <input type="number" class="form-control" name="foodRemain" th:value="${petFood.foodRemain}" readonly="readonly">
 			                        </div>
 								</div>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="input-group">
 									<div class="form-line">
 										사용량
-										<input type="number" class="form-control" name="usingPetFood" placeholder="number">
+										<input type="number" class="form-control" name="usingfoodAmount" placeholder="0">
 									</div>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
+								<div class="input-group">
+									<div class="form-line">
+										구입량
+										<input type="number" class="form-control" name="buyfoodAmount" placeholder="0">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
 								<div class="input-group">
 			                        <div class="form-line">
 										구매인
-			                            <input type="text" class="form-control" name="username" th:value="${petFood.foodBuyer}">
+			                            <input type="text" class="form-control" name="foodBuyer" th:value="${petFood.foodBuyer}">
 			                        </div>
 								</div>
 							</div>

@@ -14,6 +14,60 @@
 		<result property="foodPurchaseDate" column="pet_food_purchase_date"/>
 	</resultMap>
 
+	<insert id="insertPetFood" parameterType="PetFood">
+		<selectKey keyProperty="foodCode" order="BEFORE" resultType="String">
+			SELECT
+				case COUNT(*)
+				when 0 then'pet_food_1'
+				else CONCAT('pet_food_',MAX(CAST(SUBSTRING(pet_food_code,10) AS DECIMAL))+1) 
+				END AS animal_type_code
+			FROM
+				tb_pet_food;
+		</selectKey>
+		INSERT INTO 
+			tb_pet_food
+			(
+			 pet_food_code
+			,pet_food_company
+			,pet_food_type
+			,pet_food_price
+			,pet_food_amount
+			,pet_food_remain
+			,pet_food_name
+			,pet_food_buyer
+			,pet_food_purchase_date
+			)
+		VALUES 
+			(
+			 #{foodCode}
+			,#{foodCompany}
+			,#{foodType}
+			,#{foodPrice}
+			,#{foodAmount}
+			,#{foodRemain}
+			,#{foodName}
+			,#{foodBuyer}
+			,CURDATE()
+			);
+	</insert>
+
+	<!-- 사료 수정 처리 -->
+	<update id="updatePetFood" parameterType="PetFood">
+		UPDATE 
+			tb_pet_food
+		SET
+			pet_food_company		=#{foodCompany},
+			pet_food_type			=#{foodType},
+			pet_food_price			=#{foodPrice},
+			pet_food_amount			=#{foodAmount},
+			pet_food_remain			=#{foodRemain},
+			pet_food_name			=#{foodName},
+			pet_food_buyer			=#{foodBuyer},
+			pet_food_purchase_date	=CURDATE()
+		WHERE pet_food_cod			e=#{foodCode};
+	</update>
+
+	<!-- 모든 사료 찾음 -->
 	<select id="selectPetFood" resultMap="pfResultMap">
 		SELECT 
 			 pet_food_code
@@ -27,8 +81,10 @@
 			,pet_food_purchase_date
 		FROM 
 			tb_pet_food
+		ORDER BY CAST(SUBSTR(pet_food_code,10) AS DECIMAL) DESC;
 	</select>
 	
+	<!-- 사료를 코드로 찾음 -->
 	<select id="selectPetFoodByPetFoodCode" parameterType="String" resultMap="pfResultMap">
 		SELECT 
 			 pet_food_code

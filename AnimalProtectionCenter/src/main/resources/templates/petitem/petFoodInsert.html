@@ -17,56 +17,65 @@
             
             <div class="card">
             	<div class="body">
-            		<form action="/petFoodList" method="post">
-	            		<div class="input-group">
-							<div class="form-line">
-								사료종류
-								<div>
-									<select>
-										<option value="">-- 강아지 --</option>
-										<option value="">-- 고양이 --</option>
-										<option value="">-- 코끼리 --</option>
-									</select>
+            		<form action="/petFoodInsert" method="post">
+            			<div class="row">
+            				<div class="col-md-4">
+            					<div class="input-group">
+									<div class="form-line">
+										사료종류
+										<div>
+											<select name="foodType">
+												<option>-- 종류선택 --</option>
+												<option th:each="aniType : ${aniTypeCnt}" th:value="${aniType.animalType}">-- [[${aniType.animalType}]] --</option>
+											</select>
+										</div>
+									</div>
+								</div>
+            				</div>
+            				<div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										사료단가
+			                            <input type="number" class="form-control" name="foodPrice" placeholder="가격">
+			                        </div>
+								</div>
+            				</div>
+            				<div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										수량
+			                            <input type="number" class="form-control" name="foodAmount" placeholder="수량">
+			                        </div>
+								</div>
+            				</div>
+            			</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										사료이름
+			                            <input type="text" class="form-control" name="foodName" placeholder="사료이름">
+			                        </div>
 								</div>
 							</div>
-						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								사료단가
-	                            <input type="number" class="form-control" name="username" placeholder="Username">
-	                        </div>
-						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								수량
-	                            <input type="number" class="form-control" name="username" placeholder="Username">
-	                        </div>
-						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								제고량
-	                            <input type="number" class="form-control" name="username" placeholder="Username">
-	                        </div>
-						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								사료이름
-	                            <input type="text" class="form-control" name="username" placeholder="Username">
-	                        </div>
-						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								사료회사
-	                            <input type="text" class="form-control" name="username" placeholder="Username">
-	                        </div>
-						</div>
-						<div class="input-group">
-	                        <div class="form-line">
-								구매인
-	                            <input type="text" class="form-control" name="username" placeholder="Username">
-	                        </div>
-						</div>
-						<button class="btn btn-block bg-blue waves-effect" type="submit">유기동물보호등록</button>
+							<div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										사료회사
+			                            <input type="text" class="form-control" name="foodCompany" placeholder="사료회사">
+			                        </div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										구매인
+			                            <input type="text" class="form-control" name="foodBuyer" placeholder="구매인" th:value="${session.SID}">
+			                        </div>
+								</div>
+							</div>
+						</div>	            		
+						<button class="btn btn-block bg-amber waves-effect" type="submit">유기동물보호등록</button>
 					</form>
             	</div>
             </div>	
