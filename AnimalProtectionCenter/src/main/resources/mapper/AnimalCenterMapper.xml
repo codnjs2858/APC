@@ -136,4 +136,18 @@
 			AND 
 			m.member_phone = #{memberPhone}
 	</select>
+	
+	<!-- searchReportCode로 acceptCode 찾기 -->
+	<select id="searchReportManager" parameterType="String" resultType="String">
+		SELECT 
+			accept_code AS acceptCode
+		FROM 
+			tb_report_manager	AS r
+		JOIN 
+			tb_search_report AS s
+		on
+			r.report_code = s.search_report_code
+		WHERE 
+			s.search_report_code = #{reCode}
+	</select>
 </mapper>

@@ -47,7 +47,7 @@
 					           			<b>신고 코드</b>
 					           			<div class="input-group ">
 							           		<div class="form-line m-t-10">
-								           		<input type="text" class="form-control" name="searchReportCode" th:value="${ac.acceptCode}">
+								           		<input type="text" class="form-control" name="searchReportCode" th:value="${searchReportCode}">
 							           		</div>
 						           		</div>
 				           			</div>
@@ -263,7 +263,7 @@
 					if(msg != null && msg != ''){
 						for(var i=0; i<msg.length;i++){
 							console.log(msg[i]);
-							html +="<tr><td><input type=\"radio\" class=\"valBtn\" name=\"selectReport\"value=\""+msg[i].animalType.animalTypeCode+"\"></td>";
+							html +="<tr><td><input type=\"radio\" class=\"valBtn\" name=\"selectReport\"value=\""+msg[i].searchReportCode+"\"></td>";
 							html +="<td>"+msg[i].animalPicture+"</td>";
 							html +="<td>"+msg[i].animalType.animalType+":"+msg[i].animalType.animalTypeSub+"</td>";
 							html +="<td>"+msg[i].animalLocation+"</td>";

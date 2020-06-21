@@ -33,8 +33,7 @@ public class AnimalCenterController {
 		if(searchRe == null) {
 			animal.setAcceptCode(null);
 		}else {
-			System.out.println(searchRe.getSearchReportCode()+":::accept코드 찾기 메소드??");
-			animal.setAcceptCode(null);
+			animal.setAcceptCode(animalCenterService.searchReportManager(searchRe.getSearchReportCode()));
 		}
 		animal.setStaff(staff);
 		animal.setAnimalType(atype);
@@ -71,6 +70,7 @@ public class AnimalCenterController {
 	@GetMapping("/animalcenterupdate")
 	public String updateAnimalCenterForm(
 			@RequestParam(name="send_code", required = false) String send_code, Model model) {
+		model.addAttribute("searchReportCode", null);
 		model.addAttribute("ac", animalCenterService.selectCenterAnimal(send_code));
 		return "animalcenter/animalCenterUpdate";
 	}

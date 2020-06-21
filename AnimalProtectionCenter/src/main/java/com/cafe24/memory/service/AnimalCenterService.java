@@ -21,6 +21,15 @@ public class AnimalCenterService {
 	private AnimalCenterMapper animalCenterMapper;
 	
 	/**
+	 * searchReportCode로 acceptCode 검색
+	 * @param reCode
+	 * @return
+	 */
+	public String searchReportManager(String reCode) {
+		return animalCenterMapper.searchReportManager(reCode);
+	}
+	
+	/**
 	 * 보호 동물 센터 등록 - 설채원
 	 * @param animal
 	 * @return

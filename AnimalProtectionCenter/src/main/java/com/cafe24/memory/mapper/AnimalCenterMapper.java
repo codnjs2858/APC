@@ -12,6 +12,8 @@ import com.cafe24.memory.domain.SearchReportAnimal;
 @Mapper
 public interface AnimalCenterMapper {
 
+	
+	public String searchReportManager(String reCode);
 	/**
 	 * 보호동물 센터 등록 - 설채원
 	 * @param animal
