@@ -59,6 +59,7 @@
 		                        </button>
 	                    	</a>
 						</div>
+						
 						<div th:each="ps : ${protectSpaceList}" class="col-xs-3 col-md-3">
 							<div class="info-box hover-zoom-effect">
 								<th:block th:if="${ps.useState}=='사용중'">
@@ -74,7 +75,7 @@
 									</div>
 									<div class="content">
 			                            <div class="text">
-			                            	[[${ps.protectSpaceCode}]] - <a th:href="@{/exitAnimalProtection(protectSpaceCode=${ps.protectSpaceCode},aniProtectionNum=${ps.animalProtect.animalProtectNum})}">비우기</a>
+			                            	[[${ps.protectSpaceCode}]] 
 			                            </div>
 			                            <div class="number">[[${ps.animalCenter.animalCenterNumber}]]([[${ps.animalProtect.state}]])</div>
 			                        </div> 

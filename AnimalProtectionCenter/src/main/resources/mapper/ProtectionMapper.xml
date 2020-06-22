@@ -4,22 +4,35 @@
 <mapper namespace="com.cafe24.memory.mapper.ProtectionMapper">
 
 	<resultMap type="ProtectionSpace" id="psResultMap">
-		<result property="protectSpaceCode" column="protect_space_code"/>
-		<result property="animalInsertCode" column="animal_insert_code"/>
-		<result property="useState" column="use_state"/>
-		<result property="implementCode" column="implement_code"/>
-		<result property="protectSpaceRegDate" column="protect_space_reg_date"/>
-		<result property="animalProtectPeriod" column="animal_protect_period"/>
+		<result property="protectSpaceCode" 	column="protect_space_code"/>
+		<result property="animalInsertCode" 	column="animal_insert_code"/>
+		<result property="useState" 			column="use_state"/>
+		<result property="implementCode" 		column="implement_code"/>
+		<result property="protectSpaceRegDate" 	column="protect_space_reg_date"/>
+		<result property="animalProtectPeriod" 	column="animal_protect_period"/>
 		<association property="animalProtect" javaType="AnimalProtect">
-			<result property="animalProtectNum" column="animal_protect_num"/>
-			<result property="animalInsertCode" column="animal_insert_code"/>
-			<result property="protectSpaceCode" column="protect_space_code"/>
-			<result property="state" column="protect_state"/>
+			<result property="animalProtectNum" 	column="animal_protect_num"/>
+			<result property="animalInsertCode" 	column="animal_insert_code"/>
+			<result property="protectSpaceCode" 	column="protect_space_code"/>
+			<result property="state" 				column="protect_state"/>
 			<result property="animalProtectRegDate" column="animal_protect_reg_date"/>
 			<result property="animalProtectExeDate" column="animal_protect_exe_date"/>
 		</association>
+		<association property="animalCenter" javaType="AnimalCenter">
+			<result property="animalInsertCode" 	column="animal_insert_code"></result>
+			<result property="animalCenterNumber" 	column="animal_center_number"></result>
+			<result property="animalPicture" 	 	column="animal_picture"></result>
+			<result property="animalGender" 		column="animal_gender"></result>
+			<result property="animalAge" 			column="animal_age"></result>
+			<result property="animalWeight" 		column="animal_weight"></result>
+			<result property="animalCharacter" 		column="animal_character"></result>
+			<result property="animalState" 			column="animal_state"></result>
+			<result property="animalInsertRegDate" 	column="animal_insert_reg_date"></result>
+			<result property="acceptCode" 			column="accept_code"></result>
+		</association>
 	</resultMap>
 	
+	<!-- 보호관리에 등록 -->
 	<insert id="insertAniamlProtection" parameterType="AnimalProtect">
 		<selectKey resultType="String" keyProperty="animalProtectNum" order="BEFORE">
 			SELECT 
@@ -43,8 +56,17 @@
 			,#{animalProtectExeDate}
 		)
 	</insert>
-
+	
+	<!-- 보호관리에서 미보호로 변환함 -->
 	<update id="updateAnimalProtectionExit" parameterType="String">
+		UPDATE tb_animal_protect AS p
+		SET
+			p.protect_state='미보호'
+		WHERE 
+			p.animal_protect_num=#{animalProtectionNum};
+	</update>
+
+	<update id="updateAnimalProtectionExitSpace" parameterType="String">
 		UPDATE
 			tb_protect_space AS s
 		SET
@@ -54,7 +76,8 @@
 			s.protect_space_code=#{proSpaceCode};
 	</update>
 
-	<update id="updateAnimalProtectionIn" parameterType="AnimalProtect">
+	<!-- 보호공간에 등록 -->
+	<update id="updateAnimalProtectionInSpace" parameterType="AnimalProtect">
 		UPDATE 
 			 tb_animal_protect AS p
 			,tb_protect_space s
@@ -85,7 +108,52 @@
 			s.protect_space_code='protect_space_2'; 
 	</update>
 	 -->
+	
+	<!-- 보호관리에서 미보호인 객체 찾음 -->
+	<select id="selectAnimalNotProtect" parameterType="String" resultType="AnimalProtect">
+		SELECT 
+			 p.animal_protect_num		as animalProtectNum
+			,p.animal_insert_code		as animalInsertCode
+			,p.protect_space_code		as protectSpaceCode
+			,p.protect_state			as state
+			,p.animal_protect_reg_date	as animalProtectRegDate
+			,p.animal_protect_exe_date	as animalProtectExeDate
+		FROM
+			tb_animal_protect AS p
+		WHERE
+			p.animal_insert_code=#{animalNum}
+			AND
+			p.protect_state='미보호';
+	</select>
+	
+	<!-- 보호공간을 갖고 있지 않는 객체 찾음 -->
+	<select id="selectAnimalHaveNotSpace" resultMap="psResultMap">
+		SELECT 
+			 i.animal_insert_code
+			,i.animal_center_number
+			,i.animal_picture
+			,i.animal_gender
+			,i.animal_age
+			,i.animal_weight
+			,i.animal_character
+			,i.animal_state
+			,i.animal_insert_reg_date
+			,i.animal_type_code
+			,i.staff_code
+			,i.accept_code
+		FROM 
+			tb_animal_insert AS i 
+			LEFT JOIN
+			tb_animal_protect AS p
+			ON
+			i.animal_insert_code = p.animal_insert_code
+		WHERE
+			p.animal_insert_code IS NULL
+			OR
+			p.protect_state = '미보호';
+	</select>
 	 
+	<!-- 동물등록코드로 보호공간찾음 -->
 	<select id="selectProtectionSpaceByAniInCode" parameterType="String" resultMap="psResultMap">
 		SELECT 
 			 s.protect_space_code
@@ -99,7 +167,8 @@
 		WHERE
 			s.animal_insert_code=#{aniInsertCode};
 	</select>
-	 
+	
+	<!-- 보호공간코드로 보호공간에 있는 객체 찾음 -->
 	<select id="selectProtectionSpaceByCode" parameterType="String" resultMap="psResultMap">
 		SELECT 
 			 s.protect_space_code
@@ -114,6 +183,7 @@
 			s.protect_space_code=#{proSpaceCode};
 	</select>
 	
+	<!-- 보호관리 번호로 보호관리 객체 찾음 -->
 	<select id="selectAnimalProtect" parameterType="String" resultType="AnimalProtect">
 		SELECT 
 			 p.animal_protect_num		as animalProtectNum
@@ -128,6 +198,106 @@
 			p.animal_insert_code=#{animalNum};
 	</select>
 	
+	<!-- 보호공간을 상태로 찾음 (없음, 사용중) -->
+	<select id="selectProtectionSpaceUseState" parameterType="String" resultMap="psResultMap">
+		SELECT 
+			 s.protect_space_code
+			,s.animal_insert_code
+			,s.use_state
+			,s.implement_code
+			,s.protect_space_reg_date
+			,s.animal_protect_period
+		FROM 
+			tb_protect_space AS s
+		WHERE 
+			s.use_state=#{state};
+	</select>
+	
+	<!-- 보호공간에 없는 동물들 찾음 -->
+	<select id="selectProtectionSpaceOutAnimal" resultMap="psResultMap">
+		SELECT 
+			 s.protect_space_code
+			,s.animal_insert_code
+			,s.use_state
+			,s.implement_code
+			,s.protect_space_reg_date
+			,s.animal_protect_period
+			,p.animal_protect_num	
+			,p.animal_insert_code
+			,p.protect_space_code
+			,p.protect_state
+			,p.animal_protect_reg_date
+			,p.animal_protect_exe_date
+			,i.animal_insert_code
+			,i.animal_center_number
+			,i.animal_picture
+			,i.animal_gender
+			,i.animal_age
+			,i.animal_weight
+			,i.animal_character
+			,i.animal_state
+			,i.animal_insert_reg_date
+			,i.animal_type_code
+			,i.staff_code
+			,i.accept_code
+		FROM
+			tb_protect_space AS s
+			LEFT JOIN 
+			tb_animal_protect AS p
+			ON 
+			p.animal_insert_code = s.animal_insert_code
+			LEFT JOIN 
+			tb_animal_insert AS i
+			ON
+			p.animal_insert_code = i.animal_insert_code
+		WHERE
+			p.animal_insert_code IS NULL
+		ORDER BY CAST(SUBSTR(s.protect_space_code,15) as decimal) DESC;
+	</select>
+	
+	<!-- 보호공간에 있는 동물들 찾음 -->
+	<select id="selectProtectionSpaceInAnimal" resultMap="psResultMap">
+		SELECT 
+			 s.protect_space_code
+			,s.animal_insert_code
+			,s.use_state
+			,s.implement_code
+			,s.protect_space_reg_date
+			,s.animal_protect_period
+			,p.animal_protect_num	
+			,p.animal_insert_code
+			,p.protect_space_code
+			,p.protect_state
+			,p.animal_protect_reg_date
+			,p.animal_protect_exe_date
+			,i.animal_insert_code
+			,i.animal_center_number
+			,i.animal_picture
+			,i.animal_gender
+			,i.animal_age
+			,i.animal_weight
+			,i.animal_character
+			,i.animal_state
+			,i.animal_insert_reg_date
+			,i.animal_type_code
+			,i.staff_code
+			,i.accept_code
+		FROM
+			tb_protect_space AS s
+			LEFT JOIN 
+			tb_animal_protect AS p
+			ON 
+			p.animal_insert_code = s.animal_insert_code
+			LEFT JOIN 
+			tb_animal_insert AS i
+			ON
+			p.animal_insert_code = i.animal_insert_code
+		WHERE
+			p.animal_insert_code IS NOT NULL
+		ORDER BY CAST(SUBSTR(s.protect_space_code,15) as decimal) DESC;
+	</select>
+	
+	<!-- 모든 보호공간 찾음 공간에 없는 값은 null 임 -->
 	<select id="selectProtectionSpace" resultMap="psResultMap">
 		SELECT 
 			 s.protect_space_code
@@ -142,15 +312,32 @@
 			,p.protect_state
 			,p.animal_protect_reg_date
 			,p.animal_protect_exe_date
+			,i.animal_insert_code
+			,i.animal_center_number
+			,i.animal_picture
+			,i.animal_gender
+			,i.animal_age
+			,i.animal_weight
+			,i.animal_character
+			,i.animal_state
+			,i.animal_insert_reg_date
+			,i.animal_type_code
+			,i.staff_code
+			,i.accept_code
 		FROM
 			tb_protect_space AS s
 			LEFT JOIN 
 			tb_animal_protect AS p
 			ON 
 			p.animal_insert_code = s.animal_insert_code
+			LEFT JOIN 
+			tb_animal_insert AS i
+			ON
+			p.animal_insert_code = i.animal_insert_code
 		ORDER BY CAST(SUBSTR(s.protect_space_code,15) as decimal) DESC;
 	</select>
 	
+	<!-- 나중에 없앨 것 경진언니꺼로 해야함 -->
 	<select id="selectMemberId" resultType="Member">
 		SELECT 
 			 member_id		as memberId
