@@ -13,7 +13,21 @@
 		<result property="board_ip" column="notice_board_ip"></result>
 	</resultMap>
 	
+	<insert id="insertNotice" parameterType="Notice">
+		<selectKey order="BEFORE" keyProperty="board_code" resultType="String">
+			Select
+			(	case count(*)
+				when 0 then 'notice_board_code_1'
+				else CONCAT('notice_board_code_',max(cast(SUBSTRING(notice_board_code,19) as decimal))+1)
+				END) 
+				as notice_board_code FROM tb_notice_board
+		</selectKey>
+		INSERT INTO tb_notice_board
+		(notice_board_code, member_id, notice_board_title, notice_board_content, notice_board_addfile, notice_board_date, notice_board_delete_date, notice_board_ip)
+		VALUES (#{board_code}, 'id001', #{board_title}, #{board_content}, '0', NOW(), '0000-00-00', #{board_ip})
+	</insert>
+	
 	<select id="selectNotice" resultMap="getNoticeMap">
-		SELECT *FROM tb_notice_board
+		SELECT *FROM tb_notice_board ORDER BY notice_board_code DESC
 	</select>
 </mapper>
