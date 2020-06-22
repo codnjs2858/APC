@@ -52,6 +52,36 @@
 	
 	</insert>
 	
+	<update id="updateAnimalHealth" parameterType="AnimalHealth">
+		UPDATE tb_animal_health 
+		<trim prefix="SET" suffixOverrides=",">
+		      	<if test="animalHealthContents != null and animalHealthContents !=''.toString()">animal_health_contents=#{animalHealthContents}</if>
+		      	<if test="animalHealthResult != null and animalHealthResult !=''.toString()">animal_health_result = #{animalHealthResult},animal_health_end_date=now()</if>
+			<where>
+				<if test="animalHealthCode != null and animalHealthCode !=''.toString()">animal_health_code=#{animalHealthCode}</if>	  
+		  	</where>
+	  	</trim>
+	</update>
+	
+	<delete id="deleteAnimalHealth" parameterType="String">
+		DELETE FROM tb_animal_health WHERE animal_health_code=#{send_code}
+	</delete>
+	
+	<select id="searchHealthCode" resultMap="animalHealth">
+		SELECT
+		*
+		FROM
+			tb_animal_health AS h
+		JOIN tb_animal_insert AS i ON h.animal_insert_code = i.animal_insert_code
+		JOIN tb_staff AS s ON h.staff_code = s.staff_code
+		WHERE 
+			animal_health_end_date IS NULL
+			AND
+			animal_health_result IS NULL
+			AND
+			h.animal_health_code = #{send_code}
+	</select>
+	
 	<select id="selectAnimalHealth" resultMap="animalHealth">
 		SELECT
 		*
