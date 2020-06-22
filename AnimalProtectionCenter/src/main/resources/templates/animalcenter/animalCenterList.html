@@ -54,7 +54,7 @@
 		                            <th><div class="align-center">건강상태</div></th>
 		                            <th><div class="align-center">등록 날짜</div></th>
 		                            <th><div class="align-center">담당자</div></th>
-		                            <th><div class="align-center">건강 상태 기록</div></th>
+		                            <th><div class="align-center">보호공간</div></th>
 		                            <th data-orderable="false"><div class="align-center">수정</div></th>
 		                            <th data-orderable="false"><div class="align-center">삭제</div></th>
 		                        </tr>
@@ -70,7 +70,7 @@
 		                            <td><div class="align-center">[[${ac.animalState}]]<a href="/animalhealthlist">(건강 상세보기)</a></div></td>
 		                            <td><div class="align-center">[[${ac.animalInsertRegDate}]]</div></td>
 		                            <td><div class="align-center">[[${ac.staff.staffName}]]</div></td>
-		                            <td><div class="align-center"><a href="/animalhealthinsert">건강 기록 등록</a></div></td>
+		                            <td><div class="align-center"><a href="/animalProtection">보호 공간 등록</a></div></td>
 		                            <td><div class="align-center">
 		                            	<a th:href="@{/animalcenterupdate(send_code=${ac.animalInsertCode})}" style="color: #9E9E9E">
 	                       					<i class="material-icons">update</i>

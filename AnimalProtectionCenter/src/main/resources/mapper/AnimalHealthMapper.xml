@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.AnimalHealthMapper">
+	<resultMap type="AnimalHealth" id="animalHealth">
+		<result property="animalHealthCode" column="animal_health_code"/>
+		<result property="animalHealthContents" column="animal_health_contents"/>
+		<result property="animalHealthResult" column="animal_health_result"/>
+		<result property="animalHealthRegDate" column="animal_health_reg_date"/>
+		<result property="animalHealthEndDate" column="animal_health_end_date"/>
+		
+		<association property="animalCenter" javaType="AnimalCenter">
+			<result property="animalInsertCode" column="animal_insert_code"/>
+			<result property="animalCenterNumber" column="animal_center_number"/>
+			<result property="animalState" column="animal_state"/>
+		</association>
+		
+		<association property="staff" javaType="Staff">
+			<result property="staffCode" column="staff_code"/>
+			<result property="staffName" column="staff_name"/>
+			<result property="staffPart" column="staff_part"/>
+			<result property="staffRank" column="staff_rank"/>
+		</association>
+	</resultMap>
+
+	<insert id="insertAnimalHealth" parameterType="AnimalHealth">
+	<selectKey order="BEFORE" keyProperty="animalHealthCode" resultType="String">
+		SELECT
+			(case COUNT(*)
+			when 0 then'health_1'
+			ELSE CONCAT('health_',MAX(CAST(SUBSTRING(animal_health_code,8) AS DECIMAL))+1) 
+			END)AS animal_health_code
+		FROM
+			tb_animal_health
+	</selectKey>
+		INSERT INTO tb_animal_health
+			(animal_health_code
+			, animal_health_contents
+			, animal_health_result
+			, animal_health_reg_date
+			, animal_health_end_date
+			, animal_insert_code
+			, staff_code)
+		VALUES (#{animalHealthCode}
+				, #{animalHealthContents}
+				, null
+				, now()
+				, null
+				, #{animalCenter.animalInsertCode}
+				, #{staff.staffCode})
+	
+	
+	</insert>
+	
+	<update id="updateAnimalHealth" parameterType="AnimalHealth">
+		UPDATE tb_animal_health 
+		<trim prefix="SET" suffixOverrides=",">
+		      	<if test="animalHealthContents != null and animalHealthContents !=''.toString()">animal_health_contents=#{animalHealthContents}</if>
+		      	<if test="animalHealthResult != null and animalHealthResult !=''.toString()">animal_health_result = #{animalHealthResult},animal_health_end_date=now()</if>
+			<where>
+				<if test="animalHealthCode != null and animalHealthCode !=''.toString()">animal_health_code=#{animalHealthCode}</if>	  
+		  	</where>
+	  	</trim>
+	</update>
+	
+	<delete id="deleteAnimalHealth" parameterType="String">
+		DELETE FROM tb_animal_health WHERE animal_health_code=#{send_code}
+	</delete>
+	
+	<select id="searchHealthCode" resultMap="animalHealth">
+		SELECT
+		*
+		FROM
+			tb_animal_health AS h
+		JOIN tb_animal_insert AS i ON h.animal_insert_code = i.animal_insert_code
+		JOIN tb_staff AS s ON h.staff_code = s.staff_code
+		WHERE 
+			animal_health_end_date IS NULL
+			AND
+			animal_health_result IS NULL
+			AND
+			h.animal_health_code = #{send_code}
+	</select>
+	
+	<select id="selectAnimalHealth" resultMap="animalHealth">
+		SELECT
+		*
+		FROM
+			tb_animal_health AS h
+		JOIN tb_animal_insert AS i ON h.animal_insert_code = i.animal_insert_code
+		JOIN tb_staff AS s ON h.staff_code = s.staff_code
+		WHERE 
+			animal_health_end_date IS NULL
+			AND
+			animal_health_result IS NULL
+	</select>
+	
+	<select id="selectAnimalHealthed" resultMap="animalHealth">
+		SELECT
+		*
+		FROM
+		tb_animal_health AS h
+		JOIN tb_animal_insert AS i ON h.animal_insert_code = i.animal_insert_code
+		JOIN tb_staff AS s ON h.staff_code = s.staff_code
+		WHERE 
+		animal_health_end_date IS NOT NULL
+		AND
+		animal_health_result IS NOT NULL
+	</select>
+</mapper>

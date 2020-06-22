@@ -5,7 +5,7 @@ public class Staff {
 	private String staffName;
 	private String staffPart;
 	private String staffRank;
-	private String memberId;
+	private Member member;
 	private String staffPhone;
 	private String staffEmail;
 	private String staffInDate;
@@ -34,11 +34,11 @@ public class Staff {
 	public void setStaffRank(String staffRank) {
 		this.staffRank = staffRank;
 	}
-	public String getMemberId() {
-		return memberId;
+	public Member getMember() {
+		return member;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	public String getStaffPhone() {
 		return staffPhone;
@@ -67,9 +67,8 @@ public class Staff {
 	@Override
 	public String toString() {
 		return "Staff [staffCode=" + staffCode + ", staffName=" + staffName + ", staffPart=" + staffPart
-				+ ", staffRank=" + staffRank + ", memberId=" + memberId + ", staffPhone=" + staffPhone + ", staffEmail="
+				+ ", staffRank=" + staffRank + ", member=" + member + ", staffPhone=" + staffPhone + ", staffEmail="
 				+ staffEmail + ", staffInDate=" + staffInDate + ", staffOutDate=" + staffOutDate + "]";
 	}
 	
-
 }

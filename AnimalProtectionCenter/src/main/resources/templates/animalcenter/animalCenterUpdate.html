@@ -38,6 +38,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="card">
 						<form action="/animalcenterupdate" method="post" id="inputForm">
+							<input type="hidden" name="animalInsertCode" th:value="${ac.animalInsertCode}">
 							<div class="header">
 								<h2>보호 동물 정보 수정</h2>
 							</div>
@@ -47,7 +48,7 @@
 					           			<b>신고 코드</b>
 					           			<div class="input-group ">
 							           		<div class="form-line m-t-10">
-								           		<input type="text" class="form-control" name="searchReportCode" th:value="${ac.acceptCode}">
+								           		<input type="text" class="form-control" name="searchReportCode" th:value="${searchReportCode}">
 							           		</div>
 						           		</div>
 				           			</div>
@@ -92,7 +93,7 @@
 						           		<b>품종</b>
 						           		<div class="input-group">
 							           		<select id="subType" name="animalTypeCode" class="form-control">
-							           			<option th:value="${ac.animalType.animalTypeSub}" >[[${ac.animalType.animalTypeSub}]]</option>
+							           			<option selected="selected" th:value="${ac.animalType.animalTypeCode}" >[[${ac.animalType.animalTypeSub}]]</option>
 							           		</select>
 						           		</div>
 				           			</div>
@@ -263,7 +264,7 @@
 					if(msg != null && msg != ''){
 						for(var i=0; i<msg.length;i++){
 							console.log(msg[i]);
-							html +="<tr><td><input type=\"radio\" class=\"valBtn\" name=\"selectReport\"value=\""+msg[i].animalType.animalTypeCode+"\"></td>";
+							html +="<tr><td><input type=\"radio\" class=\"valBtn\" name=\"selectReport\"value=\""+msg[i].searchReportCode+"\"></td>";
 							html +="<td>"+msg[i].animalPicture+"</td>";
 							html +="<td>"+msg[i].animalType.animalType+":"+msg[i].animalType.animalTypeSub+"</td>";
 							html +="<td>"+msg[i].animalLocation+"</td>";
