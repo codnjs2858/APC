@@ -33,5 +33,16 @@
 	<delete id="deleteMember" parameterType="Member">
 		DELETE FROM tb_member WHERE member_id=#{memberId}
 	</delete>
+	<update id="updateMember" parameterType="Member">
+		UPDATE tb_member
+		SET
+			member_pw=#{memberPw},
+			level_code=#{level.levelCode},
+			member_name=#{memberName},
+			member_phone=#{memberPhone},
+			member_addr=#{memberAddr},
+			member_email=#{memberEmail}
+		WHERE member_id=#{memberId}
+	</update>
 	
 </mapper>

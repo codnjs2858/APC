@@ -9,7 +9,7 @@ public class Member {
 	private String memberPhone;
 	private String memberAddr;
 	private String memberEmail;
-	private Date memberInDate;
+	private String memberInDate;
 	private Level level;//levelCode연결
 	
 	public String getMemberName() {
@@ -50,10 +50,10 @@ public class Member {
 	}
 	
 	
-	public Date getMemberInDate() {
+	public String getMemberInDate() {
 		return memberInDate;
 	}
-	public void setMemberInDate(Date memberInDate) {
+	public void setMemberInDate(String memberInDate) {
 		this.memberInDate = memberInDate;
 	}
 	public Level getLevel() {

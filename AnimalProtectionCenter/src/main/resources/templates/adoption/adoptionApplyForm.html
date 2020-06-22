@@ -20,7 +20,19 @@
 	<script type="text/javascript" src="../../plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript">
 	  	$(document).ready(function(){
-	  		
+	  		$('#animalType').change(function(){
+	  			var select=$('#animalType').val(); 
+	  			if(select=="강아지"){
+	  				$('#dogType').css('display','block');
+	  				$('#catSelectType').css('display','none');
+	  				
+	  			}if(select=="고양이"){
+	  				$('#dogType').css('display','none');
+	  				$('#catSelectType').css('display','block');
+	  				
+	  			}
+	  				
+	  		})
 	  	
 			
 		}); 
@@ -33,7 +45,7 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
+                    <div class="card" th:each="m,i:${AniList}">
                         <div class="header">
                             <h2>입양신청폼</h2>
                         </div>
@@ -41,7 +53,7 @@
                             <form id="form_validation" action="/adoptionApply" method="POST">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="memberId" readonly="readonly" value="2teamSeesionId">
+                                        <input type="text" class="form-control" name="memberId" readonly="readonly" th:value="${session.SID}">
                                         
                                     </div>
                                 </div>
@@ -57,14 +69,14 @@
                                         <b>동물종류</b>
                                     </p>
                                     <select id="animalType" class="form-control show-tick" >
-                                        <option value="">-축종선택-</option>
-                                        <option value="강아지">강아지</option>
+                                        <option th:value="">-축종선택-</option>
+                                        <option value="${m.animalType}">강아지</option>
                                         <option value="고양이">고양이</option>
                                         <option value="기타">기타</option>
                                     </select>
 
                                 </div>
-                                <div id="dogType" class="col-md-3"  style="display:block;">
+                                <div id="dogType" class="col-md-3"  style="display:none;">
                                     <p>
                                         <b>품종</b>
                                     </p>
@@ -77,7 +89,7 @@
                                     </select>
 
                                 </div>
-                                <div id="catSelectType" class="col-md-3" style="display:block;">
+                                <div id="catSelectType" class="col-md-3" style="display:none;">
                                     <p>
                                         <b>품종</b>
                                     </p>

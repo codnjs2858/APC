@@ -16,6 +16,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 	 String uri=request.getRequestURI();
 	 if(sessionId==null) {
 		 response.sendRedirect("/login");
+		 
 		 return false;
 	 }if(uri.equals("/admin")) {
 		 if((sessionLevel.equals("level_code_03"))&&(sessionId!=null)) {

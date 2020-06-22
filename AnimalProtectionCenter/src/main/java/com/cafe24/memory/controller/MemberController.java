@@ -11,16 +11,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.memory.domain.Level;
 import com.cafe24.memory.domain.Member;
 import com.cafe24.memory.service.MemberService;
+import com.cafe24.memory.service.StaffService;
 
 @Controller
 public class MemberController {
 	@Autowired private MemberService memberService;
-	
+	@Autowired private StaffService staffService;
 	@GetMapping("/login")
 	public String login() {
 	
@@ -41,6 +45,9 @@ public class MemberController {
 					session.setAttribute("SNAME", getMember.getMemberName());
 					session.setAttribute("SEMAIL", getMember.getMemberEmail());
 					session.setAttribute("SLEVEL", getMember.getLevel().getLevelCode());
+				}if(getMember.getLevel().getLevelCode().equals("level_code_02")||getMember.getLevel().getLevelCode().equals("level_code_01")) {
+					session.setAttribute("STAFFCODE",staffService.selectStaffMember(member.getMemberId()).getStaffCode());
+					
 				}
 				
 			}
@@ -71,6 +78,25 @@ public class MemberController {
 		model.addAttribute("memberList", memberService.getMemberList());
 		return "member/memberList";
 	}
+	
+	/**
+	 * 회원가입시 기존 아이디 존재하는지 중복확인-이경진
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/ajax/Addmember", method = RequestMethod.GET)
+	@ResponseBody
+	public String ajaxAddmember(@RequestParam(value = "id") String id) {
+		System.out.println(id);
+		Member member= new Member();
+		member.setMemberId(id);
+		List<Member>mList=memberService.getMemberList(member);
+		String result="";
+		if(mList != null && !"".equals(mList.get(0).getMemberId())){
+			result="이미 존재하는 아이디 입니다";
+		}
+		return result;
+	}
 	@GetMapping("/memberUpdate")
 	public String memberUpdate(Model model,Member member) {
 		System.out.println(member+"<-member");
@@ -80,8 +106,11 @@ public class MemberController {
 		return "member/updateMember";
 	}
 	@PostMapping("/memberUpdate")
-	public String memberUpdate(Member member) {
-
+	public String memberUpdate(Member member,Level level) {
+		member.setLevel(level);
+		System.out.println(member+"<-회원update");
+		int result=memberService.updateMember(member);
+		System.out.println(result+"<-회원update 결과값");
 		return "index";
 	}
 	

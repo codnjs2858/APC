@@ -63,4 +63,5 @@ public class AnimalTypeController {
 		}
 		return "redirect:/animaltypelist";
 	}
+	
 }
