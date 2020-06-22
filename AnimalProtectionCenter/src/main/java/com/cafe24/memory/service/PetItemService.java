@@ -1,6 +1,7 @@
 package com.cafe24.memory.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,27 @@ public class PetItemService {
 	
 	@Autowired
 	private PetItemMapper petItemMapper;
+	
+	public int deletePetFood(String petFoodCode) {
+		return petItemMapper.deletePetFood(petFoodCode);
+	}
+	
+	/**
+	 * 사료종류로 리스트 검색
+	 * @param foodType
+	 * @return
+	 */
+	public List<PetFood> selectPetFoodByFoodType(String foodType){
+		return petItemMapper.selectPetFoodByFoodType(foodType);
+	}
+	
+	/**
+	 * 사료종류별로 등록개수찾기
+	 * @return
+	 */
+	public List<Map<String, Object>> selectPetFoodTypeCount(){
+		return petItemMapper.selectPetFoodTypeCount();
+	}
 	
 	/**
 	 * 펫사료 등록 처리

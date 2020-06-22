@@ -76,37 +76,37 @@
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
-<script>
-	$(function(){
-		$('#btnNamePet').click(function(){
-			var btnNamePet = $('#petName').val();
-			var request = $.ajax({
-				url: "/insertCodeCheck",
-				method: "POST",
-				data: { "btnNamePet" : btnNamePet },
-				dataType: "json"
+	<script>
+		$(function(){
+			$('#btnNamePet').click(function(){
+				var btnNamePet = $('#petName').val();
+				var request = $.ajax({
+					url: "/insertCodeCheck",
+					method: "POST",
+					data: { "btnNamePet" : btnNamePet },
+					dataType: "json"
+				});
+				 
+				request.done(function( msg ) {
+					alert(JSON.stringify(msg));
+				});
+				 
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});
 			});
-			 
-			request.done(function( msg ) {
-				alert(JSON.stringify(msg));
-			});
-			 
-			request.fail(function( jqXHR, textStatus ) {
-				alert( "Request failed: " + textStatus );
+			
+			$('#protectSpaceBtn').click(function(){
+				if($('#protectDate').val() == ''){
+					alert("보호기간을 넣어주세요");
+					$('#protectDate').focus();
+					return;
+				}
+			
+				$('#protectSpaceForm').submit();			
 			});
 		});
-		
-		$('#protectSpaceBtn').click(function(){
-			if($('#protectDate').val() == ''){
-				alert("보호기간을 넣어주세요");
-				$('#protectDate').focus();
-				return;
-			}
-		
-			$('#protectSpaceForm').submit();			
-		});
-	});
-</script>
+	</script>
 </th:block>
  
 </html>

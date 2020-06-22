@@ -46,6 +46,14 @@ public class PetItemController {
 		return "petitem/petGoodsList";
 	}
 	
+	@GetMapping("/petFoodDelete")
+	public String petFoodDelete(
+			@RequestParam(name = "foodCode", required = false) String foodCode) {
+		petItemService.deletePetFood(foodCode);
+		
+		return "redirect:/petFoodList";
+	}
+	
 	@GetMapping("/petFoodUpdate")
 	public String petFoodUpdate(Model model, 
 			@RequestParam(value = "foodCode", required = false) String foodCode) {
@@ -78,16 +86,39 @@ public class PetItemController {
 			petFood.setFoodRemain(remain);
 		}
 		
-		System.out.println(petFood + " <-- petFood petFoodList()");
+		System.out.println(petFood + " <-- petFood petFoodUpdate()");
 		petItemService.updatePetFood(petFood);
 		
 		return "redirect:/petFoodList";
 	}
 	
 	@GetMapping("/petFoodList")
-	public String petFoodList(Model model) {
+	public String petFoodList(Model model,
+			@RequestParam(name = "sendType", required = false) String sendType) {
 		List<PetFood> petFoodList = petItemService.selectPetFood();
+		List<Map<String, Object>> petFoodTypeCnt = petItemService.selectPetFoodTypeCount();
+		
+		System.out.println(petFoodTypeCnt + " <-- petFoodTypeCnt");
+		System.out.println(sendType + " <-- sendType");
 		System.out.println(petFoodList);
+		
+		int totalCount = 0;
+		totalCount = petFoodList.size();
+		
+		if(sendType != null) {
+			if("강아지".equals(sendType)) {
+				petFoodList = petItemService.selectPetFoodByFoodType("강아지");
+			}else if ("고양이".equals(sendType)) {
+				petFoodList = petItemService.selectPetFoodByFoodType("고양이");
+			}else {
+				petFoodList = petItemService.selectPetFoodByFoodType("기타");
+			}
+		}else {
+			
+		}
+
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("petFoodTypeCnt", petFoodTypeCnt);
 		model.addAttribute("petFoodList", petFoodList);
 		
 		return "petitem/petFoodList";

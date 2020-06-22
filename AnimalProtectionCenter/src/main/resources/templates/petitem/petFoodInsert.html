@@ -24,8 +24,8 @@
 									<div class="form-line">
 										사료종류
 										<div>
-											<select name="foodType">
-												<option>-- 종류선택 --</option>
+											<select id="foodType" name="foodType">
+												<option value="">-- 종류선택 --</option>
 												<option th:each="aniType : ${aniTypeCnt}" th:value="${aniType.animalType}">-- [[${aniType.animalType}]] --</option>
 											</select>
 										</div>
@@ -36,7 +36,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										사료단가
-			                            <input type="number" class="form-control" name="foodPrice" placeholder="가격">
+			                            <input id="foodPrice" type="number" class="form-control" name="foodPrice" placeholder="가격">
 			                        </div>
 								</div>
             				</div>
@@ -44,7 +44,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										수량
-			                            <input type="number" class="form-control" name="foodAmount" placeholder="수량">
+			                            <input id="foodAmount" type="number" class="form-control" name="foodAmount" placeholder="수량">
 			                        </div>
 								</div>
             				</div>
@@ -54,7 +54,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										사료이름
-			                            <input type="text" class="form-control" name="foodName" placeholder="사료이름">
+			                            <input id="foodName" type="text" class="form-control" name="foodName" placeholder="사료이름">
 			                        </div>
 								</div>
 							</div>
@@ -62,7 +62,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										사료회사
-			                            <input type="text" class="form-control" name="foodCompany" placeholder="사료회사">
+			                            <input id="foodCompany" type="text" class="form-control" name="foodCompany" placeholder="사료회사">
 			                        </div>
 								</div>
 							</div>
@@ -70,7 +70,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										구매인
-			                            <input type="text" class="form-control" name="foodBuyer" placeholder="구매인" th:value="${session.SID}">
+			                            <input id="foodBuyer" type="text" class="form-control" name="foodBuyer" placeholder="구매인" th:value="${session.SID}">
 			                        </div>
 								</div>
 							</div>
@@ -94,11 +94,28 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
+			var checkValue = function(obj, msg){
+				if(obj.val() == ''){
+					alert(msg);
+					obj.focus();
+					
+					return true;
+				}
+				return false;
+			}
+			
 			$('#petFoodBtn').click(function(){
-				alert("버튼 누름");
+				if(checkValue($('#foodType'), '사료종료를 입력해주세요')) return;
+				if(checkValue($('#foodPrice'), '사료가격을 입력해주세요')) return;
+				if(checkValue($('#foodAmount'), '사료 구입량을 입력해주세요')) return;
+				if(checkValue($('#foodBuyer'), '구매인을 입력해주세요')) return;
+				if(checkValue($('#foodName'), '사료이름을 입력해주세요')) return;
+				if(checkValue($('#foodCompany'), '사료회사를 입력해주세요')) return;
+				
+				$('#petFoodForm').submit();
 			});
 		});
 	</script>
 </th:block>
- 
+
 </html>

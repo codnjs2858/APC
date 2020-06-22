@@ -13,6 +13,14 @@
 		<result property="foodBuyer" 		column="pet_food_buyer"/>
 		<result property="foodPurchaseDate" column="pet_food_purchase_date"/>
 	</resultMap>
+	
+	<delete id="deletePetFood" parameterType="String">
+		DELETE 
+		FROM 
+			tb_pet_food 
+		WHERE 
+			pet_food_code=#{petFoodCode};
+	</delete>
 
 	<insert id="insertPetFood" parameterType="PetFood">
 		<selectKey keyProperty="foodCode" order="BEFORE" resultType="String">
@@ -64,8 +72,37 @@
 			pet_food_name			=#{foodName},
 			pet_food_buyer			=#{foodBuyer},
 			pet_food_purchase_date	=CURDATE()
-		WHERE pet_food_cod			e=#{foodCode};
+		WHERE pet_food_code			=#{foodCode};
 	</update>
+	
+	<!-- 사료를 사료종류로 찾음 -->
+	<select id="selectPetFoodByFoodType" parameterType="String" resultMap="pfResultMap">
+		SELECT 
+			 pet_food_code
+			,pet_food_company
+			,pet_food_type
+			,pet_food_price
+			,pet_food_amount
+			,pet_food_remain
+			,pet_food_name
+			,pet_food_buyer
+			,pet_food_purchase_date
+		FROM 
+			tb_pet_food
+		WHERE
+			pet_food_type=#{foodType}
+		ORDER BY CAST(SUBSTR(pet_food_code,10) AS DECIMAL) DESC;
+	</select>
+	
+	<!-- 사료의 종류와 개수 찾음 -->
+	<select id="selectPetFoodTypeCount" resultType="Map">
+		SELECT 
+			 f.pet_food_type		as foodType
+			,COUNT(f.pet_food_type)	as foodCount
+		FROM 
+			tb_pet_food AS f
+		GROUP BY f.pet_food_type;
+	</select>
 
 	<!-- 모든 사료 찾음 -->
 	<select id="selectPetFood" resultMap="pfResultMap">

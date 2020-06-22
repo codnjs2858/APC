@@ -30,34 +30,18 @@
 				<div class="body">
 					<div class="row clearfix">
 	                	<div class="col-xs-3 col-md-3" >
-	                    	<a th:href="@{/petGoodsList}">
+	                    	<a th:href="@{/petFoodList}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
 		                        	전체보기
-		                        	<span class="badge">4</span>
+		                        	<span class="badge" th:text="${totalCount}"></span>
 		                        </button>
 	                    	</a>
 	                    </div>
-	                	<div class="col-xs-3 col-md-3" >
-	                    	<a th:href="@{/petGoodsList}">
+	                	<div class="col-xs-3 col-md-3" th:each="p : ${petFoodTypeCnt}" >
+	                    	<a th:href="@{/petFoodList(sendType=${p.foodType})}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
-		                        	전체보기
-		                        	<span class="badge">4</span>
-		                        </button>
-	                    	</a>
-	                    </div>
-	                	<div class="col-xs-3 col-md-3" >
-	                    	<a th:href="@{/petGoodsList}">
-		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
-		                        	전체보기
-		                        	<span class="badge">4</span>
-		                        </button>
-	                    	</a>
-	                    </div>
-	                	<div class="col-xs-3 col-md-3" >
-	                    	<a th:href="@{/petGoodsList}">
-		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
-		                        	전체보기
-		                        	<span class="badge">4</span>
+		                        	[[${p.foodType}]]
+		                        	<span class="badge">[[${p.foodCount}]]</span>
 		                        </button>
 	                    	</a>
 	                    </div>
@@ -93,14 +77,14 @@
 						            <td><div class="align-center">[[${pf.foodBuyer}]]</div></td>
 						            <td>
 						            	<div class="align-center">
-							            	<a th:href="@{petFoodUpdate(foodCode=${pf.foodCode})}" style="color: #9E9E9E">
+							            	<a th:href="@{/petFoodUpdate(foodCode=${pf.foodCode})}" style="color: #9E9E9E">
 							            		<i class="material-icons">update</i>
 							            	</a>
 							            </div>
 						            </td>
 						            <td>
 						           	 	<div class="align-center">
-						            		<a href="#">
+						            		<a id="delete" th:href="@{/petFoodDelete(foodCode=${pf.foodCode})}">
 						            			<i class="material-icons">delete</i>
 						            		</a>
 						            	</div>
@@ -140,6 +124,15 @@
     		$('#dataTable').dataTable({
     			"aaSorting": []
     		});
+    		
+    		$('#delete').click(function(){
+    			 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+    			     return true;
+    			 }else{   //취소
+    			     return false;
+    			 }
+    		});
+    		
     	});
     </script>
 </th:block>
