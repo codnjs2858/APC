@@ -25,16 +25,56 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="../../css/themes/all-themes.css" rel="stylesheet" />
-
+    
+	<!-- Jquery Core Js -->
+	<script src="./plugins/jquery/jquery.min.js"></script>
 	
 
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		
-		var btn =document.getElementById('terms');
+	$(function(){
 		
 		
+		var userPw =document.getElementById('userPw');
+		var userPw2 =document.getElementById('userPw2');
+		var userName =document.getElementById('userName');
+		var memberPhone =document.getElementById('memberPhone');
+		var memberEmail =document.getElementById('memberEmail');
+		var memberAddr =document.getElementById('memberAddr');
+		var sign_up =document.getElementById('sign_up');
+		
+		$('#joinBtn').click(function(){
+			var userId = $('#userId').val();
+			
+			 var result=null;
+				var request = $.ajax({
+				  url: "/ajaxAddmember",
+				  method: "GET",
+				  data: {"id" : "id"},
+				  dataType: "json"
+				});
+				
+				request.done(function( msg ) {
+				  alert(JSON.stringify(msg));
+				  /* if(msg!=null){
+					  result=msg;
+					  
+				  } */
+				});
+				 
+				request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+				});
+			
+				/* if(result=""){
+					
+					return false;
+				}else{
+					
+					$('#sign_up').submit();
+				}  */
+				
+		});
 	});
 	
 </script>
@@ -57,8 +97,12 @@
                         <div class="form-line">
                       		 <input type="text" class="form-control" name="memberId" id="userId" placeholder="회원가입 아이디를 입력하세요" required autofocus>
                         </div>
+          	           <div class="alert bg-green" id="idalert" style="display:none;">
+          				
+     				   </div>
                          
                     </div>
+                
                      <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">lock</i>
@@ -119,7 +163,7 @@
                         <label for="terms">개인정보활동에 동의합니다</label>
                     </div>
 
-                    <button class="btn btn-block btn-lg bg-red waves-effect" id="joinBtn" type="submit">회원가입</button>
+                    <button class="btn btn-block btn-lg bg-red" id="joinBtn" type="button">회원가입</button>
 
                     <div class="m-t-25 m-b--5 align-center">
                         <a th:href="@{/login}">이미 회원가입 되어있으신가요?</a>
@@ -128,29 +172,10 @@
             </div>
         </div>
     </div>
-		<!-- Jquery Core Js -->
-		<script src="../../plugins/jquery/jquery.min.js"></script>
 		
 		<!-- Bootstrap Core Js -->
 		<script src="../../plugins/bootstrap/js/bootstrap.js"></script>
 		
-		<!-- Select Plugin Js -->
-		<script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
 		
-		<!-- Slimscroll Plugin Js -->
-		<script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
-		
-		<!-- Waves Effect Plugin Js -->
-		<script src="../../plugins/node-waves/waves.js"></script>
-	   
-	    <!-- Validation Plugin Js -->
-    	<script src="../../plugins/jquery-validation/jquery.validate.js"></script>
-		
-		<!-- Custom Js -->
-		<script src="../../js/admin.js"></script>
-		
-		<!-- Demo Js -->
-		<script src="../../js/demo.js"></script>
- 		<script src="../../js/pages/examples/sign-in.js"></script>	
 </body>
 </html>

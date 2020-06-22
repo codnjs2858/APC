@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,7 +22,6 @@ import com.cafe24.memory.service.MemberService;
 @Controller
 public class MemberController {
 	@Autowired private MemberService memberService;
-	
 	@GetMapping("/login")
 	public String login() {
 	
@@ -41,6 +42,9 @@ public class MemberController {
 					session.setAttribute("SNAME", getMember.getMemberName());
 					session.setAttribute("SEMAIL", getMember.getMemberEmail());
 					session.setAttribute("SLEVEL", getMember.getLevel().getLevelCode());
+				}if(getMember.getLevel().getLevelCode().equals("level_code_02")||getMember.getLevel().getLevelCode().equals("level_code_01")) {
+					
+					
 				}
 				
 			}
@@ -70,6 +74,25 @@ public class MemberController {
 	public String getMemberList(Model model) {
 		model.addAttribute("memberList", memberService.getMemberList());
 		return "member/memberList";
+	}
+	
+	/**
+	 * 회원가입시 기존 아이디 존재하는지 중복확인-이경진
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/ajax/Addmember", method = RequestMethod.GET)
+	@ResponseBody
+	public String ajaxAddmember(@RequestParam(value = "id") String id) {
+		System.out.println(id);
+		Member member= new Member();
+		member.setMemberId(id);
+		List<Member>mList=memberService.getMemberList(member);
+		String result="";
+		if(mList != null && !"".equals(mList.get(0).getMemberId())){
+			result="이미 존재하는 아이디 입니다";
+		}
+		return result;
 	}
 	@GetMapping("/memberUpdate")
 	public String memberUpdate(Model model,Member member) {

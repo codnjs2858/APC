@@ -18,6 +18,7 @@ public class WebConfig implements WebMvcConfigurer{
 				.excludePathPatterns("/js/**")
 				.excludePathPatterns("/images/**")
 				.excludePathPatterns("/scss/**")
+				.excludePathPatterns("/ajax/**")
 				.excludePathPatterns("/plugins/**")
 				.excludePathPatterns("/login")
 				.excludePathPatterns("/index")
