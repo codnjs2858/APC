@@ -1,5 +1,8 @@
 package com.cafe24.memory.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.CompanionAnimalRegister;
@@ -32,8 +36,9 @@ public class CompanionAnimalRegisterController {
 	@GetMapping("/companionAnimalRegisterList")
 	
 		public String companionAnimalRegisterList(Model model) {
-			
-			model.addAttribute("CARS", companionAnimalRegisterService.selectCompanionAnimalRegisterList());
+			List<CompanionAnimalRegister> cars = companionAnimalRegisterService.selectCompanionAnimalRegisterList();
+			System.out.println(cars);
+			model.addAttribute("CARS", cars);
 			return "companionanimalregister/companionAnimalRegisterList";
 		
 		}
@@ -65,20 +70,29 @@ public class CompanionAnimalRegisterController {
 	
 	@GetMapping("/companionAnimalRegisterUpdate")
 	
-		public String companionAnimalRegisterUpdate(Model model, CompanionAnimalRegister companionAnimalRegister) {
-		
-		model.addAttribute("CARS", companionAnimalRegisterService.selectCompanionAnimalRegisterList());	
-		model.addAttribute("CARS", animalCenterService.selectAnimalCenter());
-			
+		public String companionAnimalRegisterUpdate(
+				@RequestParam(name="send_code", required = false) String send_code,
+				@RequestParam(name="companionAnimalRegisterCode", required = false) String companionAnimalRegisterCode,
+				Model model){
+			CompanionAnimalRegister companionAnimalRegister = companionAnimalRegisterService.selectCompanionAnimalRegister(companionAnimalRegisterCode);
+			System.out.println(send_code + " <-- send_code companionAnimalRegisterUpdate()");
+			AnimalCenter ac = animalCenterService.selectCenterAnimal(send_code);
+			System.out.println(ac + " <-- ac companionAnimalRegisterUpdate()" );
+			System.out.println(companionAnimalRegister + " <-- companionAnimalRegister companionAnimalRegisterUpdate()" );
+			model.addAttribute("CARC", ac);
+			model.addAttribute("CAREG", companionAnimalRegister);
+			System.out.println(companionAnimalRegister + "<== cAniReg");
 			return "companionanimalregister/companionAnimalRegisterUpdate";
 		
 		}
 	
 	@PostMapping("/companionAnimalRegisterUpdate")
-	
-		public String companionAnimalRegisterUpdate() {
-			return "redirect:/companionAnimalRegisterList";
+		public String companionAnimalRegisterUpdate(CompanionAnimalRegister cAniReg) {
+		
+			System.out.println(cAniReg + " <-- cAniReg companionAnimalRegisterUpdate()");
+			companionAnimalRegisterService.updateCompanionAnimalRegister(cAniReg);
 			
+			return "redirect:/companionAnimalRegisterList";
 		
 		}
 	

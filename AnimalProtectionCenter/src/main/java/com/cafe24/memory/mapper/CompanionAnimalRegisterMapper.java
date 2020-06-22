@@ -15,5 +15,8 @@ public interface CompanionAnimalRegisterMapper {
 	
 	public int insertCompanionAnimalRegister(CompanionAnimalRegister cAniReg);
 	
-	public int updateCompanionAnimalRegister();
+	public int updateCompanionAnimalRegister(CompanionAnimalRegister cAniReg);
+	
+	public CompanionAnimalRegister selectCompanionAnimalRegister(String companionAnimalRegisterCode);
+	
 }

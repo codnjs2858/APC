@@ -25,19 +25,20 @@
 				<div class="body">
 					<div class="clearfix">
 							<div class="row">
-				      			<div class="col-md-3">
-				      				<b>동물번호</b>
-					                <div class="input-group colorpicker colorpicker-element">
-					                    <div class="form-line">
-					                        <input type="text" name="animalinsertcode" class="form-control" th:value="1111" readonly="readonly">
-					                    </div>
-					       			</div>
-				      			</div>
+				      			<div class="row">
+				           			<div class="col-xs-4 col-md-4">
+						           		<b>동물 번호</b>
+										<div class="input-group">
+							           		<div class="form-line m-t-10">
+								           		<input type="text" name="animalCenterNumber" class="form-control onlyNumber" th:value="${CARC.animalCenterNumber}" readonly>
+							           		</div>
+						           		</div>
+				           			</div>
 				      			<div class="col-md-3 col-md-offset-1">
 				      				<b>담당자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="staffcode" class="form-control" value="이경진" readonly="readonly">
+					                        <input type="text" name="staffcode" class="form-control" readonly>
 					                    </div>
 					       			</div>
 				      			</div>
@@ -45,39 +46,39 @@
 				      				<b>등록 일자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="companionRegisterDate" class="form-control" value="2020-06-11" readonly="readonly">
+					                        <input type="text" name="companionRegisterDate" class="form-control" th:value="${CAREG.companionRegisterDate}">
 					                    </div>
 					       			</div>
 				      			</div>
 							</div>
-		                	<div class="col-md-3">
-				           		<b>분양 상태</b>
-				           		<div class="input-group">
-					           		<select class="form-control">
-					           			<option value="">====== 선택 ======</option>
-					           			<option value="#">분양 가능</option>
-		            					<option value="#">분양 완료</option>
-		            					<option value="#">기타</option>
-					           		</select>
-				           		</div>
-		           			</div>
+		                	<div class="col-md-2 col-md-offset-1">
+	            				<b>분양 상태</b>
+			                    <div class="input-group colorpicker colorpicker-element">
+		            				<select name="animalInformation">
+		            					<option value="">====== 선택 ======</option>
+		            					<option value="분양 가능">분양 가능</option>
+		            					<option value="분양 완료">분양 완료</option>
+		            					<option value="기타">기타</option>
+		            				</select>
+		            			</div>
+	            			</div>
 		           			<div class="col-md-3 col-md-offset-1">
 				      				<b>분양 일자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="date" name="animalhealthregdate" class="form-control">
+					                        <input type="date" name="cancleComInDate" th:value="${cancleCompanionInDate}" class="form-control">
 					                    </div>
 					       			</div>
 				      		</div>
 		           	</div>
            		</div>
-				 <div class="body">
 	            	<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">반려동물 수정</button>
-	            </div>
-	      		</form>
 	      		</div>
+	      		</form>
+	      		
+	      		
 			</div>
-				
+			</div>	
 	</section>
 </th:block> 
 

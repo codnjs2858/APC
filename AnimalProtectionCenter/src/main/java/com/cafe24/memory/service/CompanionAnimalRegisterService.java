@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.CompanionAnimalRegister;
+import com.cafe24.memory.mapper.AnimalCenterMapper;
 import com.cafe24.memory.mapper.CompanionAnimalRegisterMapper;
 
 @Service
@@ -15,6 +17,9 @@ public class CompanionAnimalRegisterService {
 	
 	@Autowired 
 	CompanionAnimalRegisterMapper companionAnimalRegisterMapper;
+	
+	@Autowired
+	AnimalCenterMapper animalCenterMapper;
 	
 	public List<CompanionAnimalRegister> selectCompanionAnimalRegisterList(){
 		
@@ -32,10 +37,28 @@ public class CompanionAnimalRegisterService {
 	
 	public int insertCompanionAnimalRegister(CompanionAnimalRegister cAniReg) {
 	  
-	  int result = companionAnimalRegisterMapper.insertCompanionAnimalRegister(cAniReg);
+		int result = companionAnimalRegisterMapper.insertCompanionAnimalRegister(cAniReg);
 	  
-	  return result;
+		return result;
 	  
-	  }
-	 
+	}
+	
+	public int updateCompanionAnimalRegister(CompanionAnimalRegister cAniReg) {
+		
+		System.out.println(cAniReg + "<<<service+cAniReg");
+		int result = companionAnimalRegisterMapper.updateCompanionAnimalRegister(cAniReg);
+		
+		return result;
+		
+	}
+	
+	public AnimalCenter selectCenterAnimal(String send_code){
+		return animalCenterMapper.selectCenterAnimal(send_code);
+	}
+	
+	public CompanionAnimalRegister selectCompanionAnimalRegister(String companionAnimalRegisterCode) {
+		
+		return companionAnimalRegisterMapper.selectCompanionAnimalRegister(companionAnimalRegisterCode);
+		
+	}
 }
