@@ -1,14 +1,13 @@
 package com.cafe24.memory.domain;
 
-import java.util.Date;
 
 public class CompanionAnimalRegister {
 	
 	private String companionAnimalRegisterCode;
 	private String animalInsertCode;
 	private String animalInformation;
-	private Date companionRegisterDate;
-	private Date cancleCompanionInDate;
+	private String companionRegisterDate;
+	private String cancleCompanionInDate;
 	//외래키
 	private ProtectionSpace protectionSpace;
 	private AnimalCenter animalCenter;
@@ -32,16 +31,16 @@ public class CompanionAnimalRegister {
 	public void setAnimalInformation(String animalInformation) {
 		this.animalInformation = animalInformation;
 	}
-	public Date getCompanionRegisterDate() {
+	public String getCompanionRegisterDate() {
 		return companionRegisterDate;
 	}
-	public void setCompanionRegisterDate(Date companionRegisterDate) {
+	public void setCompanionRegisterDate(String companionRegisterDate) {
 		this.companionRegisterDate = companionRegisterDate;
 	}
-	public Date getCancleCompanionInDate() {
+	public String getCancleCompanionInDate() {
 		return cancleCompanionInDate;
 	}
-	public void setCancleCompanionInDate(Date cancleCompanionInDate) {
+	public void setCancleCompanionInDate(String cancleCompanionInDate) {
 		this.cancleCompanionInDate = cancleCompanionInDate;
 	}
 	public ProtectionSpace getProtectionSpace() {
