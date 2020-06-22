@@ -14,5 +14,6 @@ public interface MemberMapper {
 	public List<Member> getMemberList();
 	public int insertMember(Member M);
 	public int deleteMember(Member M);
+	public int updateMember(Member M);
 
 }

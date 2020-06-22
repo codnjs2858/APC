@@ -23,6 +23,9 @@ public class AnimalAdoptionController {
 	@GetMapping("/adoptionApply")
 	public String adoptionApply(Model model) {
 		List<AnimalType>AniList=animalTypeService.selectAnimalType();
+		System.out.println(AniList);
+		
+		
 		model.addAttribute("AniList", AniList);
 		return "adoption/adoptionApplyForm";
 	}

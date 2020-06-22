@@ -45,7 +45,7 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
+                    <div class="card" th:each="m,i:${AniList}">
                         <div class="header">
                             <h2>입양신청폼</h2>
                         </div>
@@ -69,8 +69,8 @@
                                         <b>동물종류</b>
                                     </p>
                                     <select id="animalType" class="form-control show-tick" >
-                                        <option value="">-축종선택-</option>
-                                        <option value="강아지">강아지</option>
+                                        <option th:value="">-축종선택-</option>
+                                        <option value="${m.animalType}">강아지</option>
                                         <option value="고양이">고양이</option>
                                         <option value="기타">기타</option>
                                     </select>

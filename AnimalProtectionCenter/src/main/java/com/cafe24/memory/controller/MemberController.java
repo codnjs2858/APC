@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.memory.domain.Level;
 import com.cafe24.memory.domain.Member;
 import com.cafe24.memory.service.MemberService;
+import com.cafe24.memory.service.StaffService;
 
 @Controller
 public class MemberController {
 	@Autowired private MemberService memberService;
+	@Autowired private StaffService staffService;
 	@GetMapping("/login")
 	public String login() {
 	
@@ -43,7 +46,7 @@ public class MemberController {
 					session.setAttribute("SEMAIL", getMember.getMemberEmail());
 					session.setAttribute("SLEVEL", getMember.getLevel().getLevelCode());
 				}if(getMember.getLevel().getLevelCode().equals("level_code_02")||getMember.getLevel().getLevelCode().equals("level_code_01")) {
-					
+					session.setAttribute("STAFFCODE",staffService.selectStaffMember(member.getMemberId()).getStaffCode());
 					
 				}
 				
@@ -103,8 +106,11 @@ public class MemberController {
 		return "member/updateMember";
 	}
 	@PostMapping("/memberUpdate")
-	public String memberUpdate(Member member) {
-
+	public String memberUpdate(Member member,Level level) {
+		member.setLevel(level);
+		System.out.println(member+"<-회원update");
+		int result=memberService.updateMember(member);
+		System.out.println(result+"<-회원update 결과값");
 		return "index";
 	}
 	
