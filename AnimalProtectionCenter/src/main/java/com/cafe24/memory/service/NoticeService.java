@@ -16,6 +16,10 @@ public class NoticeService {
 	@Autowired
 	private NoticeMapper noticeMapper;
 	
+	public int insertNotice(Notice notice) {
+		int result = noticeMapper.insertNotice(notice);
+		return result;
+	}
 	public List<Notice> selectQuestion(){
 		return noticeMapper.selectNotice();
 	}
