@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.StaffMapper">
+	<resultMap type="Staff" id="staff">
+		<result property="staffCode" column="staff_code"/>
+		<result property="staffName" column="staff_name"/>
+		<result property="staffPart" column="staff_part"/>
+		<result property="staffRank" column="staff_rank"/>
+		<result property="staffPhone" column="staff_phone"/>
+		<result property="staffEmail" column="staff_email"/>
+		<result property="staffInDate" column="staff_in_date"/>
+		<result property="staffOutDate" column="staff_out_date"/>
+		<association property="member" javaType="Member">
+			<result property="memberId" column="member_id"/> 
+		</association>
+	</resultMap>
+	
+	<select id="selectStaffMember" parameterType="String" resultMap="staff">
+		SELECT
+		*
+		FROM
+			tb_staff AS s
+		JOIN
+			tb_member AS m ON s.member_id = m.member_id
+		WHERE 
+			m.member_id = #{send_id}
+	</select>
+</mapper>

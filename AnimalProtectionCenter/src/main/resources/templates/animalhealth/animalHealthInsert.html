@@ -19,7 +19,7 @@
 				<div class="header">
 					<h2>동물 진료 기록 등록</h2>
 				</div>
-				<form action="/animalhealthlist">
+				<form action="/animalhealthinsert" method="post">
 				<div class="body">
 					<div class="clearfix">
 							<div class="row">
@@ -27,7 +27,7 @@
 				      				<b>동물번호</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="animalinsertcode" class="form-control">
+					                        <input type="text" name="animalCenterNumber" class="form-control" value="561">
 					                    </div>
 					       			</div>
 				      			</div>
@@ -35,7 +35,9 @@
 				      				<b>담당자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="staffcode" class="form-control" value="이경진" readonly="readonly">
+					                    	<!-- 세션 등록 -->
+					                        <input type="hidden" name="staffCode" class="form-control" value="staff_code_1">
+					                        <input type="text" name="staffName" class="form-control" value="이경진" readonly="readonly">
 					                    </div>
 					       			</div>
 				      			</div>
@@ -43,13 +45,13 @@
 				      				<b>등록 일자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="animalhealthregdate" class="form-control" value="2020-06-11" readonly="readonly">
+					                        <input type="text" name="animalHealthRegDate" class="form-control" readonly="readonly">
 					                    </div>
 					       			</div>
 				      			</div>
 							</div>
 			                <b>동물 상태</b>
-		           			<textarea class="form-control" rows="3" name="animalhealthcontents"></textarea>
+		           			<textarea class="form-control" rows="3" name="animalHealthContents"></textarea>
 			  	    	</div>
 				</div>
 	            <div class="body">
@@ -62,6 +64,9 @@
 </th:block> 
 
 <th:block layout:fragment="customFooterScript">
+	<script>
+		$('input[name=animalHealthRegDate]').val(new Date().toISOString().substring(0, 10));
+	</script>
 </th:block>
  
 </html>
