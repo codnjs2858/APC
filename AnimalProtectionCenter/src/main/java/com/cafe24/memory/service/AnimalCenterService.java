@@ -38,6 +38,15 @@ public class AnimalCenterService {
 	}
 	
 	/**
+	 * 동물 넘버로 센터 동물 조회 (코드,등등)
+	 * @param send_num
+	 * @return
+	 */
+	public AnimalCenter selectNumCode(int Animalnum) {
+		return animalCenterMapper.selectNumCode(Animalnum);
+	}
+	
+	/**
 	 * 동물 코드로 searchReporCode검색
 	 * @param send_code
 	 * @return

@@ -3,6 +3,8 @@ package com.cafe24.memory.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +19,22 @@ import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.AnimalTypeService;
+import com.cafe24.memory.service.StaffService;
 
 @Controller
 public class AnimalCenterController {
 	@Autowired private AnimalTypeService animalTypeService;
 	@Autowired private AnimalCenterService animalCenterService;
+	@Autowired private StaffService staffService;
 	
 	//animal center inset
 	@GetMapping("/animalcenterinsert")
-	public String insertAnimalCenterForm() {
+	public String insertAnimalCenterForm(Model model, HttpSession session) {
+		try {
+			model.addAttribute("staff", staffService.selectStaffMember((String) session.getAttribute("SID")));
+		}catch (Exception e) {
+			model.addAttribute("staff", null);
+		}
 		return "animalcenter/animalCenterInsert";
 	}
 	@PostMapping("/animalcenterinsert")
@@ -50,10 +59,9 @@ public class AnimalCenterController {
 	@ResponseBody
 	public ArrayList<SearchReportAnimal> animalcenterReport(@RequestParam(name = "memberName") String memberName,
 												@RequestParam(name = "memberPhone") String memberPhone) {
-		System.out.println(animalCenterService.selectCenterReport(memberName, memberPhone));
 		return animalCenterService.selectCenterReport(memberName, memberPhone);
 	}
-	
+
 	//animal center list 
 	@GetMapping("/animalcenterlist")
 	public String listAnimalCenter(@RequestParam(name="send_type", required = false) String send_type ,Model model) {

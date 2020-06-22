@@ -13,6 +13,13 @@ import com.cafe24.memory.domain.SearchReportAnimal;
 public interface AnimalCenterMapper {
 
 	/**
+	 * 동물 번호로 센터 동물 조회
+	 * @param send_num
+	 * @return
+	 */
+	public AnimalCenter selectNumCode(int Animalnum);
+
+	/**
 	 * 센터 동물 삭제
 	 * @param send_code
 	 * @return

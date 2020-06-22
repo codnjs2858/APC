@@ -24,6 +24,15 @@
 		
 	</resultMap>
 	
+	<select id="selectNumCode" parameterType="int" resultMap="animalCenter">
+		SELECT
+		*
+		FROM
+		tb_animal_insert
+		WHERE
+			animal_center_number = #{Animalnum}
+	</select>
+	
 	<delete id="deleteAnimalCenter" parameterType="String">
 		DELETE FROM tb_animal_insert WHERE animal_insert_code=#{send_code}
 	</delete>
