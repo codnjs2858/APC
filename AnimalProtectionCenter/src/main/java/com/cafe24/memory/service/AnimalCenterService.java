@@ -21,6 +21,50 @@ public class AnimalCenterService {
 	private AnimalCenterMapper animalCenterMapper;
 	
 	/**
+	 * 센터 동물 삭제
+	 * @param send_code
+	 * @return
+	 */
+	public int deleteAnimalCenter(String send_code) {
+		return animalCenterMapper.deleteAnimalCenter(send_code);
+	}
+	/**
+	 * 센터 동물 수정
+	 * @param animal
+	 * @return
+	 */
+	public int updateAnimalCenter(AnimalCenter animal) {
+		return animalCenterMapper.updateAnimalCenter(animal);
+	}
+	
+	/**
+	 * 동물 넘버로 센터 동물 조회 (코드,등등)
+	 * @param send_num
+	 * @return
+	 */
+	public AnimalCenter selectNumCode(int Animalnum) {
+		return animalCenterMapper.selectNumCode(Animalnum);
+	}
+	
+	/**
+	 * 동물 코드로 searchReporCode검색
+	 * @param send_code
+	 * @return
+	 */
+	public String getsearchReportCode(String send_code) {
+		return animalCenterMapper.getsearchReportCode(send_code);
+	}
+	
+	/**
+	 * searchReportCode로 acceptCode 검색
+	 * @param reCode
+	 * @return
+	 */
+	public String searchReportManager(String reCode) {
+		return animalCenterMapper.searchReportManager(reCode);
+	}
+	
+	/**
 	 * 보호 동물 센터 등록 - 설채원
 	 * @param animal
 	 * @return

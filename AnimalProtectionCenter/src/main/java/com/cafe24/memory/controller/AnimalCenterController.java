@@ -3,6 +3,8 @@ package com.cafe24.memory.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +19,22 @@ import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.AnimalTypeService;
+import com.cafe24.memory.service.StaffService;
 
 @Controller
 public class AnimalCenterController {
 	@Autowired private AnimalTypeService animalTypeService;
 	@Autowired private AnimalCenterService animalCenterService;
+	@Autowired private StaffService staffService;
 	
 	//animal center inset
 	@GetMapping("/animalcenterinsert")
-	public String insertAnimalCenterForm() {
+	public String insertAnimalCenterForm(Model model, HttpSession session) {
+		try {
+			model.addAttribute("staff", staffService.selectStaffMember((String) session.getAttribute("SID")));
+		}catch (Exception e) {
+			model.addAttribute("staff", null);
+		}
 		return "animalcenter/animalCenterInsert";
 	}
 	@PostMapping("/animalcenterinsert")
@@ -33,8 +42,7 @@ public class AnimalCenterController {
 		if(searchRe == null) {
 			animal.setAcceptCode(null);
 		}else {
-			System.out.println(searchRe.getSearchReportCode()+":::accept코드 찾기 메소드??");
-			animal.setAcceptCode(null);
+			animal.setAcceptCode(animalCenterService.searchReportManager(searchRe.getSearchReportCode()));
 		}
 		animal.setStaff(staff);
 		animal.setAnimalType(atype);
@@ -51,10 +59,9 @@ public class AnimalCenterController {
 	@ResponseBody
 	public ArrayList<SearchReportAnimal> animalcenterReport(@RequestParam(name = "memberName") String memberName,
 												@RequestParam(name = "memberPhone") String memberPhone) {
-		System.out.println(animalCenterService.selectCenterReport(memberName, memberPhone));
 		return animalCenterService.selectCenterReport(memberName, memberPhone);
 	}
-	
+
 	//animal center list 
 	@GetMapping("/animalcenterlist")
 	public String listAnimalCenter(@RequestParam(name="send_type", required = false) String send_type ,Model model) {
@@ -71,28 +78,31 @@ public class AnimalCenterController {
 	@GetMapping("/animalcenterupdate")
 	public String updateAnimalCenterForm(
 			@RequestParam(name="send_code", required = false) String send_code, Model model) {
+		model.addAttribute("searchReportCode",animalCenterService.getsearchReportCode(send_code));
 		model.addAttribute("ac", animalCenterService.selectCenterAnimal(send_code));
 		return "animalcenter/animalCenterUpdate";
 	}
 	@PostMapping("/animalcenterupdate")
-	public String updateAnimalCenter(AnimalType atype, Staff staff, AnimalCenter animal,SearchReportAnimal searchRe) {
+	public String updateAnimalCenter(AnimalType atype, AnimalCenter animal,SearchReportAnimal searchRe) {
 		if(searchRe == null) {
 			animal.setAcceptCode(null);
 		}else {
-			System.out.println(searchRe.getSearchReportCode()+":::accept코드 찾기 메소드??");
-			animal.setAcceptCode(null);
+			animal.setAcceptCode(animalCenterService.searchReportManager(searchRe.getSearchReportCode()));
 		}
-		animal.setStaff(staff);
 		animal.setAnimalType(atype);
-		
-		System.out.println("");
+		animalCenterService.updateAnimalCenter(animal);
+		System.out.println("업데이트 실행 "+animal);
 		return "redirect:/animalcenterlist";
 	}
 	
 	//animal center delete
 	@GetMapping("/animalcenterdelete")
 	public String deleteAnimalCenter(@RequestParam(name="send_code", required = false) String send_code) {
-		System.out.println("");
+		try {
+			animalCenterService.deleteAnimalCenter(send_code);
+		} catch (Exception e) {
+			System.out.println("센터 동물 삭제 실패");
+		}
 		return "redirect:/animalcenterlist";
 	}
 	
