@@ -16,7 +16,7 @@
                 	</h2>
 				</div>
 				<div class="body">
-					<form action="/addAnimalProtection" method="POST">
+					<form id="protectSpaceForm" action="/addAnimalProtection" method="POST">
 						<div class="input-group">
 	                        <div class="form-line">
 								보호공간
@@ -52,11 +52,11 @@
 						<div class="input-group">
 	                        <div class="form-line">
 								보호기간
-	                            <input type="number" class="form-control" name="protectDate" placeholder="보호기간">
+	                            <input id="protectDate" type="number" class="form-control" name="protectDate" placeholder="보호기간">
 	                        </div>
 						</div>
 						
-                        <button class="btn btn-block bg-amber waves-effect" type="submit">유기동물보호등록</button>
+                        <button id="protectSpaceBtn" class="btn btn-block bg-amber waves-effect" type="button">유기동물보호등록</button>
                         
                 	</form>
 				</div>
@@ -94,6 +94,16 @@
 			request.fail(function( jqXHR, textStatus ) {
 				alert( "Request failed: " + textStatus );
 			});
+		});
+		
+		$('#protectSpaceBtn').click(function(){
+			if($('#protectDate').val() == ''){
+				alert("보호기간을 넣어주세요");
+				$('#protectDate').focus();
+				return;
+			}
+		
+			$('#protectSpaceForm').submit();			
 		});
 	});
 </script>

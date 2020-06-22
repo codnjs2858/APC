@@ -139,7 +139,7 @@ public class AnimalProtectionController {
 		
 		animalProtect.setAnimalProtectExeDate(exeDate);
 		
-		System.out.println(animalProtect + " <-- addAnimalProtection() AnimalProtectionController.java");
+		System.out.println(animalProtect + " <-- animalProtection() AnimalProtectionController.java");
 		protectionService.updateAnimalProtectionIn(animalProtect);
 		
 		return "redirect:/animalProtection";

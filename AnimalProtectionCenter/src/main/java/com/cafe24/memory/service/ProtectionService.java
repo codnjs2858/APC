@@ -92,17 +92,16 @@ public class ProtectionService {
 		int result = 0;
 		System.out.println(animalProtect + " <-- animalProtect updateAnimalProtectionIn() ProtectionService.java");
 		System.out.println(ap + " <-- animalProtect updateAnimalProtectionIn() ProtectionService.java");
-
 		System.out.println(ps + " <-- ProtectionService.java");
+		
 		//보호공간에 있는지 없는지를 체크
 		if(ps != null && ps.size() != 0) {
 			for(int i = 0; i < ps.size(); i++) {
 				result += protectionMapper.updateAnimalProtectionExitSpace(ps.get(i).getProtectSpaceCode());				
 			}
 		//보호관리가 미보호인 상태를 체크
-		}else if(ap == null && ap.size() == 0){
+		}else if(ap != null && ap.size() == 0){
 			result += protectionMapper.insertAniamlProtection(animalProtect);
-			System.out.println("여기에서 추가가 되야함");
 		}
 		
 		System.out.println(animalProtect + " <-- animalProtect updateAnimalProtectionIn() ProtectionService.java");
