@@ -24,6 +24,25 @@
 		
 	</resultMap>
 	
+	<delete id="deleteAnimalCenter" parameterType="String">
+		DELETE FROM tb_animal_insert WHERE animal_insert_code=#{send_code}
+	</delete>
+	
+	<update id="updateAnimalCenter" parameterType="AnimalCenter">
+		UPDATE tb_animal_insert
+		SET
+			animal_center_number=#{animalCenterNumber},
+			animal_picture=#{animalPicture},
+			animal_gender=#{animalGender},
+			animal_age=#{animalAge},
+			animal_weight=#{animalWeight},
+			animal_character=#{animalCharacter},
+			animal_state=#{animalState},
+			animal_type_code=#{animalType.animalTypeCode},
+			accept_code=#{acceptCode}
+		WHERE animal_insert_code=#{animalInsertCode}
+	</update>
+	
 	<insert id="insertAnimalCenter" parameterType="AnimalCenter">
 		<selectKey order="BEFORE" keyProperty="animalInsertCode" resultType="String">
 			SELECT
@@ -103,7 +122,7 @@
 	
 	
 	<!-- 신고 관련 부분  -->
-	<!-- result Type -->
+	<!-- SearchReportAnimal result -->
 	<resultMap type="SearchReportAnimal" id="SearchReportAnimal">
 		<result property="searchReportCode" column="search_report_code"></result>
 		<result property="animalDetail" column="animal_detail"></result>
@@ -116,7 +135,7 @@
 			<result property="animalTypeSub" column="animal_type_sub"></result>
 		</association>
 	</resultMap>
-
+	
 	<!-- 이름&연락처로 신고코드 찾기 -->
 	<select id="selectCenterReport" parameterType="String" resultMap="SearchReportAnimal">
 		SELECT 
@@ -140,7 +159,7 @@
 	<!-- searchReportCode로 acceptCode 찾기 -->
 	<select id="searchReportManager" parameterType="String" resultType="String">
 		SELECT 
-			accept_code AS acceptCode
+			accept_code as acceptCode
 		FROM 
 			tb_report_manager	AS r
 		JOIN 
@@ -149,5 +168,16 @@
 			r.report_code = s.search_report_code
 		WHERE 
 			s.search_report_code = #{reCode}
+	</select>
+	
+	<!-- acceptCode로 searchReportCode 찾기 -->
+	<select id="getsearchReportCode" parameterType="String" resultType="String" >
+		SELECT 
+			s.search_report_code AS searchReportCode
+		FROM tb_animal_insert AS a 
+			JOIN tb_report_manager AS r ON a.accept_code = r.accept_code
+			JOIN tb_search_report AS s ON r.report_code = s.search_report_code
+		WHERE 
+			a.animal_insert_code = #{send_code}
 	</select>
 </mapper>

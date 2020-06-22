@@ -70,29 +70,31 @@ public class AnimalCenterController {
 	@GetMapping("/animalcenterupdate")
 	public String updateAnimalCenterForm(
 			@RequestParam(name="send_code", required = false) String send_code, Model model) {
-		model.addAttribute("searchReportCode", null);
+		model.addAttribute("searchReportCode",animalCenterService.getsearchReportCode(send_code));
 		model.addAttribute("ac", animalCenterService.selectCenterAnimal(send_code));
 		return "animalcenter/animalCenterUpdate";
 	}
 	@PostMapping("/animalcenterupdate")
-	public String updateAnimalCenter(AnimalType atype, Staff staff, AnimalCenter animal,SearchReportAnimal searchRe) {
+	public String updateAnimalCenter(AnimalType atype, AnimalCenter animal,SearchReportAnimal searchRe) {
 		if(searchRe == null) {
 			animal.setAcceptCode(null);
 		}else {
-			System.out.println(searchRe.getSearchReportCode()+":::accept코드 찾기 메소드??");
-			animal.setAcceptCode(null);
+			animal.setAcceptCode(animalCenterService.searchReportManager(searchRe.getSearchReportCode()));
 		}
-		animal.setStaff(staff);
 		animal.setAnimalType(atype);
-		
-		System.out.println("");
+		animalCenterService.updateAnimalCenter(animal);
+		System.out.println("업데이트 실행 "+animal);
 		return "redirect:/animalcenterlist";
 	}
 	
 	//animal center delete
 	@GetMapping("/animalcenterdelete")
 	public String deleteAnimalCenter(@RequestParam(name="send_code", required = false) String send_code) {
-		System.out.println("");
+		try {
+			animalCenterService.deleteAnimalCenter(send_code);
+		} catch (Exception e) {
+			System.out.println("센터 동물 삭제 실패");
+		}
 		return "redirect:/animalcenterlist";
 	}
 	
