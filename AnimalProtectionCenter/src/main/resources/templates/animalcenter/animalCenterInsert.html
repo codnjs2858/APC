@@ -39,7 +39,7 @@
 					<div class="card">
 						<form action="/animalcenterinsert" method="post" id="inputForm">
 							<!-- 직원 세션 아이디, 코드 -->
-							<input type="hidden" name="staffCode" value="staff_code_01">
+							<input type="hidden" name="staffCode" th:value="${staff.staffCode}">
 							<div class="header">
 								<h2>보호 동물 센터 등록</h2>
 							</div>
@@ -265,7 +265,7 @@
 					if(msg != null && msg != ''){
 						for(var i=0; i<msg.length;i++){
 							console.log(msg[i]);
-							html +="<tr><td><input type=\"radio\" class=\"valBtn\" name=\"selectReport\"value=\""+msg[i].animalType.animalTypeCode+"\"></td>";
+							html +="<tr><td><input type=\"radio\" class=\"valBtn\" name=\"selectReport\"value=\""+msg[i].searchReportCode+"\"></td>";
 							html +="<td>"+msg[i].animalPicture+"</td>";
 							html +="<td>"+msg[i].animalType.animalType+":"+msg[i].animalType.animalTypeSub+"</td>";
 							html +="<td>"+msg[i].animalLocation+"</td>";
