@@ -22,6 +22,7 @@
 					<h2>반려동물 분양 수정</h2>
 				</div>
 				<form action="/companionAnimalRegisterUpdate" method="post">
+				<input type="hidden" name="companionAnimalRegisterCode" th:value="${CAREG.companionAnimalRegisterCode}">
 				<div class="body">
 					<div class="clearfix">
 							<div class="row">
@@ -46,7 +47,7 @@
 				      				<b>등록 일자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="companionRegisterDate" class="form-control" th:value="${CAREG.companionRegisterDate}">
+					                        <input type="text" name="companionRegisterDate" class="form-control" th:value="${CAREG.companionRegisterDate}" readonly>
 					                    </div>
 					       			</div>
 				      			</div>
@@ -56,9 +57,9 @@
 			                    <div class="input-group colorpicker colorpicker-element">
 		            				<select name="animalInformation">
 		            					<option value="">====== 선택 ======</option>
-		            					<option value="분양 가능">분양 가능</option>
-		            					<option value="분양 완료">분양 완료</option>
-		            					<option value="기타">기타</option>
+		            					<option value="분양 가능" th:selected="(${CAREG.animalInformation} == '분양 가능')">분양 가능</option>
+		            					<option value="분양 완료" th:selected="(${CAREG.animalInformation} == '분양 완료')">분양 완료</option>
+		            					<option value="기타" th:selected="(${CAREG.animalInformation} == '기타')">기타</option>
 		            				</select>
 		            			</div>
 	            			</div>
@@ -66,7 +67,7 @@
 				      				<b>분양 일자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="date" name="cancleComInDate" th:value="${cancleCompanionInDate}" class="form-control">
+					                        <input type="date" name="cancleComInDate" th:value="${CAREG.cancleCompanionInDate}" class="form-control">
 					                    </div>
 					       			</div>
 				      		</div>

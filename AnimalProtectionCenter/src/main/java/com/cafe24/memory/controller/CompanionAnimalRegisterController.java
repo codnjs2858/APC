@@ -29,6 +29,14 @@ public class CompanionAnimalRegisterController {
 	@Autowired
 	AnimalCenterService animalCenterService;
 	
+	@GetMapping("/companionAnimalRegisterDelete")
+	
+		public String companionAnimalRegisterDelete(@RequestParam(name="companionAnimalRegisterCode", required = false) String companionAnimalRegisterCode) {
+			companionAnimalRegisterService.deleteCompanionAnimalRegister(companionAnimalRegisterCode);
+			
+			return "redirect:/companionAnimalRegisterList";
+		
+		}
 	
 	@GetMapping("/companionAnimalRegisterList")
 	

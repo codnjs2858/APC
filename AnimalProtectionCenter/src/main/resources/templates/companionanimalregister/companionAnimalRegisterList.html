@@ -23,7 +23,7 @@
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a href="/animaltypeinsert" class=" waves-effect waves-block">동물 종류 추가</a></li>
+	                            <li><a href="/companionAnimalRegisterInsert" class=" waves-effect waves-block">반려동물 등록 추가</a></li>
 	                        </ul>
 	                    </li>
 	                </ul>
@@ -35,7 +35,14 @@
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
 	                    	</a>
 	                    </div>
-	                    
+	                    <div class="col-xs-3 col-md-3" th:each="p : ${petFoodTypeCnt}" >
+	                    	<a th:href="@{/petFoodList(sendType=${p.foodType})}">
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
+		                        	[[${p.foodType}]]
+		                        	<span class="badge">[[${p.foodCount}]]</span>
+		                        </button>
+	                    	</a>
+	                    </div>
 	                </div>
 	                <div class="table-responsive" style="overflow: hidden;">
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
@@ -69,7 +76,7 @@
 		                       				<i class="material-icons">update</i></a></div>
 		                      			</td>
 		                      			<td><div class="align-center">
-					                       	<a th:href="@{#}" style="color: #F44336">
+					                       	<a class="delete" th:href="@{/companionAnimalRegisterDelete(companionAnimalRegisterCode=${CARS.companionAnimalRegisterCode})}" style="color: #F44336">
 					                       	<i class="material-icons">delete</i></a></div>
 			                      		</td>
 			                        </tr>
@@ -95,12 +102,25 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
     <script>
-    	$(function(){
+    	
+	    $(function(){
 	    	//데이터 테이블
-    		$('#dataTabelEaxm1').dataTable({
-    			"aaSorting": []
-    		});
-    	});
+			$('#dataTabelEaxm1').dataTable({
+				"aaSorting": []
+			});
+		
+	    	//삭제 유효성
+			$('.delete').click(function(){
+				var val = $(this).val();
+				console.log(val);
+				var url ="/companionAnimalRegisterDelete?companionAnimalRegisterCode="+val;
+			    var msg = confirm('해당 종류를 삭제 하겠습니까?');
+			    if(msg  == true){
+			    	$(location).attr('href',url);
+			    }
+			    
+			})
+		});
 	</script>
 </th:block>
  

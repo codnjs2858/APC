@@ -59,6 +59,12 @@ public class CompanionAnimalRegisterService {
 	public CompanionAnimalRegister selectCompanionAnimalRegister(String companionAnimalRegisterCode) {
 		
 		return companionAnimalRegisterMapper.selectCompanionAnimalRegister(companionAnimalRegisterCode);
+	}
+	
+	public int deleteCompanionAnimalRegister(String companionAnimalRegisterCode) {
+		
+		return companionAnimalRegisterMapper.deleteCompanionAnimalRegister(companionAnimalRegisterCode);
 		
 	}
+	
 }
