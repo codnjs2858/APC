@@ -21,12 +21,13 @@ public class AnimalHealthController {
 	@Autowired AnimalHealthService animalHealthService;
 	@Autowired AnimalCenterService animalCenterService;
 	//animal health
-	
+	/*animal health list*/
 	@GetMapping("/animalhealthlist")
 	public String listAnimalHealth(Model model) {
 		model.addAttribute("hlist", animalHealthService.selectAnimalHealth());
 		return "animalhealth/animalHealthList";
 	}
+	/*animal health insert*/
 	@GetMapping("/animalhealthinsert")
 	public String insertAnimalHealthForm(Model model, HttpSession session) {
 		//model.addAttribute("animalNum", );
@@ -35,46 +36,62 @@ public class AnimalHealthController {
 	}
 	@PostMapping("/animalhealthinsert")
 	public String insertAnimalHealth(AnimalHealth aheal, AnimalCenter ac, Staff staff) {
-		//동물 번호로 동물 센터 코드 검색
 		aheal.setAnimalCenter(animalCenterService.selectNumCode(ac.getAnimalCenterNumber()));
 		aheal.setStaff(staff);
 		animalHealthService.insertAnimalHealth(aheal);
 		return "redirect:/animalhealthlist";
 	}
+	
+	/*animal health update*/
 	@GetMapping("/animalhealthupdate")
-	public String updateAnimalHealth() {
+	public String updateAnimalHealthForm(String send_code, Model model) {
+		model.addAttribute("hinfo", animalHealthService.searchHealthCode(send_code));
 		return "animalhealth/animalHealthUpdate";
 	}
+	@PostMapping("/animalhealthupdate")
+	public String updateAnimalHealth(AnimalHealth aheal) {
+		animalHealthService.updateAnimalHealth(aheal);
+		return "redirect:/animalhealthlist";
+	}
+	
+	/*animal health delete*/
 	@GetMapping("/animalhealthdelete")
-	public String deleteAnimalHealth() {
-		//경로 delete
-		return "animalhealth/animalHealthList";
+	public String deleteAnimalHealth(String send_code) {
+		animalHealthService.deleteAnimalHealth(send_code);
+		return "redirect:/animalhealthlist";
 	}
 
 	
 	//animal health history
-	@PostMapping("/animalhealthhistoryinsert")
-	public String insertAnimalHealthHistory() {
-		return "animalhealth/animalHealthHistoryInsert";
-	}
-	@GetMapping("/animalhealthhistoryinsert")
-	public String insertAnimalHealthHistoryForm(
-			@RequestParam(name = "send_code") String send_code, Model model) {
-		//model.addAttribute("healnum", 건강코드로 동물 검색);
-		
-		return "animalhealth/animalHealthHistoryInsert";
-	}
+	/*animal health history list*/
 	@GetMapping("/animalhealthhistorylist")
 	public String listAnimalHealthHistory(Model model) {
 		model.addAttribute("hlist", animalHealthService.selectAnimalHealthed());
 		return "animalhealth/animalHealthHistoryList";
 	}
+	
+	/*animal health history insert*/
+	@GetMapping("/animalhealthhistoryinsert")
+	public String insertAnimalHealthHistoryForm(
+			@RequestParam(name = "send_code") String send_code, Model model) {
+		model.addAttribute("hinfo", animalHealthService.searchHealthCode(send_code));
+		return "animalhealth/animalHealthHistoryInsert";
+	}
+	
+	/*animal health history update*/
 	@GetMapping("/animalhealthhistoryupdate")
-	public String updateAnimalHealthHistory() {
+	public String updateAnimalHealthHistoryForm() {
 		return "animalhealth/animalHealthHistoryUpdate";
 	}
+	@PostMapping("/animalhealthhistoryupdate")
+	public String updateAnimalHealthHistory(AnimalHealth aheal) {
+		return "redirect:/animalhealthhistorylist";
+	}
+	
+	/*animal health history delete*/
 	@GetMapping("/animalhealthhistorydelete")
 	public String deleteAnimalHealthHistory() {
-		return "animalhealth/animalHealthHistoryList";
+		
+		return "redirect:/animalhealthhistorylist";
 	}
 }

@@ -3,10 +3,9 @@
 
 <mapper namespace="com.cafe24.memory.mapper.CompanionAnimalRegisterMapper">
 	
-	<resultMap type="CompanionAnimalRegister" id="companionAnimalRegister">
+	<resultMap type="CompanionAnimalRegister" id="companionAnimalRegisterResultMap">
 		<result property="companionAnimalRegisterCode" column="companion_animal_register_code"></result>
 		<result property="animalInformation" column="animal_information"></result>
-		<result property="animalInsertCode" column="animal_insert_code"></result>
 		<result property="companionRegisterDate" column="companion_register_date"></result>
 		<result property="cancleCompanionInDate" column="cancle_companion_in_date"></result>
 		
@@ -19,6 +18,7 @@
 			<result property="animalGender" column="animal_gender"></result>
 			<result property="animalAge" column="animal_age"></result>
 			<result property="animalCenterNumber" column="animal_center_number"></result>
+			<result property="animalInsertCode" column="animal_insert_code"></result>
 		</association>
 		
 		<association property="protectionSpace" javaType="ProtectionSpace">
@@ -29,10 +29,11 @@
 	<!-- 리스트 -->
 	<select id="selectCompanionAnimalRegisterList" 
 	resultType="CompanionAnimalRegister"
-	resultMap="companionAnimalRegister">
+	resultMap="companionAnimalRegisterResultMap">
 		SELECT 
 			 companion_animal_register_code
 			,aniI.animal_center_number
+			,aniI.animal_insert_code
 			,animal_information
 			,companion_register_date
 			,cancle_companion_in_date
@@ -50,13 +51,23 @@
 			s.staff_code=car.staff_code;
 	</select>
 	
-	<!-- <select id="selectMemberAll" resultType="String">
+	<select id="selectCompanionAnimalRegister" parameterType="String" resultMap="companionAnimalRegisterResultMap">
 		SELECT 
-			 member_id	as memberId
+			companion_animal_register_code, 
+			animal_insert_code, 
+			animal_information, 
+			companion_register_date, 
+			cancle_companion_in_date, 
+			pro_space_code, 
+			staff_code
 		FROM 
-			tb_member;
+			tb_companion_animal_register
+		WHERE
+			companion_animal_register_code=#{companionAnimalRegisterCode};
+	
 	</select>
 	
+	<!-- 등록 -->
 	<insert	id="insertCompanionAnimalRegister" parameterType="CompanionAnimalRegister">
  		
  		<selectKey resultType="String" order="BEFORE" keyProperty="companionAnimalRegisterCode">
@@ -64,7 +75,42 @@
  				CONCAT('CARC_', MAX(CAST(SUBSTRING(companion_animal_register_code,6) AS DECIMAL)+1)) AS companion_animal_register_code
 			FROM tb_companion_animal_register
  		</selectKey>
- 		
- 		
- 	</insert> -->
+ 			INSERT INTO tb_companion_animal_register
+			(companion_animal_register_code, animal_insert_code, animal_information, companion_register_date, cancle_companion_in_date, pro_space_code, staff_code)
+			VALUES (
+					#{companionAnimalRegisterCode},
+					#{animalCenter.animalInsertCode}, 
+					#{animalInformation},
+					NOW(),
+					#{cancleCompanionInDate},
+					#{protectionSpace.protectSpaceCode},
+					#{staff.staffCode}
+					);
+	</insert>
+	
+	<!-- 수정 -->
+	
+	<update id="updateCompanionAnimalRegister" parameterType="CompanionAnimalRegister">
+		
+		UPDATE tb_companion_animal_register
+		SET
+			animal_information=#{animalInformation},
+			cancle_companion_in_date=NOW()
+		WHERE
+			companion_animal_register_code=#{companionAnimalRegisterCode};
+	
+	</update>
+	
+	<select id="selectCenterAnimal" resultMap="companionAnimalRegisterResultMap" parameterType="String">
+		SELECT
+			*
+		FROM 
+			tb_companion_animal_register AS c
+		JOIN 
+			tb_animal_insert AS i
+		ON
+			c.animal_insert_code = i.animal_insert_code
+		WHERE 
+			companion_animal_register_code = #{companionAnimalRegisterCode};
+	</select>
 </mapper>

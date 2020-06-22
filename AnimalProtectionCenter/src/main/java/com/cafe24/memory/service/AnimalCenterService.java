@@ -36,7 +36,6 @@ public class AnimalCenterService {
 	public int updateAnimalCenter(AnimalCenter animal) {
 		return animalCenterMapper.updateAnimalCenter(animal);
 	}
-	
 	/**
 	 * 동물 넘버로 센터 동물 조회 (코드,등등)
 	 * @param send_num

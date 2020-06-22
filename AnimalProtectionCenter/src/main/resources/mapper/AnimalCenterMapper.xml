@@ -115,7 +115,7 @@
 		</if>
 		ORDER BY i.animal_insert_reg_date DESC;
 	</select>
-	<select id="selectCenterAnimal" resultMap="animalCenter">
+	<select id="selectCenterAnimal" resultMap="animalCenter" parameterType="String">
 		SELECT
 			*
 		FROM 
@@ -125,7 +125,7 @@
 		ON
 			a.animal_type_code = t.animal_type_code 
 		WHERE 
-			animal_insert_code = #{send_code}
+			animal_insert_code = #{animal_insert_code};
 	</select>
 		
 	
