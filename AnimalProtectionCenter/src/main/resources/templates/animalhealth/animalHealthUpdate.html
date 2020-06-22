@@ -19,7 +19,8 @@
 				<div class="header">
 					<h2>동물 진료 기록 수정</h2>
 				</div>
-				<form action="/animalhealthlist">
+				<form action="/animalhealthupdate" method="post">
+				<input type="hidden" name="animalHealthCode" th:value="${hinfo.animalHealthCode}">
 				<div class="body">
 					<div class="clearfix">
 							<div class="row">
@@ -27,7 +28,7 @@
 				      				<b>동물번호</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="animalinsertcode" class="form-control" value="1111" readonly="readonly">
+					                        <input type="text" name="animalCenterNumber" th:value="${hinfo.animalCenter.animalCenterNumber}" class="form-control" readonly="readonly">
 					                    </div>
 					       			</div>
 				      			</div>
@@ -35,7 +36,8 @@
 				      				<b>담당자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="staffcode" class="form-control" value="이경진" readonly="readonly">
+					                        <input type="hidden" name="staffCode" class="form-control" th:value="${hinfo.staff.staffCode}">
+					                        <input type="text" name="staffName" class="form-control" th:value="${hinfo.staff.staffName}" readonly="readonly">
 					                    </div>
 					       			</div>
 				      			</div>
@@ -43,13 +45,13 @@
 				      				<b>등록 일자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="animalhealthregdate" class="form-control" value="2020-06-11" readonly="readonly">
+					                        <input type="text" name="animalHealthRegDate" class="form-control" th:value="${hinfo.animalHealthRegDate}" readonly="readonly">
 					                    </div>
 					       			</div>
 				      			</div>
 							</div>
 			                <b>동물 상태</b>
-		           			<textarea class="form-control" rows="3" name="animalhealthcontents"></textarea>
+		           			<textarea class="form-control" rows="3" name="animalHealthContents">[[${hinfo.animalHealthContents}]]</textarea>
 			  	    	</div>
 				</div>
 	            <div class="body">
