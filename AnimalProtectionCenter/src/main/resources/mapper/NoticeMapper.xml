@@ -27,6 +27,10 @@
 		VALUES (#{board_code}, 'id001', #{board_title}, #{board_content}, '0', NOW(), '0000-00-00', #{board_ip})
 	</insert>
 	
+	<select id="selectPosts" resultMap="getNoticeMap">
+		SELECT * FROM tb_notice_board WHERE notice_board_code = #{board_code}
+	</select>
+	
 	<select id="selectNotice" resultMap="getNoticeMap">
 		SELECT *FROM tb_notice_board ORDER BY notice_board_code DESC
 	</select>

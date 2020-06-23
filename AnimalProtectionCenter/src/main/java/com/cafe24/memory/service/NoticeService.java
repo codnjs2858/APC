@@ -20,7 +20,10 @@ public class NoticeService {
 		int result = noticeMapper.insertNotice(notice);
 		return result;
 	}
-	public List<Notice> selectQuestion(){
+	public List<Notice> selectPosts(Notice notice){
+		return noticeMapper.selectPosts(notice);
+	}
+	public List<Notice> selectNotice(){
 		return noticeMapper.selectNotice();
 	}
 

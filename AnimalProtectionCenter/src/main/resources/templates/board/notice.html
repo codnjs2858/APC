@@ -47,8 +47,25 @@
 				</table>
 				<button type="button" class="btn btn-primary waves-effect" onclick="location.href='/write'">게시글 작성</button>
                 <script>
+	                function sendPost(click){
+	                    var form1 = document.createElement("form"); // 폼 생성
+	                    form1.setAttribute("method", "GET"); // 전송방식
+	                    form1.setAttribute("action", "/Posts"); // 주소
+	                    document.body.appendChild(form1);
+	                    
+	                    var formInput1 = document.createElement("input"); // 입력창 생성
+	                    formInput1.setAttribute("type", "hidden"); // 타입
+	                    formInput1.setAttribute("name", "board_code"); // name 속성
+	                    formInput1.setAttribute("id", "board_code"); // id 속성
+	                    formInput1.setAttribute("value", click); // 값
+	                    form1.appendChild(formInput1);
+
+	                    form1.submit();
+	                }
+                	
 	                $("#tb_board").on("click", "tr", function(){
-	                	alert( $(this).find("td:eq(0)").text() );
+	                	var click = $(this).find("td:eq(0)").text();
+	                	sendPost(click);
 	                });
                 </script>
                 </div>

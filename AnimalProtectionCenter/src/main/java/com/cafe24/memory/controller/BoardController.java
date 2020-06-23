@@ -14,6 +14,13 @@ public class BoardController {
 	
 	@Autowired private NoticeService noticeService;
 	
+	@GetMapping("/Posts")
+	public String Posts(Notice notice, Model model) {
+		model.addAttribute("selectPosts", noticeService.selectPosts(notice));
+		System.out.println(noticeService.selectPosts(notice).toString());
+		return "board/Posts";
+	}
+	
 	@PostMapping("/notice")
 	public String notice(Notice notice, Model model) {
 		noticeService.insertNotice(notice);
@@ -23,7 +30,7 @@ public class BoardController {
 
 	@GetMapping("/notice")
 	public String notice(Model model) {
-		model.addAttribute("selectNotice", noticeService.selectQuestion());
+		model.addAttribute("selectNotice", noticeService.selectNotice());
 		return "board/notice";
 	}
 	
