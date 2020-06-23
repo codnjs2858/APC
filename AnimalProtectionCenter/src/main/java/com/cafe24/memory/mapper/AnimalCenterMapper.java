@@ -13,6 +13,14 @@ import com.cafe24.memory.domain.SearchReportAnimal;
 public interface AnimalCenterMapper {
 
 	/**
+	 * 모든 보호동물 ,타입별 보호동물 보호공간 코드 조회
+	 * @param send_type
+	 * @return
+	 */
+	public List<String> selectProtectAnimalCenter(String send_type);
+	public List<String> selectProtectAnimalCenter();
+	
+	/**
 	 * 동물 번호로 센터 동물 조회
 	 * @param send_num
 	 * @return

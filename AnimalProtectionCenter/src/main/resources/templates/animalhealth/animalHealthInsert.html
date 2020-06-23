@@ -27,7 +27,7 @@
 				      				<b>동물번호</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="animalCenterNumber" class="form-control" value="561">
+					                        <input type="text" name="animalCenterNumber" class="form-control" placeholder="1~16">
 					                    </div>
 					       			</div>
 				      			</div>
@@ -36,8 +36,8 @@
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
 					                    	<!-- 세션 등록 -->
-					                        <input type="hidden" name="staffCode" class="form-control" value="staff_code_1">
-					                        <input type="text" name="staffName" class="form-control" value="이경진" readonly="readonly">
+					                        <input type="hidden" name="staffCode" class="form-control" th:value="${session.STAFF.staffCode}">
+					                        <input type="text" name="staffName" class="form-control" th:value="${session.STAFF.staffName}" readonly="readonly">
 					                    </div>
 					       			</div>
 				      			</div>

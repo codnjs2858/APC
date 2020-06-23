@@ -3,7 +3,6 @@ package com.cafe24.memory.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,47 +18,36 @@ import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.AnimalTypeService;
-import com.cafe24.memory.service.StaffService;
 
 @Controller
 public class AnimalCenterController {
 	@Autowired private AnimalTypeService animalTypeService;
 	@Autowired private AnimalCenterService animalCenterService;
-	@Autowired private StaffService staffService;
 	
 	//animal center inset
 	@GetMapping("/animalcenterinsert")
-	public String insertAnimalCenterForm(Model model, HttpSession session) {
-		try {
-			model.addAttribute("staff", staffService.selectStaffMember((String) session.getAttribute("SID")));
-		}catch (Exception e) {
-			model.addAttribute("staff", null);
-		}
+	public String insertAnimalCenterForm() {
 		return "animalcenter/animalCenterInsert";
 	}
+	
 	@PostMapping("/animalcenterinsert")
 	public String insertAnimalCenter(Model model, AnimalType atype, Staff staff, AnimalCenter animal,SearchReportAnimal searchRe) {
-		if(searchRe == null) {
+		String reCode = searchRe.getSearchReportCode();
+		if( reCode == null || "".equals(reCode)) {
 			animal.setAcceptCode(null);
 		}else {
-			animal.setAcceptCode(animalCenterService.searchReportManager(searchRe.getSearchReportCode()));
+			animal.setAcceptCode(animalCenterService.searchReportManager(reCode));
 		}
 		animal.setStaff(staff);
 		animal.setAnimalType(atype);
 		animalCenterService.insertAnimalCenter(animal);
 		return "redirect:/animalcenterlist";
 	}
+	
 	@PostMapping("/animalcentertype")
 	@ResponseBody
 	public List<AnimalType> addProtectInsert(@RequestParam(name = "type") String type) {
 		return animalTypeService.selectAnimalType(type);
-	}
-	//신고 내역 조회
-	@PostMapping("/animalcenterReport")
-	@ResponseBody
-	public ArrayList<SearchReportAnimal> animalcenterReport(@RequestParam(name = "memberName") String memberName,
-												@RequestParam(name = "memberPhone") String memberPhone) {
-		return animalCenterService.selectCenterReport(memberName, memberPhone);
 	}
 
 	//animal center list 
@@ -68,8 +56,10 @@ public class AnimalCenterController {
 		model.addAttribute("Cnt", animalCenterService.selectCenterCnt());
 		if(send_type != null && !"".equals(send_type)) {
 			model.addAttribute("AClist", animalCenterService.selectAnimalCenter(send_type));
+			model.addAttribute("proNum", animalCenterService.selectProtectAnimalCenter(send_type));
 		}else {
 			model.addAttribute("AClist", animalCenterService.selectAnimalCenter());
+			model.addAttribute("proNum", animalCenterService.selectProtectAnimalCenter());
 		}
 		return "animalcenter/animalCenterList";
 	}
@@ -112,4 +102,11 @@ public class AnimalCenterController {
 		return "animalcenter/animalCenterPage";
 	}
 	
+	//신고 내역 조회
+	@PostMapping("/animalcenterReport")
+	@ResponseBody
+	public ArrayList<SearchReportAnimal> animalcenterReport(@RequestParam(name = "memberName") String memberName,
+			@RequestParam(name = "memberPhone") String memberPhone) {
+		return animalCenterService.selectCenterReport(memberName, memberPhone);
+	}
 }

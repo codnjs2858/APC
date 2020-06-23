@@ -10,6 +10,20 @@ import com.cafe24.memory.domain.AnimalHealth;
 public interface AnimalHealthMapper {
 
 	/**
+	 * 건강 기록 삭제
+	 * @param send_code
+	 * @return
+	 */
+	public int deleteAnimalHealthHistory(String send_code);
+	
+	/**
+	 * 개체별 건강 기록+내역 검색 - 설채원
+	 * @param send_code
+	 * @return
+	 */
+	public List<AnimalHealth> selectAnimalHealthInfo(String send_code);
+	
+	/**
 	 * 건강 기록 수정 - 설채원
 	 * @param aheal
 	 * @return
