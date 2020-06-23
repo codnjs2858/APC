@@ -21,13 +21,13 @@
 		
 		<association property="screeningComplete" javaType="ScreeningComplete">
 			<result property="screening_complete_totel" column="screening_complete_totel"></result>
+			<result property="screening_complete_code" column="screening_complete_code"></result>
 		</association>
 	
 	</resultMap>	
 	
 	<!-- 리스트 -->
 	<select id="selectAdoptee" 
-	resultType="Adoptee"
 	resultMap="adoptee">
 		SELECT 
 				adoptee_code
@@ -41,18 +41,37 @@
 			 	,staff_name
 		FROM 
 				tb_adoptee AS a
-				INNER JOIN
+		INNER JOIN
 				tb_member AS m
-				INNER JOIN
+		INNER JOIN
 				tb_staff AS t
-				INNER JOIN
+		INNER JOIN
 				tb_screening_complete AS c
-				ON
+		ON
 				a.member_id=m.member_id
-				AND
+		AND
 				a.staff_code=t.staff_code
-				AND
-				a.screening_complete_code=c.screening_complete_code
+		AND
+				a.screening_complete_code=c.screening_complete_code;
 	</select>
-
+	
+	<!-- 등록 -->
+	<insert	id="insertAdoptee" parameterType="Adoptee">
+ 		
+ 		<selectKey resultType="String" order="BEFORE" keyProperty="adopteeCode">
+ 			SELECT 
+ 				CONCAT('ADC_', MAX(CAST(SUBSTRING(adoptee_code,5) AS DECIMAL)+1)) AS adoptee_code
+			FROM tb_adoptee
+ 		</selectKey>
+ 			INSERT INTO tb_adoptee
+			(adoptee_code, staff_code, member_id, screening_complete_code, adoptee_date)
+			VALUES 
+					(
+					 #{adopteeCode},
+					 #{staff.staffCode},
+					 #{member.memberId},
+					 #{screeningComplete.screening_complete_code},
+					 now()		  
+					 );
+	</insert>
 </mapper>

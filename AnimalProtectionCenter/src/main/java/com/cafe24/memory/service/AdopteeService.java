@@ -21,6 +21,15 @@ public class AdopteeService {
 		 List<Adoptee> list = adopteeMapper.selectAdoptee(); 
 		
 		 return list;
+	}
+	
+	public int insertAdoptee(Adoptee adt) {
+		
+		int result = adopteeMapper.insertAdoptee(adt);
+		
+		return result;
 		
 	}
 }
+
+

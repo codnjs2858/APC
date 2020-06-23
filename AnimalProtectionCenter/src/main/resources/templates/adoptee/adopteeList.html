@@ -55,9 +55,7 @@
 		                            	<th><div class="align-center">지표총점</div></th>
 		                            	<th><div class="align-center">등록날짜</div></th>
 		                            	<th><div class="align-center">담당자</div></th>
-		                            	<th data-orderable="false"><div class="align-center">수정</div></th>
-		                            	<th data-orderable="false"><div class="align-center">삭제</div></th>
-		                            </tr>
+		                            	</tr>
 		                        </thead>
 	                        <tbody>
 			                        <tr th:each="ADTL, i : ${ADTL}" class="odd">
@@ -70,15 +68,7 @@
 		                               	<td><div class="align-center"></div>[[${ADTL.screeningComplete.screening_complete_totel}]]</td>
 		                               	<td><div class="align-center"></div>[[${ADTL.adopteeDate}]]</td>
 		                               	<td><div class="align-center"></div>[[${ADTL.staff.staffName}]]</td>
-		                                <td><div class="align-center">
-		                                	<a th:href="@{/adopteeUpdate}" style="color: #9E9E9E">
-		                       				<i class="material-icons">update</i></a></div>
-		                      			</td>
-		                      			<td><div class="align-center">
-					                       	<a th:href="@{#}" style="color: #F44336">
-					                       	<i class="material-icons">delete</i></a></div>
-			                      		</td>
-			                        </tr>
+									</tr>
 		                    </tbody>
 	                    </table>
 	                </div>
@@ -106,7 +96,7 @@
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
     		});
-    	});
+	    });
 	</script>
 </th:block>
  

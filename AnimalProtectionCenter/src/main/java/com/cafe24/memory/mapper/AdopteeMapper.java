@@ -10,4 +10,6 @@ import com.cafe24.memory.domain.Adoptee;
 public interface AdopteeMapper {
 	
 	public List<Adoptee> selectAdoptee();
+	
+	public int insertAdoptee(Adoptee adt); 
 }
