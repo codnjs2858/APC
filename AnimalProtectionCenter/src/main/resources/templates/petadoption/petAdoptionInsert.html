@@ -22,6 +22,8 @@
 	            <div class="body">
 	            	<div class="row clearfix">
 	            		<form action="/petAdoptionInsert" method="post">
+	            		<!-- 직원 세션 아이디, 코드 -->
+	            		<input type="hidden" name="staffCode" value="staff_code_2">
 	            			<div class="col-md-5">
 	            				<b>회원 아이디</b>
 			                    <div class="input-group colorpicker colorpicker-element">
@@ -42,11 +44,11 @@
 	            			<div class="col-md-4">
 	            				<b>관리 상태</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="petAdoptionState">
+		            				<select name="petAdoptionState" class="form-control">
 		            					<option value="">====== 선택 ======</option>
-		            					<option value="#">분양 전</option>
-		            					<option value="#">분양 완료</option>
-		            					<option value="#">기타</option>
+		            					<option value="분양 전">분양 전</option>
+		            					<option value="분양 완료">분양 완료</option>
+		            					<option value="기타">기타</option>
 		            				</select>
 		            			</div>
 	            			</div>
@@ -90,7 +92,7 @@
 		$('#memberId').change(function(){
 			var type = $(this).val();
 			var request = $.ajax({
-				url: "/ajax/membertype",
+				url: "/ajax/memberType",
 				method: "POST",
 				data: { "type" : type },
 				dataType: "json"

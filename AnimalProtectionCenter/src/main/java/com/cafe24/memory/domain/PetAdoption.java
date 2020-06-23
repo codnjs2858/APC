@@ -5,57 +5,49 @@ import java.util.Date;
 public class PetAdoption {
 	
 	private String petAdoptionCode;
-	private Date petAdoptionInDate;
-	private Date petAdoptionManagementDate;
-	private Date petAdoptionEndDate;
+	private String petAdoptionInDate;
+	private String petAdoptionManagementDate;
+	private String petAdoptionEndDate;
 	private String petAdoptionState;
 	//외래키
 	private Member member;
-	public Member getMember() {
-		return member;
-	}
-	public void setMember(Member member) {
-		this.member = member;
-	}
-	private Adoptee adoptee;
 	private Staff staff;
 	
-	
-	public String getPetAdoptionState() {
-		return petAdoptionState;
-	}
-	public void setPetAdoptionState(String petAdoptionState) {
-		this.petAdoptionState = petAdoptionState;
-	}
 	public String getPetAdoptionCode() {
 		return petAdoptionCode;
 	}
 	public void setPetAdoptionCode(String petAdoptionCode) {
 		this.petAdoptionCode = petAdoptionCode;
 	}
-	public Date getPetAdoptionInDate() {
+	public String getPetAdoptionInDate() {
 		return petAdoptionInDate;
 	}
-	public void setPetAdoptionInDate(Date petAdoptionInDate) {
+	public void setPetAdoptionInDate(String petAdoptionInDate) {
 		this.petAdoptionInDate = petAdoptionInDate;
 	}
-	public Date getPetAdoptionManagementDate() {
+	public String getPetAdoptionManagementDate() {
 		return petAdoptionManagementDate;
 	}
-	public void setPetAdoptionManagementDate(Date petAdoptionManagementDate) {
+	public void setPetAdoptionManagementDate(String petAdoptionManagementDate) {
 		this.petAdoptionManagementDate = petAdoptionManagementDate;
 	}
-	public Date getPetAdoptionEndDate() {
+	public String getPetAdoptionEndDate() {
 		return petAdoptionEndDate;
 	}
-	public void setPetAdoptionEndDate(Date petAdoptionEndDate) {
+	public void setPetAdoptionEndDate(String petAdoptionEndDate) {
 		this.petAdoptionEndDate = petAdoptionEndDate;
 	}
-	public Adoptee getAdoptee() {
-		return adoptee;
+	public String getPetAdoptionState() {
+		return petAdoptionState;
 	}
-	public void setAdoptee(Adoptee adoptee) {
-		this.adoptee = adoptee;
+	public void setPetAdoptionState(String petAdoptionState) {
+		this.petAdoptionState = petAdoptionState;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	public Staff getStaff() {
 		return staff;
@@ -68,8 +60,10 @@ public class PetAdoption {
 	public String toString() {
 		return "PetAdoption [petAdoptionCode=" + petAdoptionCode + ", petAdoptionInDate=" + petAdoptionInDate
 				+ ", petAdoptionManagementDate=" + petAdoptionManagementDate + ", petAdoptionEndDate="
-				+ petAdoptionEndDate + ", petAdoptionState=" + petAdoptionState + ", member=" + member + ", adoptee="
-				+ adoptee + ", staff=" + staff + "]";
+				+ petAdoptionEndDate + ", petAdoptionState=" + petAdoptionState + ", member=" + member + ", staff="
+				+ staff + "]";
 	}
+	
+	
 	
 }

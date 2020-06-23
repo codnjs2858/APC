@@ -46,5 +46,25 @@
 		a.staff_code=t.staff_code;
 	</select>
 	
+	<insert	id="insertPetAdoption" parameterType="PetAdoption">
+ 		
+ 		<selectKey resultType="String" order="BEFORE" keyProperty="petAdoptionCode">
+ 			SELECT 
+ 				CONCAT('PAC_', MAX(CAST(SUBSTRING(pet_adoption_code,5) AS DECIMAL)+1)) AS pet_adoption_code
+			FROM tb_pet_Adoption;
+ 		</selectKey>
+ 			INSERT INTO tb_pet_Adoption
+			(pet_adoption_code, member_id, staff_code, pet_adoption_in_date, pet_adoption_state, pet_adoption_management_date, pet_adoption_end_date)
+			VALUES (
+					#{petAdoptionCode}, 
+					#{member.memberId}, 
+					#{staff.staffCode}, 
+					NOW(), 
+					#{petAdoptionState}, 
+					NOW(), 
+					NOW()
+					);
+	</insert>
+	
 	
 </mapper>
