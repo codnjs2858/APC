@@ -52,6 +52,14 @@
 	
 	</insert>
 	
+	<update id="deleteAnimalHealthHistory" parameterType="String">
+		UPDATE tb_animal_health
+		SET
+			animal_health_result = NULL,
+			animal_health_end_date = NULL
+		WHERE animal_health_code= #{send_code}
+	</update>
+	
 	<update id="updateAnimalHealth" parameterType="AnimalHealth">
 		UPDATE tb_animal_health 
 		<trim prefix="SET" suffixOverrides=",">
@@ -67,6 +75,18 @@
 		DELETE FROM tb_animal_health WHERE animal_health_code=#{send_code}
 	</delete>
 	
+	<select id="selectAnimalHealthInfo" resultMap="animalHealth">
+		SELECT 
+		*
+		FROM
+			tb_animal_health AS h
+			JOIN tb_animal_insert AS i ON h.animal_insert_code = i.animal_insert_code
+			JOIN tb_staff AS s ON h.staff_code = s.staff_code
+		WHERE 
+		h.animal_insert_code = #{send_code}
+		ORDER BY h.animal_health_end_date asc
+	</select>
+	
 	<select id="searchHealthCode" resultMap="animalHealth">
 		SELECT
 		*
@@ -75,10 +95,6 @@
 		JOIN tb_animal_insert AS i ON h.animal_insert_code = i.animal_insert_code
 		JOIN tb_staff AS s ON h.staff_code = s.staff_code
 		WHERE 
-			animal_health_end_date IS NULL
-			AND
-			animal_health_result IS NULL
-			AND
 			h.animal_health_code = #{send_code}
 	</select>
 	
