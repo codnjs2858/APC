@@ -105,12 +105,12 @@
 			}
 			
 			$('#petFoodBtn').click(function(){
-				if(checkValue($('#foodType'), '사료종료를 입력해주세요')) return;
-				if(checkValue($('#foodPrice'), '사료가격을 입력해주세요')) return;
-				if(checkValue($('#foodAmount'), '사료 구입량을 입력해주세요')) return;
-				if(checkValue($('#foodBuyer'), '구매인을 입력해주세요')) return;
-				if(checkValue($('#foodName'), '사료이름을 입력해주세요')) return;
-				if(checkValue($('#foodCompany'), '사료회사를 입력해주세요')) return;
+				if(checkValue($('#foodType'), 	'사료종료를 입력해주세요')) 	return;
+				if(checkValue($('#foodPrice'), 	'사료가격을 입력해주세요')) 	return;
+				if(checkValue($('#foodAmount'), '사료 구입량을 입력해주세요')) 	return;
+				if(checkValue($('#foodBuyer'), 	'구매인을 입력해주세요')) 		return;
+				if(checkValue($('#foodName'), 	'사료이름을 입력해주세요')) 	return;
+				if(checkValue($('#foodCompany'),'사료회사를 입력해주세요')) 	return;
 				
 				$('#petFoodForm').submit();
 			});

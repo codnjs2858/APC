@@ -12,6 +12,26 @@ import com.cafe24.memory.domain.PetGoods;
 public interface PetItemMapper {
 	
 	/**
+	 * 펫 용품 삭제
+	 * @param petGoodsCode
+	 * @return
+	 */
+	int deletePetGoods(String petGoodsCode);
+	
+	/**
+	 * 펫 용품을 시설코드로 찾기
+	 * @param implementCode
+	 * @return
+	 */
+	List<PetGoods> selectGoodsByImplementCode(String implementCode);
+	
+	/**
+	 * 펫 용품으로 코드와 갯수찾음 - 손충기
+	 * @return
+	 */
+	List<Map<String, Object>> selectImplementTypeNCodeNCnt();
+	
+	/**
 	 * 펫사료 삭제 - 손충기
 	 * @param petFoodCode
 	 * @return
