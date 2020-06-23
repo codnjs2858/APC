@@ -17,8 +17,20 @@ import com.cafe24.memory.mapper.AnimalCenterMapper;
 @Transactional
 public class AnimalCenterService {
 	
-	@Autowired
-	private AnimalCenterMapper animalCenterMapper;
+	@Autowired private AnimalCenterMapper animalCenterMapper;
+	
+	
+	/**
+	 * 모든 보호동물 ,타입별 보호동물 보호공간 코드 조회
+	 * @return
+	 */
+	public List<String> selectProtectAnimalCenter(){
+		return animalCenterMapper.selectProtectAnimalCenter();
+	}
+	public List<String> selectProtectAnimalCenter(String send_type){
+		return animalCenterMapper.selectProtectAnimalCenter(send_type);
+	}
+	
 	
 	/**
 	 * 센터 동물 삭제
@@ -80,6 +92,7 @@ public class AnimalCenterService {
 	public List<AnimalCenter> selectAnimalCenter(){
 		return animalCenterMapper.selectAnimalCenter();
 	}
+	
 	
 	/**
 	 * 센터 등록 동물 타입별 조회 - 설채원

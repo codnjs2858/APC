@@ -17,7 +17,8 @@
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="header">
-					<h2>동물 치료 등록</h2>
+					<h2 th:if="${hinfo.animalHealthResult} == null">동물 치료 등록</h2>
+					<h2 th:unless="${hinfo.animalHealthResult} == null">동물 치료 수정</h2>
 				</div>
 				<form action="/animalhealthupdate" method="post">
 				<div class="body">
@@ -28,7 +29,8 @@
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
 					                    	<input type="hidden" name="animalHealthCode" th:value="${hinfo.animalHealthCode}">
-					                        <input type="text" name="animalCenterNumber" class="form-control" th:value="${hinfo.animalCenter.animalCenterNumber}">
+					                        <input th:if="${hinfo.animalHealthResult} == null" type="text" name="animalCenterNumber" class="form-control" th:value="${hinfo.animalCenter.animalCenterNumber}">
+					                        <input th:unless="${hinfo.animalHealthResult} == null" type="text" name="animalCenterNumber" class="form-control" th:value="${hinfo.animalCenter.animalCenterNumber}" readonly="readonly">
 					                    </div>
 					       			</div>
 				      			</div>
@@ -55,7 +57,8 @@
 			  	    	</div>
 				</div>
 	            <div class="body">
-	            	<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">동물 치료 등록</button>
+	            	<button th:if="${hinfo.animalHealthResult} == null" type="submit" class="btn bg-amber btn-block btn-lg waves-effect">동물 치료 등록</button>
+	            	<button th:unless="${hinfo.animalHealthResult} == null" type="submit" class="btn bg-amber btn-block btn-lg waves-effect">동물 치료 수정</button>
 	            </div>
 	      		</form>
 			</div>

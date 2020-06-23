@@ -39,7 +39,7 @@
 					<div class="card">
 						<form action="/animalcenterinsert" method="post" id="inputForm">
 							<!-- 직원 세션 아이디, 코드 -->
-							<input type="hidden" name="staffCode" th:value="${staff.staffCode}">
+							<input type="hidden" name="staffCode" th:value="${session.STAFF.staffCode}">
 							<div class="header">
 								<h2>보호 동물 센터 등록</h2>
 							</div>
@@ -49,7 +49,7 @@
 					           			<b>신고 코드</b>
 					           			<div class="input-group ">
 							           		<div class="form-line m-t-10">
-								           		<input type="text" class="form-control" name="searchReportCode" value="null">
+								           		<input type="text" class="form-control" name="searchReportCode">
 							           		</div>
 						           		</div>
 				           			</div>
