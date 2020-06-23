@@ -8,61 +8,93 @@
 
 <th:block layout:fragment="customContents">
 	<section class="content">
-		<div class="container-fluid">
-			<div class="block-header">
-                <h2>
-                    	펫용품리스트
-                </h2>
-            </div>
-			
-			<div class="card">
-				<div class="body">
-					<div class="table-responsive">
-						<table class="table table-bordered" style="text-align: center;">
-						    <thead>
-						        <tr>
-						            <th>용품</th>
-						            <th>강아지이름</th>
-						            <th>담당자</th>
-						            <th>수정</th>
-						        </tr>
-						    </thead>
-						    <tbody>
-						        <tr>
-						            <td>밥그릇</td>
-						            <td>5</td>
-						            <td>홍02</td>
-						            <td>
-						            	<a th:href="@{petGoodsUpdate}">수정</a>
-						            </td>
-						        </tr>
-						        <tr>
-						            <td>담요</td>
-						            <td>12</td>
-						            <td>홍02</td>
-						            <td>
-						            	<a th:href="@{petGoodsUpdate}">수정</a>
-						            </td>
-						        </tr>
-						        <tr>
-						            <td>밥그릇</td>
-						            <td>12</td>
-						            <td>홍02</td>
-						            <td>
-						            	<a th:href="@{petGoodsUpdate}">수정</a>
-						            </td>
-						        </tr>
-						        <tr>
-						            <td>담요</td>
-						            <td>5</td>
-						            <td>홍02</td>
-						            <td>
-						            	<a th:href="@{petGoodsUpdate}">수정</a>
-						            </td>
-						        </tr>
-						       
-						    </tbody>
-						</table>
+		<div class="col-lg-12">
+			<div class="container-fluid">	
+				<div class="card">
+					<div class="header">
+						<h2>
+							펫용품 사용
+						</h2>
+						<ul class="header-dropdown m-r--5">
+		                    <li class="dropdown">
+		                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		                            <i class="material-icons">more_vert</i>
+		                        </a>
+		                        <ul class="dropdown-menu pull-right">
+		                            <li><a href="/petGoodsInsert" class=" waves-effect waves-block">펫 용품 등록</a></li>
+		                        </ul>
+		                    </li>
+		                </ul>
+					</div>
+					<div class="body">
+						<div class="row clearfix">
+		                	<div class="col-xs-3 col-md-3" >
+		                    	<a th:href="@{#}">
+			                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
+			                        	전체보기
+			                        	<span class="badge"></span>
+			                        </button>
+		                    	</a>
+		                    </div>
+		                	<div class="col-xs-3 col-md-3" >
+		                    	<a th:href="@{#}">
+			                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
+			                        	전체보기
+			                        	<span class="badge"></span>
+			                        </button>
+		                    	</a>
+		                    </div>
+		                	<div class="col-xs-3 col-md-3" >
+		                    	<a th:href="@{#}">
+			                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
+			                        	전체보기
+			                        	<span class="badge"></span>
+			                        </button>
+		                    	</a>
+		                    </div>
+		                	<div class="col-xs-3 col-md-3" >
+		                    	<a th:href="@{#}">
+			                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
+			                        	전체보기
+			                        	<span class="badge"></span>
+			                        </button>
+		                    	</a>
+		                    </div>
+		                </div>
+						<div class="table-responsive"  style="overflow: hidden;">
+							<table id="dataTable" class="table table-bordered table-striped table-hover">
+							    <thead>
+							        <tr>
+							            <th><div class="align-center">용품</div></th>
+							            <th><div class="align-center">강아지이름</div></th>
+							            <th><div class="align-center">담당자</div></th>
+							            <th data-orderable="false"><div class="align-center">수정</div></th>
+							            <th data-orderable="false"><div class="align-center">삭제</div></th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							        <tr th:each="g : ${petGoodAllList}">
+							            <td><div class="align-center">[[${g.implement.implementType}]]</div></td>
+							            <td><div class="align-center">[[${g.animalCenter.animalCenterNumber}]]</div></td>
+							            <td><div class="align-center">[[${session.STAFF.staffName}]]</div></td>
+							            <td>
+							            	<div class="align-center">
+								            	<a th:href="@{/petGoodsUpdate}" style="color: #9E9E9E">
+								            		<i class="material-icons">update</i>
+								            	</a>
+								            </div>
+							            </td>
+							            <td>
+							            	<div class="align-center">
+								            	<a id="delete" th:href="@{#}">
+								            			<i class="material-icons">delete</i>
+								            	</a>							            	
+							            	</div>
+							            </td>
+							        </tr>
+							    </tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -74,9 +106,37 @@
 </th:block> 
 
 <th:block layout:fragment="customCss">
+	<!-- JQuery DataTable Css -->
+    <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
+	<!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
+    	$(function(){
+    		$('#dataTable').dataTable({
+    			"aaSorting": []
+    		});
+    		
+    		$('#delete').click(function(){
+    			 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+    			     return true;
+    			 }else{   //취소
+    			     return false;
+    			 }
+    		});
+    		
+    	});
+    </script>
 </th:block>
  
 </html>

@@ -14,6 +14,49 @@
 		<result property="foodPurchaseDate" column="pet_food_purchase_date"/>
 	</resultMap>
 	
+	<resultMap type="PetGoods" id="pgResultMap">
+		<result property="petGoodsCode" column="pet_goods_code"/>
+		<result property="implementCode" 	column="implement_code"/>
+		<result property="animalInsertCode" 	column="animal_insert_code"/>
+		<result property="petGoodsRegDate" 	column="pet_goods_reg_date"/>
+	</resultMap>
+	
+	<insert id="insertPetGoods" parameterType="PetGoods">
+		<selectKey keyProperty="petGoodsCode" resultType="String" order="BEFORE">
+			SELECT
+				CASE COUNT(*)
+				WHEN 0 THEN 'pet_goods_1'
+				ELSE CONCAT('pet_goods_' ,CAST(SUBSTR(implement_code, 11) AS DECIMAL) + 1)
+				END
+			FROM
+				tb_pet_goods;
+		</selectKey>
+			INSERT INTO tb_pet_goods
+			(
+			 pet_goods_code 
+			,implement_code 
+			,animal_insert_code
+			,pet_goods_reg_date
+			)
+			VALUES 
+			(
+			 #{petGoodsCode}
+			,#{implementCode}
+			,#{animalInsertCode}
+			,CURDATE()
+			)	
+	</insert>
+	
+	<select id="selectPetGoods" resultMap="pgResultMap">
+		SELECT 
+			 pet_goods_code
+			,implement_code
+			,animal_insert_code
+			,pet_goods_reg_date
+		FROM 
+			tb_pet_goods;
+	</select>
+	
 	<delete id="deletePetFood" parameterType="String">
 		DELETE 
 		FROM 

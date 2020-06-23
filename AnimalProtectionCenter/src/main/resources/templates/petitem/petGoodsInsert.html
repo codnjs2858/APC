@@ -12,17 +12,22 @@
             <div class="card">
             	<div class="header">
             		<h2>
-            			펫용품수정
+            			펫용품등록
             		</h2>
             	</div>
             	<div class="body">
-            		<form action="/petGoodsList" method="post">
+            		<form action="/petGoodsInsert" method="post">
             			<div class="row">
             				<div class="col-md-4">
 			            		<div class="input-group">
-			                        <div class="form-line">
+			                        <div>
 										용품
-			                            <input type="text" class="form-control" name="username" placeholder="Username">
+			                            <div>
+				                            <select name="implementCode">
+				                            	<option value=""> -- 용품 선택 -- </option>
+				                            	<option th:each="im : ${implementList}" th:value="${im.implementCode}" th:text="${im.implementType}"></option>
+				                            </select>
+			                            </div>
 			                        </div>
 								</div>
             				</div>
@@ -30,7 +35,12 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										유기동물이름
-			                            <input type="text" class="form-control" name="username" placeholder="Username">
+			                            <div>
+				                            <select name="animalInsertCode">
+				                            	<option value=""> -- 동물번호 선택 -- </option>
+				                            	<option th:each="ac : ${animalCenterList}" th:value="${ac.animalInsertCode}" th:text="${ac.animalCenterNumber}"></option>
+				                            </select>
+			                            </div>
 			                        </div>
 								</div>
             				</div>
@@ -38,12 +48,12 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										담당자
-			                            <input type="text" class="form-control" name="username" placeholder="Username">
+			                            <input type="text" class="form-control" name="staffCode" th:value="${session.STAFF.staffName}" placeholder="Username">
 			                        </div>
 								</div>
             				</div>
             			</div>						
-						<button class="btn btn-block bg-amber waves-effect" type="submit">펫용품수정</button>
+						<button class="btn btn-block bg-amber waves-effect" type="submit">펫용품등록</button>
 					</form>
             	</div>
             </div>	

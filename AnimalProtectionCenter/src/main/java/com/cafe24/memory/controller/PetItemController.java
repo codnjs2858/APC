@@ -10,10 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.CompanionAnimalRegister;
+import com.cafe24.memory.domain.Implement;
 import com.cafe24.memory.domain.PetFood;
+import com.cafe24.memory.domain.PetGoods;
+import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.AnimalTypeService;
 import com.cafe24.memory.service.CompanionAnimalRegisterService;
+import com.cafe24.memory.service.ImplementService;
 import com.cafe24.memory.service.PetItemService;
 
 @Controller
@@ -28,6 +33,33 @@ public class PetItemController {
 	@Autowired
 	private CompanionAnimalRegisterService companionAnimalRegisterService; 
 	
+	@Autowired
+	private ImplementService implementService;
+	
+	@Autowired
+	private AnimalCenterService animalCenterService;
+	
+	@PostMapping("/petGoodsInsert")
+	public String petGoodsInsert(PetGoods petGoods) {
+		System.out.println(petGoods + " <-- petGoods petGoodsInsert()");
+		petItemService.insertPetGoods(petGoods);
+		
+		return "redirect:/petGoodsList";
+	}
+	
+	@GetMapping("/petGoodsInsert")
+	public String petGoodsInsert(Model model) {
+		List<Implement> implementList = implementService.selectImplement();
+		System.out.println(implementList + " <-- implementList petGoodsInsert()");
+		List<AnimalCenter> animalCenterList = animalCenterService.selectAnimalCenter();
+		System.out.println(animalCenterList + " <-- animalCenterList petGoodsInsert()");
+		
+		model.addAttribute("implementList", implementList);
+		model.addAttribute("animalCenterList", animalCenterList);
+		
+		return "petitem/petGoodsInsert";
+	}
+	
 	@GetMapping("/petGoodsUpdate")
 	public String petGoodsUpdate() {
 		
@@ -35,13 +67,18 @@ public class PetItemController {
 	}
 	
 	@PostMapping("/petGoodsList")
-	public String petGoodsList(Model model) {
+	public String petGoodsList() {
 		
 		return "petitem/petGoodsList";
 	}
 	
 	@GetMapping("/petGoodsList")
-	public String petGoodsList() {
+	public String petGoodsList(Model model) {
+		/* 한개만 가져왔었는데 보니깐 값들이 code 임 그래서 code 값을 가지고 일일히 다 찾아서 Map 으로 받아 처리함 
+		 * List<PetGoods> petGoodList = petItemService.selectPetGoods(); */
+		List<Map<String, Object>> petGoodAllList = petItemService.searchImplementNAnimalInsertByPetGoods();
+		System.out.println(petGoodAllList + " <-- petGoodAllList petGoodsList()");
+		model.addAttribute("petGoodAllList", petGoodAllList);
 		
 		return "petitem/petGoodsList";
 	}
@@ -135,6 +172,7 @@ public class PetItemController {
 	@PostMapping("/petFoodInsert")
 	public String petFoodInsert(PetFood petFood) {
 		System.out.println(petFood + " <-- petFood petFoodInsert()");
+		petFood.setFoodRemain(petFood.getFoodAmount());
 		petItemService.insertPetFood(petFood);
 		
 		return "redirect:/petFoodList";

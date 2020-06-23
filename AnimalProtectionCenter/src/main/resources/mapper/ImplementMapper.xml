@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.ImplementMapper">
+	<resultMap type="Implement" id="imResultMap">
+		<result property="implementCode" 			column="implement_code"/>
+		<result property="implementType" 			column="implement_type"/>
+		<result property="implementAmount" 			column="implement_amount"/>
+		<result property="implementReceiptCount" 	column="implement_receipt_count"/>
+		<result property="implementRemain" 			column="implement_remain"/>
+		<result property="implementBreakageAmount" 	column="implement_breakage_amount"/>
+		<result property="implementPrice" 			column="implement_price"/>
+	</resultMap>
+
+	<select id="selectImplementByCode" parameterType="String" resultMap="imResultMap">
+		SELECT 
+			 implement_code
+			,implement_type
+			,implement_amount
+			,implement_receipt_count
+			,implement_remain
+			,implement_breakage_amount
+			,implement_price
+		FROM 
+			tb_implement
+		WHERE
+			implement_code=#{implementCode};
+	</select>
+
+	<select id="selectImplement" resultMap="imResultMap">
+		SELECT 
+			 implement_code
+			,implement_type
+			,implement_amount
+			,implement_receipt_count
+			,implement_remain
+			,implement_breakage_amount
+			,implement_price
+		FROM 
+			tb_implement;
+	</select>
+</mapper>
