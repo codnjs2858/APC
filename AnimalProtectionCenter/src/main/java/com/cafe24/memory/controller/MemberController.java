@@ -47,6 +47,7 @@ public class MemberController {
 					session.setAttribute("SLEVEL", getMember.getLevel().getLevelCode());
 				}if(getMember.getLevel().getLevelCode().equals("level_code_02")||getMember.getLevel().getLevelCode().equals("level_code_01")) {
 					session.setAttribute("STAFFCODE",staffService.selectStaffMember(member.getMemberId()).getStaffCode());
+					session.setAttribute("STAFF",staffService.selectStaffMember(member.getMemberId()));
 					
 				}
 				
@@ -84,7 +85,7 @@ public class MemberController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/ajax/Addmember", method = RequestMethod.GET)
+	@RequestMapping(value = "/ajax/Addmember", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public String ajaxAddmember(@RequestParam(value = "id") String id) {
 		System.out.println(id);
