@@ -7,6 +7,9 @@
 <title>관리자회원추가</title>
 </th:block>
 
+<th:block layout:fragment="customHeadScript">
+
+</th:block> 
 <th:block layout:fragment="customContents">
     <section class="content">
         <div class="container-fluid">
@@ -20,7 +23,7 @@
                           
                         </div>
                         <div class="body">
-                            <form action="/addMember" method="post">
+                            <form action="/addMember" method="post" id="addMemberForm">
                                 <label for="email_address">ID</label>
                                 <div class="form-group">
                                     <div class="form-line">
@@ -57,8 +60,28 @@
                                         <input type="text" id="userEmail" name="memberEmail" class="form-control" placeholder="이메일">
                                     </div>
                                 </div>
-                
-                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">회원추가</button>
+                               
+                            <div class="button-demo js-modal-buttons"> 
+                				<button type="button" id="insertMember" data-color="lime" class="btn bg-amber waves-effect">회원추가</button>
+                			</div>	
+                                
+                 <!-- For Material Design Colors -->
+            <div class="modal fade" id="mdModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content modal-content modal-col-amber">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="defaultModalLabel">경고</h4>
+                        </div>
+                        <div class="modal-body" id="alert">
+                            	
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
                             </form>
                         </div>
                     </div>
@@ -68,7 +91,52 @@
         </section>   
 
 	<th:block layout:fragment="customFooterScript">
-	
+	   	<script type="text/javascript" src="/plugins/jquery/jquery.min.js"></script>
+		 <script src="../../js/pages/ui/modals.js"></script>
+		
+	<script type="text/javascript">
+		$(function(){
+			$('#insertMember').click(function(){
+				var addMemberForm=$('#addMemberForm');
+				var userId=$('input[name=memberId]').val();				
+				var userPw=$('input[name=memberPw]').val();				
+				var userName=$('input[name=memberName]').val();				
+				var userPhone=$('input[name=memberPhone]').val();				
+				var userAddress=$('input[name=memberAddr]').val();				
+				var userEmail=$('input[name=memberEmail]').val();				
+					var alert="";
+				if(userId==""){
+					 alert="아이디를 입력하세요";
+					$('#alert').text(alert);
+		    		return false;	
+				}if(userPw==""){
+					 alert="패스워드를 입력하세요";
+					$('#alert').text(alert);
+			    		return false;	
+				}if(userName==""){
+					 alert="이름을 입력하세요";
+					$('#alert').text(alert);
+			    		return false;	
+				}if(userPhone==""){
+					 alert="핸드폰번호를 입력하세요";
+					$('#alert').text(alert);
+			    		return false;	
+					
+				}if(userAddress==""){
+					 alert="주소를 입력하세요";
+					$('#alert').text(alert);
+			    		return false;	
+					
+				}if(userEmail==""){
+					 alert="이메일을 입력하세요";
+					$('#alert').text(alert);
+			    		return false;	
+					
+				}
+				addMemberForm.submit();
+			})
+		})
+	</script>
 	</th:block>
 	
 </html>

@@ -117,9 +117,15 @@ public class MemberController {
 	
 	@GetMapping("/memberDelete")
 	public String memberDelete(Member member) {
-		int result=memberService.deleteMember(member);
-		System.out.println(result+"<-delete 결과값");
-		return "redirect:/getMemberList";
+		
+		try {
+			int result=memberService.deleteMember(member);
+			System.out.println(result+"<-delete 결과값");
+		
+		} catch (Exception e) {
+			System.out.println("회원삭제 실패");
+		}
+		return "redirect:/animalcenterlist";
 	}
 	@GetMapping("/forgotPassword")
 	public String forgotPassword(Member member) {

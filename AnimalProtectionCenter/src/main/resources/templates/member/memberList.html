@@ -7,6 +7,15 @@
  	<title>관리자화면</title>
  </th:block> 
 <th:block layout:fragment="customCss">
+   <style>
+   		::-webkit-scrollbar { display: none; }
+    	.delete {
+    		color: #F44336;
+    		border: 0; 
+    		outline: 0; 
+    		background: none;
+    	}
+    </style>
  		<!-- JQuery DataTable Css -->
     <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
  </th:block>
@@ -67,8 +76,9 @@
 	                       				<i class="material-icons">update</i></a></div>
 	                      			</td>
 	                      			<td><div class="align-center">
-				                      	<a th:href="@{/memberDelete(memberId=${j.memberId})}">
-				                       	<i class="material-icons">delete</i></a></div>
+	                      				<button type="button" class="delete" th:value="${j.memberId}" >
+	                      					<i class="material-icons">delete</i>
+	                      				</button>
 	                        	</tr>
 	                        </tbody>
 	                    </table>
@@ -76,6 +86,31 @@
 				</div>
 			</div>
 		</div>
+<!-- 모달을 열기 위한 버튼 -->
+<div style="display:none;">
+<button type="button" id="modalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+모달 보기 버튼
+</button>
+</div>
+<!-- 모달 영역 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+<h4 class="modal-title" id="myModalLabel">삭제</h4>
+</div>
+<div class="modal-body">
+회원을 정말 삭제하시겠습니까?
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-primary" id="ok">확인</button>
+<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+</div>
+</div>
+</div>
+</div>
+
 	</section>
  </th:block> 
  
@@ -94,6 +129,21 @@
     <script>
     	$(function(){
     		$('#dataTabelEaxm1').dataTable();
+	    
+	    		//삭제 유효성
+			$('.delete').click(function(){
+				$('#modalBtn').trigger('click');
+				var val = $(this).val();
+				console.log(val);
+				var url ="/memberDelete?memberId="+val;
+			  $('#ok').click(function(){
+		
+			    	$(location).attr('href',url);
+		
+			  })
+			    
+			})	
+	    		
     	});
     </script>
  
