@@ -5,6 +5,14 @@
 <th:block layout:fragment="customCss">
 	<!-- JQuery DataTable Css -->
     <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+    <style>
+    	.delete {
+    		color: #F44336;
+    		border: 0; 
+    		outline: 0; 
+    		background: none;
+    	}
+    </style>
 </th:block>
 
 <th:block layout:fragment="customTitle">
@@ -39,20 +47,27 @@
 	                        <tbody>
 	                            <tr th:each="hlist , i : ${hlist}" class="odd">
 	                            	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-	                            	<td><div class="align-center">[[${hlist.animalCenter.animalCenterNumber}]]<a th:href="@{/animalcenterpage}">(동물정보 상세보기)</a></div></td>
+	                            	<td><div class="align-center">[[${hlist.animalCenter.animalCenterNumber}]]
+	                            		<a th:href="@{/animalcenterpage(send_code=${hlist.animalHealthCode})}">(동물정보 상세보기)</a></div></td>
 		                            <td><div class="align-center">[[${hlist.animalHealthContents}]]</div></td>
 		                            <td><div class="align-center">[[${hlist.animalHealthRegDate}]]</div></td>
 		                            <td><div class="align-center">[[${hlist.animalHealthResult}]]</div></td>
 		                            <td><div class="align-center">[[${hlist.animalHealthEndDate}]]</div></td>
 		                            <td><div class="align-center">[[${hlist.staff.staffName}]]</div></td>
-		                            <td><div class="align-center">
-		                            	<a th:href="@{/animalhealthhistoryupdate(send_code=${hlist.animalHealthCode})}">
-	                       				<i class="material-icons">update</i></a></div>
+		                            <td>
+		                            	<div class="align-center">
+		                            		<a th:href="@{/animalhealthhistoryinsert(send_code=${hlist.animalHealthCode})}" style="color: #9E9E9E;">
+	                       						<i class="material-icons">update</i>
+	                       					</a>
+	                       				</div>
 	                      			</td>
-	                      			<td><div class="align-center">
-				                       	<a th:href="@{/animalhealthhistorydelete(send_code=${hlist.animalHealthCode})}">
-				                       	<i class="material-icons">delete</i>
-			                       	</a></div></td>
+	                      			<td>
+			                       		<div class="align-center">
+		                      				<button type="button" class="delete" th:value="${hlist.animalHealthCode}">
+		                      					<i class="material-icons">delete</i>
+		                      				</button>
+				                       	</div>
+			                       	</td>
 	                        	</tr>
 	                        </tbody>
 	                    </table>
@@ -76,12 +91,24 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
     <script>
     	$(function(){
-    		$('#dataTabelEaxm1').dataTable({
-    			"aaSorting": []
-    		});
     		$('#dataTabelEaxm2').dataTable({
     			"aaSorting": []
     		});
+    		
+    		//삭제 유효성
+			$('.delete').click(function(){
+				var val = $(this).val();
+				console.log(val);
+			    var msg = confirm('해당 기록을 삭제 하겠습니까?');
+			    if(msg  == true){
+			    	var check = confirm('진료 삭제시 확인, 치료 삭제시 취소 버튼을 클릭하세요.');
+			    	if(check == true){
+				    	$(location).attr('href',"/animalhealthdelete?send_code="+val);
+			    	}else{
+				    	$(location).attr('href',"/animalhealthhistorydelete?send_code="+val);
+			    	}
+			    }
+			})
     	});
     </script>
 </th:block>

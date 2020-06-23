@@ -15,7 +15,24 @@ public class AnimalHealthService {
 
 	@Autowired  AnimalHealthMapper animalHealthMapper;
 	
-
+	/**
+	 * 건강 내역 삭제-> 건강 기록으로 update
+	 * @param sed_code
+	 * @return
+	 */
+	public int deleteAnimalHealthHistory(String send_code) {
+		return animalHealthMapper.deleteAnimalHealthHistory(send_code);
+	}
+	
+	/**
+	 * 건강 기록+내역 개체별 검색 - 설채원
+	 * @param send_code
+	 * @return
+	 */
+	public List<AnimalHealth> selectAnimalHealthInfo(String send_code){
+		return animalHealthMapper.selectAnimalHealthInfo(send_code);
+	}
+	
 	/**
 	 * 건강 기록 수정 - 설채원
 	 * @param aheal
