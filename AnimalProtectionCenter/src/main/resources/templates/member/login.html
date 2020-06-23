@@ -51,7 +51,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#memberlogin').click(function(){
-		
+			var memberId=${'#memberId'}.val();
+			var memberPw=${'#memberPw'}.val();
 			var request = $.ajax({
 			  url: "/indexlogin",
 			  method: "POST",
@@ -94,7 +95,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="memberId" value="id001" placeholder="아이디를 입력해주세요" required autofocus>
+                            <input type="text" class="form-control" id="memberId" name="memberId" value="id001" placeholder="아이디를 입력해주세요" required autofocus>
                         </div>
                     </div>
                     <div class="input-group">
@@ -102,7 +103,7 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            <input type="password" class="form-control" name="memberPw" value="pw001" placeholder="비밀번호를 입력해주세요" required>
+                            <input type="password" class="form-control" id="memberPw" name="memberPw" value="pw001" placeholder="비밀번호를 입력해주세요" required>
                         </div>
                     </div>
                     <div class="row">
