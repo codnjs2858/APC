@@ -1,8 +1,5 @@
 package com.cafe24.memory.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +29,14 @@ public class CompanionAnimalRegisterController {
 	@Autowired
 	AnimalCenterService animalCenterService;
 	
+	@GetMapping("/companionAnimalRegisterDelete")
+	
+		public String companionAnimalRegisterDelete(@RequestParam(name="companionAnimalRegisterCode", required = false) String companionAnimalRegisterCode) {
+			companionAnimalRegisterService.deleteCompanionAnimalRegister(companionAnimalRegisterCode);
+			
+			return "redirect:/companionAnimalRegisterList";
+		
+		}
 	
 	@GetMapping("/companionAnimalRegisterList")
 	
@@ -75,12 +80,13 @@ public class CompanionAnimalRegisterController {
 				@RequestParam(name="companionAnimalRegisterCode", required = false) String companionAnimalRegisterCode,
 				Model model){
 			CompanionAnimalRegister companionAnimalRegister = companionAnimalRegisterService.selectCompanionAnimalRegister(companionAnimalRegisterCode);
-			System.out.println(send_code + " <-- send_code companionAnimalRegisterUpdate()");
 			AnimalCenter ac = animalCenterService.selectCenterAnimal(send_code);
-			System.out.println(ac + " <-- ac companionAnimalRegisterUpdate()" );
-			System.out.println(companionAnimalRegister + " <-- companionAnimalRegister companionAnimalRegisterUpdate()" );
 			model.addAttribute("CARC", ac);
 			model.addAttribute("CAREG", companionAnimalRegister);
+			
+			System.out.println(send_code + " <-- send_code companionAnimalRegisterUpdate()");
+			System.out.println(ac + " <-- ac companionAnimalRegisterUpdate()" );
+			System.out.println(companionAnimalRegister + " <-- companionAnimalRegister companionAnimalRegisterUpdate()" );
 			System.out.println(companionAnimalRegister + "<== cAniReg");
 			return "companionanimalregister/companionAnimalRegisterUpdate";
 		

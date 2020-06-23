@@ -19,4 +19,6 @@ public interface CompanionAnimalRegisterMapper {
 	
 	public CompanionAnimalRegister selectCompanionAnimalRegister(String companionAnimalRegisterCode);
 	
+	public int deleteCompanionAnimalRegister(String companionAnimalRegisterCode);
+	
 }

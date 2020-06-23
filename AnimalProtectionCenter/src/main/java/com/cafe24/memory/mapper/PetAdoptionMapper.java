@@ -10,4 +10,10 @@ import com.cafe24.memory.domain.PetAdoption;
 public interface PetAdoptionMapper {
 	
 	public List<PetAdoption> seletectPetAdoption();
+	
+	public int insertPetAdoption(PetAdoption petAdoption);
+	
+	public int updatePetAdoption(PetAdoption petAdoption);
+	
+	public int deletePetAdoption(PetAdoption petAdoption);
 }

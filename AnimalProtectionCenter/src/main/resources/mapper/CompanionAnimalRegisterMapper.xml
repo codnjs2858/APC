@@ -51,6 +51,7 @@
 			s.staff_code=car.staff_code;
 	</select>
 	
+	<!-- 코드로 찾기 -->
 	<select id="selectCompanionAnimalRegister" parameterType="String" resultMap="companionAnimalRegisterResultMap">
 		SELECT 
 			companion_animal_register_code, 
@@ -113,4 +114,12 @@
 		WHERE 
 			companion_animal_register_code = #{companionAnimalRegisterCode};
 	</select>
+	
+	<delete id="deleteCompanionAnimalRegister" parameterType="String">
+		DELETE 
+		FROM 
+			tb_companion_animal_register 
+		WHERE 
+			companion_animal_register_code=#{companionAnimalRegisterCode};
+	</delete>
 </mapper>

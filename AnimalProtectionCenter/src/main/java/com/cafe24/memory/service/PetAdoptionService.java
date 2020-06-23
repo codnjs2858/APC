@@ -21,7 +21,29 @@ public class PetAdoptionService {
 		List<PetAdoption> list = petAdoptionMapper.seletectPetAdoption();
 		
 		return list;
+	}
+	
+	public int insertPetAdoption(PetAdoption petAdoption) {
 		
+		int result = petAdoptionMapper.insertPetAdoption(petAdoption);
+		
+		return result;
+		
+	}
+	
+	public int updatePetAdoption(PetAdoption petAdoption) {
+		
+		int result = petAdoptionMapper.updatePetAdoption(petAdoption);
+		
+		return result;
+		
+	}
+	
+	public int deletePetAdoption(PetAdoption petAdoption) {
+		
+		int result = petAdoptionMapper.deletePetAdoption(petAdoption);
+		
+		return result;
 		
 	}
 

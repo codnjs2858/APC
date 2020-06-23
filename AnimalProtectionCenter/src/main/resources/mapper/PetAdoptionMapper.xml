@@ -12,6 +12,7 @@
 		
 		<association property="staff" javaType="Staff">
 			<result property="staffName" column="staff_name"></result>
+			<result property="staffCode" column="staff_code"></result>
 		</association>
 		
 		<association property="member" javaType="Member">
@@ -23,7 +24,6 @@
 	
 	<!-- 리스트 -->
 	<select id="seletectPetAdoption" 
-	resultType="PetAdoption"
 	resultMap="petAdoption">
 		SELECT 
 			pet_adoption_code, 
@@ -45,5 +45,6 @@
 		AND
 		a.staff_code=t.staff_code;
 	</select>
-
+	
+	
 </mapper>
