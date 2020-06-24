@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.cafe24.memory.domain.Notice;
+import com.cafe24.memory.domain.Board;
 
 @Mapper
 public interface NoticeMapper {
-	public int insertNotice(Notice notice);
-	public List<Notice> selectPosts(Notice notice);
-	public List<Notice> selectNotice();
+	public int insertNotice(Board notice);
+	public List<Board> selectPosts(Board notice);
+	public List<Board> selectNotice();
 }
