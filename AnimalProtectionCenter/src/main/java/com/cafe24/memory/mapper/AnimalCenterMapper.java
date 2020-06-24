@@ -1,6 +1,5 @@
 package com.cafe24.memory.mapper;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -82,17 +81,25 @@ public interface AnimalCenterMapper {
 	public List<Map<String,Object>> selectCenterCnt();
 	
 	/**
-	 * 신고 내역 조회 - 설채원
-	 * @param memberName
-	 * @param memberPhone
-	 * @return
-	 */
-	public ArrayList<SearchReportAnimal> selectCenterReport(String memberName,String memberPhone);
-	
-	/**
 	 * 센터 동물 개체 조회(한 개체) -설채원
 	 * @param send_code
 	 * @return
 	 */
 	public AnimalCenter selectCenterAnimal(String send_code);
+	
+	/**
+	 * 신고 내역 조회 이름+전화번호-> searchReport- 설채원
+	 * @param memberName
+	 * @param memberPhone
+	 * @return
+	 */
+	public List<SearchReportAnimal> selectCenterReport(String memberName,String memberPhone);
+	
+	/**
+	 * 신고내역 조회 센터등록 코드 -> searchReport - 설채원
+	 * @param acceptCode
+	 * @return
+	 */
+	public SearchReportAnimal selectReportCodeAnimal(String send_code);
 }
+

@@ -11,7 +11,14 @@
 		<result property="animalCharacter" column="animal_character"></result>
 		<result property="animalState" column="animal_state"></result>
 		<result property="animalInsertRegDate" column="animal_insert_reg_date"></result>
-		<result property="acceptCode" column="accept_code"></result>
+		
+		<association property="reportManger" javaType="ReportManger">
+			<result property="acceptCode" column="accept_code"></result>
+			<result property="reportCode" column="report_code"></result>
+			<result property="acceptState" column="accept_state"></result>
+			<result property="acceptInDate" column="accept_in_date"></result>
+			<result property="acceptOutDate" column="accept_out_date"></result>
+		</association>
 		<association property="staff" javaType="Staff">
 			<result property="staffCode" column="staff_code"></result>
 			<result property="staffName" column="staff_name"></result>
@@ -48,7 +55,7 @@
 			animal_character=#{animalCharacter},
 			animal_state=#{animalState},
 			animal_type_code=#{animalType.animalTypeCode},
-			accept_code=#{acceptCode}
+			accept_code=#{reportManger.acceptCode}
 		WHERE animal_insert_code=#{animalInsertCode}
 	</update>
 	
@@ -86,13 +93,14 @@
 				, NOW()
 				, #{animalType.animalTypeCode}
 				, #{staff.staffCode}
-				, #{acceptCode})
+				, #{reportManger.acceptCode})
 	</insert>
 	
 	<select id="selectProtectAnimalCenter" resultType="String">
 		SELECT
-			p.protect_space_code
-			FROM 
+			p.protect_space_code AS 'spaceCode'
+			
+		FROM 
 			tb_animal_insert AS i
 			JOIN tb_animal_type AS t ON i.animal_type_code = t.animal_type_code
 			LEFT JOIN tb_protect_space AS p ON i.animal_insert_code = p.animal_insert_code
@@ -136,10 +144,9 @@
 			*
 		FROM 
 			tb_animal_insert AS a
-		JOIN 
-			tb_animal_type AS t
-		ON
-			a.animal_type_code = t.animal_type_code 
+			left JOIN tb_animal_type AS t ON a.animal_type_code = t.animal_type_code 
+			left JOIN tb_staff AS s ON a.staff_code = s.staff_code
+			left JOIN tb_report_manager AS r ON a.accept_code = r.accept_code
 		WHERE 
 			animal_insert_code = #{animal_insert_code};
 	</select>
@@ -153,11 +160,15 @@
 		<result property="animalDetail" column="animal_detail"></result>
 		<result property="animalLocation" column="animal_location"></result>
 		<result property="animalPicture" column="animal_picture"></result>
-		
 		<association property="animalType" javaType="AnimalType">
 			<result property="animalTypeCode" column="animal_type_code"></result>
 			<result property="animalType" column="animal_type"></result>
 			<result property="animalTypeSub" column="animal_type_sub"></result>
+		</association>
+		<association property="member" javaType="Member">
+			<result property="memberId" column="member_id"></result>
+			<result property="memberName" column="member_name"></result>
+			<result property="memberPhone" column="member_phone"></result>
 		</association>
 	</resultMap>
 	
@@ -204,5 +215,17 @@
 			JOIN tb_search_report AS s ON r.report_code = s.search_report_code
 		WHERE 
 			a.animal_insert_code = #{send_code}
+	</select>
+	
+	<select id="selectReportCodeAnimal" parameterType="String" resultMap="SearchReportAnimal">
+		SELECT
+		 *
+		FROM 
+		tb_animal_insert AS a
+		 	left JOIN tb_report_manager AS r ON a.accept_code = r.accept_code
+			JOIN tb_search_report AS s on r.report_code = s.search_report_code
+			JOIN tb_member AS m ON s.member_id = m.member_id
+		WHERE 
+			a.animal_insert_code = #{send_code};
 	</select>
 </mapper>

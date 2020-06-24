@@ -1,7 +1,6 @@
 package com.cafe24.memory.service;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -126,7 +125,16 @@ public class AnimalCenterService {
 	 * @param memberPhone
 	 * @return
 	 */
-	public ArrayList<SearchReportAnimal> selectCenterReport(String memberName,String memberPhone){
+	public List<SearchReportAnimal> selectCenterReport(String memberName,String memberPhone){
 		return animalCenterMapper.selectCenterReport(memberName, memberPhone);
+	}
+	
+	/**
+	 * 센터 등록 코드로 찾음신고 검색
+	 * @param send_code
+	 * @return
+	 */
+	public SearchReportAnimal selectReportCodeAnimal(String send_code) {
+		return animalCenterMapper.selectReportCodeAnimal(send_code);
 	}
 }
