@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.memory.domain.AnimalCenter;
@@ -22,6 +23,7 @@ import com.cafe24.memory.service.ImplementService;
 import com.cafe24.memory.service.PetItemService;
 
 @Controller
+@RequestMapping("/petItem")
 public class PetItemController {
 	
 	@Autowired
@@ -29,10 +31,7 @@ public class PetItemController {
 	
 	@Autowired
 	private AnimalTypeService animalTypeService;
-	
-	@Autowired
-	private CompanionAnimalRegisterService companionAnimalRegisterService; 
-	
+
 	@Autowired
 	private ImplementService implementService;
 	
