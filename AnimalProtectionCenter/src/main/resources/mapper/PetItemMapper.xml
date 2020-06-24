@@ -21,12 +21,46 @@
 		<result property="petGoodsRegDate" 	column="pet_goods_reg_date"/>
 	</resultMap>
 	
+	<delete id="deletePetGoods" parameterType="String">
+		DELETE 
+		FROM 
+			tb_pet_goods 
+		WHERE 
+			pet_goods_code=#{petGoodsCode};
+	</delete>
+	
+	<select id="selectGoodsByImplementCode" parameterType="String" resultMap="pgResultMap">
+		SELECT 
+			 pet_goods_code
+			,implement_code
+			,animal_insert_code
+			,pet_goods_reg_date
+		FROM 
+			tb_pet_goods
+		WHERE
+			implement_code=#{implementCode};
+	</select>
+	
+	<select id="selectImplementTypeNCodeNCnt" resultType="Map">
+		SELECT
+			 i.implement_type AS implementType
+			,g.implement_code AS implementCode
+			,COUNT(g.implement_code) AS cnt
+		FROM
+			tb_pet_goods AS g
+			INNER JOIN 
+			tb_implement AS i
+			ON 
+			g.implement_code = i.implement_code
+		GROUP BY g.implement_code;
+	</select>
+	
 	<insert id="insertPetGoods" parameterType="PetGoods">
 		<selectKey keyProperty="petGoodsCode" resultType="String" order="BEFORE">
 			SELECT
 				CASE COUNT(*)
 				WHEN 0 THEN 'pet_goods_1'
-				ELSE CONCAT('pet_goods_' ,CAST(SUBSTR(implement_code, 11) AS DECIMAL) + 1)
+				ELSE CONCAT('pet_goods_' ,MAX(CAST(SUBSTR(pet_goods_code, 11) AS DECIMAL)) + 1)
 				END
 			FROM
 				tb_pet_goods;

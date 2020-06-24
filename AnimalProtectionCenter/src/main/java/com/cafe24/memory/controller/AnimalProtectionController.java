@@ -18,7 +18,7 @@ import com.cafe24.memory.domain.ProtectionSpace;
 import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.ProtectionService;
 
-@Controller
+@Controller("/protection")
 public class AnimalProtectionController {
 	
 	@Autowired
