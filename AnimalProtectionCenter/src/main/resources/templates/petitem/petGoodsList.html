@@ -52,7 +52,7 @@
 							            <th><div class="align-center">용품</div></th>
 							            <th><div class="align-center">강아지이름</div></th>
 							            <th><div class="align-center">담당자</div></th>
-							            <th data-orderable="false"><div class="align-center">수정</div></th>
+							            <!-- <th data-orderable="false"><div class="align-center">수정</div></th>  -->
 							            <th data-orderable="false"><div class="align-center">삭제</div></th>
 							        </tr>
 							    </thead>
@@ -61,13 +61,15 @@
 							            <td><div class="align-center">[[${g.implement.implementType}]]</div></td>
 							            <td><div class="align-center">[[${g.animalCenter.animalCenterNumber}]]</div></td>
 							            <td><div class="align-center">[[${session.STAFF.staffName}]]</div></td>
+							            <!-- 
 							            <td>
 							            	<div class="align-center">
-								            	<a th:href="@{/petItem/petGoodsUpdate}" style="color: #9E9E9E">
+								            	<a th:href="@{/petItem/petGoodsUpdate(sendCode=${g.goods.petGoodsCode})}" style="color: #9E9E9E">
 								            		<i class="material-icons">update</i>
 								            	</a>
 								            </div>
 							            </td>
+							             -->
 							            <td>
 							            	<div class="align-center">
 								            	<a class="delete" th:href="@{/petItem/petGoodsDelete(sendCode=${g.goods.petGoodsCode})}">

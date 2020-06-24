@@ -44,7 +44,7 @@ public class PetItemController {
 		System.out.println(sendCode + " <-- sendCode petGoodsDelete()");
 		petItemService.deletePetGoods(sendCode);
 		
-		return "redirect:/petGoodsList";
+		return "redirect:/petItem/petGoodsList";
 	}
 	
 	@PostMapping("/petGoodsInsert")
@@ -52,7 +52,7 @@ public class PetItemController {
 		System.out.println(petGoods + " <-- petGoods petGoodsInsert()");
 		petItemService.insertPetGoods(petGoods);
 		
-		return "redirect:/petGoodsList";
+		return "redirect:/petItem/petGoodsList";
 	}
 	
 	@GetMapping("/petGoodsInsert")
@@ -100,7 +100,7 @@ public class PetItemController {
 			@RequestParam(name = "foodCode", required = false) String foodCode) {
 		petItemService.deletePetFood(foodCode);
 		
-		return "redirect:/petFoodList";
+		return "redirect:/petItem/petFoodList";
 	}
 	
 	@GetMapping("/petFoodUpdate")
@@ -138,7 +138,7 @@ public class PetItemController {
 		System.out.println(petFood + " <-- petFood petFoodUpdate()");
 		petItemService.updatePetFood(petFood);
 		
-		return "redirect:/petFoodList";
+		return "redirect:/petItem/petFoodList";
 	}
 	
 	@GetMapping("/petFoodList")
@@ -187,7 +187,7 @@ public class PetItemController {
 		petFood.setFoodRemain(petFood.getFoodAmount());
 		petItemService.insertPetFood(petFood);
 		
-		return "redirect:/petFoodList";
+		return "redirect:/petItem/petFoodList";
 	}
 	
 }
