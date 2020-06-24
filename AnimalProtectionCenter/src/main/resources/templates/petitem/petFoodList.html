@@ -84,7 +84,7 @@
 							            </td>
 							            <td>
 							           	 	<div class="align-center">
-							            		<a id="delete" th:href="@{/petFoodDelete(foodCode=${pf.foodCode})}">
+							            		<a class="delete" th:href="@{/petFoodDelete(foodCode=${pf.foodCode})}">
 							            			<i class="material-icons">delete</i>
 							            		</a>
 							            	</div>
@@ -125,7 +125,7 @@
     			"aaSorting": []
     		});
     		
-    		$('#delete').click(function(){
+    		$('.delete').click(function(){
     			 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
     			     return true;
     			 }else{   //취소

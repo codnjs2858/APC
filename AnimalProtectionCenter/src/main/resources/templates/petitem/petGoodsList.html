@@ -29,34 +29,18 @@
 					<div class="body">
 						<div class="row clearfix">
 		                	<div class="col-xs-3 col-md-3" >
-		                    	<a th:href="@{#}">
+		                    	<a th:href="@{/petGoodsList}">
 			                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
 			                        	전체보기
-			                        	<span class="badge"></span>
+			                        	<span class="badge">[[${petGoodAllList.size()}]]</span>
 			                        </button>
 		                    	</a>
 		                    </div>
-		                	<div class="col-xs-3 col-md-3" >
-		                    	<a th:href="@{#}">
+		                	<div class="col-xs-3 col-md-3" th:each="im : ${implementTypeNCnt}">
+		                    	<a th:href="@{/petGoodsList(sendCode=${im.implementCode})}">
 			                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
-			                        	전체보기
-			                        	<span class="badge"></span>
-			                        </button>
-		                    	</a>
-		                    </div>
-		                	<div class="col-xs-3 col-md-3" >
-		                    	<a th:href="@{#}">
-			                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
-			                        	전체보기
-			                        	<span class="badge"></span>
-			                        </button>
-		                    	</a>
-		                    </div>
-		                	<div class="col-xs-3 col-md-3" >
-		                    	<a th:href="@{#}">
-			                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
-			                        	전체보기
-			                        	<span class="badge"></span>
+			                        	[[${im.implementType}]]
+			                        	<span class="badge">[[${im.cnt}]]</span>
 			                        </button>
 		                    	</a>
 		                    </div>
@@ -86,7 +70,7 @@
 							            </td>
 							            <td>
 							            	<div class="align-center">
-								            	<a id="delete" th:href="@{#}">
+								            	<a class="delete" th:href="@{/petGoodsDelete(sendCode=${g.goods.petGoodsCode})}">
 								            			<i class="material-icons">delete</i>
 								            	</a>							            	
 							            	</div>
@@ -127,7 +111,7 @@
     			"aaSorting": []
     		});
     		
-    		$('#delete').click(function(){
+    		$('.delete').click(function(){
     			 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
     			     return true;
     			 }else{   //취소
