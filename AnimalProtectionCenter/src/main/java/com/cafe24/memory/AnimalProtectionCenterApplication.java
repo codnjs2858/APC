@@ -1,5 +1,7 @@
 package com.cafe24.memory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +12,11 @@ import com.cafe24.memory.service.StorageService;
 @SpringBootApplication
 public class AnimalProtectionCenterApplication {
 
+	private final static Logger logger = 
+			LoggerFactory.getLogger(SpringBootApplication.class);
+	
 	public static void main(String[] args) {
+		logger.info("로거 출력 - {}", "값");
 		SpringApplication.run(AnimalProtectionCenterApplication.class, args);
 	}
 
