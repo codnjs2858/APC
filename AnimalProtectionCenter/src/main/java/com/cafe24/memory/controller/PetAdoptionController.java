@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.memory.domain.Member;
+import com.cafe24.memory.domain.PetAdoption;
+import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.service.MemberService;
 import com.cafe24.memory.service.PetAdoptionService;
 
-@Controller
+@Controller("/PetAdoption")
 public class PetAdoptionController {
 	
 	@Autowired
@@ -52,8 +54,14 @@ public class PetAdoptionController {
 		}
 	
 	@PostMapping("/petAdoptionInsert")
-		public String petAdoptionInsert() {
-			return "petadoption/petAdoptionList";
+		public String petAdoptionInsert(PetAdoption petAdoption, Staff staff, Member member) {
+			
+			petAdoption.setMember(member);
+			petAdoption.setStaff(staff);
+			
+			petAdoptionService.insertPetAdoption(petAdoption);
+			System.out.println(petAdoption + "<petAdoption");
+			return "redirect:/petAdoptionList";
 		
 		}
 	

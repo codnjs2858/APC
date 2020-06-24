@@ -61,8 +61,8 @@
 					#{staff.staffCode}, 
 					NOW(), 
 					#{petAdoptionState}, 
-					NOW(), 
-					NOW()
+					#{petAdoptionManagementDate}, 
+					#{petAdoptionEndDate}
 					);
 	</insert>
 	

@@ -1,7 +1,5 @@
 package com.cafe24.memory.domain;
 
-import java.util.Date;
-
 public class PetAdoption {
 	
 	private String petAdoptionCode;
