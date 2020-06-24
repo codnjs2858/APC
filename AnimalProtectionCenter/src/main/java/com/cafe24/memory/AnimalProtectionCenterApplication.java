@@ -1,7 +1,11 @@
 package com.cafe24.memory;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.cafe24.memory.service.StorageService;
 
 @SpringBootApplication
 public class AnimalProtectionCenterApplication {
@@ -10,4 +14,14 @@ public class AnimalProtectionCenterApplication {
 		SpringApplication.run(AnimalProtectionCenterApplication.class, args);
 	}
 
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+			//서버 시작시 전체 업로드 경로의 파일 제거
+			//storageService.deleteAll();
+			//파일 업로드 없을 경우 폴더 생성
+			storageService.init();
+		};
+	}
+	
 }
