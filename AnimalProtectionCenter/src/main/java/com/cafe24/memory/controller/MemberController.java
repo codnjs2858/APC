@@ -81,24 +81,7 @@ public class MemberController {
 		return "member/memberList";
 	}
 	
-	/**
-	 * 회원가입시 기존 아이디 존재하는지 중복확인-이경진
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/ajax/Addmember", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public String ajaxAddmember(@RequestParam(value = "id") String id) {
-		System.out.println(id);
-		Member member= new Member();
-		member.setMemberId(id);
-		List<Member>mList=memberService.getMemberList(member);
-		String result="";
-		if(mList != null && !"".equals(mList.get(0).getMemberId())){
-			result="이미 존재하는 아이디 입니다";
-		}
-		return result;
-	}
+
 	@GetMapping("/memberUpdate")
 	public String memberUpdate(Model model,Member member) {
 		System.out.println(member+"<-member");
