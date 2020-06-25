@@ -22,6 +22,7 @@ import com.cafe24.memory.service.MemberService;
 import com.cafe24.memory.service.StaffService;
 
 @Controller
+@RequestMapping("/member")
 public class MemberController {
 	@Autowired private MemberService memberService;
 	@Autowired private StaffService staffService;
@@ -67,7 +68,7 @@ public class MemberController {
 		model.addAttribute("title", "회원가입");
 		int result=memberService.insertMember(member);
 		System.out.println(result+"<-controller insertMember결과값");
-		return "redirect:/getMemberList";
+		return "redirect:/member/getMemberList";
 	}
 	@GetMapping("/adminAddMember")
 	public String addMebmer(Model model) {
@@ -80,24 +81,7 @@ public class MemberController {
 		return "member/memberList";
 	}
 	
-	/**
-	 * 회원가입시 기존 아이디 존재하는지 중복확인-이경진
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/ajax/Addmember", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public String ajaxAddmember(@RequestParam(value = "id") String id) {
-		System.out.println(id);
-		Member member= new Member();
-		member.setMemberId(id);
-		List<Member>mList=memberService.getMemberList(member);
-		String result="";
-		if(mList != null && !"".equals(mList.get(0).getMemberId())){
-			result="이미 존재하는 아이디 입니다";
-		}
-		return result;
-	}
+
 	@GetMapping("/memberUpdate")
 	public String memberUpdate(Model model,Member member) {
 		System.out.println(member+"<-member");
@@ -125,7 +109,7 @@ public class MemberController {
 		} catch (Exception e) {
 			System.out.println("회원삭제 실패");
 		}
-		return "redirect:/animalcenterlist";
+		return "redirect:/animalcenter/animalcenterlist";
 	}
 	@GetMapping("/forgotPassword")
 	public String forgotPassword(Member member) {
@@ -135,7 +119,7 @@ public class MemberController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/login";
+		return "redirect:/member/login";
 	}
 	@PostMapping(value="/indexlogin", produces="application/json")
 	@ResponseBody

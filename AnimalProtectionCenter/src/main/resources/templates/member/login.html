@@ -1,96 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-    <!-- Favicon-->
-    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customCss">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+</th:block>
 
-    <!-- Bootstrap Core Css -->
-    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+ <th:block layout:fragment="customTitle">
+ <title>로그인</title>
+ </th:block> 
 
-    <!-- Waves Effect Css -->
-    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+ <th:block layout:fragment="customHeadScript">
 
-    <!-- Animation Css -->
-    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
-
-    <!-- Custom Css -->
-    <link href="../../css/style.css" rel="stylesheet">
-
-    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
-
-	
-		<!-- Jquery Core Js -->
-		<script src="../../plugins/jquery/jquery.min.js"></script>
-		
-		<!-- Bootstrap Core Js -->
-		<script src="../../plugins/bootstrap/js/bootstrap.js"></script>
-		
-		<!-- Select Plugin Js -->
-		<script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
-		
-		<!-- Slimscroll Plugin Js -->
-		<script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
-		
-		<!-- Waves Effect Plugin Js -->
-		<script src="../../plugins/node-waves/waves.js"></script>
-		
-		<!-- Custom Js -->
-		<script src="../../js/admin.js"></script>
-		<!-- Demo Js -->
-		
-		<script src="../../js/demo.js"></script>
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#memberlogin').click(function(){
-			var memberId=${'#memberId'}.val();
-			var memberPw=${'#memberPw'}.val();
-			var request = $.ajax({
-			  url: "/indexlogin",
-			  method: "POST",
-			//  data: { id : menuId },
-			  dataType: "json"
-			});
-			 					//result
-			request.done(function( msg ) {
-			console.log(msg);	
-			
-			});
-			 
-			request.fail(function( jqXHR, textStatus ) {
-			  alert( "Request failed: " + textStatus );
-			});			
-			
-		});
-	})
-
-</script>
-</head>
-	<body class="login-page">
-    <div class="login-box">
+</th:block> 
+ <th:block layout:fragment="customContents">
+ 	  <section class="content">
+        <div class="container-fluid">
+ 
         <div class="logo">
             <a href="javascript:void(0);">유기동물<b>관리센터</b></a>
             <small>ksmart 2team 유기동물 관리센터 로그인</small>
         </div>
-        <div class="card">
+        <div class="card" style="margin-bottom: 500px; ">
+           <div class="login-page login-box">
             <div class="body">
-                <form id="loginform" action="/login" method="post">
+                <form id="loginform" action="/member/login" method="post">
                     <div class="msg">아이디와 비번을 입력해주세요</div>
                     <div class="demo-button">
                     <button type="button" id="memberlogin"class="btn btn-block btn-lg btn-warning waves-effect">회원로그인</button>
-                    </div></br>
-                    <div class="demo-button">
+                    </div>
+                    <div class="demo-button m-t-10">
                     <button type="button" id="adminlogin" class="btn btn-block btn-lg btn-warning waves-effect">관리자로그인</button>
-                    </div></br>
-                    <div class="input-group">
+                    </div>
+                    <div class="input-group m-t-10">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
                         </span>
@@ -106,25 +48,34 @@
                             <input type="password" class="form-control" id="memberPw" name="memberPw" value="pw001" placeholder="비밀번호를 입력해주세요" required>
                         </div>
                     </div>
-                    <div class="row">
-                       
-                        <div class="col-xs-4">
-                            <button class="btn btn-block bg-red waves-effect" type="submit" id="loginBtn">로그인</button>
+                  
+                   
+                        <div  class="demo-button">
+                            <button class="btn btn-block btn-lg btn bg-red waves-effect" type="submit" id="loginBtn">로그인</button>
                         </div>
-                        
-                    </div>
+                 
                     <div class="row m-t-15 m-b--20">
                         <div class="col-xs-6">
-                            <a th:href="@{/addMember}">회원가입</a>
+                            <a th:href="@{/member/addMember}">회원가입</a>
                         </div>
                         <div class="col-xs-6 align-right">
-                            <a href="/forgotPassword">비밀번호찾기</a>
+                            <a href="/member/forgotPassword">비밀번호찾기</a>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
- <script src="../../js/pages/examples/sign-in.js"></script>	
-</body>
+
+
+</div>
+</section>
+ </th:block> 
+
+<th:block layout:fragment="customFooterScript">
+ <!-- Validation Plugin Js -->
+    <script src="../../plugins/jquery-validation/jquery.validate.js"></script>
+       <script src="../../js/pages/examples/sign-in.js"></script>
+</th:block>
+ 
 </html>

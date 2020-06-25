@@ -16,7 +16,7 @@ import com.cafe24.memory.service.AnimalTypeService;
 
 
 @Controller
-@RequestMapping("/adoption")
+@RequestMapping("adoption")
 public class AnimalAdoptionController {
 	@Autowired private AnimalTypeService animalTypeService;
 	

@@ -21,6 +21,25 @@ public class CenterReturnService {
 		List<CenterReturn> list = centerReturnMapper.selectCenterReturn();
 		
 		return list;
+	}
+	
+	public int insertCenterReturn(CenterReturn centerReturn) {
 		
+		return centerReturnMapper.insertCenterReturn(centerReturn);
+	}
+	
+	public int updateCenterReturn(CenterReturn centerReturn) {
+		
+		return centerReturnMapper.updateCenterReturn(centerReturn);
+	}
+	
+	public int deleteCenterReturn(String centerReturnCode) {
+		
+		return centerReturnMapper.deleteCenterReturn(centerReturnCode);
+	}
+	
+	public CenterReturn selectCenterReturnCode(String centerReturnCode) {
+		
+		return centerReturnMapper.selectCenterReturnCode(centerReturnCode);
 	}
 }
