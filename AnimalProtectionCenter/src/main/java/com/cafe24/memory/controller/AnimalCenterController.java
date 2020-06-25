@@ -42,32 +42,7 @@ public class AnimalCenterController {
 	
 	private final static Logger logger = 
 			LoggerFactory.getLogger(SpringBootApplication.class);
-	//이게 다운로드
-	@GetMapping("/files/{filename:.+}")
-	@ResponseBody
-	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-		//파일 다운로드
-		logger.info("로거 출력해보자 - {}", "파일 다운로드");
-		logger.error("에러를 출력해보자 - {}", "파일 다운로드");
-		Resource file = storageService.loadAsResource(filename);
-		ResponseEntity<Resource>  re = ResponseEntity.ok().header(
-				HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\""
-		).body(file);
-		return re;
-	}
-
-	//이게 업로드 form 에서 MultipartFile로 보내고 파라미터로 받고하면 됨 storageService.store(); 만 해주면 올라감 
-	@PostMapping("/")
-	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-		storageService.store(file);
-		//redirect 보내면서 Attribute 전달
-		redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
-		redirectAttributes.addFlashAttribute("imageFile", "/files/" + file.getOriginalFilename());
-		
-		return "redirect:/";
-	}
-		
-		
+	
 	//animal center inset
 	@GetMapping("/animalcenterinsert")
 	public String insertAnimalCenterForm() {
