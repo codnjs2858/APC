@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,6 +20,7 @@ import com.cafe24.memory.service.MemberService;
 import com.cafe24.memory.service.ScreeningCompleteService;
 
 @Controller
+@RequestMapping("/adoptee")
 public class AdopteeController {
 	
 	@Autowired
@@ -62,6 +64,6 @@ public class AdopteeController {
 			adoptee.setScreeningComplete(screeningComplete);
 			
 			adopteeService.insertAdoptee(adoptee);
-			return "redirect:/adopteeList";
+			return "redirect:/adoptee/adopteeList";
 		}
 }
