@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+
+<th:block layout:fragment="customTitle">
+	<title>센터 등록 동물 리스트sck</title>
+</th:block>	
+<th:block layout:fragment="customCss">
+	<!-- JQuery DataTable Css -->
+    <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+    <style>
+    	.delete {
+    		color: #F44336;
+    		border: 0; 
+    		outline: 0; 
+    		background: none;
+    	}
+    </style>
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="header">
+	                <h2>보호 동물 리스트SCK</h2>
+				</div>
+				<div class="body">
+	                <div class="table-responsive" style="overflow: hidden;">
+	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
+	                        <thead>
+	                            <tr>
+		                            <th data-orderable="false"></th>
+		                            <th><div class="align-center">동물 번호</div></th>
+		                            <th><div class="align-center">종류</div></th>
+		                            <th><div class="align-center">품종</div></th>
+		                            <th><div class="align-center">성별</div></th>
+		                            <th><div class="align-center">건강상태</div></th>
+		                            <th><div class="align-center">등록 날짜</div></th>
+		                            <th><div class="align-center">담당자</div></th>
+		                            <th><div class="align-center">보호공간</div></th>
+		                            <th data-orderable="false"><div class="align-center">수정</div></th>
+		                            <th data-orderable="false"><div class="align-center">삭제</div></th>
+		                        </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr th:each="ac, i : ${AClist}" class="odd">
+	                       			<!-- <td><div class="align-center"><span class="label label-warning">new</span></div></td> -->
+				                    <td><div class="align-center">[[${i.size - i.index}]]</div></td>
+				                    <td><div class="align-center">[[${ac.animalCenterNumber}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalType.animalType}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalType.animalTypeSub}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalGender}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalInsertRegDate}]]</div></td>
+		                            <td><div class="align-center">[[${ac.staff.staffName}]]</div></td>
+		                            <td>
+		                            	<div class="align-center proNum">
+			                            	
+		                            	</div>
+	                            	</td>
+		                            <td>
+		                            	<div class="align-center">
+			                            	<a th:href="@{/animalcenterupdateSCK(send_code=${ac.animalInsertCode})}" style="color: #9E9E9E">
+		                       					<i class="material-icons">update</i>
+		                       				</a>
+		                       			</div>
+	                      			</td>
+	                      			<td>
+			                            <div class="align-center">
+		                      				<button type="button" class="delete" th:value="${ac.animalInsertCode}">
+		                      					<i class="material-icons">delete</i>
+		                      				</button>
+				                       	</div>
+			                       	</td>
+	                        	</tr>
+	                        </tbody>
+	                    </table>
+	                </div>
+	            </div>
+			</div>
+		</div>
+	</section>
+</th:block> 
+ 
+<th:block layout:fragment="customHeadScript">
+
+</th:block> 
+<th:block layout:fragment="customFooterScript">
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
+    	$(function(){
+    		$('#dataTabelEaxm1').dataTable({
+    			"aaSorting": []
+    		});
+    		
+    		//삭제 유효성
+			$('.delete').click(function(){
+				var val = $(this).val();
+				console.log(val);
+				var url ="/animalcenterdelete?send_code="+val;
+			    var msg = confirm('해당 동물을 삭제 하겠습니까?');
+			    if(msg  == true){
+			    	$(location).attr('href',url);
+			    }
+			})
+			/* var proNum = [[${proNum}]]; */
+		
+			var html = "<a th:href=\"@{/animalProtection}\">보호 공간 등록</a>";
+			$('.proNum').html(html);
+    	});
+    </script>
+</th:block>
+ 
+</html>

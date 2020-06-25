@@ -17,7 +17,7 @@
             
             <div class="card">
             	<div class="body">
-            		<form id="petFoodForm" action="/petFoodInsert" method="post">
+            		<form id="petFoodForm" action="/petItem/petFoodInsert" method="post">
             			<div class="row">
             				<div class="col-md-4">
             					<div class="input-group">
@@ -87,7 +87,7 @@
 </th:block> 
 
 <th:block layout:fragment="customCss">
-	<link href="../../plugins/multi-select/css/multi-select.css" rel="stylesheet">
+	<link href="/plugins/multi-select/css/multi-select.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 </th:block>
 
@@ -105,12 +105,12 @@
 			}
 			
 			$('#petFoodBtn').click(function(){
-				if(checkValue($('#foodType'), '사료종료를 입력해주세요')) return;
-				if(checkValue($('#foodPrice'), '사료가격을 입력해주세요')) return;
-				if(checkValue($('#foodAmount'), '사료 구입량을 입력해주세요')) return;
-				if(checkValue($('#foodBuyer'), '구매인을 입력해주세요')) return;
-				if(checkValue($('#foodName'), '사료이름을 입력해주세요')) return;
-				if(checkValue($('#foodCompany'), '사료회사를 입력해주세요')) return;
+				if(checkValue($('#foodType'), 	'사료종료를 입력해주세요')) 	return;
+				if(checkValue($('#foodPrice'), 	'사료가격을 입력해주세요')) 	return;
+				if(checkValue($('#foodAmount'), '사료 구입량을 입력해주세요')) 	return;
+				if(checkValue($('#foodBuyer'), 	'구매인을 입력해주세요')) 		return;
+				if(checkValue($('#foodName'), 	'사료이름을 입력해주세요')) 	return;
+				if(checkValue($('#foodCompany'),'사료회사를 입력해주세요')) 	return;
 				
 				$('#petFoodForm').submit();
 			});

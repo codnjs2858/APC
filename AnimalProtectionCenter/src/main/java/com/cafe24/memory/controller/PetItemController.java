@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.memory.domain.AnimalCenter;
@@ -22,6 +23,7 @@ import com.cafe24.memory.service.ImplementService;
 import com.cafe24.memory.service.PetItemService;
 
 @Controller
+@RequestMapping("/petItem")
 public class PetItemController {
 	
 	@Autowired
@@ -29,22 +31,28 @@ public class PetItemController {
 	
 	@Autowired
 	private AnimalTypeService animalTypeService;
-	
-	@Autowired
-	private CompanionAnimalRegisterService companionAnimalRegisterService; 
-	
+
 	@Autowired
 	private ImplementService implementService;
 	
 	@Autowired
 	private AnimalCenterService animalCenterService;
 	
+	@GetMapping("/petGoodsDelete")
+	public String petGoodsDelete(
+			@RequestParam(name = "sendCode", required = false) String sendCode){
+		System.out.println(sendCode + " <-- sendCode petGoodsDelete()");
+		petItemService.deletePetGoods(sendCode);
+		
+		return "redirect:/petItem/petGoodsList";
+	}
+	
 	@PostMapping("/petGoodsInsert")
 	public String petGoodsInsert(PetGoods petGoods) {
 		System.out.println(petGoods + " <-- petGoods petGoodsInsert()");
 		petItemService.insertPetGoods(petGoods);
 		
-		return "redirect:/petGoodsList";
+		return "redirect:/petItem/petGoodsList";
 	}
 	
 	@GetMapping("/petGoodsInsert")
@@ -73,11 +81,15 @@ public class PetItemController {
 	}
 	
 	@GetMapping("/petGoodsList")
-	public String petGoodsList(Model model) {
+	public String petGoodsList(Model model,
+			@RequestParam(name = "sendCode", required = false) String sendCode) {
 		/* 한개만 가져왔었는데 보니깐 값들이 code 임 그래서 code 값을 가지고 일일히 다 찾아서 Map 으로 받아 처리함 
 		 * List<PetGoods> petGoodList = petItemService.selectPetGoods(); */
-		List<Map<String, Object>> petGoodAllList = petItemService.searchImplementNAnimalInsertByPetGoods();
+		List<Map<String, Object>> petGoodAllList = petItemService.searchImplementNAnimalInsertByPetGoods(sendCode);
 		System.out.println(petGoodAllList + " <-- petGoodAllList petGoodsList()");
+		List<Map<String, Object>> implementTypeNCnt = petItemService.selectImplementTypeNCodeNCnt();
+		System.out.println(implementTypeNCnt + " <-- implementTypeNCnt petGoodsList()");
+		model.addAttribute("implementTypeNCnt", implementTypeNCnt);
 		model.addAttribute("petGoodAllList", petGoodAllList);
 		
 		return "petitem/petGoodsList";
@@ -88,7 +100,7 @@ public class PetItemController {
 			@RequestParam(name = "foodCode", required = false) String foodCode) {
 		petItemService.deletePetFood(foodCode);
 		
-		return "redirect:/petFoodList";
+		return "redirect:/petItem/petFoodList";
 	}
 	
 	@GetMapping("/petFoodUpdate")
@@ -126,7 +138,7 @@ public class PetItemController {
 		System.out.println(petFood + " <-- petFood petFoodUpdate()");
 		petItemService.updatePetFood(petFood);
 		
-		return "redirect:/petFoodList";
+		return "redirect:/petItem/petFoodList";
 	}
 	
 	@GetMapping("/petFoodList")
@@ -175,7 +187,7 @@ public class PetItemController {
 		petFood.setFoodRemain(petFood.getFoodAmount());
 		petItemService.insertPetFood(petFood);
 		
-		return "redirect:/petFoodList";
+		return "redirect:/petItem/petFoodList";
 	}
 	
 }
