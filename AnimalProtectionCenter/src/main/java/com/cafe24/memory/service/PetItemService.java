@@ -16,6 +16,7 @@ import com.cafe24.memory.domain.PetGoods;
 import com.cafe24.memory.mapper.AnimalCenterMapper;
 import com.cafe24.memory.mapper.ImplementMapper;
 import com.cafe24.memory.mapper.PetItemMapper;
+import com.cafe24.memory.mapper.StaffMapper;
 
 @Service
 @Transactional
@@ -29,6 +30,9 @@ public class PetItemService {
 	
 	@Autowired
 	private AnimalCenterMapper animalCenterMapper;
+	
+	@Autowired
+	private StaffMapper staffMapper;
 	
 	/**
 	 * 펫용품 삭제 - 손충기

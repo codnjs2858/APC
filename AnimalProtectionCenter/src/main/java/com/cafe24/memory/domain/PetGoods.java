@@ -4,7 +4,8 @@ public class PetGoods {
 	private String petGoodsCode;
 	private String implementCode;
 	private String animalInsertCode;
-	private String petGoodsRegDate;
+	private String staffCode;
+	private String petGoodsRegDate;	
 	public String getPetGoodsCode() {
 		return petGoodsCode;
 	}
@@ -23,6 +24,12 @@ public class PetGoods {
 	public void setAnimalInsertCode(String animalInsertCode) {
 		this.animalInsertCode = animalInsertCode;
 	}
+	public String getStaffCode() {
+		return staffCode;
+	}
+	public void setStaffCode(String staffCode) {
+		this.staffCode = staffCode;
+	}
 	public String getPetGoodsRegDate() {
 		return petGoodsRegDate;
 	}
@@ -32,7 +39,7 @@ public class PetGoods {
 	@Override
 	public String toString() {
 		return "PetGoods [petGoodsCode=" + petGoodsCode + ", implementCode=" + implementCode + ", animalInsertCode="
-				+ animalInsertCode + ", petGoodsRegDate=" + petGoodsRegDate + "]";
+				+ animalInsertCode + ", staffCode=" + staffCode + ", petGoodsRegDate=" + petGoodsRegDate + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -42,6 +49,7 @@ public class PetGoods {
 		result = prime * result + ((implementCode == null) ? 0 : implementCode.hashCode());
 		result = prime * result + ((petGoodsCode == null) ? 0 : petGoodsCode.hashCode());
 		result = prime * result + ((petGoodsRegDate == null) ? 0 : petGoodsRegDate.hashCode());
+		result = prime * result + ((staffCode == null) ? 0 : staffCode.hashCode());
 		return result;
 	}
 	@Override
@@ -73,6 +81,12 @@ public class PetGoods {
 				return false;
 		} else if (!petGoodsRegDate.equals(other.petGoodsRegDate))
 			return false;
+		if (staffCode == null) {
+			if (other.staffCode != null)
+				return false;
+		} else if (!staffCode.equals(other.staffCode))
+			return false;
 		return true;
 	}
+	
 }

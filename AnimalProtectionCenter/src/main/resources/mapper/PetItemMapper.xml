@@ -15,9 +15,10 @@
 	</resultMap>
 	
 	<resultMap type="PetGoods" id="pgResultMap">
-		<result property="petGoodsCode" column="pet_goods_code"/>
+		<result property="petGoodsCode" 	column="pet_goods_code"/>
 		<result property="implementCode" 	column="implement_code"/>
-		<result property="animalInsertCode" 	column="animal_insert_code"/>
+		<result property="animalInsertCode" column="animal_insert_code"/>
+		<result property="staffCode" 		column="staff_code"/>
 		<result property="petGoodsRegDate" 	column="pet_goods_reg_date"/>
 	</resultMap>
 	
@@ -34,6 +35,7 @@
 			 pet_goods_code
 			,implement_code
 			,animal_insert_code
+			,staff_code
 			,pet_goods_reg_date
 		FROM 
 			tb_pet_goods
@@ -70,6 +72,7 @@
 			 pet_goods_code 
 			,implement_code 
 			,animal_insert_code
+			,staff_code
 			,pet_goods_reg_date
 			)
 			VALUES 
@@ -77,6 +80,7 @@
 			 #{petGoodsCode}
 			,#{implementCode}
 			,#{animalInsertCode}
+			,#{staffCode}
 			,CURDATE()
 			)	
 	</insert>
@@ -86,10 +90,13 @@
 			 pet_goods_code
 			,implement_code
 			,animal_insert_code
+			,staff_code
 			,pet_goods_reg_date
 		FROM 
 			tb_pet_goods;
 	</select>
+	
+	<!-- 사료 -->
 	
 	<delete id="deletePetFood" parameterType="String">
 		DELETE 

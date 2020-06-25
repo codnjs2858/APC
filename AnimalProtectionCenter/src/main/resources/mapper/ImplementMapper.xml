@@ -11,7 +11,22 @@
 		<result property="implementBreakageAmount" 	column="implement_breakage_amount"/>
 		<result property="implementPrice" 			column="implement_price"/>
 	</resultMap>
-
+	
+	<!-- 시설 수정 처리 -->
+	<update id="updateImplement" parameterType="Implement">
+		UPDATE tb_implement
+		SET
+			 implement_type=#{implementType}
+			,implement_amount=#{implementAmount}
+			,implement_receipt_count=#{implementReceiptCount}
+			,implement_remain=#{implementRemain}
+			,implement_breakage_amount=#{implementBreakageAmount}
+			,implement_price=#{implementPrice}
+		WHERE 
+			implement_code=#{implementCode}
+	</update>
+	
+	<!-- 시설을 코드로 찾기 -->
 	<select id="selectImplementByCode" parameterType="String" resultMap="imResultMap">
 		SELECT 
 			 implement_code
@@ -27,6 +42,7 @@
 			implement_code=#{implementCode};
 	</select>
 
+	<!-- 모든 시설 찾기 -->
 	<select id="selectImplement" resultMap="imResultMap">
 		SELECT 
 			 implement_code

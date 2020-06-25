@@ -16,6 +16,10 @@ public class ImplementService {
 	@Autowired
 	ImplementMapper implementMapper;
 	
+	public int updateImplement(Implement implement) {
+		return implementMapper.updateImplement(implement);
+	}
+	
 	public Implement selectImplementByCode(String implementCode) {
 		return implementMapper.selectImplementByCode(implementCode);
 	}

@@ -45,7 +45,7 @@
 		                    	</a>
 		                    </div>
 		                </div>
-						<div class="table-responsive"  style="overflow: hidden;">
+						<div class="table-responsive" style="overflow: hidden;">
 							<table id="dataTable" class="table table-bordered table-striped table-hover">
 							    <thead>
 							        <tr>
@@ -60,7 +60,7 @@
 							        <tr th:each="g : ${petGoodAllList}">
 							            <td><div class="align-center">[[${g.implement.implementType}]]</div></td>
 							            <td><div class="align-center">[[${g.animalCenter.animalCenterNumber}]]</div></td>
-							            <td><div class="align-center">[[${session.STAFF.staffName}]]</div></td>
+							            <td><div class="align-center">[[${g.animalCenter.staff.staffCode}]]</div></td>
 							            <!-- 
 							            <td>
 							            	<div class="align-center">

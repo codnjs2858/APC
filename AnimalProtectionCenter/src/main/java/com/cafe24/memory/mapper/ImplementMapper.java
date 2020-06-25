@@ -10,6 +10,13 @@ import com.cafe24.memory.domain.Implement;
 public interface ImplementMapper {
 	
 	/**
+	 * 시설 수정 처리 - 손충기
+	 * @param implement
+	 * @return
+	 */
+	int updateImplement(Implement implement);
+	
+	/**
 	 * 시설코드로 찾기 - 손충기
 	 * @param implementCode
 	 * @return

@@ -37,7 +37,7 @@ public class AnimalProtectionController {
 		System.out.println(aniProtectionNum + " <-- aniProtectionNum exitAnimalProtection() AnimalProtectionController.java");
 		protectionService.exitProtectionSpace(protectSpaceCode, aniProtectionNum);
 		
-		return "redirect:/animalProtection";
+		return "redirect:/protection/animalProtection";
 	}
 	
 	@PostMapping("/insertCodeCheck")
@@ -123,7 +123,7 @@ public class AnimalProtectionController {
 		System.out.println(animalProtect + " <-- addAnimalProtection() AnimalProtectionController.java");
 		protectionService.insertAniamlProtection(animalProtect);
 		
-		return "redirect:/animalProtection";
+		return "redirect:/protection/animalProtection";
 	}
 	
 	@PostMapping("/animalProtection")
@@ -144,7 +144,7 @@ public class AnimalProtectionController {
 		System.out.println(animalProtect + " <-- animalProtection() AnimalProtectionController.java");
 		protectionService.updateAnimalProtectionIn(animalProtect);
 		
-		return "redirect:/animalProtection";
+		return "redirect:/protection/animalProtection";
 	}
 	
 	@GetMapping("/addAnimalProtection")

@@ -9,91 +9,52 @@
 <th:block layout:fragment="customContents">
 	<section class="content">
 		<div class="container-fluid">
-			<div class="block-header">
-                <h2>
-                    	시설리스트
-                </h2>
-            </div>
-			
 			<div class="card">
+				<div class="header">
+					<h2>
+						시설리스트
+					</h2>
+				</div>
 				<div class="body">
-					<div class="table-responsive">
-						<table class="table table-bordered" style="text-align: center;">
+					<div class="table-responsive" style="overflow: hidden;">
+						<table id="dataTable" class="table table-bordered table-striped table-hover" style="text-align: center;">
 						    <thead>
 						        <tr>
-						            <th>시설종류</th>
-						            <th>총수량</th>
-						            <th>입고수량</th>
-						            <th>재고</th>
-						            <th>파손량</th>
-						            <th>단가</th>
-						            <th>구매인</th>
-						            <th>수정</th>
-						            <th>삭제</th>
+						            <th><div class="align-center">시설종류</div></th>
+						            <th><div class="align-center">총수량</div></th>
+						            <th><div class="align-center">입고수량</div></th>
+						            <th><div class="align-center">재고</div></th>
+						            <th><div class="align-center">파손량</div></th>
+						            <th><div class="align-center">단가</div></th>
+						            <th><div class="align-center">구매인</div></th>
+						            <th data-orderable="false"><div class="align-center">수정</div></th>
+						            <th data-orderable="false"><div class="align-center">삭제</div></th>
 						        </tr>
 						    </thead>
 						    <tbody>
-						        <tr>
-						            <td>케이지소</td>
-						            <td>50</td>
-						            <td>37</td>
-						            <td>10</td>
-						            <td>3</td>
-						            <td>10000</td>
-						            <td>홍02</td>
+						        <tr th:each="im : ${impleList}">
+						            <td><div class="align-center">[[${im.implementType}]]</div></td>
+						            <td><div class="align-center">[[${im.implementAmount}]]</div></td>
+						            <td><div class="align-center">[[${im.implementReceiptCount}]]</div></td>
+						            <td><div class="align-center">[[${im.implementRemain}]]</div></td>
+						            <td><div class="align-center">[[${im.implementBreakageAmount}]]</div></td>
+						            <td><div class="align-center">[[${im.implementPrice}]]</div></td>
+						            <td><div class="align-center">새리</div></td>
 						            <td>
-						            	<a th:href="@{/implement/implementUpdate}">수정</a>
+						            	<div class="align-center">
+							            	<a th:href="@{/implement/implementUpdate(sendCode=${im.implementCode})}" style="color: #9E9E9E">
+							            		<i class="material-icons">update</i>
+							            	</a>
+							            </div>
 						            </td>
 						            <td>
-						            	<a th:href="@{#}">삭제</a>
-						            </td>
-						        </tr>
-						        <tr>
-						            <td>케이지대</td>
-						            <td>10</td>
-						            <td>7</td>
-						            <td>2</td>
-						            <td>1</td>
-						            <td>100000</td>
-						            <td>홍02</td>
-						            <td>
-						            	<a th:href="@{/implement/implementUpdate}">수정</a>
-						            </td>
-						            <td>
-						            	<a th:href="@{#}">삭제</a>
+						            	<div class="align-center">
+							            	<a class="delete" th:href="@{#}">
+							            			<i class="material-icons">delete</i>
+							            	</a>							            	
+						            	</div>
 						            </td>
 						        </tr>
-						        <tr>
-						            <td>담요</td>
-						            <td>130</td>
-						            <td>23</td>
-						            <td>5</td>
-						            <td>2</td>
-						            <td>10000</td>
-						            <td>홍02</td>
-						            <td>
-						            	<a th:href="@{/implement/implementUpdate}">수정</a>
-						            </td>
-						            <td>
-						            	<a th:href="@{#}">삭제</a>
-						            </td>
-						        </tr>
-						        <tr>
-						            <td>밥그릇</td>
-						            <td>50</td>
-						            <td>20</td>
-						            <td>30</td>
-						            <td>0</td>
-						            <td>10000</td>
-						            <td>홍02</td>
-						            <td>
-						            	<a th:href="@{/implement/implementUpdate}">수정</a>
-						            </td>
-						            <td>
-						            	<a th:href="@{#}">삭제</a>
-						            </td>
-						        </tr>
-						       
 						    </tbody>
 						</table>
 					</div>
@@ -107,9 +68,28 @@
 </th:block> 
 
 <th:block layout:fragment="customCss">
+	<!-- JQuery DataTable Css -->
+    <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
+	<!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
+	    $(function(){
+			$('#dataTable').dataTable({
+				"aaSorting": []
+			});
+	    });
+    </script>
 </th:block>
  
 </html>
