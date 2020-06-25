@@ -24,7 +24,7 @@
         <div class="card" style="margin-bottom: 500px; ">
            <div class="login-page login-box">
             <div class="body">
-                <form id="loginform" action="/login" method="post">
+                <form id="loginform" action="/member/login" method="post">
                     <div class="msg">아이디와 비번을 입력해주세요</div>
                     <div class="demo-button">
                     <button type="button" id="memberlogin"class="btn btn-block btn-lg btn-warning waves-effect">회원로그인</button>
@@ -56,10 +56,10 @@
                  
                     <div class="row m-t-15 m-b--20">
                         <div class="col-xs-6">
-                            <a th:href="@{/addMember}">회원가입</a>
+                            <a th:href="@{/member/addMember}">회원가입</a>
                         </div>
                         <div class="col-xs-6 align-right">
-                            <a href="/forgotPassword">비밀번호찾기</a>
+                            <a href="/member/forgotPassword">비밀번호찾기</a>
                         </div>
                     </div>
                 </form>
