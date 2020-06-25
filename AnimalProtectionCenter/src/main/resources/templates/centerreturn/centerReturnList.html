@@ -23,7 +23,7 @@
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a href="/centerreturn/centerReturnInsert" class=" waves-effect waves-block">블랙리스트 등록</a></li>
+	                            <li><a href="/centerreturn/centerReturnInsert" class=" waves-effect waves-block">유실동물 반환 등록</a></li>
 	                        </ul>
 	                    </li>
 	                </ul>
@@ -48,7 +48,7 @@
 		                            <tr role="row">
 		                            	<th></th>
 		                            	<th><div class="align-center">반환 코드</div></th>
-		                            	<th><div class="align-center">동물 번호</div></th>
+		                            	<th><div class="align-center">동물 종류</div></th>
 		                            	<th><div class="align-center">반환인 이름</div></th>
 		                            	<th><div class="align-center">반환인 나이</div></th>
 		                            	<th><div class="align-center">반환인 주소</div></th>
@@ -63,7 +63,7 @@
 			                        <tr th:each="CRL, i : ${CRL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
 		                              	<td><div class="align-center"></div>[[${CRL.centerReturnCode}]]</td>
-		                                <td><div class="align-center"></div>[[${CRL.animalCenter.animalInsertCode}]]</td>
+		                                <td><div class="align-center"></div>[[${CRL.animalType}]]</td>
 		                                <td><div class="align-center"></div>[[${CRL.centerReturnName}]]</td>
 		                                <td><div class="align-center"></div>[[${CRL.centerReturnAge}]]</td>
 		                                <td><div class="align-center"></div>[[${CRL.centerReturnAddress}]]</td>
@@ -71,11 +71,11 @@
 		                                <td><div class="align-center"></div>[[${CRL.centerReturnDate}]]</td>
 		                               	<td><div class="align-center"></div>[[${CRL.staff.staffName}]]</td>
 		                                <td><div class="align-center">
-		                                	<a th:href="@{/centerreturn/centerReturnUpdate}" style="color: #9E9E9E">
+		                                	<a th:href="@{/centerreturn/centerReturnUpdate(centerReturnCode=${CRL.centerReturnCode})}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>
 		                      			</td>
 		                      			<td><div class="align-center">
-					                       	<a th:href="@{#}" style="color: #F44336">
+					                       	<a class="delete" th:href="@{/centerreturn/centerReturnDelete(centerReturnCode=${CRL.centerReturnCode})}" style="color: #F44336">
 					                       	<i class="material-icons">delete</i></a></div>
 			                      		</td>
 			                        </tr>
@@ -106,6 +106,19 @@
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
     		});
+	    	
+	    	//삭제 유효성
+    		$('.delete').click(function(){
+				var val = $(this).val();
+				console.log(val);
+				var url ="/centerReturnDelete?centerReturnCode="+val;
+			    var msg = confirm('해당 종류를 삭제 하겠습니까?');
+			    if(msg){
+			    	$(location).attr('href',url);
+			    }else if(!msg){
+			    	return false;
+			    }
+			})
     	});
 	</script>
 </th:block>
