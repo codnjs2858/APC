@@ -23,5 +23,13 @@ public class QuestionService {
 	public List<Question> selectQuestion(){
 		return questionMapper.selectQuestion();
 	}
+	
+	public List<Question> selectQuestion(Question question_code){
+		return questionMapper.selectQuestion(question_code);
+	}
+	
+	public int updateQuestion(Question question) {
+		return questionMapper.updateQuestion(question);
+	}
 
 }

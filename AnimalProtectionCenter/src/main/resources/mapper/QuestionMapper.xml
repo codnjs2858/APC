@@ -17,5 +17,20 @@
 	
 	<select id="selectQuestion" resultMap="getQuestionMap">
 		SELECT * FROM tb_question
+		<if test="question_code!=null and question_code !=''.toString()">
+			<where>
+			question_code=#{question_code}
+			</where>
+		</if>
 	</select>
+	
+	<update id="updateQuestion" parameterType="Question">
+		UPDATE tb_question
+			SET
+				question_name=#{question_name},
+				question_desc=#{question_desc},
+				question_score=#{question_score},
+				question_modify_date=NOW()
+			WHERE question_code=#{question_code}
+	</update>
 </mapper>

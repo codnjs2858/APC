@@ -5,11 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cafe24.memory.domain.Board;
 import com.cafe24.memory.service.ReviewBoardService;
 
 @Controller
+@RequestMapping("/board")
 public class ReviewBoardController {
 	
 	@Autowired private ReviewBoardService reviewBoardService;
@@ -25,7 +27,7 @@ public class ReviewBoardController {
 	public String notice(Board review, Model model) {
 		reviewBoardService.insertReviewBoard(review);
 		System.out.println(review.toString());
-		return "redirect:/ReviewBoard";
+		return "redirect:/board/ReviewBoard";
 	}
 
 	@GetMapping("/ReviewBoard")
@@ -37,7 +39,7 @@ public class ReviewBoardController {
 	
 	@GetMapping("/ReviewBoardWrite")
 	public String write(Model model) {
-		model.addAttribute("send", "/ReviewBoard");
+		model.addAttribute("send", "/board/ReviewBoard");
 		return "board/write";
 	}
 }
