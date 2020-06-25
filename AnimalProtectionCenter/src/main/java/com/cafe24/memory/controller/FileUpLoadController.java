@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cafe24.memory.AnimalProtectionCenterApplication;
 import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.AnimalType;
+import com.cafe24.memory.domain.ReportManger;
 import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.service.AnimalCenterService;
@@ -64,67 +65,5 @@ public class FileUpLoadController {
 		redirectAttributes.addFlashAttribute("imageFile", "/files/" + file.getOriginalFilename());
 		
 		return "redirect:/";
-	}
-	
-	//animal center inset
-	@GetMapping("/animalcenterinsertSCK")
-	public String insertAnimalCenterForm() {
-		return "fileUpLoad/animalCenterInsertSCK";
-	}
-	
-	@PostMapping("/animalcenterinsertSCK")
-	public String insertAnimalCenter(Model model, AnimalType atype, Staff staff, AnimalCenter animal,SearchReportAnimal searchRe,
-			@RequestParam("animalPictureSCK") MultipartFile file, RedirectAttributes redirectAttributes) {
-		String reCode = searchRe.getSearchReportCode();
-		if( reCode == null || "".equals(reCode)) {
-			animal.setAcceptCode(null);
-		}else {
-			animal.setAcceptCode(animalCenterService.searchReportManager(reCode));
-		}
-		storageService.store(file);
-		redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
-		redirectAttributes.addFlashAttribute("imageFile", "/files/" + file.getOriginalFilename());
-		
-		animal.setAnimalPicture(file.getOriginalFilename());
-		animal.setStaff(staff);
-		animal.setAnimalType(atype);
-		animalCenterService.insertAnimalCenter(animal);
-		return "redirect:/animalcenterlistSCK";
-	}
-	
-	@GetMapping("/animalcenterlistSCK")
-	public String listAnimalCenter(@RequestParam(name="send_type", required = false) String send_type ,Model model) {
-		model.addAttribute("Cnt", animalCenterService.selectCenterCnt());
-		if(send_type != null && !"".equals(send_type)) {
-			model.addAttribute("AClist", animalCenterService.selectAnimalCenter(send_type));
-			model.addAttribute("proNum", animalCenterService.selectProtectAnimalCenter(send_type));
-		}else {
-			model.addAttribute("AClist", animalCenterService.selectAnimalCenter());
-			model.addAttribute("proNum", animalCenterService.selectProtectAnimalCenter());
-		}
-		return "fileUpLoad/animalcenterlistSCK";
-	}
-	
-	//animal center update
-	@GetMapping("/animalcenterupdateSCK")
-	public String updateAnimalCenterForm(
-			@RequestParam(name="send_code", required = false) String send_code, Model model) {
-		AnimalCenter ac = animalCenterService.selectCenterAnimal(send_code);
-		model.addAttribute("searchReportCode",animalCenterService.getsearchReportCode(send_code));
-		model.addAttribute("ac", ac);
-		model.addAttribute("aniPicture", "/files/" + ac.getAnimalPicture());
-		return "fileUpLoad/animalCenterUpdateSCK";
-	}
-	@PostMapping("/animalcenterupdateSCK")
-	public String updateAnimalCenter(AnimalType atype, AnimalCenter animal,SearchReportAnimal searchRe) {
-		if(searchRe == null) {
-			animal.setAcceptCode(null);
-		}else {
-			animal.setAcceptCode(animalCenterService.searchReportManager(searchRe.getSearchReportCode()));
-		}
-		animal.setAnimalType(atype);
-		animalCenterService.updateAnimalCenter(animal);
-		System.out.println("업데이트 실행 "+animal);
-		return "redirect:/animalcenterlistSCK";
 	}
 }

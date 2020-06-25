@@ -31,7 +31,7 @@
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a href="/animalcenterinsert" class=" waves-effect waves-block">보호 동물 센터 등록</a></li>
+	                            <li><a href="/animalcenter/animalcenterinsert" class=" waves-effect waves-block">보호 동물 센터 등록</a></li>
 	                        </ul>
 	                    </li>
 	                </ul>
@@ -39,12 +39,12 @@
 				<div class="body">
 	                <div class="row clearfix">
 	                	<div class="col-xs-3 col-md-3" >
-	                    	<a th:href="@{/animalcenterlist}">
+	                    	<a th:href="@{/animalcenter/animalcenterlist}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
 	                    	</a>
 	                    </div>
 	                    <div class="col-xs-3 col-md-3" th:each="c:${Cnt}">
-	                    	<a th:href="@{/animalcenterlist(send_type=${c.animalType})}">
+	                    	<a th:href="@{/animalcenter/animalcenterlist(send_type=${c.animalType})}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
 		                        [[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
 	                    	</a>
@@ -72,22 +72,27 @@
 	                       			<!-- <td><div class="align-center"><span class="label label-warning">new</span></div></td> -->
 				                    <td><div class="align-center">[[${i.size - i.index}]]</div></td>
 				                    <td><div class="align-center">[[${ac.animalCenterNumber}]]
-				                    	<a th:href="@{/animalcenterpage(send_code=${ac.animalInsertCode})}">(동물 상세보기)</a></div></td>
+				                    	<a th:href="@{/animalcenter/animalcenterpage(send_code=${ac.animalInsertCode})}">(동물 상세보기)</a></div></td>
 		                            <td><div class="align-center">[[${ac.animalType.animalType}]]</div></td>
 		                            <td><div class="align-center">[[${ac.animalType.animalTypeSub}]]</div></td>
 		                            <td><div class="align-center">[[${ac.animalGender}]]</div></td>
 		                            <td><div class="align-center">[[${ac.animalState}]]
-		                            	<a th:href="@{/animalhealthlist(send_code=${ac.animalInsertCode})}">(건강 상세보기)</a></div></td>
+		                            	<a th:href="@{/animalhealth/animalhealthlist(send_code=${ac.animalInsertCode})}">(건강 상세보기)</a></div></td>
 		                            <td><div class="align-center">[[${ac.animalInsertRegDate}]]</div></td>
 		                            <td><div class="align-center">[[${ac.staff.staffName}]]</div></td>
-		                            <td>
-		                            	<div class="align-center proNum">
-			                            	
+		                            <td th:if="${proNum[i.index]} == null">
+		                            	<div class="align-center">
+			                            	<a th:href="@{/protection/animalProtection}">보호 공간 등록</a>
+		                            	</div>
+		                            </td>
+		                            <td th:unless="${proNum[i.index]} == null">
+		                            	<div class="align-center">
+			                            	[[${proNum[i.index]}]]
 		                            	</div>
 	                            	</td>
 		                            <td>
 		                            	<div class="align-center">
-			                            	<a th:href="@{/animalcenterupdate(send_code=${ac.animalInsertCode})}" style="color: #9E9E9E">
+			                            	<a th:href="@{/animalcenter/animalcenterupdate(send_code=${ac.animalInsertCode})}" style="color: #9E9E9E">
 		                       					<i class="material-icons">update</i>
 		                       				</a>
 		                       			</div>
@@ -95,6 +100,7 @@
 	                      			<td>
 			                            <div class="align-center">
 		                      				<button type="button" class="delete" th:value="${ac.animalInsertCode}">
+				                            	<p th:text="${ac.animalPicture}" style="display: none"></p>
 		                      					<i class="material-icons">delete</i>
 		                      				</button>
 				                       	</div>
@@ -132,17 +138,14 @@
     		//삭제 유효성
 			$('.delete').click(function(){
 				var val = $(this).val();
-				console.log(val);
-				var url ="/animalcenterdelete?send_code="+val;
+				var pic = $(this).find('p').text();
+				var url ="/animalcenter/animalcenterdelete?send_code="+val+"&send_pic="+pic;
 			    var msg = confirm('해당 동물을 삭제 하겠습니까?');
 			    if(msg  == true){
 			    	$(location).attr('href',url);
 			    }
 			})
-			/* var proNum = [[${proNum}]]; */
-		
-			var html = "<a th:href=\"@{/animalProtection}\">보호 공간 등록</a>";
-			$('.proNum').html(html);
+			
     	});
     </script>
 </th:block>

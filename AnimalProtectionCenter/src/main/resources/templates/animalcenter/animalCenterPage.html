@@ -13,102 +13,138 @@
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="header">
-					<h2>동물 번호 : 11111</h2>
+					<h2>동물 번호 : [[${aInfo.animalCenterNumber}]]</h2>
 				</div>
 	           	<div class="body">
-	           		<h4>동물 정보</h4>
+	           		<h4>
+						동물 정보
+						<a th:href="@{/animalcenter/animalcenterupdate(send_code=${aInfo.animalInsertCode})}">
+		           			<span class="label label-warning">수정</span>
+						</a>
+	           		</h4>
 	           		<div class="row m-t-10">
 	           			<div class="col-xs-6 col-md-3">
 	                        <a href="javascript:void(0);" class="thumbnail">
-	                            <img src="http://placehold.it/500x300" class="img-responsive">
+	                        	<img th:src="${aniPicture}" class="img-responsive">
 	                        </a>
 	                    </div>
 	           		</div>
 	           		<ol class="breadcrumb">
 	           			<li><b>동물번호</b></li>
-	           			<li>11111</li>
+	           			<li>[[${aInfo.animalCenterNumber}]]</li>
 	           		</ol>
 	           		<ol class="breadcrumb">
 	           			<li><b>성별</b></li>
-	           			<li>암컷</li>
+	           			<li>[[${aInfo.animalGender}]]</li>
 	           		</ol>
 	           		<ol class="breadcrumb">
 	           			<li><b>동물 축종</b></li>
-	           			<li>강아지</li>
+	           			<li>[[${aInfo.animalType.animalType}]]</li>
 	           		</ol>
 	           		<ol class="breadcrumb">
 	           			<li><b>동물 품종</b></li>
-	           			<li>말티즈</li>
+	           			<li>[[${aInfo.animalType.animalTypeSub}]]</li>
 	           		</ol>
 	           		<ol class="breadcrumb">
 	           			<li>동물 체중</li>
-	           			<li>4kg</li>
+	           			<li>[[${aInfo.animalWeight}]]</li>
 	           		</ol>
 	           		<ol class="breadcrumb">
 	           			<li><b>동물 나이</b></li>
-	           			<li>3세</li>
+	           			<li>[[${aInfo.animalAge}]]</li>
 	           		</ol>
 	           		<ol class="breadcrumb">
 	           			<li><b>특징</b></li>
-	           			<li>귀여움</li>
+	           			<li>[[${aInfo.animalCharacter}]]</li>
 	           		</ol>
 	           	</div>
 	           	<div class="body">
-	           		<h4>동물 진료 기록</h4>
-	           		<table class="table table-bordered table-hover">
-	                    <thead>
-	                        <tr>
-	                         <th><div class="align-center">동물 번호</div></th>
-	                         <th><div class="align-center">아픈 내용</div></th>
-	                         <th><div class="align-center">아픈 날짜</div></th>
-	                         <th><div class="align-center">치료 내용</div></th>
-	                         <th><div class="align-center">치료 완료 날짜</div></th>
-	                         <th><div class="align-center">담당자</div></th>
-	                     </tr>
-	                    </thead>
-	                    <tbody>
-	                        <tr th:each="j : ${#numbers.sequence(1,3)}" class="odd">
-		                   		 <td><div class="align-center">[[${j}]]</div></td>
-		                         <td><div class="align-center">감기</div></td>
-		                         <td><div class="align-center">2020-06-10</div></td>
-		                         <td><div class="align-center">치료함</div></td>
-		                         <td><div class="align-center">2020-06-10</div></td>
-		                         <td><div class="align-center">이경진</div></td>
-	                    	</tr>
-	                    </tbody>
-	                </table>
+	           		<h4>
+	           			동물 진료 기록
+	           			<a th:href="@{/animalhealth/animalhealthinsert}">
+		           			<span class="label label-warning">등록</span>
+	           			</a>
+	           		</h4>
+	           		<th:block th:if="${hlist} != null">
+		           		<table class="table table-bordered table-hover">
+		                    <thead>
+		                        <tr>
+		                         <th><div class="align-center">동물 번호</div></th>
+		                         <th><div class="align-center">아픈 내용</div></th>
+		                         <th><div class="align-center">아픈 날짜</div></th>
+		                         <th><div class="align-center">치료 내용</div></th>
+		                         <th><div class="align-center">치료 완료 날짜</div></th>
+		                         <th><div class="align-center">담당자</div></th>
+		                     </tr>
+		                    </thead>
+		                    <tbody>
+		                        <tr th:each="hlist,i : ${hlist}" class="odd">
+			                   		 <td><div class="align-center">[[${hlist.animalCenter.animalCenterNumber}]]</div></td>
+			                         <td><div class="align-center">[[${hlist.animalHealthContents}]]</div></td>
+			                         <td><div class="align-center">[[${hlist.animalHealthRegDate}]]</div></td>
+			                         <td><div class="align-center">[[${hlist.animalHealthResult}]]</div></td>
+			                         <td><div class="align-center">[[${hlist.animalHealthEndDate}]]</div></td>
+			                         <td><div class="align-center">[[${hlist.staff.staffName}]]</div></td>
+		                    	</tr>
+		                    </tbody>
+		                </table>
+	           		</th:block>
                 </div>
                 <div class="body">
 	           		<h4>동물 구조 정보</h4>
-	           		<ol class="breadcrumb">
-	           			<li><b>신고종류</b></li>
-	           			<li>찾음신고</li>
-	           		</ol>
-	           		<ol class="breadcrumb">
-	           			<li><b>신고자</b></li>
-	           			<li>설채원</li>
-	           		</ol>
-	           		<ol class="breadcrumb">
-	           			<li><b>신고지역</b></li>
-	           			<li>전주시 덕진구</li>
-	           		</ol>
-	           		<ol class="breadcrumb">
-	           			<li><b>신고자 연락처</b></li>
-	           			<li>010-0000-0000</li>
-	           		</ol>
+	           		<th:block th:if="${sInfo} != null">
+		           		<ol class="breadcrumb">
+		           			<li><b>신고자</b></li>
+		           			<li>[[${sInfo.member.memberName}]]</li>
+		           		</ol>
+		           		<ol class="breadcrumb">
+		           			<li><b>신고자 연락처</b></li>
+		           			<li>[[${sInfo.member.memberPhone}]]</li>
+		           		</ol>
+		           		<ol class="breadcrumb">
+		           			<li><b>발견지역</b></li>
+		           			<li>[[${sInfo.animalLocation}]]</li>
+		           		</ol>
+		           		<ol class="breadcrumb">
+		           			<li><b>발견정황</b></li>
+		           			<li>[[${sInfo.animalDetail}]]</li>
+		           		</ol>
+	           		</th:block>
 	           	</div>
 	           	<div class="body">
-	           		<h4>동물 처리 정보</h4>
-	           		<ol class="breadcrumb">
-	           			<li><b>처리결과</b></li>
-	           			<li>반환</li>
-	           		</ol>
-	           		<ol class="breadcrumb">
-	           			<li><b>내용</b></li>
-	           			<li>반환인:이경진</li>
-	           			<li>반환인주소:전주시 송천동</li>
-	           			<li>반환인연락처:010-1111-1111</li>
-	           		</ol>
+	           		<h4>
+	           			동물 처리 정보
+	           			<a th:href="@{/animaldisposal/animaldisposallist}">
+		           			<span class="label label-warning">등록</span>
+	           			</a>
+	           		</h4>
+	           		<th:block th:if="${dlist} != null">
+		           		<ol class="breadcrumb">
+		           			<li><b>처리결과</b></li>
+		           			<li>[[${dlist.animalDisposalResult}]]</li>
+		          	    </ol>       		
+		          	    <ol class="breadcrumb">
+		           			<li><b>내용</b></li>
+		           			<th:block th:if="${dlist.animalDisposalResult} == '안락사,폐사'">
+			           			<li>[[${dlist.animalDisposalDieInfo}]]</li>
+		           			</th:block>
+		           			<th:block th:if="${dlist.animalDisposalResult} == '방사'">
+			           			<li>[[${dlist.animalDisposalPastureInfo}]]</li>
+		           			</th:block>
+		           			<th:block th:if="${dlist.animalDisposalResult} == '반환'">
+			           			<li>반환인:[[${dlist.centerReturn.centerReturnName}]]</li>
+			           			<li>반환인 주소:[[${dlist.centerReturn.centerReturnAddress}]]</li>
+			           			<li>반환인 연락처:[[${dlist.centerReturn.centerReturnPhone}]]</li>
+			           			<li>반환날짜:[[${dlist.centerReturn.centerReturnDate}]]</li>
+		           			</th:block>
+		           			<th:block th:if="${dlist.animalDisposalResult} == '입양'">
+			           			<li>분양인:[[${dlist.adoptee.member.memberName}]]</li>
+			           			<li>분양인 주소:[[${dlist.adoptee.member.memberAddr}]]</li>
+			           			<li>분양인 연락처:[[${dlist.adoptee.member.memberPhone}]]</li>
+			           			<li>분양 날짜:[[${dlist.adoptee.adopteeDate}]]</li>
+		           			</th:block>
+		           		</ol>
+	           		</th:block>
 		        </div>
 	       </div>
 		</div>
@@ -119,5 +155,13 @@
 </th:block> 
 
 <th:block layout:fragment="customFooterScript">
+	<script>
+		$(function(){
+			//이미지 깨짐
+			$('img').on("error",function(){
+				$(this).attr('src','http://placehold.it/500x300');
+			})
+		});
+	</script>
 </th:block>
 </html>

@@ -48,7 +48,7 @@
 	                            <tr th:each="hlist , i : ${hlist}" class="odd">
 	                            	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
 	                            	<td><div class="align-center">[[${hlist.animalCenter.animalCenterNumber}]]
-	                            		<a th:href="@{/animalcenterpage(send_code=${hlist.animalHealthCode})}">(동물정보 상세보기)</a></div></td>
+	                            		<a th:href="@{/animalcenter/animalcenterpage(send_code=${hlist.animalCenter.animalInsertCode})}">(동물정보 상세보기)</a></div></td>
 		                            <td><div class="align-center">[[${hlist.animalHealthContents}]]</div></td>
 		                            <td><div class="align-center">[[${hlist.animalHealthRegDate}]]</div></td>
 		                            <td><div class="align-center">[[${hlist.animalHealthResult}]]</div></td>
@@ -56,7 +56,7 @@
 		                            <td><div class="align-center">[[${hlist.staff.staffName}]]</div></td>
 		                            <td>
 		                            	<div class="align-center">
-		                            		<a th:href="@{/animalhealthhistoryinsert(send_code=${hlist.animalHealthCode})}" style="color: #9E9E9E;">
+		                            		<a th:href="@{/animalhealth/animalhealthhistoryinsert(send_code=${hlist.animalHealthCode})}" style="color: #9E9E9E;">
 	                       						<i class="material-icons">update</i>
 	                       					</a>
 	                       				</div>
@@ -103,9 +103,9 @@
 			    if(msg  == true){
 			    	var check = confirm('진료 삭제시 확인, 치료 삭제시 취소 버튼을 클릭하세요.');
 			    	if(check == true){
-				    	$(location).attr('href',"/animalhealthdelete?send_code="+val);
+				    	$(location).attr('href',"/animalhealth/animalhealthdelete?send_code="+val);
 			    	}else{
-				    	$(location).attr('href',"/animalhealthhistorydelete?send_code="+val);
+				    	$(location).attr('href',"/animalhealth/animalhealthhistorydelete?send_code="+val);
 			    	}
 			    }
 			})

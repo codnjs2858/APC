@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -12,6 +13,7 @@ import com.cafe24.memory.domain.AnimalType;
 import com.cafe24.memory.service.AnimalTypeService;
 
 @Controller
+@RequestMapping("/animaltype")
 public class AnimalTypeController {
 	@Autowired private AnimalTypeService animalTypeService;
 	
@@ -35,7 +37,7 @@ public class AnimalTypeController {
 	@PostMapping("/animaltypeinsert")
 	public String insertAnimalType(AnimalType atype) {
 		animalTypeService.insertAnimalType(atype);
-		return "redirect:/animaltypelist"; 
+		return "redirect:/animaltype/animaltypelist"; 
 	}
 	
 	//animal type update
@@ -48,7 +50,7 @@ public class AnimalTypeController {
 	@PostMapping("/animaltypeupdate")
 	public String updateAnimalType(AnimalType atype) {
 		animalTypeService.updateAnimalType(atype);
-		return "redirect:/animaltypelist";
+		return "redirect:/animaltype/animaltypelist";
 	}
 	
 	//animal type delete
@@ -61,7 +63,7 @@ public class AnimalTypeController {
 			rattr.addAttribute("alert", "N");
 			System.out.println("동물 종류 삭제 실패");
 		}
-		return "redirect:/animaltypelist";
+		return "redirect:/animaltype/animaltypelist";
 	}
 	
 }

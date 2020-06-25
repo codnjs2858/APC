@@ -2,48 +2,80 @@ package com.cafe24.memory.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/staff")
 public class StaffController {
-	//staff
-	@GetMapping("/staffinsert")
-	public String insertStaff() {
-		return "staff/staffInsert";
-	}
+	//staff list
 	@GetMapping("/stafflist")
 	public String listStaff() {
 		return "staff/staffList";
 	}
+	
+	//staff insert
+	@GetMapping("/staffinsert")
+	public String insertStaffForm() {
+		return "staff/staffInsert";
+	}
+	@PostMapping("/staffinsert")
+	public String insertStaff() {
+		return "redirect:/staff/stafflist";
+	}
+
+	//staff update
 	@GetMapping("/staffupdate")
-	public String updateStaff() {
+	public String updateStaffForm() {
 		return "staff/staffUpdate";
 	}
+	@PostMapping("/staffupdate")
+	public String updateStaff() {
+		return "redirect:/staff/stafflist";
+	}
+
 	@GetMapping("/staffdelete")
 	public String deleteStaff() {
-		return "staff/staffList";
+		return "redirect:/staff/stafflist";
 	}
 	
-	//staffcommute
+	
+	//staffcommute list
 	@GetMapping("/staffcommutelist")
 	public String listStaffCommute() {
 		return "staffcommute/staffCommuteList";
 	}
 	
-	//staffvacation
+	
+	//staffvacation list
 	@GetMapping("/staffvacationlist")
 	public String listStaffVacation() {
 		return "staffvacation/staffVacationList";
 	}
+
+	//staffvacation insert
 	@GetMapping("/staffvacationinsert")
-	public String insertStaffVacation() {
+	public String insertStaffVacationForm() {
 		return "staffvacation/staffVacationInsert";
 	}
+	@PostMapping("/staffvacationinsert")
+	public String insertStaffVacation() {
+		return "redirect:/staff/staffvacationlist";
+	}
+
+	//staffvacation update
 	@GetMapping("/staffvacationupdate")
-	public String updateStaffVacation() {
+	public String updateStaffVacationForm() {
 		return "staffvacation/staffVacationUpdate";
 	}
+	@PostMapping("/staffvacationupdate")
+	public String updateStaffVacation() {
+		return "redirect:/staff/staffvacationlist";
+	}
+
+	//staffvacation delete
 	@GetMapping("/staffvacationdelete")
 	public String deleteStaffVacation() {
-		return "staffvacation/staffVacationList";
+		return "redirect:/staff/staffvacationlist";
 	}
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.memory.domain.AnimalCenter;
@@ -15,6 +16,7 @@ import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.AnimalHealthService;
 
 @Controller
+@RequestMapping("/animalhealth")
 public class AnimalHealthController {
 	@Autowired AnimalHealthService animalHealthService;
 	@Autowired AnimalCenterService animalCenterService;
@@ -51,7 +53,7 @@ public class AnimalHealthController {
 		}catch (Exception e) {
 			
 		}
-		return "redirect:/animalhealthlist";
+		return "redirect:/animalhealth/animalhealthlist";
 	}
 	
 	/*animal health update*/
@@ -64,7 +66,7 @@ public class AnimalHealthController {
 	@PostMapping("/animalhealthupdate")
 	public String updateAnimalHealth(AnimalHealth aheal) {
 		animalHealthService.updateAnimalHealth(aheal);
-		return "redirect:/animalhealthlist";
+		return "redirect:/animalhealth/animalhealthlist";
 	}
 	
 	//animal health history
@@ -88,7 +90,7 @@ public class AnimalHealthController {
 	public String deleteAnimalHealthHistory(
 			@RequestParam(name="send_code", required = false) String send_code) {
 		animalHealthService.deleteAnimalHealthHistory(send_code);
-		return "redirect:/animalhealthhistorylist";
+		return "redirect:/animalhealth/animalhealthhistorylist";
 	}
 	
 	/*animal health delete*/
@@ -96,6 +98,6 @@ public class AnimalHealthController {
 	public String deleteAnimalHealth(
 			@RequestParam(name="send_code", required = false) String send_code) {
 		animalHealthService.deleteAnimalHealth(send_code);
-		return "redirect:/animalhealthlist";
+		return "redirect:/animalhealth/animalhealthlist";
 	}
 }

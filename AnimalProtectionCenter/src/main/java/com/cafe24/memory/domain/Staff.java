@@ -10,6 +10,7 @@ public class Staff {
 	private String staffEmail;
 	private String staffInDate;
 	private String staffOutDate;
+	
 	public String getStaffCode() {
 		return staffCode;
 	}

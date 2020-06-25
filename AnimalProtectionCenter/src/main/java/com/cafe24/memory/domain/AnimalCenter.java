@@ -10,11 +10,9 @@ public class AnimalCenter {
 	private String animalCharacter;
 	private String animalState;
 	private String animalInsertRegDate;
-	//외래키
 	private AnimalType animalType;
 	private Staff staff;
-	//도메인 미완료
-	private String acceptCode;
+	private ReportManger reportManger;
 	
 	public String getAnimalInsertCode() {
 		return animalInsertCode;
@@ -82,11 +80,11 @@ public class AnimalCenter {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
-	public String getAcceptCode() {
-		return acceptCode;
+	public ReportManger getReportManger() {
+		return reportManger;
 	}
-	public void setAcceptCode(String acceptCode) {
-		this.acceptCode = acceptCode;
+	public void setReportManger(ReportManger reportManger) {
+		this.reportManger = reportManger;
 	}
 	@Override
 	public String toString() {
@@ -94,6 +92,6 @@ public class AnimalCenter {
 				+ ", animalPicture=" + animalPicture + ", animalGender=" + animalGender + ", animalAge=" + animalAge
 				+ ", animalWeight=" + animalWeight + ", animalCharacter=" + animalCharacter + ", animalState="
 				+ animalState + ", animalInsertRegDate=" + animalInsertRegDate + ", animalType=" + animalType
-				+ ", staff=" + staff + ", acceptCode=" + acceptCode + "]";
+				+ ", staff=" + staff + ", reportManger=" + reportManger + "]";
 	}
 }
