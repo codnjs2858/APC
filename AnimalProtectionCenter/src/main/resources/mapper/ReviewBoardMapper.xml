@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.ReviewBoardMapper">
+	<resultMap type="Board" id="getReviewBoardMap">
+		<result property="board_code" column="review_board_code"></result>
+		<result property="member_id" column="member_id"></result>
+		<result property="board_title" column="review_board_title"></result>
+		<result property="board_content" column="review_board_content"></result>
+		<result property="board_addfile" column="review_board_addfile"></result>
+		<result property="board_date" column="review_board_date"></result>
+		<result property="board_delete_date" column="review_board_delete_date"></result>
+		<result property="board_ip" column="review_board_ip"></result>
+	</resultMap>
+	
+	<insert id="insertReviewBoard" parameterType="Board">
+		<selectKey order="BEFORE" keyProperty="board_code" resultType="String">
+			Select
+			(	case count(*)
+				when 0 then 'review_board_code_1'
+				else CONCAT('review_board_code_',max(cast(SUBSTRING(review_board_code,19) as decimal))+1)
+				END) 
+				as review_board_code FROM tb_review_board
+		</selectKey>
+		INSERT INTO tb_review_board
+		(review_board_code, member_id, review_board_title, review_board_content, review_board_addfile, review_board_date, review_board_delete_date, review_board_ip)
+		VALUES (#{board_code}, 'id001', #{board_title}, #{board_content}, '0', NOW(), '0000-00-00', #{board_ip})
+	</insert>
+	
+	<select id="selectPostsReviewBoard" resultMap="getReviewBoardMap">
+		SELECT * FROM tb_review_board WHERE review_board_code = #{board_code}
+	</select>
+	
+	<select id="selectReviewBoard" resultMap="getReviewBoardMap">
+		SELECT *FROM tb_review_board ORDER BY cast(SUBSTRING(review_board_code,19) as decimal) DESC
+	</select>
+</mapper>

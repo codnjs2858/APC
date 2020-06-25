@@ -19,4 +19,8 @@ public class ScreeningApplicationService {
 	public List<ScreeningApplication> selectScreeningApplication(){
 		return screeningApplicationMapper.selectScreeningApplication();
 	}
+	
+	public int updateScreeningApplication(ScreeningApplication screeningApplication) {
+		return screeningApplicationMapper.updateScreeningApplication(screeningApplication);
+	}
 }

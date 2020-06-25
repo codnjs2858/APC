@@ -12,4 +12,13 @@
 	<select id="selectScreeningApplication" resultMap="getScreeningApplicationMap">
 		SELECT * FROM tb_screening_application
 	</select>
+	
+	<update id="updateScreeningApplication" parameterType="ScreeningApplication">
+		UPDATE tb_screening_application
+			SET
+				member_id=#{member_id},
+				screening_application_reg_date=NOW(),
+				screening_application_state=#{screening_application_state}
+			WHERE screening_application_code=#{screening_application_code}
+	</update>
 </mapper>

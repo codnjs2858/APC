@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cafe24.memory.mapper.NoticeMapper">
-	<resultMap type="Notice" id="getNoticeMap">
+	<resultMap type="Board" id="getNoticeMap">
 		<result property="board_code" column="notice_board_code"></result>
 		<result property="member_id" column="member_id"></result>
 		<result property="board_title" column="notice_board_title"></result>
@@ -13,7 +13,7 @@
 		<result property="board_ip" column="notice_board_ip"></result>
 	</resultMap>
 	
-	<insert id="insertNotice" parameterType="Notice">
+	<insert id="insertNotice" parameterType="Board">
 		<selectKey order="BEFORE" keyProperty="board_code" resultType="String">
 			Select
 			(	case count(*)
@@ -32,6 +32,6 @@
 	</select>
 	
 	<select id="selectNotice" resultMap="getNoticeMap">
-		SELECT *FROM tb_notice_board ORDER BY notice_board_code DESC
+		SELECT *FROM tb_notice_board ORDER BY cast(SUBSTRING(notice_board_code,19) as decimal) DESC
 	</select>
 </mapper>

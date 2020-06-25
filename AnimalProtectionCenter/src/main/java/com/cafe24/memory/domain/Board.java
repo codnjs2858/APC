@@ -1,6 +1,6 @@
 package com.cafe24.memory.domain;
 
-public class Notice {
+public class Board {
 	private String board_code;
 	private String member_id;
 	private String board_title;
@@ -59,7 +59,7 @@ public class Notice {
 	}
 	@Override
 	public String toString() {
-		return "Notice [board_code=" + board_code + ", member_id=" + member_id + ", board_title=" + board_title
+		return "Board [board_code=" + board_code + ", member_id=" + member_id + ", board_title=" + board_title
 				+ ", board_content=" + board_content + ", board_addfile=" + board_addfile + ", board_date=" + board_date
 				+ ", board_delete_date=" + board_delete_date + ", board_ip=" + board_ip + "]";
 	}

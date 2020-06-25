@@ -10,6 +10,9 @@
  </th:block> 
 
 <th:block layout:fragment="customContents">
+<script>
+	var link = '[[${send}]]';
+</script>
 <section class="content">
 	<div class="container-fluid">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -18,7 +21,7 @@
             		<input type="text" style="border:none; width:100%" id="setTitle" placeholder="제목">
             	</div>
                 <div class="body">
-                	<form action="/notice" method="post" onsubmit="return addParameter();">
+                	<form method="post" onsubmit="this.action=link; return addParameter();">
                 		<input type="hidden" id="board_title" name="board_title">
                 		<input type="hidden" id="board_ip" name="board_ip">
 						<textarea id="ckeditor" name="board_content" style="visibility: hidden; display: none;"></textarea>

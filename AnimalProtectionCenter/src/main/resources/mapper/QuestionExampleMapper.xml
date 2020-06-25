@@ -19,5 +19,18 @@
 		   tb_question_example AS e
 		   ON
 		   e.question_code = q.question_code
+		<if test="question_example_code!=null and question_example_code !=''.toString()">
+			<where>
+			question_example_code=#{question_example_code}
+			</where>
+		</if>
 	</select>
+	
+	<update id="updateQuestionExample" parameterType="QuestionExample">
+		UPDATE tb_question_example
+			SET
+				question_example_content=#{question_example_content},
+				score_division=#{score_division}
+			WHERE question_example_code=#{question_example_code}
+	</update>
 </mapper>

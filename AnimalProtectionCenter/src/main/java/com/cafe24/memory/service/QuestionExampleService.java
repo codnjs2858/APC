@@ -19,4 +19,12 @@ public class QuestionExampleService {
 	public List<QuestionExample> selectQuestionExample(){
 		return questionExampleMapper.selectQuestionExample();
 	}
+	
+	public List<QuestionExample> selectQuestionExample(QuestionExample question_example_code){
+		return questionExampleMapper.selectQuestionExample(question_example_code);
+	}
+	
+	public int updateQuestionExample(QuestionExample questionExample) {
+		return questionExampleMapper.updateQuestionExample(questionExample);
+	}
 }
