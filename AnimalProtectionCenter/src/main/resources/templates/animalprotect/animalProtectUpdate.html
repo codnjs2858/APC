@@ -16,7 +16,7 @@
                 	</h2>
 				</div>
 				<div class="body">
-					<form action="/animalProtection" method="POST">
+					<form action="/protection/animalProtection" method="POST">
 						<div class="input-group">
 	                        <div class="form-line">
 								보호공간
@@ -75,28 +75,6 @@
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
-<script>
-	$(function(){
-		$('#btnNamePet').click(function(){
-			var btnNamePet = $('#petName').val();
-			var request = $.ajax({
-				url: "/insertCodeCheck",
-				method: "POST",
-				data: { "btnNamePet" : btnNamePet },
-				dataType: "text"
-			});
-			 
-			request.done(function( msg ) {
-				console.log(msg);
-				alert(JSON.stringify(msg));
-			});
-			 
-			request.fail(function( jqXHR, textStatus ) {
-				alert( "Request failed: " + textStatus );
-			});
-		});
-	});
-</script>
 </th:block>
  
 </html>
