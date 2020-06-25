@@ -26,7 +26,7 @@ public class AdminController {
 	public String admin() {
 		return "admin/admin";
 	}
-	@GetMapping("/blacklistMemberAlert")
+	@GetMapping("/member/blacklistMemberAlert")
 	public String blacklistMemberAlert() {
 		return "member/blacklistMemberAlert";
 	}

@@ -34,7 +34,8 @@ import com.cafe24.memory.service.StorageService;
 @Controller
 @RequestMapping("/animalcenter")
 public class AnimalCenterController {
-	@Autowired AnimalHealthService animalHealthService;
+	
+	@Autowired private AnimalHealthService animalHealthService;
 	@Autowired private AnimalCenterService animalCenterService;
 	@Autowired private StorageService storageService;
 	
