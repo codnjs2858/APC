@@ -21,6 +21,7 @@ import com.cafe24.memory.service.AnimalTypeService;
 
 @Controller
 public class AnimalCenterController {
+	
 	@Autowired private AnimalTypeService animalTypeService;
 	@Autowired private AnimalCenterService animalCenterService;
 	

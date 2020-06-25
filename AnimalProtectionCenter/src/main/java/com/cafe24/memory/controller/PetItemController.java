@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.memory.domain.AnimalCenter;
@@ -22,6 +23,7 @@ import com.cafe24.memory.service.ImplementService;
 import com.cafe24.memory.service.PetItemService;
 
 @Controller
+@RequestMapping("/petItem")
 public class PetItemController {
 	
 	@Autowired
@@ -29,10 +31,7 @@ public class PetItemController {
 	
 	@Autowired
 	private AnimalTypeService animalTypeService;
-	
-	@Autowired
-	private CompanionAnimalRegisterService companionAnimalRegisterService; 
-	
+
 	@Autowired
 	private ImplementService implementService;
 	
@@ -45,7 +44,7 @@ public class PetItemController {
 		System.out.println(sendCode + " <-- sendCode petGoodsDelete()");
 		petItemService.deletePetGoods(sendCode);
 		
-		return "redirect:/petGoodsList";
+		return "redirect:/petItem/petGoodsList";
 	}
 	
 	@PostMapping("/petGoodsInsert")
@@ -53,7 +52,7 @@ public class PetItemController {
 		System.out.println(petGoods + " <-- petGoods petGoodsInsert()");
 		petItemService.insertPetGoods(petGoods);
 		
-		return "redirect:/petGoodsList";
+		return "redirect:/petItem/petGoodsList";
 	}
 	
 	@GetMapping("/petGoodsInsert")
@@ -101,7 +100,7 @@ public class PetItemController {
 			@RequestParam(name = "foodCode", required = false) String foodCode) {
 		petItemService.deletePetFood(foodCode);
 		
-		return "redirect:/petFoodList";
+		return "redirect:/petItem/petFoodList";
 	}
 	
 	@GetMapping("/petFoodUpdate")
@@ -139,7 +138,7 @@ public class PetItemController {
 		System.out.println(petFood + " <-- petFood petFoodUpdate()");
 		petItemService.updatePetFood(petFood);
 		
-		return "redirect:/petFoodList";
+		return "redirect:/petItem/petFoodList";
 	}
 	
 	@GetMapping("/petFoodList")
@@ -188,7 +187,7 @@ public class PetItemController {
 		petFood.setFoodRemain(petFood.getFoodAmount());
 		petItemService.insertPetFood(petFood);
 		
-		return "redirect:/petFoodList";
+		return "redirect:/petItem/petFoodList";
 	}
 	
 }

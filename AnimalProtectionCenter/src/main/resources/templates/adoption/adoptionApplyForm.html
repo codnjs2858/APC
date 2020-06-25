@@ -2,145 +2,94 @@
 <html xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/default2}">
-	
- <th:block layout:fragment="customTitle">
- 	
- </th:block> 
-<th:block layout:fragment="customCss">
- 		<!-- Multi Select Css -->
-	<link href="../../plugins/multi-select/css/multi-select.css" rel="stylesheet">
-    <!-- Bootstrap Select Css -->
-    <link href="/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
+<th:block layout:fragment="customTitle">
+	<title>입양신청</title>
 </th:block>
-<th:block layout:fragment="customHeadScript">
-	
-	<script type="text/javascript" src="/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript">
-	/*   	$(document).ready(function(){
-	  		$('#animalType').change(function(){
-	  			var select=$('#animalType'); 
-	  			if(select.val()=="강아지"){
-	  				$('#dogType').css('display','block');
-	  				$('#catSelectType').css('display','none');
-	  				
-	  			}if(select.val()=="고양이"){
-	  				$('#dogType').css('display','none');
-	  				$('#catSelectType').css('display','block');
-	  				
-	  			}
-	  			var request = $.ajax({
-					  url: "/ajaxAdoptionApplyForm",
-					  method: "GET",
-					  data: {"select" : select},
-					  dataType: "json"
-					});
-									
-					request.done(function( AniList ) {
-					  var html="";
-					  console.log(AniList);
-					  for(var i=0; i<select.children.length;i++){
-						 console.log(AniList[i]);
-						  
-					  }
-						
-					});
-					 
-					request.fail(function( jqXHR, textStatus ) {
-					  alert( "Request failed: " + textStatus );
-					});
-	  				
-	  		})
-	  	
-			
-		});  */
-	</script>
-</th:block> 
- <th:block layout:fragment="customContents">
- 	<!-- 입양신청폼 -->
- <!-- Basic Validation -->
-     <section class="content">
-        <div class="container-fluid">
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>입양신청폼</h2>
-                        </div>
-                        <div class="body">
-                            <form id="form_validation" action="/adoptionApply" method="POST">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="memberId" readonly="readonly" th:value="${session.SID}">
-                                        
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <input type="hidden" class="form-control" name="memberId" placeholder="입양점수">
-                        		</div>
-                            
-                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">    
-                             <div class="body"> 
-                              <div class="row clearfix">
-                                <div class="col-md-3">
-                                    <p>
-                                        <b>동물종류</b>
-                                    </p>
-                                    <select id="animalType" class="form-control show-tick" >
-                                        <option th:value="">-축종선택-</option>
+<th:block layout:fragment="customCss">
+<!-- Bootstrap Select Css -->
+   	<link href="/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+</th:block>	
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="col-lg-12">
+			<div class="card">
+	            <div class="header">
+	                <h2>입양신청</h2>
+	            </div>
+	            <div class="body">
+	            	<div class="row clearfix">
+	            		<form action="/adoptionApply" method="post">
+	            			<div class="col-md-5">
+	            				<b>회원 아이디</b>
+			                    <div class="input-group">
+		            				<div class="form-line">
+			                            <input name="memberId" th:value="${session.SID}" class="form-control" readonly>
+			                        </div>
+		            			</div>
+	            			</div>
+	            			<div class="col-md-5">
+			                    <b>입양점수</b>
+			                    <div class="input-group">
+			                        <div class="form-line">
+			                            <input name="adoptionPoint" id="adoptionPoint" class="form-control" readonly>
+			                        </div>
+			                    </div>
+			                </div>
+	            			<div class="col-md-4">
+	            				<b>축종코드</b>
+			                    <div class="input-group">
+		            				<select id="animalType" class="form-control show-tick" >
+                                        <option value="">-축종선택-</option>
                                         <option value="강아지">강아지</option>
                                         <option value="고양이">고양이</option>
                                         <option value="기타">기타</option>
                                     </select>
-
-                                </div>
-                                <div id="dogType" class="col-md-3"  style="display:none;">
-                                    <p>
-                                        <b>품종</b>
-                                    </p>
-                                    <select id="dogSelectType" class="form-control show-tick" >
+		            			</div>
+	            			</div>
+	            			<div class="col-md-4">
+	            				<b>강아지</b>
+			                    <div class="input-group">
+		            				<select id="dogSelectType"  class="form-control show-tick" >
                                         <option value="">-품종선택-</option>
                                         <option value="말티즈">말티즈</option>
                                         <option value="포메라니안">포메라니안</option>
                                         <option value="비글">비글</option>
                                         <option value="기타">기타</option>
                                     </select>
-
-                                </div>
-                                <div id="catSelectType" class="col-md-3" style="display:none;">
-                                    <p>
-                                        <b>품종</b>
-                                    </p>
-                                    <select id="catType" class="form-control show-tick">
-                                        <option value="">-품종선택-</option>
+		            			</div>
+	            			</div>
+	            			<div class="col-md-4">
+	            				<b>고양이</b>
+			                    <div class="input-group">
+		            				<select id="dogSelectType"  class="form-control show-tick" >
+                                       <option value="">-품종선택-</option>
                                         <option value="페르시안">페르시안</option>
                                         <option value="벵골">벵골</option>
                                         <option value="사암고양이">사암고양이</option>
                                         <option value="기타">기타</option>
                                     </select>
-
-                                </div>
-                               </div>  
-                              <div class="form-group">
-                                  <div class="font-bold col-teal">성별</div>
-                                    <input type="radio" name="gender" id="male" class="with-gap">
-                                    <label for="male">수컷</label>
-
-                                    <input type="radio" name="gender" id="female" class="with-gap">
-                                    <label for="female" class="m-l-20">암컷</label>
-                                    
-                                    <input type="radio" name="gender" id="middle" class="with-gap">
-                                    <label for="middle" class="m-l-20">무관</label>
-                                </div>
-                              
-                             </div> 
-       					  </div> 
-       					  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">    
-                              <div class="row clearfix">
-                                <div class="col-md-5">
+		            			</div>
+	            			</div>
+	            		 </div>
+		            	<div class="form-group">
+	                          <div class="font-bold col-teal">성별</div>
+	                            <input type="radio" name="gender" id="male" class="with-gap">
+	                            <label for="male">수컷</label>
+	
+	                            <input type="radio" name="gender" id="female" class="with-gap">
+	                            <label for="female" class="m-l-20">암컷</label>
+	                            
+	                            <input type="radio" name="gender" id="middle" class="with-gap">
+	                            <label for="middle" class="m-l-20">무관</label>
+	                    </div>
+			                <div class="form-group">
                                     <p>
                                         <b>입양 희망 지역</b>
                                     </p>
-                                    <select id="animalType" class="form-control show-tick" >
+                                    <select id="animalType" class="form-control" >
                                         <option value="">-지역선택-</option>
                                         <option value="전국분양">전국분양</option>
                                         <option value="서울시">서울시</option>
@@ -162,14 +111,12 @@
                                         <option value="제주도">제주도</option>
                                     </select>
 
-                                </div>
-                               </div> 
-                               <div class="row clearfix">
-                                <div class="col-md-5">
+                             </div>
+                              <div class="form-group">
                                     <p>
                                         <b>입양 희망 연령</b>
                                     </p>
-                                    <select id="animalAge" class="form-control show-tick" >
+                                    <select id="animalAge" class="form-control" >
                                         <option value="">-나이선택-</option>
                                         <option value="1">1세이하</option>
                                         <option value="2">2세이하</option>
@@ -178,28 +125,54 @@
                                        
                                     </select>
 
-                                </div>
-                               
-                               </div> 
-                           
-       					  </div>
-       					  
-                                <button class="btn btn-primary waves-effect" type="submit">입양신청</button>
-                                
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         </div>
-       </section>     
-            <!-- #END# Basic Validation -->
- </th:block> 
+                                </div>    
+			                <div class="form-grou p-t-10">
+			                	<button type="submit" class="btn btn-primary btn-lg">입양신청</button>
+			                </div>
+	            		</form>
+		            </div>
+	            </div>
+	        </div>
+		</div>
+	</section>
+</th:block>
 
-
+<th:block layout:fragment="customHeadScript">
+</th:block> 
 <th:block layout:fragment="customFooterScript">
+	<script>
+	
+	$(function(){
+		
+		//회원 아이디로 회원 이름 가져오기
+		$('#memberId').change(function(){
+			var type = $(this).val();
+			var request = $.ajax({
+				url: "/ajax/membertype",
+				method: "POST",
+				data: { "type" : type },
+				dataType: "json"
+			});
+			request.done(function( data ) {
+				console.log(data);
+				var memberId = '';
+				
+				for(var i=0;i<data.length;i++){
+					if(type == data[i].memberId){
+						memberId += data[i].memberName;
+						
+					}
+				}		
+				$('#memberName').val(memberId);
+				
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});
+			});
+		});
+	});
+	</script>
 
- 
- </th:block>
+</th:block>
  
 </html>
