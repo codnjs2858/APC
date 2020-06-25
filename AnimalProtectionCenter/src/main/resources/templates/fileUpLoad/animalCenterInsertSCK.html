@@ -229,7 +229,7 @@
 			$('#selectType').change(function(){
 				var type = $(this).val();
 				var request = $.ajax({
-					url: "/animalcentertype",
+					url: "/ajax/animalcentertype",
 					method: "POST",
 					data: { "type" : type },
 					dataType: "json"
@@ -254,7 +254,7 @@
 				var memberName = $('input[name=memberName]').val();
 				var memberPhone = $('input[name=memberPhone]').val();
 				var request = $.ajax({
-					url: "/animalcenterReport",
+					url: "/ajax/animalcenterReport",
 					method: "POST",
 					data: { "memberName" : memberName,
 							"memberPhone" : memberPhone},

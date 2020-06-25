@@ -37,7 +37,7 @@
              <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="card">
-						<form action="/animalcenter/animalcenterinsert" method="post" id="inputForm">
+						<form action="/animalcenter/animalcenterinsert" enctype="multipart/form-data" method="post" id="inputForm">
 							<!-- 직원 세션 아이디, 코드 -->
 							<input type="hidden" name="staffCode" th:value="${session.STAFF.staffCode}">
 							<div class="header">

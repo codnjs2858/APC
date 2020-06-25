@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cafe24.memory.AnimalProtectionCenterApplication;
 import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.AnimalType;
+import com.cafe24.memory.domain.ReportManger;
 import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.service.AnimalCenterService;
@@ -74,16 +75,15 @@ public class FileUpLoadController {
 	
 	@PostMapping("/animalcenterinsertSCK")
 	public String insertAnimalCenter(Model model, AnimalType atype, Staff staff, AnimalCenter animal,SearchReportAnimal searchRe,
-			@RequestParam("animalPictureSCK") MultipartFile file, RedirectAttributes redirectAttributes) {
+			@RequestParam("animalPictureSCK") MultipartFile file) {
 		String reCode = searchRe.getSearchReportCode();
-		if( reCode == null || "".equals(reCode)) {
-			animal.setAcceptCode(null);
-		}else {
-			animal.setAcceptCode(animalCenterService.searchReportManager(reCode));
+		ReportManger rm = new ReportManger();
+		if( reCode != null || !"".equals(reCode)) {
+			rm.setAcceptCode(animalCenterService.searchReportManager(reCode));
 		}
+		animal.setReportManger(rm);
+		
 		storageService.store(file);
-		redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
-		redirectAttributes.addFlashAttribute("imageFile", "/files/" + file.getOriginalFilename());
 		
 		animal.setAnimalPicture(file.getOriginalFilename());
 		animal.setStaff(staff);
@@ -117,11 +117,11 @@ public class FileUpLoadController {
 	}
 	@PostMapping("/animalcenterupdateSCK")
 	public String updateAnimalCenter(AnimalType atype, AnimalCenter animal,SearchReportAnimal searchRe) {
-		if(searchRe == null) {
-			animal.setAcceptCode(null);
-		}else {
-			animal.setAcceptCode(animalCenterService.searchReportManager(searchRe.getSearchReportCode()));
+		ReportManger rm = new ReportManger();
+		if(searchRe != null) {
+			rm.setAcceptCode(animalCenterService.searchReportManager(searchRe.getSearchReportCode()));
 		}
+		animal.setReportManger(rm);
 		animal.setAnimalType(atype);
 		animalCenterService.updateAnimalCenter(animal);
 		System.out.println("업데이트 실행 "+animal);
