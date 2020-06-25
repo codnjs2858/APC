@@ -23,9 +23,9 @@
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a href="/staffinsert" class=" waves-effect waves-block">센터 직원 등록</a></li>
-	                            <li><a href="/staffcommutelist" class=" waves-effect waves-block">근태 내역</a></li>
-	                            <li><a href="/staffvacationlist" class=" waves-effect waves-block">휴가,외출 신청 내역</a></li>
+	                            <li><a href="/staff/staffinsert" class=" waves-effect waves-block">센터 직원 등록</a></li>
+	                            <li><a href="/staff/staffcommutelist" class=" waves-effect waves-block">근태 내역</a></li>
+	                            <li><a href="/staff/staffvacationlist" class=" waves-effect waves-block">휴가,외출 신청 내역</a></li>
 	                        </ul>
 	                    </li>
 	                </ul>
@@ -66,14 +66,20 @@
 		                            <td><div class="align-center">휴가신청<a href="#">(상세보기)</a></div></td>
 		                            <td><div class="align-center">2020-06-01</div></td>
 		                            <td><div class="align-center"></div></td>
-		                            <td><div class="align-center">
-		                            	<a href="/staffupdate">
-	                       				<i class="material-icons">update</i></a></div>
+		                            <td>
+		                            	<div class="align-center">
+			                            	<a th:href="@{/staff/staffupdate}">
+		                       					<i class="material-icons">update</i>
+	                       					</a>
+                       					</div>
 	                      			</td>
-	                      			<td><div class="align-center">
-				                       	<a href="/staffdelete">
-				                       	<i class="material-icons">delete</i>
-			                       	</a></div>
+	                      			<td>
+	                      				<div class="align-center">
+				                       		<a th:href="@{/staff/staffdelete}">
+				                       			<i class="material-icons">delete</i>
+			                       			</a>
+			                       		</div>
+			                       	</td>
 	                        	</tr>
 	                        </tbody>
 	                    </table>

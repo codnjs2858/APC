@@ -28,7 +28,6 @@
 			<result property="animalCharacter" 		column="animal_character"></result>
 			<result property="animalState" 			column="animal_state"></result>
 			<result property="animalInsertRegDate" 	column="animal_insert_reg_date"></result>
-			<result property="acceptCode" 			column="accept_code"></result>
 		</association>
 	</resultMap>
 	
@@ -140,7 +139,6 @@
 			,i.animal_insert_reg_date
 			,i.animal_type_code
 			,i.staff_code
-			,i.accept_code
 		FROM 
 			tb_animal_insert AS i 
 			LEFT JOIN
@@ -239,7 +237,6 @@
 			,i.animal_insert_reg_date
 			,i.animal_type_code
 			,i.staff_code
-			,i.accept_code
 		FROM
 			tb_protect_space AS s
 			LEFT JOIN 
@@ -281,7 +278,6 @@
 			,i.animal_insert_reg_date
 			,i.animal_type_code
 			,i.staff_code
-			,i.accept_code
 		FROM
 			tb_protect_space AS s
 			LEFT JOIN 
@@ -323,7 +319,6 @@
 			,i.animal_insert_reg_date
 			,i.animal_type_code
 			,i.staff_code
-			,i.accept_code
 		FROM
 			tb_protect_space AS s
 			LEFT JOIN 

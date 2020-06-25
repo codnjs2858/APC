@@ -31,7 +31,7 @@
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a href="/animaltypeinsert" class=" waves-effect waves-block">동물 종류 추가</a></li>
+	                            <li><a href="/animaltype/animaltypeinsert" class=" waves-effect waves-block">동물 종류 추가</a></li>
 	                        </ul>
 	                    </li>
 	                </ul>
@@ -39,7 +39,7 @@
 				<div class="body">
 					<div class="row clearfix">
 	                    <div class="col-xs-3 col-md-3" >
-	                    	<a th:href="@{/animaltypelist}">
+	                    	<a th:href="@{/animaltype/animaltypelist}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
 	                    	</a>
 	                    </div>
@@ -72,7 +72,7 @@
 		                                <td><div class="align-center">[[${typelist.animalTypeRegDate}]]</div></td>
 		                                <td>
 		                                	<div class="align-center">
-			                                	<a th:href="@{/animaltypeupdate(send_code=${typelist.animalTypeCode})}" style="color: #9E9E9E">
+			                                	<a th:href="@{/animaltype/animaltypeupdate(send_code=${typelist.animalTypeCode})}" style="color: #9E9E9E">
 			                       					<i class="material-icons">update</i>
 			                       				</a>
 		                       				</div>
@@ -119,7 +119,7 @@
 			$('.delete').click(function(){
 				var val = $(this).val();
 				console.log(val);
-				var url ="/animaltypedelete?send_code="+val;
+				var url ="/animaltype/animaltypedelete?send_code="+val;
 			    var msg = confirm('해당 종류를 삭제 하겠습니까?');
 			    if(msg  == true){
 			    	$(location).attr('href',url);
