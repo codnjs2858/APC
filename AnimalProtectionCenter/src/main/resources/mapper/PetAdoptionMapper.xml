@@ -50,14 +50,17 @@
 	<select id="selectPetAdoption" parameterType="String" resultMap="petAdoption">
 		SELECT 
 			pet_adoption_code, 
-			member_id, 
+			m.member_id,
+			m.member_name, 
 			staff_code, 
 			pet_adoption_in_date, 
 			pet_adoption_state, 
 			pet_adoption_management_date, 
 			pet_adoption_end_date
 		FROM 
-			tb_pet_Adoption
+			tb_pet_Adoption AS a
+		INNER JOIN
+			tb_member AS m
 		WHERE
 			pet_adoption_code=#{petAdoptionCode};
 	

@@ -7,16 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.cafe24.memory.domain.Member;
 import com.cafe24.memory.domain.PetAdoption;
 import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.service.MemberService;
 import com.cafe24.memory.service.PetAdoptionService;
 
-@Controller("/PetAdoption")
+@Controller
+@RequestMapping("/petAdoption")
 public class PetAdoptionController {
 	
 	@Autowired
@@ -30,7 +30,7 @@ public class PetAdoptionController {
 		
 			petAdoptionService.updatePetAdoption(petAdoption);
 		
-			return "redirect:/petAdoptionList";
+			return "redirect:/petAdoption/petAdoptionList";
 		}
 	
 	@GetMapping("/petAdoptionUpdate")
@@ -70,7 +70,7 @@ public class PetAdoptionController {
 			
 			petAdoptionService.insertPetAdoption(petAdoption);
 			System.out.println(petAdoption + "<petAdoption");
-			return "redirect:/petAdoptionList";
+			return "redirect:/petAdoption/petAdoptionList";
 		
 		}
 	
