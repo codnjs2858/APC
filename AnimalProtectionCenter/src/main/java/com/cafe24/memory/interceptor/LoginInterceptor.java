@@ -15,7 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 	 String sessionLevel=(String)session.getAttribute("SLEVEL");
 	 String uri=request.getRequestURI();
 	 if(sessionId==null) {
-		 response.sendRedirect("/login");
+		 response.sendRedirect("/member/login");
 		 
 		 return false;
 	 }if(uri.equals("/admin")) {
@@ -26,7 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		 
 	 }if(uri.equals("/")) {
 		 if((sessionLevel.equals("level_code_04"))&&(sessionId!=null)) {
-			 response.sendRedirect("/blacklistMemberAlert");
+			 response.sendRedirect("/member/blacklistMemberAlert");
 			 return false; 
 		 }
 	 }

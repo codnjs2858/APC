@@ -87,7 +87,7 @@
         </div>
         <div class="card">
             <div class="body">
-                <form id="sign_up" method="POST">
+                <form id="sign_up" action="/member/addMember" method="POST" >
                     <div class="msg">회원정보를 입력하세요</div>
                  
                      <div class="input-group">
@@ -166,7 +166,7 @@
                     <button class="btn btn-block btn-lg bg-red" id="joinBtn" type="button">회원가입</button>
 
                     <div class="m-t-25 m-b--5 align-center">
-                        <a th:href="@{/login}">이미 회원가입 되어있으신가요?</a>
+                        <a th:href="@{/member/login}">이미 회원가입 되어있으신가요?</a>
                     </div>
                 </form>
             </div>

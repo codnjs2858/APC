@@ -126,7 +126,7 @@ public class MemberController {
 		} catch (Exception e) {
 			System.out.println("회원삭제 실패");
 		}
-		return "redirect:/animalcenterlist";
+		return "redirect:/animalcenter/animalcenterlist";
 	}
 	@GetMapping("/forgotPassword")
 	public String forgotPassword(Member member) {
