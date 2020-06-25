@@ -9,15 +9,15 @@ public class CenterReturn {
 	private String centerReturnAddress;
 	private String centerReturnPhone;
 	private Date centerReturnDate;
-	//외래키
-	private AnimalCenter animalCenter;
+	private String animalType;
+	//외래키 
 	private Staff staff;
 	
-	public Date getCenterReturnDate() {
-		return centerReturnDate;
+	public Staff getStaff() {
+		return staff;
 	}
-	public void setCenterReturnDate(Date centerReturnDate) {
-		this.centerReturnDate = centerReturnDate;
+	public void setStaff(Staff staff) {
+		this.staff = staff;
 	}
 	public String getCenterReturnCode() {
 		return centerReturnCode;
@@ -49,17 +49,17 @@ public class CenterReturn {
 	public void setCenterReturnPhone(String centerReturnPhone) {
 		this.centerReturnPhone = centerReturnPhone;
 	}
-	public AnimalCenter getAnimalCenter() {
-		return animalCenter;
+	public Date getCenterReturnDate() {
+		return centerReturnDate;
 	}
-	public void setAnimalCenter(AnimalCenter animalCenter) {
-		this.animalCenter = animalCenter;
+	public void setCenterReturnDate(Date centerReturnDate) {
+		this.centerReturnDate = centerReturnDate;
 	}
-	public Staff getStaff() {
-		return staff;
+	public String getAnimalType() {
+		return animalType;
 	}
-	public void setStaff(Staff staff) {
-		this.staff = staff;
+	public void setAnimalType(String animalType) {
+		this.animalType = animalType;
 	}
 	
 	@Override
@@ -67,7 +67,7 @@ public class CenterReturn {
 		return "CenterReturn [centerReturnCode=" + centerReturnCode + ", centerReturnName=" + centerReturnName
 				+ ", centerReturnAge=" + centerReturnAge + ", centerReturnAddress=" + centerReturnAddress
 				+ ", centerReturnPhone=" + centerReturnPhone + ", centerReturnDate=" + centerReturnDate
-				+ ", animalCenter=" + animalCenter + ", staff=" + staff + "]";
+				+ ", animalType=" + animalType + ", staff=" + staff + "]";
 	}
 	
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.memory.domain.AnimalCenter;
@@ -18,6 +19,7 @@ import com.cafe24.memory.service.CompanionAnimalRegisterService;
 import com.cafe24.memory.service.ProtectionService;
 
 @Controller
+@RequestMapping("/companionanimalregister")
 public class CompanionAnimalRegisterController {
 	
 	@Autowired
@@ -32,9 +34,10 @@ public class CompanionAnimalRegisterController {
 	@GetMapping("/companionAnimalRegisterDelete")
 	
 		public String companionAnimalRegisterDelete(@RequestParam(name="companionAnimalRegisterCode", required = false) String companionAnimalRegisterCode) {
+			
 			companionAnimalRegisterService.deleteCompanionAnimalRegister(companionAnimalRegisterCode);
 			
-			return "redirect:/companionAnimalRegisterList";
+			return "redirect:/companionanimalregister/companionAnimalRegisterList";
 		
 		}
 	
@@ -57,7 +60,7 @@ public class CompanionAnimalRegisterController {
 			cAniReg.setStaff(staff);
 			cAniReg.setProtectionSpace(aniPro);
 			companionAnimalRegisterService.insertCompanionAnimalRegister(cAniReg);
-			return "redirect:/companionAnimalRegisterList";
+			return "redirect:/companionanimalregister/companionAnimalRegisterList";
 		
 		}
 	
@@ -93,12 +96,13 @@ public class CompanionAnimalRegisterController {
 		}
 	
 	@PostMapping("/companionAnimalRegisterUpdate")
+		
 		public String companionAnimalRegisterUpdate(CompanionAnimalRegister cAniReg) {
 		
 			System.out.println(cAniReg + " <-- cAniReg companionAnimalRegisterUpdate()");
 			companionAnimalRegisterService.updateCompanionAnimalRegister(cAniReg);
 			
-			return "redirect:/companionAnimalRegisterList";
+			return "redirect:/companionanimalregister/companionAnimalRegisterList";
 		
 		}
 	

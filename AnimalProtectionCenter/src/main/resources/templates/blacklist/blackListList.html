@@ -23,7 +23,7 @@
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a href="/blackListInsert" class=" waves-effect waves-block">블랙리스트 등록</a></li>
+	                            <li><a href="/blacklist/blackListInsert" class=" waves-effect waves-block">블랙리스트 등록</a></li>
 	                        </ul>
 	                    </li>
 	                </ul>
@@ -31,7 +31,7 @@
 				<div class="body">
 					<div class="row clearfix">
 	                    <div class="col-xs-3 col-md-3" >
-	                    	<a th:href="@{/blackListList}">
+	                    	<a th:href="@{/blacklist/blackListList}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
 	                    	</a>
 	                    </div>
@@ -69,7 +69,7 @@
 		                               	<td><div class="align-center"></div>[[${BL.blackListCancleDate}]]</td>
 		                               	<td><div class="align-center"></div>[[${BL.staff.staffName}]]</td>
 		                                <td><div class="align-center">
-		                                	<a th:href="@{/blackListUpdate}" style="color: #9E9E9E">
+		                                	<a th:href="@{/blacklist/blackListUpdate}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>
 		                      			</td>
 		                      			<td><div class="align-center">

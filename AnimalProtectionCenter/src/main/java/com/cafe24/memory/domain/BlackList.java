@@ -11,14 +11,6 @@ public class BlackList {
 	private Date blackListDate;
 	//외래키
 	private Member member;
-	private Staff staff;
-	
-	public Staff getStaff() {
-		return staff;
-	}
-	public void setStaff(Staff staff) {
-		this.staff = staff;
-	}
 	public int getBlackListNum() {
 		return blackListNum;
 	}
@@ -55,12 +47,15 @@ public class BlackList {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+	
 	@Override
 	public String toString() {
 		return "BlackList [blackListNum=" + blackListNum + ", blackListReason=" + blackListReason
 				+ ", blackListCancleReason=" + blackListCancleReason + ", blackListCancleDate=" + blackListCancleDate
-				+ ", blackListDate=" + blackListDate + ", member=" + member + ", staff=" + staff + "]";
+				+ ", blackListDate=" + blackListDate + ", member=" + member + "]";
 	}
+	
+	
 	
 	
 }

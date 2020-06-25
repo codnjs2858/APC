@@ -20,15 +20,20 @@
 	            </div>
 	            <div class="body">
 	            	<div class="row clearfix">
-	            		<form action="/centerReturnInsert" method="post">
+	            		<form action="/centerreturn/centerReturnInsert" method="post">
+	            		<!-- 직원 세션 아이디, 코드 -->
+	            		<input type="hidden" name="staffCode" value="staff_code_2">
 	            			<div class="col-md-4">
-			                    <b>동물 번호</b>
+	            				<b>동물 축종</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="text" name="animalCenterNumber" class="form-control" readonly>
-			                        </div>
-			                    </div>
-			                </div>
+		            				<select name="animalType">
+		            					<option value="">====== 선택 ======</option>
+		            					<option value="강아지">강아지</option>
+		            					<option value="고양이">고양이</option>
+		            					<option value="기타">기타</option>
+		            				</select>
+		            			</div>
+	            			</div>
 			                <div class="col-md-4">
 			                    <b>반환인 이름</b>
 			                    <div class="input-group colorpicker colorpicker-element">
@@ -61,17 +66,7 @@
 			                        </div>
 			                    </div>
 			                </div>
-	            			<div class="col-md-2 col-md-offset-1">
-	            				<b>담당자</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="staffName">
-		            					<option value="">====== 선택 ======</option>
-		            					<option th:each="m : ${mlist}">[[${m}]]</option>
-		            				</select>
-		            			</div>
-	            			</div>
-			                
-			                <div class="col-md-4 col-md-offset-1 p-t-10">
+	            			<div class="col-md-4 col-md-offset-1 p-t-10">
 			                	<button type="submit" class="btn btn-primary btn-lg">센터 반환 등록</button>
 			                </div>
 	            		</form>

@@ -96,7 +96,7 @@
 		UPDATE tb_companion_animal_register
 		SET
 			animal_information=#{animalInformation},
-			cancle_companion_in_date=NOW()
+			cancle_companion_in_date=#{cancleCompanionInDate}
 		WHERE
 			companion_animal_register_code=#{companionAnimalRegisterCode};
 	
@@ -115,6 +115,7 @@
 			companion_animal_register_code = #{companionAnimalRegisterCode};
 	</select>
 	
+	<!-- 삭제 -->
 	<delete id="deleteCompanionAnimalRegister" parameterType="String">
 		DELETE 
 		FROM 

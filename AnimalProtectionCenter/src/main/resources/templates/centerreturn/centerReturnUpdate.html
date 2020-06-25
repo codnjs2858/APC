@@ -21,43 +21,53 @@
 				<div class="header">
 					<h2>센터 반환 리스트 수정</h2>
 				</div>
-				<form action="/centerReturnUpdate" method="post">
+				<form action="/centerreturn/centerReturnUpdate" method="post">
 				<div class="body">
 					<div class="clearfix">
-							<div class="row">
-				      			<div class="col-md-3">
-				      				<b>반환인 이름</b>
-					                <div class="input-group colorpicker colorpicker-element">
-					                    <div class="form-line">
-					                        <input type="text" name="centerReturnName" class="form-control" th:value="1111" readonly="readonly">
-					                    </div>
-					       			</div>
-				      			</div>
-				      			<div class="col-md-3">
-				      				<b>반환인 나이</b>
-					                <div class="input-group colorpicker colorpicker-element">
-					                    <div class="form-line">
-					                        <input type="text" name="centerReturnAge" class="form-control" th:value="1111">
-					                    </div>
-					       			</div>
-				      			</div>
-				      			<div class="col-md-3">
-				      				<b>반환인 주소</b>
-					                <div class="input-group colorpicker colorpicker-element">
-					                    <div class="form-line">
-					                        <input type="text" name="centerReturnAddress" class="form-control" th:value="1111">
-					                    </div>
-					       			</div>
-				      			</div>
-				      			<div class="col-md-3 col-md-offset-1">
-				      				<b>반환인 연락처</b>
-					                <div class="input-group colorpicker colorpicker-element">
-					                    <div class="form-line">
-					                        <input type="text" name="blackListReason" class="form-control" value="이경진">
-					                    </div>
-					       			</div>
-					       		</div>
-				      		</div>
+							<input type="hidden" name="centerReturnCode" th:value="${CR.centerReturnCode}">
+	            			<div class="col-md-4">
+	            				<b>동물 축종</b>
+			                    <div class="input-group colorpicker colorpicker-element">
+		            				<select name="animalType">
+		            					<option value="">====== 선택 ======</option>
+		            					<option value="강아지" th:selected="(${CR.animalType} == '강아지')">강아지</option>
+		            					<option value="고양이" th:selected="(${CR.animalType} == '고양이')">고양이</option>
+		            					<option value="기타" th:selected="(${CR.animalType} == '기타')">기타</option>
+		            				</select>
+		            			</div>
+	            			</div>
+			                <div class="col-md-4">
+			                    <b>반환인 이름</b>
+			                    <div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+			                            <input type="text" name="centerReturnName" th:value="${CR.centerReturnName}" class="form-control">
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="col-md-4">
+			                    <b>반환인 나이</b>
+			                    <div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+			                            <input type="text" name="centerReturnAge" th:value="${CR.centerReturnAge}" class="form-control">
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="col-md-4">
+			                    <b>반환인 주소</b>
+			                    <div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+			                            <input type="text" name="centerReturnAddress" th:value="${CR.centerReturnAddress}" class="form-control">
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="col-md-4">
+			                    <b>반환인 연락처</b>
+			                    <div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+			                            <input type="text" name="centerReturnPhone" th:value="${CR.centerReturnPhone}" class="form-control">
+			                        </div>
+			                    </div>
+			                </div>
 		                </div>
            		</div>
 				 <div class="body">
