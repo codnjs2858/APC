@@ -50,7 +50,11 @@
 	                function sendPost(click){
 	                    var form1 = document.createElement("form"); // 폼 생성
 	                    form1.setAttribute("method", "GET"); // 전송방식
-	                    form1.setAttribute("action", "/Posts"); // 주소
+	                    if('[[${title}]]' == '공고게시판'){
+		                    form1.setAttribute("action", "/Posts"); // 주소
+	                	}else{
+		                    form1.setAttribute("action", "/PostsReviewBoard"); // 주소
+	                	}
 	                    document.body.appendChild(form1);
 	                    
 	                    var formInput1 = document.createElement("input"); // 입력창 생성

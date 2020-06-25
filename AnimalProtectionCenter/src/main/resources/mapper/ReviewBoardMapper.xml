@@ -32,6 +32,6 @@
 	</select>
 	
 	<select id="selectReviewBoard" resultMap="getReviewBoardMap">
-		SELECT *FROM tb_review_board ORDER BY review_board_code DESC
+		SELECT *FROM tb_review_board ORDER BY cast(SUBSTRING(review_board_code,19) as decimal) DESC
 	</select>
 </mapper>
