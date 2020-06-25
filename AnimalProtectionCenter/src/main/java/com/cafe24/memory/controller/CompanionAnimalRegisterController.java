@@ -93,6 +93,7 @@ public class CompanionAnimalRegisterController {
 		}
 	
 	@PostMapping("/companionAnimalRegisterUpdate")
+		
 		public String companionAnimalRegisterUpdate(CompanionAnimalRegister cAniReg) {
 		
 			System.out.println(cAniReg + " <-- cAniReg companionAnimalRegisterUpdate()");

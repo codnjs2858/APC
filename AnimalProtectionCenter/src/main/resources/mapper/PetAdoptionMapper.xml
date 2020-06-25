@@ -46,6 +46,24 @@
 		a.staff_code=t.staff_code;
 	</select>
 	
+	<!-- 코드로 찾기 -->
+	<select id="selectPetAdoption" parameterType="String" resultMap="petAdoption">
+		SELECT 
+			pet_adoption_code, 
+			member_id, 
+			staff_code, 
+			pet_adoption_in_date, 
+			pet_adoption_state, 
+			pet_adoption_management_date, 
+			pet_adoption_end_date
+		FROM 
+			tb_pet_Adoption
+		WHERE
+			pet_adoption_code=#{petAdoptionCode};
+	
+	</select>
+	
+	<!-- 등록 -->
 	<insert	id="insertPetAdoption" parameterType="PetAdoption">
  		
  		<selectKey resultType="String" order="BEFORE" keyProperty="petAdoptionCode">
@@ -66,5 +84,18 @@
 					);
 	</insert>
 	
+	<!-- 수정 -->
+	
+	<update id="updatePetAdoption" parameterType="PetAdoption">
+		
+			UPDATE tb_pet_Adoption
+			SET
+				pet_adoption_state=#{petAdoptionState},
+				pet_adoption_management_date=#{petAdoptionManagementDate},
+				pet_adoption_end_date=#{petAdoptionEndDate}
+			WHERE 
+				pet_adoption_code=#{petAdoptionCode};
+	
+	</update>
 	
 </mapper>

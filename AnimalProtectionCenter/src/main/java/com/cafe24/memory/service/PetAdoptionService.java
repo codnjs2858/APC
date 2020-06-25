@@ -46,5 +46,10 @@ public class PetAdoptionService {
 		return result;
 		
 	}
+	
+	public PetAdoption selectPetAdoption(String petAdoptionCode) {
+		
+		return petAdoptionMapper.selectPetAdoption(petAdoptionCode);
+	}
 
 }

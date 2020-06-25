@@ -26,12 +26,21 @@ public class PetAdoptionController {
 	MemberService memberService;
 	
 	@PostMapping("/petAdoptionUpdate")
-		public String petAdoptionUpdate(Model model) {
-			return "petadoption/petAdoptionList";
+		public String petAdoptionUpdate(PetAdoption petAdoption) {
+		
+			petAdoptionService.updatePetAdoption(petAdoption);
+		
+			return "redirect:/petAdoptionList";
 		}
 	
 	@GetMapping("/petAdoptionUpdate")
-		public String petAdoptionUpdate() {
+		public String petAdoptionUpdate(@RequestParam(name="petAdoptionCode" ,required = false)
+										String petAdoptionCode, Model model) {
+			
+			PetAdoption petAdoption = petAdoptionService.selectPetAdoption(petAdoptionCode);
+			model.addAttribute("PA", petAdoption);
+			
+			System.out.println(petAdoption +"<-- petAdoption");
 			return "petadoption/petAdoptionUpdate";
 		
 		}
