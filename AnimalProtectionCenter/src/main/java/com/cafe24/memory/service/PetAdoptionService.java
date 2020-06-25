@@ -39,9 +39,9 @@ public class PetAdoptionService {
 		
 	}
 	
-	public int deletePetAdoption(PetAdoption petAdoption) {
+	public int deletePetAdoption(String petAdoptionCode) {
 		
-		int result = petAdoptionMapper.deletePetAdoption(petAdoption);
+		int result = petAdoptionMapper.deletePetAdoption(petAdoptionCode);
 		
 		return result;
 		

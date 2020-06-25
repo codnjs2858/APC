@@ -115,6 +115,7 @@
 			companion_animal_register_code = #{companionAnimalRegisterCode};
 	</select>
 	
+	<!-- 삭제 -->
 	<delete id="deleteCompanionAnimalRegister" parameterType="String">
 		DELETE 
 		FROM 

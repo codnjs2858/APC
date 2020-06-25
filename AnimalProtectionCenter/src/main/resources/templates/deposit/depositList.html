@@ -23,7 +23,7 @@
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a href="/depositInsert" class=" waves-effect waves-block">보증금 등록</a></li>
+	                            <li><a href="/deposit/depositInsert" class=" waves-effect waves-block">보증금 등록</a></li>
 	                        </ul>
 	                    </li>
 	                </ul>
@@ -31,7 +31,7 @@
 				<div class="body">
 					<div class="row clearfix">
 	                    <div class="col-xs-3 col-md-3" >
-	                    	<a th:href="@{/depositList}">
+	                    	<a th:href="@{/deposit/depositList}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
 	                    	</a>
 	                    </div>
@@ -71,7 +71,7 @@
 		                              	<td><div class="align-center"></div>[[${DP.depositReturnDate}]]</td>
 		                              	<td><div class="align-center"></div>[[${DP.staff.staffName}]]</td>
 		                                <td><div class="align-center">
-		                                	<a th:href="@{/depositUpdate}" style="color: #9E9E9E">
+		                                	<a th:href="@{/deposit/depositUpdate}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>
 		                      			</td>
 		                      			<td><div class="align-center">

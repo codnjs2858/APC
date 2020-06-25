@@ -15,7 +15,7 @@ public interface PetAdoptionMapper {
 	
 	public int updatePetAdoption(PetAdoption petAdoption);
 	
-	public int deletePetAdoption(PetAdoption petAdoption);
+	public int deletePetAdoption(String petAdoptionCode);
 	
 	public PetAdoption selectPetAdoption(String petAdoptionCode);
 }

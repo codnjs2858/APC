@@ -100,5 +100,13 @@
 				pet_adoption_code=#{petAdoptionCode};
 	
 	</update>
+	<!-- 삭제 -->
+	<delete id="deletePetAdoption" parameterType="String">
+		DELETE 
+		FROM 
+			tb_pet_Adoption 
+		WHERE 
+			pet_adoption_code=#{petAdoptionCode};
+	</delete>
 	
 </mapper>

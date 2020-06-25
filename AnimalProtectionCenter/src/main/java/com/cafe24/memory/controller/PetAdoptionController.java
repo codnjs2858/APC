@@ -16,7 +16,7 @@ import com.cafe24.memory.service.MemberService;
 import com.cafe24.memory.service.PetAdoptionService;
 
 @Controller
-@RequestMapping("/petAdoption")
+@RequestMapping("/petadoption")
 public class PetAdoptionController {
 	
 	@Autowired
@@ -25,12 +25,22 @@ public class PetAdoptionController {
 	@Autowired
 	MemberService memberService;
 	
+	@GetMapping("/petAdoptionDelete")
+		public String petAdoptionDelete(@RequestParam(name="petAdoptionCode" ,required = false)
+										String petAdoptionCode) {
+			
+			petAdoptionService.deletePetAdoption(petAdoptionCode);
+			
+			return "redirect:/petadoption/petAdoptionList";
+		
+		}
+	
 	@PostMapping("/petAdoptionUpdate")
 		public String petAdoptionUpdate(PetAdoption petAdoption) {
 		
 			petAdoptionService.updatePetAdoption(petAdoption);
 		
-			return "redirect:/petAdoption/petAdoptionList";
+			return "redirect:/petadoption/petAdoptionList";
 		}
 	
 	@GetMapping("/petAdoptionUpdate")
@@ -70,7 +80,7 @@ public class PetAdoptionController {
 			
 			petAdoptionService.insertPetAdoption(petAdoption);
 			System.out.println(petAdoption + "<petAdoption");
-			return "redirect:/petAdoption/petAdoptionList";
+			return "redirect:/petadoption/petAdoptionList";
 		
 		}
 	
