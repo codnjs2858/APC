@@ -1,5 +1,7 @@
 package com.cafe24.memory.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,26 +10,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cafe24.memory.domain.AnimalCenter;
+import com.cafe24.memory.domain.AnimalDisposal;
 import com.cafe24.memory.domain.AnimalType;
 import com.cafe24.memory.domain.ReportManger;
 import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.service.AnimalCenterService;
+import com.cafe24.memory.service.AnimalDisposalService;
 import com.cafe24.memory.service.AnimalHealthService;
 import com.cafe24.memory.service.StorageService;
 
@@ -37,6 +35,7 @@ public class AnimalCenterController {
 	
 	@Autowired private AnimalHealthService animalHealthService;
 	@Autowired private AnimalCenterService animalCenterService;
+	@Autowired private AnimalDisposalService animalDisposalService;
 	@Autowired private StorageService storageService;
 	
 	
@@ -51,7 +50,7 @@ public class AnimalCenterController {
 	
 	@PostMapping("/animalcenterinsert")
 	public String insertAnimalCenter(Model model, AnimalType atype, Staff staff, AnimalCenter animal,SearchReportAnimal searchRe
-			, @RequestParam("animalPictureSCK") MultipartFile file) {
+			, @RequestParam("animalPicture2") MultipartFile file) {
 		
 		String reCode = searchRe.getSearchReportCode();
 		ReportManger rm = new ReportManger();
@@ -59,7 +58,7 @@ public class AnimalCenterController {
 			rm.setAcceptCode(animalCenterService.searchReportManager(reCode));
 		}
 		storageService.store(file);
-		
+		animal.setAnimalPicture(file.getOriginalFilename());
 		animal.setReportManger(rm);
 		animal.setStaff(staff);
 		animal.setAnimalType(atype);
@@ -102,23 +101,31 @@ public class AnimalCenterController {
 	}
 	
 	@PostMapping("/animalcenterupdate")
-	public String updateAnimalCenter(AnimalType atype, AnimalCenter animal,SearchReportAnimal searchRe) {
+	public String updateAnimalCenter(AnimalType atype, AnimalCenter animal,SearchReportAnimal searchRe
+			, @RequestParam("animalPicture2") MultipartFile file) {
 		ReportManger rm = new ReportManger();
 		if(searchRe != null) {
 			rm.setAcceptCode(animalCenterService.searchReportManager(searchRe.getSearchReportCode()));
 		}
+		if(file != null && !"".equals(file.getOriginalFilename())) {
+			storageService.deleteFile(animal.getAnimalPicture());
+			storageService.store(file);
+			animal.setAnimalPicture(file.getOriginalFilename());
+		}
 		animal.setReportManger(rm);
 		animal.setAnimalType(atype);
 		animalCenterService.updateAnimalCenter(animal);
-		System.out.println("업데이트 실행 "+animal);
+		
 		return "redirect:/animalcenter/animalcenterlist";
 	}
 	
 	//animal center delete
 	@GetMapping("/animalcenterdelete")
-	public String deleteAnimalCenter(@RequestParam(name="send_code", required = false) String send_code) {
+	public String deleteAnimalCenter(@RequestParam(name="send_code", required = false) String send_code
+			,@RequestParam(name="send_pic", required = false) String send_pic) {
 		try {
 			animalCenterService.deleteAnimalCenter(send_code);
+			storageService.deleteFile(send_pic);
 		} catch (Exception e) {
 			System.out.println("센터 동물 삭제 실패");
 		}
@@ -129,10 +136,22 @@ public class AnimalCenterController {
 	@GetMapping("/animalcenterpage")
 	public String pageAnimalCenter(
 			@RequestParam(name="send_code", required = false) String send_code, Model model) {
-		model.addAttribute("aInfo", animalCenterService.selectCenterAnimal(send_code));
+		AnimalCenter ac = animalCenterService.selectCenterAnimal(send_code);
+		AnimalDisposal ad = animalDisposalService.selectResultTest(send_code);
+		model.addAttribute("aInfo", ac);
 		model.addAttribute("sInfo",animalCenterService.selectReportCodeAnimal(send_code));
 		model.addAttribute("hlist", animalHealthService.selectAnimalHealthInfo(send_code));
-			
+		model.addAttribute("dlist", ad);
+		model.addAttribute("aniPicture", "/files/" + ac.getAnimalPicture());
+		
+		//데이트 포맷
+		/*
+		 * SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		 * model.addAttribute("adopteeDate",
+		 * format.format(ad.getAdoptee().getAdopteeDate()));
+		 * model.addAttribute("returnDate",
+		 * format.format(ad.getCenterReturn().getCenterReturnDate()));
+		 */
 		return "animalcenter/animalCenterPage";
 	}
 	

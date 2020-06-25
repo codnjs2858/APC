@@ -1,5 +1,6 @@
 package com.cafe24.memory.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -55,6 +56,11 @@ public class StorageService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void deleteFile(String filename) {
+		File f = new File(getPath().toFile(), filename);
+		f.delete();
 	}
 
 	/**

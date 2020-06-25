@@ -24,7 +24,7 @@
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a href="/animaldisposalinsert" class=" waves-effect waves-block">동물 처리 등록</a></li>
+	                            <li><a th:href="@{/animaldisposal/animaldisposalinsert}" class=" waves-effect waves-block">동물 처리 등록</a></li>
 	                        </ul>
 	                    </li>
 	                </ul>
@@ -37,7 +37,6 @@
 		                            <th data-orderable="false"></th>
 		                            <th><div class="align-center">동물 번호</div></th>
 		                            <th><div class="align-center">처리 분류</div></th>
-		                            <th><div class="align-center">처리 내용</div></th>
 		                            <th><div class="align-center">처리 날짜</div></th>
 		                            <th><div class="align-center">담당자</div></th>
 		                            <th data-orderable="false"><div class="align-center">수정</div></th>
@@ -45,21 +44,26 @@
 		                        </tr>
 	                        </thead>
 	                        <tbody>
-	                            <tr th:each="j : ${#numbers.sequence(1,100)}" class="odd">
-	                       			<td><div class="align-center"><span class="label label-warning">new</span></div></td>
-				                    <!-- <td class="sorting_1" th:text="${j}"></td> -->
-				                    <td><div class="align-center">[[${j}]]<a href="#/animalcenterpage">(동물정보 상세보기)</a></div></td>
-		                            <td><div class="align-center">안락사</div></td>
-		                            <td><div class="align-center">아픔</div></td>
-		                            <td><div class="align-center">2020-06-10</div></td>
-		                            <td><div class="align-center">이경진</div></td>
-		                            <td><div class="align-center"><a href="/animaldisposalupdate">
-	                       				<i class="material-icons">update</i></a></div>
+	                            <tr th:each="dList, i : ${dList}" class="odd">
+				                   	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
+				                    <td><div class="align-center">[[${dList.animalCneter.animalCenterNumber}]]
+				                    	<a th:href="@{/animalcenter/animalcenterpage(send_code=${dList.animalCneter.animalInsertCode})}">(동물 상세보기)</a></div></td>
+		                            <td><div class="align-center">[[${dList.animalDisposalResult}]]</div></td>
+		                            <td><div class="align-center">[[${dList.animalDisposalDate}]]</div></td>
+		                            <td><div class="align-center">[[${dList.staff.staffName}]]</div></td>
+		                            <td><div class="align-center">
+			                            	<a href="/animaldisposal/animaldisposalupdate">
+		                       					<i class="material-icons">update</i>
+		                       				</a>
+	                       				</div>
 	                      			</td>
-	                      			<td><div class="align-center">
-				                       	<a href="/animaldisposaldelete">
-				                       	<i class="material-icons">delete</i>
-			                       	</a></div>
+	                      			<td>
+	                      				<div class="align-center">
+				                       		<a href="/animaldisposal/animaldisposaldelete">
+				                       			<i class="material-icons">delete</i>
+			                       			</a>
+			                       		</div>
+			                       	</td>
 	                        	</tr>
 	                        </tbody>
 	                    </table>
@@ -83,9 +87,6 @@
     <script>
     	$(function(){
     		$('#dataTabelEaxm1').dataTable({
-    			"aaSorting": []
-    		});
-    		$('#dataTabelEaxm2').dataTable({
     			"aaSorting": []
     		});
     	});

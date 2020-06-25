@@ -20,7 +20,7 @@
 				<div class="header">
 					<h2>동물 처리 등록</h2>
 				</div>
-				<form action="/animaldisposallist">
+				<form action="/animaldisposal/animaldisposalinsert" method="post">
 				<div class="body">
 					<div class="clearfix">
 							<div class="row">
@@ -54,10 +54,10 @@
 				           		<div class="input-group">
 					           		<select class="form-control">
 					           			<option>----처리 선택----</option>
-					           			<option>입양</option>
-					           			<option>반환</option>
-					           			<option>안락사,폐사</option>
-					           			<option>방사</option>
+					           			<option value="입양">입양</option>
+					           			<option value="반환">반환</option>
+					           			<option value="방사">방사</option>
+					           			<option value="안락사,폐사">안락사,폐사</option>
 					           		</select>
 				           		</div>
 		           			</div>

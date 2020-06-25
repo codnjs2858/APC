@@ -82,7 +82,7 @@
 		                            <td><div class="align-center">[[${ac.staff.staffName}]]</div></td>
 		                            <td th:if="${proNum[i.index]} == null">
 		                            	<div class="align-center">
-			                            	<a th:href="@{/animalprotect/animalProtection}">보호 공간 등록</a>
+			                            	<a th:href="@{/protection/animalProtection}">보호 공간 등록</a>
 		                            	</div>
 		                            </td>
 		                            <td th:unless="${proNum[i.index]} == null">
@@ -100,6 +100,7 @@
 	                      			<td>
 			                            <div class="align-center">
 		                      				<button type="button" class="delete" th:value="${ac.animalInsertCode}">
+				                            	<p th:text="${ac.animalPicture}" style="display: none"></p>
 		                      					<i class="material-icons">delete</i>
 		                      				</button>
 				                       	</div>
@@ -137,8 +138,8 @@
     		//삭제 유효성
 			$('.delete').click(function(){
 				var val = $(this).val();
-				console.log(val);
-				var url ="/animalcenter/animalcenterdelete?send_code="+val;
+				var pic = $(this).find('p').text();
+				var url ="/animalcenter/animalcenterdelete?send_code="+val+"&send_pic="+pic;
 			    var msg = confirm('해당 동물을 삭제 하겠습니까?');
 			    if(msg  == true){
 			    	$(location).attr('href',url);

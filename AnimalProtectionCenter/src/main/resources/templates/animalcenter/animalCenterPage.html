@@ -16,11 +16,16 @@
 					<h2>동물 번호 : [[${aInfo.animalCenterNumber}]]</h2>
 				</div>
 	           	<div class="body">
-	           		<h4>동물 정보</h4>
+	           		<h4>
+						동물 정보
+						<a th:href="@{/animalcenter/animalcenterupdate(send_code=${aInfo.animalInsertCode})}">
+		           			<span class="label label-warning">수정</span>
+						</a>
+	           		</h4>
 	           		<div class="row m-t-10">
 	           			<div class="col-xs-6 col-md-3">
 	                        <a href="javascript:void(0);" class="thumbnail">
-	                            <img src="http://placehold.it/500x300" class="img-responsive">
+	                        	<img th:src="${aniPicture}" class="img-responsive">
 	                        </a>
 	                    </div>
 	           		</div>
@@ -54,7 +59,12 @@
 	           		</ol>
 	           	</div>
 	           	<div class="body">
-	           		<h4>동물 진료 기록</h4>
+	           		<h4>
+	           			동물 진료 기록
+	           			<a th:href="@{/animalhealth/animalhealthinsert}">
+		           			<span class="label label-warning">등록</span>
+	           			</a>
+	           		</h4>
 	           		<th:block th:if="${hlist} != null">
 		           		<table class="table table-bordered table-hover">
 		                    <thead>
@@ -102,17 +112,37 @@
 	           		</th:block>
 	           	</div>
 	           	<div class="body">
-	           		<h4>동물 처리 정보</h4>
-	           		<th:block>
+	           		<h4>
+	           			동물 처리 정보
+	           			<a th:href="@{/animaldisposal/animaldisposallist}">
+		           			<span class="label label-warning">등록</span>
+	           			</a>
+	           		</h4>
+	           		<th:block th:if="${dlist} != null">
 		           		<ol class="breadcrumb">
 		           			<li><b>처리결과</b></li>
-		           			<li>반환</li>
-		           		</ol>
-		           		<ol class="breadcrumb">
+		           			<li>[[${dlist.animalDisposalResult}]]</li>
+		          	    </ol>       		
+		          	    <ol class="breadcrumb">
 		           			<li><b>내용</b></li>
-		           			<li>반환인:이경진</li>
-		           			<li>반환인주소:전주시 송천동</li>
-		           			<li>반환인연락처:010-1111-1111</li>
+		           			<th:block th:if="${dlist.animalDisposalResult} == '안락사,폐사'">
+			           			<li>[[${dlist.animalDisposalDieInfo}]]</li>
+		           			</th:block>
+		           			<th:block th:if="${dlist.animalDisposalResult} == '방사'">
+			           			<li>[[${dlist.animalDisposalPastureInfo}]]</li>
+		           			</th:block>
+		           			<th:block th:if="${dlist.animalDisposalResult} == '반환'">
+			           			<li>반환인:[[${dlist.centerReturn.centerReturnName}]]</li>
+			           			<li>반환인 주소:[[${dlist.centerReturn.centerReturnAddress}]]</li>
+			           			<li>반환인 연락처:[[${dlist.centerReturn.centerReturnPhone}]]</li>
+			           			<li>반환날짜:[[${dlist.centerReturn.centerReturnDate}]]</li>
+		           			</th:block>
+		           			<th:block th:if="${dlist.animalDisposalResult} == '입양'">
+			           			<li>분양인:[[${dlist.adoptee.member.memberName}]]</li>
+			           			<li>분양인 주소:[[${dlist.adoptee.member.memberAddr}]]</li>
+			           			<li>분양인 연락처:[[${dlist.adoptee.member.memberPhone}]]</li>
+			           			<li>분양 날짜:[[${dlist.adoptee.adopteeDate}]]</li>
+		           			</th:block>
 		           		</ol>
 	           		</th:block>
 		        </div>
@@ -125,5 +155,13 @@
 </th:block> 
 
 <th:block layout:fragment="customFooterScript">
+	<script>
+		$(function(){
+			//이미지 깨짐
+			$('img').on("error",function(){
+				$(this).attr('src','http://placehold.it/500x300');
+			})
+		});
+	</script>
 </th:block>
 </html>
