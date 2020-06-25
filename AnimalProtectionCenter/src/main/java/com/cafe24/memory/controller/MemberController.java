@@ -22,6 +22,7 @@ import com.cafe24.memory.service.MemberService;
 import com.cafe24.memory.service.StaffService;
 
 @Controller
+@RequestMapping("/member")
 public class MemberController {
 	@Autowired private MemberService memberService;
 	@Autowired private StaffService staffService;
@@ -67,7 +68,7 @@ public class MemberController {
 		model.addAttribute("title", "회원가입");
 		int result=memberService.insertMember(member);
 		System.out.println(result+"<-controller insertMember결과값");
-		return "redirect:/getMemberList";
+		return "redirect:/member/getMemberList";
 	}
 	@GetMapping("/adminAddMember")
 	public String addMebmer(Model model) {
@@ -135,7 +136,7 @@ public class MemberController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/login";
+		return "redirect:/member/login";
 	}
 	@PostMapping(value="/indexlogin", produces="application/json")
 	@ResponseBody
