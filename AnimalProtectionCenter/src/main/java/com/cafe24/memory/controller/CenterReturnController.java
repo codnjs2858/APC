@@ -26,54 +26,54 @@ public class CenterReturnController {
 	CenterReturnService centerReturnService;
 	
 	@GetMapping("/centerReturnDelete")
-		public String centerReturnDelete(@RequestParam(name="centerReturnCode" ,required = false)
-										String centerReturnCode) {
-			centerReturnService.deleteCenterReturn(centerReturnCode);
-			
-			return "redirect:/centerreturn/centerReturnList";
+	public String centerReturnDelete(@RequestParam(name="centerReturnCode" ,required = false)
+									String centerReturnCode) {
+		centerReturnService.deleteCenterReturn(centerReturnCode);
+		
+		return "redirect:/centerreturn/centerReturnList";
 		
 	}
 	
 	@PostMapping("centerReturnInsert")
-		public String centerReturnInsert(CenterReturn centerReturn ,Staff staff) {
-			
-			centerReturn.setStaff(staff);
-			centerReturnService.insertCenterReturn(centerReturn);
-			
-			return "redirect:/centerreturn/centerReturnList";
+	public String centerReturnInsert(CenterReturn centerReturn ,Staff staff) {
 		
-		}
+		centerReturn.setStaff(staff);
+		centerReturnService.insertCenterReturn(centerReturn);
+		
+		return "redirect:/centerreturn/centerReturnList";
+		
+	}
 	
 	@GetMapping("centerReturnInsert")
-		public String centerReturnInsert(Model model) {
-		
-			return "centerreturn/centerReturnInsert";
-		}
+	public String centerReturnInsert(Model model) {
+	
+		return "centerreturn/centerReturnInsert";
+	}
 	
 	@GetMapping("centerReturnList")
-		public String centerReturnList(Model model) {
-		
-			model.addAttribute("CRL", centerReturnService.selectCenterReturn());
-		
-			return "centerreturn/centerReturnList";
-		}
+	public String centerReturnList(Model model) {
 	
+		model.addAttribute("CRL", centerReturnService.selectCenterReturn());
+	
+		return "centerreturn/centerReturnList";
+	}
+
 	@GetMapping("centerReturnUpdate")
-		public String centerReturnUpdate(@RequestParam(name="centerReturnCode" ,required = false)
-										String centerReturnCode, Model model) {
-			CenterReturn centerReturn = centerReturnService.selectCenterReturnCode(centerReturnCode);
-			model.addAttribute("CR" , centerReturn);
-			
-			logger.info("{}", model);
-			
-			return "centerreturn/centerReturnUpdate";
-		}
+	public String centerReturnUpdate(@RequestParam(name="centerReturnCode" ,required = false)
+									String centerReturnCode, Model model) {
+		CenterReturn centerReturn = centerReturnService.selectCenterReturnCode(centerReturnCode);
+		model.addAttribute("CR" , centerReturn);
+		
+		logger.info("{}", model);
+		
+		return "centerreturn/centerReturnUpdate";
+	}
 	
 	@PostMapping("centerReturnUpdate")
-		public String centerReturnUpdate(CenterReturn centerReturn) {
-			
-			centerReturnService.updateCenterReturn(centerReturn);
+	public String centerReturnUpdate(CenterReturn centerReturn) {
 		
-			return "redirect:/centerreturn/centerReturnList";
-		}	
+		centerReturnService.updateCenterReturn(centerReturn);
+	
+		return "redirect:/centerreturn/centerReturnList";
+	}	
 }

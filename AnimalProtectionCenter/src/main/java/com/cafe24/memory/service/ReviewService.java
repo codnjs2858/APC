@@ -21,6 +21,33 @@ public class ReviewService {
 		List<Review> list = reviewMapper.selectReview();
 		
 		return list;
+	}
+	
+	public int insertReview(Review review) {
+		if( "".equals( review.getReviewManagementPeriod() ) ) {
+			review.setReviewManagementPeriod(null);			
+		}
 		
+		return reviewMapper.insertReview(review);
+	}
+	
+	public int updateReview(Review review) {
+		
+		if( "".equals(review.getReviewManagementPeriod())) {
+			review.setReviewManagementPeriod(null);
+		}
+		
+		return reviewMapper.updateReview(review);
+	}
+	
+	public int deleteReview(String reviewCode) {
+		
+		return reviewMapper.deleteReview(reviewCode);
+		
+	}
+	
+	public Review selectReviewCode(String reviewCode) {
+		
+		return reviewMapper.selectReviewCode(reviewCode);
 	}
 }

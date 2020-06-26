@@ -17,29 +17,29 @@ public class GiftController {
 	
 	
 	@PostMapping("/giftInsert")
-		public String giftInsert(Model model) {
-			return "gift/giftList";
-		}
+	public String giftInsert(Model model) {
+		return "gift/giftList";
+	}
 	
 	@GetMapping("/giftInsert")
-		public String giftInsert() {
-			return "gift/giftInsert";
-		}
+	public String giftInsert() {
+		return "gift/giftInsert";
+	}
 	
 	@GetMapping("/giftList")
-		public String giftList(Model model) {
-			
-			model.addAttribute("GL", giftService.selectGift());
-			return "gift/giftList";
-		}
+	public String giftList(Model model) {
+		
+		model.addAttribute("GL", giftService.selectGift());
+		return "gift/giftList";
+	}
 	
 	@GetMapping("/giftUpdate")
-		public String giftUpdate() {
-			return "gift/giftUpdate";
-		}
+	public String giftUpdate() {
+		return "gift/giftUpdate";
+	}
 	
 	@PostMapping("/giftUpdate")
-		public String giftUpdate(Model model) {
-			return "gift/giftList";
-		}
+	public String giftUpdate(Model model) {
+		return "gift/giftList";
+	}
 }

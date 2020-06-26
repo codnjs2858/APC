@@ -33,37 +33,37 @@ public class AdopteeController {
 		ScreeningCompleteService screeningCompleteService;
 	
 	@GetMapping("/adopteeList")
-		public String adopteeList(Model model) {
-			
-			model.addAttribute("ADTL", adopteeService.selectAdoptee());
-			
-			
-			return "adoptee/adopteeList";
-		}
+	public String adopteeList(Model model) {
+		
+		model.addAttribute("ADTL", adopteeService.selectAdoptee());
+		
+		
+		return "adoptee/adopteeList";
+	}
 	
 	@GetMapping("/adopteeInsert")
-		public String adopteeInsert(Model model) {
-			
-			List<Member> mList = memberService.getMemberList();
-			List<ScreeningComplete> scList = screeningCompleteService.selectScreeningComplete();
-			model.addAttribute("mList", mList);
-			model.addAttribute("scList" , scList);
-			
-			System.out.println(mList + "<<mList");
-			System.out.println(scList + "<<scList");
-			return "adoptee/adopteeInsert";
+	public String adopteeInsert(Model model) {
 		
-		}
+		List<Member> mList = memberService.getMemberList();
+		List<ScreeningComplete> scList = screeningCompleteService.selectScreeningComplete();
+		model.addAttribute("mList", mList);
+		model.addAttribute("scList" , scList);
+		
+		System.out.println(mList + "<<mList");
+		System.out.println(scList + "<<scList");
+		return "adoptee/adopteeInsert";
+	
+	}
 	
 	@PostMapping("/adopteeInsert")
-		public String adopteeInsert(Model model, Staff staff, Member member, Adoptee adoptee
-									,ScreeningComplete screeningComplete) {
-			
-			adoptee.setMember(member);
-			adoptee.setStaff(staff);
-			adoptee.setScreeningComplete(screeningComplete);
-			
-			adopteeService.insertAdoptee(adoptee);
-			return "redirect:/adoptee/adopteeList";
-		}
+	public String adopteeInsert(Model model, Staff staff, Member member, Adoptee adoptee
+								,ScreeningComplete screeningComplete) {
+		
+		adoptee.setMember(member);
+		adoptee.setStaff(staff);
+		adoptee.setScreeningComplete(screeningComplete);
+		
+		adopteeService.insertAdoptee(adoptee);
+		return "redirect:/adoptee/adopteeList";
+	}
 }

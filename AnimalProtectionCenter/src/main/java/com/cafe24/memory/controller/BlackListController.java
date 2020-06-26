@@ -18,31 +18,31 @@ public class BlackListController {
 		BlackListService blackListService;
 	
 	@PostMapping("/blackListInsert")
-		public String blackListInsert(Model model) {
-			return "blacklist/blackListList";
-		}
+	public String blackListInsert(Model model) {
+		return "blacklist/blackListList";
+	}
 	
 	@GetMapping("/blackListInsert")
-		public String blackListInsert() {
-			return "blacklist/blackListInsert";
-		}
+	public String blackListInsert() {
+		return "blacklist/blackListInsert";
+	}
 	
 	@GetMapping("/blackListList")
-		public String blackListList(Model model) {
-			
-			model.addAttribute("BL", blackListService.selectBlackList());
-			
-			return "blacklist/blackListList";
-		}
+	public String blackListList(Model model) {
+		
+		model.addAttribute("BL", blackListService.selectBlackList());
+		
+		return "blacklist/blackListList";
+	}
 	
 	@GetMapping("/blackListUpdate")
-		public String blackListUpdate() {
-			return "blacklist/blackListUpdate";
-		}
+	public String blackListUpdate() {
+		return "blacklist/blackListUpdate";
+	}
 	
 	@PostMapping("/blackListUpdate")
-		public String blackListUpdate(Model model) {
-			return "blacklist/blackListList";
-		}
+	public String blackListUpdate(Model model) {
+		return "blacklist/blackListList";
+	}
 	
 }
