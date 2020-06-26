@@ -10,7 +10,66 @@
 		<result property="implementRemain" 			column="implement_remain"/>
 		<result property="implementBreakageAmount" 	column="implement_breakage_amount"/>
 		<result property="implementPrice" 			column="implement_price"/>
+		<result property="staffCode" 				column="staff_code"/>
+		<result property="implementRegDate" 		column="implement_reg_date"/>
 	</resultMap>
+	
+	<!-- <delete id="deleteImplement" parameterType="String">
+		implementCode
+	</delete> -->
+	
+	<select id="selectImplementUseCountByCode" parameterType="String" resultType="Map">
+		SELECT 
+			 u.implementCode
+			,u.cnt
+		FROM
+			(
+				(
+					SELECT
+						 s.implement_code	AS implementCode
+						,COUNT(*)			AS cnt
+					FROM 
+						tb_protect_space AS s
+					WHERE
+						s.use_state='사용중'
+					GROUP BY s.implement_code
+				)
+				UNION
+				(
+					SELECT
+						 g.implement_code	AS implementCode
+						,COUNT(*)			AS cnt
+					FROM
+						tb_pet_goods AS g
+					GROUP BY g.implement_code
+				)
+			) AS u
+		WHERE 
+			u.implementCode = #{implementCode};
+			
+	</select>
+	
+	<select id="selectImplementUseCount" resultType="Map">
+		(
+		SELECT
+			 s.implement_code	AS implementCode
+			,COUNT(*)			AS cnt
+		FROM 
+			tb_protect_space AS s
+		WHERE
+			s.use_state='사용중'
+		GROUP BY s.implement_code
+		)
+		UNION
+		(
+		SELECT
+			 g.implement_code	AS implementCode
+			,COUNT(*)			AS cnt
+		FROM
+			tb_pet_goods AS g
+		GROUP BY g.implement_code
+		);
+	</select>
 	
 	<!-- 시설 수정 처리 -->
 	<update id="updateImplement" parameterType="Implement">
@@ -22,6 +81,8 @@
 			,implement_remain=#{implementRemain}
 			,implement_breakage_amount=#{implementBreakageAmount}
 			,implement_price=#{implementPrice}
+			,staff_code=#{staffCode}
+			,implement_reg_date=#{implementRegDate}
 		WHERE 
 			implement_code=#{implementCode}
 	</update>
@@ -36,6 +97,8 @@
 			,implement_remain
 			,implement_breakage_amount
 			,implement_price
+			,staff_code
+			,implement_reg_date
 		FROM 
 			tb_implement
 		WHERE
@@ -52,6 +115,8 @@
 			,implement_remain
 			,implement_breakage_amount
 			,implement_price
+			,staff_code
+			,implement_reg_date
 		FROM 
 			tb_implement;
 	</select>

@@ -16,7 +16,6 @@ public class AnimalProtectionCenterApplication {
 			LoggerFactory.getLogger(SpringBootApplication.class);
 	
 	public static void main(String[] args) {
-		logger.info("로거 출력 - {}", "값");
 		SpringApplication.run(AnimalProtectionCenterApplication.class, args);
 	}
 

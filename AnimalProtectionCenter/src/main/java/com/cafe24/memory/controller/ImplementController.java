@@ -34,6 +34,11 @@ public class ImplementController {
 	@GetMapping("/implementList")
 	public String implement(Model model) {
 		List<Implement> impleList = impleMentServer.selectImplement();
+		Implement im = null;
+		for(int i = 0; i < impleList.size(); i++) {
+			im = impleList.get(i);
+			impleMentServer.modifyImplement(im);
+		}
 		logger.info("시설 리스트 {}", impleList);
 		model.addAttribute("impleList", impleList);
 		
@@ -43,7 +48,7 @@ public class ImplementController {
 	@PostMapping("/implementUpdate")
 	public String implementUpdate(Implement implement) {
 		logger.info("시설 수정 화면에서 보낸 시설 {}", implement);
-		int result = impleMentServer.updateImplement(implement);
+		int result = impleMentServer.modifyImplement(implement);
 		logger.info("시설 수정 처리 결과값 {}", result);
 		
 		return "redirect:/implement/implementList";
@@ -67,7 +72,9 @@ public class ImplementController {
 	}
 	
 	@GetMapping("/implementDelete")
-	public String implementDelete() {
+	public String implementDelete(@RequestParam(name = "implementCode", required = false) String implementCode) {
+		logger.info("implementCode {}", implementCode);
+		
 		return "redirect:/implement/implementList";
 	}
 	

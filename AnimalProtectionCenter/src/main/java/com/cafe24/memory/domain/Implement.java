@@ -8,6 +8,8 @@ public class Implement {
 	private int implementRemain;
 	private int implementBreakageAmount;
 	private int implementPrice;
+	private String staffCode;
+	private String implementRegDate;
 	public String getImplementCode() {
 		return implementCode;
 	}
@@ -50,12 +52,24 @@ public class Implement {
 	public void setImplementPrice(int implementPrice) {
 		this.implementPrice = implementPrice;
 	}
+	public String getStaffCode() {
+		return staffCode;
+	}
+	public void setStaffCode(String staffCode) {
+		this.staffCode = staffCode;
+	}
+	public String getImplementRegDate() {
+		return implementRegDate;
+	}
+	public void setImplementRegDate(String implementRegDate) {
+		this.implementRegDate = implementRegDate;
+	}
 	@Override
 	public String toString() {
 		return "Implement [implementCode=" + implementCode + ", implementType=" + implementType + ", implementAmount="
 				+ implementAmount + ", implementReceiptCount=" + implementReceiptCount + ", implementRemain="
 				+ implementRemain + ", implementBreakageAmount=" + implementBreakageAmount + ", implementPrice="
-				+ implementPrice + "]";
+				+ implementPrice + ", staffCode=" + staffCode + ", implementRegDate=" + implementRegDate + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -66,8 +80,10 @@ public class Implement {
 		result = prime * result + ((implementCode == null) ? 0 : implementCode.hashCode());
 		result = prime * result + implementPrice;
 		result = prime * result + implementReceiptCount;
+		result = prime * result + ((implementRegDate == null) ? 0 : implementRegDate.hashCode());
 		result = prime * result + implementRemain;
 		result = prime * result + ((implementType == null) ? 0 : implementType.hashCode());
+		result = prime * result + ((staffCode == null) ? 0 : staffCode.hashCode());
 		return result;
 	}
 	@Override
@@ -92,12 +108,22 @@ public class Implement {
 			return false;
 		if (implementReceiptCount != other.implementReceiptCount)
 			return false;
+		if (implementRegDate == null) {
+			if (other.implementRegDate != null)
+				return false;
+		} else if (!implementRegDate.equals(other.implementRegDate))
+			return false;
 		if (implementRemain != other.implementRemain)
 			return false;
 		if (implementType == null) {
 			if (other.implementType != null)
 				return false;
 		} else if (!implementType.equals(other.implementType))
+			return false;
+		if (staffCode == null) {
+			if (other.staffCode != null)
+				return false;
+		} else if (!staffCode.equals(other.staffCode))
 			return false;
 		return true;
 	}
