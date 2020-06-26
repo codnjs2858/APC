@@ -11,6 +11,11 @@
 	
 	<select id="selectScreeningApplication" resultMap="getScreeningApplicationMap">
 		SELECT * FROM tb_screening_application
+		<if test="screening_application_code!=null and screening_application_code !=''.toString()">
+			<where>
+			screening_application_code=#{screening_application_code}
+			</where>
+		</if>
 	</select>
 	
 	<update id="updateScreeningApplication" parameterType="ScreeningApplication">
