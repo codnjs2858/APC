@@ -30,8 +30,7 @@
 	                            <button type="button" id="btnNamePet" class="btn btn-block bg-green waves-effect">동물이름중복</button> -->
 	                            <div>
 		                            <select name="animalInsertCode">
-		                            	<option th:each="l : ${acl}" th:value="${l.animalInsertCode}" th:text="${l.animalCenterNumber}" th:if="${l.animalInsertCode}==${ptSpace.animalInsertCode}" th:selected="selected"></option>
-		                            	<option th:each="l : ${acl}" th:value="${l.animalInsertCode}" th:text="${l.animalCenterNumber}" th:unless="${l.animalInsertCode}==${ptSpace.animalInsertCode}"></option>
+		                            	<option th:each="l : ${acl}" th:value="${l.animalInsertCode}" th:text="${l.animalCenterNumber}" th:selected="${l.animalInsertCode}==${ptSpace.animalInsertCode}"></option>
 		                            </select>
 	                            </div>
 	                        </div>

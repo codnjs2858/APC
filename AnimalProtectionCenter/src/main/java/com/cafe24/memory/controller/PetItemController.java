@@ -85,12 +85,14 @@ public class PetItemController {
 			@RequestParam(name = "sendCode", required = false) String sendCode) {
 		/* 한개만 가져왔었는데 보니깐 값들이 code 임 그래서 code 값을 가지고 일일히 다 찾아서 Map 으로 받아 처리함 
 		 * List<PetGoods> petGoodList = petItemService.selectPetGoods(); */
-		List<Map<String, Object>> petGoodAllList = petItemService.searchImplementNAnimalInsertByPetGoods(sendCode);
-		System.out.println(petGoodAllList + " <-- petGoodAllList petGoodsList()");
+		List<PetGoods> petGoodsAllList = petItemService.selectPetGoods();
+		List<Map<String, Object>> petGoodList = petItemService.searchImplementNAnimalInsertByPetGoods(sendCode);
+		System.out.println(petGoodList + " <-- petGoodAllList petGoodsList()");
 		List<Map<String, Object>> implementTypeNCnt = petItemService.selectImplementTypeNCodeNCnt();
 		System.out.println(implementTypeNCnt + " <-- implementTypeNCnt petGoodsList()");
 		model.addAttribute("implementTypeNCnt", implementTypeNCnt);
-		model.addAttribute("petGoodAllList", petGoodAllList);
+		model.addAttribute("petGoodsAllList", petGoodsAllList);
+		model.addAttribute("petGoodList", petGoodList);
 		
 		return "petitem/petGoodsList";
 	}

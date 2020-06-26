@@ -16,14 +16,14 @@
 					</h2>
 				</div>
 				<div class="body">
-					<form action="/implement/implementUpdate" method="POST">
+					<form id="implementForm" action="/implement/implementUpdate" method="POST">
 						<div class="row">
 							<div class="col-md-4">
 			                    <div class="input-group">
 			                    	<input type="hidden" name="implementCode" th:value="${implement.implementCode}">
 			                        <div class="form-line">
 										시설종류
-			                            <input type="text" class="form-control" name="implementType" th:value="${implement.implementType}">
+			                            <input type="text" id="type" class="form-control" name="implementType" th:value="${implement.implementType}">
 			                        </div>
 								</div>
 							</div>
@@ -31,7 +31,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										총수량
-			                            <input type="number" class="form-control" name="implementAmount" th:value="${implement.implementAmount}">
+			                            <input type="number" id="amount" class="form-control" name="implementAmount" th:value="${implement.implementAmount}" readonly="readonly">
 			                        </div>
 								</div>
 							</div>
@@ -39,7 +39,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										입고수량
-			                            <input type="number" class="form-control" name="implementReceiptCount" th:value="${implement.implementReceiptCount}">
+			                            <input type="number" id="receiptAmount" class="form-control" name="implementReceiptCount" value="0">
 			                        </div>
 								</div>
 							</div>
@@ -49,7 +49,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										재고
-			                            <input type="number" class="form-control" name="implementRemain" th:value="${implement.implementRemain}">
+			                            <input type="number" id="remainAmount" class="form-control" name="implementRemain" th:value="${implement.implementRemain}" readonly="readonly">
 			                        </div>
 								</div>
 							</div>
@@ -57,7 +57,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										파손량
-			                            <input type="number" class="form-control" name="implementBreakageAmount" th:value="${implement.implementBreakageAmount}">
+			                            <input type="number" id="breakageAmount" class="form-control" name="implementBreakageAmount" th:value="${implement.implementBreakageAmount}">
 			                        </div>
 								</div>
 							</div>
@@ -65,7 +65,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										단가
-			                            <input type="number" class="form-control" name="implementPrice" th:value="${implement.implementPrice}">
+			                            <input type="number" id="price" class="form-control" name="implementPrice" th:value="${implement.implementPrice}">
 			                        </div>
 								</div>
 							</div>
@@ -85,7 +85,7 @@
 							</div>
 						</div>
 						
-                        <button class="btn btn-block bg-amber waves-effect" type="submit">시설수정</button>
+                        <button id="implementBtn" class="btn btn-block bg-amber waves-effect" type="button">시설수정</button>
                         
                 	</form>
 				</div>
@@ -103,6 +103,57 @@
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
+	<script>
+		$(function(){
+			/* var amount = $('#amount');
+			var amountVal = 0;
+			var receiptAmount = $('#receiptAmount');
+			var receiptAmountVal = 0;
+			var remainAmount = $('#remainAmount');
+			var remainAmountVal = 0;
+			var breakageAmount = $('#breakageAmount');
+			
+			if(amount != null && amount.val() != ''){
+				amountVal = Number(amount.val());
+			}
+			if(remainAmount != null && remainAmount.val() != ''){
+				remainAmountVal = Number(remainAmount.val());
+			}
+			
+			receiptAmount.on("change paste keyup", function(){
+				if(receiptAmount != null && receiptAmount.val() != ''){
+					receiptAmountVal = Number(receiptAmount.val());				
+				}else{
+					receiptAmount.val(0);
+					receiptAmountVal = 0;
+				}
+				
+				amount.val(amountVal + receiptAmountVal);
+				remainAmount.val(remainAmountVal + receiptAmountVal);
+			}); */
+			
+			var checkValue = function(obj, msg){
+				if(obj.val() == ''){
+					alert(msg);
+					obj.focus();
+					
+					return true;
+				}
+				return false;
+			}
+			
+			$('#implementBtn').click(function(){
+				if(checkValue($('#type'), 			'시설종류를 입력해주세요')) 	return;
+				if(checkValue($('#amount'), 		'총수량을 입력해주세요')) 	return;
+				if(checkValue($('#receiptAmount'), 	'입고량을 입력해주세요')) 	return;
+				if(checkValue($('#remainAmount'), 	'재고량을 입력해주세요'))	return;
+				if(checkValue($('#breakageAmount'), '파손량을 입력해주세요')) 	return;
+				if(checkValue($('#price'), 			'구매가격을 입력해주세요')) 	return;
+				
+				$('#implementForm').submit();
+			});
+		});
+	</script>
 </th:block>
  
 </html>
