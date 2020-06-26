@@ -20,6 +20,10 @@ public class ScreeningApplicationService {
 		return screeningApplicationMapper.selectScreeningApplication();
 	}
 	
+	public List<ScreeningApplication> selectScreeningApplication(ScreeningApplication screeningApplication){
+		return screeningApplicationMapper.selectScreeningApplication(screeningApplication);
+	}
+	
 	public int updateScreeningApplication(ScreeningApplication screeningApplication) {
 		return screeningApplicationMapper.updateScreeningApplication(screeningApplication);
 	}
