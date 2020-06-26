@@ -10,4 +10,12 @@ import com.cafe24.memory.domain.WithdrawalPet;
 public interface WithdrawalPetMapper {
 	
 	public List<WithdrawalPet> selectWithdrawalPet();
+	
+	public int insertWithdrawalPet(WithdrawalPet withdrawalPet);
+	
+	public int updateWithdrawalPet(WithdrawalPet withdrawalPet);
+	
+	public int deleteWithdrawalPet(String withdrawalPetCode);
+	
+	public WithdrawalPet selectWithdrawalPetCode(String withdrawalPetCode);
 }

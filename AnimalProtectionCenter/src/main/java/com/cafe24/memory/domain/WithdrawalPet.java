@@ -1,17 +1,14 @@
 package com.cafe24.memory.domain;
 
-import java.util.Date;
-
 public class WithdrawalPet {
 	
 	private String withdrawalPetCode;
 	private String withdrawalPetReason;
-	private Date withdrawalPetDate;
+	private String withdrawalPetDate;
 	//외래키
 	private Staff staff;
 	private AnimalCenter animalCenter;
 	private Member member;
-	
 	public String getWithdrawalPetCode() {
 		return withdrawalPetCode;
 	}
@@ -24,10 +21,10 @@ public class WithdrawalPet {
 	public void setWithdrawalPetReason(String withdrawalPetReason) {
 		this.withdrawalPetReason = withdrawalPetReason;
 	}
-	public Date getWithdrawalPetDate() {
+	public String getWithdrawalPetDate() {
 		return withdrawalPetDate;
 	}
-	public void setWithdrawalPetDate(Date withdrawalPetDate) {
+	public void setWithdrawalPetDate(String withdrawalPetDate) {
 		this.withdrawalPetDate = withdrawalPetDate;
 	}
 	public Staff getStaff() {
@@ -55,7 +52,4 @@ public class WithdrawalPet {
 				+ ", withdrawalPetDate=" + withdrawalPetDate + ", staff=" + staff + ", animalCenter=" + animalCenter
 				+ ", member=" + member + "]";
 	}
-	
-	
-	
 }

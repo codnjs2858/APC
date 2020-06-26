@@ -22,40 +22,35 @@
 	            <div class="body">
 	            	<div class="row clearfix">
 	            		<form action="/withdrawalpet/withdrawalPetInsert" method="post">
-	            			<div class="col-md-4">
-			                    <b>동물 번호</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="text" name="animalCenterNumber" class="form-control">
-			                        </div>
-			                    </div>
-			                </div>
-	            			<div class="col-md-2 col-md-offset-1">
+	            			<!-- 직원 세션 아이디, 코드 -->
+	            			<input type="hidden" name="staffCode" value="staff_code_1">
+	            			<div class="col-md-6">
 	            				<b>입양인 아이디</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="memberId">
+		            				<select name="memberId" id="memberId" class="form-control">
 		            					<option value="">====== 선택 ======</option>
-		            					<option th:each="m : ${mlist}">[[${m}]]</option>
+		            					<option th:each="m : ${mList}" th:value="${m.memberId}">[[${m.memberId}]]</option>
 		            				</select>
 		            			</div>
 	            			</div>
-			                <div class="col-md-4">
+	            			<div class="col-md-6">
 			                    <b>입양인 이름</b>
 			                    <div class="input-group colorpicker colorpicker-element">
 			                        <div class="form-line">
-			                            <input type="text" name="memberName" class="form-control">
+			                            <input name="memberName" id="memberName" class="form-control" readonly>
 			                        </div>
 			                    </div>
 			                </div>
-			                <div class="col-md-4">
-			                    <b>회수 사유</b>
+	            			<div class="col-md-6">
+	            				<b>동물 번호</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="text" name="memberName" class="form-control">
-			                        </div>
-			                    </div>
-			                </div>
-			                <div class="col-md-4">
+		            				<select name="animalInsertCode">
+		            					<option value="">====== 선택 ======</option>
+		            					<option th:each="ac : ${aniC}" th:value="${ac.animalInsertCode}">[[${ac.animalCenterNumber}]]</option>
+		            				</select>
+		            			</div>
+	            			</div>
+			                <div class="col-md-6">
 			                    <b>회수 완료 날짜</b>
 			                    <div class="input-group colorpicker colorpicker-element">
 			                        <div class="form-line">
@@ -63,17 +58,17 @@
 			                        </div>
 			                    </div>
 			                </div>
-			                <div class="col-md-2 col-md-offset-1">
-	            				<b>담당자</b>
+	            			<div class="col-md-12">
+			                    <b>회수 사유</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="staffName">
-		            					<option value="">====== 선택 ======</option>
-		            					<option th:each="m : ${mlist}">[[${m}]]</option>
-		            				</select>
-		            			</div>
-	            			</div>
-							<div class="col-md-3 col-md-offset-1 p-t-10">
-			                	<button type="submit" class="btn btn-primary btn-lg">후기  등록</button>
+			                        <div class="form-line">
+			                            <input type="text" name="withdrawalPetReason" class="form-control">
+			                        </div>
+			                    </div>
+			                </div>
+			                
+			                <div class="col-md-3 col-md-offset-1 p-t-10">
+			                	<button type="submit" class="btn btn-primary btn-lg">회수동물  등록</button>
 			                </div>
 	            		</form>
 		            </div>
@@ -86,6 +81,38 @@
 <th:block layout:fragment="customHeadScript">
 </th:block> 
 <th:block layout:fragment="customFooterScript">
+
+	<script>
+	$(function(){
+		
+		//회원 아이디로 회원 이름 가져오기
+		$('#memberId').change(function(){
+			var type = $(this).val();
+			var request = $.ajax({
+				url: "/ajax/memberType",
+				method: "POST",
+				data: { "type" : type },
+				dataType: "json"
+			});
+			request.done(function( data ) {
+				console.log(data);
+				var memberId = '';
+				
+				for(var i=0;i<data.length;i++){
+					if(type == data[i].memberId){
+						memberId += data[i].memberName;
+						
+					}
+				}		
+				$('#memberName').val(memberId);
+				
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});
+			});
+		});
+	});
+	</script>
 </th:block>
  
 </html>
