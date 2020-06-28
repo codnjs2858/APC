@@ -11,4 +11,11 @@ public interface BlackListMapper {
 	
 	public List<BlackList> selectBlackList();
 	
+	public int insertBlackList(BlackList blackList);
+	
+	public int updateBlackList(BlackList blackList);
+	
+	public int deleteBlackList(String blackListCode);
+	
+	public BlackList selectBlackListCode(String blackListCode);
 }

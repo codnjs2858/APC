@@ -22,46 +22,47 @@
 					<h2>블랙리스트 수정</h2>
 				</div>
 				<form action="/blacklist/blackListUpdate" method="post">
+					<input type="hidden" name="blackListCode" th:value="${BL.blackListCode}">
 				<div class="body">
 					<div class="clearfix">
 							<div class="row">
-				      			<div class="col-md-3">
+				      			<div class="col-md-6">
 				      				<b>회원 아이디</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="memberId" class="form-control" th:value="1111" readonly="readonly">
+					                        <input type="text" name="memberId" class="form-control" th:value="${BL.member.memberId}" readonly>
 					                    </div>
 					       			</div>
 				      			</div>
-				      			<div class="col-md-3">
+				      			<div class="col-md-6">
 				      				<b>등록 사유</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="memberId" class="form-control" th:value="1111" readonly="readonly">
+					                        <input type="text" name="blackListReason" class="form-control" th:value="${BL.blackListReason}" readonly>
 					                    </div>
 					       			</div>
 				      			</div>
-				      			<div class="col-md-3">
+				      			<div class="col-md-4">
 				      				<b>등록 날짜</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="memberId" class="form-control" th:value="1111" readonly="readonly">
+					                        <input type="text" name="blackListDate" class="form-control" th:value="${BL.blackListDate}" readonly>
 					                    </div>
 					       			</div>
 				      			</div>
-				      			<div class="col-md-3 col-md-offset-1">
+				      			<div class="col-md-4">
 				      				<b>해지 사유</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="blackListReason" class="form-control" value="이경진">
+					                        <input type="text" name="blackListCancleReason" class="form-control" th:value="${BL.blackListCancleReason}">
 					                    </div>
 					       			</div>
 				      			</div>
-				      			<div class="col-md-3 col-md-offset-1">
+				      			<div class="col-md-4">
 				      				<b>해지 날짜</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="date" name="screening_complete_totel" class="form-control">
+					                        <input type="date" name="blackListCancleDate" th:value="${BL.blackListCancleDate}" class="form-control">
 					                    </div>
 					       			</div>
 				      			</div>

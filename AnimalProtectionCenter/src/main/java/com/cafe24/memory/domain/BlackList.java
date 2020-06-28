@@ -1,21 +1,20 @@
 package com.cafe24.memory.domain;
 
-import java.util.Date;
-
 public class BlackList {
 	
-	private int blackListNum;
+	private String blackListCode;
 	private String blackListReason;
 	private String blackListCancleReason;
-	private Date blackListCancleDate;
-	private Date blackListDate;
+	private String blackListCancleDate;
+	private String blackListDate;
 	//외래키
 	private Member member;
-	public int getBlackListNum() {
-		return blackListNum;
+	private Staff staff;
+	public String getBlackListCode() {
+		return blackListCode;
 	}
-	public void setBlackListNum(int blackListNum) {
-		this.blackListNum = blackListNum;
+	public void setBlackListCode(String blackListCode) {
+		this.blackListCode = blackListCode;
 	}
 	public String getBlackListReason() {
 		return blackListReason;
@@ -29,16 +28,16 @@ public class BlackList {
 	public void setBlackListCancleReason(String blackListCancleReason) {
 		this.blackListCancleReason = blackListCancleReason;
 	}
-	public Date getBlackListCancleDate() {
+	public String getBlackListCancleDate() {
 		return blackListCancleDate;
 	}
-	public void setBlackListCancleDate(Date blackListCancleDate) {
+	public void setBlackListCancleDate(String blackListCancleDate) {
 		this.blackListCancleDate = blackListCancleDate;
 	}
-	public Date getBlackListDate() {
+	public String getBlackListDate() {
 		return blackListDate;
 	}
-	public void setBlackListDate(Date blackListDate) {
+	public void setBlackListDate(String blackListDate) {
 		this.blackListDate = blackListDate;
 	}
 	public Member getMember() {
@@ -47,15 +46,17 @@ public class BlackList {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+	public Staff getStaff() {
+		return staff;
+	}
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
 	
 	@Override
 	public String toString() {
-		return "BlackList [blackListNum=" + blackListNum + ", blackListReason=" + blackListReason
+		return "BlackList [blackListCode=" + blackListCode + ", blackListReason=" + blackListReason
 				+ ", blackListCancleReason=" + blackListCancleReason + ", blackListCancleDate=" + blackListCancleDate
-				+ ", blackListDate=" + blackListDate + ", member=" + member + "]";
+				+ ", blackListDate=" + blackListDate + ", member=" + member + ", staff=" + staff + "]";
 	}
-	
-	
-	
-	
 }
