@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.cafe24.memory.service.MemberService;
 import com.cafe24.memory.service.StorageService;
 
 @SpringBootApplication
@@ -20,7 +21,7 @@ public class AnimalProtectionCenterApplication {
 	}
 
 	@Bean
-	CommandLineRunner init(StorageService storageService) {
+	CommandLineRunner init(StorageService storageService, MemberService memberService) {
 		return (args) -> {
 			//서버 시작시 전체 업로드 경로의 파일 제거
 			//storageService.deleteAll();
@@ -28,5 +29,4 @@ public class AnimalProtectionCenterApplication {
 			storageService.init();
 		};
 	}
-	
 }

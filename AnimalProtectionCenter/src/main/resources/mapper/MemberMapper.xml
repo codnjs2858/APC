@@ -18,9 +18,9 @@
 	
 	<select id="getMemberList" parameterType="String" resultMap="getMemberMap">
 			SELECT * from tb_member
-		<if test="memberId!=null and memberId !=''.toString()">
+		<if test="mId != null and mId != ''.toString()">
 			<where>
-			member_id=#{Mid}
+			member_id=#{mId}
 			</where>
 		</if>
 	</select>
