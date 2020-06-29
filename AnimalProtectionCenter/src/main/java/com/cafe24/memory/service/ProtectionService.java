@@ -18,6 +18,14 @@ public class ProtectionService {
 	@Autowired
 	ProtectionMapper protectionMapper;
 	
+	public int deleteProtectionSpace(String protectionSpaceCode) {
+		return protectionMapper.deleteProtectionSpace(protectionSpaceCode);
+	}
+	
+	public int insertProtectionSpace(ProtectionSpace protectionSpace) {
+		return protectionMapper.insertProtectionSpace(protectionSpace);
+	}
+	
 	/**
 	 * 보호공간에서 빼낼때 보호공간관리에 미보호로 해주고 보호공간에서 빼야함 - 손충기
 	 * @param protectionSpaceCode

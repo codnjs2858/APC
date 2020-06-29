@@ -76,19 +76,6 @@
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
-	<script>
-		$(function(){
-			$('#protectSpaceBtn').click(function(){
-				if($('#protectDate').val() == ''){
-					alert("보호기간을 넣어주세요");
-					$('#protectDate').focus();
-					return;
-				}
-			
-				$('#protectSpaceForm').submit();			
-			});
-		});
-	</script>
 </th:block>
  
 </html>

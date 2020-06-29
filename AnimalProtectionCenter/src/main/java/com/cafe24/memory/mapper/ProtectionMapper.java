@@ -6,11 +6,26 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.AnimalProtect;
+import com.cafe24.memory.domain.Implement;
 import com.cafe24.memory.domain.ProtectionSpace;
 
 @Mapper
 public interface ProtectionMapper {
 
+	/**
+	 * 보호공간 삭제
+	 * @param protectionSpaceCode
+	 * @return
+	 */
+	int deleteProtectionSpace(String protectionSpaceCode);
+	
+	/**
+	 * 보호공간 등록 - 손충기
+	 * @param implement
+	 * @return
+	 */
+	int insertProtectionSpace(ProtectionSpace protectionSpace);
+	
 	/**
 	 * 보호공간에서 보호공간코드로 찾음 - 손충기
 	 * @param proSpaceCode

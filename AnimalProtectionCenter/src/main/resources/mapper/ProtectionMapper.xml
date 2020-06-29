@@ -31,6 +31,45 @@
 		</association>
 	</resultMap>
 	
+	<!-- 보호공간 삭제 -->
+	<delete id="deleteProtectionSpace" parameterType="String">
+		DELETE 
+		FROM 
+			tb_protect_space 
+		WHERE protect_space_code=#{protectionSpace};
+	</delete>
+	
+	<!-- 보호공간 등록 -->
+	<insert id="insertProtectionSpace" parameterType="ProtectionSpace">
+		<selectKey resultType="String" keyProperty="protectSpaceCode" order="BEFORE">
+			SELECT
+				case COUNT(*)
+				when 0 then 'protect_space_1'
+				else CONCAT('protect_space_',MAX(CAST(SUBSTRING(s.protect_space_code, 15) AS DECIMAL))+1) 
+				END AS protectSpaceCode
+			FROM
+				tb_protect_space AS s
+		</selectKey>
+		INSERT INTO tb_protect_space
+			(
+			 protect_space_code
+			,animal_insert_code
+			,use_state
+			,implement_code
+			,protect_space_reg_date
+			,animal_protect_period
+			)
+		VALUES 
+			(
+			 #{protectSpaceCode}
+			,null
+			,'없음'
+			,#{implementCode}
+			,NOW()
+			,#{animalProtectPeriod}
+			)
+	</insert>
+	
 	<!-- 보호관리에 등록 -->
 	<insert id="insertAniamlProtection" parameterType="AnimalProtect">
 		<selectKey resultType="String" keyProperty="animalProtectNum" order="BEFORE">

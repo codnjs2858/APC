@@ -3062,7 +3062,7 @@ section.content {
   display: flex;
   cursor: default;
   background-color: #fff;
-  position: relative;
+  /* position: relative; */
   overflow: hidden;
   margin-bottom: 30px; }
   .info-box .icon {

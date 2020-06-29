@@ -4,31 +4,67 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.AnimalProtect;
+import com.cafe24.memory.domain.Implement;
 import com.cafe24.memory.domain.ProtectionSpace;
 import com.cafe24.memory.service.AnimalCenterService;
+import com.cafe24.memory.service.ImplementService;
 import com.cafe24.memory.service.ProtectionService;
 
 @Controller
 @RequestMapping("/protection")
 public class AnimalProtectionController {
 	
+	private final static Logger logger = 
+			LoggerFactory.getLogger(SpringBootApplication.class);
+	
 	@Autowired
 	ProtectionService protectionService;
 	
 	@Autowired
 	AnimalCenterService animalCenterService;
+	
+	@Autowired
+	ImplementService implementService;
+	
+	@GetMapping("/delProtectionSpace")
+	public String delProtectionSpace(
+			@RequestParam(name = "protectSpaceCode", required = false) String protectSpaceCode) {
+		logger.info("삭제버튼 클릭시 보내는 장소 코드 값 {}", protectSpaceCode);
+		protectionService.deleteProtectionSpace(protectSpaceCode);
+		
+		return "redirect:/protection/animalProtection";
+	}
+	
+	@PostMapping("/addAnimalProtectionSpace")
+	public String addAnimalProtectionSpace(ProtectionSpace space) {
+		logger.info("보호공간화면에서 보낸 ProtectionSpace {}", space);
+		protectionService.insertProtectionSpace(space);
+		
+		return "redirect:/protection/animalProtection";
+	}
 
+	@GetMapping("/addProtectionSpace")
+	public String addprotectionSpace(Model model) {
+		List<Implement> implementList = implementService.selectImplement();
+		logger.info("보호공간 등록 화면에 보낼 시설 데이타베이스 {}", implementList);
+		model.addAttribute("implementList", implementList);
+		
+		return "/animalprotect/animalProtectSpaceInsert";
+	}
+	
 	@GetMapping("/exitAnimalProtection")
 	public String exitAnimalProtection(
 			 @RequestParam(name = "protectSpaceCode", required = false) String protectSpaceCode
@@ -38,20 +74,6 @@ public class AnimalProtectionController {
 		protectionService.exitProtectionSpace(protectSpaceCode, aniProtectionNum);
 		
 		return "redirect:/protection/animalProtection";
-	}
-	
-	@PostMapping("/insertCodeCheck")
-	@ResponseBody
-	public String modifyAnimalProtection(@RequestParam(name = "btnNamePet") String petName) {
-		System.out.println(petName);
-		String result = "N";
-		
-		AnimalProtect ap = protectionService.selectAnimalProtect(petName);
-		if(ap != null) {
-			result = "Y";
-		}
-		
-		return result;
 	}
 	
 	@GetMapping("/animalProtection")
