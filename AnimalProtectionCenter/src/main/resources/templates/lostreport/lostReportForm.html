@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ㅍ<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/default}">
@@ -36,7 +36,7 @@
                             <h2>유기동물 분실신고</h2>
                         </div>
                         <div class="body">
-                            <form id="form_validation" action="/searchreport/lostReport" method="POST">
+                            <form id="form_validation" action="/reportlist/lostReport" method="POST">
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="memberId" readonly="readonly" th:value="${session.SID}">
