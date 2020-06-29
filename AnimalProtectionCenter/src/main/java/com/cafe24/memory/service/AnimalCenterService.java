@@ -19,6 +19,14 @@ public class AnimalCenterService {
 	@Autowired private AnimalCenterMapper animalCenterMapper;
 	
 	/**
+	 * 처리안한 동물 리스트
+	 * @return
+	 */
+	public List<AnimalCenter> selectNoDisposal(){
+		return animalCenterMapper.selectNoDisposal();
+	}
+	
+	/**
 	 * 모든 보호동물, 타입별 보호동물 처리 조회
 	 * @return
 	 */

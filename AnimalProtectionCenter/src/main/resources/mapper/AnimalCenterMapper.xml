@@ -31,6 +31,16 @@
 		
 	</resultMap>
 	
+	<select id="selectNoDisposal" resultMap="animalCenter">
+		SELECT
+			*
+		FROM
+			tb_animal_insert AS i
+			left JOIN 
+			tb_animal_disposal AS d ON i.animal_insert_code = d.animal_insert_code
+		WHERE d.animal_disposal_code IS null
+	</select>
+	
 	<select id="selectNumCode" parameterType="int" resultMap="animalCenter">
 		SELECT
 		*

@@ -11,8 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cafe24.memory.domain.Adoptee;
 import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.AnimalDisposal;
+import com.cafe24.memory.domain.CenterReturn;
+import com.cafe24.memory.domain.Member;
+import com.cafe24.memory.domain.Staff;
+import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.AnimalDisposalService;
 
 @Controller
@@ -23,6 +28,7 @@ public class AnimalDisposalController {
 			LoggerFactory.getLogger(SpringBootApplication.class);
 	
 	@Autowired private AnimalDisposalService animalDisposalService;
+	@Autowired private AnimalCenterService animalCenterService;
 	
 	//animal disposal list
 	@GetMapping("/animaldisposallist")
@@ -45,7 +51,19 @@ public class AnimalDisposalController {
 		return "animaldisposal/animalDisposalInsert";
 	}
 	@PostMapping("/animaldisposalinsert")
-	public String insertAnimalDisposal() {
+	public String insertAnimalDisposal(AnimalDisposal disposal, AnimalCenter ac, Staff staff,CenterReturn centerReturn, Member member) {
+		disposal.setAnimalCneter(animalCenterService.selectNumCode(ac.getAnimalCenterNumber()));
+		disposal.setStaff(staff);
+		if(member != null ) {
+			Adoptee adoptee = new Adoptee();
+			adoptee.setAdopteeCode(animalDisposalService.DisposalmemberId(member.getMemberId()));
+			disposal.setAdoptee(adoptee);
+		}
+		if(centerReturn != null ) {
+			centerReturn.setCenterReturnCode(animalDisposalService.DisposalReturnCode(centerReturn.getCenterReturnName(),centerReturn.getCenterReturnPhone()));
+			disposal.setCenterReturn(centerReturn);
+		}
+		animalDisposalService.insertAnimalDisposal(disposal);
 		return "redirect:/animaldisposal/animaldisposallist";
 	}
 	

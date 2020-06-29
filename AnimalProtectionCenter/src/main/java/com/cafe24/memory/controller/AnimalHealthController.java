@@ -32,12 +32,13 @@ public class AnimalHealthController {
 	/*animal health insert*/
 	@GetMapping("/animalhealthinsert")
 	public String insertAnimalHealthForm(Model model) {
+		model.addAttribute("AList", animalCenterService.selectNoDisposal());
 		return "animalhealth/animalHealthInsert";
 	}
 	@PostMapping("/animalhealthinsert")
 	public String insertAnimalHealth(AnimalHealth aheal, AnimalCenter ac, Staff staff) {
 		try{
-			aheal.setAnimalCenter(animalCenterService.selectNumCode(ac.getAnimalCenterNumber()));
+			aheal.setAnimalCenter(ac);
 			aheal.setStaff(staff);
 			animalHealthService.insertAnimalHealth(aheal);
 		}catch (Exception e) {
