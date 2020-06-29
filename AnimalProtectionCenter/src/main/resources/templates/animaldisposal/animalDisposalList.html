@@ -5,8 +5,10 @@
 <th:block layout:fragment="customCss">
 	<!-- JQuery DataTable Css -->
     <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+    <style>
+    	::-webkit-scrollbar { display: none; }
+    </style>
 </th:block>
-
 <th:block layout:fragment="customTitle">
 	<title>동물 처리 리스트</title>
 </th:block> 
@@ -51,18 +53,19 @@
 		                            <td><div class="align-center">[[${dList.animalDisposalResult}]]</div></td>
 		                            <td><div class="align-center">[[${dList.animalDisposalDate}]]</div></td>
 		                            <td><div class="align-center">[[${dList.staff.staffName}]]</div></td>
-		                            <td><div class="align-center">
-			                            	<a href="/animaldisposal/animaldisposalupdate">
+		                            <td>
+	                      				<div class="align-center">
+			                            	<a th:href="@{/animaldisposal/animaldisposalupdate(send_code=${dList.animalDisposalCode})}" style="color: #9E9E9E">
 		                       					<i class="material-icons">update</i>
 		                       				</a>
 	                       				</div>
 	                      			</td>
 	                      			<td>
 	                      				<div class="align-center">
-				                       		<a href="/animaldisposal/animaldisposaldelete">
-				                       			<i class="material-icons">delete</i>
-			                       			</a>
-			                       		</div>
+						            		<a class="delete" data-toggle="modal" data-color="red" th:data-data="${dList.animalDisposalCode}" data-title="삭제하시겠습니까?" href="#modalTarget">
+						            			<i class="material-icons">delete</i>
+						            		</a>
+						            	</div>
 			                       	</td>
 	                        	</tr>
 	                        </tbody>
@@ -72,6 +75,23 @@
 			</div>
 		</div>
 	</section>
+	<div id="modalTarget" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h2 class="modal-title">Modal Header</h2>
+				</div>
+				<div class="modal-body">
+					<p>Some text in the modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="ok">ok</button>
+					<button type="button" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </th:block> 
 <th:block layout:fragment="customFooterScript">
 	<!-- Jquery DataTable Plugin Js -->
@@ -88,6 +108,22 @@
     	$(function(){
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
+    		});
+			
+			$('#modalTarget').on('show.bs.modal', function (event) {
+    	        var color = $(event.relatedTarget).data('color');
+    	        var data = $(event.relatedTarget).data('data');
+    	        var title = $(event.relatedTarget).data('title');
+    	        $('#modalTarget .modal-title').text(title);
+    	        $('#modalTarget .modal-body').text('해당 코드 : '+data);
+    	        $('#modalTarget .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
+    	        $('#ok').val(data);
+    	    });
+    		
+    		$('#ok').click(function(){
+    			var val = $(this).val();
+    			console.log('ok 버튼 클릭 했음' + val);
+    			location.href='/animaldisposal/animaldisposaldelete?send_code=' + val;
     		});
     	});
     </script>

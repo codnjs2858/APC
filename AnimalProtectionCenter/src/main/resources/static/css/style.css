@@ -1,5 +1,11 @@
 ﻿/* Navbar ====================================== */
 @import url(materialize.css);
+.delete {
+    		color: #F44336;
+    		border: 0; 
+    		outline: 0; 
+    		background: none;
+    	}
 .navbar {
   font-family: "Roboto", sans-serif;
   -webkit-border-radius: 0;

@@ -16,11 +16,44 @@ public class AnimalDisposalService {
 
 	@Autowired private AnimalDisposalMapper animalDisposalMapper;
 	
-	public AnimalDisposal selectResultTest(String send_code){
-		return animalDisposalMapper.selectResultTest(send_code);
+	/**
+	 * 이름, 연락처로 반환코드 조회
+	 * @param reName
+	 * @param rePhone
+	 * @return
+	 */
+	public String DisposalReturnCode(String reName, String rePhone) {
+		return animalDisposalMapper.DisposalReturnCode(reName, rePhone);
 	}
 	
-	public List<AnimalDisposal> selectResultTest(){
-		return animalDisposalMapper.selectResultTest();
+	/**
+	 * 회원 아이디로 입양인코드 조회
+	 * @param send_id
+	 * @return
+	 */
+	public String DisposalmemberId(String send_id) {
+		return animalDisposalMapper.DisposalmemberId(send_id);
+	}
+	
+	/**
+	 * 동물 처리 등록
+	 * @param disposal
+	 * @return
+	 */
+	public int insertAnimalDisposal(AnimalDisposal disposal) {
+		return animalDisposalMapper.insertAnimalDisposal(disposal);
+	}
+	
+	
+	/**
+	 * 동물 처리 조회
+	 * @param send_code
+	 * @return
+	 */
+	public AnimalDisposal selectDisposal(String send_code){
+		return animalDisposalMapper.selectDisposal(send_code);
+	}
+	public List<AnimalDisposal> selectDisposal(){
+		return animalDisposalMapper.selectDisposal();
 	}
 }

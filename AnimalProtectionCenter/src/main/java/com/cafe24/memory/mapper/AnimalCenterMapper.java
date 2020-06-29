@@ -12,6 +12,19 @@ import com.cafe24.memory.domain.SearchReportAnimal;
 public interface AnimalCenterMapper {
 
 	/**
+	 * 처리 안한 동물 리스트
+	 * @return
+	 */
+	public List<AnimalCenter> selectNoDisposal();
+	
+	/**
+	 * 모든 보호동물, 타입별 보호동물 처리 조회
+	 * @return
+	 */
+	public List<String> selectDisposalAnimalCenter();
+	public List<String> selectDisposalAnimalCenter(String send_type);
+	
+	/**
 	 * 모든 보호동물 ,타입별 보호동물 보호공간 코드 조회
 	 * @param send_type
 	 * @return
