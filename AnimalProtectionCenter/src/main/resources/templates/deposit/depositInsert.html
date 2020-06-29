@@ -21,20 +21,21 @@
 	            <div class="body">
 	            	<div class="row clearfix">
 	            		<form action="/deposit/depositInsert" method="post">
-	            			<div class="col-md-2 col-md-offset-1">
-	            				<b>아이디</b>
+	            			<input type="hidden" name="reviewCode" th:each="rct : ${reviewCount}" th:value="${rct.reviewCode}">
+	            			<div class="col-md-6">
+	            				<b>회원 아이디</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="memberId">
+		            				<select name="memberId" id="memberId" class="form-control">
 		            					<option value="">====== 선택 ======</option>
-		            					<option th:each="m : ${mlist}">[[${m}]]</option>
+		            					<option th:each="rct : ${reviewCount}" th:value="${rct.memberId}">[[${rct.memberId}]]</option>
 		            				</select>
 		            			</div>
 	            			</div>
-			                <div class="col-md-4">
-			                    <b>입양인 이름</b>
+	            			<div class="col-md-6">
+			                    <b>회원 이름</b>
 			                    <div class="input-group colorpicker colorpicker-element">
 			                        <div class="form-line">
-			                            <input type="text" name="memberName" class="form-control">
+			                            <input name="memberName" id="memberName" class="form-control" readonly>
 			                        </div>
 			                    </div>
 			                </div>
@@ -46,28 +47,51 @@
 			                        </div>
 			                    </div>
 			                </div>
-	            			<div class="col-md-2 col-md-offset-1">
+	            			<div class="col-md-4">
 	            				<b>보증금 상태</b>
 			                    <div class="input-group colorpicker colorpicker-element">
 		            				<select name="depositState">
 		            					<option value="">====== 선택 ======</option>
-		            					<option value="#">입금 완료</option>
-		            					<option value="#">입금 미확인</option>
-		            					<option value="#">기타</option>
+		            					<option value="입금 완료">입금 완료</option>
+		            					<option value="입금 미확인">입금 미확인</option>
+		            					<option value="기타">기타</option>
 		            				</select>
 		            			</div>
 	            			</div>
-	            			<div class="col-md-2 col-md-offset-1">
-	            				<b>담당자</b>
+	            			 <div class="col-md-4">
+			                    <b>리뷰 카운트</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="staffName">
-		            					<option value="">====== 선택 ======</option>
-		            					<option th:each="m : ${mlist}">[[${m}]]</option>
-		            				</select>
-		            			</div>
-	            			</div>
-			                
-			                <div class="col-md-4 col-md-offset-1 p-t-10">
+			                        <div class="form-line">
+			                            <input type="text" id="reviewCount" name="reviewCount" class="form-control">
+			                        </div>
+			                    </div>
+			                </div>
+	            			<div class="col-md-4">
+								<div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+										담당자
+			                            <input type="text" class="form-control" th:value="${session.STAFF.staffName}">
+			                            <input type="hidden" id="staffCode" class="form-control" name="staffCode" th:value="${session.STAFF.staffCode}">
+			                        </div>
+								</div>
+            				</div>
+	            			<div class="col-md-4">
+			                    <b>보증금 받은 날짜</b>
+			                    <div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+			                            <input type="Date" name="depositDate" class="form-control">
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="col-md-4">
+			                    <b>보증금 돌려주는 날짜</b>
+			                    <div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+			                            <input type="Date" name="depositReturnDate" class="form-control">
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="col-md-12 col-md-offset-1 p-t-10">
 			                	<button type="submit" class="btn btn-primary btn-lg">보증금  등록</button>
 			                </div>
 	            		</form>
@@ -81,6 +105,41 @@
 <th:block layout:fragment="customHeadScript">
 </th:block> 
 <th:block layout:fragment="customFooterScript">
+
+	<script>
+	
+	$(function(){
+		
+		//회원 아이디로 회원 이름 가져오기
+		$('#memberId').change(function(){
+			var type = $(this).val();
+			var request = $.ajax({
+				url: "/ajax/reviewType",
+				method: "POST",
+				data: { "type" : type },
+				dataType: "json"
+			});
+			request.done(function( data ) {
+				console.log(JSON.stringify(data));
+				var memberId = '';
+				var reviewCount = '';
+				for(var i=0;i<data.length;i++){
+					if(type == data[i].memberId){
+						memberId += data[i].memberName;
+						reviewCount += data[i].reviewCount;
+					}
+				}		
+				$('#memberName').val(memberId);
+				$('#reviewCount').val(reviewCount);
+			});
+			
+			request.fail(function( jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
+			});
+		});
+	});
+	
+	</script>
 </th:block>
  
 </html>
