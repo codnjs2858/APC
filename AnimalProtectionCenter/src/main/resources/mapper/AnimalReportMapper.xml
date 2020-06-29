@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.AnimalReportMapper">
+	<resultMap type="SearchReportAnimal" id="searchReportAnimal">
+		<result property="searchReportCode" column="search_report_code"></result>
+		<result property="searchReportInDate" column="search_report_in_date"></result>
+		<result property="searchReportOutDate" column="search_report_out_date"></result>
+		<result property="animalGender" column="animal_gender"></result>
+		<result property="animalDetail" column="animal_detail"></result>
+		<result property="animalLocation" column="animal_location"></result>
+		<result property="animalPicture" column="animal_picture"></result>
+		<association property="animalType" javaType="AnimalType">
+			<result property="animalTypeCode" column="animal_type_code"></result>
+			<result property="animalType" column="animal_type"></result>
+			<result property="animalTypeSub" column="animal_type_sub"></result>
+			<result property="animalTypeRegDate" column="animal_type_reg_date"></result>
+		</association>
+		<association property="member" javaType="Member">
+			<result property="memberId" column="animal_type_code"></result>
+			<result property="memberPw" column="animal_type"></result>
+			<result property="memberName" column="animal_type_sub"></result>
+			<result property="memberPhone" column="animal_type_reg_date"></result>
+			<result property="memberAddr" column="animal_type_reg_date"></result>
+			<result property="memberEmail" column="animal_type_reg_date"></result>
+			<result property="memberInDate" column="animal_type_reg_date"></result>
+			<association property="level" javaType="Level">
+				<result property="levelCode" column="level_code"></result>
+				<result property="levelName" column="level_name"></result>
+				<result property="levelNum" column="level_num"></result>
+				<result property="levelInDate" column="level_in_date"></result>
+			</association>
+		</association>
+	</resultMap>
+	
+	<insert id="insertAnimalReport" parameterType="SearchReportAnimal">
+		<selectKey resultType="String" order="BEFORE" keyProperty="searchReportCode">
+			SELECT (
+			case COUNT(*)
+					when 0 then 'search_report_1'
+			ELSE  CONCAT('search_report_',max(cast(	substr(search_report_code,15) as decimal))+1)
+					END	)
+			AS searchReportCode
+			fROM tb_search_report;
+		</selectKey>
+		INSERT INTO tb_search_report
+		(search_report_code, animal_code, animal_gender, animal_detail, animal_location, animal_picture, member_id, search_report_in_date)
+		VALUES (#{searchReportCode}, #{animalType.animalTypeCode}, #{animalGender}, #{animalDetail}, #{animalLocation}, #{animalPicture}, #{member.memberId}, NOW())
+	</insert>
+</mapper>

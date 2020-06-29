@@ -10,8 +10,8 @@ public class SearchReportAnimal {
 	private String animalDetail;
 	private String animalLocation;
 	private String animalPicture;
-	private Date searchReportInDate;
-	private Date searchReportOutDate;
+	private String searchReportInDate;
+	private String searchReportOutDate;
 	
 	public String getAnimalDetail() {
 		return animalDetail;
@@ -55,16 +55,16 @@ public class SearchReportAnimal {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	public Date getSearchReportInDate() {
+	public String getSearchReportInDate() {
 		return searchReportInDate;
 	}
-	public void setSearchReportInDate(Date searchReportInDate) {
+	public void setSearchReportInDate(String searchReportInDate) {
 		this.searchReportInDate = searchReportInDate;
 	}
-	public Date getSearchReportOutDate() {
+	public String getSearchReportOutDate() {
 		return searchReportOutDate;
 	}
-	public void setSearchReportOutDate(Date searchReportOutDate) {
+	public void setSearchReportOutDate(String searchReportOutDate) {
 		this.searchReportOutDate = searchReportOutDate;
 	}
 	@Override
