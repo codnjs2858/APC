@@ -9,7 +9,10 @@ import com.cafe24.memory.interceptor.LoginInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
-	@Autowired LoginInterceptor loginInterceptor;
+	
+	@Autowired 
+	LoginInterceptor loginInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor)
@@ -22,7 +25,6 @@ public class WebConfig implements WebMvcConfigurer{
 				.excludePathPatterns("/plugins/**")
 				.excludePathPatterns("/member/**")
 				.excludePathPatterns("/index");
-		
 	}
 	
 }
