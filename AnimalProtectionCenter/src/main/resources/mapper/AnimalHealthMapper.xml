@@ -109,6 +109,7 @@
 			animal_health_end_date IS NULL
 			AND
 			animal_health_result IS NULL
+		ORDER BY h.animal_health_reg_date DESC
 	</select>
 	
 	<select id="selectAnimalHealthed" resultMap="animalHealth">

@@ -34,7 +34,58 @@
 		</association>
 	</resultMap>
 	
-	<select id="selectResultTest" parameterType="String" resultMap="animalDisposal">
+	<select id="DisposalReturnCode" resultType="String">
+		SELECT
+			center_return_code
+		FROM 
+			tb_center_return
+		WHERE 
+			center_return_name = #{reName}
+			AND
+			center_return_phone = #{rePhone}
+	</select>
+	
+	<select id="DisposalmemberId" resultType="String">
+		SELECT 
+		adoptee_code
+		FROM
+		tb_adoptee
+		WHERE member_id=#{send_id}
+		ORDER BY COUNT(*)
+	</select>
+	
+	<insert id="insertAnimalDisposal" parameterType="AnimalDisposal">
+		<selectKey order="BEFORE" keyProperty="animalDisposalCode" resultType="String">
+			SELECT
+				(case COUNT(*)
+				when 0 then'disposal_1'
+				else CONCAT('disposal_',MAX(CAST(SUBSTRING(animal_disposal_code,10) AS DECIMAL))+1) 
+				END)AS animal_disposal_code
+			FROM
+				tb_animal_disposal
+		</selectKey>
+		INSERT INTO tb_animal_disposal
+		(animal_disposal_code
+		, animal_insert_code
+		, animal_disposal_result
+		, animal_disposal_pasture_info
+		, animal_disposal_die_info
+		, animal_disposal_date
+		, staff_code
+		, adoptee_code
+		, center_return_code)
+		VALUES (#{animalDisposalCode}
+				, #{animalCneter.animalInsertCode}
+				, #{animalDisposalResult}
+				, #{animalDisposalPastureInfo}
+				, #{animalDisposalDieInfo}
+				, NOW()
+				, #{staff.staffCode}
+				, #{adoptee.adopteeCode}
+				, #{centerReturn.centerReturnCode})
+	</insert>
+	
+	<select id="selectDisposal" parameterType="String" resultMap="animalDisposal">
 		SELECT
 		*
 		FROM 

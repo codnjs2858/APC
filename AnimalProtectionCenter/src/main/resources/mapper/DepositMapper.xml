@@ -16,6 +16,7 @@
 		</association>	
 		
 		<association property="review" javaType="Review">
+			<result property="reviewCode" column="review_code"></result>
 			<result property="reviewCount" column="review_count"></result>
 		</association>	
 		
@@ -32,7 +33,6 @@
 	
 	<!-- 리스트 -->
 	<select id="selectDeposit"
-			resultType="Deposit"
 			resultMap="deposit">
 		SELECT 
 			deposit_code, 
@@ -60,4 +60,49 @@
 		d.review_code=r.review_code		
 	</select>
 
+
+	<!-- 등록 -->
+	<insert id="insertDeposit" parameterType="Deposit">
+		<selectKey resultType="String" order="BEFORE" keyProperty="depositCode">
+			SELECT 
+ 				CONCAT('DPC_', MAX(CAST(SUBSTRING(deposit_code,5) AS DECIMAL)+1)) AS deposit_code
+			FROM tb_deposit;
+		</selectKey>
+			INSERT INTO tb_deposit
+			(deposit_code, member_id, staff_code, review_code, deposit_amount, deposit_state, deposit_date, deposit_return_date)
+			VALUES (
+					#{depositCode},
+			 		#{member.memberId}, 
+			 		#{staff.staffCode},
+			 		#{review.reviewCode}, 
+			 		#{depositAmount}, 
+			 		#{depositState}, 
+			 		#{depositDate}, 
+			 		#{depositReturnDate}
+			 		);
+	</insert>
+	
+	<!-- 리뷰코드로 아이디값 가져와서 카운터 조회 -->
+	
+	<select id="selectReviewCount" parameterType="String" resultType="map">
+		SELECT 
+			m.member_id AS memberId,
+			m.member_name AS memberName,
+			d.review_code AS reviewCode,
+			r.review_count AS reviewCount
+		FROM 
+			tb_deposit AS d
+		INNER JOIN
+			tb_review AS r
+		INNER JOIN
+			tb_member AS m
+		ON
+			d.review_code = r.review_code
+		AND 
+			r.member_id = m.member_id
+		WHERE
+			d.review_code = #{review.reviewCode};	
+	
+	</select>
+	
 </mapper>

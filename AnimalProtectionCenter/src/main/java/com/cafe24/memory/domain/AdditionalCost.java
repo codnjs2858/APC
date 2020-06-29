@@ -8,6 +8,7 @@ public class AdditionalCost {
 	private String additionalCostType;
 	private int additionalCostAmount;
 	private Date additionalCostDate;
+	
 	public String getAdditionalCostCode() {
 		return additionalCostCode;
 	}

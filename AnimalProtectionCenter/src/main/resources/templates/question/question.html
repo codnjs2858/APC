@@ -29,7 +29,6 @@
 						            <th>등록날짜</th>
 						            <th>수정날짜</th>
 						            <th>수정</th>
-						            <th>삭제</th>
 						        </tr>
 						    </thead>
 						    <tbody>
@@ -41,14 +40,9 @@
 						            <td>[[${i.question_modify_date}]]</td>
 						            <td>
 						            	<div class="align-center">
-		                                <a href="#" style="color: #9E9E9E">
+		                                <a th:href="@{/question/questionUpdate(question_code=${i.question_code})}" style="color: #9E9E9E">
 		                       			<i class="material-icons">update</i></a></div>
 		                      		</td>
-		                      		<td>
-		                      			<div class="align-center">
-					                    <a th:href="@{/questionDelete(question_code=${i.question_code})}" style="color: #F44336">
-					                    <i class="material-icons">delete</i></a></div>
-			                      	</td>
 						        </tr>
 						    </tbody>
 	                    </table>

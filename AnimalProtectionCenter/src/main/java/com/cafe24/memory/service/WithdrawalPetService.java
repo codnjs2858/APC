@@ -23,4 +23,30 @@ public class WithdrawalPetService {
 		return list;
 	}
 	
+	public int insertWithdrawalPet(WithdrawalPet withdrawalPet) {
+		
+		int result = withdrawalPetMapper.insertWithdrawalPet(withdrawalPet);
+		
+		return result;
+	}
+		
+	public int updateWithdrawalPet(WithdrawalPet withdrawalPet) {
+			
+			int result = withdrawalPetMapper.updateWithdrawalPet(withdrawalPet);
+			
+			return result;
+	}
+
+	public int deleteWithdrawalPet(String withdrawalPetCode) {
+		
+		int result = withdrawalPetMapper.deleteWithdrawalPet(withdrawalPetCode);
+		
+		return result;
+	}
+	
+	public WithdrawalPet selectWithdrawalPetCode(String withdrawalPetCode) {
+		
+		return withdrawalPetMapper.selectWithdrawalPetCode(withdrawalPetCode);
+	}
+	
 }

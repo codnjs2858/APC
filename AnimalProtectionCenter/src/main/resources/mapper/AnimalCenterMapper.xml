@@ -31,6 +31,16 @@
 		
 	</resultMap>
 	
+	<select id="selectNoDisposal" resultMap="animalCenter">
+		SELECT
+			*
+		FROM
+			tb_animal_insert AS i
+			left JOIN 
+			tb_animal_disposal AS d ON i.animal_insert_code = d.animal_insert_code
+		WHERE d.animal_disposal_code IS null
+	</select>
+	
 	<select id="selectNumCode" parameterType="int" resultMap="animalCenter">
 		SELECT
 		*
@@ -104,6 +114,21 @@
 			tb_animal_insert AS i
 			JOIN tb_animal_type AS t ON i.animal_type_code = t.animal_type_code
 			LEFT JOIN tb_protect_space AS p ON i.animal_insert_code = p.animal_insert_code
+		<if test="send_type !=null and send_type !=''.toString()">
+			<where>
+			t.animal_type = #{send_type}
+			</where>
+		</if>
+		ORDER BY i.animal_insert_reg_date DESC
+	</select>
+	
+	<select id="selectDisposalAnimalCenter" resultType="String">
+		SELECT
+			d.animal_disposal_result AS disposal
+		FROM 
+			tb_animal_insert AS i 
+			left JOIN tb_animal_disposal AS d ON d.animal_insert_code =i.animal_insert_code
+			LEFT JOIN tb_animal_type AS t ON i.animal_type_code = t.animal_type_code
 		<if test="send_type !=null and send_type !=''.toString()">
 			<where>
 			t.animal_type = #{send_type}

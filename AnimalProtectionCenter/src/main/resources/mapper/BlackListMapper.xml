@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.memory.mapper.BlackListMapper">
+
+	<resultMap type="BlackList" id="blackList">
+		<result property="blackListCode" column="black_list_code"></result>
+		<result property="blackListReason" column="black_list_reason"></result>
+		<result property="blackListCancleReason" column="black_list_cancle_reason"></result>
+		<result property="blackListDate" column="black_list_date"></result>
+		<result property="blackListCancleDate" column="black_list_cancle_date"></result>
+		
+		<association property="staff" javaType="Staff">
+			<result property="staffCode" column="staff_code"></result>
+			<result property="staffName" column="staff_name"></result>
+		</association>
+		
+		<association property="member" javaType="Member">
+			<result property="memberId" column="member_id"></result>
+			<result property="memberName" column="member_name"></result>
+		</association>
+	</resultMap>
+	
+	<!-- 리스트 -->
+	<select id="selectBlackList" 
+	resultMap="blackList">
+	
+		SELECT 
+			b.black_list_code, 
+			m.member_id, 
+			t.staff_name, 
+			black_list_reason, 
+			black_list_cancle_reason, 
+			black_list_date, 
+			black_list_cancle_date
+		FROM 
+			tb_black_list AS b
+		INNER JOIN
+			tb_member AS m
+		INNER JOIN
+			tb_staff AS t
+		ON
+			b.member_id=m.member_id
+		AND
+			b.staff_code=t.staff_code;
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="insertBlackList" parameterType="BlackList">
+		<selectKey resultType="String" order="BEFORE" keyProperty="blackListCode">
+			SELECT 
+ 				CONCAT('BLC_', MAX(CAST(SUBSTRING(black_list_code,5) AS DECIMAL)+1)) AS black_list_code
+			FROM tb_black_list;
+		</selectKey>
+			INSERT INTO tb_black_list
+					(black_list_code, member_id, staff_code, black_list_reason, black_list_date)
+					VALUES (
+							#{blackListCode},
+							#{member.memberId},
+							#{staff.staffCode}, 
+							#{blackListReason}, 
+							NOW() 
+							);
+	</insert>
+	
+	<!-- 코드로 찾기 -->
+	<select id="selectBlackListCode" parameterType="String" resultMap="blackList">
+	
+			SELECT 
+				black_list_code, 
+				m.member_id, 
+				staff_code, 
+				black_list_reason, 
+				black_list_cancle_reason, 
+				black_list_date, 
+				black_list_cancle_date
+			FROM 
+				tb_black_list AS b
+			INNER join
+				tb_member AS m
+			ON
+				b.member_id=m.member_id
+			WHERE
+				black_list_code=#{blackListCode};
+	
+	</select>
+	
+	<!-- 수정 -->
+	
+	<update id="updateBlackList" parameterType="BlackList">
+		
+			UPDATE tb_black_list
+			SET
+				black_list_cancle_reason=#{blackListCancleReason},
+				black_list_cancle_date=#{blackListCancleDate}
+			WHERE 
+				black_list_code=#{blackListCode};
+	
+	</update>
+	
+	<!-- 삭제 -->
+	
+	<delete id="deleteBlackList" parameterType="String">
+		
+		DELETE 
+		FROM 
+			tb_black_list 
+		WHERE 
+			black_list_code=#{blackListCode};
+			
+	</delete>
+</mapper>

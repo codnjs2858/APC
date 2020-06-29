@@ -32,78 +32,78 @@ public class CompanionAnimalRegisterController {
 	AnimalCenterService animalCenterService;
 	
 	@GetMapping("/companionAnimalRegisterDelete")
-	
-		public String companionAnimalRegisterDelete(@RequestParam(name="companionAnimalRegisterCode", required = false) String companionAnimalRegisterCode) {
-			
-			companionAnimalRegisterService.deleteCompanionAnimalRegister(companionAnimalRegisterCode);
-			
-			return "redirect:/companionanimalregister/companionAnimalRegisterList";
+
+	public String companionAnimalRegisterDelete(@RequestParam(name="companionAnimalRegisterCode", required = false) String companionAnimalRegisterCode) {
 		
-		}
+		companionAnimalRegisterService.deleteCompanionAnimalRegister(companionAnimalRegisterCode);
+		
+		return "redirect:/companionanimalregister/companionAnimalRegisterList";
+	
+	}
 	
 	@GetMapping("/companionAnimalRegisterList")
 	
-		public String companionAnimalRegisterList(Model model) {
-			List<CompanionAnimalRegister> cars = companionAnimalRegisterService.selectCompanionAnimalRegisterList();
-			System.out.println(cars);
-			model.addAttribute("CARS", cars);
-			return "companionanimalregister/companionAnimalRegisterList";
-		
-		}
+	public String companionAnimalRegisterList(Model model) {
+		List<CompanionAnimalRegister> cars = companionAnimalRegisterService.selectCompanionAnimalRegisterList();
+		System.out.println(cars);
+		model.addAttribute("CARS", cars);
+		return "companionanimalregister/companionAnimalRegisterList";
+	
+	}
 	
 	@PostMapping("/companionAnimalRegisterInsert")
 	
-		public String insertCompanionAnimalRegister(Model model, Staff staff, AnimalCenter animal, ProtectionSpace aniPro
-													, CompanionAnimalRegister cAniReg) {
-			
-			cAniReg.setAnimalCenter(animal);
-			cAniReg.setStaff(staff);
-			cAniReg.setProtectionSpace(aniPro);
-			companionAnimalRegisterService.insertCompanionAnimalRegister(cAniReg);
-			return "redirect:/companionanimalregister/companionAnimalRegisterList";
+	public String insertCompanionAnimalRegister(Model model, Staff staff, AnimalCenter animal, ProtectionSpace aniPro
+												, CompanionAnimalRegister cAniReg) {
 		
-		}
+		cAniReg.setAnimalCenter(animal);
+		cAniReg.setStaff(staff);
+		cAniReg.setProtectionSpace(aniPro);
+		companionAnimalRegisterService.insertCompanionAnimalRegister(cAniReg);
+		return "redirect:/companionanimalregister/companionAnimalRegisterList";
+	
+	}
 	
 	@GetMapping("/companionAnimalRegisterInsert")
+
+	public String insertCompanionAnimalRegister(Model model) {
 	
-		public String insertCompanionAnimalRegister(Model model) {
-		
-		 List<ProtectionSpace> proList = protectionService.selectProtectionSpace();
-		 List<AnimalCenter> anicenter = animalCenterService.selectAnimalCenter();
-		 model.addAttribute("prolist" ,proList);
-		 model.addAttribute("aniCenNum", anicenter);
-			return "companionanimalregister/companionAnimalRegisterInsert";
-		
-		}
+	 List<ProtectionSpace> proList = protectionService.selectProtectionSpace();
+	 List<AnimalCenter> anicenter = animalCenterService.selectAnimalCenter();
+	 model.addAttribute("prolist" ,proList);
+	 model.addAttribute("aniCenNum", anicenter);
+		return "companionanimalregister/companionAnimalRegisterInsert";
+	
+	}
 	
 	@GetMapping("/companionAnimalRegisterUpdate")
 	
-		public String companionAnimalRegisterUpdate(
-				@RequestParam(name="send_code", required = false) String send_code,
-				@RequestParam(name="companionAnimalRegisterCode", required = false) String companionAnimalRegisterCode,
-				Model model){
-			CompanionAnimalRegister companionAnimalRegister = companionAnimalRegisterService.selectCompanionAnimalRegister(companionAnimalRegisterCode);
-			AnimalCenter ac = animalCenterService.selectCenterAnimal(send_code);
-			model.addAttribute("CARC", ac);
-			model.addAttribute("CAREG", companionAnimalRegister);
-			
-			System.out.println(send_code + " <-- send_code companionAnimalRegisterUpdate()");
-			System.out.println(ac + " <-- ac companionAnimalRegisterUpdate()" );
-			System.out.println(companionAnimalRegister + " <-- companionAnimalRegister companionAnimalRegisterUpdate()" );
-			System.out.println(companionAnimalRegister + "<== cAniReg");
-			return "companionanimalregister/companionAnimalRegisterUpdate";
+	public String companionAnimalRegisterUpdate(
+			@RequestParam(name="send_code", required = false) String send_code,
+			@RequestParam(name="companionAnimalRegisterCode", required = false) String companionAnimalRegisterCode,
+			Model model){
+		CompanionAnimalRegister companionAnimalRegister = companionAnimalRegisterService.selectCompanionAnimalRegister(companionAnimalRegisterCode);
+		AnimalCenter ac = animalCenterService.selectCenterAnimal(send_code);
+		model.addAttribute("CARC", ac);
+		model.addAttribute("CAREG", companionAnimalRegister);
 		
-		}
+		System.out.println(send_code + " <-- send_code companionAnimalRegisterUpdate()");
+		System.out.println(ac + " <-- ac companionAnimalRegisterUpdate()" );
+		System.out.println(companionAnimalRegister + " <-- companionAnimalRegister companionAnimalRegisterUpdate()" );
+		System.out.println(companionAnimalRegister + "<== cAniReg");
+		return "companionanimalregister/companionAnimalRegisterUpdate";
 	
+	}
+
 	@PostMapping("/companionAnimalRegisterUpdate")
 		
-		public String companionAnimalRegisterUpdate(CompanionAnimalRegister cAniReg) {
-		
-			System.out.println(cAniReg + " <-- cAniReg companionAnimalRegisterUpdate()");
-			companionAnimalRegisterService.updateCompanionAnimalRegister(cAniReg);
-			
-			return "redirect:/companionanimalregister/companionAnimalRegisterList";
-		
-		}
+	public String companionAnimalRegisterUpdate(CompanionAnimalRegister cAniReg) {
 	
+		System.out.println(cAniReg + " <-- cAniReg companionAnimalRegisterUpdate()");
+		companionAnimalRegisterService.updateCompanionAnimalRegister(cAniReg);
+		
+		return "redirect:/companionanimalregister/companionAnimalRegisterList";
+	
+	}
+
 }

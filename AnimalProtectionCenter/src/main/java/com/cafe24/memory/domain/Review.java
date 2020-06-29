@@ -1,52 +1,44 @@
 package com.cafe24.memory.domain;
 
-import java.util.Date;
-
 public class Review {
 	
 	private String reviewCode;
-	private int reviewCount;
-	private int reviewOmissionCount;
-	private Date reviewDate;
-	private Date reviewManagementPeriod;
+	private String reviewCount;
+	private String reviewOmissionCount;
+	private String reviewDate;
+	private String reviewManagementPeriod;
 	//외래키
 	private Staff staff;
 	private Member member;
 	
-	public Member getMember() {
-		return member;
-	}
-	public void setMember(Member member) {
-		this.member = member;
-	}
 	public String getReviewCode() {
 		return reviewCode;
 	}
 	public void setReviewCode(String reviewCode) {
 		this.reviewCode = reviewCode;
 	}
-	public int getReviewCount() {
+	public String getReviewCount() {
 		return reviewCount;
 	}
-	public void setReviewCount(int reviewCount) {
+	public void setReviewCount(String reviewCount) {
 		this.reviewCount = reviewCount;
 	}
-	public int getReviewOmissionCount() {
+	public String getReviewOmissionCount() {
 		return reviewOmissionCount;
 	}
-	public void setReviewOmissionCount(int reviewOmissionCount) {
+	public void setReviewOmissionCount(String reviewOmissionCount) {
 		this.reviewOmissionCount = reviewOmissionCount;
 	}
-	public Date getReviewDate() {
+	public String getReviewDate() {
 		return reviewDate;
 	}
-	public void setReviewDate(Date reviewDate) {
+	public void setReviewDate(String reviewDate) {
 		this.reviewDate = reviewDate;
 	}
-	public Date getReviewManagementPeriod() {
+	public String getReviewManagementPeriod() {
 		return reviewManagementPeriod;
 	}
-	public void setReviewManagementPeriod(Date reviewManagementPeriod) {
+	public void setReviewManagementPeriod(String reviewManagementPeriod) {
 		this.reviewManagementPeriod = reviewManagementPeriod;
 	}
 	public Staff getStaff() {
@@ -54,6 +46,12 @@ public class Review {
 	}
 	public void setStaff(Staff staff) {
 		this.staff = staff;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	
 	@Override

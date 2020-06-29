@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cafe24.memory.domain.BlackList;
+import com.cafe24.memory.domain.CenterReturn;
 import com.cafe24.memory.mapper.BlackListMapper;
 
 @Service
@@ -21,6 +22,25 @@ public class BlackListService {
 		List<BlackList> list = blackListMapper.selectBlackList();
 		
 		return list;
+	}
+	
+	public int insertBlackList(BlackList blackList) {
 		
+		return blackListMapper.insertBlackList(blackList);
+	}
+	
+	public int updateBlackList(BlackList blackList) {
+		
+		return blackListMapper.updateBlackList(blackList);
+	}
+	
+	public int deleteBlackList(String blackListCode) {
+		
+		return blackListMapper.deleteBlackList(blackListCode);
+	}
+	
+	public BlackList selectBlackListCode(String blackListCode) {
+		
+		return blackListMapper.selectBlackListCode(blackListCode);
 	}
 }

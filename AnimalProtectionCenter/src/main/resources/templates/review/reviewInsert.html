@@ -19,51 +19,51 @@
 	                <h2>후기 등록</h2>
 	            </div>
 	            <div class="body">
-	            	<div class="row clearfix">
+	            	<div class="row">
 	            		<form action="/review/reviewInsert" method="post">
-	            			<div class="col-md-2 col-md-offset-1">
-	            				<b>아이디</b>
+	            			<div class="col-md-6">
+	            				<b>회원 아이디</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="memberId">
+		            				<select name="memberId" id="memberId" class="form-control">
 		            					<option value="">====== 선택 ======</option>
-		            					<option th:each="m : ${mlist}">[[${m}]]</option>
+		            					<option th:each="m : ${mList}" th:value="${m.memberId}">[[${m.memberId}]]</option>
 		            				</select>
 		            			</div>
 	            			</div>
-			                <div class="col-md-4">
-			                    <b>입양인 이름</b>
+	            			<div class="col-md-6">
+			                    <b>회원 이름</b>
 			                    <div class="input-group colorpicker colorpicker-element">
 			                        <div class="form-line">
-			                            <input type="text" name="memberName" class="form-control">
+			                            <input name="memberName" id="memberName" class="form-control" readonly>
 			                        </div>
 			                    </div>
 			                </div>
-			                <div class="col-md-3">
+			                <div class="col-md-4">
 				           		<b>후기 등록 횟수</b>
 				           		<div class="input-group">
-					           		<select class="form-control">
+					           		<select class="form-control" name="reviewCount">
 					           			<option value="">====== 선택 ======</option>
-					           			<option value="#">1회 완료</option>
-		            					<option value="#">2회 완료</option>
-		            					<option value="#">3회 완료</option>
-		            					<option value="#">4회 완료</option>
-		            					<option value="#">5회 완료</option>
-		            					<option value="#">후기 완료!</option>
+					           			<option value="1회 완료">1회 완료</option>
+		            					<option value="2회 완료">2회 완료</option>
+		            					<option value="3회 완료">3회 완료</option>
+		            					<option value="4회 완료">4회 완료</option>
+		            					<option value="5회 완료">5회 완료</option>
+		            					<option value="후기 완료!">후기 완료!</option>
 		            				</select>
 				           		</div>
 		           			</div>
-		           			<div class="col-md-3">
+		           			<div class="col-md-4">
 				           		<b>등록 누락 횟수</b>
-				           		<div class="input-group">
-					           		<select class="form-control">
+				           		<div class="input-group colorpicker colorpicker-element">
+					           		<select class="form-control" name="reviewOmissionCount">
 					           			<option value="">====== 선택 ======</option>
-					           			<option value="#">1회 누락</option>
-		            					<option value="#">2회 누락</option>
-		            					<option value="#">회수 조치!</option>
+					           			<option value="1회 누락">1회 누락</option>
+		            					<option value="2회 누락">2회 누락</option>
+		            					<option value="회수 조치">회수 조치!</option>
 		            				</select>
 				           		</div>
 		           			</div>
-		           			<div class="col-md-3">
+		           			<div class="col-md-4">
 			                    <b>후기 관리 기간</b>
 			                    <div class="input-group colorpicker colorpicker-element">
 			                        <div class="form-line">
@@ -71,15 +71,15 @@
 			                        </div>
 			                    </div>
 			                </div>
-		           			<div class="col-md-2 col-md-offset-1">
-	            				<b>담당자</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="staffName">
-		            					<option value="">====== 선택 ======</option>
-		            					<option th:each="m : ${mlist}">[[${m}]]</option>
-		            				</select>
-		            			</div>
-	            			</div>
+		           			<div class="col-md-4">
+								<div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+										담당자
+			                            <input type="text" class="form-control" th:value="${session.STAFF.staffName}">
+			                            <input type="hidden" id="staffCode" class="form-control" name="staffCode" th:value="${session.STAFF.staffCode}">
+			                        </div>
+								</div>
+            				</div>
 							<div class="col-md-3 col-md-offset-1 p-t-10">
 			                	<button type="submit" class="btn btn-primary btn-lg">후기  등록</button>
 			                </div>
@@ -94,6 +94,38 @@
 <th:block layout:fragment="customHeadScript">
 </th:block> 
 <th:block layout:fragment="customFooterScript">
+	<script>
+	
+	$(function(){
+		
+		//회원 아이디로 회원 이름 가져오기
+		$('#memberId').change(function(){
+			var type = $(this).val();
+			var request = $.ajax({
+				url: "/ajax/memberType",
+				method: "POST",
+				data: { "type" : type },
+				dataType: "json"
+			});
+			request.done(function( data ) {
+				console.log(data);
+				var memberId = '';
+				
+				for(var i=0;i<data.length;i++){
+					if(type == data[i].memberId){
+						memberId += data[i].memberName;
+						
+					}
+				}		
+				$('#memberName').val(memberId);
+				
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});
+			});
+		});
+	});
+	</script>
 </th:block>
  
 </html>

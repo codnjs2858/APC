@@ -9,6 +9,6 @@ import com.cafe24.memory.domain.ScreeningApplication;
 @Mapper
 public interface ScreeningApplicationMapper {
 	public List<ScreeningApplication> selectScreeningApplication();
-	public List<ScreeningApplication> selectScreeningApplication(ScreeningApplication screeningApplication);
+	public List<ScreeningApplication> selectScreeningApplication(ScreeningApplication screening_application_code);
 	public int updateScreeningApplication(ScreeningApplication screeningApplication);
 }

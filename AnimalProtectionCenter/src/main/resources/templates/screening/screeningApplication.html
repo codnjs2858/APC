@@ -24,8 +24,8 @@
 						    <thead>
 						        <tr>
 						            <th>아이디</th>
-						            <th>신청날짜</th>
 						            <th>상태</th>
+						            <th>신청날짜</th>
 						            <th>수정</th>
 						        </tr>
 						    </thead>
@@ -34,10 +34,11 @@
 						            <td>[[${i.member_id}]]</td>
 						            <td>[[${i.screening_application_state}]]</td>
 						            <td>[[${i.screening_application_reg_date}]]</td>
-						            <td><div class="align-center">
-		                                	<a href="#" style="color: #9E9E9E">
-		                       				<i class="material-icons">update</i></a></div>
-		                      			</td>
+						            <td>
+						            	<div class="align-center">
+	                                	<a th:href="@{/screening/screeningApplicationUpdate(screening_application_code=${i.screening_application_code})}" style="color: #9E9E9E">
+	                       				<i class="material-icons">update</i></a></div>
+	                      			</td>
 						        </tr>
 						    </tbody>
 	                    </table>

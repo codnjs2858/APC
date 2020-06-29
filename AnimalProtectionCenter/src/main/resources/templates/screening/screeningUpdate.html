@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default2}">
+	
+<th:block layout:fragment="customTitle">
+<title>심사신청수정</title>
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="container-fluid">
+            <div class="card">
+            	<div class="header">
+            		<h2>
+            			심사 신청 수정
+            		</h2>
+            	</div>
+            	<div class="body">
+            		<form action="/screening/screeningApplicationUpdate" method="post">
+						<div class="row">
+							<input id="screening_application_code" type="hidden" name="screening_application_code" th:value="${val.screening_application_code}">
+							<div class="col-md-4">
+								<div class="input-group">
+									<div class="form-line">
+										아이디
+										<input id="member_id" type="text" class="form-control" name="member_id" th:value="${val.member_id}" readonly="readonly">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<div class="form-line">
+										상태
+										<input id="screening_application_state" type="text" class="form-control" name="screening_application_state" th:value="${val.screening_application_state}">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										신청날짜
+			                            <input id="screening_application_reg_date" type="text" class="form-control" name="screening_application_reg_date" th:value="${val.screening_application_reg_date}" readonly="readonly">
+			                        </div>
+								</div>
+							</div>
+						</div>
+						<button class="btn btn-block bg-amber waves-effect" type="submit">수정</button>
+					</form>
+            	</div>
+            </div>	
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customCss">
+	<link href="../../plugins/multi-select/css/multi-select.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+</th:block>
+ 
+</html>

@@ -1,26 +1,18 @@
 package com.cafe24.memory.domain;
 
-import java.util.Date;
-
 public class Deposit {
 
 	private String depositCode;
 	private int depositAmount;
 	private String depositState;
-	private Date depositDate;
-	private Date depositReturnDate;
+	private String depositDate;
+	private String depositReturnDate;
 	//외래키
 	private PetAdoption petAdoption;
 	private Review review;
 	private Staff staff;
 	private Member member;
 	
-	public Member getMember() {
-		return member;
-	}
-	public void setMember(Member member) {
-		this.member = member;
-	}
 	public String getDepositCode() {
 		return depositCode;
 	}
@@ -39,16 +31,16 @@ public class Deposit {
 	public void setDepositState(String depositState) {
 		this.depositState = depositState;
 	}
-	public Date getDepositDate() {
+	public String getDepositDate() {
 		return depositDate;
 	}
-	public void setDepositDate(Date depositDate) {
+	public void setDepositDate(String depositDate) {
 		this.depositDate = depositDate;
 	}
-	public Date getDepositReturnDate() {
+	public String getDepositReturnDate() {
 		return depositReturnDate;
 	}
-	public void setDepositReturnDate(Date depositReturnDate) {
+	public void setDepositReturnDate(String depositReturnDate) {
 		this.depositReturnDate = depositReturnDate;
 	}
 	public PetAdoption getPetAdoption() {
@@ -69,6 +61,13 @@ public class Deposit {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	
 	@Override
 	public String toString() {
 		return "Deposit [depositCode=" + depositCode + ", depositAmount=" + depositAmount + ", depositState="
@@ -76,7 +75,6 @@ public class Deposit {
 				+ ", petAdoption=" + petAdoption + ", review=" + review + ", staff=" + staff + ", member=" + member
 				+ "]";
 	}
-	
 	
 	
 }

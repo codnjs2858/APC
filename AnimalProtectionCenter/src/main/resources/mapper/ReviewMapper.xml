@@ -11,6 +11,7 @@
 		<result property="reviewManagementPeriod" column="review_management_period"></result>
 		
 		<association property="staff" javaType="Staff">
+			<result property="staffCode" column="staff_code"></result>
 			<result property="staffName" column="staff_name"></result>
 		</association>	
 		
@@ -46,5 +47,72 @@
 			r.staff_code=t.staff_code;
 					
 	</select>
-
+	
+	<!-- 등록 -->
+	<insert id="insertReview" parameterType="Review">
+		<selectKey resultType="String" order="BEFORE" keyProperty="reviewCode">
+			SELECT 
+ 				CONCAT('RC_', MAX(CAST(SUBSTRING(review_code,4) AS DECIMAL)+1)) AS review_code
+			FROM tb_review;
+		</selectKey>
+			INSERT INTO tb_review
+			(review_code, member_id, staff_code, review_count, review_omission_count, review_date, review_management_period)
+			VALUES (
+					#{reviewCode},
+			 		#{member.memberId}, 
+			 		#{staff.staffCode}, 
+			 		#{reviewCount}, 
+			 		#{reviewOmissionCount}, 
+			 		NOW(), 
+			 		#{reviewManagementPeriod}
+			 		);
+	</insert>
+	
+	<!-- 코드로 찾기 -->
+	<select id="selectReviewCode" parameterType="String" resultMap="review">
+		
+		SELECT 
+			review_code, 
+			m.member_id,
+			m.member_name, 
+			staff_code, 
+			review_count, 
+			review_omission_count, 
+			review_date, 
+			review_management_period
+		FROM 
+			tb_review AS r
+		INNER JOIN
+			tb_member AS m
+		ON
+			r.member_id=m.member_id	
+		WHERE
+			review_code=#{reviewCode};
+	
+	</select>
+	
+	<!-- 수정 -->
+	
+	<update id="updateReview" parameterType="Review">
+		
+			UPDATE tb_review
+			SET
+				review_count=#{reviewCount},
+				review_omission_count=#{reviewOmissionCount},
+				review_management_period=#{reviewManagementPeriod}
+			WHERE 
+			review_code=#{reviewCode}
+	
+	</update>
+	
+	<!-- 삭제 -->
+	
+	<delete id="deleteReview" parameterType="String">
+	
+			DELETE 
+			FROM 
+				tb_review 
+			WHERE review_code=#{reviewCode};
+	
+	</delete>
 </mapper>

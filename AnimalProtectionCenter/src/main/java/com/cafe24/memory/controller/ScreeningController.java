@@ -32,14 +32,15 @@ public class ScreeningController {
 	}
 	
 	@GetMapping("/screeningApplicationUpdate")
-	public String screeningApplicationUpdate(Model model, ScreeningApplication screeningApplication) {
-		List<ScreeningApplication> screeningApplicationList = screeningApplicationService.selectScreeningApplication(screeningApplication);
-		model.addAttribute("screeningApplicationCode", screeningApplicationList.get(0));
-		return "screening/updateScreeningApplication";
+	public String screeningApplicationUpdate(Model model, ScreeningApplication screening_application_code) {
+		List<ScreeningApplication> screeningApplicationList = screeningApplicationService.selectScreeningApplication(screening_application_code);
+		model.addAttribute("val", screeningApplicationList.get(0));
+		return "screening/screeningUpdate";
 	}
 	
 	@PostMapping("/screeningApplicationUpdate")
 	public String screeningApplicationUpdate(ScreeningApplication screeningApplication) {
+		System.out.println(screeningApplication.toString());
 		screeningApplicationService.updateScreeningApplication(screeningApplication);
 		return "redirect:/screening/screeningApplication";
 	}
