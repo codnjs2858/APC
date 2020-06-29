@@ -38,9 +38,9 @@ public class MemberController {
 		
 			HttpSession session=request.getSession();
 			
-			if((member.getMemberId())!=null&&!"".equals(member.getMemberId())&&(member.getMemberPw())!=null&&!"".equals(member.getMemberPw())) {
-				List<Member> result=memberService.getMemberList(member);
-				Member getMember=result.get(0);
+			if(member.getMemberId()!=null&&!"".equals(member.getMemberId())&&member.getMemberPw()!=null&&!"".equals(member.getMemberPw())) {
+				Member result=memberService.getMemberList(member.getMemberId());
+				Member getMember=result;
 				if((getMember.getMemberPw()).equals(member.getMemberPw())) {
 					session.setAttribute("SID", getMember.getMemberId());
 					session.setAttribute("SNAME", getMember.getMemberName());
@@ -49,7 +49,6 @@ public class MemberController {
 				}if(getMember.getLevel().getLevelCode().equals("level_code_02")||getMember.getLevel().getLevelCode().equals("level_code_01")) {
 					session.setAttribute("STAFFCODE",staffService.selectStaffMember(member.getMemberId()).getStaffCode());
 					session.setAttribute("STAFF",staffService.selectStaffMember(member.getMemberId()));
-					
 				}
 				
 			}
@@ -85,8 +84,8 @@ public class MemberController {
 	@GetMapping("/memberUpdate")
 	public String memberUpdate(Model model,Member member) {
 		System.out.println(member+"<-member");
-		List<Member> mem=memberService.getMemberList(member);
-		model.addAttribute("mem", mem.get(0));
+		Member mem=memberService.getMemberList(member.getMemberId());
+		model.addAttribute("mem", mem);
 		System.out.println(mem+"<-model의 mem");
 		return "member/updateMember";
 	}

@@ -25,11 +25,9 @@ public class AjaxLKJController {
 	@RequestMapping("/Addmember")
 	public String ajaxAddmember(@RequestParam(value = "id") String id) {
 		System.out.println(id);
-		Member member= new Member();
-		member.setMemberId(id);
-		List<Member>mList=memberService.getMemberList(member);
+		Member mList=memberService.getMemberList(id);
 		String result="";
-		if(mList != null && !"".equals(mList.get(0).getMemberId())){
+		if(mList != null && !"".equals(mList.getMemberId())){
 			result="N";
 		}
 		return result;
