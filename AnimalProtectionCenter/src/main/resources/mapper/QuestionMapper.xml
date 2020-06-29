@@ -11,10 +11,6 @@
 		<result property="question_modify_date" column="question_modify_date"></result>
 	</resultMap>
 	
-	<delete id="deleteQuestion" parameterType="String">
-		DELETE FROM tb_question WHERE question_code = question_code
-	</delete>
-	
 	<select id="selectQuestion" resultMap="getQuestionMap">
 		SELECT * FROM tb_question
 		<if test="question_code!=null and question_code !=''.toString()">

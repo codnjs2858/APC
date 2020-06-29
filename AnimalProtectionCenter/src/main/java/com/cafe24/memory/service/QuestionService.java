@@ -16,10 +16,6 @@ public class QuestionService {
 	@Autowired
 	private QuestionMapper questionMapper;
 	
-	public int deleteQuestion(String question_code) {
-		return questionMapper.deleteQuestion(question_code);
-	}
-	
 	public List<Question> selectQuestion(){
 		return questionMapper.selectQuestion();
 	}

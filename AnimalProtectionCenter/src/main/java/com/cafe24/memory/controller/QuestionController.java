@@ -35,8 +35,8 @@ public class QuestionController {
 	@GetMapping("/questionUpdate")
 	public String questionUpdate(Model model, Question question) {
 		List<Question> questionList = questionService.selectQuestion(question);
-		model.addAttribute("questionCode", questionList.get(0));
-		return "question/updateQuestion";
+		model.addAttribute("val", questionList.get(0));
+		return "question/questionUpdate";
 	}
 	
 	@PostMapping("/questionUpdate")
