@@ -6,12 +6,7 @@
 	<!-- JQuery DataTable Css -->
     <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
     <style>
-    	.delete {
-    		color: #F44336;
-    		border: 0; 
-    		outline: 0; 
-    		background: none;
-    	}
+    	::-webkit-scrollbar { display: none; }
     </style>
 </th:block>
 
@@ -63,9 +58,9 @@
 	                      			</td>
 	                      			<td>
 			                       		<div class="align-center">
-		                      				<button type="button" class="delete" th:value="${hlist.animalHealthCode}">
-		                      					<i class="material-icons">delete</i>
-		                      				</button>
+			                       			<a class="delete" data-toggle="modal" data-color="red" th:data-data="${hlist.animalHealthCode}" data-title="해당 기록을 삭제하시겠습니까?" href="#modalTarget">
+						            			<i class="material-icons">delete</i>
+						            		</a>
 				                       	</div>
 			                       	</td>
 	                        	</tr>
@@ -76,6 +71,24 @@
 			</div>
 		</div>
 	</section>
+	<div id="modalTarget" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h2 class="modal-title">Modal Header</h2>
+				</div>
+				<div class="modal-body">
+					<p>Some text in the modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="yes">네</button>
+					<button type="button" id="no">아니오</button>
+					<button type="button" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </th:block> 
 
 <th:block layout:fragment="customFooterScript">
@@ -95,20 +108,27 @@
     			"aaSorting": []
     		});
     		
-    		//삭제 유효성
-			$('.delete').click(function(){
-				var val = $(this).val();
-				console.log(val);
-			    var msg = confirm('해당 기록을 삭제 하겠습니까?');
-			    if(msg  == true){
-			    	var check = confirm('진료 삭제시 확인, 치료 삭제시 취소 버튼을 클릭하세요.');
-			    	if(check == true){
-				    	$(location).attr('href',"/animalhealth/animalhealthdelete?send_code="+val);
-			    	}else{
-				    	$(location).attr('href',"/animalhealth/animalhealthhistorydelete?send_code="+val);
-			    	}
-			    }
-			})
+			$('#modalTarget').on('show.bs.modal', function (event) {
+    	        var color = $(event.relatedTarget).data('color');
+    	        var data = $(event.relatedTarget).data('data');
+    	        var title = $(event.relatedTarget).data('title');
+    	        $('#modalTarget .modal-title').text(title);
+    	        $('#modalTarget .modal-body').text('해당 기록을 영구히 삭제하시려면 (네), 치료만 삭제하시려면 (아니오) 버튼을 클릭하세요.');
+    	        $('#modalTarget .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
+    	        $('#no').val(data);
+    	        $('#yes').val(data);
+    	    });
+    		
+    		$('#no').click(function(){
+    			var val = $(this).val();
+    			console.log('no 버튼 클릭 했음-치료삭제' + val);
+    			location.href='/animalhealth/animalhealthhistorydelete?send_code=' + val;
+    		});
+    		$('#yes').click(function(){
+    			var val = $(this).val();
+    			console.log('yes 버튼 클릭 했음-진료삭제' + val);
+    			location.href='/animalhealth/animalhealthdelete?send_code=' + val;
+    		});
     	});
     </script>
 </th:block>

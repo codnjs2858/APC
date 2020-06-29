@@ -20,8 +20,8 @@ public class ScreeningApplicationService {
 		return screeningApplicationMapper.selectScreeningApplication();
 	}
 	
-	public List<ScreeningApplication> selectScreeningApplication(ScreeningApplication screeningApplication){
-		return screeningApplicationMapper.selectScreeningApplication(screeningApplication);
+	public List<ScreeningApplication> selectScreeningApplication(ScreeningApplication screening_application_code){
+		return screeningApplicationMapper.selectScreeningApplication(screening_application_code);
 	}
 	
 	public int updateScreeningApplication(ScreeningApplication screeningApplication) {

@@ -4,7 +4,7 @@
   layout:decorator="@{layout/default2}">
 <th:block layout:fragment="customCss">
 	<!-- Bootstrap Select Css -->
-    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 </th:block>
 
 <th:block layout:fragment="customTitle">
@@ -20,7 +20,7 @@
 				<div class="header">
 					<h2>동물 처리 등록</h2>
 				</div>
-				<form action="/animaldisposal/animaldisposalinsert" method="post">
+				<form action="/animaldisposal/animaldisposalinsert" method="post" id="disposalForm">
 				<div class="body">
 					<div class="clearfix">
 							<div class="row">
@@ -28,7 +28,8 @@
 				      				<b>동물번호</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="animalinsertcode" class="form-control" value="11111" readonly="readonly">
+					                        <input th:if="${ac} == null" type="text" name="animalCenterNumber" class="form-control">
+					                        <input th:unless="${ac} == null" type="text" name="animalCenterNumber" class="form-control" th:value="${ac.animalCenterNumber}">
 					                    </div>
 					       			</div>
 				      			</div>
@@ -36,7 +37,8 @@
 				      				<b>담당자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="staffcode" class="form-control" value="이경진" readonly="readonly">
+					                        <input type="hidden" name="staffCode" class="form-control" th:value="${session.STAFF.staffCode}">
+					                        <input type="text" name="staffName" class="form-control" th:value="${session.STAFF.staffName}" readonly="readonly">
 					                    </div>
 					       			</div>
 				      			</div>
@@ -44,91 +46,32 @@
 				      				<b>등록 일자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="animalhealthregdate" class="form-control" value="2020-06-11" readonly="readonly">
+					                        <input type="text" name="animalDisposalDate" class="form-control" value="2020-06-11" readonly="readonly">
 					                    </div>
 					       			</div>
 				      			</div>
 							</div>
-		                	<div class="col-md-3">
-				           		<b>처리 분류</b>
-				           		<div class="input-group">
-					           		<select class="form-control">
-					           			<option>----처리 선택----</option>
-					           			<option value="입양">입양</option>
-					           			<option value="반환">반환</option>
-					           			<option value="방사">방사</option>
-					           			<option value="안락사,폐사">안락사,폐사</option>
-					           		</select>
-				           		</div>
-		           			</div>
+							<div class="row">
+			                	<div class="col-md-4">
+					           		<b>처리 분류</b>
+					           		<div class="input-group">
+						           		<select class="form-control" name="animalDisposalResult">
+						           			<option value="">------ 처리 선택 ------</option>
+						           			<option value="입양">입양</option>
+						           			<option value="반환">반환</option>
+						           			<option value="방사">방사</option>
+						           			<option value="안락사,폐사">안락사,폐사</option>
+						           		</select>
+					           		</div>
+			           			</div>
+			           			<div id="reContents">
+			           			</div>
+							</div>
 		           		</div>
 				</div>
-       			<div class="body">
-	                <div class="row">
-	           			<div class="col-md-3 ">
-	           				<b>입양인 아이디</b>
-	           				<div class="input-group colorpicker colorpicker-element">
-		           				<div class="form-line">
-			                        <input type="text" class="form-control">
-			                    </div>
-			                </div>
-	           			</div>
-	           			<div class="col-md-3 col-md-offset-1">
-	           				<b>입양인 이름</b>
-	           				<div class="input-group colorpicker colorpicker-element">
-		           				<div class="form-line">
-			                        <input type="text" class="form-control">
-			                    </div>
-			                </div>
-	           			</div>
-	                </div>
-       			</div>
-       			<div class="body">
-	                <div class="row">
-	           			<div class="col-md-3 ">
-	           				<b>반환인 아이디</b>
-	           				<div class="input-group colorpicker colorpicker-element">
-		           				<div class="form-line">
-			                        <input type="text" class="form-control">
-			                    </div>
-			                </div>
-	           			</div>
-	           			<div class="col-md-3 col-md-offset-1">
-	           				<b>반환인 이름</b>
-	           				<div class="input-group colorpicker colorpicker-element">
-		           				<div class="form-line">
-			                        <input type="text" class="form-control">
-			                    </div>
-			                </div>
-	           			</div>
-	                </div>
-       			</div>
-				<div class="body">
-					<div class="row">
-	           			<div class="col-md-3">
-	           				<b>안락사,폐사 사유</b>
-	           				<div class="input-group colorpicker colorpicker-element">
-		           				<div class="form-line">
-			                        <input type="text" class="form-control">
-			                    </div>
-			                </div>
-	           			</div>
-	           		</div>
-				</div>
-				<div class="body">
-					<div class="row">
-	           			<div class="col-md-3">
-	           				<b>방사 정보</b>
-	           				<div class="input-group colorpicker colorpicker-element">
-		           				<div class="form-line">
-			                        <input type="text" class="form-control">
-			                    </div>
-			                </div>
-	           			</div>
-	           		</div>
-				</div>
+						
 	            <div class="body">
-	            	<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">동물 처리 등록</button>
+	            	<button type="button" id="DisInBtn" class="btn bg-amber btn-block btn-lg waves-effect">동물 처리 등록</button>
 	            </div>
 	      		</form>
 	      		</div>
@@ -138,6 +81,57 @@
 </th:block> 
 
 <th:block layout:fragment="customFooterScript">
+	<script>
+		$(function(){
+			//분류별 입력 항목
+			$('select[name=animalDisposalResult]').change(function(){
+				val = $(this).val();
+				var	html = '<div class="col-md-4">';
+				if(val=='입양'){
+					html += '<b>입양인 아이디</b>';
+					html += '<div class="input-group">';
+					html += '<div class="form-line">';
+					html += '<input type="text" name="memberId" class="form-control">';
+				}else if(val=='반환'){
+					html += '<b>반환인 이름</b>';
+					html += '<div class="input-group">';
+					html += '<div class="form-line">';
+					html += '<input type="text" name="centerReturnName" class="form-control">';
+					html += '</div></div></div>';
+					html += '<div class="col-md-4">';
+					html += '<b>반환인 연락처</b>';
+					html += '<div class="input-group">';
+					html += '<div class="form-line">';
+					html += '<input type="text" name="centerReturnPhone" class="form-control">';
+				}else if(val =='방사'){
+					html += '<b>방사 지역,정보</b>';
+					html += '<div class="input-group">';
+					html += '<div class="form-line">';
+					html += '<input type="text" name="animalDisposalPastureInfo" class="form-control">';
+				}
+				else if(val=='안락사,폐사'){
+					html += '<b>안락사,폐사 사유</b>';
+					html += '<div class="input-group">';
+					html += '<div class="form-line">';
+					html += '<input type="text" name="animalDisposalDieInfo" class="form-control">';
+				}
+				html += '</div></div></div>';
+				$('#reContents').html(html);
+			});
+			
+			//유효성 검사
+			$('#DisInBtn').click(function(){
+				var animalNum= $('input[name=animalCenterNumber]').val();
+				var disposalResult= $('input[name=animalDisposalResult]').val();
+				if( animalNum == null || animalNum == ""){
+					alert("동물 번호를 입력 하세요.");
+					return;
+				}
+				$('#disposalForm').submit();
+				
+			});
+		});
+	</script>
 </th:block>
  
 </html>

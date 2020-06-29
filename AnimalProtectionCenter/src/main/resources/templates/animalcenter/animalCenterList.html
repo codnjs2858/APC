@@ -10,12 +10,7 @@
 	<!-- JQuery DataTable Css -->
     <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
     <style>
-    	.delete {
-    		color: #F44336;
-    		border: 0; 
-    		outline: 0; 
-    		background: none;
-    	}
+    	::-webkit-scrollbar { display: none; }
     </style>
 </th:block> 
 
@@ -63,6 +58,7 @@
 		                            <th><div class="align-center">등록 날짜</div></th>
 		                            <th><div class="align-center">담당자</div></th>
 		                            <th><div class="align-center">보호공간</div></th>
+		                            <th><div class="align-center">처리 상태</div></th>
 		                            <th data-orderable="false"><div class="align-center">수정</div></th>
 		                            <th data-orderable="false"><div class="align-center">삭제</div></th>
 		                        </tr>
@@ -76,8 +72,7 @@
 		                            <td><div class="align-center">[[${ac.animalType.animalType}]]</div></td>
 		                            <td><div class="align-center">[[${ac.animalType.animalTypeSub}]]</div></td>
 		                            <td><div class="align-center">[[${ac.animalGender}]]</div></td>
-		                            <td><div class="align-center">[[${ac.animalState}]]
-		                            	<a th:href="@{/animalhealth/animalhealthlist(send_code=${ac.animalInsertCode})}">(건강 상세보기)</a></div></td>
+		                            <td><div class="align-center">[[${ac.animalState}]]</div></td>
 		                            <td><div class="align-center">[[${ac.animalInsertRegDate}]]</div></td>
 		                            <td><div class="align-center">[[${ac.staff.staffName}]]</div></td>
 		                            <td th:if="${proNum[i.index]} == null">
@@ -90,19 +85,29 @@
 			                            	[[${proNum[i.index]}]]
 		                            	</div>
 	                            	</td>
-		                            <td>
+		                            <td th:if="${disResult[i.index]} == null">
 		                            	<div class="align-center">
+			                            	<a th:href="@{/animaldisposal/animaldisposalinsert(send_code=${ac.animalInsertCode},send_num=${ac.animalCenterNumber})}">처리등록</a>
+		                            	</div>
+		                            </td>
+		                            <td th:unless="${disResult[i.index]} == null">
+		                            	<div class="align-center">
+			                            	[[${disResult[i.index]}]]
+		                            	</div>
+	                            	</td>
+	                      			<td>
+	                      				<div class="align-center">
 			                            	<a th:href="@{/animalcenter/animalcenterupdate(send_code=${ac.animalInsertCode})}" style="color: #9E9E9E">
 		                       					<i class="material-icons">update</i>
 		                       				</a>
-		                       			</div>
+	                       				</div>
 	                      			</td>
 	                      			<td>
 			                            <div class="align-center">
-		                      				<button type="button" class="delete" th:value="${ac.animalInsertCode}">
+			                            	<a class="delete" data-toggle="modal" data-color="red" th:data-data="${ac.animalInsertCode}" data-title="해당 동물을 삭제하시겠습니까?" href="#modalTarget">
+						            			<i class="material-icons">delete</i>
 				                            	<p th:text="${ac.animalPicture}" style="display: none"></p>
-		                      					<i class="material-icons">delete</i>
-		                      				</button>
+						            		</a>
 				                       	</div>
 			                       	</td>
 	                        	</tr>
@@ -113,6 +118,23 @@
 			</div>
 		</div>
 	</section>
+	<div id="modalTarget" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h2 class="modal-title">Modal Header</h2>
+				</div>
+				<div class="modal-body">
+					<p>Some text in the modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="ok">ok</button>
+					<button type="button" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </th:block> 
  
 <th:block layout:fragment="customHeadScript">
@@ -135,16 +157,22 @@
     			"aaSorting": []
     		});
     		
-    		//삭제 유효성
-			$('.delete').click(function(){
-				var val = $(this).val();
-				var pic = $(this).find('p').text();
-				var url ="/animalcenter/animalcenterdelete?send_code="+val+"&send_pic="+pic;
-			    var msg = confirm('해당 동물을 삭제 하겠습니까?');
-			    if(msg  == true){
-			    	$(location).attr('href',url);
-			    }
-			})
+			$('#modalTarget').on('show.bs.modal', function (event) {
+    	        var color = $(event.relatedTarget).data('color');
+    	        var data = $(event.relatedTarget).data('data');
+    	        var title = $(event.relatedTarget).data('title');
+    	        $('#modalTarget .modal-title').text(title);
+    	        $('#modalTarget .modal-body').text('삭제 동물 코드 : '+data);
+    	        $('#modalTarget .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
+    	        $('#ok').val(data);
+    	    });
+    		
+    		$('#ok').click(function(){
+    			var val = $(this).val();
+    			var pic = $(this).find('p').text();
+    			console.log('ok 버튼 클릭 했음' + val);
+    			location.href='/animalcenter/animalcenterdelete?send_code=' + val+"&send_pic="+pic;
+    		});
 			
     	});
     </script>

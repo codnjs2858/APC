@@ -6,12 +6,7 @@
 	<!-- JQuery DataTable Css -->
     <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
     <style>
-    	.delete {
-    		color: #F44336;
-    		border: 0; 
-    		outline: 0; 
-    		background: none;
-    	}
+    	::-webkit-scrollbar { display: none; }
     </style>
 </th:block>
 
@@ -69,15 +64,20 @@
 			                            	</th:block>
 			                            </td>
 			                            <td><div class="align-center">[[${hlist.staff.staffName}]]</div></td>
-			                            <td><div class="align-center">
-			                            	<a th:href="@{/animalhealth/animalhealthupdate(send_code=${hlist.animalHealthCode})}" style="color: #9E9E9E">
-		                       				<i class="material-icons">update</i></a></div>
+			                            <td>
+			                            	<div class="align-center">
+				                            	<a th:href="@{/animalhealth/animalhealthupdate(send_code=${hlist.animalHealthCode})}" style="color: #9E9E9E">
+			                       					<i class="material-icons">update</i>
+			                       				</a>
+		                       				</div>
 		                      			</td>
-		                      			<td><div class="align-center">
-		                      				<button type="button" class="delete" th:value="${hlist.animalHealthCode}">
-		                      					<i class="material-icons">delete</i>
-		                      				</button>
-				                       	</div></td>
+		                      			<td>
+			                      			<div class="align-center">
+			                      				<a class="delete" data-toggle="modal" data-color="red" th:data-data="${hlist.animalHealthCode}" data-title="해당 기록을 삭제하시겠습니까?" href="#modalTarget">
+							            			<i class="material-icons">delete</i>
+							            		</a>
+					                       	</div>
+				                       	</td>
 		                        	</tr>
 	                        	</th:block>
 	                        </tbody>
@@ -87,6 +87,23 @@
 			</div>
 		</div>
 	</section>
+	<div id="modalTarget" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h2 class="modal-title">Modal Header</h2>
+				</div>
+				<div class="modal-body">
+					<p>Some text in the modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="ok">ok</button>
+					<button type="button" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </th:block> 
 <th:block layout:fragment="customFooterScript">
 	<!-- Jquery DataTable Plugin Js -->
@@ -104,17 +121,22 @@
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
     		});
-    		//삭제 유효성
-			$('.delete').click(function(){
-				var val = $(this).val();
-				console.log(val);
-				var url ="/animalhealth/animalhealthdelete?send_code="+val;
-			    var msg = confirm('해당 기록을 삭제 하겠습니까?');
-			    if(msg  == true){
-			    	$(location).attr('href',url);
-			    }
 			    
-			});
+			$('#modalTarget').on('show.bs.modal', function (event) {
+    	        var color = $(event.relatedTarget).data('color');
+    	        var data = $(event.relatedTarget).data('data');
+    	        var title = $(event.relatedTarget).data('title');
+    	        $('#modalTarget .modal-title').text(title);
+    	        $('#modalTarget .modal-body').text('해당 기록 코드 : '+data);
+    	        $('#modalTarget .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
+    	        $('#ok').val(data);
+    	    });
+    		
+    		$('#ok').click(function(){
+    			var val = $(this).val();
+    			console.log('ok 버튼 클릭 했음' + val);
+    			location.href='/animalhealth/animalhealthdelete?send_code=' + val;
+    		});
     	});
     </script>
 </th:block>
