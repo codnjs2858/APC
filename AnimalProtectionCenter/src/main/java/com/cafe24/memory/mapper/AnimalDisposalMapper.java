@@ -8,6 +8,6 @@ import com.cafe24.memory.domain.AnimalDisposal;
 
 @Mapper
 public interface AnimalDisposalMapper {
-	public List<AnimalDisposal> selectResultTest();
-	public AnimalDisposal selectResultTest(String send_code);
+	public List<AnimalDisposal> selectDisposal();
+	public AnimalDisposal selectDisposal(String send_code);
 }

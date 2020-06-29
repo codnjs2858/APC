@@ -1,7 +1,5 @@
 package com.cafe24.memory.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.AnimalDisposal;
 import com.cafe24.memory.service.AnimalDisposalService;
 
@@ -27,13 +27,21 @@ public class AnimalDisposalController {
 	//animal disposal list
 	@GetMapping("/animaldisposallist")
 	public String listAnimalDisposal(Model model) {
-		model.addAttribute("dList", animalDisposalService.selectResultTest());
+		model.addAttribute("dList", animalDisposalService.selectDisposal());
 		return "animaldisposal/animalDisposalList";
 	}
 	
 	//animal disposal insert
 	@GetMapping("/animaldisposalinsert")
-	public String insertAnimalDisposalForm() {
+	public String insertAnimalDisposalForm(
+			@RequestParam(name="send_code", required = false) String send_code ,
+			@RequestParam(name="send_num", required = false) Integer send_num, Model model) {
+		AnimalCenter ac  = new AnimalCenter();
+		if(send_code != null && !"".equals(send_code) && send_num != null && !"".equals(send_num)) {
+			ac.setAnimalInsertCode(send_code);
+			ac.setAnimalCenterNumber(send_num);
+			model.addAttribute("ac", ac);
+		}
 		return "animaldisposal/animalDisposalInsert";
 	}
 	@PostMapping("/animaldisposalinsert")

@@ -23,19 +23,9 @@ public class AnimalHealthController {
 	//animal health
 	/*animal health list*/
 	@GetMapping("/animalhealthlist")
-	public String listAnimalHealth(
-			@RequestParam(name="send_code", required = false) String send_code, Model model) {
-		if(send_code == null || send_code == "") {
-			model.addAttribute("hlist", animalHealthService.selectAnimalHealth());
-			model.addAttribute("subtitle", "치료 미완료 동물 리스트");
-		}else{
-			try {
-				model.addAttribute("hlist", animalHealthService.selectAnimalHealthInfo(send_code));
-			}catch (Exception e) {
-			}finally {
-				model.addAttribute("subtitle","동물 진료 기록");
-			}
-		}
+	public String listAnimalHealth(Model model) {
+		model.addAttribute("hlist", animalHealthService.selectAnimalHealth());
+		model.addAttribute("subtitle", "치료 미완료 동물 리스트");
 		return "animalhealth/animalHealthList";
 	}
 	

@@ -34,7 +34,7 @@
 		</association>
 	</resultMap>
 	
-	<select id="selectResultTest" parameterType="String" resultMap="animalDisposal">
+	<select id="selectDisposal" parameterType="String" resultMap="animalDisposal">
 		SELECT
 		*
 		FROM 

@@ -69,15 +69,20 @@
 			                            	</th:block>
 			                            </td>
 			                            <td><div class="align-center">[[${hlist.staff.staffName}]]</div></td>
-			                            <td><div class="align-center">
-			                            	<a th:href="@{/animalhealth/animalhealthupdate(send_code=${hlist.animalHealthCode})}" style="color: #9E9E9E">
-		                       				<i class="material-icons">update</i></a></div>
+			                            <td>
+			                            	<div class="align-center">
+				                            	<a th:href="@{/animalhealth/animalhealthupdate(send_code=${hlist.animalHealthCode})}" style="color: #9E9E9E">
+			                       					<i class="material-icons">update</i>
+			                       				</a>
+		                       				</div>
 		                      			</td>
-		                      			<td><div class="align-center">
-		                      				<button type="button" class="delete" th:value="${hlist.animalHealthCode}">
-		                      					<i class="material-icons">delete</i>
-		                      				</button>
-				                       	</div></td>
+		                      			<td>
+			                      			<div class="align-center">
+			                      				<button type="button" class="delete" th:value="${hlist.animalHealthCode}">
+			                      					<i class="material-icons">delete</i>
+			                      				</button>
+					                       	</div>
+				                       	</td>
 		                        	</tr>
 	                        	</th:block>
 	                        </tbody>

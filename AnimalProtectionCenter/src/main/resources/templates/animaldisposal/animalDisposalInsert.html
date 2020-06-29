@@ -28,7 +28,8 @@
 				      				<b>동물번호</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="animalinsertcode" class="form-control" value="11111" readonly="readonly">
+					                        <input type="text" name="animalInsertCode" class="form-control">
+					                        <input th:if="${ac} != null" type="text" name="animalInsertCode" class="form-control" th:value="${ac.animalCenterNumber}">
 					                    </div>
 					       			</div>
 				      			</div>
@@ -36,7 +37,8 @@
 				      				<b>담당자</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="staffcode" class="form-control" value="이경진" readonly="readonly">
+					                        <input type="hidden" name="staffCode" class="form-control" value="${session.STAFF.staffCode}">
+					                        <input type="text" name="staffName" class="form-control" th:value="${session.STAFF.staffName}" readonly="readonly">
 					                    </div>
 					       			</div>
 				      			</div>

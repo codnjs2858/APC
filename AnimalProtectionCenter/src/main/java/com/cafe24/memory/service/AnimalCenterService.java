@@ -18,6 +18,17 @@ public class AnimalCenterService {
 	
 	@Autowired private AnimalCenterMapper animalCenterMapper;
 	
+	/**
+	 * 모든 보호동물, 타입별 보호동물 처리 조회
+	 * @return
+	 */
+	public List<String> selectDisposalAnimalCenter(){
+		return animalCenterMapper.selectDisposalAnimalCenter();
+	}
+	public List<String> selectDisposalAnimalCenter(String send_type){
+		return animalCenterMapper.selectDisposalAnimalCenter(send_type);
+	}
+	
 	
 	/**
 	 * 모든 보호동물 ,타입별 보호동물 보호공간 코드 조회

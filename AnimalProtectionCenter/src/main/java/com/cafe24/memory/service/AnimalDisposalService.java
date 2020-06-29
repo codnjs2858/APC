@@ -16,11 +16,11 @@ public class AnimalDisposalService {
 
 	@Autowired private AnimalDisposalMapper animalDisposalMapper;
 	
-	public AnimalDisposal selectResultTest(String send_code){
-		return animalDisposalMapper.selectResultTest(send_code);
+	public AnimalDisposal selectDisposal(String send_code){
+		return animalDisposalMapper.selectDisposal(send_code);
 	}
 	
-	public List<AnimalDisposal> selectResultTest(){
-		return animalDisposalMapper.selectResultTest();
+	public List<AnimalDisposal> selectDisposal(){
+		return animalDisposalMapper.selectDisposal();
 	}
 }

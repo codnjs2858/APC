@@ -146,6 +146,9 @@
 		           		</ol>
 	           		</th:block>
 		        </div>
+	       		<div class="body">
+	           		<button type="button" id="ListBtn" class="btn bg-amber btn-block btn-lg waves-effect">목록 보기</button>
+	           	</div>
 	       </div>
 		</div>
 	</section>
@@ -160,7 +163,12 @@
 			//이미지 깨짐
 			$('img').on("error",function(){
 				$(this).attr('src','http://placehold.it/500x300');
-			})
+			});
+			
+			//센터 동물 리스트 이동
+			$('#ListBtn').click(function(){
+				$(location).attr('href',"/animalcenter/animalcenterlist");
+			});
 		});
 	</script>
 </th:block>
