@@ -61,7 +61,7 @@
 	           	<div class="body">
 	           		<h4>
 	           			동물 진료 기록
-	           			<a th:href="@{/animalhealth/animalhealthinsert}">
+	           			<a th:href="@{/animalhealth/animalhealthinsert(send_code=${aInfo.animalInsertCode})}">
 		           			<span class="label label-warning">등록</span>
 	           			</a>
 	           		</h4>
@@ -82,9 +82,20 @@
 			                   		 <td><div class="align-center">[[${hlist.animalCenter.animalCenterNumber}]]</div></td>
 			                         <td><div class="align-center">[[${hlist.animalHealthContents}]]</div></td>
 			                         <td><div class="align-center">[[${hlist.animalHealthRegDate}]]</div></td>
-			                         <td><div class="align-center">[[${hlist.animalHealthResult}]]</div></td>
-			                         <td><div class="align-center">[[${hlist.animalHealthEndDate}]]</div></td>
-			                         <td><div class="align-center">[[${hlist.staff.staffName}]]</div></td>
+			                         <td>
+		                            	<th:block th:if="${hlist.animalHealthResult == null}">
+		                            		<div class="align-center"><a th:href="@{/animalhealth/animalhealthhistoryinsert(send_code=${hlist.animalHealthCode})}">치료 등록</a></div>
+		                            	</th:block>
+		                            	<th:block th:unless="${hlist.animalHealthResult == null}">
+			                            	<div class="align-center">[[${hlist.animalHealthResult}]]</div>
+		                            	</th:block>
+		                            </td>
+		                            <td>
+		                            	<th:block th:unless="${hlist.animalHealthEndDate == null}">
+			                            	<div class="align-center">[[${hlist.animalHealthEndDate}]]</div>
+		                            	</th:block>
+		                            </td>
+			                        <td><div class="align-center">[[${hlist.staff.staffName}]]</div></td>
 		                    	</tr>
 		                    </tbody>
 		                </table>
@@ -114,7 +125,7 @@
 	           	<div class="body">
 	           		<h4>
 	           			동물 처리 정보
-	           			<a th:href="@{/animaldisposal/animaldisposalinsert(send_code=${aInfo.animalInsertCode},send_num=${aInfo.animalCenterNumber})}">
+	           			<a th:if="${dlist} == null" th:href="@{/animaldisposal/animaldisposalinsert(send_code=${aInfo.animalInsertCode},send_num=${aInfo.animalCenterNumber})}">
 		           			<span class="label label-warning">등록</span>
 	           			</a>
 	           		</h4>
@@ -135,13 +146,13 @@
 			           			<li>반환인:[[${dlist.centerReturn.centerReturnName}]]</li>
 			           			<li>반환인 주소:[[${dlist.centerReturn.centerReturnAddress}]]</li>
 			           			<li>반환인 연락처:[[${dlist.centerReturn.centerReturnPhone}]]</li>
-			           			<li>반환날짜:[[${dlist.centerReturn.centerReturnDate}]]</li>
+			           			<li th:if="${returnDate} != null">반환날짜 : [[${returnDate}]]</li>
 		           			</th:block>
 		           			<th:block th:if="${dlist.animalDisposalResult} == '입양'">
-			           			<li>분양인:[[${dlist.adoptee.member.memberName}]]</li>
-			           			<li>분양인 주소:[[${dlist.adoptee.member.memberAddr}]]</li>
-			           			<li>분양인 연락처:[[${dlist.adoptee.member.memberPhone}]]</li>
-			           			<li>분양 날짜:[[${dlist.adoptee.adopteeDate}]]</li>
+			           			<li>분양인 : [[${dlist.adoptee.member.memberName}]]</li>
+			           			<li>분양인 주소 : [[${dlist.adoptee.member.memberAddr}]]</li>
+			           			<li>분양인 연락처 : [[${dlist.adoptee.member.memberPhone}]]</li>
+			           			<li th:if="${adopteeDate} != null">분양 날짜 : [[${adopteeDate}]]</li>
 		           			</th:block>
 		           		</ol>
 	           		</th:block>

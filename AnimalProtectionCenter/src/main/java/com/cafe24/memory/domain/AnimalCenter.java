@@ -13,6 +13,7 @@ public class AnimalCenter {
 	private AnimalType animalType;
 	private Staff staff;
 	private ReportManger reportManger;
+	private AnimalDisposal animalDisposal;
 	
 	public String getAnimalInsertCode() {
 		return animalInsertCode;
@@ -85,6 +86,12 @@ public class AnimalCenter {
 	}
 	public void setReportManger(ReportManger reportManger) {
 		this.reportManger = reportManger;
+	}
+	public AnimalDisposal getAnimalDisposal() {
+		return animalDisposal;
+	}
+	public void setAnimalDisposal(AnimalDisposal animalDisposal) {
+		this.animalDisposal = animalDisposal;
 	}
 	@Override
 	public String toString() {

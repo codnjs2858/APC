@@ -31,8 +31,9 @@ public class AnimalHealthController {
 	
 	/*animal health insert*/
 	@GetMapping("/animalhealthinsert")
-	public String insertAnimalHealthForm(Model model) {
+	public String insertAnimalHealthForm(Model model, @RequestParam(name="send_code", required = false) String send_code) {
 		model.addAttribute("AList", animalCenterService.selectNoDisposal());
+		model.addAttribute("send_code", send_code);
 		return "animalhealth/animalHealthInsert";
 	}
 	@PostMapping("/animalhealthinsert")
@@ -52,6 +53,7 @@ public class AnimalHealthController {
 	public String updateAnimalHealthForm(
 			@RequestParam(name="send_code", required = false) String send_code, Model model) {
 		model.addAttribute("hinfo", animalHealthService.searchHealthCode(send_code));
+		model.addAttribute("AList", animalCenterService.selectNoDisposal());
 		return "animalhealth/animalHealthUpdate";
 	}
 	@PostMapping("/animalhealthupdate")
@@ -73,6 +75,7 @@ public class AnimalHealthController {
 	public String insertAnimalHealthHistoryForm(
 			@RequestParam(name="send_code", required = false) String send_code, Model model) {
 		model.addAttribute("hinfo", animalHealthService.searchHealthCode(send_code));
+		model.addAttribute("AList", animalCenterService.selectNoDisposal());
 		return "animalhealth/animalHealthHistoryInsert";
 	}
 	

@@ -11,6 +11,11 @@
 	<title>동물 처리 등록</title>
 </th:block> 
 <th:block layout:fragment="customHeadScript">
+	<script src="/plugins/jquery-validation/jquery.validate.js"></script>
+	<script src="/plugins/jquery-validation/additional-methods.js"></script>
+	<script src="/js/pages/forms/form-validation.js"></script>
+	<script>
+	</script>
 </th:block> 
 
 <th:block layout:fragment="customContents">
@@ -20,18 +25,23 @@
 				<div class="header">
 					<h2>동물 처리 등록</h2>
 				</div>
-				<form action="/animaldisposal/animaldisposalinsert" method="post" id="disposalForm">
+				<form id="form_validation" action="/animaldisposal/animaldisposalinsert" method="post">
 				<div class="body">
 					<div class="clearfix">
 							<div class="row">
 				      			<div class="col-md-3">
 				      				<b>동물번호</b>
-					                <div class="input-group colorpicker colorpicker-element">
-					                    <div class="form-line">
-					                        <input th:if="${ac} == null" type="text" name="animalCenterNumber" class="form-control">
-					                        <input th:unless="${ac} == null" type="text" name="animalCenterNumber" class="form-control" th:value="${ac.animalCenterNumber}">
-					                    </div>
-					       			</div>
+				      				<div class="input-group">
+						           		<select class="form-control" name="animalInsertCode">
+						           			<option value="">------ 동물 번호 선택 ------</option>
+						           			<th:block th:if="${ac} == null">
+						           				<option th:each="AList : ${AList}" th:value="${AList.animalInsertCode}">[[${AList.animalCenterNumber}]]</option>
+						           			</th:block>
+						           			<th:block th:if="${ac} != null">
+						           				<option th:each="AList : ${AList}" th:value="${AList.animalInsertCode}" th:selected="(${AList.animalInsertCode == ac.animalInsertCode})">[[${AList.animalCenterNumber}]]</option>
+						           			</th:block>
+						           		</select>
+					           		</div>
 				      			</div>
 				      			<div class="col-md-3 col-md-offset-1">
 				      				<b>담당자</b>
@@ -71,7 +81,7 @@
 				</div>
 						
 	            <div class="body">
-	            	<button type="button" id="DisInBtn" class="btn bg-amber btn-block btn-lg waves-effect">동물 처리 등록</button>
+	            	<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">동물 처리 등록</button>
 	            </div>
 	      		</form>
 	      		</div>
@@ -117,18 +127,6 @@
 				}
 				html += '</div></div></div>';
 				$('#reContents').html(html);
-			});
-			
-			//유효성 검사
-			$('#DisInBtn').click(function(){
-				var animalNum= $('input[name=animalCenterNumber]').val();
-				var disposalResult= $('input[name=animalDisposalResult]').val();
-				if( animalNum == null || animalNum == ""){
-					alert("동물 번호를 입력 하세요.");
-					return;
-				}
-				$('#disposalForm').submit();
-				
 			});
 		});
 	</script>

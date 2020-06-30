@@ -10,6 +10,19 @@ import com.cafe24.memory.domain.AnimalDisposal;
 public interface AnimalDisposalMapper {
 	
 	/**
+	 * 동물 코드로 보고관리 삭제
+	 * @param send_code
+	 * @return
+	 */
+	public int deleteProtection(String send_code);
+	
+	/**
+	 * 동물 코드로 처리 삭제(처리취소) - 설채원
+	 * @return
+	 */
+	public int deleteAnimalDisposal(String send_code);
+	
+	/**
 	 * 이름, 연락처로 반환코드 조회
 	 * @param reName
 	 * @param rePhone
@@ -31,7 +44,10 @@ public interface AnimalDisposalMapper {
 	 */
 	public int insertAnimalDisposal(AnimalDisposal disposal);
 	
+	/**
+	 * 동물 처리 조회
+	 * @return
+	 */
 	public List<AnimalDisposal> selectDisposal();
-	
 	public AnimalDisposal selectDisposal(String send_code);
 }
