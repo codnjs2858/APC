@@ -10,7 +10,18 @@ import com.cafe24.memory.domain.Implement;
 @Mapper
 public interface ImplementMapper {
 	
-	//구현 못하게됬음
+	/**
+	 * 시설 등록 - 손충기
+	 * @param implement
+	 * @return
+	 */
+	int insertImplement(Implement implement);
+	
+	/**
+	 * 시설 삭제 프로시저 - 손충기
+	 * @param implementCode
+	 * @return
+	 */
 	int deleteImplement(String implementCode);
 	
 	/**

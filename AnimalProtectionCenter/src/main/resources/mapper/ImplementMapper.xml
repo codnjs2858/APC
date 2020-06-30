@@ -14,8 +14,49 @@
 		<result property="implementRegDate" 		column="implement_reg_date"/>
 	</resultMap>
 	
+	<insert id="insertImplement" parameterType="Implement">
+		<selectKey resultType="String" keyProperty="implementCode" order="BEFORE">
+			SELECT
+				case COUNT(*)
+				when 0 then 'implement_1'
+				else CONCAT('implement_',MAX(CAST(SUBSTRING(i.implement_code, 11) AS DECIMAL))+1) 
+				END AS implementCode
+			FROM
+				tb_implement AS i		
+		</selectKey>
+		INSERT INTO tb_implement
+			(
+			 implement_code
+			,implement_type
+			,implement_amount
+			,implement_receipt_count
+			,implement_remain
+			,implement_breakage_amount
+			,implement_price
+			,staff_code
+			,implement_reg_date
+			)
+		VALUES 
+			(
+			 #{implementCode}
+			,#{implementType}
+			,#{implementAmount}
+			,#{implementReceiptCount}
+			,#{implementRemain}
+			,#{implementBreakageAmount}
+			,#{implementPrice}
+			,#{staffCode}
+			,NOW()
+			)
+	</insert>
+	
+	<!-- 시설삭제 프로시저(아직 케이스 삭제는 안됨 케이스를 외래키로 가져다가 쓰는 곳이 있음 -->
+	<delete id="deleteImplement" statementType="CALLABLE">
+		CALL deleteImplement(#{implementCode});
+	</delete>
+	
 	<!-- <delete id="deleteImplement" parameterType="String">
-		implementCode
+		#{implementCode}
 	</delete> -->
 	
 	<select id="selectImplementUseCountByCode" parameterType="String" resultType="Map">
@@ -75,14 +116,14 @@
 	<update id="updateImplement" parameterType="Implement">
 		UPDATE tb_implement
 		SET
-			 implement_type=#{implementType}
-			,implement_amount=#{implementAmount}
-			,implement_receipt_count=#{implementReceiptCount}
-			,implement_remain=#{implementRemain}
-			,implement_breakage_amount=#{implementBreakageAmount}
-			,implement_price=#{implementPrice}
-			,staff_code=#{staffCode}
-			,implement_reg_date=#{implementRegDate}
+			 implement_type				=#{implementType}
+			,implement_amount			=#{implementAmount}
+			,implement_receipt_count	=#{implementReceiptCount}
+			,implement_remain			=#{implementRemain}
+			,implement_breakage_amount	=#{implementBreakageAmount}
+			,implement_price			=#{implementPrice}
+			,staff_code					=#{staffCode}
+			,implement_reg_date			=#{implementRegDate}
 		WHERE 
 			implement_code=#{implementCode}
 	</update>

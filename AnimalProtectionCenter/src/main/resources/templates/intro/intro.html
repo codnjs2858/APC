@@ -73,9 +73,16 @@
             
             <div class="card">
             	<div class="body">
-		            <form action="/index" method="post">
-		            	<button class="btn btn-block bg-pink waves-effect" type="submit">유기동물보호센터 가기</button>
-		            </form>
+            		<div th:if="${session.SLEVEL} eq level_code_01 or ${session.SLEVEL} eq level_code_02">
+						<form action="/admin" method="post">
+			            	<button class="btn btn-block bg-pink waves-effect" type="submit">유기동물보호센터 가기</button>
+			            </form>
+            		</div>
+            		<div th:unless="${session.SLEVEL} eq level_code_01 or ${session.SLEVEL} eq level_code_02">
+			            <form action="/index" method="post">
+			            	<button class="btn btn-block bg-pink waves-effect" type="submit">유기동물보호센터 가기</button>
+			            </form>
+            		</div>
             	</div>
             </div>
             

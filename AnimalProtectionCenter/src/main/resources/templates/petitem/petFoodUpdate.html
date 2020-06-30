@@ -16,7 +16,7 @@
             		</h2>
             	</div>
             	<div class="body">
-            		<form action="/petItem/petFoodUpdate" method="post">
+            		<form id="petFoodForm" action="/petItem/petFoodUpdate" method="post">
             			<div class="row">
             				<div class="col-md-4">
 			            		<div class="input-group">
@@ -99,12 +99,31 @@
 								</div>
 							</div>
 						</div>
-						<button class="btn btn-block bg-amber waves-effect" type="submit">유기동물보호등록</button>
+						<button id="petFoodBtn" class="btn btn-block bg-amber waves-effect" type="button">펫사료수정</button>
 					</form>
             	</div>
             </div>	
 		</div>
 	</section>
+	
+	<div id="modalTarget" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h2 class="modal-title">Modal Header</h2>
+				</div>
+				<div class="modal-body">
+					<p>Some text in the modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="ok">ok</button>
+					<button type="button" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 </th:block> 
 
 <th:block layout:fragment="customHeadScript">
@@ -120,8 +139,9 @@
 		$(function(){
 			var checkValue = function(obj, msg){
 				if(obj.val() == ''){
-					alert(msg);
-					obj.focus();
+					$('#modalTarget').modal(function(){
+						alert(msg);						
+					});
 					
 					return true;
 				}
@@ -131,7 +151,7 @@
 			$('#petFoodBtn').click(function(){
 				if(checkValue($('#foodName'), 		'사료종류를 입력해주세요')) 	return;
 				if(checkValue($('#foodCompany'), 	'사료회사을 입력해주세요')) 	return;
-				if(checkValue($('#foodPrice'), 		'사료가격을을 입력해주세요'))return;
+				if(checkValue($('#foodPrice'), 		'사료가격을을 입력해주세요'))	return;
 				if(checkValue($('#foodBuyer'), 		'구매인을 입력해주세요')) 	return;
 				var usingfoodAmount = $('#usingfoodAmount').val();
 				if(usingfoodAmount != 0 || usingfoodAmount == ''){
