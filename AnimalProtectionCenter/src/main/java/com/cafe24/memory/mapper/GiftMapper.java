@@ -10,4 +10,12 @@ import com.cafe24.memory.domain.Gift;
 public interface GiftMapper {
 
 	public List<Gift> selectGift();	
+	
+	public int insertGift(Gift gift);
+	
+	public int updateGift(Gift gift);
+	
+	public int deleteGift(String giftCode);
+	
+	public Gift selectGiftCode(String giftCode);
 }

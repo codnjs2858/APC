@@ -49,6 +49,7 @@
 		                            	<th></th>
 		                            	<th><div class="align-center">보증금 코드</div></th>
 		                            	<th><div class="align-center">회원 아이디</div></th>
+		                            	<th><div class="align-center">회원 이름</div></th>
 		                            	<th><div class="align-center">후기 등록횟수</div></th>
 		                            	<th><div class="align-center">보증금 금액</div></th>
 		                            	<th><div class="align-center">보증금 상태</div></th>
@@ -64,6 +65,7 @@
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
 		                              	<td><div class="align-center"></div>[[${DP.depositCode}]]</td>
 		                              	<td><div class="align-center"></div>[[${DP.member.memberId}]]</td>
+		                              	<td><div class="align-center"></div>[[${DP.member.memberName}]]</td>
 		                              	<td><div class="align-center"></div>[[${DP.review.reviewCount}]]</td>
 		                              	<td><div class="align-center"></div>[[${DP.depositAmount}]]</td>
 		                              	<td><div class="align-center"></div>[[${DP.depositState}]]</td>
@@ -71,11 +73,11 @@
 		                              	<td><div class="align-center"></div>[[${DP.depositReturnDate}]]</td>
 		                              	<td><div class="align-center"></div>[[${DP.staff.staffName}]]</td>
 		                                <td><div class="align-center">
-		                                	<a th:href="@{/deposit/depositUpdate}" style="color: #9E9E9E">
+		                                	<a th:href="@{/deposit/depositUpdate(depositCode=${DP.depositCode})}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>
 		                      			</td>
 		                      			<td><div class="align-center">
-					                       	<a th:href="@{#}" style="color: #F44336">
+					                       	<a class="delete" th:href="@{/deposit/depositDelete(depositCode=${DP.depositCode})}" style="color: #F44336">
 					                       	<i class="material-icons">delete</i></a></div>
 			                      		</td>
 			                        </tr>
@@ -106,6 +108,19 @@
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
     		});
+	    	
+    		//삭제 유효성
+    		$('.delete').click(function(){
+				var val = $(this).val();
+				console.log(val);
+				var url ="/blackListDelete?blackListCode="+val;
+			    var msg = confirm('해당 종류를 삭제 하겠습니까?');
+			    if(msg){
+			    	$(location).attr('href',url);
+			    }else if(!msg){
+			    	return false;
+			    }
+			})
     	});
 	</script>
 </th:block>

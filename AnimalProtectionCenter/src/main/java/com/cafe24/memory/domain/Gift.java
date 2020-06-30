@@ -1,25 +1,16 @@
 package com.cafe24.memory.domain;
 
-import java.util.Date;
-
 public class Gift {
 	
 	private String giftCode;
 	private String giftType;
 	private String giftCost;
-	private Date giftDate;
+	private String giftDate;
 	private String giftReason;
 	//외래키
 	private Member member;
 	private Staff staff;
 	
-	
-	public String getGiftReason() {
-		return giftReason;
-	}
-	public void setGiftReason(String giftReason) {
-		this.giftReason = giftReason;
-	}
 	public String getGiftCode() {
 		return giftCode;
 	}
@@ -38,11 +29,17 @@ public class Gift {
 	public void setGiftCost(String giftCost) {
 		this.giftCost = giftCost;
 	}
-	public Date getGiftDate() {
+	public String getGiftDate() {
 		return giftDate;
 	}
-	public void setGiftDate(Date giftDate) {
+	public void setGiftDate(String giftDate) {
 		this.giftDate = giftDate;
+	}
+	public String getGiftReason() {
+		return giftReason;
+	}
+	public void setGiftReason(String giftReason) {
+		this.giftReason = giftReason;
 	}
 	public Member getMember() {
 		return member;
@@ -62,5 +59,4 @@ public class Gift {
 		return "Gift [giftCode=" + giftCode + ", giftType=" + giftType + ", giftCost=" + giftCost + ", giftDate="
 				+ giftDate + ", giftReason=" + giftReason + ", member=" + member + ", staff=" + staff + "]";
 	}
-	
 }
