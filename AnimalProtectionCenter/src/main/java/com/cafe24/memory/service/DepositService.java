@@ -25,11 +25,21 @@ public class DepositService {
 	}
 	
 	public int insertDeposit(Deposit deposit) {
+		if("".equals(deposit.getDepositDate())){
+			deposit.setDepositDate(null);
+		}if("".equals(deposit.getDepositReturnDate())) {
+			deposit.setDepositReturnDate(null);
+		}
 		
 		return depositMapper.insertDeposit(deposit);
 	}
 	
 	public int updateDeposit(Deposit deposit) {
+		if("".equals(deposit.getDepositDate())){
+			deposit.setDepositDate(null);
+		}if("".equals(deposit.getDepositReturnDate())) {
+			deposit.setDepositReturnDate(null);
+		}
 		
 		return depositMapper.updateDeposit(deposit);
 	}
