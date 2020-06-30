@@ -22,71 +22,65 @@
 					<h2>보증금 수정</h2>
 				</div>
 				<form action="/deposit/depositUpdate" method="post">
+					<input type="hidden" name="depositCode" th:value="${DP.depositCode}">
 				<div class="body">
 					<div class="clearfix">
 							<div class="row">
-				      			<div class="col-md-3">
+				      			<div class="col-md-6">
 				      				<b>회원 아이디</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="memberId" class="form-control" th:value="1111" readonly="readonly">
+					                        <input type="text" name="memberId" class="form-control" th:value="${DP.member.memberId}" readonly>
 					                    </div>
 					       			</div>
 				      			</div>
-				      			<div class="col-md-3 col-md-offset-1">
+				      			<div class="col-md-6">
 				      				<b>회원 이름</b>
 					                <div class="input-group colorpicker colorpicker-element">
 					                    <div class="form-line">
-					                        <input type="text" name="memberName" class="form-control" value="이경진" readonly="readonly">
+					                        <input type="text" name="memberName" class="form-control" th:value="${DP.member.memberName}" readonly>
 					                    </div>
 					       			</div>
 				      			</div>
-				      			<div class="col-md-3 col-md-offset-1">
-				      				<b>등록 일자</b>
-					                <div class="input-group colorpicker colorpicker-element">
-					                    <div class="form-line">
-					                        <input type="text" name="depositDate" class="form-control" value="2020-06-11" readonly="readonly">
-					                    </div>
-					       			</div>
-				      			</div>
-							</div>
-		                	<div class="col-md-3">
-				           		<b>후기 등록 횟수</b>
-				           		<div class="input-group">
-					           		<select class="form-control">
-					           			<option value="">====== 선택 ======</option>
-					           			<option value="#">1회 완료</option>
-		            					<option value="#">2회 완료</option>
-		            					<option value="#">3회 완료</option>
-		            					<option value="#">4회 완료</option>
-		            					<option value="#">5회 완료</option>
-		            					<option value="#">후기 완료!</option>
-		            				</select>
-				           		</div>
-		           			</div>
-		           			<div class="col-md-3">
-				           		<b>보증금 상태</b>
-				           		<div class="input-group">
-					           		<select class="form-control">
-					           			<option value="">====== 선택 ======</option>
-					           			<option value="#">입금 미확인</option>
-		            					<option value="#">입금 완료</option>
-		            					<option value="#">보관 중</option>
-		            					<option value="#">반환 완료</option>
-		            					<option value="#">회수 대기</option>
-		            					<option value="#">기부 처리</option>
-		            				</select>
-				           		</div>
-		           			</div>
-		           	</div>
-           		</div>
-				 <div class="body">
-	            	<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">보증금 수정</button>
-	            </div>
+				      			<div class="col-md-4">
+					           		<b>보증금 상태</b>
+					           		<div class="input-group">
+						           		<select class="form-control" name="depositState">
+						           			<option value="">====== 선택 ======</option>
+						           			<option value="입금 미확인" th:selected="(${DP.depositState} == '입금 미확인')">입금 미확인</option>
+			            					<option value="입금 완료" th:selected="(${DP.depositState} == '입금 완료')">입금 완료</option>
+			            					<option value="보관 중" th:selected="(${DP.depositState} == '보관 중')">보관 중</option>
+			            					<option value="반환 완료" th:selected="(${DP.depositState} == '반환 완료')">반환 완료</option>
+			            					<option value="회수 대기" th:selected="(${DP.depositState} == '회수 대기')">회수 대기</option>
+			            					<option value="기부 처리" th:selected="(${DP.depositState} == '기부 처리')">기부 처리</option>
+			            				</select>
+					           		</div>
+			           			</div>
+			           			<div class="col-md-4">
+			                    	<b>보증금 받은 날짜</b>
+			                    <div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+			                            <input type="Date" name="depositDate" class="form-control">
+			                        </div>
+			                    </div>
+			                	</div>
+			                	<div class="col-md-4">
+			                    	<b>보증금 돌려주는 날짜</b>
+			                    <div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+			                            <input type="Date" name="depositReturnDate" class="form-control">
+			                        </div>
+			                    </div>
+			                	</div>
+			           		</div>	
+			           	</div>
+					 </div>
+					 <div class="body">
+		            	<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">보증금 수정</button>
+		            </div>
 	      		</form>
 	      		</div>
 			</div>
-				
 	</section>
 </th:block> 
 
