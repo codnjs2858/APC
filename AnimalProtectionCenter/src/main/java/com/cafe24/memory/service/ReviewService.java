@@ -24,7 +24,7 @@ public class ReviewService {
 	}
 	
 	public int insertReview(Review review) {
-		if( "".equals( review.getReviewManagementPeriod() ) ) {
+		if( "".equals(review.getReviewManagementPeriod())) {
 			review.setReviewManagementPeriod(null);			
 		}
 		

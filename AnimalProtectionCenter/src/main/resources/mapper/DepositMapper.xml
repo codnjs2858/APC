@@ -86,23 +86,72 @@
 	
 	<select id="selectReviewCount" parameterType="String" resultType="map">
 		SELECT 
+			r.review_code AS reviewCode,
+			r.review_count AS reviewCount,
 			m.member_id AS memberId,
-			m.member_name AS memberName,
-			d.review_code AS reviewCode,
-			r.review_count AS reviewCount
+			m.member_name AS memberName
+		FROM
+			tb_review AS r
+		INNER join
+			tb_member AS m
+		ON
+			r.member_id = m.member_id
+		left JOIN
+			tb_deposit AS d
+		ON
+			r.member_id = d.member_id
+	</select>
+	
+	<!-- 코드로 찾기 -->
+	
+	<select id="selectDepositCode" parameterType="String" resultMap="deposit">
+		SELECT 
+			deposit_code, 
+			m.member_id,
+			m.member_name, 
+			r.review_code, 
+			t.staff_code, 
+			deposit_amount, 
+			deposit_state, 
+			deposit_date, 
+			deposit_return_date
 		FROM 
 			tb_deposit AS d
 		INNER JOIN
+			tb_member AS m
+		INNER JOIN
 			tb_review AS r
 		INNER JOIN
-			tb_member AS m
+			tb_staff AS t
 		ON
-			d.review_code = r.review_code
-		AND 
-			r.member_id = m.member_id
+			m.member_id = d.member_id
 		WHERE
-			d.review_code = #{review.reviewCode};	
-	
+			d.deposit_code = #{depositCode}
+		GROUP BY 
+			d.deposit_code;
 	</select>
+	
+	<!-- 수정 -->
+	
+	<update id="updateDeposit" parameterType="Deposit">
+		UPDATE tb_deposit
+		SET
+			deposit_state=#{depositState},
+			deposit_date=#{depositDate},
+			deposit_return_date=#{depositReturnDate}
+		WHERE 
+			deposit_code=#{depositCode};
+	</update>
+	
+	<!-- 삭제 -->
+	
+	<delete id="deleteDeposit" parameterType="String">
+		DELETE 
+		FROM 
+			tb_deposit 
+		WHERE 
+			deposit_code=#{depositCode};
+		
+	</delete>
 	
 </mapper>
