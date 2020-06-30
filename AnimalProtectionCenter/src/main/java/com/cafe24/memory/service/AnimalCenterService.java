@@ -27,18 +27,6 @@ public class AnimalCenterService {
 	}
 	
 	/**
-	 * 모든 보호동물, 타입별 보호동물 처리 조회
-	 * @return
-	 */
-	public List<String> selectDisposalAnimalCenter(){
-		return animalCenterMapper.selectDisposalAnimalCenter();
-	}
-	public List<String> selectDisposalAnimalCenter(String send_type){
-		return animalCenterMapper.selectDisposalAnimalCenter(send_type);
-	}
-	
-	
-	/**
 	 * 모든 보호동물 ,타입별 보호동물 보호공간 코드 조회
 	 * @return
 	 */
@@ -65,14 +53,6 @@ public class AnimalCenterService {
 	 */
 	public int updateAnimalCenter(AnimalCenter animal) {
 		return animalCenterMapper.updateAnimalCenter(animal);
-	}
-	/**
-	 * 동물 넘버로 센터 동물 조회 (코드,등등)
-	 * @param send_num
-	 * @return
-	 */
-	public AnimalCenter selectNumCode(int Animalnum) {
-		return animalCenterMapper.selectNumCode(Animalnum);
 	}
 	
 	/**

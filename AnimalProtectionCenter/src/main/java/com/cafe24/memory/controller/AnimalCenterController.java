@@ -1,5 +1,7 @@
 package com.cafe24.memory.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,28 +71,20 @@ public class AnimalCenterController {
 	public String listAnimalCenter(@RequestParam(name="send_type", required = false) String send_type ,Model model) {
 		model.addAttribute("Cnt", animalCenterService.selectCenterCnt());
 		Map<Integer, Object> spaceMap = new HashMap<Integer, Object>();
-		Map<Integer, Object> disposalMap = new HashMap<Integer, Object>();
 		List<String> space = null;
-		List<String> disposal = null;
 		List<AnimalCenter> AClist = null;
 		if(send_type != null && !"".equals(send_type)) {
 			AClist = animalCenterService.selectAnimalCenter(send_type);
 			space = animalCenterService.selectProtectAnimalCenter(send_type);
-			disposal = animalCenterService.selectDisposalAnimalCenter(send_type);
 		}else {
 			AClist = animalCenterService.selectAnimalCenter();
 			space = animalCenterService.selectProtectAnimalCenter();
-			disposal = animalCenterService.selectDisposalAnimalCenter();
 		}
 		for(int i = 0; i < space.size(); i++) {
 			spaceMap.put(i, space.get(i));
 		}
-		for(int i = 0; i < disposal.size(); i++) {
-			disposalMap.put(i, disposal.get(i));
-		}
 		model.addAttribute("AClist", AClist);
 		model.addAttribute("proNum", spaceMap);
-		model.addAttribute("disResult", disposalMap);
 		
 		return "animalcenter/animalCenterList";
 	}
@@ -146,16 +140,31 @@ public class AnimalCenterController {
 		model.addAttribute("aInfo", ac);
 		model.addAttribute("sInfo",animalCenterService.selectReportCodeAnimal(send_code));
 		model.addAttribute("hlist", animalHealthService.selectAnimalHealthInfo(send_code));
-		model.addAttribute("dlist", animalDisposalService.selectDisposal(send_code));
+		AnimalDisposal ad = animalDisposalService.selectDisposal(send_code);
+		model.addAttribute("dlist", ad );
 		model.addAttribute("aniPicture", "/files/" + ac.getAnimalPicture());
+		
 		//데이트 포맷
-		/*
-		 * SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		 * model.addAttribute("adopteeDate",
-		 * format.format(ad.getAdoptee().getAdopteeDate()));
-		 * model.addAttribute("returnDate",
-		 * format.format(ad.getCenterReturn().getCenterReturnDate()));
-		 */
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date adopteeDate = null; 
+		Date returnDate = null;
+		if(ad.getAdoptee() != null) {
+			adopteeDate =  ad.getAdoptee().getAdopteeDate();
+		}
+		if(ad.getCenterReturn() != null) {
+			returnDate =  ad.getCenterReturn().getCenterReturnDate();
+		}
+		String add = null;
+		String rdd = null;
+		if(adopteeDate != null) {
+			add =  format.format(adopteeDate);
+		}
+		if(returnDate != null) {
+			rdd =  format.format(returnDate);
+		}
+		model.addAttribute("adopteeDate",add);
+		model.addAttribute("returnDate",rdd);
+		 
 		return "animalcenter/animalCenterPage";
 	}
 	
