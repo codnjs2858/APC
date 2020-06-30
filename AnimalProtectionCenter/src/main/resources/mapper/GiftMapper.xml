@@ -23,7 +23,6 @@
 	
 	<!-- 리스트 -->
 	<select id="selectGift"
-			resultType="Gift"
 			resultMap="gift">
 		SELECT 
 			gift_code, 
@@ -45,5 +44,76 @@
 		AND
 			g.staff_code=t.staff_code;		
 	</select>
+	
+	<!-- 등록 -->
+	<insert id="insertGift" parameterType="Gift">
+		<selectKey resultType="String" order="BEFORE" keyProperty="giftCode">
+			SELECT 
+ 				CONCAT('GFC_', MAX(CAST(SUBSTRING(gift_code,5) AS DECIMAL)+1)) AS gift_code
+			FROM tb_gift;
+		</selectKey>
+			INSERT INTO tb_gift
+			(gift_code, member_id, gift_type, staff_code, gift_cost, gift_date, gift_reason)
+			VALUES (
+					#{giftCode}, 
+					#{member.memberId},
+					#{giftType}, 
+					#{staff.staffCode},
+					#{giftCost}, 
+					NOW(), 
+					#{giftReason}
+					)
+	</insert>
+	
+	<!-- 코드로 찾기 -->
+	
+	<select id="selectGiftCode" parameterType="String" resultMap="gift">
+		
+			SELECT 
+				gift_code, 
+				m.member_id,
+				m.member_name, 
+				gift_type, 
+				staff_code, 
+				gift_cost, 
+				gift_date, 
+				gift_reason
+			FROM 
+				tb_gift AS g
+			INNER JOIN
+				tb_member AS m
+			ON
+				g.member_id = m.member_id
+			WHERE
+				gift_code = #{giftCode};
+	
+	</select>
+	
+	<!-- 수정 -->
+	
+	<update id="updateGift" parameterType="Gift">
+		
+		UPDATE tb_gift
+		SET
+			gift_type=#{giftType},
+			gift_cost=#{giftCost},
+			gift_reason=#{giftReason}
+		WHERE 
+			gift_code = #{giftCode};
+			
+	</update>
+	
+	<!-- 삭제 -->
+	
+	<delete id="deleteGift" parameterType="String">
+		
+		DELETE 
+		FROM 
+			tb_gift 
+		WHERE 
+			gift_code=#{giftCode};
+	
+	</delete>
+	
 
 </mapper>

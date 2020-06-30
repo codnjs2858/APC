@@ -105,4 +105,14 @@
 		WHERE 
 			center_return_code=#{centerReturnCode};
 	</delete>
+	
+	<!-- 동물 타입 찾기 -->
+	<select id="selectPetTypeCount" resultType="Map">
+		SELECT 
+			c.animal_type		as animalType,
+			COUNT(c.animal_type)	as animalCount
+		FROM 
+			tb_center_return AS c
+		GROUP BY c.animal_type;
+	</select>
 </mapper>	

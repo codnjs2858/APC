@@ -1,5 +1,8 @@
 package com.cafe24.memory.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +54,12 @@ public class CenterReturnController {
 	}
 	
 	@GetMapping("centerReturnList")
-	public String centerReturnList(Model model) {
-	
+	public String centerReturnList(Model model, @RequestParam(name="sendType", required = false)
+												String sendType) {
+		List<Map<String, Object>> petType = centerReturnService.selectPetTypeCount();
+		System.out.println(petType);
+		
+		model.addAttribute("petType", petType);
 		model.addAttribute("CRL", centerReturnService.selectCenterReturn());
 	
 		return "centerreturn/centerReturnList";

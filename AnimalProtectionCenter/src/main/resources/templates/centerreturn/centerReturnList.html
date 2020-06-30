@@ -35,10 +35,10 @@
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
 	                    	</a>
 	                    </div>
-	                    <div class="col-xs-3 col-md-3" th:each="c:${Cnt}">
-	                    	<a th:href="@{/centerReturnList(send_type=${c.animalType})}">
+	                    <div class="col-xs-3 col-md-3" th:each="c:${petType}">
+	                    	<a th:href="@{/centerreturn/centerReturnList(sendType=${c.animalType})}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
-		                        [[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
+		                        [[${c.animalType}]] <span class="badge">[[${c.animalCount}]]</span></button>
 	                    	</a>
 	                    </div>
 	                </div>
