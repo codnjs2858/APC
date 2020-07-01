@@ -26,17 +26,17 @@
 				<div class="body">
 					<div class="clearfix">
 						<div class="row">
-			      			<div class="col-md-6">
+			      			<div class="col-md-4">
 			      				<b>회원 아이디</b>
-				                <div class="input-group colorpicker colorpicker-element">
+				                <div class="input-group">
 				                    <div class="form-line">
 				                        <input type="text" name="memberId" class="form-control" th:value="${GL.member.memberId}" readonly>
 				                    </div>
 				       			</div>
 			      			</div>
-			      			<div class="col-md-6">
+			      			<div class="col-md-4">
 			      				<b>회원 이름</b>
-				                <div class="input-group colorpicker colorpicker-element">
+				                <div class="input-group">
 				                    <div class="form-line">
 				                        <input type="text" name="memberName" class="form-control" th:value="${GL.member.memberName}" readonly>
 				                    </div>
@@ -44,7 +44,7 @@
 			      			</div>
 				      		<div class="col-md-4">
 	            				<b>기프트 종류</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 		            				<select name="giftType">
 		            					<option value="">====== 선택 ======</option>
 		            					<option value="무료 예방 접종권" th:selected="(${GL.giftType} == '무료 예방 접종권')">무료 예방 접종권</option>
@@ -55,9 +55,11 @@
 		            				</select>
 		            			</div>
 	            			</div>
+						</div>
+						<div class="row">
 							<div class="col-md-4">
 			                    <b>기프트 이유</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input type="text" name="giftReason" th:value="${GL.giftReason}" class="form-control">
 			                        </div>
@@ -65,19 +67,17 @@
 			                </div>
 				            <div class="col-md-4">
 			                    <b>기프트 비용</b>
-		                    	<div class="input-group colorpicker colorpicker-element">
+		                    	<div class="input-group">
 			                        <div class="form-line">
 			                            <input type="text" name="giftCost" th:value="${GL.giftCost}" class="form-control">
 			                        </div>
 		                    	</div>
 			                </div>
-						</div> 
-		           	</div>
+						</div>	
+					</div>
            		</div>
-				 <div class="body">
-	            	<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">기프트 수정</button>
-	            </div>
-	      		</form>
+            	<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">기프트 수정</button>
+				</form>
 	      		</div>
 			</div>
 	</section>

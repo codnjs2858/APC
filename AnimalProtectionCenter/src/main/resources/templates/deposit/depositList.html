@@ -47,7 +47,6 @@
 	                        <thead>
 		                            <tr role="row">
 		                            	<th></th>
-		                            	<th><div class="align-center">보증금 코드</div></th>
 		                            	<th><div class="align-center">회원 아이디</div></th>
 		                            	<th><div class="align-center">회원 이름</div></th>
 		                            	<th><div class="align-center">후기 등록횟수</div></th>
@@ -63,7 +62,6 @@
 	                        <tbody>
 			                        <tr th:each="DP, i : ${DP}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${DP.depositCode}]]</td>
 		                              	<td><div class="align-center"></div>[[${DP.member.memberId}]]</td>
 		                              	<td><div class="align-center"></div>[[${DP.member.memberName}]]</td>
 		                              	<td><div class="align-center"></div>[[${DP.review.reviewCount}]]</td>

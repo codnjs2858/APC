@@ -19,20 +19,21 @@
 	                <h2>기프트 등록</h2>
 	            </div>
 	            <div class="body">
-	            	<div class="row clearfix">
+	            	<div class="clearfix">
 	            		<form action="/gift/giftInsert" method="post">
-	            			<div class="col-md-6">
+	            		<div class="row">
+	            			<div class="col-md-4">
 	            				<b>회원 아이디</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="colorpicker colorpicker-element">
 		            				<select name="memberId" id="memberId" class="form-control">
 		            					<option value="">====== 선택 ======</option>
 		            					<option th:each="m : ${mList}" th:value="${m.memberId}">[[${m.memberId}]]</option>
 		            				</select>
 		            			</div>
 	            			</div>
-	            			<div class="col-md-6">
+	            			<div class="col-md-4">
 			                    <b>회원 이름</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input name="memberName" id="memberName" class="form-control" readonly>
 			                        </div>
@@ -40,17 +41,19 @@
 			                </div>
 	            			<div class="col-md-4">
 	            				<b>기프트 종류</b>
-		                    	<div class="input-group colorpicker colorpicker-element">
-	            				<select name="giftType">
-	            					<option value="">====== 선택 ======</option>
-	            					<option value="무료 예방 접종권">무료 예방 접종권</option>
-									<option value="사료 1kg">사료 1kg</option>
-									<option value="3만원 상품권">3만원 상품권</option>
-									<option value="댕댕이 박스">댕댕이 박스</option>
-									<option value="냥냥이 박스">냥냥이 박스</option>
-	            				</select>
+		                    	<div class="input-group">
+		            				<select name="giftType">
+		            					<option value="">====== 선택 ======</option>
+		            					<option value="무료 예방 접종권">무료 예방 접종권</option>
+										<option value="사료 1kg">사료 1kg</option>
+										<option value="3만원 상품권">3만원 상품권</option>
+										<option value="댕댕이 박스">댕댕이 박스</option>
+										<option value="냥냥이 박스">냥냥이 박스</option>
+		            				</select>
+	            				</div>
 	            			</div>
-	            			</div>
+	            		</div>
+	            		<div class="row">
 	            			<div class="col-md-4">
 			                    <b>기프트 주는 이유</b>
 		                    	<div class="input-group colorpicker colorpicker-element">
@@ -76,10 +79,9 @@
 			                        </div>
 								</div>
             				</div>
-			                <div class="col-md-4">
-			                	<button type="submit" class="btn btn-primary btn-lg">기프트  등록</button>
-			                </div>
-	            		</form>
+	            		</div>
+		                	<button type="submit" class="btn btn-block bg-amber waves-effect">기프트  등록</button>
+			            </form>
 		            </div>
 	            </div>
 	        </div>

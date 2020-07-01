@@ -57,11 +57,32 @@ public class CenterReturnController {
 	public String centerReturnList(Model model, @RequestParam(name="sendType", required = false)
 												String sendType) {
 		List<Map<String, Object>> petType = centerReturnService.selectPetTypeCount();
+		List<CenterReturn> centerReturnList = centerReturnService.selectCenterReturn();
+		
+		
 		System.out.println(petType);
+		System.out.println(centerReturnList);
+		
+		int totalcount = 0;
+		totalcount = centerReturnList.size();
+		
+		System.out.println(totalcount);
+		
+		if(sendType != null) {
+			if("강아지".equals(sendType)) {
+				centerReturnList = centerReturnService.selectAnimalType("강아지");
+			}else if ("고양이".equals(sendType)) {
+				centerReturnList = centerReturnService.selectAnimalType("고양이");
+			}else {
+				centerReturnList = centerReturnService.selectAnimalType("기타");
+			}
+		}else {
+			
+		}
 		
 		model.addAttribute("petType", petType);
-		model.addAttribute("CRL", centerReturnService.selectCenterReturn());
-	
+		model.addAttribute("CRL", centerReturnList);
+		model.addAttribute("totalCount", totalcount);
 		return "centerreturn/centerReturnList";
 	}
 

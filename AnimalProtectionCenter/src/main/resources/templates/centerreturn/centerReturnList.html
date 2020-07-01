@@ -32,7 +32,10 @@
 					<div class="row clearfix">
 	                    <div class="col-xs-3 col-md-3" >
 	                    	<a th:href="@{/centerreturn/centerReturnList}">
-		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
+		                        	전체보기
+		                        <span class="badge" th:text="${totalCount}"></span>	
+		                        </button>
 	                    	</a>
 	                    </div>
 	                    <div class="col-xs-3 col-md-3" th:each="c:${petType}">
@@ -47,7 +50,6 @@
 	                        <thead>
 		                            <tr role="row">
 		                            	<th></th>
-		                            	<th><div class="align-center">반환 코드</div></th>
 		                            	<th><div class="align-center">동물 종류</div></th>
 		                            	<th><div class="align-center">반환인 이름</div></th>
 		                            	<th><div class="align-center">반환인 나이</div></th>
@@ -62,8 +64,7 @@
 	                        <tbody>
 			                        <tr th:each="CRL, i : ${CRL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${CRL.centerReturnCode}]]</td>
-		                                <td><div class="align-center"></div>[[${CRL.animalType}]]</td>
+		                              	<td><div class="align-center"></div>[[${CRL.animalType}]]</td>
 		                                <td><div class="align-center"></div>[[${CRL.centerReturnName}]]</td>
 		                                <td><div class="align-center"></div>[[${CRL.centerReturnAge}]]</td>
 		                                <td><div class="align-center"></div>[[${CRL.centerReturnAddress}]]</td>

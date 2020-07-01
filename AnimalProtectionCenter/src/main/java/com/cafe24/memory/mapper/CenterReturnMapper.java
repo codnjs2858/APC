@@ -21,4 +21,6 @@ public interface CenterReturnMapper {
 	public CenterReturn selectCenterReturnCode(String centerReturnCode);
 	
 	public List<Map<String, Object>> selectPetTypeCount();
+	
+	public List<CenterReturn> selectAnimalType(String animalType);
 }

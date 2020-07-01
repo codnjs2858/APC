@@ -47,7 +47,6 @@
 	                        <thead>
 		                            <tr role="row">
 		                            	<th></th>
-		                            	<th><div class="align-center">블랙리스트 코드</div></th>
 		                            	<th><div class="align-center">아이디</div></th>
 		                            	<th><div class="align-center">등록 사유</div></th>
 		                            	<th><div class="align-center">등록 날짜</div></th>
@@ -61,8 +60,7 @@
 	                        <tbody>
 			                        <tr th:each="BL, i : ${BL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${BL.blackListCode}]]</td>
-		                                <td><div class="align-center"></div>[[${BL.member.memberId}]]</td>
+		                              	<td><div class="align-center"></div>[[${BL.member.memberId}]]</td>
 		                               	<td><div class="align-center"></div>[[${BL.blackListReason}]]</td>
 		                               	<td><div class="align-center"></div>[[${BL.blackListDate}]]</td>
 		                               	<td><div class="align-center"></div>[[${BL.blackListCancleReason}]]</td>

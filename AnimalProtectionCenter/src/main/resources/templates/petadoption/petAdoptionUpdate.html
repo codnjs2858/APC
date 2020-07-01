@@ -28,7 +28,7 @@
 							<div class="row">
 				      			<div class="col-md-6">
 				      				<b>회원 아이디</b>
-					                <div class="input-group colorpicker colorpicker-element">
+					                <div class="input-group">
 					                    <div class="form-line">
 					                        <input type="text" name="memeberId" th:value="${PA.member.memberId}" class="form-control"  readonly="readonly">
 					                    </div>
@@ -36,7 +36,7 @@
 				      			</div>
 				      			<div class="col-md-6">
 				      				<b>입양인 이름</b>
-					                <div class="input-group colorpicker colorpicker-element">
+					                <div class="input-group">
 					                    <div class="form-line">
 					                        <input type="text" name="memberName" th:value="${PA.member.memberName}" class="form-control"  readonly="readonly">
 					                    </div>
@@ -44,18 +44,16 @@
 				      			</div>
 					      		<div class="col-md-4">
 					           		<b>현재 상태</b>
-					           		<div class="input-group">
-						           		<select class="form-control" name="petAdoptionState">
-						           			<option value="">====== 선택 ======</option>
-						           			<option value="관리 진행중" th:selected="(${PA.petAdoptionState} == '관리 진행중')">관리 진행중</option>
-			            					<option value="관리 완료" th:selected="(${PA.petAdoptionState} == '관리 완료')" >관리 완료</option>
-			            					<option value="중도 포기" th:selected="(${PA.petAdoptionState} == '중도 포기')">중도 포기</option>
-			            				</select>
-					           		</div>
-			           			</div>
+					           		<select class="form-control" name="petAdoptionState">
+					           			<option value="">====== 선택 ======</option>
+					           			<option value="관리 진행중" th:selected="(${PA.petAdoptionState} == '관리 진행중')">관리 진행중</option>
+		            					<option value="관리 완료" th:selected="(${PA.petAdoptionState} == '관리 완료')" >관리 완료</option>
+		            					<option value="중도 포기" th:selected="(${PA.petAdoptionState} == '중도 포기')">중도 포기</option>
+		            				</select>
+					           	</div>
 			           			<div class="col-md-4">
 			                    <b>입양관리 시작 날짜</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input type="Date" name="petAdoptionManagementDate" th:value="${PA.petAdoptionManagementDate}" class="form-control">
 			                        </div>
@@ -63,7 +61,7 @@
 			                	</div>
 			                	<div class="col-md-4">
 			                    	<b>입양관리 종료 날짜</b>
-				                    <div class="input-group colorpicker colorpicker-element">
+				                    <div class="input-group">
 				                        <div class="form-line">
 				                            <input type="Date" name="petAdoptionEndDate" th:value="${PA.petAdoptionEndDate}" class="form-control">
 				                        </div>
