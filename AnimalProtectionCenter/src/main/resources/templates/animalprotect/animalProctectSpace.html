@@ -13,7 +13,7 @@
 				<div class="header"><h2>반려동물보호</h2></div>
 				
 				<div class="body">
-					<div class="row clearfix">
+					<div class="row">
 						<div class="col-xs-6 col-md-3">
 	                    	<a th:href="@{/protection/animalProtection}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
@@ -74,13 +74,12 @@
 			                                        <i class="material-icons">more_vert</i>
 			                                    </a>
 			                                    <ul class="dropdown-menu pull-right">
-			                                        <li><a th:href="@{/protection/exitAnimalProtection(protectSpaceCode=${ps.protectSpaceCode},aniProtectionNum=${ps.animalProtect.animalProtectNum})}">비우기</a></li>
+			                                        <!-- <li><a th:href="@{/protection/exitAnimalProtection(protectSpaceCode=${ps.protectSpaceCode},aniProtectionNum=${ps.animalProtect.animalProtectNum})}">비우기</a></li> -->
+			                                        <li><a class="clean" th:data-myurl="'/protection/exitAnimalProtection?protectSpaceCode=' + ${ps.protectSpaceCode} + '&aniProtectionNum=' + ${ps.animalProtect.animalProtectNum}" href="javascript:void(0)">비우기</a></li>
 			                                    </ul>
 			                                </li>
 			                            </ul>
-			                            <div class="text">
-			                            	[[${ps.protectSpaceCode}]]
-			                            </div>
+			                            <div class="text" th:text="${'방 '+ #strings.substring(ps.protectSpaceCode, 14)}"></div>
 			                            <div class="number">[[${ps.animalCenter.animalCenterNumber}]]([[${ps.animalProtect.state}]])</div>
 			                        </div> 
 								</th:block>
@@ -97,11 +96,12 @@
 			                                        <i class="material-icons">more_vert</i>
 			                                    </a>
 			                                    <ul class="dropdown-menu pull-right">
-			                                        <li><a data-toggle="modal" data-color="red" th:data-data="${ps.protectSpaceCode}" data-title="delete" class=" waves-effect waves-block" href="#modalTarget">삭제</a></li>
+			                                        <!-- <li><a data-toggle="modal" data-color="red" th:data-data="${ps.protectSpaceCode}" data-title="delete" class=" waves-effect waves-block" href="#modalTarget">삭제</a></li> -->
+			                                        <li><a class="delete" th:data-myurl="'/protection/delProtectionSpace?protectSpaceCode=' + ${ps.protectSpaceCode}" href="javascript:void(0)">삭제</a></li>
 			                                    </ul>
 			                                </li>
 			                            </ul>
-				                        <div class="text">[[${ps.protectSpaceCode}]]</div>
+				                        <div class="text" th:text="${'방 '+ #strings.substring(ps.protectSpaceCode, 14)}"></div>
 									</div> 
 								</th:block>
 							</div>
@@ -150,6 +150,54 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
+			$('.clean').click(function(){
+    			swal('비우시겠습니까?', {
+					title:'경고',
+					icon:'error',
+					buttons: true,
+				})
+    			.then((foodDelete) => {
+    				var val = $(this).data('myurl');
+    				console.log(val);
+    				if(foodDelete){
+    					swal("정말로 비우시겠습니까?", {
+    							title: '확인',
+    					      	icon: "warning",
+    					      	buttons: true,
+    					    })
+    					    .then((value) => {
+    					    	if(value) location.href = val;
+    					    });
+    				}else{
+    					console.log('취소');
+    				}
+    			});
+    		});
+			
+			$('.delete').click(function(){
+    			swal('삭제하시겠습니까?', {
+					title:'경고',
+					icon:'error',
+					buttons: true,
+				})
+    			.then((foodDelete) => {
+    				var val = $(this).data('myurl');
+    				console.log(val);
+    				if(foodDelete){
+    					swal("정말로 삭제하시겠습니까?", {
+    							title: '확인',
+    					      	icon: "warning",
+    					      	buttons: true,
+    					    })
+    					    .then((value) => {
+    					    	if(value) location.href = val;
+    					    });
+    				}else{
+    					console.log('취소');
+    				}
+    			});
+    		});
+			
 			$('#modalTarget').on('show.bs.modal', function (event) {
     	        var color = $(event.relatedTarget).data('color');
     	        var data = $(event.relatedTarget).data('data');

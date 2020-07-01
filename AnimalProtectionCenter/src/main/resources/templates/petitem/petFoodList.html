@@ -83,8 +83,13 @@
 								            </div>
 							            </td>
 							            <td>
-							           	 	<div class="align-center">
+							           	 	<!-- <div class="align-center">
 							            		<a class="delete" data-toggle="modal" data-color="red" th:data-data="${pf.foodCode}" data-title="delete" href="#modalTarget">
+							            			<i class="material-icons">delete</i>
+							            		</a>
+							            	</div> -->
+							            	<div class="align-center">
+							            		<a class="delete" th:data-myurl="'/petItem/petFoodDelete?foodCode=' + ${pf.foodCode}" href="javascript:void(0)">
 							            			<i class="material-icons">delete</i>
 							            		</a>
 							            	</div>
@@ -140,6 +145,30 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
     <script>
     	$(function(){
+    		$('.delete').click(function(){
+    			swal('삭제하시겠습니까?', {
+					title:'경고',
+					icon:'error',
+					buttons: true,
+				})
+    			.then((foodDelete) => {
+    				var val = $(this).data('myurl');
+    				console.log(val);
+    				if(foodDelete){
+    					swal("정말로 삭제하시겠습니까?", {
+    							title: '확인',
+    					      	icon: "warning",
+    					      	buttons: true,
+    					    })
+    					    .then((value) => {
+    					    	if(value) location.href = val;
+    					    });
+    				}else{
+    					console.log('취소');
+    				}
+    			});
+    		});
+    		
     		$('#dataTable').dataTable({
     			"aaSorting": []
     		});

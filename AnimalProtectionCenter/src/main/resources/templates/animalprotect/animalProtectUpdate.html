@@ -18,39 +18,33 @@
 				<div class="body">
 					<form action="/protection/animalProtection" method="POST">
 						<div class="row">
-							<div class="input-group">
-		                        <div class="form-line">
-									보호공간
-		                            <input type="text" class="form-control" name="protectSpaceCode" th:value="${ptSpace.protectSpaceCode}" readonly="readonly">
-		                        </div>
-							</div>						
+							<div class="col-xs-12 col-md-12">
+								<div class="input-group">
+			                        <div class="form-line">
+										보호공간
+			                            <input type="text" class="form-control" name="protectSpaceCode" th:value="${ptSpace.protectSpaceCode}" readonly="readonly">
+			                        </div>
+								</div>						
+							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-6 col-md-4">
-			                    <div class="input-group">
-			                        <div>
-										센터등록된 유기동물번호
-			                            <!-- <input id="petName" type="text" class="form-control" name="animalInsertCode" placeholder="유기동물이름" th:value="${ptSpace.animalProtect.animalInsertCode}">
-			                            <button type="button" id="btnNamePet" class="btn btn-block bg-green waves-effect">동물이름중복</button> -->
-			                            <div>
-				                            <select name="animalInsertCode">
-				                            	<option th:each="l : ${acl}" th:value="${l.animalInsertCode}" th:text="${l.animalCenterNumber}" th:selected="${l.animalInsertCode}==${ptSpace.animalInsertCode}"></option>
-				                            </select>
-			                            </div>
-			                        </div>
-								</div>
+								센터등록된 유기동물번호
+	                            <!-- <input id="petName" type="text" class="form-control" name="animalInsertCode" placeholder="유기동물이름" th:value="${ptSpace.animalProtect.animalInsertCode}">
+	                            <button type="button" id="btnNamePet" class="btn btn-block bg-green waves-effect">동물이름중복</button> -->
+	                            <div>
+		                            <select name="animalInsertCode">
+		                            	<option th:each="l : ${acl}" th:value="${l.animalInsertCode}" th:text="${l.animalCenterNumber}" th:selected="${l.animalInsertCode}==${ptSpace.animalInsertCode}"></option>
+		                            </select>
+	                            </div>
 							</div>
 							<div class="col-xs-6 col-md-4">
-								<div class="input-group">
-									<div>
-										보호상태
-										<div>
-											<select name="state">
-												<option value="보호중">-- 보호중 --</option>
-												<option value="특별보호">-- 특별보호 --</option>
-											</select>
-										</div>
-									</div>
+								보호상태
+								<div>
+									<select name="state">
+										<option value="보호중">-- 보호중 --</option>
+										<option value="특별보호">-- 특별보호 --</option>
+									</select>
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-4">

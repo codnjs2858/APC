@@ -3075,7 +3075,7 @@ section.content {
     display: inline-block;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.12);
-    width: 80px; }
+    min-width: 80px; }
     .info-box .icon i {
       color: #fff;
       font-size: 50px;

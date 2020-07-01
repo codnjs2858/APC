@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/default2}">
@@ -96,7 +96,11 @@
 		$(function(){
 			var checkValue = function(obj, msg){
 				if(obj.val() == ''){
-					alert(msg);
+					swal({
+						title:'경고',
+						text:msg,
+						icon:'error'
+					});
 					obj.focus();
 					
 					return true;
