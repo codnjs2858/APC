@@ -14,7 +14,6 @@
 		
 		<association property="reportManger" javaType="ReportManger">
 			<result property="acceptCode" column="accept_code"></result>
-			<result property="reportCode" column="report_code"></result>
 			<result property="acceptState" column="accept_state"></result>
 			<result property="acceptInDate" column="accept_in_date"></result>
 			<result property="acceptOutDate" column="accept_out_date"></result>

@@ -19,6 +19,10 @@ public class AnimalDisposalService {
 	@Autowired private AnimalDisposalMapper animalDisposalMapper;
 	@Autowired private ProtectionMapper protectionMapper;
 	
+	public int updateAnimalDisposal(AnimalDisposal disposal) {
+		return animalDisposalMapper.updateAnimalDisposal(disposal);
+	}
+	
 	/**
 	 * 동물 코드로 검색해 보호 삭제, 공간 비우기
 	 * @param send_code

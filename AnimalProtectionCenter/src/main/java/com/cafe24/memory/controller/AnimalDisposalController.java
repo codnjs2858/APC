@@ -78,7 +78,18 @@ public class AnimalDisposalController {
 		return "animaldisposal/animalDisposalUpdate";
 	}
 	@PostMapping("/animaldisposalupdate")
-	public String updateAnimalDisposal(AnimalDisposal ad) {
+	public String updateAnimalDisposal(AnimalDisposal disposal, AnimalCenter ac,CenterReturn centerReturn, Member member) {
+		disposal.setAnimalCneter(ac);
+		if(member != null ) {
+			Adoptee adoptee = new Adoptee();
+			adoptee.setAdopteeCode(animalDisposalService.DisposalmemberId(member.getMemberId()));
+			disposal.setAdoptee(adoptee);
+		}
+		if(centerReturn != null ) {
+			centerReturn.setCenterReturnCode(animalDisposalService.DisposalReturnCode(centerReturn.getCenterReturnName(),centerReturn.getCenterReturnPhone()));
+			disposal.setCenterReturn(centerReturn);
+		}
+		animalDisposalService.updateAnimalDisposal(disposal);
 		return "redirect:/animaldisposal/animaldisposallist";
 	}
 
