@@ -3,7 +3,6 @@ package com.cafe24.memory.domain;
 public class ReportManger {
 	private String acceptCode;
 	private SearchReportAnimal searchReport;
-	private String reportCode;
 	private LostReportAnimal lostReport;
 	private String acceptState;
 	private Member member;
@@ -22,12 +21,7 @@ public class ReportManger {
 	public void setSearchReport(SearchReportAnimal searchReport) {
 		this.searchReport = searchReport;
 	}
-	public String getReportCode() {
-		return reportCode;
-	}
-	public void setReportCode(String reportCode) {
-		this.reportCode = reportCode;
-	}
+	
 	public LostReportAnimal getLostReport() {
 		return lostReport;
 	}
@@ -60,8 +54,7 @@ public class ReportManger {
 	}
 	@Override
 	public String toString() {
-		return "ReportManger [acceptCode=" + acceptCode + ", searchReport=" + searchReport + ", reportCode="
-				+ reportCode + ", lostReport=" + lostReport + ", acceptState=" + acceptState + ", member=" + member
+		return "ReportManger [acceptCode=" + acceptCode + ", searchReport=" + searchReport + ", lostReport=" + lostReport + ", acceptState=" + acceptState + ", member=" + member
 				+ ", acceptInDate=" + acceptInDate + ", acceptOutDate=" + acceptOutDate + "]";
 	}
 	
