@@ -9,7 +9,7 @@
 </th:block>
 
  <th:block layout:fragment="customTitle">
- 	<title>받은쪽지함</title>
+ 	<title>보낸쪽지함</title>
  </th:block> 
 
 <th:block layout:fragment="customContents">
@@ -18,7 +18,7 @@
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
             	<div class="header">
-            	<h2>받은쪽지함</h2>
+            	<h2>보낸쪽지함</h2>
             	</div>
                 <div class="body">
 				<table id="tb_note" class="table table-hover">
@@ -26,16 +26,16 @@
 				        <tr>
 				            <th>번호</th>
 				            <th>제목</th>
-				            <th>보낸사람</th>
-				            <th>받은시간</th>
+				            <th>받은사람</th>
+				            <th>보낸시간</th>
 				        </tr>
 				    </thead>
 				    <tbody>
-				        <tr th:each="i, j : ${noteList}">
+				        <tr th:each="i, j : ${sendNoteList}">
 				            <th scope="row">[[${j.count}]]</th>
 				            <td style="display:none">[[${i.note_code}]]</td>
 				            <td>[[${i.note_title}]]</td>
-				            <td>[[${i.send_member}]]</td>
+				            <td>[[${i.recipient_member}]]</td>
 				            <td>[[${i.note_date}]]</td>
 				        </tr>
 				    </tbody>

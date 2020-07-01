@@ -20,60 +20,65 @@
 	                <h2>분양 동물 기간 관리 등록</h2>
 	            </div>
 	            <div class="body">
-	            	<div class="row clearfix">
+	            	<div class="clearfix">
 	            		<form action="/petadoption/petAdoptionInsert" method="post">
-	            		<!-- 직원 세션 아이디, 코드 -->
-	            		<input type="hidden" name="staffCode" value="staff_code_2">
-	            			<div class="col-md-6">
-	            				<b>회원 아이디</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+	            			<div class="row">
+		            			<div class="col-md-4">
+		            				<b>회원 아이디</b>
 		            				<select name="memberId" id="memberId" class="form-control">
 		            					<option value="">====== 선택 ======</option>
 		            					<option th:each="m : ${mList}" th:value="${m.memberId}">[[${m.memberId}]]</option>
-		            				</select>
+		            				</select>			                    
+		            			</div>
+		            			<div class="col-md-4">
+		            				<div class="input-group">
+					                    <b>회원 이름</b>
+				                        <div class="form-line">
+				                            <input name="memberName" id="memberName" class="form-control" readonly>
+				                        </div>
+			                        </div>
+				                </div>
+		            			<div class="col-md-4">
+		            				<div class="input-group">
+			            				<b>관리 상태</b>
+			            				<select name="petAdoptionState" class="form-control">
+			            					<option value="">====== 선택 ======</option>
+			            					<option value="분양 전">분양 전</option>
+			            					<option value="분양 완료">분양 완료</option>
+			            					<option value="기타">기타</option>
+			            				</select>
+		            				</div>
 		            			</div>
 	            			</div>
-	            			<div class="col-md-6">
-			                    <b>회원 이름</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input name="memberName" id="memberName" class="form-control" readonly>
-			                        </div>
-			                    </div>
-			                </div>
-	            			<div class="col-md-4">
-	            				<b>관리 상태</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="petAdoptionState" class="form-control">
-		            					<option value="">====== 선택 ======</option>
-		            					<option value="분양 전">분양 전</option>
-		            					<option value="분양 완료">분양 완료</option>
-		            					<option value="기타">기타</option>
-		            				</select>
-		            			</div>
+	            			<div class="row">
+		            			<div class="col-md-4">
+		            				<div class="input-group">
+					                    <b>입양관리 시작 날짜</b>
+				                        <div class="form-line">
+				                            <input type="Date" name="petAdoptionManagementDate" class="form-control">
+				                        </div>
+		            				</div>
+				                </div>
+				                <div class="col-md-4">
+				                	<div class="input-group">
+					                    <b>입양관리 종료 날짜</b>
+				                        <div class="form-line">
+				                            <input type="Date" name="petAdoptionEndDate" class="form-control">
+				                        </div>
+				                    </div>    
+				                </div>
+				                <div class="col-md-4">
+									<div class="input-group">
+				                        <div class="form-line">
+											담당자
+				                            <input type="text" class="form-control" th:value="${session.STAFF.staffName}">
+				                            <input type="hidden" id="staffCode" class="form-control" name="staffCode" th:value="${session.STAFF.staffCode}">
+				                        </div>
+									</div>
+	            				</div>
 	            			</div>
-	            			<div class="col-md-4">
-			                    <b>입양관리 시작 날짜</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="Date" name="petAdoptionManagementDate" class="form-control">
-			                        </div>
-			                    </div>
-			                </div>
-			                
-	            			<div class="col-md-4">
-			                    <b>입양관리 종료 날짜</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="Date" name="petAdoptionEndDate" class="form-control">
-			                        </div>
-			                    </div>
-			                </div>
-			                
-			                <div class="col-md-4 col-md-offset-1 p-t-10">
-			                	<button type="submit" class="btn btn-primary btn-lg">분양 동물 기간 관리 등록</button>
-			                </div>
-	            		</form>
+		                	<button type="submit" class="btn btn-block bg-amber waves-effect">분양 동물 기간 관리 등록</button>
+			            </form>
 		            </div>
 	            </div>
 	        </div>

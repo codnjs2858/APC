@@ -27,7 +27,7 @@
 							<input type="hidden" name="centerReturnCode" th:value="${CR.centerReturnCode}">
 	            			<div class="col-md-4">
 	            				<b>동물 축종</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="colorpicker colorpicker-element">
 		            				<select name="animalType">
 		            					<option value="">====== 선택 ======</option>
 		            					<option value="강아지" th:selected="(${CR.animalType} == '강아지')">강아지</option>
@@ -38,7 +38,7 @@
 	            			</div>
 			                <div class="col-md-4">
 			                    <b>반환인 이름</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input type="text" name="centerReturnName" th:value="${CR.centerReturnName}" class="form-control">
 			                        </div>
@@ -46,7 +46,7 @@
 			                </div>
 			                <div class="col-md-4">
 			                    <b>반환인 나이</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input type="text" name="centerReturnAge" th:value="${CR.centerReturnAge}" class="form-control">
 			                        </div>
@@ -54,7 +54,7 @@
 			                </div>
 			                <div class="col-md-4">
 			                    <b>반환인 주소</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input type="text" name="centerReturnAddress" th:value="${CR.centerReturnAddress}" class="form-control">
 			                        </div>
@@ -62,7 +62,7 @@
 			                </div>
 			                <div class="col-md-4">
 			                    <b>반환인 연락처</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input type="text" name="centerReturnPhone" th:value="${CR.centerReturnPhone}" class="form-control">
 			                        </div>

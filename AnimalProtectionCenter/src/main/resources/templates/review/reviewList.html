@@ -47,7 +47,6 @@
 	                        <thead>
 		                            <tr role="row">
 		                            	<th></th>
-		                            	<th><div class="align-center">후기 코드</div></th>
 		                            	<th><div class="align-center">회원 아이디</div></th>
 		                            	<th><div class="align-center">회원 이름</div></th>
 		                            	<th><div class="align-center">등록 횟수</div></th>
@@ -62,7 +61,6 @@
 	                        <tbody>
 			                        <tr th:each="RVL, i : ${RVL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${RVL.reviewCode}]]</td>
 		                              	<td><div class="align-center"></div>[[${RVL.member.memberId}]]</td>
 		                              	<td><div class="align-center"></div>[[${RVL.member.memberName}]]</td>
 		                              	<td><div class="align-center"></div>[[${RVL.reviewCount}]]</td>

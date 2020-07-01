@@ -25,6 +25,12 @@ public class PetAdoptionService {
 	
 	public int insertPetAdoption(PetAdoption petAdoption) {
 		
+		if("".equals(petAdoption.getPetAdoptionManagementDate())) {
+			petAdoption.setPetAdoptionManagementDate(null);
+		}if("".equals(petAdoption.getPetAdoptionEndDate())) {
+			petAdoption.setPetAdoptionEndDate(null);
+		}
+		
 		int result = petAdoptionMapper.insertPetAdoption(petAdoption);
 		
 		return result;
@@ -32,6 +38,12 @@ public class PetAdoptionService {
 	}
 	
 	public int updatePetAdoption(PetAdoption petAdoption) {
+		
+		if("".equals(petAdoption.getPetAdoptionManagementDate())) {
+			petAdoption.setPetAdoptionManagementDate(null);
+		}if("".equals(petAdoption.getPetAdoptionEndDate())) {
+			petAdoption.setPetAdoptionEndDate(null);
+		}
 		
 		int result = petAdoptionMapper.updatePetAdoption(petAdoption);
 		
