@@ -19,65 +19,70 @@
 	                <h2>보증금 등록</h2>
 	            </div>
 	            <div class="body">
-	            	<div class="row clearfix">
+	            	<div class ="clearfix">
 	            		<form action="/deposit/depositInsert" method="post">
-	            			<input type="hidden" name="reviewCode" th:each="rct : ${reviewCount}" th:value="${rct.reviewCode}">
-	            			<div class="col-md-6">
+	            		<div class="row">
+	            			<div class="col-md-4">
 	            				<b>회원 아이디</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="colorpicker colorpicker-element">
 		            				<select name="memberId" id="memberId" class="form-control">
 		            					<option value="">====== 선택 ======</option>
 		            					<option th:each="rct : ${reviewCount}" th:value="${rct.memberId}">[[${rct.memberId}]]</option>
 		            				</select>
 		            			</div>
 	            			</div>
-	            			<div class="col-md-6">
+	            			<div class="col-md-4">
 			                    <b>회원 이름</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input name="memberName" id="memberName" class="form-control" readonly>
 			                        </div>
 			                    </div>
 			                </div>
+			                <div class="col-md-4">
+	            				<b>보증금 상태</b>
+			                    <div class="colorpicker colorpicker-element">
+			                    	<div class="form-line">
+			            				<select name="depositState">
+			            					<option value="">====== 선택 ======</option>
+			            					<option value="입금 완료">입금 완료</option>
+			            					<option value="입금 미확인">입금 미확인</option>
+			            					<option value="기타">기타</option>
+			            				</select>
+		            				</div>
+		            			</div>
+	            			</div>
+	            		</div>
+	            		<div class="row">
 			                 <div class="col-md-4">
 			                    <b>보증금 금액</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input type="text" name="depositAmount" class="form-control">
 			                        </div>
 			                    </div>
 			                </div>
 	            			<div class="col-md-4">
-	            				<b>보증금 상태</b>
+			                    <b>리뷰 코드</b>
 			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="depositState">
-		            					<option value="">====== 선택 ======</option>
-		            					<option value="입금 완료">입금 완료</option>
-		            					<option value="입금 미확인">입금 미확인</option>
-		            					<option value="기타">기타</option>
-		            				</select>
-		            			</div>
-	            			</div>
-	            			 <div class="col-md-4">
+			                        <div class="form-line">
+			                            <input type="text" id="reviewCode" name="reviewCode" class="form-control">
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="col-md-4">
 			                    <b>리뷰 카운트</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input type="text" id="reviewCount" name="reviewCount" class="form-control">
 			                        </div>
 			                    </div>
 			                </div>
-	            			<div class="col-md-4">
-								<div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-										담당자
-			                            <input type="text" class="form-control" th:value="${session.STAFF.staffName}">
-			                            <input type="hidden" id="staffCode" class="form-control" name="staffCode" th:value="${session.STAFF.staffCode}">
-			                        </div>
-								</div>
-            				</div>
-	            			<div class="col-md-4">
+	            		</div>
+	            		<div class="row">
+			                <div class="col-md-4">
 			                    <b>보증금 받은 날짜</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input type="Date" name="depositDate" class="form-control">
 			                        </div>
@@ -85,16 +90,24 @@
 			                </div>
 			                <div class="col-md-4">
 			                    <b>보증금 돌려주는 날짜</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input type="Date" name="depositReturnDate" class="form-control">
 			                        </div>
 			                    </div>
 			                </div>
-			                <div class="col-md-12 col-md-offset-1 p-t-10">
-			                	<button type="submit" class="btn btn-primary btn-lg">보증금  등록</button>
-			                </div>
-	            		</form>
+			                <div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										담당자
+			                            <input type="text" class="form-control" th:value="${session.STAFF.staffName}">
+			                            <input type="hidden" id="staffCode" class="form-control" name="staffCode" th:value="${session.STAFF.staffCode}">
+			                        </div>
+								</div>
+            				</div>
+	            		</div>
+			                <button type="submit" class="btn btn-block bg-amber waves-effect">보증금  등록</button>
+			            </form>
 		            </div>
 	            </div>
 	        </div>
@@ -123,14 +136,17 @@
 				console.log(JSON.stringify(data));
 				var memberId = '';
 				var reviewCount = '';
+				var reviewCode = '';
 				for(var i=0;i<data.length;i++){
 					if(type == data[i].memberId){
 						memberId += data[i].memberName;
 						reviewCount += data[i].reviewCount;
+						reviewCode += data[i].reviewCode;
 					}
 				}		
 				$('#memberName').val(memberId);
 				$('#reviewCount').val(reviewCount);
+				$('#reviewCode').val(reviewCode);
 			});
 			
 			request.fail(function( jqXHR, textStatus ) {

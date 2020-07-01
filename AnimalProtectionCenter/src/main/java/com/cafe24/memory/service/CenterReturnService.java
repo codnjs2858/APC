@@ -1,6 +1,7 @@
 package com.cafe24.memory.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,15 @@ public class CenterReturnService {
 	public CenterReturn selectCenterReturnCode(String centerReturnCode) {
 		
 		return centerReturnMapper.selectCenterReturnCode(centerReturnCode);
+	}
+	
+	public List<Map<String, Object>> selectPetTypeCount(){
+		
+		return centerReturnMapper.selectPetTypeCount();
+	}
+	
+	public List<CenterReturn> selectAnimalType(String animalType){
+		
+		return centerReturnMapper.selectAnimalType(animalType);
 	}
 }

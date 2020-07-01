@@ -19,57 +19,69 @@
 	                <h2>기프트 등록</h2>
 	            </div>
 	            <div class="body">
-	            	<div class="row clearfix">
-	            		<form action="gift/giftInsert" method="post">
-	            			<div class="col-md-2 col-md-offset-1">
-	            				<b>기프트 종류</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="giftType">
+	            	<div class="clearfix">
+	            		<form action="/gift/giftInsert" method="post">
+	            		<div class="row">
+	            			<div class="col-md-4">
+	            				<b>회원 아이디</b>
+			                    <div class="colorpicker colorpicker-element">
+		            				<select name="memberId" id="memberId" class="form-control">
 		            					<option value="">====== 선택 ======</option>
-		            					<option value="#">무료 예방 접종권</option>
-										<option value="#">사료 1kg</option>
-										<option value="#">3만원 상품권</option>
-		            				</select>
-		            			</div>
-	            			</div>	
-			                	<div class="col-md-4">
-			                    <b>입양인 이름</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="text" name="memberName" class="form-control">
-			                        </div>
-			                    </div>
-			                </div>
-			                <div class="col-md-4">
-			                    <b>기프트 이유</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="text" name="giftReason" class="form-control">
-			                        </div>
-			                    </div>
-			                </div>
-			                <div class="col-md-4">
-			                    <b>기프트 비용</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="text" name="giftCost" class="form-control">
-			                        </div>
-			                    </div>
-			                </div>
-			                <div class="col-md-2 col-md-offset-1">
-	            				<b>담당자</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="staffName">
-		            					<option value="">====== 선택 ======</option>
-		            					<option th:each="m : ${mlist}">[[${m}]]</option>
+		            					<option th:each="m : ${mList}" th:value="${m.memberId}">[[${m.memberId}]]</option>
 		            				</select>
 		            			</div>
 	            			</div>
-			                
-			                <div class="col-md-4 col-md-offset-1 p-t-10">
-			                	<button type="submit" class="btn btn-primary btn-lg">기프트  등록</button>
+	            			<div class="col-md-4">
+			                    <b>회원 이름</b>
+			                    <div class="input-group">
+			                        <div class="form-line">
+			                            <input name="memberName" id="memberName" class="form-control" readonly>
+			                        </div>
+			                    </div>
 			                </div>
-	            		</form>
+	            			<div class="col-md-4">
+	            				<b>기프트 종류</b>
+		                    	<div class="input-group">
+		            				<select name="giftType">
+		            					<option value="">====== 선택 ======</option>
+		            					<option value="무료 예방 접종권">무료 예방 접종권</option>
+										<option value="사료 1kg">사료 1kg</option>
+										<option value="3만원 상품권">3만원 상품권</option>
+										<option value="댕댕이 박스">댕댕이 박스</option>
+										<option value="냥냥이 박스">냥냥이 박스</option>
+		            				</select>
+	            				</div>
+	            			</div>
+	            		</div>
+	            		<div class="row">
+	            			<div class="col-md-4">
+			                    <b>기프트 주는 이유</b>
+		                    	<div class="input-group colorpicker colorpicker-element">
+		                        	<div class="form-line">
+		                            	<input type="text" name="giftReason" class="form-control">
+		                        	</div>
+		                    	</div>
+			                </div>
+			                <div class="col-md-4">
+			                    <b>기프트 비용</b>
+		                    	<div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+			                            <input type="text" name="giftCost" class="form-control">
+			                        </div>
+		                    	</div>
+			                </div>
+			                <div class="col-md-4">
+								<div class="input-group colorpicker colorpicker-element">
+			                        <div class="form-line">
+										담당자
+			                            <input type="text" class="form-control" th:value="${session.STAFF.staffName}">
+			                            <input type="hidden" id="staffCode" class="form-control" name="staffCode" th:value="${session.STAFF.staffCode}">
+			                        </div>
+								</div>
+            				</div>
+	            		</div>
+		                	<button type="submit" class="btn btn-block bg-amber waves-effect">기프트  등록</button>
+			            </form>
 		            </div>
 	            </div>
 	        </div>
@@ -80,6 +92,40 @@
 <th:block layout:fragment="customHeadScript">
 </th:block> 
 <th:block layout:fragment="customFooterScript">
+
+<script>
+	
+	$(function(){
+		
+		//회원 아이디로 회원 이름 가져오기
+		$('#memberId').change(function(){
+			var type = $(this).val();
+			var request = $.ajax({
+				url: "/ajax/memberType",
+				method: "POST",
+				data: { "type" : type },
+				dataType: "json"
+			});
+			request.done(function( data ) {
+				console.log(data);
+				var memberId = '';
+				
+				for(var i=0;i<data.length;i++){
+					if(type == data[i].memberId){
+						memberId += data[i].memberName;
+						
+					}
+				}		
+				$('#memberName').val(memberId);
+				
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});
+			});
+		});
+	});
+	
+	</script>
 </th:block>
  
 </html>

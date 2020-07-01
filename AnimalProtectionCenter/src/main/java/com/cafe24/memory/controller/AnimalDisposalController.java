@@ -48,12 +48,13 @@ public class AnimalDisposalController {
 			ac.setAnimalCenterNumber(send_num);
 			model.addAttribute("ac", ac);
 		}
+		model.addAttribute("AList", animalCenterService.selectNoDisposal());
 		return "animaldisposal/animalDisposalInsert";
 	}
 	@PostMapping("/animaldisposalinsert")
 	public String insertAnimalDisposal(AnimalDisposal disposal, AnimalCenter ac, Staff staff,CenterReturn centerReturn, Member member) {
-		disposal.setAnimalCneter(animalCenterService.selectNumCode(ac.getAnimalCenterNumber()));
 		disposal.setStaff(staff);
+		disposal.setAnimalCneter(ac);
 		if(member != null ) {
 			Adoptee adoptee = new Adoptee();
 			adoptee.setAdopteeCode(animalDisposalService.DisposalmemberId(member.getMemberId()));
@@ -63,6 +64,7 @@ public class AnimalDisposalController {
 			centerReturn.setCenterReturnCode(animalDisposalService.DisposalReturnCode(centerReturn.getCenterReturnName(),centerReturn.getCenterReturnPhone()));
 			disposal.setCenterReturn(centerReturn);
 		}
+		animalDisposalService.deleteProtectExitSpace(ac.getAnimalInsertCode());
 		animalDisposalService.insertAnimalDisposal(disposal);
 		return "redirect:/animaldisposal/animaldisposallist";
 	}
@@ -70,18 +72,21 @@ public class AnimalDisposalController {
 	
 	//animal disposal update
 	@GetMapping("/animaldisposalupdate")
-	public String updateAnimalDisposalForm() {
+	public String updateAnimalDisposalForm(@RequestParam(name="send_code", required = false) String send_code, Model model) {
+		model.addAttribute("ac", animalDisposalService.selectDisposal(send_code));
+		model.addAttribute("AList", animalCenterService.selectNoDisposal());
 		return "animaldisposal/animalDisposalUpdate";
 	}
 	@PostMapping("/animaldisposalupdate")
-	public String updateAnimalDisposal() {
+	public String updateAnimalDisposal(AnimalDisposal ad) {
 		return "redirect:/animaldisposal/animaldisposallist";
 	}
 
 	
 	//animal disposal delete
 	@GetMapping("/animaldisposaldelete")
-	public String deleteAnimalDisposal() {
+	public String deleteAnimalDisposal(@RequestParam(name="send_code", required = false) String send_code) {
+		animalDisposalService.deleteAnimalDisposal(send_code);
 		return "redirect:/animaldisposal/animaldisposallist";
 	}
 	

@@ -20,57 +20,65 @@
 	                <h2>회수 동물 등록</h2>
 	            </div>
 	            <div class="body">
-	            	<div class="row clearfix">
+	            	<div class="clearfix">
 	            		<form action="/withdrawalpet/withdrawalPetInsert" method="post">
-	            			<!-- 직원 세션 아이디, 코드 -->
-	            			<input type="hidden" name="staffCode" value="staff_code_1">
-	            			<div class="col-md-6">
-	            				<b>입양인 아이디</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="memberId" id="memberId" class="form-control">
-		            					<option value="">====== 선택 ======</option>
-		            					<option th:each="m : ${mList}" th:value="${m.memberId}">[[${m.memberId}]]</option>
-		            				</select>
+	            			<div class="row">
+		            			<div class="col-md-4">
+		            				<b>입양인 아이디</b>
+				                    <div class="input-group">
+			            				<select name="memberId" id="memberId" class="form-control">
+			            					<option value="">====== 선택 ======</option>
+			            					<option th:each="m : ${mList}" th:value="${m.memberId}">[[${m.memberId}]]</option>
+			            				</select>
+			            			</div>
+		            			</div>
+		            			<div class="col-md-4">
+				                    <b>입양인 이름</b>
+				                    <div class="input-group">
+				                        <div class="form-line">
+				                            <input name="memberName" id="memberName" class="form-control" readonly>
+				                        </div>
+				                    </div>
+				                </div>
+		            			<div class="col-md-4">
+		            				<b>동물 번호</b>
+				                    <div class="input-group">
+			            				<select name="animalInsertCode">
+			            					<option value="">====== 선택 ======</option>
+			            					<option th:each="ac : ${aniC}" th:value="${ac.animalInsertCode}">[[${ac.animalCenterNumber}]]</option>
+			            				</select>
+			            			</div>
 		            			</div>
 	            			</div>
-	            			<div class="col-md-6">
-			                    <b>입양인 이름</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input name="memberName" id="memberName" class="form-control" readonly>
-			                        </div>
-			                    </div>
-			                </div>
-	            			<div class="col-md-6">
-	            				<b>동물 번호</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-		            				<select name="animalInsertCode">
-		            					<option value="">====== 선택 ======</option>
-		            					<option th:each="ac : ${aniC}" th:value="${ac.animalInsertCode}">[[${ac.animalCenterNumber}]]</option>
-		            				</select>
-		            			</div>
+	            			<div class="row">
+				                <div class="col-md-4">
+				                    <b>회수 완료 날짜</b>
+				                    <div class="input-group colorpicker colorpicker-element">
+				                        <div class="form-line">
+				                            <input type="Date" name="withdrawalPetDate" class="form-control">
+				                        </div>
+				                    </div>
+				                </div>
+		            			<div class="col-md-4">
+				                    <b>회수 사유</b>
+				                    <div class="input-group colorpicker colorpicker-element">
+				                        <div class="form-line">
+				                            <input type="text" name="withdrawalPetReason" class="form-control">
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class="col-md-4">
+									<div class="input-group">
+				                        <div class="form-line">
+											담당자
+				                            <input type="text" class="form-control" th:value="${session.STAFF.staffName}">
+				                            <input type="hidden" id="staffCode" class="form-control" name="staffCode" th:value="${session.STAFF.staffCode}">
+				                        </div>
+									</div>
+	            				</div>
 	            			</div>
-			                <div class="col-md-6">
-			                    <b>회수 완료 날짜</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="Date" name="withdrawalPetDate" class="form-control">
-			                        </div>
-			                    </div>
-			                </div>
-	            			<div class="col-md-12">
-			                    <b>회수 사유</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="text" name="withdrawalPetReason" class="form-control">
-			                        </div>
-			                    </div>
-			                </div>
-			                
-			                <div class="col-md-3 col-md-offset-1 p-t-10">
-			                	<button type="submit" class="btn btn-primary btn-lg">회수동물  등록</button>
-			                </div>
-	            		</form>
+		                	<button type="submit" class="btn btn-block bg-amber waves-effect">회수동물  등록</button>
+			            </form>
 		            </div>
 	            </div>
 	        </div>

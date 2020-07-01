@@ -26,14 +26,16 @@ public class ImplementController {
 	private ImplementService impleMentServer;
 	
 	@PostMapping("/implementList")
-	public String implement() {
+	public String implementList() {
 		
 		return "implement/implementList";
 	}
 	
 	@GetMapping("/implementList")
-	public String implement(Model model) {
+	public String implementList(Model model) {
 		List<Implement> impleList = impleMentServer.selectImplement();
+		
+		// 사용량을 확인하고 update 를 함
 		Implement im = null;
 		for(int i = 0; i < impleList.size(); i++) {
 			im = impleList.get(i);
@@ -48,6 +50,7 @@ public class ImplementController {
 	@PostMapping("/implementUpdate")
 	public String implementUpdate(Implement implement) {
 		logger.info("시설 수정 화면에서 보낸 시설 {}", implement);
+		implement.setBuyAmount(implement.getImplementReceiptCount());
 		int result = impleMentServer.modifyImplement(implement);
 		logger.info("시설 수정 처리 결과값 {}", result);
 		
@@ -65,6 +68,16 @@ public class ImplementController {
 		return "implement/implementUpdate";
 	}
 	
+	@PostMapping("/implementInsert")
+	public String implementInsert(Implement implement) {
+		implement.setImplementAmount(implement.getImplementReceiptCount());
+		implement.setImplementRemain(implement.getImplementReceiptCount());
+		logger.info("시설등록에서 보낸 implement {}", implement);
+		impleMentServer.insertImplement(implement);
+		
+		return "redirect:/implement/implementList";
+	}
+	
 	@GetMapping("/implementInsert")
 	public String implementInsert() {
 		
@@ -73,7 +86,8 @@ public class ImplementController {
 	
 	@GetMapping("/implementDelete")
 	public String implementDelete(@RequestParam(name = "implementCode", required = false) String implementCode) {
-		logger.info("implementCode {}", implementCode);
+		logger.info("삭제 버튼 클릭시 보내는 시설 코드 implementCode {}", implementCode);
+		impleMentServer.deleteImplement(implementCode);
 		
 		return "redirect:/implement/implementList";
 	}

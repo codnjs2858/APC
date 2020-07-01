@@ -28,7 +28,7 @@
 							<div class="row">
 				      			<div class="col-md-6">
 				      				<b>회원 아이디</b>
-					                <div class="input-group colorpicker colorpicker-element">
+					                <div class="input-group">
 					                    <div class="form-line">
 					                        <input type="text" name="memberId" class="form-control" th:value="${RVL.member.memberId}" readonly>
 					                    </div>
@@ -36,56 +36,54 @@
 				      			</div>
 				      			<div class="col-md-6">
 				      				<b>회원 이름</b>
-					                <div class="input-group colorpicker colorpicker-element">
+					                <div class="input-group">
 					                    <div class="form-line">
 					                        <input type="text" name="memberName" class="form-control" th:value="${RVL.member.memberName}" readonly>
 					                    </div>
 					       			</div>
 				      			</div>
-				      		</div>
-		                	<div class="col-md-4">
-				           		<b>후기 등록 횟수</b>
-				           		<div class="input-group">
-					           		<select class="form-control" name="reviewCount">
-					           			<option value="">====== 선택 ======</option>
-					           			<option value="1회 완료" th:selected="(${RVL.reviewCount} == '1회 완료')">1회 완료</option>
-		            					<option value="2회 완료" th:selected="(${RVL.reviewCount} == '2회 완료')">2회 완료</option>
-		            					<option value="3회 완료" th:selected="(${RVL.reviewCount} == '3회 완료')">3회 완료</option>
-		            					<option value="4회 완료" th:selected="(${RVL.reviewCount} == '4회 완료')">4회 완료</option>
-		            					<option value="5회 완료" th:selected="(${RVL.reviewCount} == '5회 완료')">5회 완료</option>
-		            					<option value="후기 완료!" th:selected="(${RVL.reviewCount} == '후기 완료!')">후기 완료!</option>
-		            				</select>
-				           		</div>
+				      			<div class="col-md-4">
+				           			<b>후기 등록 횟수</b>
+					           		<div class="input-group">
+						           		<select class="form-control" name="reviewCount">
+						           			<option value="">====== 선택 ======</option>
+						           			<option value="1회 완료" th:selected="(${RVL.reviewCount} == '1회 완료')">1회 완료</option>
+			            					<option value="2회 완료" th:selected="(${RVL.reviewCount} == '2회 완료')">2회 완료</option>
+			            					<option value="3회 완료" th:selected="(${RVL.reviewCount} == '3회 완료')">3회 완료</option>
+			            					<option value="4회 완료" th:selected="(${RVL.reviewCount} == '4회 완료')">4회 완료</option>
+			            					<option value="5회 완료" th:selected="(${RVL.reviewCount} == '5회 완료')">5회 완료</option>
+			            					<option value="후기 완료!" th:selected="(${RVL.reviewCount} == '후기 완료!')">후기 완료!</option>
+			            				</select>
+					           		</div>
+		           				</div>
+			           			<div class="col-md-4">
+					           		<b>등록 누락 횟수</b>
+					           		<div class="input-group">
+						           		<select class="form-control" name="reviewOmissionCount">
+						           			<option value="">====== 선택 ======</option>
+						           			<option value="1회 누락" th:selected="(${RVL.reviewOmissionCount} == '1회 누락')">1회 누락</option>
+			            					<option value="2회 누락" th:selected="(${RVL.reviewOmissionCount} == '2회 누락')">2회 누락</option>
+			            					<option value="회수 조치!" th:selected="(${RVL.reviewOmissionCount} == '회수 조치!')">회수 조치!</option>
+			            				</select>
+					           		</div>
+					           	</div>	
+					           	<div class="col-md-4">
+				                    <b>후기 관리 기간</b>
+				                    <div class="input-group">
+				                        <div class="form-line">
+				                            <input type="Date" name="reviewManagementPeriod" th:value="${RVL.reviewManagementPeriod}" class="form-control">
+				                        </div>
+				                    </div>
+				                </div>
 		           			</div>
-		           			<div class="col-md-4">
-				           		<b>등록 누락 횟수</b>
-				           		<div class="input-group">
-					           		<select class="form-control" name="reviewOmissionCount">
-					           			<option value="">====== 선택 ======</option>
-					           			<option value="1회 누락" th:selected="(${RVL.reviewOmissionCount} == '1회 누락')">1회 누락</option>
-		            					<option value="2회 누락" th:selected="(${RVL.reviewOmissionCount} == '2회 누락')">2회 누락</option>
-		            					<option value="회수 조치!" th:selected="(${RVL.reviewOmissionCount} == '회수 조치!')">회수 조치!</option>
-		            				</select>
-				           		</div>
-				           	</div>	
-				           	<div class="col-md-4">
-			                    <b>후기 관리 기간</b>
-			                    <div class="input-group colorpicker colorpicker-element">
-			                        <div class="form-line">
-			                            <input type="Date" name="reviewManagementPeriod" th:value="${RVL.reviewManagementPeriod}" class="form-control">
-			                        </div>
-			                    </div>
-			                </div>
 		           		</div>
-		           	</div>
-           		</div>
-				 <div class="body">
-	            	<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">후기 관리 수정</button>
-	            </div>
+           			</div>
+				 	<div class="body">
+	            		<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">후기 관리 수정</button>
+	            	</div>
 	            </form>	
 	      		</div>	
 			</div>
-		</div>	
 	</section>
 </th:block> 
 

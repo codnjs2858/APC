@@ -10,6 +10,7 @@ public class Implement {
 	private int implementPrice;
 	private String staffCode;
 	private String implementRegDate;
+	private int buyAmount;
 	public String getImplementCode() {
 		return implementCode;
 	}
@@ -63,6 +64,12 @@ public class Implement {
 	}
 	public void setImplementRegDate(String implementRegDate) {
 		this.implementRegDate = implementRegDate;
+	}
+	public int getBuyAmount() {
+		return buyAmount;
+	}
+	public void setBuyAmount(int buyAmount) {
+		this.buyAmount = buyAmount;
 	}
 	@Override
 	public String toString() {

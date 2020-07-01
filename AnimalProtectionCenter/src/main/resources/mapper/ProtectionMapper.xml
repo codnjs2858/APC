@@ -167,19 +167,20 @@
 	<!-- 보호공간을 갖고 있지 않는 객체 찾음 -->
 	<select id="selectAnimalHaveNotSpace" resultMap="psResultMap">
 		SELECT 
-			 i.animal_insert_code
-			,i.animal_center_number
-			,i.animal_picture
-			,i.animal_gender
-			,i.animal_age
-			,i.animal_weight
-			,i.animal_character
-			,i.animal_state
-			,i.animal_insert_reg_date
-			,i.animal_type_code
-			,i.staff_code
+		*
 		FROM 
-			tb_animal_insert AS i 
+			(
+			SELECT
+				 i.animal_insert_code 
+				,i.animal_center_number
+			FROM
+				tb_animal_insert AS i
+				left JOIN 
+				tb_animal_disposal AS d 
+				ON i.animal_insert_code = d.animal_insert_code
+			WHERE 
+				d.animal_disposal_code IS NULL
+			) AS i
 			LEFT JOIN
 			tb_animal_protect AS p
 			ON

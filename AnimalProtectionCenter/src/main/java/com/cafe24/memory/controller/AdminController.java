@@ -23,6 +23,11 @@ public class AdminController {
 		return "index";
 	}
 	
+	@PostMapping("/admin")
+	public String admin(Model model) {
+		return "admin/admin";
+	}
+	
 	@GetMapping("/admin")
 	public String admin() {
 		return "admin/admin";

@@ -36,23 +36,28 @@ public class CompanionAnimalRegisterService {
 	}
 	
 	public int insertCompanionAnimalRegister(CompanionAnimalRegister cAniReg) {
+		
+		if("".equals(cAniReg.getCompanionRegisterDate())) {
+			cAniReg.setCompanionRegisterDate(null);
+		}if("".equals(cAniReg.getCancleCompanionInDate())) {
+			cAniReg.setCancleCompanionInDate(null);
+		}
 	  
-		int result = companionAnimalRegisterMapper.insertCompanionAnimalRegister(cAniReg);
-	  
-		return result;
-	  
+		return companionAnimalRegisterMapper.insertCompanionAnimalRegister(cAniReg);
 	}
 	
 	public int updateCompanionAnimalRegister(CompanionAnimalRegister cAniReg) {
 		
-		System.out.println(cAniReg + "<<<service+cAniReg");
-		int result = companionAnimalRegisterMapper.updateCompanionAnimalRegister(cAniReg);
-		
-		return result;
-		
+		if("".equals(cAniReg.getCompanionRegisterDate())) {
+			cAniReg.setCompanionRegisterDate(null);
+		}if("".equals(cAniReg.getCancleCompanionInDate())) {
+			cAniReg.setCancleCompanionInDate(null);
+		}
+		return companionAnimalRegisterMapper.updateCompanionAnimalRegister(cAniReg);
 	}
 	
 	public AnimalCenter selectCenterAnimal(String send_code){
+		
 		return animalCenterMapper.selectCenterAnimal(send_code);
 	}
 	

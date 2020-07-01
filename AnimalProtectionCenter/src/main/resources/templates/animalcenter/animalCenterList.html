@@ -85,14 +85,14 @@
 			                            	[[${proNum[i.index]}]]
 		                            	</div>
 	                            	</td>
-		                            <td th:if="${disResult[i.index]} == null">
+		                            <td th:if="${ac.animalDisposal} == null">
 		                            	<div class="align-center">
 			                            	<a th:href="@{/animaldisposal/animaldisposalinsert(send_code=${ac.animalInsertCode},send_num=${ac.animalCenterNumber})}">처리등록</a>
 		                            	</div>
 		                            </td>
-		                            <td th:unless="${disResult[i.index]} == null">
+		                            <td th:unless="${ac.animalDisposal} == null">
 		                            	<div class="align-center">
-			                            	[[${disResult[i.index]}]]
+			                            	[[${ac.animalDisposal.animalDisposalResult}]]
 		                            	</div>
 	                            	</td>
 	                      			<td>

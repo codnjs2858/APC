@@ -1,4 +1,5 @@
 $(function () {
+	
     $('#form_validation').validate({
         rules: {
             'checkbox': {
@@ -6,6 +7,9 @@ $(function () {
             },
             'gender': {
                 required: true
+            },
+            'animalCenterNumber':{
+            	required: true
             }
         },
         highlight: function (input) {

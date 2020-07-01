@@ -22,6 +22,14 @@ public class ImplementService {
 	@Autowired
 	ImplementMapper implementMapper;
 	
+	public int insertImplement(Implement implement) {
+		return implementMapper.insertImplement(implement);
+	}
+	
+	public int deleteImplement(String implementCode) {
+		return implementMapper.deleteImplement(implementCode);
+	}
+	
 	public Map<String, Object> selectImplementUseCountByCode(String implementCode){
 		return implementMapper.selectImplementUseCountByCode(implementCode);
 	}
@@ -33,23 +41,25 @@ public class ImplementService {
 	public int modifyImplement(Implement implement) {
 		int amount = implement.getImplementAmount();
 		int remainAmount = implement.getImplementRemain();
-		int receiptAmount = implement.getImplementReceiptCount();
+		int buyAmount = implement.getBuyAmount();
 		int breakageAmount = implement.getImplementBreakageAmount();
 		
 		//List<Map<String, Integer>> impleUseCnt = selectImplementUseCount(implement.getImplementCode());
 		Map<String, Object> impleUseCnt = selectImplementUseCountByCode(implement.getImplementCode());
 		
-		String useCode = (String) impleUseCnt.get("implementCode");
-		long useCnt = (long) impleUseCnt.get("cnt");
+		if(impleUseCnt != null) {
+			String useCode = (String) impleUseCnt.get("implementCode");
+			long useCnt = (long) impleUseCnt.get("cnt");			
+			logger.info("시설 사용과 사용량 {}", impleUseCnt);
+			logger.info("사용중인 시설 {}", useCode);
+			logger.info("사용중인 시설의 사용량 {}", useCnt);
+			
+			implement.setImplementAmount(amount + buyAmount);
+			implement.setImplementRemain(remainAmount + buyAmount);
+			implement.setImplementRemain(amount - breakageAmount - (int)useCnt);
+			implement.setBuyAmount(0);		
+		}
 		
-		logger.info("시설 사용과 사용량 {}", impleUseCnt);
-		logger.info("사용중인 시설 {}", useCode);
-		logger.info("사용중인 시설의 사용량 {}", useCnt);
-		
-		implement.setImplementAmount(amount + receiptAmount);
-		implement.setImplementRemain(remainAmount + receiptAmount);
-		
-		implement.setImplementRemain(amount - breakageAmount - (int)useCnt);
 		
 		return updateImplement(implement);
 	}

@@ -105,4 +105,27 @@
 		WHERE 
 			center_return_code=#{centerReturnCode};
 	</delete>
+	
+	<!-- 동물 갯수 찾기 -->
+	<select id="selectPetTypeCount" resultType="Map">
+		SELECT 
+			c.animal_type		as animalType,
+			COUNT(c.animal_type)	as animalCount
+		FROM 
+			tb_center_return AS c
+		GROUP BY c.animal_type;
+	</select>
+	
+	<!-- 동물 타입으로 리스트 검색 -->
+	
+	<select id="selectAnimalType" parameterType="String" resultMap="centerReturn">
+		SELECT 
+			*
+		FROM 
+			tb_center_return
+		WHERE
+			animal_type=#{animalType}
+		ORDER BY CAST(SUBSTR(center_return_code,5) AS DECIMAL) DESC;
+	
+	</select>
 </mapper>	

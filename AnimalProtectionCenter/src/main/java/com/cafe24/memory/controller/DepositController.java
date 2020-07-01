@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.memory.domain.Deposit;
 import com.cafe24.memory.domain.Member;
@@ -32,6 +33,16 @@ public class DepositController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@GetMapping("/depositDelete")
+	public String depositDelete(@RequestParam(name="depositCode" ,required = false)
+								String depositCode, Model model){
+		
+		depositService.deleteDeposit(depositCode);
+		
+		return "redirect:/deposit/depositList";
+									
+	}
 	
 	@PostMapping("/depositInsert")
 	public String depositInsert(Deposit deposit, Staff staff, Member member, Review review) {
@@ -63,17 +74,21 @@ public class DepositController {
 	}
 	
 	@GetMapping("/depositUpdate")
-	public String depositUpdate() {
-			
-			
+	public String depositUpdate(@RequestParam(name="depositCode" ,required = false)
+								String depositCode, Model model) {
+		
+		Deposit deposit = depositService.selectDepositCode(depositCode);	
+		model.addAttribute("DP", deposit);
+		
+		logger.info("deposit << {}", deposit);
 		return "deposit/depositUpdate";
 	}
 	
 	@PostMapping("/depositUpdate")
-	public String depositUpdate(Model model) {
+	public String depositUpdate(Deposit deposit) {
 		
-		return "deposit/depositList";
+		depositService.updateDeposit(deposit);
+		
+		return "redirect:/deposit/depositList";
 	}
-	
-	
 }

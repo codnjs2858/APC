@@ -47,7 +47,6 @@
 	                        <thead>
 		                            <tr role="row">
 		                            	<th></th>
-		                            	<th><div class="align-center">입양인 코드</div></th>
 		                            	<th><div class="align-center">아이디</div></th>
 		                            	<th><div class="align-center">이름</div></th>
 		                            	<th><div class="align-center">주소</div></th>
@@ -60,8 +59,7 @@
 	                        <tbody>
 			                        <tr th:each="ADTL, i : ${ADTL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${ADTL.adopteeCode}]]</td>
-		                                <td><div class="align-center"></div>[[${ADTL.member.memberId}]]</td>
+		                              	 <td><div class="align-center"></div>[[${ADTL.member.memberId}]]</td>
 		                               	<td><div class="align-center"></div>[[${ADTL.member.memberName}]]</td>
 		                               	<td><div class="align-center"></div>[[${ADTL.member.memberAddr}]]</td>
 		                               	<td><div class="align-center"></div>[[${ADTL.member.memberPhone}]]</td>

@@ -29,7 +29,12 @@
 				      				<div class="input-group">
 						           		<select class="form-control" name="animalInsertCode">
 						           			<option value="">------ 동물 번호 선택 ------</option>
-						           			<option th:each="AList : ${AList}" th:value="${AList.animalInsertCode}">[[${AList.animalCenterNumber}]]</option>
+						           			<th:block th:if="${send_code} == null">
+						           				<option th:each="AList : ${AList}" th:value="${AList.animalInsertCode}">[[${AList.animalCenterNumber}]]</option>
+						           			</th:block>
+						           			<th:block th:if="${send_code} != null">
+						           				<option th:each="AList : ${AList}" th:value="${AList.animalInsertCode}" th:selected="(${AList.animalInsertCode == send_code})">[[${AList.animalCenterNumber}]]</option>
+						           			</th:block>
 						           		</select>
 					           		</div>
 				      			</div>

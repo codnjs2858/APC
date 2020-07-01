@@ -3,7 +3,8 @@
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/default2}">
 <th:block layout:fragment="customCss">
-
+	<!-- Bootstrap Select Css -->
+    <link href="/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 </th:block>
 
 <th:block layout:fragment="customTitle">
@@ -26,13 +27,13 @@
 							<div class="row">
 				      			<div class="col-md-3">
 				      				<b>동물번호</b>
-					                <div class="input-group colorpicker colorpicker-element">
-					                    <div class="form-line">
-					                    	<input type="hidden" name="animalHealthCode" th:value="${hinfo.animalHealthCode}">
-					                        <input th:if="${hinfo.animalHealthResult} == null" type="text" name="animalCenterNumber" class="form-control" th:value="${hinfo.animalCenter.animalCenterNumber}">
-					                        <input th:unless="${hinfo.animalHealthResult} == null" type="text" name="animalCenterNumber" class="form-control" th:value="${hinfo.animalCenter.animalCenterNumber}" readonly="readonly">
-					                    </div>
-					       			</div>
+				      				<div class="input-group">
+				                    	<input type="hidden" name="animalHealthCode" th:value="${hinfo.animalHealthCode}">
+						           		<select class="form-control" name="animalInsertCode">
+						           			<option value="">------ 동물 번호 선택 ------</option>
+					           				<option th:each="AList : ${AList}" th:value="${AList.animalInsertCode}" th:selected="(${AList.animalInsertCode == hinfo.animalCenter.animalInsertCode})">[[${AList.animalCenterNumber}]]</option>
+						           		</select>
+					           		</div>
 				      			</div>
 				      			<div class="col-md-3 col-md-offset-1">
 				      				<b>담당자</b>

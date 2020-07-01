@@ -34,6 +34,14 @@
 		</association>
 	</resultMap>
 	
+	<delete id="deleteAnimalDisposal">
+		DELETE FROM tb_animal_disposal WHERE animal_disposal_code=#{send_code};
+	</delete>
+	
+	<delete id="deleteProtection" parameterType="String">
+		DELETE p FROM tb_animal_protect AS p WHERE p.animal_insert_code = #{send_code};
+	</delete>
+	
 	<select id="DisposalReturnCode" resultType="String">
 		SELECT
 			center_return_code
