@@ -138,33 +138,38 @@ public class AnimalCenterController {
 			@RequestParam(name="send_code", required = false) String send_code, Model model) {
 		AnimalCenter ac = animalCenterService.selectCenterAnimal(send_code);
 		model.addAttribute("aInfo", ac);
-		model.addAttribute("sInfo",animalCenterService.selectReportCodeAnimal(send_code));
-		model.addAttribute("hlist", animalHealthService.selectAnimalHealthInfo(send_code));
-		AnimalDisposal ad = animalDisposalService.selectDisposal(send_code);
-		model.addAttribute("dlist", ad );
 		model.addAttribute("aniPicture", "/files/" + ac.getAnimalPicture());
+		model.addAttribute("hlist", animalHealthService.selectAnimalHealthInfo(send_code));
+		model.addAttribute("sInfo",animalCenterService.selectReportCodeAnimal(send_code));
 		
-		//데이트 포맷
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date adopteeDate = null; 
-		Date returnDate = null;
-		if(ad.getAdoptee() != null) {
-			adopteeDate =  ad.getAdoptee().getAdopteeDate();
+		//처리
+		try {
+			AnimalDisposal ad = animalDisposalService.selectDisposal(send_code);
+			model.addAttribute("dlist", ad );
+			//데이트 포맷
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date adopteeDate = null; 
+			Date returnDate = null;
+			if(ad.getAdoptee() != null) {
+				adopteeDate =  ad.getAdoptee().getAdopteeDate();
+			}
+			if(ad.getCenterReturn() != null) {
+				returnDate =  ad.getCenterReturn().getCenterReturnDate();
+			}
+			String add = null;
+			String rdd = null;
+			if(adopteeDate != null) {
+				add =  format.format(adopteeDate);
+			}
+			if(returnDate != null) {
+				rdd =  format.format(returnDate);
+			}
+			model.addAttribute("adopteeDate",add);
+			model.addAttribute("returnDate",rdd);
+			
+		}catch (Exception e) {
+			System.out.println("4");
 		}
-		if(ad.getCenterReturn() != null) {
-			returnDate =  ad.getCenterReturn().getCenterReturnDate();
-		}
-		String add = null;
-		String rdd = null;
-		if(adopteeDate != null) {
-			add =  format.format(adopteeDate);
-		}
-		if(returnDate != null) {
-			rdd =  format.format(returnDate);
-		}
-		model.addAttribute("adopteeDate",add);
-		model.addAttribute("returnDate",rdd);
-		 
 		return "animalcenter/animalCenterPage";
 	}
 	

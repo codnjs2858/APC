@@ -8,7 +8,7 @@
 </th:block> 
 <th:block layout:fragment="customCss">
 	<!-- Multi Select Css -->
-	<link href="../../plugins/multi-select/css/multi-select.css" rel="stylesheet">
+	<link href="/plugins/multi-select/css/multi-select.css" rel="stylesheet">
     <!-- Bootstrap Select Css -->
     <link href="/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
     <style>
@@ -30,6 +30,11 @@
 			opacity: 1;
 		}
     </style>
+</th:block>
+<th:block layout:fragment="customHeadScript">
+	<!-- sweet alert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </th:block>
 <th:block layout:fragment="customContents">
 	<section class="content">
@@ -56,6 +61,9 @@
 				           			<div class="m-t-20">
 					           			<button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#largeModal">신고 코드 찾기</button>
 				           			</div>
+				           			<div class="m-t-20">
+					           			<button type="button" id="test" class="btn btn-default waves-effect m-r-20">신고 코드 테스트2</button>
+				           			</div>
 				           		</div>
 				           	</div>
 				           	<div class="header">
@@ -77,15 +85,15 @@
 				           			<div class="col-xs-4 col-md-4">
 						           		<b>동물 번호</b>
 										<div class="input-group">
-							           		<div class="form-line m-t-10">
-								           		<input type="text" name="animalCenterNumber" class="form-control onlyNumber" required oninvalid="this.setCustomValidity('동물 번호를 입력하세요.')">
+							           		<div class="form-line m-t-10 error">
+								           		<input type="text" name="animalCenterNumber" class="form-control onlyNumber">
 							           		</div>
 						           		</div>
 				           			</div>
 				           			<div class="col-sm-4 m-t-10">
 						           		<b>축종</b>
 						           		<div class="input-group">
-							           		<select id="selectType" class="form-control" required oninvalid="this.setCustomValidity('축종을 선택하세요')">
+							           		<select id="selectType" class="form-control" required>
 							           			<option value="">----축종 선택----</option>
 							           			<option value="강아지">강아지</option>
 							           			<option value="고양이">고양이</option>
@@ -96,7 +104,7 @@
 				           			<div class="col-sm-4 m-t-10">
 						           		<b>품종</b>
 						           		<div class="input-group">
-							           		<select id="subType" name="animalTypeCode" class="form-control">
+							           		<select id="subType" name="animalTypeCode" class="form-control" required autofocus>
 							           			<option value="">----축종을 선택해 주세요----</option>
 							           		</select>
 						           		</div>
@@ -108,7 +116,7 @@
 						           		<div class="input-group">
 						           			<div class="col-sm-6">
 								           		<div class="form-line">
-									           		<input type="text" name="animalAge" class="form-control onlyNumber">
+									           		<input type="text" name="animalAge" class="form-control onlyNumber" required>
 								           		</div>
 						           			</div>
 							           		<div class="col-sm-3">
@@ -150,7 +158,7 @@
 				           			</div>
 				           		</div>
 				           		<b>특징</b>
-				           		<textarea rows="3" name="animalCharacter" class="form-control"></textarea>
+				           		<textarea rows="3" name="animalCharacter" class="form-control" required></textarea>
 				           	</div>
 				           	<div class="body button-demo js-modal-buttons">
 				           		<input type="submit" class="btn bg-amber btn-block btn-lg waves-effect" value="보호 동물 센터 등록">
@@ -222,11 +230,13 @@
 	</div>
 </th:block> 
 
-<th:block layout:fragment="customHeadScript">
-</th:block> 
+ 
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
+			
+			
+			
 			//이미지 미리보기
 			function readURL(input) {
 		        if (input.files && input.files[0]) {
@@ -320,7 +330,18 @@
 	                $(this).val(inputVal.replace(/[^0-9]/gi,''));
 	            }
 	        });
-    		
+			
+			$('#test').click(function(){
+				swal({
+					  content: {
+					    element: "input",
+					    attributes: {
+					      placeholder: "Type your password",
+					      type: "password",
+					    },
+					  },
+					});
+			});
 		});
 	</script>
 </th:block>

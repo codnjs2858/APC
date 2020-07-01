@@ -9,6 +9,8 @@ import com.cafe24.memory.domain.AnimalDisposal;
 @Mapper
 public interface AnimalDisposalMapper {
 	
+	public int updateAnimalDisposal(AnimalDisposal disposal);
+	
 	/**
 	 * 동물 코드로 보고관리 삭제
 	 * @param send_code

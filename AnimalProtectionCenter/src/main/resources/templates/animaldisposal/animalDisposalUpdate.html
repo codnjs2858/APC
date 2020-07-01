@@ -20,11 +20,11 @@
 				<div class="header">
 					<h2>동물 처리 수정</h2>
 				</div>
-				<form action="/animaldisposal/animaldisposalupdate" method="post" id="disposalForm">
+				<form action="/animaldisposal/animaldisposalupdate" method="post">
 				<div class="body">
 					<div class="clearfix">
 							<div class="row">
-				      			<div class="col-md-3">
+				      			<div class="col-md-4">
 				      				<b>동물번호</b>
 				      				<input type="hidden" name="animalDisposalCode" th:value="${ac.animalDisposalCode}">
 				      				<div class="input-group">
@@ -35,7 +35,7 @@
 						           		</select>
 					           		</div>
 				      			</div>
-				      			<div class="col-md-3 col-md-offset-1">
+				      			<div class="col-md-4">
 				      				<b>담당자</b>
 					                <div class="input-group">
 					                    <div class="form-line">
@@ -44,7 +44,7 @@
 					                    </div>
 					       			</div>
 				      			</div>
-				      			<div class="col-md-3 col-md-offset-1">
+				      			<div class="col-md-4">
 				      				<b>등록 일자</b>
 					                <div class="input-group">
 					                    <div class="form-line">
@@ -67,14 +67,61 @@
 					           		</div>
 			           			</div>
 			           			<div id="reContents">
-			           			
+			           				<th:block th:if="${ac.animalDisposalResult == '입양'}">
+			           					<div class="col-md-4">
+			           						<b>입양인 아이디</b>
+			           						<div class="input-group">
+			           							<div class="form-line">
+			           								<input type="text" name="memberId" class="form-control" th:value="${ac.adoptee.member.memberId}">
+			           							</div>
+			           						</div>
+			           					</div>
+			           				</th:block>
+			           				<th:block th:if="${ac.animalDisposalResult == '반환'}">
+			           					<div class="col-md-4">
+			           						<b>반환인 이름</b>
+				           					<div class="input-group">
+			           							<div class="form-line">
+			           								<input type="text" name="centerReturnName" class="form-control" th:value="${ac.centerReturn.centerReturnName}">
+			           							</div>
+			           						</div>
+			           					</div>
+			           					<div class="col-md-4">
+			           						<b>반환인 연락처</b>
+				           					<div class="input-group">
+			           							<div class="form-line">
+			           								<input type="text" name="centerReturnPhone" class="form-control" th:value="${ac.centerReturn.centerReturnPhone}">
+			           							</div>
+			           						</div>
+			           					</div>
+			           				</th:block>
+			           				<th:block th:if="${ac.animalDisposalResult == '방사'}">
+			           					<div class="col-md-4">
+			           						<b>방사 지역,정보</b>
+				           					<div class="input-group">
+			           							<div class="form-line">
+			           								<input type="text" name="animalDisposalPastureInfo" class="form-control" th:value="${ac.animalDisposalPastureInfo}">
+			           							</div>
+			           						</div>
+			           					</div>
+			           				</th:block>
+			           				<th:block th:if="${ac.animalDisposalResult == '안락사,폐사'}">
+			           					<div class="col-md-4">
+			           						<b>안락사,폐사 사유</b>
+				           					<div class="input-group">
+			           							<div class="form-line">
+			           								<input type="text" name="animalDisposalDieInfo" class="form-control" th:value="${ac.animalDisposalDieInfo}">
+			           							</div>
+			           						</div>
+			           					</div>
+			           				</th:block>
 			           			</div>
 							</div>
 		           		</div>
 				</div>
 						
 	            <div class="body">
-	            	<button type="button" id="DisInBtn" class="btn bg-amber btn-block btn-lg waves-effect">동물 처리 수정</button>
+	            	<input type="submit" class="btn bg-amber btn-block btn-lg waves-effect" value="동물 처리 수정">
 	            </div>
 	      		</form>
 	      		</div>
@@ -120,18 +167,6 @@
 				}
 				html += '</div></div></div>';
 				$('#reContents').html(html);
-			});
-			
-			//유효성 검사
-			$('#DisInBtn').click(function(){
-				/* var animalNum= $('input[name=animalCenterNumber]').val();
-				var disposalResult= $('input[name=animalDisposalResult]').val();
-				if( animalNum == null || animalNum == ""){
-					alert("동물 번호를 입력 하세요.");
-					return;
-				} */
-				$('#disposalForm').submit();
-				
 			});
 		});
 	</script>

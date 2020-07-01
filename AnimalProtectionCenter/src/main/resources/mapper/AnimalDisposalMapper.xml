@@ -62,6 +62,38 @@
 		ORDER BY COUNT(*)
 	</select>
 	
+	<update id="updateAnimalDisposal" parameterType="AnimalDisposal">
+		UPDATE tb_animal_disposal
+		SET
+			animal_insert_code=#{animalCneter.animalInsertCode},
+			animal_disposal_result=#{animalDisposalResult},
+			<if test="animalDisposalPastureInfo != null and animalDisposalPastureInfo !=''.toString()">
+				 animal_disposal_pasture_info=#{animalDisposalPastureInfo}
+				,animal_disposal_die_info = null
+				,adoptee_code = null
+				,center_return_code = null
+			</if>
+			<if test="animalDisposalDieInfo != null and animalDisposalDieInfo !=''.toString()">
+				 animal_disposal_pasture_info = null
+				,animal_disposal_die_info=#{animalDisposalDieInfo}
+				,adoptee_code = null
+				,center_return_code = null
+			</if>
+			<if test="adoptee.adopteeCode != null and adoptee.adopteeCode !=''.toString()">
+				 animal_disposal_pasture_info = null
+				,animal_disposal_die_info = null
+				,adoptee_code=#{adoptee.adopteeCode}
+				,center_return_code = null
+			</if>
+			<if test="centerReturn.centerReturnCode != null and centerReturn.centerReturnCode !=''.toString()">
+				 animal_disposal_pasture_info = null
+				,animal_disposal_die_info = null
+				,adoptee_code = null
+				center_return_code=#{centerReturn.centerReturnCode}
+			</if>
+		WHERE animal_disposal_code=#{animalDisposalCode}
+	</update>
+	
 	<insert id="insertAnimalDisposal" parameterType="AnimalDisposal">
 		<selectKey order="BEFORE" keyProperty="animalDisposalCode" resultType="String">
 			SELECT
