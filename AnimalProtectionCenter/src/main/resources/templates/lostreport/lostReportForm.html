@@ -19,7 +19,37 @@
 
 	<script type="text/javascript" src="/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript">
-	
+	$(document).ready(function(){
+  		
+  		
+  		$(document).on('click','#cancel',function(){
+  			$('#form_validation').attr('action','/reportlist/cacelSearchReport');
+
+		});
+		//품종 선택 ajax
+		$('#animalType').change(function(){
+			var type = $(this).val();
+			var request = $.ajax({
+				url: "/ajax/animalcentertype",
+				method: "POST",
+				data: { "type" : type },
+				dataType: "json"
+			});
+			request.done(function( msg ) {
+				console.log(msg);
+				var html='<option value="">----품종을 선택해 주세요----</option>';
+				for(var i=0;i<msg.length;i++){		
+					html += '<option value="'+msg[i].animalTypeCode+'">'+msg[i].animalTypeSub+'</option>';
+				}	
+				$('#subType').html(html);
+				$('#subType').selectpicker('refresh');
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
+			});
+		});
+	});
 	
 	</script>
  </th:block> 
@@ -63,8 +93,8 @@
                                         
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
+                                <div class="col-sm-4" >
+                                    <div class="form-group" style="display:none;">
                                         <div class="form-line">
                                         <label> 신고 취소 날짜
                                             <input type="date" id="cancelDate"class="form-control" placeholder="신고 취소 날짜" value="2020-03-20">
@@ -90,7 +120,7 @@
                                         <label class="form-label">잃어버린 정황 서술해주세요</label>
                                     </div>
                                 </div>
-                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">    
+                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">    
                              <div class="body"> 
                               <div class="row clearfix">
                                 <div class="col-md-3">
@@ -105,32 +135,15 @@
                                     </select>
 
                                 </div>
-                                <div id="dogType" class="col-md-3"  style="display:block;">
-                                    <p>
-                                        <b>품종</b>
-                                    </p>
-                                    <select id="dogSelectType" class="form-control show-tick" >
-                                        <option value="">-품종선택-</option>
-                                        <option value="말티즈">말티즈</option>
-                                        <option value="포메라니안">포메라니안</option>
-                                        <option value="비글">비글</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-
+                                <div class="col-md-3">
+	                                 <p>
+	                                 	<b>동물종류</b>
+	                                 </p>
+	                                <select id="subType" name="animalTypeCode">
+                              			<option value="">==축종을 선택해주세요==</option>
+	                                </select>
                                 </div>
-                                <div id="catSelectType" class="col-md-3" style="display:block;">
-                                    <p>
-                                        <b>품종</b>
-                                    </p>
-                                    <select id="catType" class="form-control show-tick">
-                                        <option value="">-품종선택-</option>
-                                        <option value="페르시안">페르시안</option>
-                                        <option value="벵골">벵골</option>
-                                        <option value="사암고양이">사암고양이</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-
-                                </div>
+                               
                                </div> 
                              </div> 
        					  </div> 
