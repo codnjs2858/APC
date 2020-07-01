@@ -47,4 +47,18 @@
 		(search_report_code, animal_code, animal_gender, animal_detail, animal_location, animal_picture, member_id, search_report_in_date)
 		VALUES (#{searchReportCode}, #{animalType.animalTypeCode}, #{animalGender}, #{animalDetail}, #{animalLocation}, #{animalPicture}, #{member.memberId}, NOW())
 	</insert>
+	<insert id="insertLostReportAnimal" parameterType="LostReportAnimal">
+		<selectKey resultType="String" order="BEFORE" keyProperty="lostReportCode">
+			SELECT (
+			case COUNT(*)
+					when 0 then 'lost_report_code_1'
+					ELSE  CONCAT('lost_report_code_',max(cast(	substr(lost_report_code,18) as decimal))+1)
+					END	)
+			AS lostReportCode
+			fROM tb_lost_report;
+		</selectKey>
+	INSERT INTO tb_lost_report
+		(lost_report_code, animal_code, animal_name, animal_gender, animal_feature, member_id, lost_report_state, lost_report_in_date)
+		VALUES (#{lostReportCode},#{animalType.animalTypeCode} ,#{animalName} , #{animalGender}, #{animaFeature}, #{member.memberId},#{lostReportState} , NOW())
+	</insert>
 </mapper>
