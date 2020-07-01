@@ -102,8 +102,9 @@
                           </div>
                                  <div class="form-group">
                                     <div class="form-line">
+                                    	<label>발견장소
                                         <input id="findlocation" type="text" class="form-control" name="animalLocation" >
-                                        <label class="form-label">발견장소</label>
+                                        </label>
                                     </div>
                                 </div>
                          
@@ -122,8 +123,9 @@
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
+                                   		 <label>발견정황에 대해 간단히 서술해주세요
                                         <textarea id="detail" name="animalDetail" cols="30" rows="5" class="form-control no-resize"></textarea>
-                                        <label class="form-label">발견정황에 대해 간단히 서술해주세요</label>
+                                        </label>
                                     </div>
                                 </div>
                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">    
@@ -149,32 +151,7 @@
                               			<option value="">==축종을 선택해주세요==</option>
 	                                </select>
                                 </div>
-                                <!-- <div id="dogType" class="col-md-3"  style="display:block;">
-                                    <p>
-                                        <b>품종</b>
-                                    </p>
-                                    <select name="animalTypeCode" id="dogSelectType" class="form-control show-tick" >
-                                        <option value="">-품종선택-</option>
-                                        <option value="말티즈">말티즈</option>
-                                        <option value="포메라니안">포메라니안</option>
-                                        <option value="비글">비글</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-
-                                </div>
-                                <div id="catSelectType" class="col-md-3" style="display:block;">
-                                    <p>
-                                        <b>품종</b>
-                                    </p>
-                                    <select name="animalTypeSub" id="catType" class="form-control show-tick">
-                                        <option value="">-품종선택-</option>
-                                        <option value="페르시안">페르시안</option>
-                                        <option value="벵골">벵골</option>
-                                        <option value="사암고양이">사암고양이</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-
-                                </div> -->
+                               
                                </div> 
                              </div> 
        					  </div> 
@@ -185,8 +162,8 @@
                                 
                             </div>
                         </div>
-                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
-                                <a class="btn btn-primary waves-effect" data-toggle="modal" data-color="red" th:data-data="${pf.foodCode}" data-title="정말 신고 취소하시겠습니까?" href="#modalTarget" id="cancel">신고 취소</a>
+                                <button class="btn btn-primary waves-effect" type="submit" id="submit">SUBMIT</button>
+                                <a class="btn btn-primary waves-effect" data-toggle="modal" data-color="red" th:data-data="${session.SID}" data-title="정말 신고 취소하시겠습니까?" href="#modalTarget" id="cancel">신고 취소</a>
                             </form>
                             </br>
                       
@@ -227,29 +204,34 @@
 
  <th:block layout:fragment="customFooterScript">
 	<script>
-	$('#modalTarget').on('show.bs.modal', function (event) {
-        var color = $(event.relatedTarget).data('color');
-        var data = $(event.relatedTarget).data('data');
-        var title = $(event.relatedTarget).data('title');
-        $('#modalTarget .modal-title').text(title);
-        $('#modalTarget .modal-body').text(data+"를 읽기전용모드로 돌립니다");
-        $('#modalTarget .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
-        $('#ok').val(data);
-    });
-	
-	$('#ok').click(function(){
-    			var val = $(this).val();
-    			console.log('ok 버튼 클릭 했음' + val);
-    			$('#del').css('display','block');
-    			$('input[name=searchReportOutDate]').val(new Date().toISOString().substring(0, 10));
-    			$('input[name="searchReportOutDate"]').attr('readonly','readonly');
-    			$('#deldate').attr('readonly','readonly');
-    			$('#finddate').attr('readonly','readonly');
-    			$('#findlocation').attr('readonly','readonly');
-    			$('#genderradio').attr('readonly','readonly');
-    			$('#animalType').attr('readonly','readonly');
-    			$('#subType').attr('readonly','readonly');
-    		});
+	$(function(){
+		
+			$('#modalTarget').on('show.bs.modal', function (event) {
+		        var color = $(event.relatedTarget).data('color');
+		        var data = $(event.relatedTarget).data('data');
+		        var title = $(event.relatedTarget).data('title');
+		        $('#modalTarget .modal-title').text(title);
+		        $('#modalTarget .modal-body').text(data+"님의 글을 읽기전용모드로 돌립니다");
+		        $('#modalTarget .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
+		        $('#ok').val(data);
+		    });
+			
+			$('#ok').click(function(){
+		    			var val = $(this).val();
+		    			console.log('ok 버튼 클릭 했음' + val);
+		    			$('#del').css('display','block');
+		    			$('input[name=searchReportOutDate]').val(new Date().toISOString().substring(0, 10));
+		    			$('input[name="searchReportOutDate"]').attr('readonly','readonly');
+		    			$('#deldate').attr('readonly','readonly');
+		    			$('#finddate').attr('readonly','readonly');
+		    			$('#findlocation').attr('readonly','readonly');
+		    			$('#genderradio').attr('readonly','readonly');
+		    			$('#animalType').attr('readonly','readonly');
+		    			$('#subType').attr('readonly','readonly');
+		    		});
+
+		
+	})
 	</script>
  </th:block>
  
