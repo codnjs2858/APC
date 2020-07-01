@@ -62,7 +62,7 @@ public class DepositController {
 		model.addAttribute("reviewCount", reviewCount);
 		
 		logger.info("reviewCount << {}", reviewCount);
-		return "redirect:/deposit/depositInsert";
+		return "deposit/depositInsert";
 	}
 	
 	@GetMapping("/depositList")

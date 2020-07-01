@@ -48,7 +48,6 @@
 	                        <thead>
 		                            <tr role="row">
 		                            	<th></th>
-		                            	<th><div class="align-center">기프트 코드</div></th>
 		                            	<th><div class="align-center">회원 아이디</div></th>
 		                            	<th><div class="align-center">입양인 이름</div></th>
 		                            	<th><div class="align-center">기프트 종류</div></th>
@@ -63,7 +62,6 @@
 	                        <tbody>
 			                        <tr th:each="GL, i : ${GL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${GL.giftCode}]]</td>
 		                              	<td><div class="align-center"></div>[[${GL.member.memberId}]]</td>
 		                              	<td><div class="align-center"></div>[[${GL.member.memberName}]]</td>
 		                              	<td><div class="align-center"></div>[[${GL.giftType}]]</td>

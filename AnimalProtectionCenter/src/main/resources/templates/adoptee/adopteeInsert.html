@@ -21,11 +21,9 @@
 	            <div class="body">
 	            	<div class="row clearfix">
 	            		<form action="/adoptee/adopteeInsert" method="post">
-	            			<!-- 직원 세션 아이디, 코드 -->
-	            			<input type="hidden" name="staffCode" value="staff_code_2">	
 	            			<div class="col-md-4">
 	            				<b>회원 아이디</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 		            				<select name="memberId" id="memberId">
 		            					<option value="">====== 선택 ======</option>
 		            					<option th:each="m : ${mList}" th:value="${m.memberId}">[[${m.memberId}]]</option>
@@ -34,7 +32,7 @@
 	            			</div>
 	            			<div class="col-md-4">
 			                    <b>회원 이름</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input name="memberName" id="memberName" class="form-control" readonly>
 			                        </div>
@@ -42,7 +40,7 @@
 			                </div>
 			                <div class="col-md-4">
 			                    <b>회원 주소</b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input name="memberAddr" id="memberAddr" class="form-control" readonly>
 			                        </div>
@@ -50,29 +48,34 @@
 			                </div>
 			                <div class="col-md-4">
 			                    <b>회원 전화번호 </b>
-			                    <div class="input-group colorpicker colorpicker-element">
+			                    <div class="input-group">
 			                        <div class="form-line">
 			                            <input name="memberPhone" id="memberPhone" class="form-control" readonly>
 			                        </div>
 			                    </div>
 			                </div>
-			                <div class="col-md-2 col-md-offset-1">
+			                <div class="col-md-4">
 			                    <b>지표 점수 </b>
-			                    <div class="input-group colorpicker colorpicker-element">
 			                        <div class="form-line">
 			                        	<select name="screening_complete_code">
 			                        		<option value="">====== 선택 ======</option>
-			                            	<option th:each="sc : ${scList}" th:value="${sc.screening_complete_code}" class="form-control">
+			                            	<option th:each="sc : ${scList}" th:value="${sc.screening_complete_code}">
 			                            	[[${sc.screening_complete_totel}]]
 			                            	</option>
 			                       		</select>
 			                        </div>
-			                    </div>
 			                </div>
-			               <div class="col-md-4 col-md-offset-1 p-t-10">
-			                	<button type="submit" class="btn btn-primary btn-lg">입양인 등록</button>
-			                </div>
-	            		</form>
+			                <div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										담당자
+			                            <input type="text" class="form-control" th:value="${session.STAFF.staffName}">
+			                            <input type="hidden" id="staffCode" class="form-control" name="staffCode" th:value="${session.STAFF.staffCode}">
+			                        </div>
+								</div>
+            				</div>
+			                	<button type="submit" class="btn btn-block bg-amber waves-effect">입양인 등록</button>
+			            </form>
 		            </div>
 	            </div>
 	        </div>

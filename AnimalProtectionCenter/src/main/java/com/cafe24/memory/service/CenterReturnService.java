@@ -48,4 +48,9 @@ public class CenterReturnService {
 		
 		return centerReturnMapper.selectPetTypeCount();
 	}
+	
+	public List<CenterReturn> selectAnimalType(String animalType){
+		
+		return centerReturnMapper.selectAnimalType(animalType);
+	}
 }
