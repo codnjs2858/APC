@@ -21,9 +21,6 @@
 			<result property="animalInsertCode" column="animal_insert_code"></result>
 		</association>
 		
-		<association property="protectionSpace" javaType="ProtectionSpace">
-			<result property="protectSpaceCode" column="pro_space_code"></result>
-		</association>
 	</resultMap>
 	
 	<!-- 리스트 -->
@@ -37,7 +34,6 @@
 			,animal_information
 			,companion_register_date
 			,cancle_companion_in_date
-			,pro_space_code
 			,s.staff_name
 		FROM
 			tb_animal_insert AS aniI
@@ -77,14 +73,13 @@
 			FROM tb_companion_animal_register
  		</selectKey>
  			INSERT INTO tb_companion_animal_register
-			(companion_animal_register_code, animal_insert_code, animal_information, companion_register_date, cancle_companion_in_date, pro_space_code, staff_code)
+			(companion_animal_register_code, animal_insert_code, animal_information, companion_register_date, cancle_companion_in_date, staff_code)
 			VALUES (
 					#{companionAnimalRegisterCode},
 					#{animalCenter.animalInsertCode}, 
 					#{animalInformation},
 					NOW(),
 					#{cancleCompanionInDate},
-					#{protectionSpace.protectSpaceCode},
 					#{staff.staffCode}
 					);
 	</insert>
@@ -117,10 +112,48 @@
 	
 	<!-- 삭제 -->
 	<delete id="deleteCompanionAnimalRegister" parameterType="String">
+		
 		DELETE 
 		FROM 
 			tb_companion_animal_register 
 		WHERE 
 			companion_animal_register_code=#{companionAnimalRegisterCode};
+	
 	</delete>
+	
+	<!-- 분양 상태 횟수 확인 -->
+	
+	<select id="selectComAniRegCount" resultType="Map">
+		
+		SELECT
+			c.animal_information AS animalInfomation,
+			COUNT(c.animal_information) AS animalInfomationCount
+		FROM
+			tb_companion_animal_register AS c
+		GROUP BY 
+			c.animal_information
+		ORDER BY (
+		          CASE c.animal_information
+		          WHEN '분양 가능' THEN 1
+		          WHEN '분양 완료' THEN 2
+		          WHEN '기타' THEN 3
+		          ELSE 4
+		          END
+         		 );	
+	
+	</select>
+	
+	<!-- 분양상태로 리스트 검색 -->
+	
+	<select id="selectComAniRegList" parameterType="String" resultMap="companionAnimalRegisterResultMap">
+			
+			SELECT 
+			*
+			FROM 
+				tb_companion_animal_register
+			WHERE
+				animal_information=#{CARL}
+			ORDER BY CAST(SUBSTR(companion_animal_register_code,6) AS DECIMAL) DESC;
+		
+	</select>
 </mapper>

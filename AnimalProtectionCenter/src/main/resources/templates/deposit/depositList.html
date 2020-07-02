@@ -62,14 +62,14 @@
 	                        <tbody>
 			                        <tr th:each="DP, i : ${DP}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${DP.member.memberId}]]</td>
-		                              	<td><div class="align-center"></div>[[${DP.member.memberName}]]</td>
-		                              	<td><div class="align-center"></div>[[${DP.review.reviewCount}]]</td>
-		                              	<td><div class="align-center"></div>[[${DP.depositAmount}]]</td>
-		                              	<td><div class="align-center"></div>[[${DP.depositState}]]</td>
-		                              	<td><div class="align-center"></div>[[${DP.depositDate}]]</td>
-		                              	<td><div class="align-center"></div>[[${DP.depositReturnDate}]]</td>
-		                              	<td><div class="align-center"></div>[[${DP.staff.staffName}]]</td>
+		                              	<td><div class="align-center">[[${DP.member.memberId}]]</div></td>
+		                              	<td><div class="align-center">[[${DP.member.memberName}]]</div></td>
+		                              	<td><div class="align-center">[[${DP.review.reviewCount}]]</div></td>
+		                              	<td><div class="align-center">[[${DP.depositAmount}]]</div></td>
+		                              	<td><div class="align-center">[[${DP.depositState}]]</div></td>
+		                              	<td><div class="align-center">[[${DP.depositDate}]]</div></td>
+		                              	<td><div class="align-center">[[${DP.depositReturnDate}]]</div></td>
+		                              	<td><div class="align-center">[[${DP.staff.staffName}]]</div></td>
 		                                <td><div class="align-center">
 		                                	<a th:href="@{/deposit/depositUpdate(depositCode=${DP.depositCode})}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>

@@ -32,14 +32,18 @@
 					<div class="row clearfix">
 	                    <div class="col-xs-3 col-md-3" >
 	                    	<a th:href="@{/companionanimalregister/companionAnimalRegisterList}">
-		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
+		                        	전체보기
+		                        <span class="badge" th:text="${totalCount}"></span>	
+		                        </button>
 	                    	</a>
 	                    </div>
-	                    <div class="col-xs-3 col-md-3" th:each="p : ${petFoodTypeCnt}" >
-	                    	<a th:href="@{/petFoodList(sendType=${p.foodType})}">
+	                    <div class="col-xs-3 col-md-3" th:each="c : ${CRC}" >
+	                    	<a th:href="@{/companionanimalregister/companionAnimalRegisterList
+	                    				(sendType=${c.animalInfomation})}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
-		                        	[[${p.foodType}]]
-		                        	<span class="badge">[[${p.foodCount}]]</span>
+		                        	[[${c.animalInfomation}]]
+		                        	<span class="badge">[[${c.animalInfomationCount}]]</span>
 		                        </button>
 	                    	</a>
 	                    </div>
@@ -49,13 +53,12 @@
 	                        <thead>
 		                            <tr role="row">
 		                            	<th></th>
-		                            	<th><div class="align-center">등록코드</div></th>
 		                            	<th><div class="align-center">동물번호</div></th>
 		                            	<th><div class="align-center">상태</div></th>
 		                            	<th><div class="align-center">등록날짜</div></th>
 		                            	<th><div class="align-center">분양날짜</div></th>
-		                            	<th><div class="align-center">보호장소</div></th>
 		                            	<th><div class="align-center">담당자</div></th>
+		                            	<th><div class="align-center">보호공간</div></th>
 		                            	<th data-orderable="false"><div class="align-center">수정</div></th>
 		                            	<th data-orderable="false"><div class="align-center">삭제</div></th>
 		                            </tr>
@@ -63,14 +66,23 @@
 	                        <tbody>
 			                        <tr th:each="CARS, i : ${CARS}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${CARS.companionAnimalRegisterCode}]]</td>
-		                                <td><div class="align-center"></div>[[${CARS.animalCenter.animalCenterNumber}]]</td>
-		                               	<td><div class="align-center"></div>[[${CARS.animalInformation}]]</td>
-		                               	<td><div class="align-center"></div>[[${CARS.companionRegisterDate}]]</td>
-		                               	<td><div class="align-center"></div>[[${CARS.cancleCompanionInDate}]]</td>
-		                               	<td><div class="align-center"></div>[[${CARS.protectionSpace.protectSpaceCode}]]</td>
-		                               	<td><div class="align-center"></div>[[${session.STAFF.staffName}]]</td>
-		                                <td><div class="align-center">
+		                              	<td><div class="align-center">[[${CARS.animalCenter.animalCenterNumber}]]
+		                              		<a th:href="@{/animalcenter/animalcenterpage(send_code=${CARS.animalCenter.animalInsertCode})}">(동물 상세보기)</a></div></td>
+		                               	<td><div class="align-center">[[${CARS.animalInformation}]]</div></td>
+		                               	<td><div class="align-center">[[${CARS.companionRegisterDate}]]</div></td>
+		                               	<td><div class="align-center">[[${CARS.cancleCompanionInDate}]]</div></td>
+		                               	<td><div class="align-center">[[${session.STAFF.staffName}]]</div></td>
+		                               	<td th:if="${proSpace[i.index].animalInsertCode} == null">
+		                            	<div class="align-center">
+			                            	<a th:href="@{/protection/animalProtection}">보호 공간 등록</a>
+		                            	</div>
+		                            	</td>
+			                            <td th:unless="${proSpace[i.index].animalInsertCode} == null">
+			                            	<div class="align-center">
+				                            	[[${proSpace[i.index].animalInsertCode}]]
+			                            	</div>
+		                            	</td>
+		                               	<td><div class="align-center">
 		                                	<a th:href="@{/companionanimalregister/companionAnimalRegisterUpdate(send_code=${CARS.animalCenter.animalInsertCode}, 
 		                                												companionAnimalRegisterCode=${CARS.companionAnimalRegisterCode})}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>

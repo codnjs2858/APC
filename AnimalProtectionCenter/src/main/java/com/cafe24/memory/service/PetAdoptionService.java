@@ -1,6 +1,7 @@
 package com.cafe24.memory.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,5 +64,14 @@ public class PetAdoptionService {
 		
 		return petAdoptionMapper.selectPetAdoption(petAdoptionCode);
 	}
+	
+	public List<Map<String, Object>> selectPetAdoptionState(){
+		
+		return petAdoptionMapper.selectPetAdoptionState();
+	}
 
+	public List<PetAdoption> selectPetAdoptionStateList(String petAdoptionState){
+		
+		return petAdoptionMapper.selectPetAdoptionStateList(petAdoptionState);
+	}
 }

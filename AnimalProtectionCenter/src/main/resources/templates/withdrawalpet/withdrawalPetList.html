@@ -61,12 +61,12 @@
 	                        <tbody>
 			                        <tr th:each="WPL, i : ${WPL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${WPL.member.memberId}]]</td>
-		                              	<td><div class="align-center"></div>[[${WPL.member.memberName}]]</td>
-		                              	<td><div class="align-center"></div>[[${WPL.animalCenter.animalCenterNumber}]]</td>
-		                              	<td><div class="align-center"></div>[[${WPL.withdrawalPetReason}]]</td>
-		                              	<td><div class="align-center"></div>[[${WPL.withdrawalPetDate}]]</td>
-		                              	<td><div class="align-center"></div>[[${WPL.staff.staffName}]]</td>
+		                              	<td><div class="align-center">[[${WPL.member.memberId}]]</div></td>
+		                              	<td><div class="align-center">[[${WPL.member.memberName}]]</div></td>
+		                              	<td><div class="align-center">[[${WPL.animalCenter.animalCenterNumber}]]</div></td>
+		                              	<td><div class="align-center">[[${WPL.withdrawalPetReason}]]</div></td>
+		                              	<td><div class="align-center">[[${WPL.withdrawalPetDate}]]</div></td>
+		                              	<td><div class="align-center">[[${WPL.staff.staffName}]]</div></td>
 		                                <td><div class="align-center">
 		                                	<a th:href="@{/withdrawalpet/withdrawalPetUpdate(withdrawalPetCode=${WPL.withdrawalPetCode})}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>

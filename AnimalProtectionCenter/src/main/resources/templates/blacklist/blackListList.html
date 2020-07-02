@@ -60,12 +60,12 @@
 	                        <tbody>
 			                        <tr th:each="BL, i : ${BL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${BL.member.memberId}]]</td>
-		                               	<td><div class="align-center"></div>[[${BL.blackListReason}]]</td>
-		                               	<td><div class="align-center"></div>[[${BL.blackListDate}]]</td>
-		                               	<td><div class="align-center"></div>[[${BL.blackListCancleReason}]]</td>
-		                               	<td><div class="align-center"></div>[[${BL.blackListCancleDate}]]</td>
-		                               	<td><div class="align-center"></div>[[${BL.staff.staffName}]]</td>
+		                              	<td><div class="align-center">[[${BL.member.memberId}]]</div></td>
+		                               	<td><div class="align-center">[[${BL.blackListReason}]]</div></td>
+		                               	<td><div class="align-center">[[${BL.blackListDate}]]</div></td>
+		                               	<td><div class="align-center">[[${BL.blackListCancleReason}]]</div></td>
+		                               	<td><div class="align-center">[[${BL.blackListCancleDate}]]</div></td>
+		                               	<td><div class="align-center">[[${BL.staff.staffName}]]</div></td>
 		                                <td><div class="align-center">
 		                                	<a th:href="@{/blacklist/blackListUpdate(blackListCode=${BL.blackListCode})}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>
