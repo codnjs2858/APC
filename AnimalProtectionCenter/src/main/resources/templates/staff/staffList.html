@@ -35,8 +35,7 @@
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
 	                        <thead>
 	                            <tr>
-		                            <th data-orderable="false"></th>
-		                            <th><div class="align-center">직원 코드</div></th>
+		                            <th></th>
 		                            <th><div class="align-center">부서</div></th>
 		                            <th><div class="align-center">직급</div></th>
 		                            <th><div class="align-center">이름</div></th>
@@ -44,7 +43,6 @@
 		                            <th><div class="align-center">연락처</div></th>
 		                            <th><div class="align-center">이메일</div></th>
 		                            <th><div class="align-center">근태 상태</div></th>
-		                            <th><div class="align-center">신청 상태</div></th>
 		                            <th><div class="align-center">입사 날짜</div></th>
 		                            <th><div class="align-center">퇴사 날짜</div></th>
 		                            <th data-orderable="false"><div class="align-center">직원 수정</div></th>
@@ -52,33 +50,46 @@
 		                        </tr>
 	                        </thead>
 	                        <tbody>
-	                            <tr th:each="j : ${#numbers.sequence(1,100)}" class="odd">
-	                       			<td><div class="align-center"><span class="label label-warning">new</span></div></td>
-				                    <!-- <td class="sorting_1" th:text="${j}"></td> -->
-				                    <td><div class="align-center">[[${j}]]</div></td>
-		                            <td><div class="align-center">부서1</div></td>
-		                            <td><div class="align-center">사원</div></td>
-		                            <td><div class="align-center">설채원</div></td>
-		                            <td><div class="align-center">id001</div></td>
-		                            <td><div class="align-center">010-0000-0000</div></td>
-		                            <td><div class="align-center">cmail@email.com</div></td>
-		                            <td><div class="align-center">출근<a href="#">(상세보기)</a></div></td>
-		                            <td><div class="align-center">휴가신청<a href="#">(상세보기)</a></div></td>
-		                            <td><div class="align-center">2020-06-01</div></td>
-		                            <td><div class="align-center"></div></td>
+	                            <tr th:each="staff,i : ${staff}" class="odd">
+				                    <td><div class="align-center">[[${i.size - i.index}]]</div></td>
+		                            <td><div class="align-center">[[${staff.staffPart}]]</div></td>
+		                            <td><div class="align-center">[[${staff.staffRank}]]</div></td>
+		                            <td><div class="align-center">[[${staff.staffName}]]</div></td>
+		                            <td><div class="align-center">[[${staff.member.memberId}]]</div></td>
+		                            <td><div class="align-center">[[${staff.member.memberPhone}]]</div></td>
+		                            <td><div class="align-center">[[${staff.member.memberEmail}]]</div></td>
+		                            <td>
+			                            <th:block th:unless="${staff.commute == null}">
+			                            	<div th:if="${staff.commute.commuteEndTime} == null" class="align-center">출근 - [[${staff.commute.commuteStartTime}]]</div>
+			                            	<div th:unless="${staff.commute.commuteEndTime} == null" class="align-center">퇴근 - [[${staff.commute.commuteEndTime}]]</div>
+			                            </th:block>
+			                            <th:block th:if="${staff.commute == null}">
+			                            	<div class="align-center">미출근</div>
+			                            </th:block>
+		                            </td>
+		                            <td><div class="align-center">[[${staff.staffInDate}]]</div></td>
+		                            <td>
+		                            	<th:block th:unless="${staff.staffOutDate} == null">
+			                            	<div class="align-center">퇴사 - [[${staff.staffOutDate}]]</div>
+		                            	</th:block>
+		                            	<th:block th:if="${staff.staffOutDate} == null">
+		                            		<div class="align-center"><a href="#">퇴사처리</a></div>
+		                            	</th:block>
+		                            </td>
 		                            <td>
 		                            	<div class="align-center">
-			                            	<a th:href="@{/staff/staffupdate}">
+			                            	<a th:href="@{/staff/staffupdate(send_id=${staff.member.memberId})}" style="color: #9E9E9E">
 		                       					<i class="material-icons">update</i>
 	                       					</a>
                        					</div>
 	                      			</td>
+	                      			
 	                      			<td>
 	                      				<div class="align-center">
-				                       		<a th:href="@{/staff/staffdelete}">
-				                       			<i class="material-icons">delete</i>
-			                       			</a>
-			                       		</div>
+			                            	<a class="delete" th:data-myurl="'/staff/staffdelete?send_code='+${staff.staffCode}" href="javascript:void(0)">
+						            			<i class="material-icons">delete</i>
+						            		</a>
+				                       	</div>
 			                       	</td>
 	                        	</tr>
 	                        </tbody>
@@ -104,6 +115,30 @@
     	$(function(){
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
+    		});
+    		$('.delete').click(function(){
+    			swal('삭제하시겠습니까?', {
+					title:'경고',
+					icon:'error',
+					buttons: true,
+				})
+    			.then((Delete) => {
+    				var val = $(this).data('myurl');
+    				console.log(val);
+    				if(Delete){
+    					swal({
+    							title: '확인',
+    					      	icon: "warning",
+    					      	text:"정말로 삭제하시겠습니까?",
+    					      	buttons: true,
+    					    })
+    					    .then((value) => {
+    					    	if(value) location.href = val;
+    					    });
+    				}else{
+    					console.log('취소');
+    				}
+    			});
     		});
     	});
     </script>

@@ -18,14 +18,6 @@ public interface AnimalCenterMapper {
 	public List<AnimalCenter> selectNoDisposal();
 	
 	/**
-	 * 모든 보호동물 ,타입별 보호동물 보호공간 코드 조회
-	 * @param send_type
-	 * @return
-	 */
-	public List<String> selectProtectAnimalCenter(String send_type);
-	public List<String> selectProtectAnimalCenter();
-	
-	/**
 	 * 센터 동물 삭제
 	 * @param send_code
 	 * @return

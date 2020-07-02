@@ -2,17 +2,58 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cafe24.memory.mapper.StaffMapper">
+	<!-- Staff -->
 	<resultMap type="Staff" id="staff">
 		<result property="staffCode" column="staff_code"/>
 		<result property="staffName" column="staff_name"/>
 		<result property="staffPart" column="staff_part"/>
 		<result property="staffRank" column="staff_rank"/>
-		<result property="staffPhone" column="staff_phone"/>
-		<result property="staffEmail" column="staff_email"/>
 		<result property="staffInDate" column="staff_in_date"/>
 		<result property="staffOutDate" column="staff_out_date"/>
 		<association property="member" javaType="Member">
 			<result property="memberId" column="member_id"/> 
+			<result property="memberAddr" column="member_addr"/> 
+			<result property="memberEmail" column="member_email"/> 
+			<result property="memberPhone" column="member_phone"/> 
+		</association>
+		<association property="commute" javaType="Commute">
+			<result property="commuteCode" column="commute_code"/>
+			<result property="commuteStartTime" column="commute_start_time"/>
+			<result property="commuteEndTime" column="commute_end_time"/>
+			<result property="commuteDate" column="commute_date"/>
+		</association>
+	</resultMap>
+
+	<resultMap type="Vacation" id="vacation">
+		<result property="vacationCode" column="vacation_code" />
+		<result property="vacationAdmissionState" column="vacation_admission_state" />
+		<result property="vacationRegDate" column="vacation_reg_date" />
+		<result property="vacationStartDate" column="vacation_start_date" />
+		<result property="vacationEndDate" column="vacation_end_date" />
+		<association property="staff" javaType="Staff">
+			<result property="staffCode" column="staff_code" />
+			<result property="staffName" column="staff_name" />
+			<result property="staffPart" column="staff_part" />
+			<result property="staffRank" column="staff_rank" />
+		</association>
+	</resultMap>
+
+	<resultMap type="Commute" id="commute">
+		<result property="CommuteCode" column="commute_code" />
+		<result property="commuteDate" column="commute_date" />
+		<result property="commuteStartTime" column="commute_start_time" />
+		<result property="commuteEndTime" column="commute_end_time" />
+		<association property="staff" javaType="Staff">
+			<result property="staffCode" column="staff_code" />
+			<result property="staffName" column="staff_name" />
+			<result property="staffPart" column="staff_part" />
+			<result property="staffRank" column="staff_rank" />
+		</association>
+		<association property="commute" javaType="Commute">
+			<result property="commuteCode" column="commute_code"/>
+			<result property="commuteStartTime" column="commute_start_time"/>
+			<result property="commuteEndTime" column="commute_end_time"/>
+			<result property="commuteDate" column="commute_date"/>
 		</association>
 	</resultMap>
 	
@@ -24,6 +65,47 @@
 		JOIN
 			tb_member AS m ON s.member_id = m.member_id
 		WHERE 
-			m.member_id = #{send_id}
+			m.member_id = #{send_id};
 	</select>
+	
+	<select id="selectStaffList" resultMap="staff">
+		SELECT
+		*
+		FROM
+		tb_staff AS s
+		JOIN tb_member AS m ON s.member_id = m.member_id
+		LEFT JOIN tb_commute AS c ON c.staff_code = s.staff_code AND c.commute_date = CURDATE()
+		ORDER BY s.staff_in_date DESC;
+	</select>
+	
+	<insert id="insertStaffMember" parameterType="Staff">
+		<selectKey order="BEFORE" keyProperty="staffCode" resultType="String">
+			SELECT
+				(case COUNT(*)
+				when 0 then'staff_code_1'
+				else CONCAT('staff_code_',MAX(CAST(SUBSTRING(staff_code,12) AS DECIMAL))+1) 
+				END)AS staff_code
+			FROM
+				tb_staff
+		</selectKey>
+		INSERT INTO tb_staff
+			(
+				staff_code
+				, member_id
+				, staff_name
+				, staff_part
+				, staff_rank
+				, staff_in_date
+				, staff_out_date
+			)
+		VALUES (
+				  #{staffCode}
+				, #{member.memberId}
+				, #{staffName}
+				, #{staffPart}
+				, #{staffRank}
+				, CURDATE()
+				, null
+				)
+	</insert>
 </mapper>
