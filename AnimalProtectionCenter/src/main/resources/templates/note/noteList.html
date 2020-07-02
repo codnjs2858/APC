@@ -41,40 +41,32 @@
 				    </tbody>
 				</table>
 				<button type="button" id="btn" class="btn btn-primary waves-effect">쪽지보내기</button>
-                <!-- <script>
+                <script>
 	                function sendPost(click){
 	                    var form1 = document.createElement("form"); // 폼 생성
 	                    form1.setAttribute("method", "GET"); // 전송방식
-	                    if('[[${title}]]' == '공고게시판'){
-		                    form1.setAttribute("action", "/board/Posts"); // 주소
-	                	}else{
-		                    form1.setAttribute("action", "/board/PostsReviewBoard"); // 주소
-	                	}
+	                    form1.setAttribute("action", "/note/getNote"); // 주소
 	                    document.body.appendChild(form1);
 	                    
 	                    var formInput1 = document.createElement("input"); // 입력창 생성
 	                    formInput1.setAttribute("type", "hidden"); // 타입
-	                    formInput1.setAttribute("name", "board_code"); // name 속성
-	                    formInput1.setAttribute("id", "board_code"); // id 속성
+	                    formInput1.setAttribute("name", "note_code"); // name 속성
+	                    formInput1.setAttribute("id", "note_code"); // id 속성
 	                    formInput1.setAttribute("value", click); // 값
 	                    form1.appendChild(formInput1);
 
 	                    form1.submit();
 	                }
                 	
-	                $("#tb_board").on("click", "tr", function(){
+	                $("#tb_note").on("click", "tr", function(){
 	                	var click = $(this).find("td:eq(0)").text();
 	                	sendPost(click);
 	                });
 	                
 	                $("#btn").click(function(){
-	                	if('[[${title}]]' == '공고게시판'){
-		                	location.href='/board/write';
-	                	}else{
-	                		location.href='/board/ReviewBoardWrite';
-	                	}
+	                	location.href='#';
 	                })
-                </script> -->
+                </script>
                 </div>
              </div>
          </div>
