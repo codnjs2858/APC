@@ -24,49 +24,58 @@
                                 <label for="email_address">dbid</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="userId" name="memberId" class="form-control" th:value="${mem.memberId}" readonly="readonly">
+                                    
+                                        <input th:unless="${mem}!=null" type="text" id="userId" name="memberId" class="form-control"  readonly="readonly">
+                                        <input th:if="${mem}!=null" type="text" id="userId" name="memberId" class="form-control" th:value="${mem.memberId}" readonly="readonly">
                                     </div>
                                 </div>
                                 <label for="password">dbpw</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="password" id="userPw" name="memberPw" class="form-control"  th:value="${mem.memberPw}">
+                                        <input th:unless="${mem}!=null" type="password" id="userPw" name="memberPw" class="form-control" >
+                                        <input th:if="${mem}!=null" type="password" id="userPw" name="memberPw" class="form-control"  th:value="${mem.memberPw}">
                                     </div>
                                 </div>
                                   <label for="password">dbLevel</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="userLevel" name="levelCode" class="form-control" th:value="${mem.level.levelCode}">
+                                        <input th:unless="${mem}!=null" type="text" id="userLevel" name="levelCode" class="form-control" >
+                                        <input th:if="${mem}!=null" type="text" id="userLevel" name="levelCode" class="form-control" th:value="${mem.level.levelCode}">
                                     </div>
                                 </div>
                                  <label for="password">dbName</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="userName" name="memberName" class="form-control"  th:value="${mem.memberName}">
+                                        <input th:unless="${mem}!=null" type="text" id="userName" name="memberName" class="form-control">
+                                        <input th:if="${mem}!=null" type="text" id="userName" name="memberName" class="form-control"  th:value="${mem.memberName}">
                                     </div>
                                 </div>
                                  <label for="password">dbPhone</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="userPhone" name="memberPhone" class="form-control" th:value="${mem.memberPhone}">
+                                        <input th:unless="${mem}!=null" type="text" id="userPhone" name="memberPhone" class="form-control">
+                                        <input th:if="${mem}!=null" type="text" id="userPhone" name="memberPhone" class="form-control" th:value="${mem.memberPhone}">
                                     </div>
                                 </div>
                                  <label for="password">dbAddress</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="userAddress" name="memberAddr" class="form-control" th:value="${mem.memberAddr}" >
+                                        <input th:unless="${mem}!=null" type="text" id="userAddress" name="memberAddr" class="form-control" >
+                                        <input th:if="${mem}!=null" type="text" id="userAddress" name="memberAddr" class="form-control" th:value="${mem.memberAddr}" >
                                     </div>
                                 </div>
                                    <label for="password">dbEmail</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="userEmail" name="memberEmail" class="form-control" th:value="${mem.memberEmail}">
+                                        <input th:unless="${mem}!=null" type="text" id="userEmail" name="memberEmail" class="form-control">
+                                        <input th:if="${mem}!=null" type="text" id="userEmail" name="memberEmail" class="form-control" th:value="${mem.memberEmail}">
                                     </div>
                                 </div>
                                 	<label for="date">dbDate</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="userInDate" name="memberInDate" class="form-control" th:value="${mem.memberInDate}">
+                                        <input th:unless="${mem}!=null" type="text" id="userInDate" name="memberInDate" class="form-control" th:value="${mem.memberInDate}">
+                                        <input th:if="${mem}!=null" type="text" id="userInDate" name="memberInDate" class="form-control" th:value="${mem.memberInDate}">
                                     </div>
                                 </div>
                 

@@ -31,6 +31,9 @@
 			<result property="animalDisposalCode" column="animal_disposal_code"/>
 			<result property="animalDisposalResult" column="animal_disposal_result"/>
 		</association>
+		<association property="protectionSpace" javaType="ProtectionSpace">
+			<result property="protectSpaceCode" column="protect_space_code"/>
+		</association>
 	</resultMap>
 	
 	<select id="selectNoDisposal" resultMap="animalCenter">
@@ -99,22 +102,6 @@
 				, #{reportManger.acceptCode})
 	</insert>
 	
-	<select id="selectProtectAnimalCenter" resultType="String">
-		SELECT
-			p.protect_space_code AS 'spaceCode'
-			
-		FROM 
-			tb_animal_insert AS i
-			JOIN tb_animal_type AS t ON i.animal_type_code = t.animal_type_code
-			LEFT JOIN tb_protect_space AS p ON i.animal_insert_code = p.animal_insert_code
-		<if test="send_type !=null and send_type !=''.toString()">
-			<where>
-			t.animal_type = #{send_type}
-			</where>
-		</if>
-		ORDER BY i.animal_insert_reg_date DESC
-	</select>
-	
 	<select id="selectCenterCnt" resultType="map">
 		SELECT 
 			animal_type AS animalType,
@@ -134,7 +121,8 @@
 			tb_animal_insert AS i
 		JOIN tb_animal_type AS t on i.animal_type_code = t.animal_type_code
 		JOIN tb_staff AS s ON i.staff_code = s.staff_code
-		left JOIN tb_animal_disposal AS d ON d.animal_insert_code =i.animal_insert_code
+		LEFT JOIN tb_animal_disposal AS d ON d.animal_insert_code =i.animal_insert_code
+		LEFT JOIN tb_protect_space AS p ON p.animal_insert_code = i.animal_insert_code
 		<if test="send_type !=null and send_type !=''.toString()">
 			<where>
 				animal_type= #{send_type}

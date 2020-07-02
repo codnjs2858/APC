@@ -70,21 +70,13 @@ public class AnimalCenterController {
 	@GetMapping("/animalcenterlist")
 	public String listAnimalCenter(@RequestParam(name="send_type", required = false) String send_type ,Model model) {
 		model.addAttribute("Cnt", animalCenterService.selectCenterCnt());
-		Map<Integer, Object> spaceMap = new HashMap<Integer, Object>();
-		List<String> space = null;
 		List<AnimalCenter> AClist = null;
 		if(send_type != null && !"".equals(send_type)) {
 			AClist = animalCenterService.selectAnimalCenter(send_type);
-			space = animalCenterService.selectProtectAnimalCenter(send_type);
 		}else {
 			AClist = animalCenterService.selectAnimalCenter();
-			space = animalCenterService.selectProtectAnimalCenter();
-		}
-		for(int i = 0; i < space.size(); i++) {
-			spaceMap.put(i, space.get(i));
 		}
 		model.addAttribute("AClist", AClist);
-		model.addAttribute("proNum", spaceMap);
 		
 		return "animalcenter/animalCenterList";
 	}
