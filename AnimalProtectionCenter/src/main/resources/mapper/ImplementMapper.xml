@@ -46,7 +46,7 @@
 			,#{implementBreakageAmount}
 			,#{implementPrice}
 			,#{staffCode}
-			,NOW()
+			,CURDATE()
 			)
 	</insert>
 	

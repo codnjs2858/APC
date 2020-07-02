@@ -104,24 +104,6 @@
 		</div>
 	</section>
 	
-	<div id="modalTarget" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h2 class="modal-title">Modal Header</h2>
-				</div>
-				<div class="modal-body">
-					<p>Some text in the modal.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="ok">ok</button>
-					<button type="button" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	
 </th:block> 
 
 <th:block layout:fragment="customHeadScript">
@@ -146,17 +128,19 @@
     <script>
     	$(function(){
     		$('.delete').click(function(){
-    			swal('삭제하시겠습니까?', {
-					title:'경고',
-					icon:'error',
+    			swal({
+					title: '경고',
+					text: '삭제하시겠습니까?', 
+					icon: 'error',
 					buttons: true,
 				})
     			.then((foodDelete) => {
     				var val = $(this).data('myurl');
     				console.log(val);
     				if(foodDelete){
-    					swal("정말로 삭제하시겠습니까?", {
+    					swal({
     							title: '확인',
+    							text: "정말로 삭제하시겠습니까?", 
     					      	icon: "warning",
     					      	buttons: true,
     					    })
@@ -181,21 +165,6 @@
     			 }
     		});
     		*/
-    		$('#modalTarget').on('show.bs.modal', function (event) {
-    	        var color = $(event.relatedTarget).data('color');
-    	        var data = $(event.relatedTarget).data('data');
-    	        var title = $(event.relatedTarget).data('title');
-    	        $('#modalTarget .modal-title').text(title);
-    	        $('#modalTarget .modal-body').text(data);
-    	        $('#modalTarget .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
-    	        $('#ok').val(data);
-    	    });
-    		
-    		$('#ok').click(function(){
-    			var val = $(this).val();
-    			console.log('ok 버튼 클릭 했음' + val);
-    			location.href='/petItem/petFoodDelete?foodCode=' + val;
-    		});
     	});
     </script>
 </th:block>

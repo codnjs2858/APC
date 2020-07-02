@@ -85,6 +85,21 @@
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
+	<script>
+		$(function(){
+			$('#protectSpaceBtn').click(function(){
+    			swal({
+					title: '등록',
+					text: '등록하시겠습니까?', 
+					icon: 'success',
+					buttons: true,
+				})
+    			.then((value) => {
+    				if(value) var val = $('#protectSpaceForm').submit();
+    			});
+    		});
+		});
+	</script>
 </th:block>
  
 </html>

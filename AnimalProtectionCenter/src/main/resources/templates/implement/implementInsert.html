@@ -14,7 +14,7 @@
 					<h2>시설등록</h2>
 				</div>
 				<div class="body">
-					<form action="/implement/implementInsert" method="POST">
+					<form id="implementForm" action="/implement/implementInsert" method="POST">
 						<div class="row">
 							<div class="col-md-4">
 			                    <div class="input-group">
@@ -82,7 +82,7 @@
 							</div>
 						</div>
 						
-                        <button class="btn btn-block bg-amber waves-effect" type="submit">시설등록</button>
+                        <button id="implementBtn" class="btn btn-block bg-amber waves-effect" type="button">시설등록</button>
                         
                 	</form>
 				</div>
@@ -100,6 +100,21 @@
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
+	<script>
+		$(function(){
+			$('#implementBtn').click(function(){
+				swal({
+					title: '등록',
+					text: '등록하시겠습니까?', 
+					icon: 'success',
+					buttons: true,
+				})
+				.then((value) => {
+					if(value) var val = $('#implementForm').submit();
+				});
+			});
+		});
+	</script>
 </th:block>
  
 </html>

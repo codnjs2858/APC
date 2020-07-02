@@ -61,7 +61,7 @@
 						            </td>
 						            <td>
 						            	<div class="align-center">
-							            	<a class="delete" data-toggle="modal" data-color="red" th:data-data="${im.implementCode}" data-title="delete" href="#modalTarget">
+							            	<a class="delete" th:data-myurl="'/implement/implementDelete?implementCode=' + ${im.implementCode}" href="javascript:void(0)">
 							            			<i class="material-icons">delete</i>
 							            	</a>							            	
 						            	</div>
@@ -116,6 +116,32 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
     <script>
 	    $(function(){
+	    	$('.delete').click(function(){
+    			swal({
+					title: '경고',
+					text: '삭제하시겠습니까?', 
+					icon: 'error',
+					buttons: true,
+				})
+    			.then((foodDelete) => {
+    				var val = $(this).data('myurl');
+    				console.log(val);
+    				if(foodDelete){
+    					swal({
+    							title: '확인',
+    							text: "정말로 삭제하시겠습니까?",
+    					      	icon: "warning",
+    					      	buttons: true,
+    					    })
+    					    .then((value) => {
+    					    	if(value) location.href = val;
+    					    });
+    				}else{
+    					console.log('취소');
+    				}
+    			});
+    		});
+	    	
 			$('#dataTable').dataTable({
 				"aaSorting": []
 			});

@@ -20,16 +20,12 @@
             		<form id="petFoodForm" action="/petItem/petFoodInsert" method="post">
             			<div class="row">
             				<div class="col-md-4">
-            					<div class="input-group">
-									<div class="form-line">
-										사료종류
-										<div>
-											<select id="foodType" name="foodType">
-												<option value="">-- 종류선택 --</option>
-												<option th:each="aniType : ${aniTypeCnt}" th:value="${aniType.animalType}">-- [[${aniType.animalType}]] --</option>
-											</select>
-										</div>
-									</div>
+								사료종류
+								<div>
+									<select id="foodType" name="foodType" class="form-control">
+										<option value="">-- 종류선택 --</option>
+										<option th:each="aniType : ${aniTypeCnt}" th:value="${aniType.animalType}">-- [[${aniType.animalType}]] --</option>
+									</select>
 								</div>
             				</div>
             				<div class="col-md-4">
@@ -94,6 +90,18 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
+			$('#petFoodBtn').click(function(){
+				swal({
+					title: '등록',
+					text: '등록하시겠습니까?', 
+					icon: 'success',
+					buttons: true,
+				})
+				.then((value) => {
+					if(value) var val = $('#petFoodForm').submit();
+				});
+			});
+			
 			var checkValue = function(obj, msg){
 				if(obj.val() == ''){
 					swal({
@@ -115,8 +123,6 @@
 				if(checkValue($('#foodBuyer'), 	'구매인을 입력해주세요')) 		return;
 				if(checkValue($('#foodName'), 	'사료이름을 입력해주세요')) 	return;
 				if(checkValue($('#foodCompany'),'사료회사를 입력해주세요')) 	return;
-				
-				$('#petFoodForm').submit();
 			});
 		});
 	</script>
