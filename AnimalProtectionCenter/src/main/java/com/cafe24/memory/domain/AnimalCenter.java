@@ -13,8 +13,15 @@ public class AnimalCenter {
 	private AnimalType animalType;
 	private Staff staff;
 	private ReportManger reportManger;
+	private ProtectionSpace protectionSpace;
 	private AnimalDisposal animalDisposal;
 	
+	public ProtectionSpace getProtectionSpace() {
+		return protectionSpace;
+	}
+	public void setProtectionSpace(ProtectionSpace protectionSpace) {
+		this.protectionSpace = protectionSpace;
+	}
 	public String getAnimalInsertCode() {
 		return animalInsertCode;
 	}
@@ -93,12 +100,15 @@ public class AnimalCenter {
 	public void setAnimalDisposal(AnimalDisposal animalDisposal) {
 		this.animalDisposal = animalDisposal;
 	}
+	
 	@Override
 	public String toString() {
 		return "AnimalCenter [animalInsertCode=" + animalInsertCode + ", animalCenterNumber=" + animalCenterNumber
 				+ ", animalPicture=" + animalPicture + ", animalGender=" + animalGender + ", animalAge=" + animalAge
 				+ ", animalWeight=" + animalWeight + ", animalCharacter=" + animalCharacter + ", animalState="
 				+ animalState + ", animalInsertRegDate=" + animalInsertRegDate + ", animalType=" + animalType
-				+ ", staff=" + staff + ", reportManger=" + reportManger + "]";
+				+ ", staff=" + staff + ", reportManger=" + reportManger + ", protectionSpace=" + protectionSpace
+				+ ", animalDisposal=" + animalDisposal + "]";
 	}
 }
+

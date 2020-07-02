@@ -6,11 +6,17 @@ public class Staff {
 	private String staffPart;
 	private String staffRank;
 	private Member member;
-	private String staffPhone;
-	private String staffEmail;
 	private String staffInDate;
 	private String staffOutDate;
+	private Commute commute;
 	
+	
+	public Commute getCommute() {
+		return commute;
+	}
+	public void setCommute(Commute commute) {
+		this.commute = commute;
+	}
 	public String getStaffCode() {
 		return staffCode;
 	}
@@ -41,18 +47,6 @@ public class Staff {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	public String getStaffPhone() {
-		return staffPhone;
-	}
-	public void setStaffPhone(String staffPhone) {
-		this.staffPhone = staffPhone;
-	}
-	public String getStaffEmail() {
-		return staffEmail;
-	}
-	public void setStaffEmail(String staffEmail) {
-		this.staffEmail = staffEmail;
-	}
 	public String getStaffInDate() {
 		return staffInDate;
 	}
@@ -68,8 +62,8 @@ public class Staff {
 	@Override
 	public String toString() {
 		return "Staff [staffCode=" + staffCode + ", staffName=" + staffName + ", staffPart=" + staffPart
-				+ ", staffRank=" + staffRank + ", member=" + member + ", staffPhone=" + staffPhone + ", staffEmail="
-				+ staffEmail + ", staffInDate=" + staffInDate + ", staffOutDate=" + staffOutDate + "]";
+				+ ", staffRank=" + staffRank + ", member=" + member + ", staffInDate=" + staffInDate + ", staffOutDate="
+				+ staffOutDate + ", commute=" + commute + "]";
 	}
 	
 }

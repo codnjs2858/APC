@@ -61,9 +61,6 @@
 				           			<div class="m-t-20">
 					           			<button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#largeModal">신고 코드 찾기</button>
 				           			</div>
-				           			<div class="m-t-20">
-					           			<button type="button" id="test" class="btn btn-default waves-effect m-r-20">신고 코드 테스트2</button>
-				           			</div>
 				           		</div>
 				           	</div>
 				           	<div class="header">
@@ -234,9 +231,6 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
-			
-			
-			
 			//이미지 미리보기
 			function readURL(input) {
 		        if (input.files && input.files[0]) {
@@ -330,18 +324,6 @@
 	                $(this).val(inputVal.replace(/[^0-9]/gi,''));
 	            }
 	        });
-			
-			$('#test').click(function(){
-				swal({
-					  content: {
-					    element: "input",
-					    attributes: {
-					      placeholder: "Type your password",
-					      type: "password",
-					    },
-					  },
-					});
-			});
 		});
 	</script>
 </th:block>
