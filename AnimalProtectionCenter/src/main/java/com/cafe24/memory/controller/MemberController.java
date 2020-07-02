@@ -83,8 +83,12 @@ public class MemberController {
 
 	@GetMapping("/memberUpdate")
 	public String memberUpdate(Model model,Member member) {
+		System.out.println(member);
+		Member mem=null;
 		System.out.println(member+"<-member");
-		Member mem=memberService.getMemberList(member.getMemberId());
+		if(member.getMemberId()!=null) {
+			mem=memberService.getMemberList(member.getMemberId());
+		}
 		model.addAttribute("mem", mem);
 		System.out.println(mem+"<-model의 mem");
 		return "member/updateMember";
