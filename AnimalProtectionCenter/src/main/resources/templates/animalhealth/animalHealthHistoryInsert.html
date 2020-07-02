@@ -69,7 +69,9 @@
 
 <th:block layout:fragment="customFooterScript">
 	<script>
-		$('input[name=animalHealthEndDate]').val(new Date().toISOString().substring(0, 10));
+		$(function(){
+			$('input[name=animalHealthEndDate]').val(new Date().toISOString().substring(0, 10));
+		});
 	</script>
 </th:block>
  

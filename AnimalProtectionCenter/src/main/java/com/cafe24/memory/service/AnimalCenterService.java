@@ -27,18 +27,6 @@ public class AnimalCenterService {
 	}
 	
 	/**
-	 * 모든 보호동물 ,타입별 보호동물 보호공간 코드 조회
-	 * @return
-	 */
-	public List<String> selectProtectAnimalCenter(){
-		return animalCenterMapper.selectProtectAnimalCenter();
-	}
-	public List<String> selectProtectAnimalCenter(String send_type){
-		return animalCenterMapper.selectProtectAnimalCenter(send_type);
-	}
-	
-	
-	/**
 	 * 센터 동물 삭제
 	 * @param send_code
 	 * @return
