@@ -1,8 +1,10 @@
 package com.cafe24.memory.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cafe24.memory.domain.CompanionAnimalRegister;
 
@@ -21,4 +23,7 @@ public interface CompanionAnimalRegisterMapper {
 	
 	public int deleteCompanionAnimalRegister(String companionAnimalRegisterCode);
 	
+	public List<Map<String, Object>> selectComAniRegCount();
+	
+	public List<CompanionAnimalRegister> selectComAniRegList(String CARL);
 }

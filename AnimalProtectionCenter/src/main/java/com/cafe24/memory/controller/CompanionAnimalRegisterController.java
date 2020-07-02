@@ -1,6 +1,8 @@
 package com.cafe24.memory.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.memory.domain.AnimalCenter;
+import com.cafe24.memory.domain.AnimalProtect;
 import com.cafe24.memory.domain.CompanionAnimalRegister;
 import com.cafe24.memory.domain.ProtectionSpace;
 import com.cafe24.memory.domain.Staff;
@@ -43,10 +46,37 @@ public class CompanionAnimalRegisterController {
 	
 	@GetMapping("/companionAnimalRegisterList")
 	
-	public String companionAnimalRegisterList(Model model) {
+	public String companionAnimalRegisterList(Model model, @RequestParam(name="sendType", required = false)
+															String sendType) {
 		List<CompanionAnimalRegister> cars = companionAnimalRegisterService.selectCompanionAnimalRegisterList();
-		System.out.println(cars);
+		List<Map<String, Object>> selectComAniRegCount = companionAnimalRegisterService.selectComAniRegCount();
+		List<ProtectionSpace> proSpace = protectionService.selectProtectionSpace();
+		
+		System.out.println(proSpace);
+		
+		//분양 현황 검색
+		int totalCount = 0;
+		totalCount = cars.size();
+		
+		if(sendType != null) {
+			if("분양 가능".equals(sendType)) {
+				cars = companionAnimalRegisterService.selectComAniRegList("분양 가능");
+			}else if("분양 완료".equals(sendType)) {
+				cars = companionAnimalRegisterService.selectComAniRegList("분양 완료");
+			}else {
+				cars = companionAnimalRegisterService.selectComAniRegList("기타");
+			}
+		}else {
+			
+		}
 		model.addAttribute("CARS", cars);
+		model.addAttribute("CRC", selectComAniRegCount);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("proSpace", proSpace);
+		
+		System.out.println(cars);
+		System.out.println("selectComAniRegCount");
+		
 		return "companionanimalregister/companionAnimalRegisterList";
 	
 	}
@@ -66,7 +96,7 @@ public class CompanionAnimalRegisterController {
 	
 	@GetMapping("/companionAnimalRegisterInsert")
 
-	public String insertCompanionAnimalRegister(Model model) {
+	public String companionAnimalRegisterInsert(Model model) {
 	
 	 List<ProtectionSpace> proList = protectionService.selectProtectionSpace();
 	 List<AnimalCenter> anicenter = animalCenterService.selectAnimalCenter();

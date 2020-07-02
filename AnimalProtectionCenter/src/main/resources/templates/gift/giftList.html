@@ -62,13 +62,13 @@
 	                        <tbody>
 			                        <tr th:each="GL, i : ${GL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${GL.member.memberId}]]</td>
-		                              	<td><div class="align-center"></div>[[${GL.member.memberName}]]</td>
-		                              	<td><div class="align-center"></div>[[${GL.giftType}]]</td>
-		                              	<td><div class="align-center"></div>[[${GL.giftCost}]]</td>
-		                              	<td><div class="align-center"></div>[[${GL.giftReason}]]</td>
-		                              	<td><div class="align-center"></div>[[${GL.giftDate}]]</td>
-		                              	<td><div class="align-center"></div>[[${GL.staff.staffName}]]</td>
+		                              	<td><div class="align-center">[[${GL.member.memberId}]]</div></td>
+		                              	<td><div class="align-center">[[${GL.member.memberName}]]</div></td>
+		                              	<td><div class="align-center">[[${GL.giftType}]]</div></td>
+		                              	<td><div class="align-center">[[${GL.giftCost}]]</div></td>
+		                              	<td><div class="align-center">[[${GL.giftReason}]]</div></td>
+		                              	<td><div class="align-center">[[${GL.giftDate}]]</div></td>
+		                              	<td><div class="align-center">[[${GL.staff.staffName}]]</div></td>
 		                                <td><div class="align-center">
 		                                	<a th:href="@{/gift/giftUpdate(giftCode=${GL.giftCode})}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>

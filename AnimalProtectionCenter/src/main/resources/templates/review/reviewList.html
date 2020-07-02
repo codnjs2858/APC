@@ -61,13 +61,13 @@
 	                        <tbody>
 			                        <tr th:each="RVL, i : ${RVL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${RVL.member.memberId}]]</td>
-		                              	<td><div class="align-center"></div>[[${RVL.member.memberName}]]</td>
-		                              	<td><div class="align-center"></div>[[${RVL.reviewCount}]]</td>
-		                              	<td><div class="align-center"></div>[[${RVL.reviewOmissionCount}]]</td>
-		                              	<td><div class="align-center"></div>[[${RVL.reviewDate}]]</td>
-		                              	<td><div class="align-center"></div>[[${RVL.reviewManagementPeriod}]]</td>
-		                              	<td><div class="align-center"></div>[[${RVL.staff.staffName}]]</td>
+		                              	<td><div class="align-center">[[${RVL.member.memberId}]]</div></td>
+		                              	<td><div class="align-center">[[${RVL.member.memberName}]]</div></td>
+		                              	<td><div class="align-center">[[${RVL.reviewCount}]]</div></td>
+		                              	<td><div class="align-center">[[${RVL.reviewOmissionCount}]]</div></td>
+		                              	<td><div class="align-center">[[${RVL.reviewDate}]]</div></td>
+		                              	<td><div class="align-center">[[${RVL.reviewManagementPeriod}]]</div></td>
+		                              	<td><div class="align-center">[[${RVL.staff.staffName}]]</div></td>
 		                                <td><div class="align-center">
 		                                	<a th:href="@{/review/reviewUpdate(reviewCode=${RVL.reviewCode})}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>

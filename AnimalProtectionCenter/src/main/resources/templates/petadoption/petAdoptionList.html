@@ -32,13 +32,16 @@
 					<div class="row clearfix">
 	                    <div class="col-xs-3 col-md-3" >
 	                    	<a th:href="@{/petadoption/petAdoptionList}">
-		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
+		                        	전체보기
+		                        <span class="badge" th:text="${totalCount}"></span>
+		                        </button>
 	                    	</a>
 	                    </div>
-	                    <div class="col-xs-3 col-md-3" th:each="c:${Cnt}">
-	                    	<a th:href="@{/animaltypelist(send_type=${c.animalType})}">
+	                    <div class="col-xs-3 col-md-3" th:each="p:${PS}">
+	                    	<a th:href="@{/petadoption/petAdoptionList(sendType=${p.petAdoptionState})}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
-		                        [[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
+		                        [[${p.petAdoptionState}]] <span class="badge">[[${p.petAdoptionCount}]]</span></button>
 	                    	</a>
 	                    </div>
 	                </div>
@@ -61,13 +64,13 @@
 	                        <tbody>
 			                        <tr th:each="PAL, i : ${PAL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${PAL.member.memberId}]]</td>
-		                              	<td><div class="align-center"></div>[[${PAL.member.memberName}]]</td>
-		                              	<td><div class="align-center"></div>[[${PAL.petAdoptionManagementDate}]]</td>
-		                              	<td><div class="align-center"></div>[[${PAL.petAdoptionEndDate}]]</td>
-		                              	<td><div class="align-center"></div>[[${PAL.petAdoptionState}]]</td>
-		                              	<td><div class="align-center"></div>[[${PAL.petAdoptionInDate}]]</td>
-		                              	<td><div class="align-center"></div>[[${PAL.staff.staffName}]]</td>
+		                              	<td><div class="align-center">[[${PAL.member.memberId}]]</div></td>
+		                              	<td><div class="align-center">[[${PAL.member.memberName}]]</div></td>
+		                              	<td><div class="align-center">[[${PAL.petAdoptionManagementDate}]]</div></td>
+		                              	<td><div class="align-center">[[${PAL.petAdoptionEndDate}]]</div></td>
+		                              	<td><div class="align-center">[[${PAL.petAdoptionState}]]</div></td>
+		                              	<td><div class="align-center">[[${PAL.petAdoptionInDate}]]</div></td>
+		                              	<td><div class="align-center">[[${PAL.staff.staffName}]]</div></td>
 		                                <td><div class="align-center">
 		                                	<a th:href="@{/petadoption/petAdoptionUpdate(petAdoptionCode=${PAL.petAdoptionCode})}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>

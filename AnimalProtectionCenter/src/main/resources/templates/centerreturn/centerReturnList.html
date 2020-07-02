@@ -64,13 +64,13 @@
 	                        <tbody>
 			                        <tr th:each="CRL, i : ${CRL}" class="odd">
 			                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-		                              	<td><div class="align-center"></div>[[${CRL.animalType}]]</td>
-		                                <td><div class="align-center"></div>[[${CRL.centerReturnName}]]</td>
-		                                <td><div class="align-center"></div>[[${CRL.centerReturnAge}]]</td>
-		                                <td><div class="align-center"></div>[[${CRL.centerReturnAddress}]]</td>
-		                                <td><div class="align-center"></div>[[${CRL.centerReturnPhone}]]</td>
-		                                <td><div class="align-center"></div>[[${CRL.centerReturnDate}]]</td>
-		                               	<td><div class="align-center"></div>[[${CRL.staff.staffName}]]</td>
+		                              	<td><div class="align-center">[[${CRL.animalType}]]</div></td>
+		                                <td><div class="align-center">[[${CRL.centerReturnName}]]</div></td>
+		                                <td><div class="align-center">[[${CRL.centerReturnAge}]]</div></td>
+		                                <td><div class="align-center">[[${CRL.centerReturnAddress}]]</div></td>
+		                                <td><div class="align-center">[[${CRL.centerReturnPhone}]]</div></td>
+		                                <td><div class="align-center">[[${CRL.centerReturnDate}]]</div></td>
+		                               	<td><div class="align-center">[[${CRL.staff.staffName}]]</div></td>
 		                                <td><div class="align-center">
 		                                	<a th:href="@{/centerreturn/centerReturnUpdate(centerReturnCode=${CRL.centerReturnCode})}" style="color: #9E9E9E">
 		                       				<i class="material-icons">update</i></a></div>

@@ -1,6 +1,7 @@
 package com.cafe24.memory.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,6 +49,7 @@ public class PetAdoptionController {
 									String petAdoptionCode, Model model) {
 		
 		PetAdoption petAdoption = petAdoptionService.selectPetAdoption(petAdoptionCode);
+		
 		model.addAttribute("PA", petAdoption);
 		
 		System.out.println(petAdoption +"<-- petAdoption");
@@ -56,9 +58,32 @@ public class PetAdoptionController {
 	}
 	
 	@GetMapping("/petAdoptionList")
-	public String petAdoptionList(Model model) {
+	public String petAdoptionList(Model model, @RequestParam(name="sendType", required = false)
+												String sendType) {
+		List<Map<String, Object>> petState = petAdoptionService.selectPetAdoptionState();
+		List<PetAdoption> petStateList = petAdoptionService.seletectPetAdoption();
 		
-		model.addAttribute("PAL", petAdoptionService.seletectPetAdoption());
+		int totalCount = 0;
+		
+		totalCount = petStateList.size();
+		System.out.println(petState);
+		System.out.println(petStateList);
+		System.out.println(totalCount);
+		
+		if(sendType != null) {
+			if("관리 진행중".equals(sendType)) {
+				petStateList = petAdoptionService.selectPetAdoptionStateList("관리 진행중");
+			}else if ("관리 완료".equals(sendType)) {
+				petStateList = petAdoptionService.selectPetAdoptionStateList("관리 완료");
+			}else {
+				petStateList = petAdoptionService.selectPetAdoptionStateList("중도 포기");
+			}
+		}else {
+			
+		}
+		model.addAttribute("PAL", petStateList);
+		model.addAttribute("PS", petState);
+		model.addAttribute("totalCount", totalCount);
 	
 		return "petadoption/petAdoptionList";
 	}

@@ -109,4 +109,36 @@
 			pet_adoption_code=#{petAdoptionCode};
 	</delete>
 	
+	<!-- 분양상태 검색 및 갯수 -->
+	
+	<select id="selectPetAdoptionState" resultType="Map">
+		SELECT 
+			p.pet_adoption_state		as petAdoptionState,
+			COUNT(p.pet_adoption_state)	as petAdoptionCount
+		FROM 
+			tb_pet_Adoption AS p
+		GROUP BY 
+			p.pet_adoption_state
+		ORDER BY (
+		          CASE p.pet_adoption_state
+		          WHEN '관리 진행중' THEN 1
+		          WHEN '관리 완료' THEN 2
+		          WHEN '중도 포기' THEN 3
+		          ELSE 4
+		          END
+         		 );	
+			
+	</select>
+	
+	<!-- 관리 상태로 리스트 검색 -->
+	
+	<select id="selectPetAdoptionStateList" parameterType="String" resultMap="petAdoption">
+		SELECT 
+			*
+		FROM 
+			tb_pet_Adoption AS p
+		WHERE
+			p.pet_adoption_state=#{petAdoptionState}
+		ORDER BY CAST(SUBSTR(p.pet_adoption_code,5) AS DECIMAL) DESC;
+	</select>
 </mapper>

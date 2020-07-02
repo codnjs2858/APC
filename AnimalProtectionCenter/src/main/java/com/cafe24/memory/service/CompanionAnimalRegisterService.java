@@ -1,6 +1,7 @@
 package com.cafe24.memory.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,6 +71,16 @@ public class CompanionAnimalRegisterService {
 		
 		return companionAnimalRegisterMapper.deleteCompanionAnimalRegister(companionAnimalRegisterCode);
 		
+	}
+	
+	public List<Map<String, Object>> selectComAniRegCount(){
+		
+		return companionAnimalRegisterMapper.selectComAniRegCount();
+	}
+	
+	public List<CompanionAnimalRegister> selectComAniRegList(String CARL){
+		
+		return companionAnimalRegisterMapper.selectComAniRegList(CARL);
 	}
 	
 }

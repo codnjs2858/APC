@@ -42,7 +42,7 @@ public class AnimalCenterController {
 	private final static Logger logger = 
 			LoggerFactory.getLogger(SpringBootApplication.class);
 	
-	//animal center inset
+	//animal center insert
 	@GetMapping("/animalcenterinsert")
 	public String insertAnimalCenterForm() {
 		return "animalcenter/animalCenterInsert";
