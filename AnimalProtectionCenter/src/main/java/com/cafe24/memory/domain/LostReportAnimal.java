@@ -8,8 +8,16 @@ public class LostReportAnimal {
 	private String animaFeature;
 	private Member member;
 	private String lostReportState;
+	private String lostReportLocation;
 	private String lostReportInDate;
 	private String lostReportOutDate;
+	
+	public String getLostReportLocation() {
+		return lostReportLocation;
+	}
+	public void setLostReportLocation(String lostReportLocation) {
+		this.lostReportLocation = lostReportLocation;
+	}
 	public String getLostReportCode() {
 		return lostReportCode;
 	}
@@ -68,8 +76,8 @@ public class LostReportAnimal {
 	public String toString() {
 		return "LostReportAnimal [lostReportCode=" + lostReportCode + ", animalType=" + animalType + ", animalName="
 				+ animalName + ", animalGender=" + animalGender + ", animaFeature=" + animaFeature + ", member="
-				+ member + ", lostReportState=" + lostReportState + ", lostReportInDate=" + lostReportInDate
-				+ ", lostReportOutDate=" + lostReportOutDate + "]";
+				+ member + ", lostReportState=" + lostReportState + ", lostReportLocation=" + lostReportLocation
+				+ ", lostReportInDate=" + lostReportInDate + ", lostReportOutDate=" + lostReportOutDate + "]";
 	}
 	
 	

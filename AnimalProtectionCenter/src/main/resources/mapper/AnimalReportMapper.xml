@@ -32,6 +32,40 @@
 			</association>
 		</association>
 	</resultMap>
+	<resultMap type="LostReportAnimal" id="lostReportAnimal">
+		<result property="lostReportCode" column="lost_report_code"></result>
+		<result property="animalName" column="animal_name"></result>
+		<result property="animalGender" column="animal_gender"></result>
+		<result property="animaFeature" column="animal_feature"></result>
+		<result property="lostReportState" column="lost_report_state"></result>
+		<result property="lostReportLocation" column="lost_report_location"></result>
+		<result property="lostReportInDate" column="lost_report_in_date"></result>
+		<result property="lostReportOutDate" column="lost_report_out_date"></result>
+		<association property="animalType" javaType="AnimalType">
+			<result property="animalTypeCode" column="animal_type_code"></result>
+			<result property="animalType" column="animal_type"></result>
+			<result property="animalTypeSub" column="animal_type_sub"></result>
+			<result property="animalTypeRegDate" column="animal_type_reg_date"></result>
+		</association>
+		<association property="member" javaType="Member">
+			<result property="memberId" column="member_id"></result>
+		</association>	
+	</resultMap>
+	<resultMap type="ReportManger" id="reportManager">
+		<result property="acceptCode" column="accept_code"></result>
+		<result property="acceptState" column="accept_state"></result>
+		<result property="acceptInDate" column="accept_in_date"></result>
+		<result property="acceptOutDate" column="accept_out_date"></result>
+		<association property="searchReport" javaType="SearchReportAnimal">
+			<result property="searchReportCode" column="search_report_code"></result>
+		</association>
+		<association property="lostReport" javaType="LostReportAnimal">
+			<result property="lostReportCode" column="lost_report_code"></result>		
+		</association>
+		<association property="member" javaType="Member">
+			<result property="memberId" column="member_id"></result>		
+		</association>
+	</resultMap>
 	
 	<insert id="insertAnimalReport" parameterType="SearchReportAnimal">
 		<selectKey resultType="String" order="BEFORE" keyProperty="searchReportCode">
@@ -58,7 +92,20 @@
 			fROM tb_lost_report;
 		</selectKey>
 	INSERT INTO tb_lost_report
-		(lost_report_code, animal_code, animal_name, animal_gender, animal_feature, member_id, lost_report_state, lost_report_in_date)
-		VALUES (#{lostReportCode},#{animalType.animalTypeCode} ,#{animalName} , #{animalGender}, #{animaFeature}, #{member.memberId},#{lostReportState} , NOW())
+	(lost_report_code, animal_code, animal_name, animal_gender, animal_feature, member_id, lost_report_state, lost_report_in_date, lost_report_location)
+	VALUES (#{lostReportCode},#{animalType.animalTypeCode} ,#{animalName} , #{animalGender}, #{animaFeature}, #{member.memberId}, #{lostReportState} , NOW(),#{lostReportLocation})
+	
 	</insert>
+	
+	<select id="selectAllReport" resultMap="reportManager">
+			SELECT 
+			s.animal_location,s.member_id,s.search_report_in_date,s.search_report_out_date,s.search_report_code
+			,l.lost_report_code,l.member_id,l.lost_report_state,l.lost_report_in_date,l.lost_report_out_date,l.lost_report_location
+			
+			FROM 
+			 
+			tb_lost_report AS l JOIN tb_search_report AS s
+			
+		;
+	</select>
 </mapper>
