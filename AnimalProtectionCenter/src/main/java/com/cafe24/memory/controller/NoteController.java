@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cafe24.memory.domain.Note;
 import com.cafe24.memory.service.NoteService;
 
 @Controller
@@ -13,6 +14,12 @@ import com.cafe24.memory.service.NoteService;
 public class NoteController {
 
 	@Autowired private NoteService noteService;
+	
+	@GetMapping("/getNote")
+	public String getNote(Note note, Model model) {
+		model.addAttribute("getNote", noteService.getNote(note));
+		return "note/getNote";
+	}
 	
 	@GetMapping("/noteList")
 	public String noteList(Model model) {

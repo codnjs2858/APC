@@ -23,4 +23,8 @@ public class NoteService {
 	public List<Note> selectSendNote(String send_member){
 		return noteMapper.selectSendNote(send_member);
 	}
+	
+	public List<Note> getNote(Note note){
+		return noteMapper.getNote(note);
+	}
 }
