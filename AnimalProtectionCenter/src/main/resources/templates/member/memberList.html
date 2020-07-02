@@ -72,13 +72,15 @@
 		                            <td><div class="align-center">[[${j.memberEmail}]]</div></td>
 		                            <td><div class="align-center">[[${j.memberInDate}]]</div></td>
 		                            <td><div class="align-center">
-		                            	<a th:href="@{/memberUpdate(memberId=${j.memberId})}">
+		                            	<a th:href="@{/member/memberUpdate(memberId=${j.memberId})}">
 	                       				<i class="material-icons">update</i></a></div>
 	                      			</td>
 	                      			<td><div class="align-center">
 	                      				<button type="button" class="delete" th:value="${j.memberId}" >
 	                      					<i class="material-icons">delete</i>
 	                      				</button>
+	                      			</div>	
+	                      			</td>
 	                        	</tr>
 	                        </tbody>
 	                    </table>
@@ -135,7 +137,7 @@
 				$('#modalBtn').trigger('click');
 				var val = $(this).val();
 				console.log(val);
-				var url ="/memberDelete?memberId="+val;
+				var url ="/member/memberDelete?memberId="+val;
 			  $('#ok').click(function(){
 		
 			    	$(location).attr('href',url);
