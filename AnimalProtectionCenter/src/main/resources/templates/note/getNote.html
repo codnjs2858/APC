@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customCss">
+</th:block>
+
+ <th:block layout:fragment="customTitle">
+ 	<title>쪽지</title>
+ </th:block> 
+
+<th:block layout:fragment="customContents">
+<section class="content">
+	<div class="container-fluid">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card" th:each="p : ${getNote}">
+            	<div class="header">
+            	<h2>[[${p.note_title}]]</h2>
+            	</div>
+                <div class="body">
+                	[[${p.note_content}]]
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</th:block> 
+ 
+<th:block layout:fragment="customHeadScript">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+</th:block> 
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>

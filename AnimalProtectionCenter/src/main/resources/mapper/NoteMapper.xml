@@ -13,15 +13,19 @@
 
 	<select id="selectNote" resultMap="getNoteMap">
 		SELECT * FROM tb_note
-		<where>
+		WHERE
 			recipient_member=#{recipient_member}
-		</where>
+		ORDER BY cast(SUBSTRING(note_code,11) as decimal) DESC
 	</select>
 	
 	<select id="selectSendNote" resultMap="getNoteMap">
 		SELECT * FROM tb_note
-		<where>
+		WHERE
 			send_member=#{send_member}
-		</where>
+		ORDER BY cast(SUBSTRING(note_code,11) as decimal) DESC
+	</select>
+	
+	<select id="getNote" resultMap="getNoteMap">
+		SELECT * FROM tb_note WHERE note_code = #{note_code}
 	</select>
 </mapper>
