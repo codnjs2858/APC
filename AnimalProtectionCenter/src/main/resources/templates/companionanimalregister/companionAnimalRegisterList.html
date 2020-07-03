@@ -71,7 +71,7 @@
 		                               	<td><div class="align-center">[[${CARS.animalInformation}]]</div></td>
 		                               	<td><div class="align-center">[[${CARS.companionRegisterDate}]]</div></td>
 		                               	<td><div class="align-center">[[${CARS.cancleCompanionInDate}]]</div></td>
-		                               	<td><div class="align-center">[[${session.STAFF.staffName}]]</div></td>
+		                               	<td><div class="align-center">[[${CARS.staff.staffName}]]</div></td>
 		                               	<td th:if="${proSpace[i.index].animalInsertCode} == null">
 		                            	<div class="align-center">
 			                            	<a th:href="@{/protection/animalProtection}">보호 공간 등록</a>
@@ -88,7 +88,7 @@
 		                       				<i class="material-icons">update</i></a></div>
 		                      			</td>
 		                      			<td><div class="align-center">
-					                       	<a class="delete" th:href="@{/companionanimalregister/companionAnimalRegisterDelete(companionAnimalRegisterCode=${CARS.companionAnimalRegisterCode})}" style="color: #F44336">
+					                       	<a class="delete" th:data-myurl="'/companionanimalregister/companionAnimalRegisterDelete?companionAnimalRegisterCode=' + ${CARS.companionAnimalRegisterCode}" href="javascript:void(0)">
 					                       	<i class="material-icons">delete</i></a></div>
 			                      		</td>
 			                        </tr>
@@ -123,16 +123,30 @@
 		
 	    	//삭제 유효성
 			$('.delete').click(function(){
-				var val = $(this).val();
-				console.log(val);
-				var url ="/companionAnimalRegisterDelete?companionAnimalRegisterCode="+val;
-			    var msg = confirm('해당 종류를 삭제 하겠습니까?');
-			    if(msg){
-			    	$(location).attr('href',url);
-			    }else if(!msg){
-			    	return false;
-			    }
-			})
+    			swal({
+					title: '경고',
+					text: '삭제하시겠습니까?', 
+					icon: 'error',
+					buttons: true,
+				})
+    			.then((Delete) => {
+    				var val = $(this).data('myurl');
+    				console.log(val);
+    				if(Delete){
+    					swal({
+    							title: '확인',
+    							text: "정말로 삭제하시겠습니까?", 
+    					      	icon: "warning",
+    					      	buttons: true,
+    					    })
+    					    .then((value) => {
+    					    	if(value) location.href = val;
+    					    });
+    				}else{
+    					console.log('취소');
+    				}
+    			});
+    		});
 		});
 	</script>
 </th:block>

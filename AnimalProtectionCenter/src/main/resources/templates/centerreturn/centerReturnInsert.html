@@ -66,6 +66,15 @@
 			                        </div>
 			                    </div>
 			                </div>
+			                <div class="col-md-4">
+								<div class="input-group">
+			                        <div class="form-line">
+										담당자
+			                            <input type="text" class="form-control" th:value="${session.STAFF.staffName}">
+			                            <input type="hidden" id="staffCode" class="form-control" name="staffCode" th:value="${session.STAFF.staffCode}">
+			                        </div>
+								</div>
+            				</div>
 		                	<button type="submit" class="btn btn-block bg-amber waves-effect">센터 반환 등록</button>
 	            		</form>
 		            </div>
