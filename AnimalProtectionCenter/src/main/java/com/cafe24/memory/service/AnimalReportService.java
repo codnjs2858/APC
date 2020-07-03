@@ -28,4 +28,11 @@ public class AnimalReportService {
 		
 		return animalReportMapper.selectAllReport();
 	}
+	public int insertAniSearchReportManager(ReportManger reportManger) {
+		
+		return animalReportMapper.insertAniSearchReportManager(reportManger);
+	}
+	public int insertAniLostReportManager(ReportManger reportManger) {
+		return animalReportMapper.insertAniLostReportManager(reportManger);
+	}
 }

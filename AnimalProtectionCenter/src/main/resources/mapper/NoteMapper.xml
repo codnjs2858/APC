@@ -10,6 +10,20 @@
 		<result property="note_content" column="note_content"></result>
 		<result property="note_date" column="note_date"></result>
 	</resultMap>
+	
+	<insert id="insertNote" parameterType="Note">
+		<selectKey order="BEFORE" keyProperty="note_code" resultType="String">
+			Select
+			(	case count(*)
+				when 0 then 'note_code_1'
+				else CONCAT('note_code_',max(cast(SUBSTRING(note_code,11) as decimal))+1)
+				END) 
+				as note_code FROM tb_note
+		</selectKey>
+		INSERT INTO tb_note
+		(note_code, send_member, recipient_member, note_title, note_content, note_date)
+		VALUES (#{note_code}, 'id001', #{recipient_member}, #{note_title}, #{note_content}, NOW())
+	</insert>
 
 	<select id="selectNote" resultMap="getNoteMap">
 		SELECT * FROM tb_note

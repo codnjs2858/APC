@@ -1,25 +1,29 @@
 package com.cafe24.memory.domain;
 
 public class Commute {
-	private String CommuteCode;
+	private String commuteCode;
 	private Staff staff;
 	private String commuteDate;
 	private String commuteStartTime;
 	private String commuteEndTime;
-	private String commuteIutingStartTime;
-	private String commuteOutingOutTime;
-	
+	private int commuteWorkingHour;
 	public String getCommuteCode() {
-		return CommuteCode;
+		return commuteCode;
 	}
 	public void setCommuteCode(String commuteCode) {
-		CommuteCode = commuteCode;
+		this.commuteCode = commuteCode;
 	}
 	public Staff getStaff() {
 		return staff;
 	}
 	public void setStaff(Staff staff) {
 		this.staff = staff;
+	}
+	public String getCommuteDate() {
+		return commuteDate;
+	}
+	public void setCommuteDate(String commuteDate) {
+		this.commuteDate = commuteDate;
 	}
 	public String getCommuteStartTime() {
 		return commuteStartTime;
@@ -33,28 +37,18 @@ public class Commute {
 	public void setCommuteEndTime(String commuteEndTime) {
 		this.commuteEndTime = commuteEndTime;
 	}
-	public String getCommuteIutingStartTime() {
-		return commuteIutingStartTime;
+	public int getCommuteWorkingHour() {
+		return commuteWorkingHour;
 	}
-	public void setCommuteIutingStartTime(String commuteIutingStartTime) {
-		this.commuteIutingStartTime = commuteIutingStartTime;
-	}
-	public String getCommuteOutingOutTime() {
-		return commuteOutingOutTime;
-	}
-	public void setCommuteOutingOutTime(String commuteOutingOutTime) {
-		this.commuteOutingOutTime = commuteOutingOutTime;
-	}
-	public String getCommuteDate() {
-		return commuteDate;
-	}
-	public void setCommuteDate(String commuteDate) {
-		this.commuteDate = commuteDate;
+	public void setCommuteWorkingHour(int commuteWorkingHour) {
+		this.commuteWorkingHour = commuteWorkingHour;
 	}
 	@Override
 	public String toString() {
-		return "Commute [CommuteCode=" + CommuteCode + ", staff=" + staff + ", commuteStartTime=" + commuteStartTime
-				+ ", commuteEndTime=" + commuteEndTime + ", commuteIutingStartTime=" + commuteIutingStartTime
-				+ ", commuteOutingOutTime=" + commuteOutingOutTime + ", commuteDate=" + commuteDate + "]";
+		return "Commute [commuteCode=" + commuteCode + ", staff=" + staff + ", commuteDate=" + commuteDate
+				+ ", commuteStartTime=" + commuteStartTime + ", commuteEndTime=" + commuteEndTime
+				+ ", commuteWorkingHour=" + commuteWorkingHour + "]";
 	}
+	
+	
 }

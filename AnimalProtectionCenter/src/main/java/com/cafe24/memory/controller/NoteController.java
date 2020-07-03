@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cafe24.memory.domain.Note;
@@ -14,6 +15,17 @@ import com.cafe24.memory.service.NoteService;
 public class NoteController {
 
 	@Autowired private NoteService noteService;
+	
+	@PostMapping("/sendNote")
+	public String sendNote(Note note, Model model) {
+		noteService.insertNote(note);
+		return "redirect:/note/sendNoteList";
+	}
+	
+	@GetMapping("/sendNote")
+	public String write(Model model) {
+		return "note/sendNote";
+	}
 	
 	@GetMapping("/getNote")
 	public String getNote(Note note, Model model) {
