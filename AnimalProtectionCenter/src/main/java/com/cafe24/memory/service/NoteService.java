@@ -16,6 +16,10 @@ public class NoteService {
 	@Autowired
 	private NoteMapper noteMapper;
 	
+	public int insertNote(Note note) {
+		return noteMapper.insertNote(note);
+	}
+	
 	public List<Note> selectNote(String recipient_member){
 		return noteMapper.selectNote(recipient_member);
 	}
