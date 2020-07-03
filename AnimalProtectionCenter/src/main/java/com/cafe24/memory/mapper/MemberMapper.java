@@ -8,8 +8,8 @@ import com.cafe24.memory.domain.Member;
 
 @Mapper
 public interface MemberMapper {
-	public int deleteMember(String Mid);
 	
+	public int deleteMember(String Mid);
 	public Member getMemberList(String mId);
 	public List<Member> getMemberList();
 	public int insertMember(Member M);
