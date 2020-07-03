@@ -96,6 +96,43 @@
 	VALUES (#{lostReportCode},#{animalType.animalTypeCode} ,#{animalName} , #{animalGender}, #{animaFeature}, #{member.memberId}, #{lostReportState} , NOW(),#{lostReportLocation})
 	
 	</insert>
+	<insert id="insertAniSearchReportManager" parameterType="ReportManger">
+		<selectKey resultType="String" order="BEFORE" keyProperty="acceptCode">
+			SELECT (
+			case COUNT(*)
+					when 0 then 'accept_1'
+					ELSE  CONCAT('accept_',max(cast(	substr(accept_code,8) as decimal))+1)
+					END	)
+			AS acceptCode
+			FROM tb_report_manager;
+		</selectKey>
+		INSERT INTO tb_report_manager
+			(accept_code, report_code, accept_state, member_id, accept_in_date, accept_out_date)
+			VALUES (#{acceptCode}, #{searchReport.searchReportCode}, '처리중',#{member.memberId},#{searchReport.searchReportInDate}, 
+		<if test='searchReport.searchReportOutDate != null'>	
+			CURDATE()
+		</if>	
+			 )
+	</insert>
+	<insert id="insertAniLostReportManager" parameterType="ReportManger">
+		<selectKey resultType="String" order="BEFORE" keyProperty="acceptCode">
+			SELECT (
+			case COUNT(*)
+					when 0 then 'accept_1'
+					ELSE  CONCAT('accept_',max(cast(substr(accept_code,8) as decimal))+1)
+					END	)
+			AS acceptCode
+			FROM tb_report_manager;
+		</selectKey>
+			INSERT INTO tb_report_manager
+				(accept_code, accept_state, member_id, accept_in_date, accept_out_date, lost_report_code)
+				VALUES (#{acceptCode}, '처리중', #{member.memberId}, #{lostReport.lostReportInDate},
+					<if test='lostReport.lostReportOutDate != null'>	
+						 #{lostReport.lostReportOutDate} 
+					</if>
+				  , #{lostReport.lostReportCode})
+				 
+	</insert>
 	
 	<select id="selectAllReport" resultMap="reportManager">
 			SELECT 
@@ -104,8 +141,9 @@
 			
 			FROM 
 			 
-			tb_lost_report AS l JOIN tb_search_report AS s
-			
-		;
+			tb_lost_report AS l JOIN tb_search_report AS s;
+	</select>
+	<select id="selectReportCnt" resultType="map">
+		
 	</select>
 </mapper>

@@ -75,10 +75,11 @@
 		                            	<a th:href="@{/member/memberUpdate(memberId=${j.memberId})}">
 	                       				<i class="material-icons">update</i></a></div>
 	                      			</td>
-	                      			<td><div class="align-center">
-	                      				<button type="button" class="delete" th:value="${j.memberId}" >
-	                      					<i class="material-icons">delete</i>
-	                      				</button>
+	                      			<td>
+	                      				<div class="align-center">
+		                      				<button type="button" class="delete" th:value="${j.memberId}" >
+		                      					<i class="material-icons">delete</i>
+		                      				</button>
 	                      			</div>	
 	                      			</td>
 	                        	</tr>
