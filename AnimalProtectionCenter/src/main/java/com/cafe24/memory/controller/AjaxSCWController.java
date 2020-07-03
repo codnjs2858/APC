@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe24.memory.domain.AnimalType;
+import com.cafe24.memory.domain.Commute;
 import com.cafe24.memory.domain.SearchReportAnimal;
+import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.AnimalTypeService;
+import com.cafe24.memory.service.StaffService;
 
 @RestController
 @RequestMapping("/ajax")
 public class AjaxSCWController {
 	@Autowired private AnimalTypeService animalTypeService;
 	@Autowired private AnimalCenterService animalCenterService;
+	@Autowired private StaffService staffService;
 	
 	@PostMapping("/animalcentertype")
 	public List<AnimalType> addProtectInsert(@RequestParam(name = "type") String type) {
@@ -31,5 +35,4 @@ public class AjaxSCWController {
 			@RequestParam(name = "memberPhone") String memberPhone) {
 		return animalCenterService.selectCenterReport(memberName, memberPhone);
 	}
-
 }

@@ -30,6 +30,10 @@
 	                    </li>
 	                </ul>
 				</div>
+				<div class="header">
+					<button type="button" id="startBtn" th:disabled="${com.commute?.commuteStartTime} != null" th:data-start="'/staff/startWork?send_code='+${com.staffCode}">출근버튼</button>
+					<button type="button" id="endBtn" th:disabled="${com.commute?.commuteEndTime != null}" th:data-end="'/staff/endWork?send_code='+${com.commute?.commuteCode}">퇴근버튼</button>
+				</div>
 				<div class="body">
 					<div class="table-responsive" style="overflow: hidden;">
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
@@ -73,7 +77,7 @@
 			                            	<div class="align-center">퇴사 - [[${staff.staffOutDate}]]</div>
 		                            	</th:block>
 		                            	<th:block th:if="${staff.staffOutDate} == null">
-		                            		<div class="align-center"><a href="#">퇴사처리</a></div>
+		                            		<div class="align-center"><a th:href="@{/staff/staffretire(send_code=${staff.staffCode})}">퇴사처리</a></div>
 		                            	</th:block>
 		                            </td>
 		                            <td>
@@ -113,9 +117,11 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
     <script>
     	$(function(){
+    		
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
     		});
+    		
     		$('.delete').click(function(){
     			swal('삭제하시겠습니까?', {
 					title:'경고',
@@ -135,6 +141,39 @@
     					    .then((value) => {
     					    	if(value) location.href = val;
     					    });
+    				}else{
+    					console.log('취소');
+    				}
+    			});
+    		});
+    		
+    		
+    		$('#startBtn').click(function(){
+    			swal('출근 하시겠습니까?', {
+    				title:'경고',
+					icon:'info',
+					buttons: true,
+				})
+				.then((result) => {
+					var val = $(this).data('start');
+    				if(result){
+					    if(result) location.href = val;
+    				}else{
+    					console.log('취소');
+    				}
+    			});
+    		});
+    		
+    		$('#endBtn').click(function(){
+				swal('퇴근 하시겠습니까?', {
+    				title:'경고',
+					icon:'info',
+					buttons: true,
+				})
+				.then((result) => {
+					var val = $(this).data('end');
+    				if(result){
+					    if(result) location.href = val;
     				}else{
     					console.log('취소');
     				}
