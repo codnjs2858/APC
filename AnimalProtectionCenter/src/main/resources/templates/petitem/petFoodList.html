@@ -89,7 +89,7 @@
 							            		</a>
 							            	</div> -->
 							            	<div class="align-center">
-							            		<a class="delete" th:data-myurl="'/petItem/petFoodDelete?foodCode=' + ${pf.foodCode}" href="javascript:void(0)">
+							            		<a class="delete" th:data-val="${pf.foodName}" th:data-myurl="'/petItem/petFoodDelete?foodCode=' + ${pf.foodCode}" href="javascript:void(0)">
 							            			<i class="material-icons">delete</i>
 							            		</a>
 							            	</div>
@@ -128,14 +128,16 @@
     <script>
     	$(function(){
     		$('.delete').click(function(){
+    			var dataval = $(this).data('val');
     			swal({
 					title: '경고',
-					text: '삭제하시겠습니까?', 
+					text: dataval + '를 삭제하시겠습니까?', 
 					icon: 'error',
 					buttons: true,
 				})
     			.then((foodDelete) => {
     				var val = $(this).data('myurl');
+    				
     				console.log(val);
     				if(foodDelete){
     					swal({

@@ -39,7 +39,7 @@
 								</div>
 							</div>
 						</div>
-                        <button id="protectSpaceBtn" class="btn btn-block bg-amber waves-effect" type="button">보호공간등록</button>
+                        <button id="protectSpaceBtn" class="btn btn-block bg-amber waves-effect" type="submit">보호공간등록</button>
                         
                 	</form>
 				</div>
@@ -59,16 +59,19 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
-			$('#protectSpaceBtn').click(function(){
-				swal({
-					title: '등록',
-					text: '등록하시겠습니까?', 
-					icon: 'success',
-					buttons: true,
-				})
-				.then((value) => {
-					if(value) var val = $('#protectSpaceForm').submit();
-				});
+			$("form").validate({
+				 rules : {
+					//네임
+					 implementCode 		: {required : true}
+					,animalProtectPeriod: {required : true}
+				}
+				,messages : {
+					 implementCode 		: {required : '시설을 선택해주세요'}
+					,animalProtectPeriod: {required : '보호기간을 입력해주세요'}
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
 			});
 		});
 	</script>

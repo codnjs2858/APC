@@ -16,37 +16,31 @@
                 	</h2>
 				</div>
 				<div class="body">
-					<form id="protectSpaceForm" action="/protection/addAnimalProtection" method="POST">
+					<form action="/protection/addAnimalProtection" method="POST">
 						<div class="row">
 							<div class="col-xs-6 col-md-4">
-		                        <div class="form-line">
-									보호공간
-									<div>
-			                            <select name="protectSpaceCode" class="form-control">
-											<option th:each="p : ${psus}" th:value="${p.protectSpaceCode}">-- [[${p.protectSpaceCode}]] --</option>
-										</select>
-									</div>
-		                        </div>
+								보호공간
+								<div>
+		                            <select name="protectSpaceCode" class="form-control">
+										<option th:each="p : ${psus}" th:value="${p.protectSpaceCode}">-- [[${p.protectSpaceCode}]] --</option>
+									</select>
+								</div>
 							</div>
 							<div class="col-xs-6 col-md-4">
-		                        <div class="form-line">
-									동물번호
-		                            <div>
-			                            <select name="animalInsertCode" class="form-control">
-											<option th:each="a : ${ahns}" th:value="${a.animalCenter.animalInsertCode}">-- [[${a.animalCenter.animalCenterNumber}]] --</option>
-										</select>
-									</div>
-		                        </div>
+								동물번호
+	                            <div>
+		                            <select name="animalInsertCode" class="form-control">
+										<option th:each="a : ${ahns}" th:value="${a.animalCenter.animalInsertCode}">-- [[${a.animalCenter.animalCenterNumber}]] --</option>
+									</select>
+								</div>
 							</div>
 							<div class="col-xs-6 col-md-4">
-								<div class="form-line">
-									보호상태
-									<div>
-										<select name="state" class="form-control">
-											<option value="보호중">-- 보호중 --</option>
-											<option value="특별보호">-- 특별보호 --</option>
-										</select>
-									</div>
+								보호상태
+								<div>
+									<select name="state" class="form-control">
+										<option value="보호중">-- 보호중 --</option>
+										<option value="특별보호">-- 특별보호 --</option>
+									</select>
 								</div>
 							</div>
 						</div>
@@ -55,7 +49,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										보호기간
-			                            <input id="protectDate" type="number" class="form-control" name="protectDate" placeholder="보호기간">
+										<input type="number" class="form-control" name="protectDate" placeholder="보호기간">
 			                        </div>
 								</div>
 							</div>
@@ -65,10 +59,10 @@
 							</div>
 						</div>
 						
-                        <button id="protectSpaceBtn" class="btn btn-block bg-amber waves-effect" type="button">유기동물보호등록</button>
+                        <button id="protectSpaceBtn" class="btn btn-block bg-amber waves-effect" type="submit">유기동물보호등록</button>
                         
                 	</form>
-					</div>
+				</div>
 			</div>
 			
 		
@@ -87,17 +81,24 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
-			$('#protectSpaceBtn').click(function(){
-    			swal({
-					title: '등록',
-					text: '등록하시겠습니까?', 
-					icon: 'success',
-					buttons: true,
-				})
-    			.then((value) => {
-    				if(value) var val = $('#protectSpaceForm').submit();
-    			});
-    		});
+			$("form").validate({
+				 rules : {
+					//네임
+					 protectSpaceCode: {required : true}
+					,animalInsertCode: {required : true}
+					,state 			 : {required : true}
+					,protectDate 	 : {required : true}
+				}
+				,messages : {
+					 protectSpaceCode: '보호공간을 입력해주세요'
+					,animalInsertCode: '동물번호를 입력해주세요'
+					,state			 : '보호상태를 입력해주세요'
+					,protectDate 	 : '보호기간을 입력해주세요'
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
+			});
 		});
 	</script>
 </th:block>

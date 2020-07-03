@@ -9,20 +9,19 @@
 <th:block layout:fragment="customContents">
 	<section class="content">
 		<div class="container-fluid">
-			<div class="block-header">
-                <h2>
-                    	펫사료등록화면
-                </h2>
-            </div>
-            
             <div class="card">
+            	<div class="header">
+	            	<h2>
+	                    	펫사료등록화면
+	                </h2>
+            	</div>
             	<div class="body">
             		<form id="petFoodForm" action="/petItem/petFoodInsert" method="post">
             			<div class="row">
             				<div class="col-md-4">
 								사료종류
 								<div>
-									<select id="foodType" name="foodType" class="form-control">
+									<select id="foodType" name="foodType" class="form-control" required>
 										<option value="">-- 종류선택 --</option>
 										<option th:each="aniType : ${aniTypeCnt}" th:value="${aniType.animalType}">-- [[${aniType.animalType}]] --</option>
 									</select>
@@ -32,7 +31,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										사료단가
-			                            <input id="foodPrice" type="number" class="form-control" name="foodPrice" placeholder="가격">
+			                            <input type="number" class="form-control" name="foodPrice" placeholder="가격" required>
 			                        </div>
 								</div>
             				</div>
@@ -40,7 +39,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										수량
-			                            <input id="foodAmount" type="number" class="form-control" name="foodAmount" placeholder="수량">
+			                            <input type="number" class="form-control" name="foodAmount" placeholder="수량" required>
 			                        </div>
 								</div>
             				</div>
@@ -50,28 +49,28 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										사료이름
-			                            <input id="foodName" type="text" class="form-control" name="foodName" placeholder="사료이름">
+			                            <input type="text" class="form-control" name="foodName"  placeholder="사료이름" required>
 			                        </div>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="input-group">
-			                        <div class="form-line">
+									<div class="form-line">
 										사료회사
-			                            <input id="foodCompany" type="text" class="form-control" name="foodCompany" placeholder="사료회사">
-			                        </div>
+			                            <input type="text" class="form-control" name="foodCompany" placeholder="사료회사"  required>
+			                    	</div>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="input-group">
 			                        <div class="form-line">
 										구매인
-			                            <input id="foodBuyer" type="text" class="form-control" name="foodBuyer" placeholder="구매인" th:value="${session.SID}">
+			                            <input type="text" class="form-control" name="foodBuyer" placeholder="구매인" th:value="${session.SID}" required>
 			                        </div>
 								</div>
 							</div>
 						</div>	            		
-						<button id="petFoodBtn" class="btn btn-block bg-amber waves-effect" type="button">유기동물보호등록</button>
+						<button class="btn btn-block bg-amber waves-effect" type="submit">유기동물보호등록</button>
 					</form>
             	</div>
             </div>	
@@ -90,7 +89,30 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
-			$('#petFoodBtn').click(function(){
+			//validate 쓰는데 에러부분이 네임으로 찾는 객체의 부모 객체 뒤에 붙게 했음( messages_ko.js 참고) - 손충기
+			$("form").validate({
+				 rules : {
+					//네임
+					 foodType 		: {required : true}
+					,foodPrice 		: {required : true, min : 0}
+					,foodAmount 	: {required : true, min : 0}
+					,foodName 		: {required : true}
+					,foodCompany 	: {required : true}
+					,foodBuyer 		: {required : true}
+				}
+				,messages : {
+					 foodType 		: {required : '사료종류를 선택하세요'}
+					,foodPrice 		: {required : '사료가격을 입력해주세요', min : '0보다 큰 수를 입력해주세요'}
+					,foodAmount 	: {required : '사료수량을 입력해주세요', min : '0이상 값을 입력해주세요'}
+					,foodName 		: '사료이름을 입력해주세요'
+					,foodCompany 	: '사료회사를 입력해주세요'
+					,foodBuyer 		: '구매인을 입력해주세요'
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
+			});
+			/* $('#petFoodBtn').click(function(){
 				swal({
 					title: '등록',
 					text: '등록하시겠습니까?', 
@@ -100,9 +122,9 @@
 				.then((value) => {
 					if(value) var val = $('#petFoodForm').submit();
 				});
-			});
+			}); */
 			
-			var checkValue = function(obj, msg){
+			/* var checkValue = function(obj, msg){
 				if(obj.val() == ''){
 					swal({
 						title:'경고',
@@ -123,7 +145,7 @@
 				if(checkValue($('#foodBuyer'), 	'구매인을 입력해주세요')) 		return;
 				if(checkValue($('#foodName'), 	'사료이름을 입력해주세요')) 	return;
 				if(checkValue($('#foodCompany'),'사료회사를 입력해주세요')) 	return;
-			});
+			}); */
 		});
 	</script>
 </th:block>

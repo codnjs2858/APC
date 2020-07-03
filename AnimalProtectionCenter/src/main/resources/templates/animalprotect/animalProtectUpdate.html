@@ -16,13 +16,13 @@
                 	</h2>
 				</div>
 				<div class="body">
-					<form action="/protection/animalProtection" method="POST">
+					<form id="animalProtectionForm" action="/protection/animalProtection" method="POST">
 						<div class="row">
 							<div class="col-xs-12 col-md-12">
 								<div class="input-group">
 			                        <div class="form-line">
 										보호공간
-			                            <input type="text" class="form-control" name="protectSpaceCode" th:value="${ptSpace.protectSpaceCode}" readonly="readonly">
+			                            <input type="text" class="form-control" name="protectSpaceCode" th:value="${ptSpace.protectSpaceCode}" readonly="readonly" required>
 			                        </div>
 								</div>						
 							</div>
@@ -30,10 +30,8 @@
 						<div class="row">
 							<div class="col-xs-6 col-md-4">
 								센터등록된 유기동물번호
-	                            <!-- <input id="petName" type="text" class="form-control" name="animalInsertCode" placeholder="유기동물이름" th:value="${ptSpace.animalProtect.animalInsertCode}">
-	                            <button type="button" id="btnNamePet" class="btn btn-block bg-green waves-effect">동물이름중복</button> -->
 	                            <div>
-		                            <select name="animalInsertCode">
+		                            <select name="animalInsertCode" required>
 		                            	<option th:each="l : ${acl}" th:value="${l.animalInsertCode}" th:text="${l.animalCenterNumber}" th:selected="${l.animalInsertCode}==${ptSpace.animalInsertCode}"></option>
 		                            </select>
 	                            </div>
@@ -51,12 +49,12 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										보호기간
-			                            <input type="number" class="form-control" name="protectDate" placeholder="보호기간" th:value="${dDay}">
+			                            <input type="number" class="form-control" name="protectDate" placeholder="보호기간" th:value="${dDay}" required	>
 			                        </div>
 								</div>
 							</div>
 						</div>
-                        <button class="btn btn-block bg-amber waves-effect" type="submit">유기동물보호수정</button>
+                        <button id="animalProtectionBtn" class="btn btn-block bg-amber waves-effect" type="submit">유기동물보호수정</button>
                         
                 	</form>
 				</div>
@@ -71,11 +69,33 @@
 </th:block> 
 
 <th:block layout:fragment="customCss">
-	<link href="../../plugins/multi-select/css/multi-select.css" rel="stylesheet">
+	<link href="/plugins/multi-select/css/multi-select.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
+	<script>
+		$(function(){
+			$("form").validate({
+				 rules : {
+					//네임
+					 protectSpaceCode : {required : true}
+					,animalInsertCode : {required : true}
+					,state 			  : {required : true}
+					,protectDate 	  : {required : true}
+				}
+				,messages : {
+					 protectSpaceCode	: '시설을 선택해주세요'
+					,animalInsertCode	: '시설을 선택해주세요'
+					,state 				: '시설을 선택해주세요'
+					,protectDate 		: '시설을 선택해주세요'
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
+			});
+		});
+	</script>
 </th:block>
  
 </html>
