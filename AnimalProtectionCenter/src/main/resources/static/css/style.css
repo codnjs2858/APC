@@ -4987,7 +4987,7 @@ section.content {
     font-size: 12px;
     margin-top: 5px;
     color: #999; }
-  .input-group label.error {
+  label.error {
     font-size: 12px;
     display: block;
     margin-top: 5px;

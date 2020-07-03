@@ -30,20 +30,21 @@
 		                         <th><div class="align-center">이름</div></th>
 		                         <th><div class="align-center">출근 시간</div></th>
 	                         	 <th><div class="align-center">퇴근 시간</div></th>
-	                         	 <th><div class="align-center">근무 시간</div></th>
+	                         	 <th><div class="align-center">일일 근무 시간</div></th>
+	                         	 <th><div class="align-center">해당 날짜</div></th>
 		                	</tr>
 	                    </thead>
 	                    <tbody>
-	                        <tr th:each="j : ${#numbers.sequence(1,100)}" class="odd">
-	                   			<td><div class="align-center"><span class="label label-warning">new</span></div></td>
-	                   <!-- <td class="sorting_1" th:text="${j}"></td> -->
-	                   			<td><div class="align-center">[[${j}]]</div></td>
-		                        <td><div class="align-center">부서1</div></td>
-		                        <td><div class="align-center">사원</div></td>
-		                        <td><div class="align-center">설채원</div></td>
-		                        <td><div class="align-center">09:00</div></td>
-		                        <td><div class="align-center">17:30</div></td>
-		                        <td><div class="align-center">8:30</div></td>
+	                        <tr th:each="clist, i : ${clist}">
+	                   			<td><div class="align-center">[[${i.size - i.index}]]</div></td>
+	                   			<td><div class="align-center">[[${clist.staff.staffCode}]]</div></td>
+		                        <td><div class="align-center">[[${clist.staff.staffPart}]]</div></td>
+		                        <td><div class="align-center">[[${clist.staff.staffRank}]]</div></td>
+		                        <td><div class="align-center">[[${clist.staff.staffName}]]</div></td>
+		                        <td><div class="align-center">[[${clist.commuteStartTime}]]</div></td>
+		                        <td><div th:if="${clist.commuteEndTime} != null" class="align-center">[[${clist.commuteEndTime}]]</div></td>
+		                        <td><div th:if="${clist.commuteWorkingHour} != null" class="align-center">[[${clist.commuteWorkingHour}]] 시간 </div></td>
+		                        <td><div class="align-center">[[${clist.commuteDate}]]</div></td>
 	                    	</tr>
 	                    </tbody>
 	                </table>

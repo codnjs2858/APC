@@ -16,7 +16,7 @@
             		</h2>
             	</div>
             	<div class="body">
-            		<form action="/petItem/petGoodsList" method="post">
+            		<form id="petGoodsForm" action="/petItem/petGoodsList" method="post">
             			<div class="row">
             				<div class="col-md-4">
 			            		<div class="input-group">
@@ -43,7 +43,7 @@
 								</div>
             				</div>
             			</div>						
-						<button class="btn btn-block bg-amber waves-effect" type="submit">펫용품수정</button>
+						<button id="petGoodsBtn" class="btn btn-block bg-amber waves-effect" type="submit">펫용품수정</button>
 					</form>
             	</div>
             </div>	
@@ -60,7 +60,21 @@
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
-	
+	<script>
+		$(function(){
+			$("form").validate({
+				 rules : {
+					//네임
+				}
+				,messages : {
+					
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
+			});
+		});
+	</script>
 </th:block>
  
 </html>

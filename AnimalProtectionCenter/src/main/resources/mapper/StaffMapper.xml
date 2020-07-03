@@ -39,23 +39,29 @@
 	</resultMap>
 
 	<resultMap type="Commute" id="commute">
-		<result property="CommuteCode" column="commute_code" />
+		<result property="commuteCode" column="commute_code" />
 		<result property="commuteDate" column="commute_date" />
 		<result property="commuteStartTime" column="commute_start_time" />
 		<result property="commuteEndTime" column="commute_end_time" />
+		<result property="commuteWorkingHour" column="commute_working_hour" />
 		<association property="staff" javaType="Staff">
 			<result property="staffCode" column="staff_code" />
 			<result property="staffName" column="staff_name" />
 			<result property="staffPart" column="staff_part" />
 			<result property="staffRank" column="staff_rank" />
 		</association>
-		<association property="commute" javaType="Commute">
-			<result property="commuteCode" column="commute_code"/>
-			<result property="commuteStartTime" column="commute_start_time"/>
-			<result property="commuteEndTime" column="commute_end_time"/>
-			<result property="commuteDate" column="commute_date"/>
-		</association>
 	</resultMap>
+	
+	<select id="commuteList" resultMap="commute">
+		SELECT 
+		*
+		FROM 
+		tb_commute AS c
+		JOIN 
+		tb_staff AS s ON c.staff_code = s.staff_code
+		WHERE s.staff_out_date IS NULL
+		ORDER BY c.commute_date DESC 
+	</select>
 	
 	<select id="selectStaffMember" parameterType="String" resultMap="staff">
 		SELECT
@@ -75,8 +81,33 @@
 		tb_staff AS s
 		JOIN tb_member AS m ON s.member_id = m.member_id
 		LEFT JOIN tb_commute AS c ON c.staff_code = s.staff_code AND c.commute_date = CURDATE()
+		<if test="send_code !=null and send_code !=''.toString()">
+			<where>
+				s.staff_code= #{send_code}
+			</where>
+		</if>
 		ORDER BY s.staff_in_date DESC;
 	</select>
+	
+	<update id="retireStaff" parameterType="String">
+		UPDATE tb_staff
+		SET
+			staff_out_date=CURDATE()
+		WHERE staff_code=#{send_code};
+	</update>
+	
+	<update id="updateStaffInfo" parameterType="Staff">
+		UPDATE tb_staff
+		SET
+			staff_name=#{staffName},
+			staff_part=#{staffPart},
+			staff_rank=#{staffRank}
+		WHERE staff_code=#{staffCode}
+	</update>
+	
+	<delete id="deleteStaff">
+		DELETE FROM tb_staff WHERE staff_code=#{send_code};
+	</delete>
 	
 	<insert id="insertStaffMember" parameterType="Staff">
 		<selectKey order="BEFORE" keyProperty="staffCode" resultType="String">
@@ -108,4 +139,43 @@
 				, null
 				)
 	</insert>
+	
+	<insert id="startWork" parameterType="Commute">
+		<selectKey order="BEFORE" keyProperty="commuteCode" resultType="String">
+			SELECT
+				(case COUNT(*)
+				when 0 then'commute_code_1'
+				else CONCAT('commute_code_',MAX(CAST(SUBSTRING(commute_code,14) AS DECIMAL))+1) 
+				END)AS commute_code
+			FROM
+				tb_commute
+		</selectKey>
+		INSERT INTO tb_commute
+			(commute_code
+			, commute_start_time
+			, commute_end_time
+			, commute_working_hour
+			, commute_date
+			, staff_code)
+			VALUES (	#{commuteCode}
+						, NOW()
+						, null
+						, null
+						, NOW()
+						, #{staff.staffCode})
+	</insert>
+	<update id="endWork" parameterType="Commute">
+		UPDATE tb_commute
+		SET
+			commute_end_time=NOW(),
+			commute_working_hour=#{commuteWorkingHour}
+		WHERE commute_code=#{commuteCode}
+	</update>
+	<select id="selectWorkTime" parameterType="String" resultType="Integer">
+		SELECT
+		 	date_format(timediff(NOW(), c.commute_start_time), '%H')
+		FROM
+		tb_commute AS c
+		WHERE c.commute_code=#{send_code}
+	</select>
 </mapper>

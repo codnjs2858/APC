@@ -8,6 +8,7 @@ import com.cafe24.memory.domain.Note;
 
 @Mapper
 public interface NoteMapper {
+	public int insertNote(Note note);
 	public List<Note> selectNote(String recipient_member);
 	public List<Note> selectSendNote(String send_member);
 	public List<Note> getNote(Note note);

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.cafe24.memory.domain.AnimalType;
 import com.cafe24.memory.domain.LostReportAnimal;
 import com.cafe24.memory.domain.Member;
+import com.cafe24.memory.domain.ReportManger;
 import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.service.AnimalReportService;
 
@@ -20,40 +21,44 @@ import ch.qos.logback.classic.Logger;
 @Controller
 @RequestMapping("/reportlist")
 public class AnimalReportController {
-	private final static Logger logger = 
-			(Logger) LoggerFactory.getLogger(SpringBootApplication.class);
+	private final static Logger logger = (Logger) LoggerFactory.getLogger(SpringBootApplication.class);
 	
 	@Autowired private AnimalReportService animalReportService;
-	@GetMapping("/searchReportList")
-	public String searhReport(SearchReportAnimal searchAni) {
-		
-		
-		return "searchreport/searchReportList";
-	}
+	
 	
 	/**
-	 * 동물 유기,유실신고
+	 * 유기동물신고 insert
 	 * @param aType
 	 * @param member
 	 * @param searchReportAnimal
 	 * @return
 	 */
 	@PostMapping("/searchReport")
-	public String searcReport(AnimalType aType,Member member,SearchReportAnimal searchReportAnimal) {
+	public String searcReport(AnimalType aType,Member member,SearchReportAnimal searchReportAnimal,ReportManger reportManager) {
 		searchReportAnimal.setAnimalType(aType);
 		searchReportAnimal.setMember(member);
-		logger.info("{}"+searchReportAnimal);
+		logger.info("찾기 리포트 {}"+searchReportAnimal);
 		animalReportService.insertAnimalReport(searchReportAnimal);
-		return "redirect:/reportlist/searchReportList";
+		reportManager.setSearchReport(searchReportAnimal);
+		reportManager.setMember(member);
+		animalReportService.insertAniSearchReportManager(reportManager);
+		return "redirect:/reportlist/reportManager";
 	
 	}
-	
+	/**
+	 * 유기동물 신고폼
+	 * @return
+	 */
 	@GetMapping("/searchReport")
 	public String searhReport() {
 		
 		
 		return "searchreport/searchReport";
 	}
+	/**
+	 * 분실신고폼
+	 * @return
+	 */
 	@GetMapping("/lostreport")
 	public String lostReport() {
 		
@@ -61,16 +66,19 @@ public class AnimalReportController {
 		return "lostreport/lostReportForm";
 	}
 	/**
-	 * 동물 분실 신고
+	 * 동물 분실 신고insert
 	 * @param lostReportAnimal
 	 * @return
 	 */
 	@PostMapping("/lostReport")
-	public String lostReport(LostReportAnimal lostReportAnimal,Member member,AnimalType animalType) {
+	public String lostReport(LostReportAnimal lostReportAnimal,Member member,AnimalType animalType,ReportManger reportManager) {
 		lostReportAnimal.setAnimalType(animalType);
 		lostReportAnimal.setMember(member);
 		System.out.println(lostReportAnimal);
 		animalReportService.insertLostAnimalReport(lostReportAnimal);
+		reportManager.setLostReport(lostReportAnimal);
+		reportManager.setMember(member);
+		animalReportService.insertAniLostReportManager(reportManager);
 		return "index";
 	}
 	/**

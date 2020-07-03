@@ -19,22 +19,20 @@
             		<form id="petFoodForm" action="/petItem/petFoodUpdate" method="post">
             			<div class="row">
             				<div class="col-md-4">
-			            		<div class="input-group">
-									사료종류
-									<div>
-										<select name="foodType">
-											<option>-- 종류선택 --</option>
-											<option th:each="aniType : ${aniTypeCnt}" th:value="${aniType.animalType}" th:selected="(${aniType.animalType} == ${petFood.foodType})">-- [[${aniType.animalType}]] --</option>
-										</select>
-										<input type="hidden" name="foodCode" th:value="${petFood.foodCode}">
-									</div>
+								사료종류
+								<div>
+									<select name="foodType">
+										<option value="">-- 종류선택 --</option>
+										<option th:each="aniType : ${aniTypeCnt}" th:value="${aniType.animalType}" th:selected="(${aniType.animalType} == ${petFood.foodType})">-- [[${aniType.animalType}]] --</option>
+									</select>
+									<input type="hidden" name="foodCode" th:value="${petFood.foodCode}">
 								</div>
             				</div>
             				<div class="col-md-4">
             					<div class="input-group">
 			                        <div class="form-line">
 										사료이름
-			                            <input id="foodName" type="text" class="form-control" name="foodName" th:value="${petFood.foodName}">
+			                            <input type="text" class="form-control" name="foodName" th:value="${petFood.foodName}">
 			                        </div>
 								</div>
             				</div>
@@ -42,7 +40,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										사료회사
-			                            <input id="foodCompany" type="text" class="form-control" name="foodCompany" th:value="${petFood.foodCompany}">
+			                            <input type="text" class="form-control" name="foodCompany" th:value="${petFood.foodCompany}">
 			                        </div>
 								</div>
             				</div>
@@ -52,7 +50,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										사료단가
-			                            <input id="foodPrice" type="number" class="form-control" name="foodPrice" th:value="${petFood.foodPrice}">
+			                            <input type="number" class="form-control" name="foodPrice" th:value="${petFood.foodPrice}">
 			                        </div>
 								</div>
 							</div>
@@ -78,7 +76,7 @@
 								<div class="input-group">
 									<div class="form-line">
 										사용량
-										<input id="usingfoodAmount" type="number" class="form-control" name="usingfoodAmount" value="0">
+										<input type="number" class="form-control" name="usingfoodAmount" value="0">
 									</div>
 								</div>
 							</div>
@@ -86,7 +84,7 @@
 								<div class="input-group">
 									<div class="form-line">
 										구입량
-										<input id="buyfoodAmount" type="number" class="form-control" name="buyfoodAmount" value="0">
+										<input type="number" class="form-control" name="buyfoodAmount" value="0">
 									</div>
 								</div>
 							</div>
@@ -94,35 +92,17 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										구매인
-			                            <input id="foodBuyer" type="text" class="form-control" name="foodBuyer" th:value="${petFood.foodBuyer}">
+			                            <input type="text" class="form-control" name="foodBuyer" th:value="${petFood.foodBuyer}">
 			                        </div>
 								</div>
 							</div>
 						</div>
-						<button id="petFoodBtn" class="btn btn-block bg-amber waves-effect" type="button">펫사료수정</button>
+						<button id="petFoodBtn" class="btn btn-block bg-amber waves-effect" type="submit">펫사료수정</button>
 					</form>
             	</div>
             </div>	
 		</div>
 	</section>
-	
-	<div id="modalTarget" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h2 class="modal-title">Modal Header</h2>
-				</div>
-				<div class="modal-body">
-					<p>Some text in the modal.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="ok">ok</button>
-					<button type="button" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	
 </th:block> 
 
@@ -137,29 +117,29 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
-			var checkValue = function(obj, msg){
-				if(obj.val() == ''){
-					$('#modalTarget').modal(function(){
-						alert(msg);						
-					});
-					
-					return true;
+			$("form").validate({
+				 rules : {
+					//네임
+					 foodType 		: {required : true}
+					,foodName 		: {required : true}
+					,foodCompany 	: {required : true}
+					,foodPrice 		: {required : true, min : 0}
+					,usingfoodAmount: {required : true, min : 0}
+					,buyfoodAmount 	: {required : true, min : 0}
+					,foodBuyer 		: {required : true}
 				}
-				return false;
-			}
-			
-			$('#petFoodBtn').click(function(){
-				if(checkValue($('#foodName'), 		'사료종류를 입력해주세요')) 	return;
-				if(checkValue($('#foodCompany'), 	'사료회사을 입력해주세요')) 	return;
-				if(checkValue($('#foodPrice'), 		'사료가격을을 입력해주세요'))	return;
-				if(checkValue($('#foodBuyer'), 		'구매인을 입력해주세요')) 	return;
-				var usingfoodAmount = $('#usingfoodAmount').val();
-				if(usingfoodAmount != 0 || usingfoodAmount == ''){
-					alert("!!!");
-					return;
+				,messages : {
+					 foodType 		: {required : '사료종류를 선택하세요'}
+					,foodName 		: '사료이름을 입력해주세요'
+					,foodCompany 	: '사료회사를 입력해주세요'
+					,foodPrice 		: {required : '사료가격을 입력해주세요', min : '0보다 큰 수를 입력해주세요'}
+					,usingfoodAmount: {required : '사용량을 입력해주세요', 	min : '0이상 값을 입력해주세요'}
+					,buyfoodAmount 	: {required : '구입량을 입력해주세요', 	min : '0이상 값을 입력해주세요'}
+					,foodBuyer 		: '구매인을 입력해주세요'
 				}
-				
-				$('#petFoodForm').submit();
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
 			});
 		});
 	</script>

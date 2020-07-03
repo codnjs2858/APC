@@ -14,7 +14,7 @@
 					<h2>시설등록</h2>
 				</div>
 				<div class="body">
-					<form action="/implement/implementInsert" method="POST">
+					<form id="implementForm" action="/implement/implementInsert" method="POST">
 						<div class="row">
 							<div class="col-md-4">
 			                    <div class="input-group">
@@ -82,7 +82,7 @@
 							</div>
 						</div>
 						
-                        <button class="btn btn-block bg-amber waves-effect" type="submit">시설등록</button>
+                        <button id="implementBtn" class="btn btn-block bg-amber waves-effect" type="submit">시설등록</button>
                         
                 	</form>
 				</div>
@@ -100,6 +100,28 @@
 </th:block>
 
 <th:block layout:fragment="customFooterScript">
+	<script>
+		$(function(){
+			$("form").validate({
+				 rules : {
+					//네임
+					 implementType 			: {required : true}
+					,implementReceiptCount	: {required : true, min : 0}
+					,implementPrice 		: {required : true, min : 0}
+					,staffCode 				: {required : true}
+				}
+				,messages : {
+					 implementType 			: {required : '시설종류를 입력해주세요'}
+					,implementReceiptCount	: {required : '입고량을 입력해주세요', min : '0이상의 값을 입력해주세요'}
+					,implementPrice 		: {required : '시설 가격을 입력해주세요', min : '0이상의 값을 입력해주세요'}
+					,staffCode 				: {required : '구입인을 입력해주세요'}
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
+			});
+		});
+	</script>
 </th:block>
  
 </html>

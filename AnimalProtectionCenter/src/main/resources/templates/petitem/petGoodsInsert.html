@@ -19,42 +19,34 @@
             		<form id="petItemForm" action="/petItem/petGoodsInsert" method="post">
             			<div class="row">
             				<div class="col-md-4">
-			            		<div class="input-group">
-			                        <div>
-										용품
-			                            <div>
-				                            <select id="item" name="implementCode">
-				                            	<option value=""> -- 용품 선택 -- </option>
-				                            	<option th:each="im : ${implementList}" th:value="${im.implementCode}" th:text="${im.implementType}"></option>
-				                            </select>
-			                            </div>
-			                        </div>
-								</div>
+			               		용품
+	                            <div>
+		                            <select name="implementCode" class="form-control">
+		                            	<option value=""> -- 용품 선택 -- </option>
+		                            	<option th:each="im : ${implementList}" th:value="${im.implementCode}" th:text="${im.implementType}"></option>
+		                            </select>
+	                            </div>
             				</div>
             				<div class="col-md-4">
-								<div class="input-group">
-			                        <div class="form-line">
-										유기동물번호
-			                            <div>
-				                            <select id="animalNum" name="animalInsertCode">
-				                            	<option value=""> -- 동물번호 선택 -- </option>
-				                            	<option th:each="ac : ${animalCenterList}" th:value="${ac.animalInsertCode}" th:text="${ac.animalCenterNumber}"></option>
-				                            </select>
-			                            </div>
-			                        </div>
-								</div>
+								유기동물번호
+	                            <div>
+		                            <select name="animalInsertCode" class="form-control">
+		                            	<option value=""> -- 동물번호 선택 -- </option>
+		                            	<option th:each="ac : ${animalCenterList}" th:value="${ac.animalInsertCode}" th:text="${ac.animalCenterNumber}"></option>
+		                            </select>
+	                            </div>
             				</div>
             				<div class="col-md-4">
 								<div class="input-group">
 			                        <div class="form-line">
 										담당자
-			                            <input type="text" class="form-control" th:value="${session.STAFF.staffName}">
-			                            <input type="hidden" id="staffCode" class="form-control" name="staffCode" th:value="${session.STAFF.staffCode}">
+			                            <input type="text" class="form-control" th:value="${session.STAFF.staffName}" readonly="readonly">
+			                            <input type="hidden" class="form-control" name="staffCode" th:value="${session.STAFF.staffCode}">
 			                        </div>
 								</div>
             				</div>
             			</div>						
-						<button id="petItemBtn" class="btn btn-block bg-amber waves-effect" type="button">펫용품등록</button>
+						<button class="btn btn-block bg-amber waves-effect" type="submit">펫용품등록</button>
 					</form>
             	</div>
             </div>	
@@ -73,22 +65,19 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
-			var checkValue = function(obj, msg){
-				if(obj.val() == ''){
-					alert(msg);
-					obj.focus();
-					
-					return true;
+			$("form").validate({
+				 rules : {
+					//네임
+					 implementCode 		: {required : true}
+					,animalInsertCode	: {required : true}
 				}
-				return false;
-			}
-			
-			$('#petItemBtn').click(function(){
-				if(checkValue($('#item'), 	'용품을 선택해주세요')) 	return;
-				if(checkValue($('#animalNum'), 	'동물번호를 선택해주세요')) 	return;
-				if(checkValue($('#staffCode'), '담당자를 입력해주세요')) 	return;
-				
-				$('#petItemForm').submit();
+				,messages : {
+					 implementCode 		: {required : '시설종류를 선택해주세요'}
+					,animalInsertCode	: {required : '동물번호를 선택해주세요'}
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
 			});
 		});
 	</script>

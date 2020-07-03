@@ -12,7 +12,13 @@
  <th:block layout:fragment="customTitle">
  <title>신고 종합 관리</title>
  </th:block> 
-
+<th:block layout:fragment="customCss">
+	<!-- JQuery DataTable Css -->
+    <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+    <style>
+    	::-webkit-scrollbar { display: none; }
+    </style>
+</th:block> 
  <th:block layout:fragment="customHeadScript">
  
 	  		
@@ -25,27 +31,28 @@
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="header">
-	                <h2>신고 종합 관리</h2>
+	                <h2>종합 신고 관리</h2>
 	                <ul class="header-dropdown m-r--5">
 	                    <li class="dropdown">
 	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a href="/animalcenterinsert" class=" waves-effect waves-block">보호 동물 센터 등록</a></li>
+	                            <li><a href="/reportlist/searchReport" class=" waves-effect waves-block">유기,유실 동물등록</a></li>
+	                            <li><a href="/reportlist/lostReport" class=" waves-effect waves-block">분실 동물등록</a></li>
 	                        </ul>
 	                    </li>
 	                </ul>
 				</div>
 				<div class="body">
 	                <div class="row clearfix">
-	                	<div class="col-xs-3 col-md-3" >
+	                	<div class="col-xs-6 col-md-3" >
 	                    	<a th:href="@{/reportlist/reportManager}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
 	                    	</a>
 	                    </div>
-	                    <div class="col-xs-3 col-md-3" th:each="c:${Cnt}">
-	                    	<a th:href="@{/animalcenterlist(send_type=${c.animalType})}">
+	                    <div class="col-xs-6 col-md-3" th:each="c:${Cnt}">
+	                    	<a th:href="@{/animalcenter/animalcenterlist(send_type=${c.animalType})}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">
 		                        [[${c.animalType}]] <span class="badge">[[${c.cnt}]]</span></button>
 	                    	</a>
@@ -56,37 +63,65 @@
 	                        <thead>
 	                            <tr>
 		                            <th data-orderable="false"></th>
-		                            <th><div class="align-center">접수코드</div></th>
-		                            <th><div class="align-center">신고취소날짜</div></th>
-		                            <th><div class="align-center">신고코드</div></th>
-		                            <th><div class="align-center">처리상태</div></th>
-		                            <th><div class="align-center">신고인아이디</div></th>
-		                            <th><div class="align-center">신고날짜</div></th>
-		                            <th><div class="align-center">신고처리날짜</div></th>
+		                            <th><div class="align-center">동물 번호</div></th>
+		                            <th><div class="align-center">종류</div></th>
+		                            <th><div class="align-center">품종</div></th>
+		                            <th><div class="align-center">성별</div></th>
+		                            <th><div class="align-center">건강상태</div></th>
+		                            <th><div class="align-center">등록 날짜</div></th>
+		                            <th><div class="align-center">담당자</div></th>
+		                            <th><div class="align-center">보호공간</div></th>
+		                            <th><div class="align-center">처리 상태</div></th>
 		                            <th data-orderable="false"><div class="align-center">수정</div></th>
 		                            <th data-orderable="false"><div class="align-center">삭제</div></th>
 		                        </tr>
 	                        </thead>
 	                        <tbody>
-	                            <tr class="odd">
-	                       			<td><div class="align-center"><span class="label label-warning">new</span></div></td> 
-				                    <td><div class="align-center">코드</div></td>
-				                    <td><div class="align-center"></div></td>
-		                            <td><div class="align-center"></div></td>
-		                            <td><div class="align-center"></div></td>
-		                            <td><div class="align-center"></div></td>
-		                            <td><div class="align-center"></div></td>
-		                            <td><div class="align-center"></div></td>
-		                            <td><div class="align-center">
-		                            	<a style="color: #9E9E9E">
-	                       					<i class="material-icons">update</i>
-	                       				</a></div>
+	                            <tr th:each="ac, i : ${AClist}" class="odd">
+	                       			<!-- <td><div class="align-center"><span class="label label-warning">new</span></div></td> -->
+				                    <td><div class="align-center">[[${i.size - i.index}]]</div></td>
+				                    <td><div class="align-center">[[${ac.animalCenterNumber}]]
+				                    	<a th:href="@{/animalcenter/animalcenterpage(send_code=${ac.animalInsertCode})}">(동물 상세보기)</a></div></td>
+		                            <td><div class="align-center">[[${ac.animalType.animalType}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalType.animalTypeSub}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalGender}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalState}]]</div></td>
+		                            <td><div class="align-center">[[${ac.animalInsertRegDate}]]</div></td>
+		                            <td><div class="align-center">[[${ac.staff.staffName}]]</div></td>
+		                            <td th:if="${ac.protectionSpace} == null">
+		                            	<div class="align-center">
+			                            	<a th:href="@{/protection/animalProtection}">보호 공간 등록</a>
+		                            	</div>
+		                            </td>
+		                            <td th:unless="${ac.protectionSpace} == null">
+		                            	<div class="align-center">
+			                            	[[${ac.protectionSpace.protectSpaceCode}]]
+		                            	</div>
+	                            	</td>
+		                            <td th:if="${ac.animalDisposal} == null">
+		                            	<div class="align-center">
+			                            	<a th:href="@{/animaldisposal/animaldisposalinsert(send_code=${ac.animalInsertCode},send_num=${ac.animalCenterNumber})}">처리등록</a>
+		                            	</div>
+		                            </td>
+		                            <td th:unless="${ac.animalDisposal} == null">
+		                            	<div class="align-center">
+			                            	[[${ac.animalDisposal.animalDisposalResult}]]
+		                            	</div>
+	                            	</td>
+	                      			<td>
+	                      				<div class="align-center">
+			                            	<a th:href="@{/animalcenter/animalcenterupdate(send_code=${ac.animalInsertCode})}" style="color: #9E9E9E">
+		                       					<i class="material-icons">update</i>
+		                       				</a>
+	                       				</div>
 	                      			</td>
-	                      			<td><div class="align-center">
-				                       	<a >
-				                       	<i class="material-icons">delete</i>
-			                       	</a></div>
-		                            
+	                      			<td>
+			                            <div class="align-center">
+			                            	<a class="delete" th:data-myurl="'/animalcenter/animalcenterdelete?send_code='+${ac.animalInsertCode}+'&send_pic='+${ac.animalPicture}" href="javascript:void(0)">
+						            			<i class="material-icons">delete</i>
+						            		</a>
+				                       	</div>
+			                       	</td>
 	                        	</tr>
 	                        </tbody>
 	                    </table>
@@ -133,11 +168,39 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 	    <script>
+	    <script>
     	$(function(){
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
     		});
+    		
+    		$('.delete').click(function(){
+    			swal('삭제하시겠습니까?', {
+					title:'경고',
+					icon:'error',
+					buttons: true,
+				})
+    			.then((Delete) => {
+    				var val = $(this).data('myurl');
+    				console.log(val);
+    				if(Delete){
+    					swal({
+    							title: '확인',
+    					      	icon: "warning",
+    					      	text:"정말로 삭제하시겠습니까?",
+    					      	buttons: true,
+    					    })
+    					    .then((value) => {
+    					    	if(value) location.href = val;
+    					    });
+    				}else{
+    					console.log('취소');
+    				}
+    			});
+    		});
+			
     	});
+    </script>
     </script>
 </th:block>
  

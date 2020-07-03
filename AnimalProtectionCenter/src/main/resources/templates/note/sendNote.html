@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customCss">
+</th:block>
+
+ <th:block layout:fragment="customTitle">
+ 	<title>쪽지 보내기</title>
+ </th:block> 
+
+<th:block layout:fragment="customContents">
+<section class="content">
+	<div class="container-fluid">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+               	<form action="/note/sendNote" method="post" style=" padding: 20px">
+               		<input type="text" style="border:none; width:100%" name="note_title" placeholder="제목"><hr/>
+           			<input type="text" style="border:none; width:100%;" name="recipient_member" placeholder="수신인"><hr/>
+					<textarea style="resize: none; width:100%; height: 300px; padding: 10px" name="note_content" placeholder="내용"></textarea><br><br>
+					<button type="submit" class="btn btn-primary waves-effect">업로드</button>
+               	</form>
+			</div>
+		</div>
+	</div>
+</section>
+</th:block> 
+ 
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>
