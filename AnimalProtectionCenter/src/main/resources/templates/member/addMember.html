@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>회원가입</title>
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 
@@ -22,227 +23,95 @@
 
     <!-- Custom Css -->
     <link href="../../css/style.css" rel="stylesheet">
-
-    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
-    
-	<!-- Jquery Core Js -->
-	<script src="/plugins/jquery/jquery.min.js"></script>
-	
-
-<style>
-.alert bg-green{
-background-color: #4CAF50 ;
-}
-.alert bg-red{
-background-color: #ff0000;
-}
-
-</style>
-
 </head>
-	<body class="signup-page">
+
+<body class="signup-page">
     <div class="signup-box">
         <div class="logo">
-            <a href="javascript:void(0);">유기동물보호센터<b></br>회원가입</b></a>
-            <small></small>
+            <a href="javascript:void(0);">유기동물 보호센터<b><br>회원가입</b></a>
+            
         </div>
         <div class="card">
             <div class="body">
-                <form id="sign_up" action="/member/addMember" method="POST" >
-                    <div class="msg">회원정보를 입력하세요</div>
-                 
-                     <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">person</i>
-                        </span>
-                        <div class="form-line">
-                      		 <input type="text" class="form-control" name="memberId" id="memberId" placeholder="회원가입 아이디를 입력하세요" required autofocus>
-                        </div>
-          	           <div id="idalert" style="display:none;">
-          				
-     				   </div>
-                         
-                    </div>
-                
-                     <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
-                        </span>
-                        
-                         <div class="form-line">
-                            <input type="text" class="form-control"  name="memberPw"  id="memberPw" placeholder="비밀번호를 입력하세요" required autofocus>
-                        </div>
-                         
-                    </div>
-                     <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
-                        </span>
-                       
-                         <div class="form-line">
-                            <input type="text" class="form-control" id="memberPw2" placeholder="비밀번호를 확인해주세요" required autofocus>
-                        </div>
-                       
-                    </div>
-                     <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">person</i>
-                        </span>
-                       
-                        <div class="form-line">
-                            <input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름을입력해주세요" required autofocus>
-                        </div>
-                    </div>
-                     <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">person</i>
-                        </span>
-                        
-                        <div class="form-line">
-                            <input type="text" class="form-control" id="memberPhone"  name="memberPhone" placeholder="전화 번호를 입력해주세요" required autofocus>
-                        </div>
-                    </div>
-                    
+                <form id="" method="POST">
                     <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">accessibility</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="memberId" minlength="6" placeholder="ID 를 입력하세요" required autofocus>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="memberName" placeholder="이름을 입력하세요" required autofocus>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="memberPw" minlength="8" placeholder="비밀번호를 입력해주세요" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="memberPw" minlength="8" placeholder="비밀번호를 다시 입력해주세요" required>
+                        </div>
+                    </div>
+                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">email</i>
                         </span>
-                        <div class="form-line">
-                            <input type="email" class="form-control" id="memberEmail" name="memberEmail" placeholder="이메일을 입력해주세요" required>
-                        </div>
-                    </div>
-                         <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">person</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="text" class="form-control" id="memberAddr" name="memberAddr" placeholder="주소를 입력해주세요" required>
-                        </div>
-                    </div>
+                        <div class="input-group">
+                        	<div class="form-line">
+	                            <input type="email" class="form-control" name="email" placeholder="이메일을 입력해주세요" required>
+                        	</div>
+	                            <button type="button" class="btn btn-danger form-control" id="emailBtn">이메일 발송</button>
+						</div>
+							<input type="hidden" path="random" id="random" value="${random}">
+						<div class="input-group">
+							<div class="form-line">
+								<input type="text" class="form-control" name="emailCheck" placeholder="인증번호를 적어주세요">
+							</div>
+								<button type="button" class="btn btn-danger form-control" id="emailAuthBtn">이메일 인증</button>
+						</div>
+					</div>
                     <div class="form-group">
-                        <input type="checkbox" name="terms" id="terms" class="filled-in chk-col-pink">
-                        <label for="terms">개인정보활동에 동의합니다</label>
+                        <input type="checkbox" name="terms" id="terms" class="filled-in chk-col-pink"/>
+                        <label for="terms">회원가입에 <a href="javascript:void(0);">동의하십니까?</a></label>
                     </div>
-                	<button type="button" id="joinBtn" class="btn btn-block bg-red btn-lg waves-effect">회원가입</button>
-      				
-                    <div class="m-t-25 m-b--5 align-center">
-                        <a th:href="@{/member/login}">이미 회원가입 되어있으신가요?</a>
+						<button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">가입하기</button>
+					<div class="m-t-25 m-b--5 align-center">
+                        <a href="sign-in.html">로그인 화면으로 이동하시겠습니까?</a>
                     </div>
-                             <!-- For Material Design Colors -->
-							<div class="modal fade" id="mdModal" tabindex="-1" role="dialog">
-							    <div class="modal-dialog" role="document">
-							        <div class="modal-content">
-							            <div class="modal-header">
-							                <h4 class="modal-title" id="defaultModalLabel">경고</h4>
-							            </div>
-							            <div class="modal-body" id="alert">
-							                	
-							            </div>
-							            <div class="modal-footer">
-							                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-							            </div>
-							        </div>
-							    </div>
-							</div> 
-					</form>
-				</div>
-               
+                </form>
             </div>
         </div>
     </div>
-	
-<!-- Bootstrap Core Js -->
-<script src="../../plugins/bootstrap/js/bootstrap.js"></script>
-<script type="text/javascript" src="/plugins/jquery/jquery.min.js"></script>
- <script src="../../js/pages/ui/modals.js"></script>
-<script type="text/javascript">
-	$(function(){
-		
-		$('#memberId').keyup(function(){
-			if($('#memberId').val().length>3){
-			var memberId = $('#memberId').val();
-			var request = $.ajax({
-			  url: "/member/ajax/Addmember",
-			  method: "POST",
-			  data: { id : memberId },
-			  dataType: "text"
-			});
-			 
-			request.done(function( data ) {
-				console.log(data);
-				if(data=='N'){
-					$('#idalert').html("이미 사용중인 아이디입니다");
-					$('#idalert').addClass("alert bg-red");
-				}else{
-					
-					$('#idalert').html("사용 가능한 아이디 입니다");
-					$('#idalert').css('display', 'block');
-					$('#idalert').removeClass("alert bg-green");
-					$('#idalert').addClass("alert bg-green");
-				}
-				
-			});
-			 
-			request.fail(function( jqXHR, textStatus ) {
-			  alert( "Request failed: " + textStatus );
-			});
-			}
-		})
-		
-		
-		$('#joinBtn').click(function(){
-			var memberId = $('#memberId');
-			var memberPw =$('#memberPw');
-			var memberPw2 =$('#memberPw2');
-			var memberName =$('#memberName');
-			var memberPhone =$('#memberPhone');
-			var memberEmail =$('#memberEmail');
-			var memberAddr =$('#memberAddr');
-			var sign_up =$('#sign_up');
-			
-			var alertVal="";
-			if(memberId.val()==""){
-				alertVal="아이디를 입력하세요";
-				alert(alertVal);
-	    		return false;	
-			}if(memberPw.val()==""){
-				alertVal="패스워드를 입력하세요";
-				alert(alertVal);
-		    		return false;	
-			}if(memberPw.val()!=memberPw2.val()){
-				alertVal="패스워드를 다시 확인하세요";
-				alert(alertVal);
-		    		return false;			
-			}if(memberName.val()==""){
-				alertVal="이름을 입력하세요";
-				alert(alertVal);
-		    		return false;	
-			}if(memberPhone.val()==""){
-				alertVal="핸드폰번호를 입력하세요";
-				alert(alertVal);
-		    		return false;	
-				
-			}if(memberEmail.val()==""){
-				alertVal="이메일을 입력하세요";
-				alert(alertVal);
-		    		return false;	
-				
-			}
-			if(memberAddr.val()==""){
-				alertVal="주소를 입력하세요";
-				alert(alertVal);
-		    		return false;	
-				
-			}
-			if($('#idalert').html()=="사용 가능한 아이디 입니다"){
-			sign_up.submit();
-			}
-			
-				
-		});
-	});
-	
-</script>
-</body>	
+
+    <!-- Jquery Core Js -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <!-- Validation Plugin Js -->
+    <script src="../../plugins/jquery-validation/jquery.validate.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/pages/examples/sign-up.js"></script>
+</body>
+
 </html>
