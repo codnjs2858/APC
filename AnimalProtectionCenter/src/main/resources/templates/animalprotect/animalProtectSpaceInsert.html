@@ -32,9 +32,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										보호기간
-										<div>
-											<input type="text" name="animalProtectPeriod" value="3개월">
-										</div>
+										<input type="text" class="form-control" name="animalProtectPeriod" value="3개월">
 			                        </div>
 								</div>
 							</div>
@@ -59,21 +57,34 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
-			$("form").validate({
-				 rules : {
-					//네임
-					 implementCode 		: {required : true}
-					,animalProtectPeriod: {required : true}
+			$('form').validate({
+				rules : {
+					animalProtectPeriod : {required : true}
 				}
 				,messages : {
-					 implementCode 		: {required : '시설을 선택해주세요'}
-					,animalProtectPeriod: {required : '보호기간을 입력해주세요'}
+					animalProtectPeriod : '보호기간을 입력해주세요'
 				}
 				,errorPlacement : function(error, element){
 					element.parent().after(error);
 				}
 			});
 		});
+		/* $(function(){
+			$("form").validate({
+				 rules : {
+					//네임
+					 implementCode 		 : {required : true}
+					,animalProtectPeriod : {required : true}
+				}
+				,messages : {
+					 implementCode 		 : '시설을 선택해주세요'
+					,animalProtectPeriod : '보호기간을 입력해주세요'
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
+			});
+		}); */
 	</script>
 </th:block>
  

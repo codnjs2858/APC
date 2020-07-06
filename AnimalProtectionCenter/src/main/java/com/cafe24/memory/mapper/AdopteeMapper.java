@@ -12,4 +12,6 @@ public interface AdopteeMapper {
 	public List<Adoptee> selectAdoptee();
 	
 	public int insertAdoptee(Adoptee adt); 
+	
+	public Adoptee selectAdopteeById(String MemberId);
 }

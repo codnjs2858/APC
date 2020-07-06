@@ -25,7 +25,7 @@
 		<appender-ref ref="STDOUT" />
 	</logger>
 
-	<logger name="jdbc.resultsettable" level="OFF" additivity="false">
+	<logger name="jdbc.resultsettable" level="DEBUG" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 

@@ -30,6 +30,15 @@ public class AdopteeService {
 		return result;
 		
 	}
+	
+	/**
+	 * 아이디로 입양인 찾기 - 손충기
+	 * @param MemberId
+	 * @return
+	 */
+	public Adoptee selectAdopteeById(String MemberId) {
+		return adopteeMapper.selectAdopteeById(MemberId);
+	}
 }
 
 

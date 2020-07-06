@@ -4,8 +4,8 @@
 <mapper namespace="com.cafe24.memory.mapper.AdopteeMapper">
 	
 	<resultMap type="Adoptee" id="adoptee">
-		<result property="adopteeCode" column="adoptee_code"></result>
-		<result property="adopteeDate" column="adoptee_date"></result>
+		<result property="adopteeCode" 			column="adoptee_code"></result>
+		<result property="adopteeDate" 			column="adoptee_date"></result>
 		
 		<association property="staff" javaType="Staff">
 			<result property="staffCode" column="staff_code"></result>
@@ -25,6 +25,19 @@
 		</association>
 	
 	</resultMap>	
+	
+	<select id="selectAdopteeById" parameterType="String" resultMap="adoptee">
+		SELECT 
+			 a.adoptee_code
+			,a.staff_code
+			,a.member_id
+			,a.screening_complete_code
+			,MAX(a.adoptee_date)
+		FROM
+			tb_adoptee AS a
+		WHERE
+			a.member_id = #{memberId};
+	</select>
 	
 	<!-- 리스트 -->
 	<select id="selectAdoptee" 
