@@ -23,12 +23,14 @@
 
     <!-- Custom Css -->
     <link href="../../css/style.css" rel="stylesheet">
+    <!-- sweet alert -->
+	    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
-<body class="signup-page">
+<body class="signup-page" style="background-image:url('/images/dogBackGround3.png');">
     <div class="signup-box">
         <div class="logo">
-            <a href="javascript:void(0);">유기동물 보호센터<b><br>회원가입</b></a>
+            <a href="javascript:void(0);" style="text-shadow: 2px 2px #000;">유기동물 보호센터<b><br>회원가입</b></a>
             
         </div>
         <div class="card">
@@ -36,7 +38,7 @@
                 <form id="" method="POST">
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">accessibility</i>
+                            <i class="material-icons">account_box</i>
                         </span>
                         <div class="form-line">
                             <input type="text" class="form-control" name="memberId" minlength="6" placeholder="ID 를 입력하세요" required autofocus>
@@ -44,7 +46,7 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">person</i>
+                            <i class="material-icons">account_circle</i>
                         </span>
                         <div class="form-line">
                             <input type="text" class="form-control" name="memberName" placeholder="이름을 입력하세요" required autofocus>
@@ -66,6 +68,22 @@
                             <input type="password" class="form-control" name="memberPw" minlength="8" placeholder="비밀번호를 다시 입력해주세요" required>
                         </div>
                     </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">call</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="memberPhone" minlength="8" placeholder="전화번호를 입력해주세요" required>
+                        </div>
+                    </div>
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">home</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="memberaddr" minlength="8" placeholder="주소를 입력해주세요" required>
+                        </div>
+                    </div>
                      <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">email</i>
@@ -74,9 +92,8 @@
                         	<div class="form-line">
 	                            <input type="email" class="form-control" name="email" placeholder="이메일을 입력해주세요" required>
                         	</div>
-	                            <button type="button" class="btn btn-danger form-control" id="emailBtn">이메일 발송</button>
+	                        <button type="button" class="btn btn-danger form-control" id="emailBtn">이메일 발송</button>
 						</div>
-							<input type="hidden" path="random" id="random" value="${random}">
 						<div class="input-group">
 							<div class="form-line">
 								<input type="text" class="form-control" name="emailCheck" placeholder="인증번호를 적어주세요">
@@ -113,5 +130,64 @@
     <script src="../../js/admin.js"></script>
     <script src="../../js/pages/examples/sign-up.js"></script>
 </body>
+
+<script>
+	
+	$(function(){
+		
+		var mEmail =$('input[name=email]');
+		var certCode ='';
+		
+		$('#emailBtn').click(function(){
+			var email = mEmail.val();
+			if(email ==''){
+				alert('이메일을 입력하세요!');
+			 	return false;
+			}
+			
+			var request = $.ajax({
+				url: "/ajax/certEmail",
+				method: "Get",
+				data: { "email" : email },
+				dataType: "json"
+			});
+			request.done(function( data ) {
+				console.log(data);
+				certCode = data.randomCode;
+				swal({
+					title:'이메일',
+					text: '인증번호를 보냈습니다', 
+					icon: 'success'
+				});
+			});
+			request.fail(function( jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
+			});
+			
+			
+		}) 
+		
+		var emailCheck =$('input[name=emailCheck]');
+		
+		$('#emailAuthBtn').click(function(){
+			console.log(certCode);
+			if( emailCheck.val()==certCode){
+				swal({
+					title:'인증번호',
+					text: '인증에 성공하셨습니다!', 
+					icon: 'success'
+				});
+			} else {
+				swal({
+					title:'인증번호',
+					text: '인증번호가 다릅니다!', 
+					icon: 'error'
+				});
+				emailCheck.focus();
+				return false;
+			}
+		})
+})	
+</script>
 
 </html>
