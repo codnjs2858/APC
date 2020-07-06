@@ -17,11 +17,11 @@
 			<result property="animalTypeRegDate" column="animal_type_reg_date"></result>
 		</association>
 		<association property="member" javaType="Member">
-			<result property="memberId" column="animal_type_code"></result>
-			<result property="memberPw" column="animal_type"></result>
-			<result property="memberName" column="animal_type_sub"></result>
-			<result property="memberPhone" column="animal_type_reg_date"></result>
-			<result property="memberAddr" column="animal_type_reg_date"></result>
+			<result property="memberId" column="member_id"></result>
+			<result property="memberPw" column="member_pw"></result>
+			<result property="memberName" column="member_name"></result>
+			<result property="memberPhone" column="member_phone"></result>
+			<result property="memberAddr" column="member_addr"></result>
 			<result property="memberEmail" column="animal_type_reg_date"></result>
 			<result property="memberInDate" column="animal_type_reg_date"></result>
 			<association property="level" javaType="Level">
@@ -41,6 +41,7 @@
 		<result property="lostReportLocation" column="lost_report_location"></result>
 		<result property="lostReportInDate" column="lost_report_in_date"></result>
 		<result property="lostReportOutDate" column="lost_report_out_date"></result>
+		<result property="lostAnimalPicture" column="lost_animal_picture"></result>
 		<association property="animalType" javaType="AnimalType">
 			<result property="animalTypeCode" column="animal_type_code"></result>
 			<result property="animalType" column="animal_type"></result>
@@ -51,13 +52,13 @@
 			<result property="memberId" column="member_id"></result>
 		</association>	
 	</resultMap>
-	<resultMap type="ReportManger" id="reportManager">
+	<resultMap type="ReportManger" id="ReportManager">
 		<result property="acceptCode" column="accept_code"></result>
 		<result property="acceptState" column="accept_state"></result>
 		<result property="acceptInDate" column="accept_in_date"></result>
 		<result property="acceptOutDate" column="accept_out_date"></result>
 		<association property="searchReport" javaType="SearchReportAnimal">
-			<result property="searchReportCode" column="search_report_code"></result>
+			<result property="searchReportCode" column="report_code"></result>
 		</association>
 		<association property="lostReport" javaType="LostReportAnimal">
 			<result property="lostReportCode" column="lost_report_code"></result>		
@@ -121,7 +122,7 @@
 					when 0 then 'accept_1'
 					ELSE  CONCAT('accept_',max(cast(substr(accept_code,8) as decimal))+1)
 					END	)
-			AS acceptCode
+			AS acceptCode`
 			FROM tb_report_manager;
 		</selectKey>
 			INSERT INTO tb_report_manager
@@ -136,14 +137,27 @@
 	
 	<select id="selectAllReport" resultMap="reportManager">
 			SELECT 
-			s.animal_location,s.member_id,s.search_report_in_date,s.search_report_out_date,s.search_report_code
-			,l.lost_report_code,l.member_id,l.lost_report_state,l.lost_report_in_date,l.lost_report_out_date,l.lost_report_location
-			
+				search_report_code  , animal_code, animal_gender, animal_detail, animal_location, animal_picture, member_id, search_report_in_date, search_report_out_date
 			FROM 
+			 tb_report_manager AS r 
 			 
-			tb_lost_report AS l JOIN tb_search_report AS s;
+			 left join
+			
+			tb_lost_report AS l 
+			
+			ON r.lost_report_code=l.lost_report_code
+			left JOIN tb_search_report AS s
+			ON r.report_code=s.search_report_code;
 	</select>
-	<select id="selectReportCnt" resultType="map">
-		
+	<select id="selectSearchReportAnimal" resultMap="searchReportAnimal">
+		SELECT *
+		from tb_search_report AS s join tb_animal_type AS a
+		ON s.animal_code=a.animal_type_code;
+	</select>
+	<select id="selectLostReportAnimal" resultMap="lostReportAnimal">
+		SELECT *
+		from
+		tb_lost_report AS l JOIN tb_animal_type AS a
+		ON l.animal_code=a.animal_type_code;
 	</select>
 </mapper>

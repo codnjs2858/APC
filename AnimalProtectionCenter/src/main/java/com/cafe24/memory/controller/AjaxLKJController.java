@@ -28,7 +28,7 @@ public class AjaxLKJController {
 		Member mList=memberService.getMemberList(id);
 		String result="";
 		if(mList != null && !"".equals(mList.getMemberId())){
-			result="N";
+			result="Y";//아이디가 존재할때
 		}
 		return result;
 	}

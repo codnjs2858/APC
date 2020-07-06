@@ -1,5 +1,7 @@
 package com.cafe24.memory.controller;
 
+import java.util.List;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -87,7 +89,9 @@ public class AnimalReportController {
 	 */
 	@GetMapping("/reportManager")
 	public String reportManager(Model model) {
-		model.addAttribute("reportList", animalReportService.selectAllReport());
+		List<ReportManger> reportManagerList=animalReportService.selectAllReport();
+		System.out.println(reportManagerList);
+		model.addAttribute("reportList", reportManagerList);
 		return "reportlist/reportManager";
 	}
 	
@@ -100,6 +104,24 @@ public class AnimalReportController {
 		return "searchreport/searchReportList";
 	
 	}
+	/**
+	 * lostReportList분실신고 리스트
+	 */
+	@GetMapping("/lostReportList")
+	public String getLostReportList(Model model) {
+		List<LostReportAnimal> lostReportList=animalReportService.selectLostReportAnimal();
+		model.addAttribute("lostReportList", lostReportList);
+		return "lostreport/lostReportList";
+	}
 	
+	/**
+	 * searchReportList 유기신고리스트
+	 */
+	@GetMapping("/searchReportList")
+	public String getSearchReportList(Model model) {
+		List<SearchReportAnimal>searchReportList=animalReportService.selectSearchReportAnimal();
+		model.addAttribute("searchReportList", searchReportList);
+		return "searchreport/searchReportList";
+	}
 	
 }
