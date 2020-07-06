@@ -1,5 +1,8 @@
 package com.cafe24.memory.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cafe24.memory.domain.Commute;
 import com.cafe24.memory.domain.Member;
 import com.cafe24.memory.domain.Staff;
+import com.cafe24.memory.domain.Vacation;
 import com.cafe24.memory.service.StaffService;
 
 @Controller
@@ -85,7 +89,7 @@ public class StaffController {
 		staff.setStaffCode(send_code);
 		com.setStaff(staff);
 		staffService.startWork(com);
-		return "redirect:/staff/stafflist";
+		return "redirect:/admin";
 	}
 	//staffcommute end - 퇴근 (send_code = 근태코드 )
 	@GetMapping("/endWork")
@@ -94,7 +98,7 @@ public class StaffController {
 		com.setCommuteCode(send_code);
 		com.setCommuteWorkingHour(staffService.selectWorkTime(send_code));
 		staffService.endWork(com);
-		return "redirect:/staff/stafflist";
+		return "redirect:/admin";
 	}
 	//staffcommute list
 	@GetMapping("/staffcommutelist")
@@ -107,7 +111,16 @@ public class StaffController {
 	
 	//staffvacation list
 	@GetMapping("/staffvacationlist")
-	public String listStaffVacation() {
+	public String listStaffVacation(Model model, @RequestParam(name="send_code", required = false) String send_code) {
+		List<Vacation> vacation = null;
+		System.out.println(send_code);
+		if(send_code != null || !"".equals(send_code)) {
+			vacation = staffService.selectStaffVacation(send_code);
+		}else {
+			vacation = staffService.selectStaffVacation();
+		}
+		model.addAttribute("vacation", vacation);
+		model.addAttribute("vList", staffService.selectCompleteVacation());
 		return "staffvacation/staffVacationList";
 	}
 
@@ -117,23 +130,27 @@ public class StaffController {
 		return "staffvacation/staffVacationInsert";
 	}
 	@PostMapping("/staffvacationinsert")
-	public String insertStaffVacation() {
-		return "redirect:/staff/staffvacationlist";
-	}
-
-	//staffvacation update
-	@GetMapping("/staffvacationupdate")
-	public String updateStaffVacationForm() {
-		return "staffvacation/staffVacationUpdate";
-	}
-	@PostMapping("/staffvacationupdate")
-	public String updateStaffVacation() {
+	public String insertStaffVacation(Staff staff, Vacation vacation) {
+		vacation.setStaff(staff);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+		try {
+			Date sDate = format.parse(vacation.getVacationStartDate());
+			Date eDate = format.parse(vacation.getVacationEndDate());
+			int calDate = (int) (sDate.getTime() - eDate.getTime()); 
+			int calDateDays = calDate / ( 24*60*60*1000); 
+			calDateDays = Math.abs(calDateDays);
+			vacation.setVacationTerm(calDateDays);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		staffService.insertStaffVacation(vacation);
 		return "redirect:/staff/staffvacationlist";
 	}
 
 	//staffvacation delete
 	@GetMapping("/staffvacationdelete")
-	public String deleteStaffVacation() {
+	public String deleteStaffVacation(@RequestParam(name="send_code", required = false) String send_code) {
+		staffService.deleteStaffVacation(send_code);
 		return "redirect:/staff/staffvacationlist";
 	}
 }
