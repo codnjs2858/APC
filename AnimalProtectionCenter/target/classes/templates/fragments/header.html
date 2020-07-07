@@ -174,7 +174,12 @@
 					                                    	<h4>출근시간 :
 					                                    		<th:block th:if="${session.com.commute?.commuteStartTime} != null">[[${session.com.commute?.commuteStartTime}]]</th:block>
 					                                    	</h4>
-					                                    	<button type="button" id="startBtn" th:disabled="${session.com.commute?.commuteStartTime} != null" th:data-start="'/staff/startWork?send_code='+${session.com.staffCode}">출근버튼</button>
+					                                    	<th:block th:if="${session.com.commute?.commuteStartTime} != null">
+						                                    	<button type="button" class="btn-block btn-lg" disabled>출근버튼</button>
+					                                    	</th:block>
+					                                    	<th:block th:if="${session.com.commute?.commuteStartTime} == null">
+						                                    	<button type="button" class="bg-red btn-block btn-lg waves-effect" id="startBtn" th:data-start="'/staff/startWork?send_code='+${session.com.staffCode}">출근버튼</button>
+					                                    	</th:block>
 			                                    		</div>
 			                                    	</a>
 			                                    </li>
@@ -184,7 +189,12 @@
 					                                    	<h4>퇴근시간 :
 					                                    		<th:block th:if="${session.com.commute?.commuteEndTime} != null">[[${session.com.commute?.commuteEndTime}]]</th:block>
 					                                    	</h4>
-															<button type="button" id="endBtn" th:disabled="${session.com.commute?.commuteEndTime} != null" th:data-end="'/staff/endWork?send_code='+${session.com.commute?.commuteCode}">퇴근버튼</button>
+					                                    	<th:block th:if="${session.com.commute?.commuteEndTime} != null">
+																<button type="button" class="btn-block btn-lg" disabled>퇴근버튼</button>
+					                                    	</th:block>
+					                                    	<th:block th:if="${session.com.commute?.commuteEndTime} == null">
+																<button type="button" class="bg-amber btn-block btn-lg waves-effect" id="endBtn" th:data-end="'/staff/endWork?send_code='+${session.com.commute?.commuteCode}">퇴근버튼</button>
+					                                    	</th:block>
 			                                    		</div>
 			                                    	</a>
 			                                    </li>

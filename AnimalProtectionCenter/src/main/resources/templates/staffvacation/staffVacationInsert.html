@@ -70,7 +70,7 @@
 		           				</div>
 				           		<div class="input-group">
 					           		<select class="form-control" name="vacationType">
-					           			<option value="">----선택----</option>
+					           			<option value="">---- 휴가 종류 선택 ----</option>
 					           			<option value="월차휴가">월차휴가</option>
 					           			<option value="연차휴가">연차휴가</option>
 					           			<option value="병가휴가">병가휴가</option>
@@ -104,7 +104,11 @@
 		           			</div>
 		           		</div>
 		           		<b>휴가 사유</b>
-		           		<textarea class="form-control" rows="3" name="vacationReason"></textarea>
+		           		<div class="input-group">
+                        	<div class="form-line">
+				           		<textarea class="form-control" rows="3" name="vacationReason" placeholder="휴가 사유를 입력해주세요."></textarea>
+                        	</div>
+                        </div>
 		           	</div>
 		           	<div class="body">
 		           		<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">휴가 신청 등록</button>
@@ -115,5 +119,31 @@
 	</section>
 </th:block> 
 <th:block layout:fragment="customFooterScript">
+	<script>
+		$("form").validate({
+			 rules : {
+				//네임
+				 staffName 			: {required : true}
+				,staffPart 			: {required : true}
+				,staffRank 			: {required : true}
+				,vacationType 		: {required : true}
+				,vacationStartDate 	: {required : true}
+				,vacationEndDate 	: {required : true}
+				,vacationReason 	: {required : true}
+			}
+			,messages : {
+				staffName 			: '직원 이름을 선택하세요'
+				,staffPart 			: {required : '직원 부서를 선택해주세요'}
+				,staffRank 			: {required : '직원 직급을 선택해주세요'}
+				,vacationType 		: {required : '휴가 사유를 선택해주세요'}
+				,vacationStartDate 	: '휴가 시작일을 입력해주세요'
+				,vacationEndDate 	: '휴가 종료일을 입력해주세요'
+				,vacationReason 	: '휴가 사유를 입력해주세요'
+			}
+			,errorPlacement : function(error, element){
+				element.parent().after(error);
+			}
+		});
+	</script>
 </th:block>
 </html>

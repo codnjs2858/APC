@@ -25,7 +25,7 @@
 			           			<b>직원 아이디</b>
 			           			<div class="input-group">
 					           		<div class="form-line">
-						           		<input type="text" class="form-control" name="memberId">
+						           		<input type="text" class="form-control" name="memberId" placeholder="직원 아이디를 입력하세요.">
 					           		</div>
 				           		</div>
 		           			</div>
@@ -33,7 +33,7 @@
 				           		<b>직원 이름</b>
 								<div class="input-group">
 					           		<div class="form-line">
-						           		<input type="text" name="staffName" class="form-control">
+						           		<input type="text" name="staffName" class="form-control" placeholder="직원 이름을 입력하세요.">
 					           		</div>
 				           		</div>
 		           			</div>
@@ -53,7 +53,7 @@
 				           		<b>부서</b>
 				           		<div class="input-group">
 					           		<select class="form-control" name="staffPart">
-					           			<option>----부서 선택----</option>
+					           			<option value="">----부서 선택----</option>
 					           			<option value="동물산업">동물산업</option>
 					           			<option value="동물복지">동물복지</option>
 					           			<option value="동물구조">동물구조</option>
@@ -64,7 +64,7 @@
 			           			<b>직원 직급</b>
 				           		<div class="input-group">
 					           		<select class="form-control" name="staffRank">
-					           			<option>----직급 선택----</option>
+					           			<option value="">----직급 선택----</option>
 					           			<option value="실장">실장</option>
 					           			<option value="부장">부장</option>
 					           			<option value="대리">대리</option>
@@ -85,7 +85,30 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 	$(function(){
+		//현재 날짜 입력
 		$('input[name=staffInDate]').val(new Date().toISOString().substring(0, 10));
+		
+		//유효성검사
+		$("form").validate({
+			 rules : {
+				//네임
+				 memberId 		: {required : true}
+				,staffName 		: {required : true}
+				,staffInDate 	: {required : true}
+				,staffPart 		: {required : true}
+				,staffRank 	: {required : true}
+			}
+			,messages : {
+				memberId 		: '직원 아이디를 등록하세요'
+				,staffName 		: '직원 이름을 입력해주세요'
+				,staffInDate 	: '직원 등록일을 입력해주세요'
+				,staffPart 		: {required : '직원 부서를 선택하세요'}
+				,staffRank 		: {required : '직원 직급을 선택해주세요'}
+			}
+			,errorPlacement : function(error, element){
+				element.parent().after(error);
+			}
+		});
 	});
 	</script>
 </th:block>

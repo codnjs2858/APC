@@ -50,7 +50,9 @@
 					.then((result) => {
 						var val = $(this).data('start');
 						if(result){
-						    if(result) location.href = val;
+						    if(result){
+						    	location.href = val;
+						    }
 						}else{
 							console.log('취소');
 						}
@@ -66,7 +68,9 @@
 					.then((result) => {
 						var val = $(this).data('end');
 						if(result){
-						    if(result) location.href = val;
+						    if(result){
+						    	location.href = val;
+						    }
 						}else{
 							console.log('취소');
 						}
