@@ -62,8 +62,14 @@ public class AnimalReportService {
 	 * 유기동물신고(searchReport) 리스트 select
 	 * @return List<SearchReportAnimal>
 	 */
+	public List<SearchReportAnimal> selectSearchReportAnimal(SearchReportAnimal searchReportAnimal){
+		return animalReportMapper.selectSearchReportAnimal();
+	}
 	public List<SearchReportAnimal> selectSearchReportAnimal(){
 		return animalReportMapper.selectSearchReportAnimal();
+	}
+	public List<LostReportAnimal> selectLostReportAnimal(LostReportAnimal lostReportAnimal){
+		return animalReportMapper.selectLostReportAnimal();
 	}
 	public List<LostReportAnimal> selectLostReportAnimal(){
 		return animalReportMapper.selectLostReportAnimal();

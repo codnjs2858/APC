@@ -41,7 +41,9 @@ public class AnimalReportController {
 		searchReportAnimal.setMember(member);
 		logger.info("찾기 리포트 {}"+searchReportAnimal);
 		animalReportService.insertAnimalReport(searchReportAnimal);
+		
 		reportManager.setSearchReport(searchReportAnimal);
+		System.out.println("-----------------------------------------"+reportManager+"<-reportManager.setSearchReport(searchReportAnimal);");
 		reportManager.setMember(member);
 		animalReportService.insertAniSearchReportManager(reportManager);
 		return "redirect:/reportlist/reportManager";
@@ -122,6 +124,25 @@ public class AnimalReportController {
 		List<SearchReportAnimal>searchReportList=animalReportService.selectSearchReportAnimal();
 		model.addAttribute("searchReportList", searchReportList);
 		return "searchreport/searchReportList";
+	}
+	/**
+	 * reportManager테이블에서 각  row의 데이터 상세보기 화면출력
+	 * @param lostReportAnimal
+	 * @param searchReportAnimal
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/reportManagerDetail")
+	public String reportManagerUpdate(LostReportAnimal lostReportAnimal,SearchReportAnimal searchReportAnimal,Model model) {
+	
+		if(lostReportAnimal!=null) {
+		model.addAttribute("lostAnimalDetail", animalReportService.selectLostReportAnimal(lostReportAnimal));
+		return "reportlist/lostAnimalDetail";
+		}
+		else {
+		model.addAttribute("SearchAnimalDetail", animalReportService.selectSearchReportAnimal(searchReportAnimal));	
+		}
+		return "reportlist/SearchAnimalDetail";
 	}
 	
 }

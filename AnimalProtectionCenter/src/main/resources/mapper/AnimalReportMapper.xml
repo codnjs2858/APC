@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cafe24.memory.mapper.AnimalReportMapper">
+
 	<resultMap type="SearchReportAnimal" id="searchReportAnimal">
 		<result property="searchReportCode" column="search_report_code"></result>
 		<result property="searchReportInDate" column="search_report_in_date"></result>
@@ -32,6 +33,7 @@
 			</association>
 		</association>
 	</resultMap>
+	
 	<resultMap type="LostReportAnimal" id="lostReportAnimal">
 		<result property="lostReportCode" column="lost_report_code"></result>
 		<result property="animalName" column="animal_name"></result>
@@ -52,16 +54,19 @@
 			<result property="memberId" column="member_id"></result>
 		</association>	
 	</resultMap>
-	<resultMap type="ReportManger" id="ReportManager">
+	
+	<resultMap type="ReportManger" id="reportManager">
 		<result property="acceptCode" column="accept_code"></result>
 		<result property="acceptState" column="accept_state"></result>
 		<result property="acceptInDate" column="accept_in_date"></result>
 		<result property="acceptOutDate" column="accept_out_date"></result>
-		<association property="searchReport" javaType="SearchReportAnimal">
-			<result property="searchReportCode" column="report_code"></result>
+		<association property="searchReport" javaType="SearchReportAnimal"> 
+			<result property="searchReportCode" column="report_code"></result><!--search_report_code로 하면 안된다  -->
+			<result property="animalLocation" column="animal_location"></result>
 		</association>
 		<association property="lostReport" javaType="LostReportAnimal">
 			<result property="lostReportCode" column="lost_report_code"></result>		
+			<result property="lostReportLocation" column="lost_report_location"></result>		
 		</association>
 		<association property="member" javaType="Member">
 			<result property="memberId" column="member_id"></result>		
@@ -108,11 +113,21 @@
 			FROM tb_report_manager;
 		</selectKey>
 		INSERT INTO tb_report_manager
-			(accept_code, report_code, accept_state, member_id, accept_in_date, accept_out_date)
-			VALUES (#{acceptCode}, #{searchReport.searchReportCode}, '처리중',#{member.memberId},#{searchReport.searchReportInDate}, 
-		<if test='searchReport.searchReportOutDate != null'>	
-			CURDATE()
-		</if>	
+			(accept_code
+			, report_code
+			, accept_state
+			, member_id
+			, accept_in_date
+			, report_location
+			, accept_out_date
+			)
+				VALUES (#{acceptCode}
+				, #{searchReport.searchReportCode}
+				, '처리중'
+				,#{member.memberId}
+				,#{searchReport.searchReportInDate}
+				,#{searchReport.animalLocation}
+				,null
 			 )
 	</insert>
 	<insert id="insertAniLostReportManager" parameterType="ReportManger">
@@ -122,22 +137,31 @@
 					when 0 then 'accept_1'
 					ELSE  CONCAT('accept_',max(cast(substr(accept_code,8) as decimal))+1)
 					END	)
-			AS acceptCode`
+			AS acceptCode
 			FROM tb_report_manager;
 		</selectKey>
 			INSERT INTO tb_report_manager
-				(accept_code, accept_state, member_id, accept_in_date, accept_out_date, lost_report_code)
-				VALUES (#{acceptCode}, '처리중', #{member.memberId}, #{lostReport.lostReportInDate},
-					<if test='lostReport.lostReportOutDate != null'>	
-						 #{lostReport.lostReportOutDate} 
-					</if>
-				  , #{lostReport.lostReportCode})
+				(accept_code
+				, accept_state
+				, member_id
+				, accept_in_date
+				, accept_out_date
+				, lost_report_code
+				,report_location)
+				VALUES (
+				#{acceptCode}
+				, '처리중'
+				, #{member.memberId}
+				, #{lostReport.lostReportInDate}
+				,null
+				, #{lostReport.lostReportCode}
+				,#{lostReport.lostReportLocation})
 				 
 	</insert>
 	
 	<select id="selectAllReport" resultMap="reportManager">
 			SELECT 
-				search_report_code  , animal_code, animal_gender, animal_detail, animal_location, animal_picture, member_id, search_report_in_date, search_report_out_date
+				r.*
 			FROM 
 			 tb_report_manager AS r 
 			 
@@ -149,15 +173,23 @@
 			left JOIN tb_search_report AS s
 			ON r.report_code=s.search_report_code;
 	</select>
-	<select id="selectSearchReportAnimal" resultMap="searchReportAnimal">
+	<select id="selectSearchReportAnimal" parameterType="SearchReportAnimal" resultMap="searchReportAnimal">
 		SELECT *
 		from tb_search_report AS s join tb_animal_type AS a
-		ON s.animal_code=a.animal_type_code;
+		ON s.animal_code=a.animal_type_code
+		<where>
+		 <if test="searchReportCode!=null and searchReportCode !=''.toString()"> s.search_report_code=#{searchReport.searchReportCode}</if>
+		</where>	
+		;
 	</select>
-	<select id="selectLostReportAnimal" resultMap="lostReportAnimal">
+	<select id="selectLostReportAnimal" parameterType="LostReportAnimal" resultMap="lostReportAnimal">
 		SELECT *
 		from
 		tb_lost_report AS l JOIN tb_animal_type AS a
-		ON l.animal_code=a.animal_type_code;
+		ON l.animal_code=a.animal_type_code
+		<where>
+		 <if test="lostReportCode!=null and lostReportCode !=''.toString()">l.lost_report_code=#{LostReportAnimal.lostReportCode}</if>
+		</where>
+		;
 	</select>
 </mapper>

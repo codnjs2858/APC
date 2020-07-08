@@ -13,13 +13,14 @@ import com.cafe24.memory.domain.SearchReportAnimal;
 public interface AnimalReportMapper {
 	public int insertAnimalReport(SearchReportAnimal searchReportAnimal);
 	public List<SearchReportAnimal> selectSearchReportAnimal();
+	public List<SearchReportAnimal> selectSearchReportAnimal(SearchReportAnimal searchReportAnimal);
 	
 	public int insertLostReportAnimal(LostReportAnimal lostReportAnimal);
 	public List<LostReportAnimal> selectLostReportAnimal();
+	public List<LostReportAnimal> selectLostReportAnimal(LostReportAnimal lostReportAnimal);
 	
 	public int insertAniSearchReportManager(ReportManger reportManager);
 	public int insertAniLostReportManager(ReportManger reportManager);
 	
 	public List<ReportManger> selectAllReport();
-	public List<Map<String,Object>> selectReportCnt();
 }

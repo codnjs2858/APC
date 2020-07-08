@@ -66,8 +66,8 @@
 		                            <th><div class="align-center">신고 코드</div></th>
 		                            <th><div class="align-center">유기코드</div></th>
 		                            <th><div class="align-center">분실코드</div></th>
-		                            <th><div class="align-center">신고인</div></th>
 		                            <th><div class="align-center">처리상태</div></th>
+		                            <th><div class="align-center">신고인</div></th>
 		                            <th><div class="align-center">신고날짜</div></th>
 		                            <th><div class="align-center">신고취소날짜</div></th>
 		                            <th data-orderable="false"><div class="align-center">수정</div></th>
@@ -78,20 +78,18 @@
 	                            <tr th:each="rl, i : ${reportList}" class="odd">
 	                       			<!-- <td><div class="align-center"><span class="label label-warning">new</span></div></td> -->
 				                    <td><div class="align-center">[[${i.size - i.index}]]</div></td>
-				                    <td><div class="align-center">[[${rl.acceptCode}]]</div></td>
-		                            <td><div class="align-center">[[${rl.searchReport}]]</div></td>
-		                            <td><div class="align-center">[[${rl.lostReport.lostReportCode}]]</div></td>
-		                            <td><div class="align-center">[[${rl.acceptState}]]</div></td>
-		                            <td><div class="align-center">[[${rl.member.memberId}]]</div></td>
-		                            <td th:if="${rl.searchReport} == null">
-		                            	<div class="align-center">[[${rl.lostReport.lostReportState}]]</div>
-		                            </td>
-		                            <td th:unless="${rl.searchReport} == null">
-		                            	<div class="align-center">[[${rl.searchReport.animalDetail}]]</div>
-		                            </td>
-		                            <div class="align-center">[[${rl.acceptInDate}]]</div>
-		                          
-		                            <div class="align-center">[[${rl.acceptOutDate}]]</div>
+				                    <td><div class="align-center">[[${rl?.acceptCode}]]</div></td>
+		                            <td><div class="align-center">[[${rl.searchReport?.searchReportCode}]]</div></td>
+		                            <td><div class="align-center">[[${rl.lostReport?.lostReportCode}]]</div></td>
+		                            <td><div class="align-center">[[${rl?.acceptState}]]</div></td>
+		                            <td><div class="align-center">[[${rl?.member?.memberId}]]</div></td>
+		                           	<td><div class="align-center">[[${rl.acceptInDate}]]</div></td>
+		                            <td><div class="align-center">[[${rl?.acceptOutDate}]]</div></td>
+		                           	<td><div class="align-center">
+		                            	<a th:href="@{/reportlist/reportManagerDetail(searchReportCode=${rl.searchReport?.searchReportCode},lostReportCode=${rl.lostReport?.lostReportCode})}">
+	                       				<i class="material-icons">상세보기</i></a></div>
+	                      			</td>
+		                           
 	                        	</tr>
 	                        </tbody>
 	                    </table>
