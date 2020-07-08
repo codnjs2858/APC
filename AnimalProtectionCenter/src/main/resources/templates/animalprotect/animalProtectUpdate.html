@@ -13,6 +13,7 @@
 				<div class="header">
 					<h2>
 						유기동물보호수정
+						<a th:href="@{/animalcenter/animalcenterpage(send_code=${ptSpace.animalInsertCode})}">(동물상세보기)</a>
                 	</h2>
 				</div>
 				<div class="body">
@@ -31,7 +32,7 @@
 							<div class="col-xs-6 col-md-4">
 								센터등록된 유기동물번호
 	                            <div>
-		                            <select name="animalInsertCode">
+		                            <select name="animalInsertCode" class="form-control">
 		                            	<option th:each="l : ${acl}" th:value="${l.animalInsertCode}" th:text="${l.animalCenterNumber}" th:selected="${l.animalInsertCode}==${ptSpace.animalInsertCode}"></option>
 		                            </select>
 	                            </div>
@@ -39,7 +40,7 @@
 							<div class="col-xs-6 col-md-4">
 								보호상태
 								<div>
-									<select name="state">
+									<select name="state" class="form-control">
 										<option value="보호중">-- 보호중 --</option>
 										<option value="특별보호">-- 특별보호 --</option>
 									</select>

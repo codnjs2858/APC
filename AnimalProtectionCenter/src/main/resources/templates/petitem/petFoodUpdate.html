@@ -21,7 +21,7 @@
             				<div class="col-md-4">
 								사료종류
 								<div>
-									<select name="foodType">
+									<select name="foodType" class="form-control">
 										<option value="">-- 종류선택 --</option>
 										<option th:each="aniType : ${aniTypeCnt}" th:value="${aniType.animalType}" th:selected="(${aniType.animalType} == ${petFood.foodType})">-- [[${aniType.animalType}]] --</option>
 									</select>

@@ -59,12 +59,12 @@
 								<th:block th:if="${ps.useState}=='사용중'">
 									<div th:if="${ps.animalProtect.state}=='보호중'" class="icon bg-cyan">
 										<a th:href="@{/protection/modifyAnimalProtection(space=${ps.protectSpaceCode})}">
-											<i class="material-icons">pets</i>
+											<i class="material-icons"><img th:src="@{'/files/' + ${ps.animalCenter.animalPicture}}" style="all: initial; width: 80px; height: 80px;"></i>
 										</a>
 									</div>
 			                       	<div th:unless="${ps.animalProtect.state}=='보호중'" class="icon bg-red">
 										<a th:href="@{/protection/modifyAnimalProtection(space=${ps.protectSpaceCode})}">
-											<i class="material-icons">pets</i>
+											<i class="material-icons"><img th:src="@{'/files/' + ${ps.animalCenter.animalPicture}}" style="all: initial; width: 80px; height: 80px;"></i>
 			                            </a>
 									</div>
 									<div class="content">
@@ -80,13 +80,13 @@
 			                                </li>
 			                            </ul>
 			                            <div class="text" th:text="${'장소 '+ #strings.substring(ps.protectSpaceCode, 14)}"></div>
-			                            <div class="number">[[${ps.animalCenter.animalCenterNumber}]]([[${ps.animalProtect.state}]])</div>
+			                            <div style="font-size: large;">[[${ps.animalCenter.animalCenterNumber}]]([[${ps.animalProtect.state}]])</div>
 			                        </div> 
 								</th:block>
 								<th:block th:unless="${ps.useState}=='사용중'">
 									<div class="icon bg-green">
 			                            <a th:href="@{/protection/modifyAnimalProtection(space=${ps.protectSpaceCode})}">
-			                            	<i class="material-icons">error</i>
+			                            	<i class="material-icons">pets</i>
 			                            </a>
 									</div>
 									<div class="content">
@@ -96,7 +96,6 @@
 			                                        <i class="material-icons">more_vert</i>
 			                                    </a>
 			                                    <ul class="dropdown-menu pull-right">
-			                                        <!-- <li><a data-toggle="modal" data-color="red" th:data-data="${ps.protectSpaceCode}" data-title="delete" class=" waves-effect waves-block" href="#modalTarget">삭제</a></li> -->
 			                                        <li><a class="delete" th:data-myurl="'/protection/delProtectionSpace?protectSpaceCode=' + ${ps.protectSpaceCode}" href="javascript:void(0)">삭제</a></li>
 			                                    </ul>
 			                                </li>
