@@ -55,6 +55,17 @@
 		</association>
 	</resultMap>
 	
+	<select id="selectNotStaffLevel" resultType="Member">
+		SELECT
+			  m.member_id as memberId
+			, m.member_name as memberName
+		FROM 
+			tb_member AS m LEFT JOIN tb_staff AS s on m.member_id = s.member_id
+		WHERE m.level_code = 'level_code_02'
+			AND s.staff_code IS NULL 
+
+	</select>
+	
 	<delete id="deleteStaffVacation" parameterType="String">
 		DELETE FROM tb_vacation WHERE vacation_code=#{send_code}
 	</delete>

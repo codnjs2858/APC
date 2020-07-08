@@ -5,11 +5,18 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.cafe24.memory.domain.Commute;
+import com.cafe24.memory.domain.Member;
 import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.domain.Vacation;
 
 @Mapper
 public interface StaffMapper {
+	
+	/**
+	 * 직원으로 등록되지 않은 관리자 회원 리스트
+	 * @return
+	 */
+	public List<Member> selectNotStaffLevel();
 	
 	/**
 	 * 직원 휴가 삭제

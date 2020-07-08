@@ -43,7 +43,8 @@ public class StaffController {
 	}
 	//staff insert
 	@GetMapping("/staffinsert")
-	public String insertStaffForm() {
+	public String insertStaffForm(Model model) {
+		model.addAttribute("notStaff", staffService.selectNotStaffLevel());
 		return "staff/staffInsert";
 	}
 	@PostMapping("/staffinsert")

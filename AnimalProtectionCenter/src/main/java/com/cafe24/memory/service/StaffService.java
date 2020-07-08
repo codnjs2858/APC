@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cafe24.memory.domain.Commute;
+import com.cafe24.memory.domain.Member;
 import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.domain.Vacation;
 import com.cafe24.memory.mapper.StaffMapper;
@@ -16,6 +17,14 @@ import com.cafe24.memory.mapper.StaffMapper;
 public class StaffService {
 	
 	@Autowired private StaffMapper staffMapper;
+	
+	/**
+	 * 직원으로 등록되지 않은 관리자 회원 리스트
+	 * @return
+	 */
+	public List<Member> selectNotStaffLevel(){
+		return staffMapper.selectNotStaffLevel();
+	}
 	
 	/**
 	 * 직원 휴가 삭제

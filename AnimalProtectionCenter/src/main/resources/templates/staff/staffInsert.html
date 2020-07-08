@@ -24,26 +24,21 @@
 		           			<div class="col-md-4">
 			           			<b>직원 아이디</b>
 			           			<div class="input-group">
-					           		<div class="form-line">
-						           		<input type="text" class="form-control" name="memberId" placeholder="직원 아이디를 입력하세요.">
-					           		</div>
+			           				<select id="selectmId" name="memberId" >
+			           					<option value="">관리자 권한의 회원 목록</option>
+			           					<th:block th:if="${notStaff} != null">
+			           						<option th:each="notStaff : ${notStaff}" th:value="${notStaff.memberId}" th:data-name="${notStaff.memberName}">[[${notStaff.memberId}]]</option>
+			           					</th:block>
+			           				</select>
 				           		</div>
 		           			</div>
 		           			<div class="col-md-4">
 				           		<b>직원 이름</b>
 								<div class="input-group">
 					           		<div class="form-line">
-						           		<input type="text" name="staffName" class="form-control" placeholder="직원 이름을 입력하세요.">
+						           		<input type="text" name="staffName" class="form-control" placeholder="직원 이름을 입력하세요." readonly="readonly">
 					           		</div>
 				           		</div>
-		           			</div>
-		           			<div class="col-md-4">
-		           				<b>직원 등록 일자</b>
-		           				<div class="input-group">
-		           					<div class="form-line">
-						           		<input type="text" class="form-control" readonly="readonly" name="staffInDate">
-					           		</div>
-		           				</div>
 		           			</div>
 		           		</div>
 		           	</div>
@@ -71,6 +66,14 @@
 					           			<option value="사원">사원</option>
 					           		</select>
 				           		</div>
+		           			</div>
+		           			<div class="col-md-4">
+		           				<b>직원 등록 일자</b>
+		           				<div class="input-group">
+		           					<div class="form-line">
+						           		<input type="text" class="form-control" readonly="readonly" name="staffInDate">
+					           		</div>
+		           				</div>
 		           			</div>
 		           		</div>
 		           	</div>
@@ -108,6 +111,16 @@
 			,errorPlacement : function(error, element){
 				element.parent().after(error);
 			}
+		});
+		
+		//직원 아이디 선택 - 이름 자동등록
+		$('#selectmId').change(function(){
+			var id = $(this).val();
+			var name = "";
+			if(id != null && id != ''){
+				name = $(this).find("option:selected").data('name');
+			}
+			$('input[name=staffName]').val(name);
 		});
 	});
 	</script>
