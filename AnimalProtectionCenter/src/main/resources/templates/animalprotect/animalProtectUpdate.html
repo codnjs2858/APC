@@ -13,6 +13,7 @@
 				<div class="header">
 					<h2>
 						유기동물보호수정
+						<a th:href="@{/animalcenter/animalcenterpage(send_code=${ptSpace.animalInsertCode})}">(동물상세보기)</a>
                 	</h2>
 				</div>
 				<div class="body">
@@ -31,7 +32,7 @@
 							<div class="col-xs-6 col-md-4">
 								센터등록된 유기동물번호
 	                            <div>
-		                            <select name="animalInsertCode" required>
+		                            <select name="animalInsertCode" class="form-control">
 		                            	<option th:each="l : ${acl}" th:value="${l.animalInsertCode}" th:text="${l.animalCenterNumber}" th:selected="${l.animalInsertCode}==${ptSpace.animalInsertCode}"></option>
 		                            </select>
 	                            </div>
@@ -39,7 +40,7 @@
 							<div class="col-xs-6 col-md-4">
 								보호상태
 								<div>
-									<select name="state">
+									<select name="state" class="form-control">
 										<option value="보호중">-- 보호중 --</option>
 										<option value="특별보호">-- 특별보호 --</option>
 									</select>
@@ -49,7 +50,7 @@
 								<div class="input-group">
 			                        <div class="form-line">
 										보호기간
-			                            <input type="number" class="form-control" name="protectDate" placeholder="보호기간" th:value="${dDay}" required	>
+			                            <input type="number" class="form-control" name="protectDate" placeholder="보호기간" th:value="${dDay}">
 			                        </div>
 								</div>
 							</div>
@@ -85,10 +86,10 @@
 					,protectDate 	  : {required : true}
 				}
 				,messages : {
-					 protectSpaceCode	: '시설을 선택해주세요'
-					,animalInsertCode	: '시설을 선택해주세요'
-					,state 				: '시설을 선택해주세요'
-					,protectDate 		: '시설을 선택해주세요'
+					 protectSpaceCode	: '장소를 선택해주세요'
+					,animalInsertCode	: '동물번호를 선택해주세요'
+					,state 				: '보호상태를 선택해주세요'
+					,protectDate 		: '보호기간을 입력해주세요'
 				}
 				,errorPlacement : function(error, element){
 					element.parent().after(error);

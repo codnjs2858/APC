@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,14 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.cafe24.memory.AnimalProtectionCenterApplication;
-import com.cafe24.memory.domain.AnimalCenter;
-import com.cafe24.memory.domain.AnimalType;
-import com.cafe24.memory.domain.ReportManger;
-import com.cafe24.memory.domain.SearchReportAnimal;
-import com.cafe24.memory.domain.Staff;
-import com.cafe24.memory.service.AnimalCenterService;
-import com.cafe24.memory.service.AnimalTypeService;
 import com.cafe24.memory.service.StorageService;
 
 @Controller
@@ -32,12 +23,6 @@ public class FileUpLoadController {
 	
 	private final static Logger logger = 
 			LoggerFactory.getLogger(SpringBootApplication.class);
-	
-	@Autowired 
-	private AnimalTypeService animalTypeService;
-	
-	@Autowired 
-	private AnimalCenterService animalCenterService;
 	
 	@Autowired
 	private StorageService storageService;
