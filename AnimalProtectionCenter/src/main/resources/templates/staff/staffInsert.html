@@ -24,26 +24,21 @@
 		           			<div class="col-md-4">
 			           			<b>직원 아이디</b>
 			           			<div class="input-group">
-					           		<div class="form-line">
-						           		<input type="text" class="form-control" name="memberId">
-					           		</div>
+			           				<select id="selectmId" name="memberId" >
+			           					<option value="">관리자 권한의 회원 목록</option>
+			           					<th:block th:if="${notStaff} != null">
+			           						<option th:each="notStaff : ${notStaff}" th:value="${notStaff.memberId}" th:data-name="${notStaff.memberName}">[[${notStaff.memberId}]]</option>
+			           					</th:block>
+			           				</select>
 				           		</div>
 		           			</div>
 		           			<div class="col-md-4">
 				           		<b>직원 이름</b>
 								<div class="input-group">
 					           		<div class="form-line">
-						           		<input type="text" name="staffName" class="form-control">
+						           		<input type="text" name="staffName" class="form-control" placeholder="직원 이름을 입력하세요." readonly="readonly">
 					           		</div>
 				           		</div>
-		           			</div>
-		           			<div class="col-md-4">
-		           				<b>직원 등록 일자</b>
-		           				<div class="input-group">
-		           					<div class="form-line">
-						           		<input type="text" class="form-control" readonly="readonly" name="staffInDate">
-					           		</div>
-		           				</div>
 		           			</div>
 		           		</div>
 		           	</div>
@@ -53,7 +48,7 @@
 				           		<b>부서</b>
 				           		<div class="input-group">
 					           		<select class="form-control" name="staffPart">
-					           			<option>----부서 선택----</option>
+					           			<option value="">----부서 선택----</option>
 					           			<option value="동물산업">동물산업</option>
 					           			<option value="동물복지">동물복지</option>
 					           			<option value="동물구조">동물구조</option>
@@ -64,13 +59,21 @@
 			           			<b>직원 직급</b>
 				           		<div class="input-group">
 					           		<select class="form-control" name="staffRank">
-					           			<option>----직급 선택----</option>
+					           			<option value="">----직급 선택----</option>
 					           			<option value="실장">실장</option>
 					           			<option value="부장">부장</option>
 					           			<option value="대리">대리</option>
 					           			<option value="사원">사원</option>
 					           		</select>
 				           		</div>
+		           			</div>
+		           			<div class="col-md-4">
+		           				<b>직원 등록 일자</b>
+		           				<div class="input-group">
+		           					<div class="form-line">
+						           		<input type="text" class="form-control" readonly="readonly" name="staffInDate">
+					           		</div>
+		           				</div>
 		           			</div>
 		           		</div>
 		           	</div>
@@ -85,7 +88,40 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 	$(function(){
+		//현재 날짜 입력
 		$('input[name=staffInDate]').val(new Date().toISOString().substring(0, 10));
+		
+		//유효성검사
+		$("form").validate({
+			 rules : {
+				//네임
+				 memberId 		: {required : true}
+				,staffName 		: {required : true}
+				,staffInDate 	: {required : true}
+				,staffPart 		: {required : true}
+				,staffRank 	: {required : true}
+			}
+			,messages : {
+				memberId 		: '직원 아이디를 등록하세요'
+				,staffName 		: '직원 이름을 입력해주세요'
+				,staffInDate 	: '직원 등록일을 입력해주세요'
+				,staffPart 		: {required : '직원 부서를 선택하세요'}
+				,staffRank 		: {required : '직원 직급을 선택해주세요'}
+			}
+			,errorPlacement : function(error, element){
+				element.parent().after(error);
+			}
+		});
+		
+		//직원 아이디 선택 - 이름 자동등록
+		$('#selectmId').change(function(){
+			var id = $(this).val();
+			var name = "";
+			if(id != null && id != ''){
+				name = $(this).find("option:selected").data('name');
+			}
+			$('input[name=staffName]').val(name);
+		});
 	});
 	</script>
 </th:block>

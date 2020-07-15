@@ -48,8 +48,8 @@
 					           			<b>신고 코드</b>
 					           			<div class="input-group ">
 							           		<div class="form-line m-t-10">
-								           		<input th:if="${searchReportCode} != null" type="text" class="form-control" name="searchReportCode" th:value="${searchReportCode}">
-								           		<input th:unless="${searchReportCode} != null" type="text" class="form-control" name="searchReportCode">
+								           		<input th:if="${searchReportCode} != null" type="text" class="form-control" name="searchReportCode" th:value="${searchReportCode}" placeholder="신고코드를 입력하거나 등록해 주세요.">
+								           		<input th:unless="${searchReportCode} != null" type="text" class="form-control" name="searchReportCode" placeholder="신고코드를 입력하거나 등록해 주세요.">
 							           		</div>
 						           		</div>
 				           			</div>
@@ -79,7 +79,7 @@
 						           		<b>동물 번호</b>
 										<div class="input-group">
 							           		<div class="form-line m-t-10">
-								           		<input type="text" name="animalCenterNumber" class="form-control onlyNumber" th:value="${ac.animalCenterNumber}">
+								           		<input type="text" name="animalCenterNumber" class="form-control onlyNumber" th:value="${ac.animalCenterNumber}" placeholder="동물번호를 입력해 주세요.">
 							           		</div>
 						           		</div>
 				           			</div>
@@ -109,7 +109,7 @@
 						           		<div class="input-group">
 						           			<div class="col-sm-6">
 								           		<div class="form-line">
-									           		<input type="text" name="animalAge" class="form-control onlyNumber" th:value="${ac.animalAge}">
+									           		<input type="text" name="animalAge" class="form-control onlyNumber" th:value="${ac.animalAge}" placeholder="동물 나이를 입력해주세요.">
 								           		</div>
 						           			</div>
 							           		<div class="col-sm-3">
@@ -122,7 +122,7 @@
 										<div class="input-group">
 						           			<div class="col-sm-6">
 								           		<div class="form-line onlyNum">
-									           		<input type="text" name="animalWeight" class="form-control onlyNumber" th:value="${ac.animalWeight}">
+									           		<input type="text" name="animalWeight" class="form-control onlyNumber" th:value="${ac.animalWeight}" placeholder="동물 체중을 입력해주세요.">
 								           		</div>
 						           			</div>
 							           		<div class="col-sm-3">
@@ -145,13 +145,13 @@
 						           		<b>상태</b>
 										<div class="input-group">
 							           		<div class="form-line">
-								           		<input type="text" class="form-control" name="animalState" th:value="${ac.animalState}">
+								           		<input type="text" class="form-control" name="animalState" th:value="${ac.animalState}" placeholder="동물 상태를 입력해주세요.">
 							           		</div>
 						           		</div>
 				           			</div>
 				           		</div>
 				           		<b>특징</b>
-				           		<textarea rows="3" name="animalCharacter" class="form-control">[[${ac.animalCharacter}]]</textarea>
+				           		<textarea rows="3" name="animalCharacter" class="form-control" placeholder="동물 특징을 입력해주세요.">[[${ac.animalCharacter}]]</textarea>
 				           	</div>
 				           	<div class="body">
 				           		<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">보호 동물 수정</button>
@@ -326,6 +326,35 @@
 	            }
 	        });
 			
+			//유효성 검사
+			$("form").validate({
+				 rules : {
+					//네임
+					 animalPicture2 		: {required : true}
+					,animalCenterNumber 	: {required : true, min : 0}
+					,selectType 			: {required : true}
+					,animalTypeCode 		: {required : true}
+					,animalState 			: {required : true}
+					,animalCharacter 		: {required : true}
+					,animalAge 				: {required : true}
+					,animalWeight	 		: {required : true}
+					,animalGender	 		: {required : true}
+				}
+				,messages : {
+					animalPicture2 			: {required : '동물 사진을 선택하세요'}
+					,animalCenterNumber 	: {required : '동물 번호를 입력해주세요', min : '0보다 큰 수를 입력해주세요'}
+					,selectType 			: '동물 축종을 선택해주세요'
+					,animalTypeCode 		: '동물 품종을 선택해주세요'
+					,animalState 			: '동물 상태를 입력해주세요'
+					,animalCharacter 		: '동물 특징을 입력해주세요'
+					,animalAge 				: '동물 나이를 입력해주세요'
+					,animalWeight 			: '동물 무게를 입력해주세요'
+					,animalGender 			: '동물 성별을 입력해주세요'
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
+			});
 		});
 	</script>
 </th:block>

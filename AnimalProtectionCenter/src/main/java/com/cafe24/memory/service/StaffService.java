@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cafe24.memory.domain.Commute;
+import com.cafe24.memory.domain.Member;
 import com.cafe24.memory.domain.Staff;
+import com.cafe24.memory.domain.Vacation;
 import com.cafe24.memory.mapper.StaffMapper;
 
 @Service
@@ -15,6 +17,55 @@ import com.cafe24.memory.mapper.StaffMapper;
 public class StaffService {
 	
 	@Autowired private StaffMapper staffMapper;
+	
+	/**
+	 * 직원으로 등록되지 않은 관리자 회원 리스트
+	 * @return
+	 */
+	public List<Member> selectNotStaffLevel(){
+		return staffMapper.selectNotStaffLevel();
+	}
+	
+	/**
+	 * 직원 휴가 삭제
+	 * @param send_code
+	 * @return
+	 */
+	public int deleteStaffVacation(String send_code) {
+		return staffMapper.deleteStaffVacation(send_code);
+	}
+	
+	/**
+	 * 직원 휴가 등록
+	 * @param v
+	 * @return
+	 */
+	public int insertStaffVacation(Vacation v) {
+		return staffMapper.insertStaffVacation(v);
+	}
+	
+	/**
+	 * 직원 휴가 업데이트(휴가코드,휴가상태)
+	 * @param v
+	 * @return
+	 */
+	public int vacationAdmission(Vacation v) {
+		return staffMapper.vacationAdmission(v);
+	}
+	
+	/**
+	 * 직원 휴가 리스트
+	 * @return
+	 */
+	public List<Vacation> selectStaffVacation(){
+		return staffMapper.selectStaffVacation();
+	}
+	public List<Vacation> selectStaffVacation(String send_code){
+		return staffMapper.selectStaffVacation(send_code);
+	}
+	public List<Vacation> selectCompleteVacation(){
+		return staffMapper.selectCompleteVacation();
+	}
 	
 	/**
 	 * 근태 코드로 근무시간 셋팅

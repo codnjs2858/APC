@@ -38,6 +38,41 @@
 	     <!-- validate plugins js -->
 	    <script src="/plugins/jquery-validation/jquery.validate.js"></script>
 		<script src="/plugins/jquery-validation/localization/messages_ko.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#startBtn').click(function(){
+					swal('출근 하시겠습니까?', {
+						title:'경고',
+						icon:'info',
+						buttons: true,
+					})
+					.then((result) => {
+						var val = $(this).data('start');
+						if(result){
+						    if(result)	location.href = val;
+						}else{
+							console.log('취소');
+						}
+					});
+				});
+				
+				$('#endBtn').click(function(){
+					swal('퇴근 하시겠습니까?', {
+						title:'경고',
+						icon:'info',
+						buttons: true,
+					})
+					.then((result) => {
+						var val = $(this).data('end');
+						if(result){
+						    if(result) location.href = val;
+						}else{
+							console.log('취소');
+						}
+					});
+				});
+			});
+		</script>
     <th:block layout:fragment="customFooterScript">
     </th:block>
 </body>

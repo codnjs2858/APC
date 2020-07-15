@@ -27,6 +27,9 @@
 	<resultMap type="Vacation" id="vacation">
 		<result property="vacationCode" column="vacation_code" />
 		<result property="vacationAdmissionState" column="vacation_admission_state" />
+		<result property="vacationType" column="vacation_type" />
+		<result property="vacationReason" column="vacation_reason" />
+		<result property="vacationTerm" column="vacation_term" />
 		<result property="vacationRegDate" column="vacation_reg_date" />
 		<result property="vacationStartDate" column="vacation_start_date" />
 		<result property="vacationEndDate" column="vacation_end_date" />
@@ -51,6 +54,77 @@
 			<result property="staffRank" column="staff_rank" />
 		</association>
 	</resultMap>
+	
+	<select id="selectNotStaffLevel" resultType="Member">
+		SELECT
+			  m.member_id as memberId
+			, m.member_name as memberName
+		FROM 
+			tb_member AS m LEFT JOIN tb_staff AS s on m.member_id = s.member_id
+		WHERE m.level_code = 'level_code_02'
+			AND s.staff_code IS NULL 
+
+	</select>
+	
+	<delete id="deleteStaffVacation" parameterType="String">
+		DELETE FROM tb_vacation WHERE vacation_code=#{send_code}
+	</delete>
+	
+	<update id="vacationAdmission" parameterType="Vacation">
+		UPDATE tb_vacation
+		SET
+			vacation_admission_state=#{vacationAdmissionState}
+		WHERE vacation_code=#{vacationCode}
+	</update>
+	
+	<select id="selectCompleteVacation" resultMap="vacation">
+		SELECT
+		*
+		FROM tb_vacation AS v
+		JOIN tb_staff AS s ON v.staff_code = s.staff_code
+		WHERE v.vacation_admission_state IS NOT NULL
+	</select>
+	
+	<select id="selectStaffVacation" resultMap="vacation">
+		SELECT
+		*
+		FROM tb_vacation AS v
+		JOIN tb_staff AS s ON v.staff_code = s.staff_code
+			<where>
+				v.vacation_admission_state IS NULL
+			</where>
+	</select>
+	
+	<insert id="insertStaffVacation" parameterType="Vacation">
+		<selectKey order="BEFORE" keyProperty="vacationCode" resultType="String">
+			SELECT
+				(case COUNT(*)
+				when 0 then'vacation_code_1'
+				else CONCAT('vacation_code_',MAX(CAST(SUBSTRING(vacation_code,15) AS DECIMAL))+1) 
+				END)AS vacation_code
+			FROM
+				tb_vacation
+		</selectKey>
+		INSERT INTO tb_vacation
+			(vacation_code
+			, staff_code
+			, vacation_admission_state
+			, vacation_type
+			, vacation_reason
+			, vacation_term
+			, vacation_start_date
+			, vacation_end_date
+			, vacation_reg_date)
+		VALUES (#{vacationCode}
+				, #{staff.staffCode}
+				, NULL
+				, #{vacationType}
+				, #{vacationReason}
+				, #{vacationTerm}
+				, #{vacationStartDate}
+				, #{vacationEndDate}
+				, CURDATE())
+	</insert>
 	
 	<select id="commuteList" resultMap="commute">
 		SELECT 
