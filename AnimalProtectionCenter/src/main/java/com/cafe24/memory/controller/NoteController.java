@@ -1,6 +1,9 @@
 package com.cafe24.memory.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,14 +37,16 @@ public class NoteController {
 	}
 	
 	@GetMapping("/noteList")
-	public String noteList(Model model) {
-		model.addAttribute("noteList", noteService.selectNote("id001"));
+	public String noteList(Model model,HttpSession session) {
+		String id = (String) session.getAttribute("SID");
+		model.addAttribute("noteList", noteService.selectNote(id));
 		return "note/noteList";
 	}
 	
 	@GetMapping("/sendNoteList")
-	public String sendNoteList(Model model) {
-		model.addAttribute("sendNoteList", noteService.selectSendNote("id001"));
+	public String sendNoteList(Model model,HttpSession session) {
+		String id = (String) session.getAttribute("SID");
+		model.addAttribute("sendNoteList", noteService.selectSendNote(id));
 		return "note/sendNoteList";
 	}
 }

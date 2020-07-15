@@ -54,7 +54,7 @@
 					           			<b>신고 코드</b>
 					           			<div class="input-group ">
 							           		<div class="form-line m-t-10">
-								           		<input type="text" class="form-control" name="searchReportCode">
+								           		<input type="text" class="form-control" name="searchReportCode" placeholder="신고코드를 입력하거나 등록해 주세요.">
 							           		</div>
 						           		</div>
 				           			</div>
@@ -82,15 +82,15 @@
 				           			<div class="col-xs-4 col-md-4">
 						           		<b>동물 번호</b>
 										<div class="input-group">
-							           		<div class="form-line m-t-10 error">
-								           		<input type="text" name="animalCenterNumber" class="form-control onlyNumber">
+							           		<div class="form-line m-t-10">
+								           		<input type="text" name="animalCenterNumber" class="form-control onlyNumber" placeholder="동물번호를 입력해 주세요.">
 							           		</div>
 						           		</div>
 				           			</div>
 				           			<div class="col-sm-4 m-t-10">
 						           		<b>축종</b>
 						           		<div class="input-group">
-							           		<select id="selectType" class="form-control" required>
+							           		<select id="selectType" name="selectType" class="form-control">
 							           			<option value="">----축종 선택----</option>
 							           			<option value="강아지">강아지</option>
 							           			<option value="고양이">고양이</option>
@@ -101,7 +101,7 @@
 				           			<div class="col-sm-4 m-t-10">
 						           		<b>품종</b>
 						           		<div class="input-group">
-							           		<select id="subType" name="animalTypeCode" class="form-control" required autofocus>
+							           		<select id="subType" name="animalTypeCode" class="form-control">
 							           			<option value="">----축종을 선택해 주세요----</option>
 							           		</select>
 						           		</div>
@@ -111,26 +111,16 @@
 				           			<div class="col-sm-3">
 						           		<b>나이</b>
 						           		<div class="input-group">
-						           			<div class="col-sm-6">
-								           		<div class="form-line">
-									           		<input type="text" name="animalAge" class="form-control onlyNumber" required>
-								           		</div>
-						           			</div>
-							           		<div class="col-sm-3">
-								           		<label>세</label>
+							           		<div class="form-line">
+								           		<input type="text" name="animalAge" class="form-control onlyNumber" placeholder="동물 나이를 입력해주세요.">
 							           		</div>
 						           		</div>
 				           			</div>
 				           			<div class="col-sm-3">
 						           		<b>체중</b>
 										<div class="input-group">
-						           			<div class="col-sm-6">
-								           		<div class="form-line onlyNum">
-									           		<input type="text" name="animalWeight" class="form-control onlyNumber">
-								           		</div>
-						           			</div>
-							           		<div class="col-sm-3">
-								           		<label>kg</label>
+							           		<div class="form-line onlyNum">
+								           		<input type="text" name="animalWeight" class="form-control onlyNumber" placeholder="동물 체중을 입력해주세요.">
 							           		</div>
 						           		</div>
 				           			</div>
@@ -149,16 +139,22 @@
 						           		<b>상태</b>
 										<div class="input-group">
 							           		<div class="form-line">
-								           		<input type="text" class="form-control" name="animalState">
+								           		<input type="text" class="form-control" name="animalState" placeholder="동물 상태를 입력해주세요.">
 							           		</div>
 						           		</div>
 				           			</div>
 				           		</div>
-				           		<b>특징</b>
-				           		<textarea rows="3" name="animalCharacter" class="form-control" required></textarea>
+				           		<div>
+					           		<b>특징</b>
+					           		<div class="input-group">
+					           			<div class="form-line">
+							           		<textarea rows="3" name="animalCharacter" class="form-control" placeholder="동물 특징을 입력해주세요."></textarea>
+					           			</div>
+					           		</div>
+				           		</div>
 				           	</div>
 				           	<div class="body button-demo js-modal-buttons">
-				           		<input type="submit" class="btn bg-amber btn-block btn-lg waves-effect" value="보호 동물 센터 등록">
+				           		<button type="submit" class="btn bg-amber btn-block btn-lg waves-effect">보호동물 센터 등록</button>
 				           	</div>
 						</form>
 			        </div>
@@ -323,6 +319,37 @@
 	                $(this).val(inputVal.replace(/[^0-9]/gi,''));
 	            }
 	        });
+			
+			//유효성 검사
+			$("form").validate({
+				 rules : {
+					//네임
+					 animalPicture2 		: {required : true}
+					,animalCenterNumber 	: {required : true, min : 0}
+					,selectType 			: {required : true}
+					,animalTypeCode 		: {required : true}
+					,animalState 			: {required : true}
+					,animalCharacter 		: {required : true}
+					,animalAge 				: {required : true}
+					,animalWeight	 		: {required : true}
+					,animalGender	 		: {required : true}
+				}
+				,messages : {
+					animalPicture2 			: {required : '동물 사진을 선택하세요'}
+					,animalCenterNumber 	: {required : '동물 번호를 입력해주세요', min : '0보다 큰 수를 입력해주세요'}
+					,selectType 			: '동물 축종을 선택해주세요'
+					,animalTypeCode 		: '동물 품종을 선택해주세요'
+					,animalState 			: '동물 상태를 입력해주세요'
+					,animalCharacter 		: '동물 특징을 입력해주세요'
+					,animalAge 				: '동물 나이를 입력해주세요'
+					,animalWeight 			: '동물 무게를 입력해주세요'
+					,animalGender 			: '동물 성별을 입력해주세요'
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
+			});
+			
 		});
 	</script>
 </th:block>

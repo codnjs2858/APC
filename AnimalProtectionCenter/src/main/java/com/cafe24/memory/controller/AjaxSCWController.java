@@ -13,6 +13,7 @@ import com.cafe24.memory.domain.AnimalType;
 import com.cafe24.memory.domain.Commute;
 import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.domain.Staff;
+import com.cafe24.memory.domain.Vacation;
 import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.AnimalTypeService;
 import com.cafe24.memory.service.StaffService;
@@ -35,4 +36,17 @@ public class AjaxSCWController {
 			@RequestParam(name = "memberPhone") String memberPhone) {
 		return animalCenterService.selectCenterReport(memberName, memberPhone);
 	}
+	
+	@PostMapping("/vacationAdmission")
+	public int vacationAdmission(@RequestParam(name = "code") String code, @RequestParam(name = "val") String val) {
+		Vacation v = new Vacation();
+		v.setVacationCode(code);
+		if("보류".equals(val)) {
+			val = null;
+		}
+		v.setVacationAdmissionState(val);
+		staffService.vacationAdmission(v);
+		return 0;
+	}
+	
 }

@@ -3,6 +3,9 @@ package com.cafe24.memory.domain;
 public class Vacation {
 	private String vacationCode;
 	private String vacationAdmissionState;
+	private String vacationType;
+	private String vacationReason;
+	private int vacationTerm;
 	private String vacationStartDate;
 	private String vacationRegDate;
 	private String vacationEndDate;
@@ -19,6 +22,24 @@ public class Vacation {
 	}
 	public void setVacationAdmissionState(String vacationAdmissionState) {
 		this.vacationAdmissionState = vacationAdmissionState;
+	}
+	public String getVacationType() {
+		return vacationType;
+	}
+	public void setVacationType(String vacationType) {
+		this.vacationType = vacationType;
+	}
+	public String getVacationReason() {
+		return vacationReason;
+	}
+	public void setVacationReason(String vacationReason) {
+		this.vacationReason = vacationReason;
+	}
+	public int getVacationTerm() {
+		return vacationTerm;
+	}
+	public void setVacationTerm(int vacationTerm) {
+		this.vacationTerm = vacationTerm;
 	}
 	public String getVacationStartDate() {
 		return vacationStartDate;
@@ -47,8 +68,8 @@ public class Vacation {
 	@Override
 	public String toString() {
 		return "Vacation [vacationCode=" + vacationCode + ", vacationAdmissionState=" + vacationAdmissionState
-				+ ", vacationStartDate=" + vacationStartDate + ", vacationRegDate=" + vacationRegDate
+				+ ", vacationType=" + vacationType + ", vacationReason=" + vacationReason + ", vacationTerm="
+				+ vacationTerm + ", vacationStartDate=" + vacationStartDate + ", vacationRegDate=" + vacationRegDate
 				+ ", vacationEndDate=" + vacationEndDate + ", staff=" + staff + "]";
 	}
-	
 }

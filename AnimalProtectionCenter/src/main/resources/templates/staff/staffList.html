@@ -30,10 +30,6 @@
 	                    </li>
 	                </ul>
 				</div>
-				<div class="header">
-					<button type="button" id="startBtn" th:disabled="${com.commute?.commuteStartTime} != null" th:data-start="'/staff/startWork?send_code='+${com.staffCode}">출근버튼</button>
-					<button type="button" id="endBtn" th:disabled="${com.commute?.commuteEndTime != null}" th:data-end="'/staff/endWork?send_code='+${com.commute?.commuteCode}">퇴근버튼</button>
-				</div>
 				<div class="body">
 					<div class="table-responsive" style="overflow: hidden;">
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
@@ -141,39 +137,6 @@
     					    .then((value) => {
     					    	if(value) location.href = val;
     					    });
-    				}else{
-    					console.log('취소');
-    				}
-    			});
-    		});
-    		
-    		
-    		$('#startBtn').click(function(){
-    			swal('출근 하시겠습니까?', {
-    				title:'경고',
-					icon:'info',
-					buttons: true,
-				})
-				.then((result) => {
-					var val = $(this).data('start');
-    				if(result){
-					    if(result) location.href = val;
-    				}else{
-    					console.log('취소');
-    				}
-    			});
-    		});
-    		
-    		$('#endBtn').click(function(){
-				swal('퇴근 하시겠습니까?', {
-    				title:'경고',
-					icon:'info',
-					buttons: true,
-				})
-				.then((result) => {
-					var val = $(this).data('end');
-    				if(result){
-					    if(result) location.href = val;
     				}else{
     					console.log('취소');
     				}

@@ -5,6 +5,16 @@
 <th:block layout:fragment="customCss">
 	<!-- JQuery DataTable Css -->
     <link href="/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap Select Css -->
+    <link href="/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <style>
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){
+    	width:auto;
+    }
+    .btn:not(.btn-link):not(.btn-circle) span {
+    	margin-left: 15px;
+    }
+    </style>
 </th:block>
 
 <th:block layout:fragment="customTitle">
@@ -29,37 +39,50 @@
 		                         <th><div class="align-center">직급</div></th>
 		                         <th><div class="align-center">이름</div></th>
 		                         <th><div class="align-center">종류</div></th>
+	                         	 <th><div class="align-center">사유</div></th>
 	                         	 <th><div class="align-center">시작일</div></th>
 	                         	 <th><div class="align-center">종료일</div></th>
 	                         	 <th><div class="align-center">기간 산출</div></th>
-	                         	 <th><div class="align-center">사유</div></th>
 	                         	 <th><div class="align-center">승인 상태</div></th>
 	                         	 <th><div class="align-center">등록 날짜</div></th>
-	                         	 <th><div class="align-center">수정</div></th>
 	                         	 <th><div class="align-center">삭제</div></th>
 		                	</tr>
 	                    </thead>
 	                    <tbody>
-	                        <tr th:each="j : ${#numbers.sequence(1,3)}" class="odd">
-	                   			<td><div class="align-center"><span class="label label-warning">new</span></div></td>
-	                   			<!-- <td class="sorting_1" th:text="${j}"></td> -->
-	                   			<td><div class="align-center">[[${j}]]</div></td>
-		                        <td><div class="align-center">부서1</div></td>
-		                        <td><div class="align-center">사원</div></td>
-		                        <td><div class="align-center">설채원</div></td>
-		                        <td><div class="align-center">연차</div></td>
-		                        <td><div class="align-center">2020-06-11</div></td>
-		                        <td><div class="align-center">2020-06-12</div></td>
-		                        <td><div class="align-center">1 (일)</div></td>
-		                        <td><div class="align-center">집에보내줘어</div></td>
-		                        <td><div class="align-center">보류/<a>(승인하기)</a></div></td>
-		                        <td><div class="align-center">2020-06-11</div></td>
-		                        <td><div class="align-center"><a th:href="@{/staff/staffvacationupdate}">(수정)</a></div></td>
-		                        <td><div class="align-center"><a th:href="@{/staff/staffvacationdelete}">(삭제)</a></div></td>
+	                    	<tr th:each="v,i : ${vacation}" class="odd">
+	                   			<td><div class="align-center">[[${i.size-i.index}]]</div></td>
+	                   			<td><div class="align-center">[[${v.staff.staffCode}]]</div></td>
+		                        <td><div class="align-center">[[${v.staff.staffPart}]]</div></td>
+		                        <td><div class="align-center">[[${v.staff.staffRank}]]</div></td>
+		                        <td><div class="align-center">[[${v.staff.staffName}]]</div></td>
+		                        <td><div class="align-center">[[${v.vacationType}]]</div></td>
+		                        <td><div class="align-center">[[${v.vacationReason}]]</div></td>
+		                        <td><div class="align-center">[[${v.vacationStartDate}]]</div></td>
+		                        <td><div class="align-center">[[${v.vacationEndDate}]]</div></td>
+		                        <td><div class="align-center">[[${v.vacationTerm}]](일)</div></td>
+		                        <td>
+		                        	<div class="align-center">
+		                        		<select id="vSelect" th:data-code="${v.vacationCode}">
+		                        			<option value="보류">보류</option>
+		                        			<option value="승인">승인</option>
+		                        			<option value="취소">취소</option>
+		                        			<option value="거절">거절</option>
+		                        		</select>
+		                        	</div>
+		                        </td>
+		                        <td><div class="align-center">[[${v.vacationRegDate}]]</div></td>
+		                        <td>
+		                            <div class="align-center">
+		                            	<a class="delete" th:data-myurl="'/staff/staffvacationdelete?send_code='+${v.vacationCode}" href="javascript:void(0)">
+					            			<i class="material-icons">delete</i>
+					            		</a>
+			                       	</div>
+		                       	</td>
 	                    	</tr>
 	                    </tbody>
 	                </table>
-	            </div><div class="header">
+	            </div>
+	            <div class="header">
 					<h2>직원 휴가, 외출 목록</h2>
 				</div>
 	            <div class="body">
@@ -72,34 +95,41 @@
 		                         <th><div class="align-center">직급</div></th>
 		                         <th><div class="align-center">이름</div></th>
 		                         <th><div class="align-center">종류</div></th>
+	                         	 <th><div class="align-center">사유</div></th>
 	                         	 <th><div class="align-center">시작일</div></th>
 	                         	 <th><div class="align-center">종료일</div></th>
 	                         	 <th><div class="align-center">기간 산출</div></th>
-	                         	 <th><div class="align-center">사유</div></th>
 	                         	 <th><div class="align-center">승인 상태</div></th>
 	                         	 <th><div class="align-center">등록 날짜</div></th>
 		                	</tr>
 	                    </thead>
 	                    <tbody>
-	                        <tr th:each="j : ${#numbers.sequence(1,100)}" class="odd">
-	                   			<td><div class="align-center"><span class="label label-warning">new</span></div></td>
-	                   			<!-- <td class="sorting_1" th:text="${j}"></td> -->
-	                   			<td><div class="align-center">[[${j}]]</div></td>
-		                        <td><div class="align-center">부서1</div></td>
-		                        <td><div class="align-center">사원</div></td>
-		                        <td><div class="align-center">설채원</div></td>
-		                        <td><div class="align-center">연차</div></td>
-		                        <td><div class="align-center">2020-06-11</div></td>
-		                        <td><div class="align-center">2020-06-12</div></td>
-		                        <td><div class="align-center">1 (일)</div></td>
-		                        <td><div class="align-center">집에보내줘어</div></td>
-		                        <td><div class="align-center">승인/<a href="">(승인하기)</a></div></td>
-		                        <td><div class="align-center">2020-06-11</div></td>
+	                    	<tr th:each="v,i : ${vList}" class="odd">
+	                   			<td><div class="align-center">[[${i.size-i.index}]]</div></td>
+	                   			<td><div class="align-center">[[${v.staff.staffCode}]]</div></td>
+		                        <td><div class="align-center">[[${v.staff.staffPart}]]</div></td>
+		                        <td><div class="align-center">[[${v.staff.staffRank}]]</div></td>
+		                        <td><div class="align-center">[[${v.staff.staffName}]]</div></td>
+		                        <td><div class="align-center">[[${v.vacationType}]]</div></td>
+		                        <td><div class="align-center">[[${v.vacationReason}]]</div></td>
+		                        <td><div class="align-center">[[${v.vacationStartDate}]]</div></td>
+		                        <td><div class="align-center">[[${v.vacationEndDate}]]</div></td>
+		                        <td><div class="align-center">[[${v.vacationTerm}]](일)</div></td>
+		                        <td>
+		                        	<div class="align-center">
+		                        		<select id="vSelect" th:data-code="${v.vacationCode}" disabled="disabled">
+		                        			<option value="보류" th:selected="${v.vacationAdmissionState} == '보류'">보류</option>
+		                        			<option value="승인" th:selected="${v.vacationAdmissionState} == '승인'">승인</option>
+		                        			<option value="취소" th:selected="${v.vacationAdmissionState} == '취소'">취소</option>
+		                        			<option value="거절" th:selected="${v.vacationAdmissionState} == '거절'">거절</option>
+		                        		</select>
+		                        	</div>
+		                        </td>
+		                        <td><div class="align-center">[[${v.vacationRegDate}]]</div></td>
 	                    	</tr>
 	                    </tbody>
 	                </table>
 	            </div>
-	            
 	        </div>
        	</div>
    	</section>
@@ -120,10 +150,54 @@
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
     		});
-    	});
-    	$(function(){
     		$('#dataTabelEaxm2').dataTable({
     			"aaSorting": []
+    		});
+    		
+    		$('#vSelect').change(function(){
+    			var val = $(this).val();
+    			var code = $(this).data('code');
+    			
+    			
+				var request = $.ajax({
+					url: "/ajax/vacationAdmission",
+					method: "POST",
+					data: { code : code ,
+							val : val},
+					dataType: "json"
+				});
+				request.done(function( msg ) {
+		
+				});
+				 
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});
+    		});
+
+    		$('.delete').click(function(){
+    			swal('삭제하시겠습니까?', {
+					title:'경고',
+					icon:'error',
+					buttons: true,
+				})
+    			.then((Delete) => {
+    				var val = $(this).data('myurl');
+    				console.log(val);
+    				if(Delete){
+    					swal({
+    							title: '확인',
+    					      	icon: "warning",
+    					      	text:"정말로 삭제하시겠습니까?",
+    					      	buttons: true,
+    					    })
+    					    .then((value) => {
+    					    	if(value) location.href = val;
+    					    });
+    				}else{
+    					console.log('취소');
+    				}
+    			});
     		});
     	});
     </script>

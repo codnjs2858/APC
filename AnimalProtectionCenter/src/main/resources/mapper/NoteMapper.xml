@@ -22,7 +22,7 @@
 		</selectKey>
 		INSERT INTO tb_note
 		(note_code, send_member, recipient_member, note_title, note_content, note_date)
-		VALUES (#{note_code}, 'id001', #{recipient_member}, #{note_title}, #{note_content}, NOW())
+		VALUES (#{note_code}, #{send_member}, #{recipient_member}, #{note_title}, #{note_content}, NOW())
 	</insert>
 
 	<select id="selectNote" resultMap="getNoteMap">

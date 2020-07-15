@@ -40,7 +40,7 @@
 				      			</div>
 				      			<div class="col-md-3 col-md-offset-1">
 				      				<b>담당자</b>
-					                <div class="input-group colorpicker colorpicker-element">
+					                <div class="input-group">
 					                    <div class="form-line">
 					                    	<!-- 세션 등록 -->
 					                        <input type="hidden" name="staffCode" class="form-control" th:value="${session.STAFF.staffCode}">
@@ -50,7 +50,7 @@
 				      			</div>
 				      			<div class="col-md-3 col-md-offset-1">
 				      				<b>등록 일자</b>
-					                <div class="input-group colorpicker colorpicker-element">
+					                <div class="input-group">
 					                    <div class="form-line">
 					                        <input type="text" name="animalHealthRegDate" class="form-control" readonly="readonly">
 					                    </div>
@@ -58,7 +58,11 @@
 				      			</div>
 							</div>
 			                <b>동물 상태</b>
-		           			<textarea class="form-control" rows="3" name="animalHealthContents"></textarea>
+			                 <div class="input-group">
+			                    <div class="form-line">
+				           			<textarea class="form-control" rows="3" name="animalHealthContents" placeholder="동물 상태를 입력해주세요."></textarea>
+			                    </div>
+			                 </div>
 			  	    	</div>
 				</div>
 	            <div class="body">
@@ -72,7 +76,29 @@
 
 <th:block layout:fragment="customFooterScript">
 	<script>
-		$('input[name=animalHealthRegDate]').val(new Date().toISOString().substring(0, 10));
+		$(function(){
+			//현재 날짜 표시해 넣기
+			$('input[name=animalHealthRegDate]').val(new Date().toISOString().substring(0, 10));
+			
+			//유효성검사
+			$("form").validate({
+				 rules : {
+					//네임
+					 animalInsertCode 		: {required : true}
+					,animalHealthEndDate 	: {required : true}
+					,animalHealthContents 	: {required : true}
+				}
+				,messages : {
+					animalInsertCode 		: {required : '동물 코드를 선택하세요.'}
+					,animalHealthEndDate 	: {required : '등록 일자를 입력해주세요.'}
+					,animalHealthContents 	: {required : '동물 상태를 입력해주세요.'}
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
+			});
+			
+		});
 	</script>
 </th:block>
  
