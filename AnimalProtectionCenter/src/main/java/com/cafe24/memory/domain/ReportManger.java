@@ -8,7 +8,15 @@ public class ReportManger {
 	private Member member;
 	private String acceptInDate;
 	private String acceptOutDate;
+	private String reportLocation;
 	
+	
+	public String getReportLocation() {
+		return reportLocation;
+	}
+	public void setReportLocation(String reportLocation) {
+		this.reportLocation = reportLocation;
+	}
 	public String getAcceptCode() {
 		return acceptCode;
 	}

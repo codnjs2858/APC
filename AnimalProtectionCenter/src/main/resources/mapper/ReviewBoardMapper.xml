@@ -24,7 +24,7 @@
 		</selectKey>
 		INSERT INTO tb_review_board
 		(review_board_code, member_id, review_board_title, review_board_content, review_board_addfile, review_board_date, review_board_delete_date, review_board_ip)
-		VALUES (#{board_code}, 'id001', #{board_title}, #{board_content}, '0', NOW(), '0000-00-00', #{board_ip})
+		VALUES (#{board_code}, #{member_id}, #{board_title}, #{board_content}, '0', NOW(), '0000-00-00', #{board_ip})
 	</insert>
 	
 	<select id="selectPostsReviewBoard" resultMap="getReviewBoardMap">

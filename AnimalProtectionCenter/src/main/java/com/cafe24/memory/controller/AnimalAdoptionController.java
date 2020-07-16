@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.memory.domain.AdoptionReview;
 import com.cafe24.memory.domain.AnimalType;
 import com.cafe24.memory.service.AnimalTypeService;
 
@@ -24,6 +25,13 @@ public class AnimalAdoptionController {
 	public String adoptionReview(Model model) {
 		return "adoption/adoptionReview";
 	}
+	
+	@PostMapping("/adoptionReview")
+	public String adoptionReview(Model model, AdoptionReview adoptionReview) {
+		System.out.println(adoptionReview.toString());
+		return "redirect:/index";
+	}
+	
 	@GetMapping("/adoptionApply")
 	public String adoptionApply(Model model) {
 		List<AnimalType>AniList=animalTypeService.selectAnimalType();

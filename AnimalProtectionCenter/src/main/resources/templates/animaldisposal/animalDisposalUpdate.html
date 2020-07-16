@@ -141,32 +141,60 @@
 					html += '<b>입양인 아이디</b>';
 					html += '<div class="input-group">';
 					html += '<div class="form-line">';
-					html += '<input type="text" name="memberId" class="form-control">';
+					html += '<input type="text" name="memberId" class="form-control" placeholder="입양인 아이디를 입력하세요.">';
 				}else if(val=='반환'){
 					html += '<b>반환인 이름</b>';
 					html += '<div class="input-group">';
 					html += '<div class="form-line">';
-					html += '<input type="text" name="centerReturnName" class="form-control">';
+					html += '<input type="text" name="centerReturnName" class="form-control" placeholder="반환인 이름을 입력하세요.">';
 					html += '</div></div></div>';
 					html += '<div class="col-md-4">';
 					html += '<b>반환인 연락처</b>';
 					html += '<div class="input-group">';
 					html += '<div class="form-line">';
-					html += '<input type="text" name="centerReturnPhone" class="form-control">';
+					html += '<input type="text" name="centerReturnPhone" class="form-control" placeholder="반환인 연락처를 입력하세요.">';
 				}else if(val =='방사'){
 					html += '<b>방사 지역,정보</b>';
 					html += '<div class="input-group">';
 					html += '<div class="form-line">';
-					html += '<input type="text" name="animalDisposalPastureInfo" class="form-control">';
+					html += '<input type="text" name="animalDisposalPastureInfo" class="form-control" placeholder="방사 지역 또는 정보를 입력하세요.">';
 				}
 				else if(val=='안락사,폐사'){
 					html += '<b>안락사,폐사 사유</b>';
 					html += '<div class="input-group">';
 					html += '<div class="form-line">';
-					html += '<input type="text" name="animalDisposalDieInfo" class="form-control">';
+					html += '<input type="text" name="animalDisposalDieInfo" class="form-control" placeholder="안락사 또는 폐사 사유를 입력하세요.">';
 				}
 				html += '</div></div></div>';
 				$('#reContents').html(html);
+			});
+			
+			//유효성검사
+			$("form").validate({
+				 rules : {
+					//네임
+					 animalInsertCode 			: {required : true}
+					,animalDisposalDate 		: {required : true}
+					,animalDisposalResult 		: {required : true}
+					,memberId 					: {required : true}
+					,centerReturnName 			: {required : true}
+					,centerReturnPhone 			: {required : true}
+					,animalDisposalPastureInfo 	: {required : true}
+					,animalDisposalDieInfo 		: {required : true}
+				}
+				,messages : {
+					animalInsertCode 			: {required : '동물 코드를 선택하세요'}
+					,animalDisposalDate 		: {required : '처리 날짜를 입력해주세요'}
+					,animalDisposalResult 		: '처리 결과를 입력해주세요'
+					,memberId 					: '입양인 아이디를 입력해주세요'
+					,centerReturnName 			: '반환인 이름을 입력해주세요'
+					,centerReturnPhone 			: '반환인 연락처를 입력해주세요'
+					,animalDisposalPastureInfo 	: '방사 정보를 입력해주세요'
+					,animalDisposalDieInfo 		: '폐사, 안락사 사유를 입력해주세요'
+				}
+				,errorPlacement : function(error, element){
+					element.parent().after(error);
+				}
 			});
 		});
 	</script>

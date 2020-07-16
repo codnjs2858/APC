@@ -24,8 +24,17 @@
   		
   		$(document).on('click','#cancel',function(){
   			$('#form_validation').attr('action','/reportlist/cacelSearchReport');
-  			$('lostReportState').val('분실신고취소');
+  			$('#lostReportState').val('분실신고취소');
+  			let today = new Date();   
 
+  			let year = today.getFullYear(); // 년도
+  			let month = today.getMonth() + 1;  // 월
+  			let date = today.getDate();  // 날짜
+  			let day = today.getDay();  // 요일
+
+  			var finddate=year+'/' + month + '/' + date;
+  			$('#cancelDate').val(finddate);
+  	
 		});
 		//품종 선택 ajax
 		$('#animalType').change(function(){
@@ -99,7 +108,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                         <label>잃어버린 날짜
-                                            <input type="date" name="lostReportInDate" class="form-control" placeholder="잃어버린 날짜">
+                                            <input type="date" name="lostReportInDate" class="form-control" placeholder="잃어버린날을 입력해주세요" >
                                             <input type="hidden" class="form-control" id="lostReportState" name="lostReportState" value="분실처리">
                                         </div>
                                         </label>
@@ -111,7 +120,7 @@
                                     <div class="form-group" style="display:none;">
                                         <div class="form-line">
                                         <label> 신고 취소 날짜
-                                            <input type="date" id="cancelDate" name="lostReportOutDate" class="form-control" placeholder="신고 취소 날짜" value="2020-03-20">
+                                            <input type="date" id="cancelDate" name="lostReportOutDate" class="form-control"value="2020-03-20">
                                         </div>
                                         </label>
                                     </div>
@@ -123,10 +132,10 @@
                                     <input type="radio" name="animalGender" id="male" class="with-gap" value="수컷">
                                     <label for="male">수컷</label>
 
-                                    <input type="radio" name="animalGender" id="female" class="with-gap">
+                                    <input type="radio" name="animalGender" id="female" class="with-gap" value="암컷">
                                     <label for="female" class="m-l-20">암컷</label>
                                     
-                                    <input type="radio" name="animalGender" id="middle" class="with-gap">
+                                    <input type="radio" name="animalGender" id="middle" class="with-gap" value="중성화">
                                     <label for="middle" class="m-l-20">중성화</label>
                                 </div>
                                 <div class="form-group form-float">
@@ -161,6 +170,13 @@
                                
                                </div> 
                              </div> 
+                             <div class="form-group">
+                            <div class="form-line">
+                            <label>사진등록</label>
+                                <input type="file" name="lostAnimalPicture"class="form-control">
+                                
+                            </div>
+                        </div>
        					  </div> 
        					  
                                 <button class="btn btn-primary waves-effect" type="submit">분실신고</button>
@@ -180,6 +196,10 @@
 
 <th:block layout:fragment="customFooterScript">
 
+	<script>
+	
+	</script>
+	
 </th:block>
  
 </html>

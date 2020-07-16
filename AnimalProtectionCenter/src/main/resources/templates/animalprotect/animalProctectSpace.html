@@ -59,12 +59,12 @@
 								<th:block th:if="${ps.useState}=='사용중'">
 									<div th:if="${ps.animalProtect.state}=='보호중'" class="icon bg-cyan">
 										<a th:href="@{/protection/modifyAnimalProtection(space=${ps.protectSpaceCode})}">
-											<i class="material-icons">pets</i>
+											<i class="material-icons"><img th:src="@{'/files/' + ${ps.animalCenter.animalPicture}}" style="all: initial; width: 80px; height: 80px;"></i>
 										</a>
 									</div>
 			                       	<div th:unless="${ps.animalProtect.state}=='보호중'" class="icon bg-red">
 										<a th:href="@{/protection/modifyAnimalProtection(space=${ps.protectSpaceCode})}">
-											<i class="material-icons">pets</i>
+											<i class="material-icons"><img th:src="@{'/files/' + ${ps.animalCenter.animalPicture}}" style="all: initial; width: 80px; height: 80px;"></i>
 			                            </a>
 									</div>
 									<div class="content">
@@ -79,14 +79,14 @@
 			                                    </ul>
 			                                </li>
 			                            </ul>
-			                            <div class="text" th:text="${'방 '+ #strings.substring(ps.protectSpaceCode, 14)}"></div>
-			                            <div class="number">[[${ps.animalCenter.animalCenterNumber}]]([[${ps.animalProtect.state}]])</div>
+			                            <div class="text" th:text="${'장소 '+ #strings.substring(ps.protectSpaceCode, 14)}"></div>
+			                            <div style="font-size: large;">[[${ps.animalCenter.animalCenterNumber}]]([[${ps.animalProtect.state}]])</div>
 			                        </div> 
 								</th:block>
 								<th:block th:unless="${ps.useState}=='사용중'">
 									<div class="icon bg-green">
 			                            <a th:href="@{/protection/modifyAnimalProtection(space=${ps.protectSpaceCode})}">
-			                            	<i class="material-icons">error</i>
+			                            	<i class="material-icons">pets</i>
 			                            </a>
 									</div>
 									<div class="content">
@@ -96,12 +96,11 @@
 			                                        <i class="material-icons">more_vert</i>
 			                                    </a>
 			                                    <ul class="dropdown-menu pull-right">
-			                                        <!-- <li><a data-toggle="modal" data-color="red" th:data-data="${ps.protectSpaceCode}" data-title="delete" class=" waves-effect waves-block" href="#modalTarget">삭제</a></li> -->
 			                                        <li><a class="delete" th:data-myurl="'/protection/delProtectionSpace?protectSpaceCode=' + ${ps.protectSpaceCode}" href="javascript:void(0)">삭제</a></li>
 			                                    </ul>
 			                                </li>
 			                            </ul>
-				                        <div class="text" th:text="${'방 '+ #strings.substring(ps.protectSpaceCode, 14)}"></div>
+				                        <div class="text" th:text="${'장소 '+ #strings.substring(ps.protectSpaceCode, 14)}"></div>
 									</div> 
 								</th:block>
 							</div>
@@ -123,24 +122,6 @@
 			</div>
 		</div>
 	</section>
-	
-	<div id="modalTarget" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h2 class="modal-title">Modal Header</h2>
-				</div>
-				<div class="modal-body">
-					<p>Some text in the modal.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="ok">ok</button>
-					<button type="button" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	
 </th:block> 
 
@@ -196,22 +177,6 @@
     					console.log('취소');
     				}
     			});
-    		});
-			
-			$('#modalTarget').on('show.bs.modal', function (event) {
-    	        var color = $(event.relatedTarget).data('color');
-    	        var data = $(event.relatedTarget).data('data');
-    	        var title = $(event.relatedTarget).data('title');
-    	        $('#modalTarget .modal-title').text(title);
-    	        $('#modalTarget .modal-body').text(data);
-    	        $('#modalTarget .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
-    	        $('#ok').val(data);
-    	    });
-    		
-    		$('#ok').click(function(){
-    			var val = $(this).val();
-    			console.log('ok 버튼 클릭 했음' + val);
-    			location.href='/protection/delProtectionSpace?protectSpaceCode=' + val;
     		});
 		});
 	</script>

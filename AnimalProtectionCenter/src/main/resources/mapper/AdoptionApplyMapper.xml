@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.memory.mapper.AdoptionApplyMapper">
+	<insert id="insertApplyAdoption" parameterType="AdoptionApply">
+		<selectKey resultType="String" order="BEFORE" keyProperty="adoptionCode">
+			SELECT (
+			case COUNT(*)
+					when 0 then 'adoption_apply_1'
+			ELSE  CONCAT('adoption_apply_',max(cast(	substr(adoption_code,15) as decimal))+1)
+					END	)
+			AS adoptionCode
+			fROM tb_adoption_apply;
+		</selectKey>
+		INSERT INTO tb_adoption_apply
+		(adoption_code, animal_code, adoption_state, adoption_point, adoption_in_date, adoption_adopted, member_id, screening_complete_code)
+		VALUES (#{adoptionCode
+		}, '', '입양신청중', '', NOW(), NOW(), '', '')
+		
+	</insert>
+	
+</mapper>
