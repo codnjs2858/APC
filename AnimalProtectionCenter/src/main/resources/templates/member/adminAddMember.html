@@ -29,11 +29,12 @@
                                     <div class="form-line">
                                         <input type="text" id="userId" name="memberId"class="form-control" placeholder="아이디">
                                     </div>
+                                    	<div id="idalert"></div>
                                 </div>
                                 <label for="password">Password</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="password" id="userPw" name="memberPw" class="form-control" placeholder="비밀번호">
+                                        <input type="password" autocomplete="off" id="userPw" name="memberPw" class="form-control" placeholder="비밀번호">
                                     </div>
                                 </div>
                                  <label for="password">Name</label>
@@ -98,16 +99,42 @@
 		
 	<script type="text/javascript">
 		$(function(){
+							
+			$('inputUserId').keyup(function(){
+				var inputUserId= $('input[name=memberId]');
+				var userIdVal=$('input[name=memberId]').val();		
+					var request = $.ajax({
+					  url: "/ajax/Addmember",
+					  method: "POST",
+					  data: { id : userIdVal  },
+					  dataType: "text"
+					});
+					 
+					request.done(function( data ) {
+						console.log(data);
+						if(data.result=='Y'){
+							
+							 alert="이미 존재하는 아이디 입니다";
+							$('#idalert').text(alert);
+							
+						}
+					});
+					 
+					request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+					});
+			})
 			$('#insertMember').click(function(){
+				var inputUserId= $('input[name=memberId]');
+				var userIdVal=$('input[name=memberId]').val();		
 				var addMemberForm=$('#addMemberForm');
-				var userId=$('input[name=memberId]').val();				
 				var userPw=$('input[name=memberPw]').val();				
 				var userName=$('input[name=memberName]').val();				
 				var userPhone=$('input[name=memberPhone]').val();				
 				var userAddress=$('input[name=memberAddr]').val();				
-				var userEmail=$('input[name=memberEmail]').val();				
+				var userEmail=$('input[name=memberEmail]').val();	
 					var alert="";
-				if(userId==""){
+				if(userIdVal==""){
 					 alert="아이디를 입력하세요";
 					$('#alert').text(alert);
 		    		return false;	

@@ -30,7 +30,7 @@
 			                        </div>
 		            			</div>
 	            			</div>
-	            			<div class="col-md-5">
+	            			<div class="col-md-5" style="display:none;">
 			                    <b>입양점수</b>
 			                    <div class="input-group">
 			                        <div class="form-line">
@@ -41,7 +41,7 @@
 	            			<div class="col-md-4">
 	            				<b>축종코드</b>
 			                    <div class="input-group">
-		            				<select id="animalType" class="form-control show-tick" >
+		            				 <select id="animalType" class="form-control show-tick" >
                                         <option value="">-축종선택-</option>
                                         <option value="강아지">강아지</option>
                                         <option value="고양이">고양이</option>
@@ -50,29 +50,14 @@
 		            			</div>
 	            			</div>
 	            			<div class="col-md-4">
-	            				<b>강아지</b>
+	            				<b>축종</b>
 			                    <div class="input-group">
-		            				<select id="dogSelectType"  class="form-control show-tick" >
-                                        <option value="">-품종선택-</option>
-                                        <option value="말티즈">말티즈</option>
-                                        <option value="포메라니안">포메라니안</option>
-                                        <option value="비글">비글</option>
-                                        <option value="기타">기타</option>
-                                    </select>
+		            				<select id="subType" name="animalTypeCode">
+                              			<option value="">==축종을 선택해주세요==</option>
+	                                </select>
 		            			</div>
 	            			</div>
-	            			<div class="col-md-4">
-	            				<b>고양이</b>
-			                    <div class="input-group">
-		            				<select id="dogSelectType"  class="form-control show-tick" >
-                                       <option value="">-품종선택-</option>
-                                        <option value="페르시안">페르시안</option>
-                                        <option value="벵골">벵골</option>
-                                        <option value="사암고양이">사암고양이</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-		            			</div>
-	            			</div>
+	            			
 	            		 </div>
 		            	<div class="form-group">
 	                          <div class="font-bold col-teal">성별</div>
@@ -143,7 +128,29 @@
 	<script>
 	
 	$(function(){
-		
+		//품종 선택 ajax
+		$('#animalType').change(function(){
+			var type = $(this).val();
+			var request = $.ajax({
+				url: "/ajax/animalcentertype",
+				method: "POST",
+				data: { "type" : type },
+				dataType: "json"
+			});
+			request.done(function( msg ) {
+				console.log(msg);
+				var html='<option value="">----품종을 선택해 주세요----</option>';
+				for(var i=0;i<msg.length;i++){		
+					html += '<option value="'+msg[i].animalTypeCode+'">'+msg[i].animalTypeSub+'</option>';
+				}	
+				$('#subType').html(html);
+				$('#subType').selectpicker('refresh');
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
+			});
+		});
 		//회원 아이디로 회원 이름 가져오기
 		$('#memberId').change(function(){
 			var type = $(this).val();

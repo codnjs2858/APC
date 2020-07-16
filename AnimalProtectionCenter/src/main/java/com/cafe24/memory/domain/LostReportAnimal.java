@@ -11,7 +11,15 @@ public class LostReportAnimal {
 	private String lostReportLocation;
 	private String lostReportInDate;
 	private String lostReportOutDate;
+	private String lostAnimalPicture;
 	
+	
+	public String getLostAnimalPicture() {
+		return lostAnimalPicture;
+	}
+	public void setLostAnimalPicture(String lostAnimalPicture) {
+		this.lostAnimalPicture = lostAnimalPicture;
+	}
 	public String getLostReportLocation() {
 		return lostReportLocation;
 	}

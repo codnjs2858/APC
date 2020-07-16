@@ -1,5 +1,9 @@
 package com.cafe24.memory.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -34,15 +38,19 @@ public class AnimalReportController {
 	 * @return
 	 */
 	@PostMapping("/searchReport")
-	public String searcReport(AnimalType aType,Member member,SearchReportAnimal searchReportAnimal,ReportManger reportManager) {
+	public String searcReport(AnimalType aType,Member member,SearchReportAnimal searchReportAnimal,ReportManger reportManager,HttpSession session) {
 		searchReportAnimal.setAnimalType(aType);
 		searchReportAnimal.setMember(member);
 		logger.info("찾기 리포트 {}"+searchReportAnimal);
 		animalReportService.insertAnimalReport(searchReportAnimal);
+		
 		reportManager.setSearchReport(searchReportAnimal);
+		System.out.println("-----------------------------------------"+reportManager+"<-reportManager.setSearchReport(searchReportAnimal);");
 		reportManager.setMember(member);
 		animalReportService.insertAniSearchReportManager(reportManager);
-		return "redirect:/reportlist/reportManager";
+		
+		
+		return "redirect:/reportlist/searchReportList";
 	
 	}
 	/**
@@ -79,7 +87,7 @@ public class AnimalReportController {
 		reportManager.setLostReport(lostReportAnimal);
 		reportManager.setMember(member);
 		animalReportService.insertAniLostReportManager(reportManager);
-		return "index";
+		return "redirect:/reportlist/lostReportList";
 	}
 	/**
 	 * 종합신고관리에 분실신고와, 찾음신고 에서 신고 처리상태와 신고날짜등만 모아서 list로 바로 보여줌
@@ -87,7 +95,9 @@ public class AnimalReportController {
 	 */
 	@GetMapping("/reportManager")
 	public String reportManager(Model model) {
-		model.addAttribute("reportList", animalReportService.selectAllReport());
+		List<ReportManger> reportManagerList=animalReportService.selectAllReport();
+		System.out.println(reportManagerList);
+		model.addAttribute("reportList", reportManagerList);
 		return "reportlist/reportManager";
 	}
 	
@@ -100,6 +110,57 @@ public class AnimalReportController {
 		return "searchreport/searchReportList";
 	
 	}
+	/**
+	 * lostReportList분실신고 리스트
+	 */
+	@GetMapping("/lostReportList")
+	public String getLostReportList(Model model) {
+		List<LostReportAnimal> lostReportList=animalReportService.selectLostReportAnimal();
+		model.addAttribute("lostReportList", lostReportList);
+		return "lostreport/lostReportList";
+	}
 	
+	/**
+	 * searchReportList 유기신고리스트
+	 */
+	@GetMapping("/searchReportList")
+	public String getSearchReportList(Model model) {
+		List<SearchReportAnimal>searchReportList=animalReportService.selectSearchReportAnimal();
+		model.addAttribute("searchReportList", searchReportList);
+		return "searchreport/searchReportList";
+	}
+	/**
+	 * reportManager테이블에서 각  row의 데이터 상세보기 화면출력
+	 * @param lostReportAnimal
+	 * @param searchReportAnimal
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/reportManagerDetail")
+	public String reportManagerUpdate(LostReportAnimal lostReportAnimal,SearchReportAnimal searchReportAnimal,Model model) {
 	
+		if(lostReportAnimal!=null) {
+		model.addAttribute("lostAnimalDetail", animalReportService.selectLostReportAnimal(lostReportAnimal));
+		return "reportlist/lostAnimalDetail";
+		}
+		else {
+		model.addAttribute("SearchAnimalDetail", animalReportService.selectSearchReportAnimal(searchReportAnimal));	
+		}
+		return "reportlist/SearchAnimalDetail";
+	}
+	@GetMapping("/deletelist")
+	public String deletelist(ReportManger reportManager,LostReportAnimal lostReportAnimal,SearchReportAnimal searchReportAnimal) {
+		if(lostReportAnimal!=null) {
+			reportManager.setLostReport(lostReportAnimal);
+			animalReportService.deleteLostReportAnimal(lostReportAnimal);
+			animalReportService.deleteReportManager(reportManager);
+		}
+		if(searchReportAnimal!=null) {
+			reportManager.setSearchReport(searchReportAnimal);
+			animalReportService.deleteSearchReportAnimal(searchReportAnimal);
+			animalReportService.deleteReportManager(reportManager);
+		}
+	
+		return "redirect:/reportlist/reportManager";
+	}
 }
