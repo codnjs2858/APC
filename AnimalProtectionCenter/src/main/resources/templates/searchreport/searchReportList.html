@@ -38,6 +38,15 @@
 	                </ul>
 				</div>
 				<div class="body">
+					<div class="row clearfix">
+	                	<div class="col-xs-6 col-md-3" >
+	                    	<a th:if="${session.SLEVEL}=='level_code_01' OR ${session.SLEVEL}=='level_code_02'" th:href="@{/reportlist/reportManager}">
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
+	                    	</a>
+	                    	
+	                    </div>
+	                  
+	                </div>
 					<div class="table-responsive" style="overflow: hidden;">
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
 	                        <thead>
@@ -53,8 +62,8 @@
 						 			<th>유기동물사진</th>
 						 			<th>신고등록날짜</th>
 						 			<th>신고취소날짜</th>
-						 		<!-- 	<th>수정</th>
-						 			<th>삭제</th> -->
+						 		<!-- 	<th>수정</th>-->
+						 			<th>삭제</th> 
 			 					</tr>
 			 		
 	                        </thead>
@@ -74,14 +83,14 @@
 			 						<!-- <td>
 		                            	<a th:href="@{/reportlist/searchReportUpdate(searchReportCode=${m.member.memberId})}">
 	                       				<i class="material-icons">update</i></a></div>
-	                      			</td>
+	                      			</td>-->
 	                      			<td>
 	                      				<div class="align-center">
-		                      				<button type="button" class="delete" th:value="${m.member.memberId}" >
+		                      				<button type="button" class="delete" th:data-myurl="@{/reportlist/deletelist(searchReportCode=${m.searchReportCode})}" >
 		                      					<i class="material-icons">delete</i>
 		                      				</button>
 	                      				</div>	
-	                      			</td> -->
+	                      			</td> 
 	                      			
 	                      			
 	                        	</tr>

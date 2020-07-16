@@ -74,4 +74,31 @@ public class AnimalReportService {
 	public List<LostReportAnimal> selectLostReportAnimal(){
 		return animalReportMapper.selectLostReportAnimal();
 	}
+	/**
+	 * 종합관리(reportManager)에서 삭제
+	 */
+
+	public int deleteReportManager(ReportManger reportManger) {
+	  
+		return animalReportMapper.deleteReportManger(reportManger); 
+	}
+	/**
+	 * 유기신고에서 삭제
+	 * @param lostReportAnimal
+	 * @return
+	 */
+	public int deleteLostReportAnimal(LostReportAnimal lostReportAnimal) {
+		return animalReportMapper.deleteLostReportAnimal(lostReportAnimal);
+	  
+	}
+	/**
+	 * 분실신고에서 삭제
+	 * @param searchReportAnimal
+	 * @return
+	 */
+	public int deleteSearchReportAnimal(SearchReportAnimal searchReportAnimal) {
+		return animalReportMapper.deleteSearchReportAnimal(searchReportAnimal);
+	  
+	}  
+	 
 }

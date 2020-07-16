@@ -2,6 +2,8 @@ package com.cafe24.memory.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,7 +38,7 @@ public class AnimalReportController {
 	 * @return
 	 */
 	@PostMapping("/searchReport")
-	public String searcReport(AnimalType aType,Member member,SearchReportAnimal searchReportAnimal,ReportManger reportManager) {
+	public String searcReport(AnimalType aType,Member member,SearchReportAnimal searchReportAnimal,ReportManger reportManager,HttpSession session) {
 		searchReportAnimal.setAnimalType(aType);
 		searchReportAnimal.setMember(member);
 		logger.info("찾기 리포트 {}"+searchReportAnimal);
@@ -46,7 +48,9 @@ public class AnimalReportController {
 		System.out.println("-----------------------------------------"+reportManager+"<-reportManager.setSearchReport(searchReportAnimal);");
 		reportManager.setMember(member);
 		animalReportService.insertAniSearchReportManager(reportManager);
-		return "redirect:/reportlist/reportManager";
+		
+		
+		return "redirect:/reportlist/searchReportList";
 	
 	}
 	/**
@@ -83,7 +87,7 @@ public class AnimalReportController {
 		reportManager.setLostReport(lostReportAnimal);
 		reportManager.setMember(member);
 		animalReportService.insertAniLostReportManager(reportManager);
-		return "index";
+		return "redirect:/reportlist/lostReportList";
 	}
 	/**
 	 * 종합신고관리에 분실신고와, 찾음신고 에서 신고 처리상태와 신고날짜등만 모아서 list로 바로 보여줌
@@ -144,5 +148,19 @@ public class AnimalReportController {
 		}
 		return "reportlist/SearchAnimalDetail";
 	}
+	@GetMapping("/deletelist")
+	public String deletelist(ReportManger reportManager,LostReportAnimal lostReportAnimal,SearchReportAnimal searchReportAnimal) {
+		if(lostReportAnimal!=null) {
+			reportManager.setLostReport(lostReportAnimal);
+			animalReportService.deleteLostReportAnimal(lostReportAnimal);
+			animalReportService.deleteReportManager(reportManager);
+		}
+		if(searchReportAnimal!=null) {
+			reportManager.setSearchReport(searchReportAnimal);
+			animalReportService.deleteSearchReportAnimal(searchReportAnimal);
+			animalReportService.deleteReportManager(reportManager);
+		}
 	
+		return "redirect:/reportlist/reportManager";
+	}
 }
