@@ -63,7 +63,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/addMember")
-	public String addMebmer(Model model,Member member) {
+	public String addMebmer(Model model, Member member) {
 		model.addAttribute("title", "회원가입");
 		int result=memberService.insertMember(member);
 		System.out.println(result+"<-controller insertMember결과값");
