@@ -30,14 +30,19 @@
 	(member_id, member_pw, level_code, member_name, member_phone, member_addr, member_email, member_in_date)
 	VALUES (#{memberId}, #{memberPw}, 'level_code_03', #{memberName}, #{memberPhone}, #{memberAddr}, #{memberEmail}, NOW())
 	</insert>
+	
 	<delete id="deleteMember" parameterType="Member">
-		DELETE FROM tb_member WHERE member_id=#{memberId}
+		DELETE 
+		FROM 
+			tb_member 
+		WHERE 
+			member_id = #{memberId};
 	</delete>
+	
 	<update id="updateMember" parameterType="Member">
 		UPDATE tb_member
 		SET
 			member_pw=#{memberPw},
-			level_code=#{level.levelCode},
 			member_name=#{memberName},
 			member_phone=#{memberPhone},
 			member_addr=#{memberAddr},

@@ -65,8 +65,9 @@ public class MemberService {
 		System.out.println(result+"<-Service insertMember결과값");
 		return result;
 	}
-	public int deleteMember(Member m) {
-		int result=memberMapper.deleteMember(m);
+	public int deleteMember(Member mId) {
+		System.out.println(mId);
+		int result=memberMapper.deleteMember(mId);
 		return result;
 	}
 	public int updateMember(Member m) {

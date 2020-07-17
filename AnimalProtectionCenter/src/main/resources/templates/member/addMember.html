@@ -84,7 +84,7 @@
                             <i class="material-icons">home</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="memberaddr" placeholder="주소를 입력해주세요" required>
+                            <input type="text" class="form-control" name="memberAddr" placeholder="주소를 입력해주세요" required>
                         </div>
                     </div>
                      <div class="input-group">
@@ -93,7 +93,7 @@
                         </span>
                         <div class="input-group">
                         	<div class="form-line">
-	                            <input type="email" class="form-control" name="email" placeholder="이메일을 입력해주세요" required>
+	                            <input type="email" class="form-control" name="memberEmail" placeholder="이메일을 입력해주세요" required>
                         	</div>
 	                        <button type="button" class="btn btn-danger form-control" id="emailBtn">이메일 발송</button>
 						</div>
@@ -138,7 +138,7 @@
 	
 	$(function(){
 		
-		var mEmail =$('input[name=email]');
+		var memberEmail =$('input[name=memberEmail]');
 		var certCode ='';
 		
 		//아이디 중복검사
@@ -176,7 +176,7 @@
 		});
 		//이메일 인증번호 보내기
 		$('#emailBtn').click(function(){
-			var email = mEmail.val();
+			var email = memberEmail.val();
 			if(email ==''){
 				alert('이메일을 입력하세요!');
 			 	return false;
@@ -233,8 +233,8 @@
 				,memberName		: {required : true}
 				,memberPwCheck 	: {required : true}
 				,memberPhone 	: {required : true}
-				,memberaddr 	: {required : true}
-				,email 			: {required : true}
+				,memberAddr 	: {required : true}
+				,memberEmail	: {required : true}
 				,emailCheck		: {required : true}
 				,terms			: {required : true}
 			}
@@ -244,8 +244,8 @@
 				,memberName		: {required : '성명을 입력해주세요'}
 				,memberPwCheck	: {required : '비밀번호를 다시 입력해주세요'}
 				,memberPhone 	: {required : '휴대폰 번호를 입력해주세요'}
-				,memberaddr 	: {required : '주소를 입력해주세요'}
-				,email 			: {required : '이메일을 입력해주세요'}
+				,memberAddr 	: {required : '주소를 입력해주세요'}
+				,memberEmail	: {required : '이메일을 입력해주세요'}
 				,emailCheck 	: {required : '인증번호를 입력해주세요'}
 				,terms			: {required : '동의란에 체크해주세요'}
 			}

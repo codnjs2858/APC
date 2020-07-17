@@ -20,77 +20,51 @@
                             <h2>
                                 	회원수정
                             </h2>
-                          
                         </div>
                         <div class="body">
                             <form action="/member/memberUpdate" method="post">
-                                <label for="email_address">dbid</label>
+                                <label for="dbid">아이디</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                    
-                                        <input th:unless="${mem}!=null" type="text" id="userId" name="memberId" class="form-control"  >
+                                    	<input th:unless="${mem}!=null" type="text" id="userId" name="memberId" class="form-control"  >
                                         <input th:if="${mem}!=null" type="text" id="userId" name="memberId" class="form-control" th:value="${mem.memberId}" readonly="readonly">
                                     </div>
                                 </div>
-                                <label for="dbpw">dbpw</label>
+                                <label for="dbpw">비밀번호</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input th:unless="${mem}!=null" type="password" id="userPw" name="memberPw" class="form-control" >
-                                        <input th:if="${mem}!=null" type="password" id="userPw" name="memberPw" class="form-control"  th:value="${mem.memberPw}">
+                                        <input th:unless="${mem}!=null" type="text" id="userPw" name="memberPw" class="form-control" >
+                                        <input th:if="${mem}!=null" type="text" id="userPw" name="memberPw" class="form-control"  th:value="${mem.memberPw}">
                                     </div>
                                 </div>
-                                  <label for="dbLevel">dbLevel</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                      <th:block th:if="${mem}!=null">
-                                        <input type="text" id="userLevel" name="levelCode" class="form-control" th:value="${mem.level.levelCode}">
-                                      </th:block>
-                                       <th:block th:unless="${mem}!=null">
-	                                        <select name="levelCode" class="form-control">
-	                                        	<option value="level_code_01">관리자</option>
-	                                        	<option value="level_code_02">센터관리자</option>
-	                                        	<option value="level_code_03">회원</option>
-	                                        	<option value="level_code_04">블랙리스트</option>
-	                                        </select>
-                                       </th:block> 
-                                    </div>
-                                </div>
-                                 <label for="dbName">dbName</label>
+                                 <label for="dbName">이름</label>
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input th:unless="${mem}!=null" type="text" id="userName" name="memberName" class="form-control">
                                         <input th:if="${mem}!=null" type="text" id="userName" name="memberName" class="form-control"  th:value="${mem.memberName}">
                                     </div>
                                 </div>
-                                 <label for="dbPhone">dbPhone</label>
+                                 <label for="dbPhone">전화번호</label>
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input th:unless="${mem}!=null" type="text" id="userPhone" name="memberPhone" class="form-control">
                                         <input th:if="${mem}!=null" type="text" id="userPhone" name="memberPhone" class="form-control" th:value="${mem.memberPhone}">
                                     </div>
                                 </div>
-                                 <label for="dbAddress">dbAddress</label>
+                                 <label for="dbAddress">주소</label>
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input th:unless="${mem}!=null" type="text" id="userAddress" name="memberAddr" class="form-control" >
                                         <input th:if="${mem}!=null" type="text" id="userAddress" name="memberAddr" class="form-control" th:value="${mem.memberAddr}" >
                                     </div>
                                 </div>
-                                   <label for="dbEmail">dbEmail</label>
+                                   <label for="dbEmail">이메일</label>
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input th:unless="${mem}!=null" type="email" id="userEmail" name="memberEmail" class="form-control">
                                         <input th:if="${mem}!=null" type="email" id="userEmail" name="memberEmail" class="form-control" th:value="${mem.memberEmail}">
                                     </div>
                                 </div>
-                                	<label for="dbDate">dbDate</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                      
-                                        <input type="date" id="userInDate" name="memberInDate" class="form-control" th:value="${mem?.memberInDate}">
-                                    </div>
-                                </div>
-                
                                 <button type="submit" class="btn btn-primary m-t-15 waves-effect">회원수정</button>
                             </form>
                         </div>
