@@ -2,10 +2,14 @@ package com.cafe24.memory.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+
 import org.springframework.stereotype.Service;
 
 import com.cafe24.memory.config.MailHandler;
 import com.cafe24.memory.domain.Mail;
+
+
+
 
 @Service
 public class MailService {
@@ -24,13 +28,14 @@ public class MailService {
             // 제목
             mailHandler.setSubject(mail.getTitle());
             // HTML Layout
-            String htmlContent = "<p>" + mail.getMessage() +"<p>";
+            String htmlContent = "<p>" + mail.getMessage() +"<p> <img src='cid:sample-img'>";
             mailHandler.setText(htmlContent, true);
             
             mailHandler.send();
         }
         catch(Exception e){
             e.printStackTrace();
+            System.out.println("에러");
         }
     }
-}
+}    
