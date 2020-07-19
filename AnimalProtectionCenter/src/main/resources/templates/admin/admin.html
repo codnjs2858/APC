@@ -3,23 +3,156 @@
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/default2}">
 	
- <th:block layout:fragment="customTitle">
- 	<title>관리자화면</title>
- </th:block> 
+<th:block layout:fragment="customTitle">
+	<title>관리자화면</title>
+</th:block> 
 <th:block layout:fragment="customCss">
  
  </th:block>
 <th:block layout:fragment="customHeadScript">
  	
- </th:block> 
+</th:block> 
 	 
- <th:block layout:fragment="customContents">
- </th:block> 
+<th:block layout:fragment="customContents">
+ 	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="card">
+						<div class="header">
+							<h2>공고게시판</h2>
+						</div>
+						<div class="body">
+							<table class="table table-bordered table-striped table-hover">
+								<thead>
+							        <tr>
+							            <th data-orderable="false"></th>
+							            <th><div class="align-center">제목</div></th>
+							            <th><div class="align-center">작성자</div></th>
+							            <th><div class="align-center">작성시간</div></th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							        <tr th:each="s, i : ${selectNoticeList}" th:if="${i.count} < 6">
+							            <th scope="row">[[${i.count}]]</th>
+							            <td><div class="align-center">[[${s.board_title}]]</div></td>
+							            <td><div class="align-center">[[${s.member_id}]]</div></td>
+							            <td><div class="align-center">[[${s.board_date}]]</div></td>
+							        </tr>
+							    </tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-6">
+					<div class="card">
+						<div class="header">
+							<h2>분실신고</h2>
+						</div>
+						<div class="body" style="overflow-y: scroll;">
+							<table class="table table-bordered table-striped table-hover">
+								<thead>
+							        <tr>
+							            <th data-orderable="false"></th>
+			                            <th><div class="align-center">동물 종류</div></th>
+			                            <th><div class="align-center">이름</div></th>
+			                            <th><div class="align-center">특징</div></th>
+			                            <th><div class="align-center">성별</div></th>
+			                            <th><div class="align-center">잃어버린장소</div></th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							        <tr th:each="l, i : ${lostReportAniamlList}">
+							            <th scope="row">[[${i.count}]]</th>
+							            <td><div class="align-center">[[${l.animalType.animalType}]]</div></td>
+							            <td><div class="align-center">[[${l.animalName}]]</div></td>
+							            <td><div class="align-center">[[${l.animaFeature}]]</div></td>
+							            <td><div class="align-center">[[${l.animalGender}]]</div></td>
+							            <td><div class="align-center">[[${l.lostReportLocation}]]</div></td>
+							        </tr>
+							    </tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="card">
+						<div class="header">
+							<h2>보유중인 유기동물</h2>
+						</div>
+						<div class="body">
+							<canvas id="pie_chart" height="224" width="448" style="display: block; width: 448px; height: 224px;"></canvas>
+						</div>
+						
+						<div th:each="c : ${cnt}">
+							<input type="hidden" class="aniType" th:value="${c.cnt}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</th:block> 
  
 
- <th:block layout:fragment="customFooterScript">
+<th:block layout:fragment="customFooterScript"> 
+	<script src="/plugins/chartjs/Chart.bundle.js"></script>	
+	<!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+	<script>
+		$(function(){
+			new Chart(document.getElementById('pie_chart').getContext('2d'), getChartJs('pie'));
 
- 
- </th:block>
+			$('#dataTable').dataTable({
+				paging: false,
+				searching: false,
+				select:false,
+				ordering: false,
+				scrollY: 250,
+    			"aaSorting": []
+    		});
+		});
+		
+		var cnt = document.getElementsByClassName('aniType');
+		
+		function getChartJs(type) {
+		    if (type === 'pie') {
+		        config = {
+		            type: 'pie',
+		            data: {
+		                datasets: [{
+		                    data: [cnt[0].value, cnt[1].value, cnt[2].value],
+		                    backgroundColor: [
+		                        "rgb(233, 30, 99)",
+		                        "rgb(255, 193, 7)",
+		                        "rgb(0, 188, 212)"
+		                    ],
+		                }],
+		                labels: [
+		                    "강아지",
+		                    "고양이",
+		                    "기타",
+		                ]
+		            },
+		            options: {
+		                responsive: true
+		            }
+		        }
+		    }
+		    return config;
+		}
+		
+	</script>
+</th:block>
 
 </html>

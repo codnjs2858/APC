@@ -61,18 +61,26 @@ public class AdminController {
 		
 		return "index";
 	}
-	
-	@PostMapping("/admin")
-	public String admin(Model model) {
-		return "admin/admin";
-	}
-	
-	@GetMapping("/admin")
-	public String admin(HttpSession session) {
+
+	@RequestMapping("/admin")
+	public String admin(HttpSession session, Model model) {
 		String send_code = (String) session.getAttribute("STAFFCODE");
 		if(send_code != null) {
 			session.setAttribute("com", staffService.selectStaffList(send_code));
 		}
+		List<SearchReportAnimal> searchReportAnimalList = animalReportService.selectSearchReportAnimal();
+		System.out.println(searchReportAnimalList + " <-- searchReportAnimalList");
+		List<LostReportAnimal> lostReportAniamlList = animalReportService.selectLostReportAnimal();
+		System.out.println(lostReportAniamlList + " <-- lostReportAniamlList");
+		List<Board> selectNoticeList = noticeService.selectNotice();
+		System.out.println(selectNoticeList + " <-- selectNoticeList");
+		
+		
+		model.addAttribute("cnt", animalCenterService.selectCenterCnt());
+		model.addAttribute("searchReportAnimalList", searchReportAnimalList);
+		model.addAttribute("lostReportAniamlList", lostReportAniamlList);
+		model.addAttribute("selectNoticeList", selectNoticeList);
+		
 		return "admin/admin";
 	}
 	@GetMapping("/member/blacklistMemberAlert")
