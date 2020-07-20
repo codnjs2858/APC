@@ -68,7 +68,7 @@
 			 		
 	                        </thead>
 	                        <tbody>
-	                            <tr th:each="m,i:${searchReportList}" id="searchinfo" th:data-code="${m.searchReportCode}">
+	                            <tr th:each="m,i:${searchReportList}" th:data-code="${m.searchReportCode}">
 						 			<td>[[${i.count}]]</td>
 						 			<td>[[${m.searchReportCode}]]</td>
 						 			<td>[[${m.animalType.animalType}]]</td>
@@ -100,31 +100,6 @@
 				</div>
 			</div>
 		</div>
-<!-- 모달을 열기 위한 버튼 -->
-<div style="display:none;">
-<button type="button" id="modalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-모달 보기 버튼
-</button>
-</div>
-<!-- 모달 영역 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-<div class="modal-dialog" role="document">
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-<h4 class="modal-title" id="myModalLabel">삭제</h4>
-</div>
-<div class="modal-body">
-신고를 정말 삭제 하시겠습니까?
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-primary" id="ok">확인</button>
-<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-</div>
-</div>
-</div>
-</div>
-
 	</section>
 
  </th:block> 
@@ -133,8 +108,18 @@
  	
  </th:block> 
 	 
- <th:block layout:fragmnet="customFooterScript">
- <script>
+<th:block layout:fragment="customFooterScript">
+ 	<!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+ 	<script>
     	$(function(){
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
@@ -164,10 +149,6 @@
     				}
     			});
     		});
-    		$('#searchinfo').click(function(){
-    			location.href=;
-    			
-    		})
 			
     	});
     </script>

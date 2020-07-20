@@ -20,7 +20,7 @@
 					<div class="body">
 	                	<div>아이디 : [[${member.memberId}]]</div>
 	                	<div>이메일 : [[${member.memberEmail}]]</div>
-		                <button class="btn btn-block bg-red waves-effect" type="button" style="margin-top: 10px;">개인정보보기</button>
+		                <a class="btn btn-block bg-red waves-effect" th:href="@{/member/memberUpdate(memberId=${member.memberId})}" style="margin-top: 10px;">개인정보수정</a>
 					</div>
 				</div>
 				<div class="card">
@@ -38,13 +38,13 @@
 				<div class="card">
 					<div class = header>
 						<h2>
-							신고
+							쪽지
 						</h2>
 					</div>
 					<div class = body>
-						<div>유기신고 : [[${reportManager.searchReport.searchReportCode}]]</div>
-						<div>분실신고 : [[${reportManager.lostReport.lostReportCode}]]</div>
-						<button class="btn btn-block bg-red waves-effect" type="button" style="margin-top: 10px;">신고보기</button>
+						<a class="btn btn-block bg-red waves-effect" href="/note/sendNote" style="margin-top: 10px;">쪽지보내기</a>
+						<a class="btn btn-block bg-red waves-effect" href="/note/noteList" style="margin-top: 10px;">받은쪽지</a>
+						<a class="btn btn-block bg-red waves-effect" href="/note/sendNoteList" style="margin-top: 10px;">보낸쪽지</a>
 					</div>
 				</div>
 				<div class="card">

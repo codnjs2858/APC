@@ -2,7 +2,6 @@ package com.cafe24.memory.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -63,7 +62,8 @@ public class MyPageController {
 			adoptee = adopteeService.selectAdopteeById(mId);
 			List<ReportManger> reportAllList = reportService.selectAllReport();
 			for(int i = 0; i < reportAllList.size(); i++) {
-				ReportManger re = reportAllList.get(i);
+				ReportManger re = new ReportManger(); 
+				re = reportAllList.get(i);
 				if(re.getMember().getMemberId().equals(mId)) {
 					reportManager = re;
 					break;
@@ -86,8 +86,10 @@ public class MyPageController {
 		
 		String adopteeInfo = "입양 불가능";
 		
-		if("screening_complete_code_01".equals(adoptee.getScreeningComplete().getScreening_complete_code())) {
-			adopteeInfo = "입양가능";
+		if(adoptee != null) {
+			if("screening_complete_code_01".equals(adoptee.getScreeningComplete().getScreening_complete_code())) {
+				adopteeInfo = "입양가능";
+			}			
 		}
 		
 		model.addAttribute("member", member);
