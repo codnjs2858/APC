@@ -57,7 +57,6 @@
 			animal_information, 
 			companion_register_date, 
 			cancle_companion_in_date, 
-			pro_space_code, 
 			staff_code
 		FROM 
 			tb_companion_animal_register
