@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.memory.domain.Level;
@@ -107,10 +106,18 @@ public class MemberController {
 		
 		return "redirect:/member/getMemberList";
 	}
-	@GetMapping("/forgotPassword")
-	public String forgotPassword(Member member) {
+	//아이디 찾기
+	@GetMapping("/findId") 
+	public String findId(Member member) {
+		 
+		return "/member/findId";
+	}
+	
+	//비밀번호 찾기
+	@GetMapping("/findPw")
+	public String findPw(Member member) {
 		
-		return "member/forgetPassword";
+		return "/member/findPw";
 	}
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -120,7 +127,7 @@ public class MemberController {
 	@PostMapping(value="/indexlogin", produces="application/json")
 	@ResponseBody
 	public HashMap<String,String> indexlogin() {
-		HashMap<String,String>result=new HashMap();
+		HashMap<String,String>result=new HashMap<String, String>();
 		List<Member>mList=memberService.getMemberList();
 		for(int i=0;i<mList.size();i++) {
 			if(("level_code_01".equals(mList.get(i).getLevel().getLevelCode()))||("level_code_02".equals(mList.get(i).getLevel().getLevelCode()))) {
