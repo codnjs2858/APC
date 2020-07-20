@@ -18,6 +18,7 @@
 			<result property="animalPicture" column="animal_picture"/>
 			<result property="animalGender" column="animal_gender"></result>
 			<result property="animalAge" column="animal_age"></result>
+			<result property="animalWeight" column="animal_weight"></result>
 			<result property="animalCharacter" column="animal_character"></result>
 			<result property="animalCenterNumber" column="animal_center_number"></result>
 			<result property="animalInsertCode" column="animal_insert_code"></result>
