@@ -8,7 +8,7 @@
 </th:block>
 
 <th:block layout:fragment="customTitle">
-	<title>동물 치료 등록</title>
+	<title>동물 치료</title>
 </th:block> 
 <th:block layout:fragment="customHeadScript">
 </th:block> 
@@ -19,7 +19,7 @@
 			<div class="card">
 				<div class="header">
 					<h2 th:if="${hinfo.animalHealthResult} == null">동물 치료 등록</h2>
-					<h2 th:unless="${hinfo.animalHealthResult} == null">동물 치료 수정</h2>
+					<h2 th:if="${hinfo.animalHealthResult} != null">동물 치료 수정</h2>
 				</div>
 				<form action="/animalhealth/animalhealthupdate" method="post">
 				<div class="body">
@@ -54,7 +54,7 @@
 				      			</div>
 							</div>
 			                <b>치료 내용</b>
-		           			<textarea class="form-control" rows="3" name="animalHealthResult" placeholder="치료 내용을 입력하세요."></textarea>
+		           			<textarea class="form-control" rows="3" name="animalHealthResult" placeholder="치료 내용을 입력하세요.">[[${hinfo.animalHealthResult}]]</textarea>
 			  	    	</div>
 				</div>
 	            <div class="body">
