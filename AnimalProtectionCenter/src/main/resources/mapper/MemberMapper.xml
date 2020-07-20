@@ -30,19 +30,46 @@
 	(member_id, member_pw, level_code, member_name, member_phone, member_addr, member_email, member_in_date)
 	VALUES (#{memberId}, #{memberPw}, 'level_code_03', #{memberName}, #{memberPhone}, #{memberAddr}, #{memberEmail}, NOW())
 	</insert>
+	
 	<delete id="deleteMember" parameterType="Member">
-		DELETE FROM tb_member WHERE member_id=#{memberId}
+		DELETE 
+		FROM 
+			tb_member 
+		WHERE 
+			member_id = #{memberId};
 	</delete>
+	
 	<update id="updateMember" parameterType="Member">
 		UPDATE tb_member
 		SET
 			member_pw=#{memberPw},
-			level_code=#{level.levelCode},
 			member_name=#{memberName},
 			member_phone=#{memberPhone},
 			member_addr=#{memberAddr},
 			member_email=#{memberEmail}
 		WHERE member_id=#{memberId}
 	</update>
+	
+	<select id="findId" parameterType = "Member" resultMap="getMemberMap">
+		SELECT
+			member_id
+		FROM
+			tb_member
+		WHERE
+			member_name = #{memberName}
+			and member_phone = #{memberPhone}
+			and member_email = #{memberEmail};
+	</select>
+	
+	<select id="findPw" parameterType = "Member" resultMap="getMemberMap">
+		SELECT
+			member_pw
+		FROM
+			tb_member
+		WHERE
+			member_id = #{memberId}
+			and member_phone = #{memberPhone}
+			and member_email = #{memberEmail};
+	</select>
 	
 </mapper>

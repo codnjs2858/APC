@@ -1,5 +1,7 @@
 package com.cafe24.memory.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +9,35 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cafe24.memory.domain.Board;
+import com.cafe24.memory.domain.CompanionAnimalRegister;
+import com.cafe24.memory.domain.LostReportAnimal;
+import com.cafe24.memory.domain.SearchReportAnimal;
+import com.cafe24.memory.service.AnimalCenterService;
+import com.cafe24.memory.service.AnimalReportService;
+import com.cafe24.memory.service.CompanionAnimalRegisterService;
+import com.cafe24.memory.service.NoticeService;
 import com.cafe24.memory.service.StaffService;
 
 @Controller
 public class AdminController {
-	@Autowired private StaffService staffService;
+	
+	@Autowired 
+	private StaffService staffService;
+	
+	@Autowired
+	private AnimalCenterService animalCenterService;
+	
+	@Autowired
+	private AnimalReportService animalReportService;
+	
+	@Autowired
+	private NoticeService noticeService;
+	
+	@Autowired
+	private CompanionAnimalRegisterService companionAnimalRegisterService;
 	
 	@GetMapping("/")
 	public String intro(HttpSession session) {
@@ -22,27 +47,37 @@ public class AdminController {
 		}
 		return "intro/intro";
 	}
-	@GetMapping("/index")
+	
+	@RequestMapping("/index")
 	public String index(Model model) {
+		//여기에서 고양이 보내주고 하면 될듯 
+		List<SearchReportAnimal> searchReportAnimalList = animalReportService.selectSearchReportAnimal();
+		System.out.println(searchReportAnimalList + " <-- searchReportAnimalList");
+		List<LostReportAnimal> lostReportAniamlList = animalReportService.selectLostReportAnimal();
+		System.out.println(lostReportAniamlList + " <-- lostReportAniamlList");
+		List<Board> selectNoticeList = noticeService.selectNotice();
+		System.out.println(selectNoticeList + " <-- selectNoticeList");
+		
+		
+		model.addAttribute("cnt", animalCenterService.selectCenterCnt());
+		model.addAttribute("searchReportAnimalList", searchReportAnimalList);
+		model.addAttribute("lostReportAniamlList", lostReportAniamlList);
+		model.addAttribute("selectNoticeList", selectNoticeList);
+		
 		return "index";
 	}
-	
-	@PostMapping("/index")
-	public String index() {
-		return "index";
-	}
-	
-	@PostMapping("/admin")
-	public String admin(Model model) {
-		return "admin/admin";
-	}
-	
-	@GetMapping("/admin")
-	public String admin(HttpSession session) {
+
+	@RequestMapping("/admin")
+	public String admin(HttpSession session, Model model) {
 		String send_code = (String) session.getAttribute("STAFFCODE");
 		if(send_code != null) {
 			session.setAttribute("com", staffService.selectStaffList(send_code));
 		}
+		List<CompanionAnimalRegister> carList = companionAnimalRegisterService.selectCompanionAnimalRegisterList();
+		
+		model.addAttribute("carList", carList);
+		model.addAttribute("cnt", animalCenterService.selectCenterCnt());
+		
 		return "admin/admin";
 	}
 	@GetMapping("/member/blacklistMemberAlert")

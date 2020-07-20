@@ -75,50 +75,22 @@
 		                            	<a th:href="@{/member/memberUpdate(memberId=${j.memberId})}">
 	                       				<i class="material-icons">update</i></a></div>
 	                      			</td>
-	                      			<td>
-	                      				<div class="align-center">
-		                      				<button type="button" class="delete" th:value="${j.memberId}" >
-		                      					<i class="material-icons">delete</i>
-		                      				</button>
-	                      				</div>	
-	                      			</td>
-	                        	</tr>
+	                      				<td><div class="align-center">
+					                       	<a class ="delete" th:data-myurl="'/member/memberDelete?memberId=' +${j.memberId}" href="javascript:void(0)">
+					                       	<i class="material-icons">delete</i></a></div>
+			                      		</td>	
+	                      		</tr>
 	                        </tbody>
 	                    </table>
 	                </div>
 				</div>
 			</div>
 		</div>
-<!-- 모달을 열기 위한 버튼 -->
-<div style="display:none;">
-<button type="button" id="modalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-모달 보기 버튼
-</button>
-</div>
-<!-- 모달 영역 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-<div class="modal-dialog" role="document">
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-<h4 class="modal-title" id="myModalLabel">삭제</h4>
-</div>
-<div class="modal-body">
-회원을 정말 삭제하시겠습니까?
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-primary" id="ok">확인</button>
-<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-</div>
-</div>
-</div>
-</div>
-
-	</section>
- </th:block> 
- 
-
- <th:block layout:fragment="customFooterScript">
+</section>
+</th:block> 
+ <th:block layout:fragment="customHeadScript">
+</th:block> 
+<th:block layout:fragment="customFooterScript">
 		<!-- Jquery DataTable Plugin Js -->
     <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
@@ -133,22 +105,33 @@
     	$(function(){
     		$('#dataTabelEaxm1').dataTable();
 	    
-	    		//삭제 유효성
+    		//삭제 유효성
 			$('.delete').click(function(){
-				//삭제버튼 클릭시
-				$('#modalBtn').trigger('click');
-				var val = $(this).val();
-				console.log(val);
-				var url ="/member/memberDelete?memberId="+val;
-			  $('#ok').click(function(){
-		
-			    	$(location).attr('href',url);
-		
-			  })
-			    
-			})	
-	    		
-    	});
+    			swal({
+					title: '경고',
+					text: '삭제하시겠습니까?', 
+					icon: 'error',
+					buttons: true,
+				})
+    			.then((Delete) => {
+    				var val = $(this).data('myurl');
+    				console.log(val);
+    				if(Delete){
+    					swal({
+    							title: '확인',
+    							text: "정말로 삭제하시겠습니까?", 
+    					      	icon: "warning",
+    					      	buttons: true,
+    					    })
+    					    .then((value) => {
+    					    	if(value) location.href = val;
+    					    });
+    				}else{
+    					console.log('취소');
+    				}
+    			});
+    		});	
+	    });
     </script>
  
  </th:block>

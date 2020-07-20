@@ -23,28 +23,32 @@
 
     <!-- Custom Css -->
     <link href="../../css/style.css" rel="stylesheet">
+    <!-- sweet alert -->
+	    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
-<body class="signup-page">
+<body class="signup-page" style="background-image:url('/images/dogBackGround3.png');">
     <div class="signup-box">
         <div class="logo">
-            <a href="javascript:void(0);">유기동물 보호센터<b><br>회원가입</b></a>
-            
+            <a href="javascript:void(0);" style="text-shadow: 2px 2px #000;">유기동물 보호센터<b><br>회원가입</b></a>
         </div>
         <div class="card">
             <div class="body">
-                <form id="" method="POST">
+                <form action="/member/addMember" method="POST">
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">accessibility</i>
+                            <i class="material-icons">account_box</i>
                         </span>
+					<div class="input-group">  
                         <div class="form-line">
-                            <input type="text" class="form-control" name="memberId" minlength="6" placeholder="ID 를 입력하세요" required autofocus>
+                            <input type="text" class="form-control" id="memberId" name="memberId" placeholder="ID 를 입력하세요" required autofocus>
                         </div>
+                        	<button type="button" class="btn btn-danger form-control" id="idCheckBtn">아이디 중복확인</button>
+					</div>
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">person</i>
+                            <i class="material-icons">account_circle</i>
                         </span>
                         <div class="form-line">
                             <input type="text" class="form-control" name="memberName" placeholder="이름을 입력하세요" required autofocus>
@@ -63,7 +67,23 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            <input type="password" class="form-control" name="memberPw" minlength="8" placeholder="비밀번호를 다시 입력해주세요" required>
+                            <input type="password" class="form-control" name="memberPwCheck" minlength="8" placeholder="비밀번호를 다시 입력해주세요" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">call</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="memberPhone" minlength="8" placeholder="전화번호를 입력해주세요" required>
+                        </div>
+                    </div>
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">home</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="memberAddr" placeholder="주소를 입력해주세요" required>
                         </div>
                     </div>
                      <div class="input-group">
@@ -72,11 +92,10 @@
                         </span>
                         <div class="input-group">
                         	<div class="form-line">
-	                            <input type="email" class="form-control" name="email" placeholder="이메일을 입력해주세요" required>
+	                            <input type="email" class="form-control" name="memberEmail" placeholder="이메일을 입력해주세요" required>
                         	</div>
-	                            <button type="button" class="btn btn-danger form-control" id="emailBtn">이메일 발송</button>
+	                        <button type="button" class="btn btn-danger form-control" id="emailBtn">이메일 발송</button>
 						</div>
-							<input type="hidden" path="random" id="random" value="${random}">
 						<div class="input-group">
 							<div class="form-line">
 								<input type="text" class="form-control" name="emailCheck" placeholder="인증번호를 적어주세요">
@@ -90,7 +109,7 @@
                     </div>
 						<button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">가입하기</button>
 					<div class="m-t-25 m-b--5 align-center">
-                        <a href="sign-in.html">로그인 화면으로 이동하시겠습니까?</a>
+                        <a href="login">로그인 화면으로 이동하시겠습니까?</a>
                     </div>
                 </form>
             </div>
@@ -113,5 +132,127 @@
     <script src="../../js/admin.js"></script>
     <script src="../../js/pages/examples/sign-up.js"></script>
 </body>
+
+<script>
+	
+	$(function(){
+		
+		var memberEmail =$('input[name=memberEmail]');
+		var certCode ='';
+		
+		//아이디 중복검사
+		$('#idCheckBtn').click(function(){
+			var type = $('#memberId').val();
+			console.log(type);
+			var request = $.ajax({
+				url: "/ajax/memberType",
+				method: "POST",
+				data: { "type" : type },
+				dataType: "json"
+			});
+			request.done(function( data ) {
+				console.log(data);
+				var memberId = '';
+				for(var i=0;i<data.length;i++){
+					if(type == data[i].memberId){
+						swal({
+							title:'아이디 중복체크',
+							text: '중복된 아이디입니다!', 
+							icon: 'error'
+						});
+						return false;
+					}
+				}
+				swal({
+					title:'아이디 중복체크',
+					text: '사용가능한 아이디입니다!', 
+					icon: 'success'
+				});
+			});
+			request.fail(function( jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
+			});
+		});
+		//이메일 인증번호 보내기
+		$('#emailBtn').click(function(){
+			var email = memberEmail.val();
+			if(email ==''){
+				alert('이메일을 입력하세요!');
+			 	return false;
+			}
+			
+			var request = $.ajax({
+				url: "/ajax/certEmail",
+				method: "Get",
+				data: { "email" : email },
+				dataType: "json"
+			});
+			
+			request.done(function( data ) {
+				console.log(data);
+				certCode = data.randomCode;
+				swal({
+					title:'이메일',
+					text: '인증번호를 보냈습니다', 
+					icon: 'success'
+				});
+			});
+			request.fail(function( jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
+			});
+		}) 
+		
+		var emailCheck =$('input[name=emailCheck]');
+		
+		//인증번호 확인
+		$('#emailAuthBtn').click(function(){
+			console.log(certCode);
+			if( emailCheck.val()==certCode){
+				swal({
+					title:'인증번호',
+					text: '인증에 성공하셨습니다!', 
+					icon: 'success'
+				});
+			} else {
+				swal({
+					title:'인증번호',
+					text: '인증번호가 다릅니다!', 
+					icon: 'error'
+				});
+				emailCheck.focus();
+				return false;
+			}
+		})
+		
+		$("form").validate({
+			 rules : {
+				//네임
+				 memberId 		: {required : true}
+				,memberPw 		: {required : true}
+				,memberName		: {required : true}
+				,memberPwCheck 	: {required : true}
+				,memberPhone 	: {required : true}
+				,memberAddr 	: {required : true}
+				,memberEmail	: {required : true}
+				,emailCheck		: {required : true}
+				,terms			: {required : true}
+			}
+			,messages : {
+				 memberId 		: {required : '아이디를 입력해주세요'}
+				,memberPw 		: {required : '비밀번호를 입력해주세요'}
+				,memberName		: {required : '성명을 입력해주세요'}
+				,memberPwCheck	: {required : '비밀번호를 다시 입력해주세요'}
+				,memberPhone 	: {required : '휴대폰 번호를 입력해주세요'}
+				,memberAddr 	: {required : '주소를 입력해주세요'}
+				,memberEmail	: {required : '이메일을 입력해주세요'}
+				,emailCheck 	: {required : '인증번호를 입력해주세요'}
+				,terms			: {required : '동의란에 체크해주세요'}
+			}
+			,errorPlacement : function(error, element){
+				element.parent().after(error);
+			}
+		});
+	})	
+</script>
 
 </html>

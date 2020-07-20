@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cafe24.memory.domain.BlackList;
-import com.cafe24.memory.domain.CenterReturn;
 import com.cafe24.memory.mapper.BlackListMapper;
 
 @Service

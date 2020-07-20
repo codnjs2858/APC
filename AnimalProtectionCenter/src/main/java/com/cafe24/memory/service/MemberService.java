@@ -65,12 +65,23 @@ public class MemberService {
 		System.out.println(result+"<-Service insertMember결과값");
 		return result;
 	}
-	public int deleteMember(Member m) {
-		int result=memberMapper.deleteMember(m);
+	public int deleteMember(Member mId) {
+		System.out.println(mId);
+		int result=memberMapper.deleteMember(mId);
 		return result;
 	}
 	public int updateMember(Member m) {
 		int result=memberMapper.updateMember(m);
 		return result;
+	}
+	
+	public Member findId(Member member) { //아이디 찾기
+		System.out.println(member +" <----------Service findId");
+	return memberMapper.findId(member);  
+	}
+	
+	public Member findPw(Member member) { // 비밀번호 찾기
+		System.out.println(member + " <---------- Service findPw");	
+	return memberMapper.findPw(member);
 	}
 }
