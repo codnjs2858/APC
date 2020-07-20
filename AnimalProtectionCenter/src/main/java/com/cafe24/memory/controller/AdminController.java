@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cafe24.memory.domain.Board;
+import com.cafe24.memory.domain.CompanionAnimalRegister;
 import com.cafe24.memory.domain.LostReportAnimal;
 import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.AnimalReportService;
+import com.cafe24.memory.service.CompanionAnimalRegisterService;
 import com.cafe24.memory.service.NoticeService;
 import com.cafe24.memory.service.StaffService;
 
@@ -33,6 +35,9 @@ public class AdminController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	private CompanionAnimalRegisterService companionAnimalRegisterService;
 	
 	@GetMapping("/")
 	public String intro(HttpSession session) {
@@ -68,18 +73,10 @@ public class AdminController {
 		if(send_code != null) {
 			session.setAttribute("com", staffService.selectStaffList(send_code));
 		}
-		List<SearchReportAnimal> searchReportAnimalList = animalReportService.selectSearchReportAnimal();
-		System.out.println(searchReportAnimalList + " <-- searchReportAnimalList");
-		List<LostReportAnimal> lostReportAniamlList = animalReportService.selectLostReportAnimal();
-		System.out.println(lostReportAniamlList + " <-- lostReportAniamlList");
-		List<Board> selectNoticeList = noticeService.selectNotice();
-		System.out.println(selectNoticeList + " <-- selectNoticeList");
+		List<CompanionAnimalRegister> carList = companionAnimalRegisterService.selectCompanionAnimalRegisterList();
 		
-		
+		model.addAttribute("carList", carList);
 		model.addAttribute("cnt", animalCenterService.selectCenterCnt());
-		model.addAttribute("searchReportAnimalList", searchReportAnimalList);
-		model.addAttribute("lostReportAniamlList", lostReportAniamlList);
-		model.addAttribute("selectNoticeList", selectNoticeList);
 		
 		return "admin/admin";
 	}
