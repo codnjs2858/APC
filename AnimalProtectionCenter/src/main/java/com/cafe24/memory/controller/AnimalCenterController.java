@@ -21,12 +21,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cafe24.memory.domain.AnimalCenter;
 import com.cafe24.memory.domain.AnimalDisposal;
 import com.cafe24.memory.domain.AnimalType;
+import com.cafe24.memory.domain.CompanionAnimalRegister;
+import com.cafe24.memory.domain.ProtectionSpace;
 import com.cafe24.memory.domain.ReportManger;
 import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.domain.Staff;
 import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.AnimalDisposalService;
 import com.cafe24.memory.service.AnimalHealthService;
+import com.cafe24.memory.service.CompanionAnimalRegisterService;
 import com.cafe24.memory.service.StorageService;
 
 @Controller
@@ -37,7 +40,7 @@ public class AnimalCenterController {
 	@Autowired private AnimalCenterService animalCenterService;
 	@Autowired private AnimalDisposalService animalDisposalService;
 	@Autowired private StorageService storageService;
-	
+	@Autowired private CompanionAnimalRegisterService companionAnimalRegisterService;
 	
 	private final static Logger logger = 
 			LoggerFactory.getLogger(SpringBootApplication.class);
@@ -88,7 +91,6 @@ public class AnimalCenterController {
 		AnimalCenter ac = animalCenterService.selectCenterAnimal(send_code);
 		model.addAttribute("searchReportCode",animalCenterService.getsearchReportCode(send_code));
 		model.addAttribute("ac", ac);
-		model.addAttribute("aniPicture", "/files/" + ac.getAnimalPicture());
 		return "animalcenter/animalCenterUpdate";
 	}
 	
@@ -130,7 +132,6 @@ public class AnimalCenterController {
 			@RequestParam(name="send_code", required = false) String send_code, Model model) {
 		AnimalCenter ac = animalCenterService.selectCenterAnimal(send_code);
 		model.addAttribute("aInfo", ac);
-		model.addAttribute("aniPicture", "/files/" + ac.getAnimalPicture());
 		model.addAttribute("hlist", animalHealthService.selectAnimalHealthInfo(send_code));
 		model.addAttribute("sInfo",animalCenterService.selectReportCodeAnimal(send_code));
 		
@@ -163,6 +164,12 @@ public class AnimalCenterController {
 			System.out.println("4");
 		}
 		return "animalcenter/animalCenterPage";
+	}
+	
+@GetMapping("/companionAnimalListPage")
+	public String companionAnimalRegisterList(Model model){
+		model.addAttribute("CARS", companionAnimalRegisterService.selectComAniRegList("분양 가능"));
+		return "companionanimalregister/companionAnimalListPage";
 	}
 	
 }

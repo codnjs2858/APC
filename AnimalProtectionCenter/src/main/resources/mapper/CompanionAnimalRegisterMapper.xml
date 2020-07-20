@@ -15,8 +15,10 @@
 		</association>
 		
 		<association property="animalCenter" javaType="AnimalCenter">
+			<result property="animalPicture" column="animal_picture"/>
 			<result property="animalGender" column="animal_gender"></result>
 			<result property="animalAge" column="animal_age"></result>
+			<result property="animalCharacter" column="animal_character"></result>
 			<result property="animalCenterNumber" column="animal_center_number"></result>
 			<result property="animalInsertCode" column="animal_insert_code"></result>
 		</association>
@@ -146,14 +148,16 @@
 	<!-- 분양상태로 리스트 검색 -->
 	
 	<select id="selectComAniRegList" parameterType="String" resultMap="companionAnimalRegisterResultMap">
-			
 			SELECT 
 			*
 			FROM 
-				tb_companion_animal_register
+				tb_companion_animal_register AS c
+				LEFT JOIN 
+				tb_animal_insert AS a
+				ON c.animal_insert_code = a.animal_insert_code
 			WHERE
 				animal_information=#{CARL}
 			ORDER BY CAST(SUBSTR(companion_animal_register_code,6) AS DECIMAL) DESC;
-		
 	</select>
+
 </mapper>

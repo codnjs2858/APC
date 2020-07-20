@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customCss">
+</th:block>
+<th:block layout:fragment="customTitle">
+	<title>분양 가능 동물 목록</title>
+</th:block> 
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customContents">
+	<section class="content">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="header">
+	                <h2>분양 가능 동물 리스트</h2>
+				</div>
+				<div class="body" style="overflow: auto;">
+					<div th:each="c : ${CARS}">
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<a href="javascript:void(0);" class="thumbnail">
+								<img th:src="'/files/'+${c.animalCenter.animalPicture}" style="width:250px; height:250px;">
+									성별 : [[${c.animalCenter.animalGender}]]<br/>
+									나이 : [[${c.animalCenter.animalAge}]]<br/>
+									몸무게: [[${c.animalCenter.animalWeight}]]<br/>
+									특징: [[${c.animalCenter.animalCharacter}]]<br/>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+ 
+</th:block> 
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>
