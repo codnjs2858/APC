@@ -50,4 +50,26 @@
 		WHERE member_id=#{memberId}
 	</update>
 	
+	<select id="findId" parameterType = "Member" resultMap="getMemberMap">
+		SELECT
+			member_id
+		FROM
+			tb_member
+		WHERE
+			member_name = #{memberName}
+			and member_phone = #{memberPhone}
+			and member_email = #{memberEmail};
+	</select>
+	
+	<select id="findPw" parameterType = "Member" resultMap="getMemberMap">
+		SELECT
+			member_pw
+		FROM
+			tb_member
+		WHERE
+			member_id = #{memberId}
+			and member_phone = #{memberPhone}
+			and member_email = #{memberEmail};
+	</select>
+	
 </mapper>

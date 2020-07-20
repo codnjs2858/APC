@@ -37,6 +37,47 @@ public class AjaxSMYController {
 	@Autowired
 	CertSerivce certSerivce; 
 	
+	//아이디 찾기 기능
+		@RequestMapping("/findId")
+		@ResponseBody
+		public HashMap<String,String> findId(Member member) { 
+				HashMap<String,String> getId = new HashMap<String,String>();
+					System.out.println("아이디 찾기");
+					System.out.println(member.getMemberName());
+					System.out.println(member.getMemberPhone());
+					System.out.println(member.getMemberEmail());
+					Member result = memberService.findId(member);
+					
+					System.out.println(result+"<---------- result");
+					if(result!=null) {
+						getId.put("result", result.getMemberId());
+					}else {
+						getId.put("result", "none");
+					}
+				return getId;
+		}
+		
+		//비밀번호 찾기 기능
+			@RequestMapping("/findPw")
+			@ResponseBody
+			public HashMap<String, String> findPw(Member member) { 	
+				HashMap<String, String> getPw = new HashMap<String, String>();
+			
+					System.out.println("비밀번호 찾기");
+					System.out.println(member.getMemberId());
+					System.out.println(member.getMemberPhone());
+					System.out.println(member.getMemberEmail());
+					Member result = memberService.findPw(member);
+					
+					System.out.println(result+"<---------- result");
+					if(result!=null) {
+						getPw.put("result", result.getMemberPw());
+					}else {
+						getPw.put("result", "none");
+					}
+				return getPw;
+			}
+	
 	@GetMapping("/certEmail")
 	@ResponseBody
 	public HashMap<String,String> certEmail(@RequestParam(name="email" ) String email){

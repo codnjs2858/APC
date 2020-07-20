@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customCss">
+
+</th:block>
+
+ <th:block layout:fragment="customTitle">
+ <title>비밀번호 찾기</title>
+ </th:block> 
+
+ <th:block layout:fragment="customHeadScript">
+
+</th:block> 
+ <th:block layout:fragment="customContents">
+ 	  <section class="content">
+        <div class="container-fluid">
+	        <div class="card">
+	        	<div class="header">
+	        		비밀번호 찾기
+	        	</div>
+	        	<div class="body" style="background-image:url('/images/dogBackGround3.png');">
+					<div class="login-page login-box">
+						<div class="body">
+			                <form id="loginform" action="/member/findId" method="Post">
+			                    <div class="input-group m-t-10">
+			                        <span class="input-group-addon">
+			                            <i class="material-icons">person</i>
+			                        </span>
+			                        <div class="form-line">
+			                            <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디를 입력해주세요">
+			                        </div>
+			                    </div>
+			                    <div class="input-group">
+			                        <span class="input-group-addon">
+			                            <i class="material-icons">phone</i>
+			                        </span>
+			                        <div class="form-line">
+			                            <input type="text" class="form-control" id="memberPhone" name="memberPhone" placeholder="전화번호 입력해주세요">
+			                        </div>
+			                    </div>
+			                    <div class="input-group">
+			                        <span class="input-group-addon">
+			                            <i class="material-icons">email</i>
+			                        </span>
+			                        <div class="input-group">
+			                        	<div class="form-line">
+				                            <input type="email" class="form-control" id="memberEmail" placeholder="이메일을 입력해주세요">
+			                        	</div>
+				                    </div>
+								</div>
+		                        <button class="btn btn-block btn btn-danger" type="button" id="findPwBtn">확인</button>
+			                </form>
+		            	</div>
+		        	</div>
+	        	</div>
+	    	</div>
+		</div>
+	</section>
+ </th:block> 
+<th:block layout:fragment="customFooterScript">
+<script>
+	$(function(){
+		var memberId = $('#memberId');
+		var memberEmail = $('#memberEmail');
+		var memberPhone = $('#memberPhone');
+		
+		$('#findPwBtn').click(function(){
+			var request = $.ajax({
+				url: "/ajax/findPw",
+				method: "Post",
+				data: { memberId : memberId.val(),
+						memberEmail : memberEmail.val(),
+						memberPhone : memberPhone.val()
+						},
+				dataType: "json"
+			});
+			request.done(function( data ) {
+				console.log(data.result);
+				if(data.result == 'none'){
+					swal({
+						title:'비밀번호 찾기실패',
+						text: '등록된 정보가 없습니다!', 
+						icon: 'error'
+					});
+				} else{
+					swal({
+						title:'비밀번호 찾기 성공!',
+						text : '회원님의 비밀번호는 ' + data.result+ '입니다',
+						icon: 'success'
+					})
+					.then((search) => {
+						if(search){
+							$('#loginform').submit();
+						}
+					});
+				}
+			});	
+
+			request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+			});	
+		
+	    })
+	})
+</script>
+</th:block>
+</html>
