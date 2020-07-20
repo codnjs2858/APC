@@ -40,7 +40,6 @@ public class AnimalCenterController {
 	@Autowired private AnimalCenterService animalCenterService;
 	@Autowired private AnimalDisposalService animalDisposalService;
 	@Autowired private StorageService storageService;
-	@Autowired private CompanionAnimalRegisterService companionAnimalRegisterService;
 	
 	private final static Logger logger = 
 			LoggerFactory.getLogger(SpringBootApplication.class);
@@ -165,11 +164,5 @@ public class AnimalCenterController {
 		}
 		return "animalcenter/animalCenterPage";
 	}
-	
-@GetMapping("/companionAnimalListPage")
-	public String companionAnimalRegisterList(Model model){
-		model.addAttribute("CARS", companionAnimalRegisterService.selectComAniRegList("분양 가능"));
-		return "companionanimalregister/companionAnimalListPage";
-	}
-	
+
 }
