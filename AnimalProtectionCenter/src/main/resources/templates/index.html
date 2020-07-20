@@ -30,7 +30,7 @@
 							<h2>공고게시판</h2>
 						</div>
 						<div class="body">
-							<table class="table table-bordered table-striped table-hover">
+							<table id="dataTable3" class="table table-bordered table-striped table-hover">
 								<thead>
 							        <tr>
 							            <th data-orderable="false"></th>
@@ -40,7 +40,7 @@
 							        </tr>
 							    </thead>
 							    <tbody>
-							        <tr th:each="s, i : ${selectNoticeList}" th:if="${i.count} < 6">
+							        <tr th:each="s, i : ${selectNoticeList}">
 							            <th scope="row">[[${i.count}]]</th>
 							            <td><div class="align-center">[[${s.board_title}]]</div></td>
 							            <td><div class="align-center">[[${s.member_id}]]</div></td>
@@ -57,7 +57,7 @@
 							<h2>분실신고</h2>
 						</div>
 						<div class="body">
-							<table class="table table-bordered table-striped table-hover">
+							<table id="dataTable2" class="table table-bordered table-striped table-hover">
 								<thead>
 							        <tr>
 							            <th data-orderable="false"></th>
@@ -69,7 +69,7 @@
 							        </tr>
 							    </thead>
 							    <tbody>
-							        <tr th:each="l, i : ${lostReportAniamlList}" th:if="${i.count} < 6">
+							        <tr th:each="l, i : ${lostReportAniamlList}">
 							            <th scope="row">[[${i.count}]]</th>
 							            <td><div class="align-center">[[${l.animalType.animalType}]]</div></td>
 							            <td><div class="align-center">[[${l.animalName}]]</div></td>
@@ -135,8 +135,7 @@
 </th:block> 
 
 <th:block layout:fragment="customFooterScript">
-	<script src="/plugins/chartjs/Chart.bundle.js"></script>
-	
+	<script src="/plugins/chartjs/Chart.bundle.js"></script>	
 	<!-- Jquery DataTable Plugin Js -->
     <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
@@ -159,6 +158,24 @@
 				scrollY: 250,
     			"aaSorting": []
     		});
+			
+			$('#dataTable2').dataTable({
+				paging: false,
+				searching: false,
+				select:false,
+				ordering: false,
+				scrollY: 250,
+    			"aaSorting": []
+			});
+			
+			$('#dataTable3').dataTable({
+				paging: false,
+				searching: false,
+				select:false,
+				ordering: false,
+				scrollY: 250,
+    			"aaSorting": []
+			});
 		});
 		
 		var cnt = document.getElementsByClassName('aniType');
