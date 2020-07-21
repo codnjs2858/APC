@@ -100,5 +100,13 @@ public class AnimalReportService {
 		return animalReportMapper.deleteSearchReportAnimal(searchReportAnimal);
 	  
 	}  
-	 
+	
+	/**
+	 * 신고취소버튼 클릭시 신고 취소한 오늘날짜 로 db에 업데이트
+	 * @param searchReportAnimal
+	 * @return
+	 */
+	public int searchReportCancel(SearchReportAnimal searchReportAnimal) {
+		return animalReportMapper.searchReportCancel(searchReportAnimal);
+	}
 }

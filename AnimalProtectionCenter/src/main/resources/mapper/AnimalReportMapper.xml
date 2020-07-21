@@ -130,6 +130,12 @@
 				,null
 			 )
 	</insert>
+	<update id="searchReportCancel"  parameterType="SearchReportAnimal">
+		UPDATE tb_search_report
+		SET
+			search_report_out_date=CURDATE()
+		WHERE search_report_code=#{searchReportCode};
+	</update>
 	<insert id="insertAniLostReportManager" parameterType="ReportManger">
 		<selectKey resultType="String" order="BEFORE" keyProperty="acceptCode">
 			SELECT (
@@ -210,4 +216,6 @@
 	<delete id="deleteLostReportAnimal" parameterType="LostReportAnimal">
 		DELETE FROM tb_lost_report WHERE lost_report_code=#{lostReportCode}
 	</delete>
+	
+	
 </mapper>

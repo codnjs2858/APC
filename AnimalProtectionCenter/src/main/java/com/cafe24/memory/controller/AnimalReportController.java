@@ -103,14 +103,6 @@ public class AnimalReportController {
 	
 	
 	/**
-	 * 신고 취소,삭제시 db에서 신고 취소버튼 날짜 now()를 가져와서 list에 신고취소날짜로 뿌려줌
-	 */
-	@PostMapping("/cacelSearchReport")
-	public String cacelSearchReport(){
-		return "searchreport/searchReportList";
-	
-	}
-	/**
 	 * lostReportList분실신고 리스트
 	 */
 	@GetMapping("/lostReportList")
@@ -162,5 +154,23 @@ public class AnimalReportController {
 		}
 	
 		return "redirect:/reportlist/reportManager";
+	}
+	@GetMapping("/searchReportView")
+	public String searchReportView(SearchReportAnimal searchReportAnimal,Model model) {
+		List<SearchReportAnimal> SearchAniList=animalReportService.selectSearchReportAnimal(searchReportAnimal);
+		SearchReportAnimal SearchAni=SearchAniList.get(0);
+		model.addAttribute("SearchAnimalDetail", SearchAni);
+		return "reportlist/SearchAnimalDetail";
+	}
+	/**
+	 * 신고 취소 버튼 클릭시, db에 오늘 날짜로 신고 취소 날짜 입력
+	 * @param searchReportAnimal
+	 * @return
+	 */
+	@GetMapping("/searchReportCancel")
+	public String searchReportCancel(SearchReportAnimal searchReportAnimal) {
+		int result=animalReportService.searchReportCancel(searchReportAnimal);
+		System.out.println(result+"<-searchReport 신고 취소 버튼클릭 결과");
+		return "redirect:/reportlist/searchReportList";
 	}
 }

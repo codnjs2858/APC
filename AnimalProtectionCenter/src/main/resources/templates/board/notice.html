@@ -69,6 +69,7 @@
                 	
 	                $("#tb_board").on("click", "tr", function(){
 	                	var click = $(this).find("td:eq(0)").text();
+	                	console.log(click);
 	                	sendPost(click);
 	                });
 	                

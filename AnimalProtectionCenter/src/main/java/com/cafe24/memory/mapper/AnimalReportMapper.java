@@ -21,11 +21,14 @@ public interface AnimalReportMapper {
 	
 	public int insertAniSearchReportManager(ReportManger reportManager);
 	public int insertAniLostReportManager(ReportManger reportManager);
+	public int searchReportCancel(SearchReportAnimal searchReportAnimal);
 	
 	public List<ReportManger> selectAllReport();
 	
 	public int deleteReportManger(ReportManger reportManager);
 	public int deleteLostReportAnimal(LostReportAnimal lostReportAnimal);
 	public int deleteSearchReportAnimal(SearchReportAnimal searchReportAnimal);
+	
+	
 	
 }

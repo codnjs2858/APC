@@ -51,40 +51,31 @@
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
 	                        <thead>
 	                           	<tr>
-						 			<th>index</th>
-						 			<th>유기동물코드</th>
-						 			<th>유기동물타입</th>
-						 			<th>유기동물종류</th>
-						 			<th>유기동물성별</th>
+						 			<th>번호</th>
 						 			<th>등록인</th>
-						 			<th>유기동물상세</th>
+						 			<th>내용</th>
 						 			<th>발견장소</th>
-						 			<th>유기동물사진</th>
 						 			<th>신고등록날짜</th>
 						 			<th>신고취소날짜</th>
-						 		<!-- 	<th>수정</th>-->
+						 			<th>상세보기</th>
 						 			<th>삭제</th> 
 			 					</tr>
 			 		
 	                        </thead>
 	                        <tbody>
 	                            <tr th:each="m,i:${searchReportList}" id="searchinfo" th:data-code="${m.searchReportCode}">
-						 			<td>[[${i.count}]]</td>
-						 			<td>[[${m.searchReportCode}]]</td>
-						 			<td>[[${m.animalType.animalType}]]</td>
-						 			<td>[[${m.animalType.animalTypeSub}]]</td>
-						 			<td>[[${m.animalGender}]]</td>
+						 			
+						 			<td>[[i.count]]</td>
 						 			<td>[[${m.member.memberId}]]</td>
 						 			<td>[[${m.animalDetail}]]</td>
 						 			<td>[[${m.animalLocation}]]</td>
-						 			<td>[[${m.animalPicture}]]</td>
 						 			<td>[[${m.searchReportInDate}]]</td>
 						 			<td>[[${m.searchReportOutDate}]]</td>
-			 						<!-- <td>
-		                            	<a th:href="@{/reportlist/searchReportUpdate(searchReportCode=${m.member.memberId})}">
-	                       				<i class="material-icons">update</i></a></div>
-	                      			</td>-->
-	                      			<td>
+			 						<td><div class="align-center">
+		                            	<a th:href="@{/reportlist/searchReportView(searchReportCode=${m.searchReportCode})}">
+	                       				<i class="material-icons"></i>상세보기</a></div>
+	                      			</td>
+			 						<td>
 	                      				<div class="align-center">
 		                      				<button type="button" class="delete" th:data-myurl="@{/reportlist/deletelist(searchReportCode=${m.searchReportCode})}" >
 		                      					<i class="material-icons">delete</i>
@@ -100,50 +91,38 @@
 				</div>
 			</div>
 		</div>
-<!-- 모달을 열기 위한 버튼 -->
-<div style="display:none;">
-<button type="button" id="modalBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-모달 보기 버튼
-</button>
-</div>
-<!-- 모달 영역 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-<div class="modal-dialog" role="document">
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-<h4 class="modal-title" id="myModalLabel">삭제</h4>
-</div>
-<div class="modal-body">
-신고를 정말 삭제 하시겠습니까?
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-primary" id="ok">확인</button>
-<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-</div>
-</div>
-</div>
-</div>
 
 	</section>
 
  </th:block> 
  
-  <th:block layout:fragment="customHeadScript">
+<th:block layout:fragment="customHeadScript">
  	
- </th:block> 
-	 
- <th:block layout:fragmnet="customFooterScript">
- <script>
+</th:block> 
+<th:block layout:fragment="customFooterScript">
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
     	$(function(){
+	    	//데이터 테이블
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
     		});
-    		
+	    	
+	    	//삭제 유효성
     		$('.delete').click(function(){
-    			swal('삭제하시겠습니까?', {
-					title:'경고',
-					icon:'error',
+    			swal({
+					title: '경고',
+					text: '삭제하시겠습니까?', 
+					icon: 'error',
 					buttons: true,
 				})
     			.then((Delete) => {
@@ -152,8 +131,8 @@
     				if(Delete){
     					swal({
     							title: '확인',
+    							text: "정말로 삭제하시겠습니까?", 
     					      	icon: "warning",
-    					      	text:"정말로 삭제하시겠습니까?",
     					      	buttons: true,
     					    })
     					    .then((value) => {
@@ -164,14 +143,8 @@
     				}
     			});
     		});
-    		$('#searchinfo').click(function(){
-    			location.href=;
-    			
-    		})
-			
     	});
-    </script>
- 
- </th:block>
- 
+	</script>
+</th:block>	 
+
 </html>
