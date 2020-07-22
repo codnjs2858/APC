@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.memory.domain.AnimalType;
 import com.cafe24.memory.domain.LostReportAnimal;
@@ -19,6 +21,7 @@ import com.cafe24.memory.domain.Member;
 import com.cafe24.memory.domain.ReportManger;
 import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.service.AnimalReportService;
+import com.cafe24.memory.service.StorageService;
 
 import ch.qos.logback.classic.Logger;
 
@@ -28,6 +31,7 @@ public class AnimalReportController {
 	private final static Logger logger = (Logger) LoggerFactory.getLogger(SpringBootApplication.class);
 	
 	@Autowired private AnimalReportService animalReportService;
+	@Autowired private StorageService storageService;
 	
 	
 	/**
@@ -38,9 +42,12 @@ public class AnimalReportController {
 	 * @return
 	 */
 	@PostMapping("/searchReport")
-	public String searcReport(AnimalType aType,Member member,SearchReportAnimal searchReportAnimal,ReportManger reportManager,HttpSession session) {
+	public String searcReport(AnimalType aType,Member member,SearchReportAnimal searchReportAnimal,ReportManger reportManager,HttpSession session, @RequestParam("animalPicture2") MultipartFile file) {
 		searchReportAnimal.setAnimalType(aType);
 		searchReportAnimal.setMember(member);
+		searchReportAnimal.setAnimalPicture(file.getOriginalFilename());
+		
+		storageService.store(file);
 		logger.info("찾기 리포트 {}"+searchReportAnimal);
 		animalReportService.insertAnimalReport(searchReportAnimal);
 		
@@ -79,9 +86,13 @@ public class AnimalReportController {
 	 * @return
 	 */
 	@PostMapping("/lostReport")
-	public String lostReport(LostReportAnimal lostReportAnimal,Member member,AnimalType animalType,ReportManger reportManager) {
+	public String lostReport(LostReportAnimal lostReportAnimal,Member member,AnimalType animalType,ReportManger reportManager, @RequestParam("lostAnimalPicture2") MultipartFile file) {
 		lostReportAnimal.setAnimalType(animalType);
 		lostReportAnimal.setMember(member);
+		lostReportAnimal.setLostAnimalPicture(file.getOriginalFilename());
+		System.out.println(lostReportAnimal.getLostAnimalPicture()+"<-lostReportAnimal.getLostAnimalPicture()");
+		storageService.store(file);
+
 		System.out.println(lostReportAnimal);
 		animalReportService.insertLostAnimalReport(lostReportAnimal);
 		reportManager.setLostReport(lostReportAnimal);
@@ -159,6 +170,7 @@ public class AnimalReportController {
 	public String searchReportView(SearchReportAnimal searchReportAnimal,Model model) {
 		List<SearchReportAnimal> SearchAniList=animalReportService.selectSearchReportAnimal(searchReportAnimal);
 		SearchReportAnimal SearchAni=SearchAniList.get(0);
+		System.out.println(SearchAni+"SearchAni");
 		model.addAttribute("SearchAnimalDetail", SearchAni);
 		return "reportlist/SearchAnimalDetail";
 	}
@@ -172,5 +184,13 @@ public class AnimalReportController {
 		int result=animalReportService.searchReportCancel(searchReportAnimal);
 		System.out.println(result+"<-searchReport 신고 취소 버튼클릭 결과");
 		return "redirect:/reportlist/searchReportList";
+	}
+	@GetMapping("/updateSearchlist")
+	public String updateSearchlist(SearchReportAnimal searchReportAnimal,Model model) {
+		List<SearchReportAnimal> SearchAniList=animalReportService.selectSearchReportAnimal(searchReportAnimal);
+		SearchReportAnimal SearchAni=SearchAniList.get(0);
+		System.out.println(SearchAni+"SearchAni");
+		model.addAttribute("SearchAnimalDetail", SearchAni);
+		return "searchreport/searchReportUpdate";
 	}
 }

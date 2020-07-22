@@ -31,7 +31,7 @@
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a th:href="@{/reportlist/lostreport}" class="btn btn-primary btn-lg active" role="button">분실동물신고등록</a></li>
+	                            <li><a th:href="@{/reportlist/searchReport}" class="btn btn-primary btn-lg active" role="button">유기동물 신고 등록</a></li>
 	                       
 	                        </ul>
 	                    </li>
@@ -52,12 +52,14 @@
 	                        <thead>
 	                           	<tr>
 						 			<th>번호</th>
+						 			<th>신고취소여부</th>
 						 			<th>등록인</th>
 						 			<th>내용</th>
 						 			<th>발견장소</th>
 						 			<th>신고등록날짜</th>
 						 			<th>신고취소날짜</th>
 						 			<th>상세보기</th>
+						 			<th>수정</th>
 						 			<th>삭제</th> 
 			 					</tr>
 			 		
@@ -65,7 +67,9 @@
 	                        <tbody>
 	                            <tr th:each="m,i:${searchReportList}" id="searchinfo" th:data-code="${m.searchReportCode}">
 						 			
-						 			<td>[[i.count]]</td>
+						 			<td>[[${i.count}]]</td>
+						 			<td th:if=${m.searchReportOutDate==null}>접수</td>
+						 			<td th:unless=${m.searchReportOutDate==null}>신고취소</td>
 						 			<td>[[${m.member.memberId}]]</td>
 						 			<td>[[${m.animalDetail}]]</td>
 						 			<td>[[${m.animalLocation}]]</td>
@@ -75,6 +79,13 @@
 		                            	<a th:href="@{/reportlist/searchReportView(searchReportCode=${m.searchReportCode})}">
 	                       				<i class="material-icons"></i>상세보기</a></div>
 	                      			</td>
+	                      			<td>
+	                      				<div class="align-center">
+		                      				<button type="button" class="update" th:data-myurl="@{/reportlist/updateSearchlist(searchReportCode=${m.searchReportCode})}" >
+		                      					<i class="material-icons">update</i>
+		                      				</button>
+	                      				</div>	
+	                      			</td> 
 			 						<td>
 	                      				<div class="align-center">
 		                      				<button type="button" class="delete" th:data-myurl="@{/reportlist/deletelist(searchReportCode=${m.searchReportCode})}" >

@@ -98,8 +98,8 @@
 			fROM tb_lost_report;
 		</selectKey>
 	INSERT INTO tb_lost_report
-	(lost_report_code, animal_code, animal_name, animal_gender, animal_feature, member_id, lost_report_state, lost_report_in_date, lost_report_location)
-	VALUES (#{lostReportCode},#{animalType.animalTypeCode} ,#{animalName} , #{animalGender}, #{animaFeature}, #{member.memberId}, #{lostReportState} , NOW(),#{lostReportLocation})
+	(lost_report_code, animal_code, animal_name, animal_gender, animal_feature, member_id, lost_report_state, lost_report_in_date, lost_report_location,lost_animal_picture)
+	VALUES (#{lostReportCode},#{animalType.animalTypeCode} ,#{animalName} , #{animalGender}, #{animaFeature}, #{member.memberId}, #{lostReportState} , NOW(),#{lostReportLocation},#{lostAnimalPicture})
 	
 	</insert>
 	<insert id="insertAniSearchReportManager" parameterType="ReportManger">
@@ -184,7 +184,7 @@
 		from tb_search_report AS s join tb_animal_type AS a
 		ON s.animal_code=a.animal_type_code
 		<where>
-		 <if test="searchReportCode!=null and searchReportCode !=''.toString()"> s.search_report_code=#{searchReport.searchReportCode}</if>
+		 <if test="searchReportCode!=null and searchReportCode !=''.toString()"> s.search_report_code=#{searchReportCode}</if>
 		</where>	
 		;
 	</select>
@@ -194,7 +194,7 @@
 		tb_lost_report AS l JOIN tb_animal_type AS a
 		ON l.animal_code=a.animal_type_code
 		<where>
-		 <if test="lostReportCode!=null and lostReportCode !=''.toString()">l.lost_report_code=#{LostReportAnimal.lostReportCode}</if>
+		 <if test="lostReportCode!=null and lostReportCode !=''.toString()">l.lost_report_code=#{lostReportCode}</if>
 		</where>
 		;
 	</select>

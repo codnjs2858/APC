@@ -63,13 +63,13 @@ public class AnimalReportService {
 	 * @return List<SearchReportAnimal>
 	 */
 	public List<SearchReportAnimal> selectSearchReportAnimal(SearchReportAnimal searchReportAnimal){
-		return animalReportMapper.selectSearchReportAnimal();
+		return animalReportMapper.selectSearchReportAnimal(searchReportAnimal);
 	}
 	public List<SearchReportAnimal> selectSearchReportAnimal(){
 		return animalReportMapper.selectSearchReportAnimal();
 	}
 	public List<LostReportAnimal> selectLostReportAnimal(LostReportAnimal lostReportAnimal){
-		return animalReportMapper.selectLostReportAnimal();
+		return animalReportMapper.selectLostReportAnimal(lostReportAnimal);
 	}
 	public List<LostReportAnimal> selectLostReportAnimal(){
 		return animalReportMapper.selectLostReportAnimal();

@@ -87,17 +87,13 @@
 	                         	<div class="col-md-12">
                                 	<div class="form-group">
                                   	<div id="genderradio" class="font-bold col-teal">성별</div>
+                                    
                                     	<input th:if="${SearchAnimalDetail.animalGender}=='숫컷'" checked="checked" readonly="readonly" type="radio" name="animalGender" id="male" value="수컷" class="with-gap">
-                                    		<label for="male">수컷</label>
-                                    	<input th:unless="${SearchAnimalDetail.animalGender}=='숫컷'" readonly="readonly" type="radio" name="animalGender" id="male" value="수컷" class="with-gap">
                                     		<label for="male">수컷</label>
 										<input th:if="${SearchAnimalDetail.animalGender}=='암컷'" checked="checked"  type="radio" name="animalGender" readonly="readonly" id="female" value="암컷" class="with-gap" >
                                     		<label for="female" class="m-l-20">암컷</label>
-                                    	<input th:unless="${SearchAnimalDetail.animalGender}=='암컷'" type="radio" name="animalGender" readonly="readonly" id="female" value="암컷" class="with-gap" >
-                                    		<label for="female" class="m-l-20">암컷</label>
-                                    	<input th:if="${SearchAnimalDetail.animalGender}=='중성화'" checked="checked" type="radio" name="animalGender" readonly="readonly" id="middle" value="중성화" class="with-gap">
-                                    		<label for="middle" class="m-l-20">중성화</label>
-                                    	<input th:unless="${SearchAnimalDetail.animalGender}=='중성화'"  type="radio" name="animalGender" readonly="readonly" id="middle" value="중성화" class="with-gap">
+                                   
+                                    	<input th:if="${SearchAnimalDetail.animalGender}=='중성화'"  checked="checked" type="radio" name="animalGender" readonly="readonly" id="middle" value="중성화" class="with-gap">
                                     		<label for="middle" class="m-l-20">중성화</label>
                                 	</div>
                             	</div>
@@ -125,17 +121,17 @@
 		                            </div>
 		                        </div>    
 	                            <div class="row">
-                        		<div class="form-group">
-		                            <div class="form-line">
-			                            <label>사진등록
-			                                <input type="file" name="animalPicture"class="form-control">
-			                        	</label>
-			                        </div>
-		                       	</div>
+                        			<div class="row m-t-10">
+	           							<div class="col-xs-6 col-md-3">
+	                       					 <a href="javascript:void(0);" class="thumbnail">
+	                        					<img th:src="'/files/' + ${SearchAnimalDetail.animalPicture}" class="img-responsive">
+	                        				 </a>
+	                    				</div>
+	           						</div>
 		                       	</div>
                               	<div class="align-center" th:if="${SearchAnimalDetail.searchReportOutDate==null}">
 				            		<a class="delete" th:data-myurl="'/reportlist/searchReportCancel?searchReportCode=' + ${SearchAnimalDetail.searchReportCode}" href="javascript:void(0)">
-				            			<i class="material-icons">신고 취소</i>
+				            			<button class="btn btn-primary waves-effect" type="button" id="cancel">분실신고취소</button>
 				            		</a>							            	
 							 	</div>
                           	</form>
@@ -161,6 +157,11 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
     <script>
     	$(function(){
+    		//이미지 깨짐
+			$('img').on("error",function(){
+				$(this).attr('src','http://placehold.it/500x300');
+			});
+    		
     		$('.delete').click(function(){
     			swal('신고취소하시겠습니까?', {
 					title:'경고',
