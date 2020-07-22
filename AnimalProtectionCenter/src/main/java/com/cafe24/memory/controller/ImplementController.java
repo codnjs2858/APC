@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.memory.domain.Implement;
 import com.cafe24.memory.service.ImplementService;
+import com.cafe24.memory.service.StaffService;
 
 @Controller
 @RequestMapping("/implement")
@@ -25,6 +26,9 @@ public class ImplementController {
 	@Autowired
 	private ImplementService impleMentServer;
 	
+	@Autowired
+	private StaffService staffService;
+	
 	@PostMapping("/implementList")
 	public String implementList() {
 		
@@ -34,12 +38,12 @@ public class ImplementController {
 	@GetMapping("/implementList")
 	public String implementList(Model model) {
 		List<Implement> impleList = impleMentServer.selectImplement();
-		
 		// 사용량을 확인하고 update 를 함
 		Implement im = null;
 		for(int i = 0; i < impleList.size(); i++) {
 			im = impleList.get(i);
 			impleMentServer.modifyImplement(im);
+			im.setStaffName(staffService.selectStaffList(im.getStaffCode()).getStaffName());
 		}
 		logger.info("시설 리스트 {}", impleList);
 		model.addAttribute("impleList", impleList);
