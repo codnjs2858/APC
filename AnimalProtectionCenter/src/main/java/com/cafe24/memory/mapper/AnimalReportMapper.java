@@ -30,5 +30,6 @@ public interface AnimalReportMapper {
 	public int deleteSearchReportAnimal(SearchReportAnimal searchReportAnimal);
 	
 	
-	
+	public int updateSearchReport(SearchReportAnimal searchReportAnimal);
+	public int updateReportManager(ReportManger reportManager);
 }

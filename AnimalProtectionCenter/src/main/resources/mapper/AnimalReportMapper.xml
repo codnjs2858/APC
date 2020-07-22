@@ -217,5 +217,29 @@
 		DELETE FROM tb_lost_report WHERE lost_report_code=#{lostReportCode}
 	</delete>
 	
+	<update id="updateSearchReport"  parameterType="SearchReportAnimal">
+		UPDATE tb_search_report
+		SET
+			animal_code=#{animalTypeCode},
+			animal_gender=#{animalGender},
+			animal_detail=#{animalDetail},
+			animal_location=#{animalLocation},
+			animal_picture=#{animalPicture},
+			search_report_in_date=#{searchReportInDate}
+		WHERE search_report_code=#{searchReportCode}
+	</update>
+	
+	<update id="updateReportManager" parameterType="ReportManger">
+		UPDATE tb_report_manager
+		SET
+		<where>
+		 <if test="lostReport!=null and lostReport !=''.toString()">lost_report_code=#{lostReport.lostReportCode}</if>
+		 <if test="searchReport!=null and searchReport !=''.toString()">report_code=#{searchReport.searchReportCode}</if>
+		</where>
+			accept_in_date=#{searchReport.searchReportInDate},
+			report_location=#{searchReport.animalLocation}
+		WHERE report_code=#{searchReport.searchReportCode}
+	</update>
+	
 	
 </mapper>

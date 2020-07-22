@@ -109,4 +109,15 @@ public class AnimalReportService {
 	public int searchReportCancel(SearchReportAnimal searchReportAnimal) {
 		return animalReportMapper.searchReportCancel(searchReportAnimal);
 	}
+	/**
+	 * searchReport신고 update
+	 * @param searchReportAnimal
+	 * @return
+	 */
+	public int updateSearchReport(SearchReportAnimal searchReportAnimal) {
+		return animalReportMapper.updateSearchReport(searchReportAnimal);
+	}
+	public int updateReportManager(ReportManger reportManager) {
+		return animalReportMapper.updateReportManager(reportManager);
+		}
 }

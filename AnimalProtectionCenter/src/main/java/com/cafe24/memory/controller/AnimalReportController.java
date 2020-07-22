@@ -185,12 +185,51 @@ public class AnimalReportController {
 		System.out.println(result+"<-searchReport 신고 취소 버튼클릭 결과");
 		return "redirect:/reportlist/searchReportList";
 	}
-	@GetMapping("/updateSearchlist")
-	public String updateSearchlist(SearchReportAnimal searchReportAnimal,Model model) {
+	/**
+	 * searchReport 신고 업데이트 폼에 보여줄 ,회원정보 조회
+	 * @param searchReportAnimal
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/updateforgetSearchlist")
+	public String updateforgetSearchlist(SearchReportAnimal searchReportAnimal,Model model) {
 		List<SearchReportAnimal> SearchAniList=animalReportService.selectSearchReportAnimal(searchReportAnimal);
 		SearchReportAnimal SearchAni=SearchAniList.get(0);
 		System.out.println(SearchAni+"SearchAni");
 		model.addAttribute("SearchAnimalDetail", SearchAni);
 		return "searchreport/searchReportUpdate";
+	}
+	
+	/**
+	 * searchReport 신고 update
+	 * @param searchReportAnimal
+	 * @param member
+	 * @param animalType
+	 * @param reportManager
+	 * @param file
+	 * @return
+	 */
+	@PostMapping("/updateSearchlist")
+	public String updateSearchlist(SearchReportAnimal searchReportAnimal,Member member,AnimalType animalType,ReportManger reportManager, @RequestParam("animalPicture2") MultipartFile file) {
+		
+		searchReportAnimal.setAnimalType(animalType);
+		searchReportAnimal.setMember(member);
+		System.out.println("updateSearchlist->"+searchReportAnimal);
+		
+		if(file != null && "".equals(file.getOriginalFilename())) {
+			storageService.deleteFile(searchReportAnimal.getAnimalPicture());
+			storageService.store(file);
+			searchReportAnimal.setAnimalPicture(file.getOriginalFilename());
+		}
+		logger.info("updateSearchlist{}"+searchReportAnimal);
+		
+		animalReportService.updateSearchReport(searchReportAnimal);
+		
+		reportManager.setSearchReport(searchReportAnimal);
+		System.out.println("-----------------------------------------"+reportManager+"<-reportManager.setSearchReport(searchReportAnimal);");
+		reportManager.setMember(member);
+		
+		animalReportService.updateReportManager(reportManager);
+		return "redirect:/reportlist/searchReportList";
 	}
 }

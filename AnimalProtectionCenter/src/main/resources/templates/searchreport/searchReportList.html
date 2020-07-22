@@ -31,7 +31,7 @@
 	                            <i class="material-icons">more_vert</i>
 	                        </a>
 	                        <ul class="dropdown-menu pull-right">
-	                            <li><a th:href="@{/reportlist/searchReport}" class="btn btn-primary btn-lg active" role="button">유기동물 신고 등록</a></li>
+	                            <li><a th:href="@{/reportlist/lostreport}" class="btn btn-primary btn-lg active" role="button">분실동물신고등록</a></li>
 	                       
 	                        </ul>
 	                    </li>
@@ -65,12 +65,8 @@
 			 		
 	                        </thead>
 	                        <tbody>
-<<<<<<< HEAD
 	                            <tr th:each="m,i:${searchReportList}" id="searchinfo" th:data-code="${m.searchReportCode}">
 						 			
-=======
-	                            <tr th:each="m,i:${searchReportList}" th:data-code="${m.searchReportCode}">
->>>>>>> refs/heads/develop
 						 			<td>[[${i.count}]]</td>
 						 			<td th:if=${m.searchReportOutDate==null}>접수</td>
 						 			<td th:unless=${m.searchReportOutDate==null}>신고취소</td>
@@ -83,13 +79,11 @@
 		                            	<a th:href="@{/reportlist/searchReportView(searchReportCode=${m.searchReportCode})}">
 	                       				<i class="material-icons"></i>상세보기</a></div>
 	                      			</td>
-	                      			<td>
-	                      				<div class="align-center">
-		                      				<button type="button" class="update" th:data-myurl="@{/reportlist/updateSearchlist(searchReportCode=${m.searchReportCode})}" >
-		                      					<i class="material-icons">update</i>
-		                      				</button>
-	                      				</div>	
-	                      			</td> 
+	                      			 <td><div class="align-center">
+		                            	<a th:href="@{/reportlist/updateforgetSearchlist(searchReportCode=${m.searchReportCode})}">
+	                       				<i class="material-icons">update</i></a></div>
+	                      			</td>
+	                      			
 			 						<td>
 	                      				<div class="align-center">
 		                      				<button type="button" class="delete" th:data-myurl="@{/reportlist/deletelist(searchReportCode=${m.searchReportCode})}" >
@@ -106,17 +100,13 @@
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/heads/develop
 	</section>
 
  </th:block> 
  
 <th:block layout:fragment="customHeadScript">
  	
-<<<<<<< HEAD
 </th:block> 
 <th:block layout:fragment="customFooterScript">
     <!-- Jquery DataTable Plugin Js -->
@@ -130,22 +120,6 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
     <script>
-=======
- </th:block> 
-	 
-<th:block layout:fragment="customFooterScript">
- 	<!-- Jquery DataTable Plugin Js -->
-    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
-    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
- 	<script>
->>>>>>> refs/heads/develop
     	$(function(){
 	    	//데이터 테이블
     		$('#dataTabelEaxm1').dataTable({
@@ -178,10 +152,6 @@
     				}
     			});
     		});
-<<<<<<< HEAD
-=======
-			
->>>>>>> refs/heads/develop
     	});
 	</script>
 </th:block>	 
