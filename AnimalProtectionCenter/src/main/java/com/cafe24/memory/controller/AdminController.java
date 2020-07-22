@@ -45,7 +45,7 @@ public class AdminController {
 		if(send_code != null) {
 			session.setAttribute("com", staffService.selectStaffList(send_code));
 		}
-		return "intro/intro";
+		return "intro/introSCW";
 	}
 	
 	@RequestMapping("/index")
