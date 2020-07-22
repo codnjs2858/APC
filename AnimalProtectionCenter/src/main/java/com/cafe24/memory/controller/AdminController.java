@@ -18,7 +18,9 @@ import com.cafe24.memory.domain.SearchReportAnimal;
 import com.cafe24.memory.service.AnimalCenterService;
 import com.cafe24.memory.service.AnimalReportService;
 import com.cafe24.memory.service.CompanionAnimalRegisterService;
+import com.cafe24.memory.service.NoteService;
 import com.cafe24.memory.service.NoticeService;
+import com.cafe24.memory.service.ReviewService;
 import com.cafe24.memory.service.StaffService;
 
 @Controller
@@ -26,6 +28,12 @@ public class AdminController {
 	
 	@Autowired 
 	private StaffService staffService;
+	
+	@Autowired 
+	private ReviewService reviewServiece;
+	
+	@Autowired 
+	private NoteService noteService;
 	
 	@Autowired
 	private AnimalCenterService animalCenterService;
@@ -70,14 +78,17 @@ public class AdminController {
 	@RequestMapping("/admin")
 	public String admin(HttpSession session, Model model) {
 		String send_code = (String) session.getAttribute("STAFFCODE");
+		String send_id = (String) session.getAttribute("SID");
 		if(send_code != null) {
 			session.setAttribute("com", staffService.selectStaffList(send_code));
 		}
 		List<CompanionAnimalRegister> carList = companionAnimalRegisterService.selectCompanionAnimalRegisterList();
-		
+		model.addAttribute("animalCnt", animalCenterService.selectAnimalCenter().size());
+		model.addAttribute("noteCnt", noteService.selectNote(send_id).size());
 		model.addAttribute("carList", carList);
 		model.addAttribute("cnt", animalCenterService.selectCenterCnt());
-		
+		model.addAttribute("RVL", reviewServiece.selectReview());
+		model.addAttribute("CARS", companionAnimalRegisterService.selectComAniRegList("분양 가능"));
 		return "admin/admin";
 	}
 	@GetMapping("/member/blacklistMemberAlert")

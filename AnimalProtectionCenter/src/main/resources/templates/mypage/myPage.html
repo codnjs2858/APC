@@ -11,54 +11,142 @@
 	<section class="content">
 		<div class="col-lg-12">
 			<div class="container-fluid">
-				<div class="card">
-					<div class="header">
-						<h2>
-							개인정보
-						</h2>
+				<div class="row">
+					<div class="col-xs-12 col-md-4">
+						<div class="card">
+			                <div class="header">
+			                	<div class="row">
+			                		<div class="col-md-6">
+					                    <h2>내 정보</h2>
+			                		</div>
+			                		<div class="col-md-6">
+					                    <a class="btn btn-block bg-red waves-effect" th:href="@{/member/memberUpdate(memberId=${member.memberId})}" style="margin-top: 10px;">개인정보수정</a>
+			                		</div>
+			                	</div>
+			                </div>
+			                <div class="body" style="height:350px;">
+			                	<div>
+		                        	<div class="row">
+			                            <label class="col-sm-3">아이디 </label>
+			                            <div>[[${member.memberId}]]</div>
+		                        	</div>
+		                        	<div class="row">
+			                            <label class="col-sm-3">이름 </label>
+			                            <div>[[${member.memberName}]]</div>
+		                        	</div>
+		                        	<div class="row">
+			                            <label class="col-sm-3">연락처 </label>
+			                            <div>[[${member.memberPhone}]]</div>
+		                        	</div>
+		                        	<div class="row">
+			                            <label class="col-sm-3">이메일 </label>
+			                            <div>[[${member.memberEmail}]]</div>
+		                        	</div>
+		                        	<div class="row">
+		                        		<label class="col-sm-3">주소</label>
+		                        		<div>[[${member.memberAddr1}]]</div>
+		                        		<div>[[${member.memberAddr2}]]</div>
+		                        		<div>[[${member.memberAddr3}]]</div>
+		                        		<div>[[${member.memberAddr4}]]</div>
+		                        	</div>
+		                        </div>
+			                </div>
+			            </div>	
 					</div>
-					<div class="body">
-	                	<div>아이디 : [[${member.memberId}]]</div>
-	                	<div>이메일 : [[${member.memberEmail}]]</div>
-		                <a class="btn btn-block bg-red waves-effect" th:href="@{/member/memberUpdate(memberId=${member.memberId})}" style="margin-top: 10px;">개인정보수정</a>
+					<div class="col-xs-12 col-md-8">
+						<div class="card">
+							<div class="header">
+								<div class="row">
+			                		<div class="col-md-6">
+					                    <h2>쪽지 관리</h2>
+			                		</div>
+			                		<div class="col-md-3 col-md-offset-3">
+					                    <a class="btn btn-block bg-red waves-effect" href="/note/sendNote" style="margin-top: 10px;">쪽지보내기</a>
+			                		</div>
+			                	</div>
+			                </div>
+			                <div class="body" style="height:350px;">
+	                            <!-- Nav tabs -->
+	                            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+	                            	<li role="presentation" class="active"><a href="#noteList" data-toggle="tab">받은쪽지함</a></li>
+	                                <li role="presentation" class=""><a href="#sendNoteList" data-toggle="tab" aria-expanded="false">보낸쪽지함</a>
+	                            </ul>
+	                            <!-- Tab panes -->
+	                            <div class="tab-content">
+	                                <div role="tabpanel" class="tab-pane fade in active" id="noteList">
+	                                    <table id="tb_note" class="table table-hover">
+											<thead>
+										        <tr>
+										            <th>번호</th>
+										            <th>제목</th>
+										            <th>보낸사람</th>
+										            <th>받은시간</th>
+										        </tr>
+										    </thead>
+										    <tbody>
+										        <tr th:each="i, j : ${noteList}">
+										        	<th:block th:if="${j.count} <= 3">
+											            <th scope="row">[[${j.count}]]</th>
+											            <td style="display:none">[[${i.note_code}]]</td>
+											            <td>[[${i.note_title}]]</td>
+											            <td>[[${i.send_member}]]</td>
+											            <td>[[${i.note_date}]]</td>
+										        	</th:block>
+										        </tr>
+										    </tbody>
+										</table>
+										<a class="btn btn-block bg-blue waves-effect" href="/note/noteList" style="margin-top: 10px;">받은쪽지 더 보기</a>
+	                                </div>
+	                                <div role="tabpanel" class="tab-pane fade" id="sendNoteList">
+	                                    <table id="tb_note" class="table table-hover">
+											<thead>
+										        <tr>
+										            <th>번호</th>
+										            <th>제목</th>
+										            <th>받은사람</th>
+										            <th>보낸시간</th>
+										        </tr>
+										    </thead>
+										    <tbody>
+										        <tr th:each="i, j : ${sendNoteList}">
+										        	<th:block th:if="${j.count} <= 3">
+											            <th scope="row">[[${j.count}]]</th>
+											            <td style="display:none">[[${i.note_code}]]</td>
+											            <td>[[${i.note_title}]]</td>
+											            <td>[[${i.recipient_member}]]</td>
+											            <td>[[${i.note_date}]]</td>
+										        	</th:block>
+										        </tr>
+										    </tbody>
+										</table>
+										<a class="btn btn-block bg-blue waves-effect" href="/note/sendNoteList" style="margin-top: 10px;">보낸쪽지 더 보기</a>
+	                                </div>
+	                            </div>
+	                        </div>
+						</div>
 					</div>
 				</div>
 				<div class="card">
-					<div class="header">
-						<h2>
-							임양신청 현황
-						</h2>
-					</div>
-					<div class="body">
-						<div th:if="adoptee eq null">입양신청 : 없음</div>
-						<div th:unless="adoptee eq null">입양신청 : 있음 심사:[[${adoptee}]]</div>
-						<button class="btn btn-block bg-red waves-effect" type="button" style="margin-top: 10px;">입양신청현황보기</button>
-					</div>
-				</div>
-				<div class="card">
-					<div class = header>
-						<h2>
-							쪽지
-						</h2>
-					</div>
-					<div class = body>
-						<a class="btn btn-block bg-red waves-effect" href="/note/sendNote" style="margin-top: 10px;">쪽지보내기</a>
-						<a class="btn btn-block bg-red waves-effect" href="/note/noteList" style="margin-top: 10px;">받은쪽지</a>
-						<a class="btn btn-block bg-red waves-effect" href="/note/sendNoteList" style="margin-top: 10px;">보낸쪽지</a>
-					</div>
-				</div>
-				<div class="card">
-					<div class="header">
-						<h2>
-							후기
-						</h2>
-					</div>
-					<div class="body">
-						<div th:each="re : ${review}">완료 횟수 : [[${re.reviewCount}]]</div>
-						<button class="btn btn-block bg-red waves-effect" type="button" style="margin-top: 10px;">내가 쓴 글보기</button>
-					</div>
-				</div>
-			</div>
+	                <div class="header">
+	                    <h2>이용 내역</h2>
+	                </div>
+	                <div class="body">
+                        <div>
+                            <b>입양 신청 현황</b>
+                            <p>
+                            	<div th:if="adoptee eq null">입양신청 : 없음</div>
+								<div th:unless="adoptee eq null">입양신청 : 있음 심사:[[${adoptee}]]</div>
+								<button disabled class="btn btn-block bg-default waves-effect" type="button" style="margin-top: 10px;">입양신청현황보기</button>
+                            </p>
+                            <b>후기 관리</b>
+                            <p>
+                                <div th:each="re : ${review}">완료 횟수 : [[${re.reviewCount}]]</div>
+								<button disabled class="btn btn-block bg-default waves-effect" type="button" style="margin-top: 10px;">내가 쓴 글보기</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 		</div>
 	</section>
 	
