@@ -136,4 +136,10 @@ public class CompanionAnimalRegisterController {
 	
 	}
 
+	//동물 분양 가능 목록 리스트 페이지
+	@GetMapping("/companionAnimalListPage")
+	public String companionAnimalRegisterList(Model model){
+		model.addAttribute("CARS", companionAnimalRegisterService.selectComAniRegList("분양 가능"));
+		return "companionanimalregister/companionAnimalListPage";
+	}
 }

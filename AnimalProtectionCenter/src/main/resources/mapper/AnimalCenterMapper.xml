@@ -11,7 +11,6 @@
 		<result property="animalCharacter" column="animal_character"></result>
 		<result property="animalState" column="animal_state"></result>
 		<result property="animalInsertRegDate" column="animal_insert_reg_date"></result>
-		
 		<association property="reportManger" javaType="ReportManger">
 			<result property="acceptCode" column="accept_code"></result>
 			<result property="acceptState" column="accept_state"></result>

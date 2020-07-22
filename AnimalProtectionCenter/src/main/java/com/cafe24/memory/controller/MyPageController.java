@@ -2,7 +2,6 @@ package com.cafe24.memory.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -44,8 +43,8 @@ public class MyPageController {
 	@Autowired
 	ReviewService reviewService;
 	
-	@GetMapping("/myPage")
-	public String myPage(Model model, HttpServletRequest request) {
+	@GetMapping("/myPageAdmin")
+	public String myPageAdmin(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
 		String mId = (String) session.getAttribute("SID");
@@ -63,7 +62,8 @@ public class MyPageController {
 			adoptee = adopteeService.selectAdopteeById(mId);
 			List<ReportManger> reportAllList = reportService.selectAllReport();
 			for(int i = 0; i < reportAllList.size(); i++) {
-				ReportManger re = reportAllList.get(i);
+				ReportManger re = new ReportManger(); 
+				re = reportAllList.get(i);
 				if(re.getMember().getMemberId().equals(mId)) {
 					reportManager = re;
 					break;
@@ -86,8 +86,67 @@ public class MyPageController {
 		
 		String adopteeInfo = "입양 불가능";
 		
-		if("screening_complete_code_01".equals(adoptee.getScreeningComplete().getScreening_complete_code())) {
-			adopteeInfo = "입양가능";
+		if(adoptee != null) {
+			if("screening_complete_code_01".equals(adoptee.getScreeningComplete().getScreening_complete_code())) {
+				adopteeInfo = "입양가능";
+			}			
+		}
+		
+		model.addAttribute("member", member);
+		model.addAttribute("adoptee", adopteeInfo);
+		model.addAttribute("reportManager", reportManager);
+		model.addAttribute("review", review);
+		
+		return "/mypage/myPageAdmin";
+	}
+	
+	@GetMapping("/myPage")
+	public String myPage(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		String mId = (String) session.getAttribute("SID");
+		logger.info("세션에 있는 아이디 {}", mId);
+		Member member = null;
+		Adoptee adoptee = null;
+		ReportManger reportManager = null;
+		List<Review> review = new ArrayList<Review>();
+		//아이디로 멤버 찾기
+		//입양신청 찾기
+		//신고 찾기
+		//후기 등록 찾기
+		if(mId != null && !"".equals(mId)) {
+			member = memberService.getMemberList(mId);
+			adoptee = adopteeService.selectAdopteeById(mId);
+			List<ReportManger> reportAllList = reportService.selectAllReport();
+			for(int i = 0; i < reportAllList.size(); i++) {
+				ReportManger re = new ReportManger(); 
+				re = reportAllList.get(i);
+				if(re.getMember().getMemberId().equals(mId)) {
+					reportManager = re;
+					break;
+				}
+			}
+			List<Review> reviewList = reviewService.selectReview();
+			for(int i = 0; i < reviewList.size(); i++) {
+				Review re = reviewList.get(i);
+				if(re.getMember().getMemberId().equals(mId)) {
+					review.add(re);
+					break;
+				}
+			}
+			
+		}
+		logger.info("member {}", member);
+		logger.info("adoptee {}", adoptee);
+		logger.info("reportManager {}", reportManager);
+		logger.info("review {}", review);
+		
+		String adopteeInfo = "입양 불가능";
+		
+		if(adoptee != null) {
+			if("screening_complete_code_01".equals(adoptee.getScreeningComplete().getScreening_complete_code())) {
+				adopteeInfo = "입양가능";
+			}			
 		}
 		
 		model.addAttribute("member", member);

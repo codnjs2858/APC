@@ -175,7 +175,7 @@
                        <div class="col-md-4 col-md-offset-1 col-xs-6">
                            <div class="form-group form-float">
                                <div class="form-line">
-                                   <input type="text" class="form-control" name="memberName" value="홍길동">
+                                   <input type="text" class="form-control" name="memberName" value="일반회원">
                                    <label class="form-label">신고인 성명</label>
                                </div>
                            </div>
@@ -183,7 +183,7 @@
                        <div class="col-md-4 col-xs-6">
                            <div class="form-group form-float">
                                <div class="form-line">
-                                   <input type="text" class="form-control" name="memberPhone" value="010-0000">
+                                   <input type="text" class="form-control" name="memberPhone" value="010-4444-4444">
                                    <label class="form-label">신고인 연락처</label>
                                </div>
                            </div>
@@ -282,7 +282,7 @@
 						for(var i=0; i<msg.length;i++){
 							console.log(msg[i]);
 							html +="<tr><td><input type=\"radio\" class=\"valBtn\" name=\"selectReport\"value=\""+msg[i].searchReportCode+"\"></td>";
-							html +="<td>"+msg[i].animalPicture+"</td>";
+							html +="<td><img src='/files/"+msg[i].animalPicture+"' class='img-responsive' style='width:100px; height:100px'></td>";
 							html +="<td>"+msg[i].animalType.animalType+":"+msg[i].animalType.animalTypeSub+"</td>";
 							html +="<td>"+msg[i].animalLocation+"</td>";
 							html +="<td>"+msg[i].animalDetail+"</td></tr>";

@@ -67,7 +67,7 @@
 										<b>동물 사진</b>
 										<div class="m-t-10">
 											<a href="javascript:void(0);" class="thumbnail">
-												<img id="aImage" th:src="${aniPicture}" class="img-responsive">
+												<img id="aImage" th:src="'/files/'+${ac.animalPicture}" class="img-responsive">
 											</a>
 									    	<input type="file" name="animalPicture2" id="output">
 									    	<input type="hidden" name="animalPicture" th:value="${ac.animalPicture}">
@@ -330,8 +330,7 @@
 			$("form").validate({
 				 rules : {
 					//네임
-					 animalPicture2 		: {required : true}
-					,animalCenterNumber 	: {required : true, min : 0}
+					animalCenterNumber 		: {required : true}
 					,selectType 			: {required : true}
 					,animalTypeCode 		: {required : true}
 					,animalState 			: {required : true}
@@ -341,8 +340,7 @@
 					,animalGender	 		: {required : true}
 				}
 				,messages : {
-					animalPicture2 			: {required : '동물 사진을 선택하세요'}
-					,animalCenterNumber 	: {required : '동물 번호를 입력해주세요', min : '0보다 큰 수를 입력해주세요'}
+					animalCenterNumber 		: {required : '동물 번호를 입력해주세요', min : '0보다 큰 수를 입력해주세요'}
 					,selectType 			: '동물 축종을 선택해주세요'
 					,animalTypeCode 		: '동물 품종을 선택해주세요'
 					,animalState 			: '동물 상태를 입력해주세요'

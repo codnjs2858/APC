@@ -42,11 +42,12 @@ public class LoginInterceptor implements HandlerInterceptor{
 			
 				return false;
 			}
-			else if((sessionLevel.equals("level_code_04"))) {
-				response.sendRedirect("/member/blacklistMemberAlert");
-				
-				return false; 
-			}
+			/*
+			 * else if((sessionLevel.equals("level_code_04"))) {
+			 * response.sendRedirect("/member/blacklistMemberAlert");
+			 * 
+			 * return false; }
+			 */
 		}else if(uri.equals("/adoption/adoptionApply")) {
 			Adoptee adoptee = adopteeService.selectAdopteeById(sessionId);
 			if(adoptee == null) {
