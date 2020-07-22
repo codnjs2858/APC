@@ -101,6 +101,9 @@ public class MyPageController {
 		model.addAttribute("reportManager", reportManager);
 		model.addAttribute("review", review);
 		
+		model.addAttribute("noteList", noteService.selectNote(mId));
+		model.addAttribute("sendNoteList", noteService.selectSendNote(mId));
+		
 		return "/mypage/myPageAdmin";
 	}
 	
