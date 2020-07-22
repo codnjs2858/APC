@@ -31,20 +31,20 @@
                				</a>
                         </div>
                         <div class="content">
-                            <div class="text">MESSAGES</div>
+                            <div class="text">쪽지함</div>
                             <div class="number">[[${noteCnt}]]</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box hover-zoom-effect">
-                        <div class="icon bg-blue">
+                        <div class="icon bg-light-blue">
 		                	<a href="/animalcenter/animalcenterlist">
                             	<i class="material-icons">pets</i>
 		                	</a>
                         </div>
                         <div class="content">
-                            <div class="text">보호중인 유기동물 수</div>
+                            <div class="text">보호중인 유기동물</div>
                             <div class="number">[[${animalCnt}]]</div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
 	                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                        	<th:block th:if="${session.com.commute?.commuteStartTime} == null">
 		                    <div class="info-box hover-zoom-effect">
-		                        <div class="icon bg-light-blue">
+		                        <div class="icon bg-light-green">
 	                           		<button type="button" class="commuteBtn" id="startBtn2" th:data-start="'/staff/startWork?send_code='+${session.com.staffCode}"><i class="material-icons">access_alarm</i></button>
 	                        	</div>
 		                        <div class="content">
@@ -78,7 +78,7 @@
 	                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                        	<th:block th:if="${session.com.commute?.commuteEndTime} == null">
                      		<div class="info-box hover-zoom-effect">
-		                        <div class="icon bg-cyan">
+		                        <div class="icon bg-orange">
 									<button type="button" class="commuteBtn" id="endBtn2" th:data-end="'/staff/endWork?send_code='+${session.com.commute?.commuteCode}"><i class="material-icons">gps_fixed</i></button>
 		                        </div>
 		                        <div class="content">
