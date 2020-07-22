@@ -22,6 +22,7 @@ import com.cafe24.memory.domain.Review;
 import com.cafe24.memory.service.AdopteeService;
 import com.cafe24.memory.service.AnimalReportService;
 import com.cafe24.memory.service.MemberService;
+import com.cafe24.memory.service.NoteService;
 import com.cafe24.memory.service.ReviewService;
 
 @Controller
@@ -33,6 +34,9 @@ public class MyPageController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	NoteService noteService;
 	
 	@Autowired
 	AdopteeService adopteeService;
@@ -103,8 +107,8 @@ public class MyPageController {
 	@GetMapping("/myPage")
 	public String myPage(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		
 		String mId = (String) session.getAttribute("SID");
+		
 		logger.info("세션에 있는 아이디 {}", mId);
 		Member member = null;
 		Adoptee adoptee = null;
@@ -153,6 +157,9 @@ public class MyPageController {
 		model.addAttribute("adoptee", adopteeInfo);
 		model.addAttribute("reportManager", reportManager);
 		model.addAttribute("review", review);
+		
+		model.addAttribute("noteList", noteService.selectNote(mId));
+		model.addAttribute("sendNoteList", noteService.selectSendNote(mId));
 		
 		return "/mypage/myPage";
 	}
