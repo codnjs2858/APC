@@ -5,17 +5,14 @@ public class Member {
 	private String memberPw;
 	private String memberName;
 	private String memberPhone;
-	private String memberAddr;
+	private String memberAddr1;
+	private String memberAddr2;
+	private String memberAddr3;
+	private String memberAddr4;
 	private String memberEmail;
 	private String memberInDate;
 	private Level level;//levelCode연결
 	
-	public String getMemberName() {
-		return memberName;
-	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
 	public String getMemberId() {
 		return memberId;
 	}
@@ -28,17 +25,41 @@ public class Member {
 	public void setMemberPw(String memberPw) {
 		this.memberPw = memberPw;
 	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
 	public String getMemberPhone() {
 		return memberPhone;
 	}
 	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;
 	}
-	public String getMemberAddr() {
-		return memberAddr;
+	public String getMemberAddr1() {
+		return memberAddr1;
 	}
-	public void setMemberAddr(String memberAddr) {
-		this.memberAddr = memberAddr;
+	public void setMemberAddr1(String memberAddr1) {
+		this.memberAddr1 = memberAddr1;
+	}
+	public String getMemberAddr2() {
+		return memberAddr2;
+	}
+	public void setMemberAddr2(String memberAddr2) {
+		this.memberAddr2 = memberAddr2;
+	}
+	public String getMemberAddr3() {
+		return memberAddr3;
+	}
+	public void setMemberAddr3(String memberAddr3) {
+		this.memberAddr3 = memberAddr3;
+	}
+	public String getMemberAddr4() {
+		return memberAddr4;
+	}
+	public void setMemberAddr4(String memberAddr4) {
+		this.memberAddr4 = memberAddr4;
 	}
 	public String getMemberEmail() {
 		return memberEmail;
@@ -46,8 +67,6 @@ public class Member {
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
-	
-	
 	public String getMemberInDate() {
 		return memberInDate;
 	}
@@ -60,13 +79,14 @@ public class Member {
 	public void setLevel(Level level) {
 		this.level = level;
 	}
+	
 	@Override
+	
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberPw=" + memberPw + ", memberName=" + memberName
-				+ ", memberPhone=" + memberPhone + ", memberAddr=" + memberAddr + ", memberEmail=" + memberEmail
+				+ ", memberPhone=" + memberPhone + ", memberAddr1=" + memberAddr1 + ", memberAddr2=" + memberAddr2
+				+ ", memberAddr3=" + memberAddr3 + ", memberAddr4=" + memberAddr4 + ", memberEmail=" + memberEmail
 				+ ", memberInDate=" + memberInDate + ", level=" + level + "]";
 	}
-	
-	
 	
 }
