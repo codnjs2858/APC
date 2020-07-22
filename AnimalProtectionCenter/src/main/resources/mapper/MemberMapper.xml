@@ -4,7 +4,10 @@
 <mapper namespace="com.cafe24.memory.mapper.MemberMapper">
 	
 	<resultMap type="Member" id="getMemberMap">
-		<result property="memberAddr" column="member_addr"></result>
+		<result property="memberAddr1" column="member_addr1"></result>
+		<result property="memberAddr2" column="member_addr2"></result>
+		<result property="memberAddr3" column="member_addr3"></result>
+		<result property="memberAddr4" column="member_addr4"></result>
 		<result property="memberEmail" column="member_email"></result>
 		<result property="memberId" column="member_id"></result>
 		<result property="memberInDate" column="member_in_date"></result>
@@ -27,8 +30,8 @@
 	
 	<insert id="insertMember" parameterType="Member">
 			INSERT INTO tb_member
-	(member_id, member_pw, level_code, member_name, member_phone, member_addr, member_email, member_in_date)
-	VALUES (#{memberId}, #{memberPw}, 'level_code_03', #{memberName}, #{memberPhone}, #{memberAddr}, #{memberEmail}, NOW())
+	(member_id, member_pw, level_code, member_name, member_phone, member_addr1, member_addr2, member_addr3, member_addr4, member_email, member_in_date)
+	VALUES (#{memberId}, #{memberPw}, 'level_code_03', #{memberName}, #{memberPhone}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3}, #{memberAddr4}, #{memberEmail}, NOW())
 	</insert>
 	
 	<delete id="deleteMember" parameterType="Member">
@@ -45,7 +48,7 @@
 			member_pw=#{memberPw},
 			member_name=#{memberName},
 			member_phone=#{memberPhone},
-			member_addr=#{memberAddr},
+			member_addr2=#{memberAddr2},
 			member_email=#{memberEmail}
 		WHERE member_id=#{memberId}
 	</update>

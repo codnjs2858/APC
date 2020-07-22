@@ -97,7 +97,7 @@ public class MemberController {
 		System.out.println(member+"<-회원update");
 		int result=memberService.updateMember(member);
 		System.out.println(result+"<-회원update 결과값");
-		return "redirect:/member/getMemberList";
+		return "redirect:/index";
 	}
 	
 	@GetMapping("/memberDelete")
