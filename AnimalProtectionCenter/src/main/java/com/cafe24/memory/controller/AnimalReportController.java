@@ -174,6 +174,24 @@ public class AnimalReportController {
 		model.addAttribute("SearchAnimalDetail", SearchAni);
 		return "reportlist/SearchAnimalDetail";
 	}
+	
+	
+	@GetMapping("/lostReportView")
+	public String lostReportView(LostReportAnimal lostReportAnimal,Model model) {
+		List<LostReportAnimal> lostAniList=animalReportService.selectLostReportAnimal(lostReportAnimal);
+		System.out.println(1);
+		LostReportAnimal lostAni=lostAniList.get(0);
+		System.out.println(lostAni+"lostAni");
+		model.addAttribute("lostAniDetail", lostAni);
+		return "reportlist/lostAnimalDetail";
+	}
+	
+	@GetMapping("/lostReportCancel")
+	public String lostReportCancel(LostReportAnimal lostReportAnimal,Model model) {
+		
+		
+		return "/index";
+	}
 	/**
 	 * 신고 취소 버튼 클릭시, db에 오늘 날짜로 신고 취소 날짜 입력
 	 * @param searchReportAnimal
@@ -232,4 +250,6 @@ public class AnimalReportController {
 		animalReportService.updateReportManager(reportManager);
 		return "redirect:/reportlist/searchReportList";
 	}
+	
+	
 }

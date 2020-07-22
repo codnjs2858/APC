@@ -356,7 +356,7 @@
 	        	<img src="/images/user.png" width="48" height="60" alt="User" />
 	    	</div>
 			<div th:if="${session.SID}==null" class="info-container">
-				<a th:href="@{/login}" style="color: yellow;">로그인 - 경</a>
+				<a th:href="@{/member/login}" style="color: yellow;">로그인 - 경</a>
 				<a th:href="@{/addMember}" style="color: yellow;">회원가입 - 경</a>
 			</div>
 			<div th:if="${session.SID}!=null" class="info-container">
@@ -433,13 +433,10 @@
 		            </a>
 		            <ul class="ml-menu">
 		                <li>
-		                    <a href="#">#신고게시판</a>
-		                </li>
-		                <li>
-		                    <a th:href="@{/reportlist/searchReport}">유기,유실 신고 - 경</a>
+		                    <a th:href="@{/reportlist/searchReportList}">유기,유실 신고 게시판</a>
 		                </li>
 		                  <li>
-		                    <a href="/reportlist/lostreport">분실 신고 - 경</a>
+		                    <a href="/reportlist/lostReportList">분실 신고 게시판</a>
 		                </li>
 		                 <li>
 		                    <a href="#">#반환(찾음) 신고</a>

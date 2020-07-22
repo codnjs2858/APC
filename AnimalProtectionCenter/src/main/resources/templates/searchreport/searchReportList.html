@@ -43,6 +43,9 @@
 	                    	<a th:if="${session.SLEVEL}=='level_code_01' OR ${session.SLEVEL}=='level_code_02'" th:href="@{/reportlist/reportManager}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
 	                    	</a>
+	                    	<a th:unless="${session.SLEVEL}=='level_code_01' OR ${session.SLEVEL}=='level_code_02'" th:href="@{/reportlist/searchReport}">
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">유기동물 신고하기</button>
+	                    	</a>
 	                    	
 	                    </div>
 	                  
