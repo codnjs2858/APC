@@ -7,54 +7,149 @@
 	<title>관리자화면</title>
 </th:block> 
 <th:block layout:fragment="customCss">
- 
- </th:block>
+	<style>
+		::-webkit-scrollbar { display: none; }
+		.commuteBtn {
+			background: none;
+			border: none;
+		}
+	</style>
+</th:block>
 <th:block layout:fragment="customHeadScript">
  	
 </th:block> 
 	 
 <th:block layout:fragment="customContents">
  	<section class="content">
-		<div class="container-fluid">			
+		<div class="container-fluid">
+			<div class="row clearfix">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box hover-zoom-effect">
+                        <div class="icon bg-pink">
+               				<a href="/note/noteList">
+                           		<i class="material-icons">email</i>
+               				</a>
+                        </div>
+                        <div class="content">
+                            <div class="text">MESSAGES</div>
+                            <div class="number">[[${noteCnt}]]</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box hover-zoom-effect">
+                        <div class="icon bg-blue">
+		                	<a href="/animalcenter/animalcenterlist">
+                            	<i class="material-icons">pets</i>
+		                	</a>
+                        </div>
+                        <div class="content">
+                            <div class="text">보호중인 유기동물 수</div>
+                            <div class="number">[[${animalCnt}]]</div>
+                        </div>
+                    </div>
+                </div>
+				<th:block th:if="${session.com} != null">
+	                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                       	<th:block th:if="${session.com.commute?.commuteStartTime} == null">
+		                    <div class="info-box hover-zoom-effect">
+		                        <div class="icon bg-light-blue">
+	                           		<button type="button" class="commuteBtn" id="startBtn2" th:data-start="'/staff/startWork?send_code='+${session.com.staffCode}"><i class="material-icons">출근</i></button>
+	                        	</div>
+		                        <div class="content">
+		                            <div class="number">출근버튼</div>
+		                        </div>
+	                    	</div>
+                       	</th:block>
+                       	<th:block th:if="${session.com.commute?.commuteStartTime} != null">
+ 	                    	<div class="info-box">
+		                        <div class="icon bg-default">
+                           			<button type="button" class="commuteBtn" disabled><i class="material-icons">access_alarm</i></button>
+		                        </div>
+		                        <div class="content">
+		                            <div class="number">출근시간</div>
+		                            <th:block th:if="${session.com.commute?.commuteStartTime} != null">
+			                            <div class="text"><small>[[${session.com.commute?.commuteStartTime}]]</small></div>
+		                            </th:block>
+		                        </div>
+	                    	</div>
+                       	</th:block>
+	                </div>
+	                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                       	<th:block th:if="${session.com.commute?.commuteEndTime} == null">
+                     		<div class="info-box hover-zoom-effect">
+		                        <div class="icon bg-cyan">
+									<button type="button" class="commuteBtn" id="endBtn2" th:data-end="'/staff/endWork?send_code='+${session.com.commute?.commuteCode}"><i class="material-icons">gps_fixed</i></button>
+		                        </div>
+		                        <div class="content">
+		                            <div class="number">퇴근버튼</div>
+		                        </div>
+	                    	</div>
+                  		</th:block>
+                   		<th:block th:if="${session.com.commute?.commuteEndTime} != null">
+		                    <div class="info-box">
+		                        <div class="icon bg-default">
+									<button type="button" class="commuteBtn" disabled><i class="material-icons">gps_fixed</i></button>
+		                        </div>
+		                        <div class="content">
+		                            <div class="number">퇴근시간</div>
+		                            <th:block th:if="${session.com.commute?.commuteEndTime} != null">
+			                            <div class="text"><small>[[${session.com.commute?.commuteEndTime}]]</small></div>
+		                            </th:block>
+		                        </div>
+		                    </div>
+                       	</th:block>
+	                </div>
+	        	</th:block>
+            </div>
 			<div class="row">
-				<div class="col-xs-12 col-md-6">
-					<div class="card">
-						<div class="header">
-							<h2>출퇴근 관리</h2>
-						</div>
-						<div class="body" th:if="${session.com} != null">
-                       		<div class="align-center">
-	                           	<h4>출근시간 :
-	                           		<th:block th:if="${session.com.commute?.commuteStartTime} != null">[[${session.com.commute?.commuteStartTime}]]</th:block>
-	                           	</h4>
-	                           	<th:block th:if="${session.com.commute?.commuteStartTime} != null">
-                            		<button type="button" class="btn-block btn-lg" disabled>출근버튼</button>
-	                           	</th:block>
-	                           	<th:block th:if="${session.com.commute?.commuteStartTime} == null">
-                            		<button type="button" class="bg-red btn-block btn-lg waves-effect" id="startBtn" th:data-start="'/staff/startWork?send_code='+${session.com.staffCode}">출근버튼</button>
-	                           	</th:block>
-                       		</div>
-                       		<div class="align-center">
-	                          	<h4>퇴근시간 :
-	                          		<th:block th:if="${session.com.commute?.commuteEndTime} != null">[[${session.com.commute?.commuteEndTime}]]</th:block>
-	                          	</h4>
-	                          	<th:block th:if="${session.com.commute?.commuteEndTime} != null">
-									<button type="button" class="btn-block btn-lg" disabled>퇴근버튼</button>
-	                          	</th:block>
-	                          	<th:block th:if="${session.com.commute?.commuteEndTime} == null">
-									<button type="button" class="bg-amber btn-block btn-lg waves-effect" id="endBtn" th:data-end="'/staff/endWork?send_code='+${session.com.commute?.commuteCode}">퇴근버튼</button>
-	                          	</th:block>
-                       		</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-md-6">
+                <div class="col-xs-12 col-md-7">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                            	분양 가능한 동물
+                            </h2>
+                        </div>
+                        <div class="body" style="height:320px; overflow: auto;">
+                           	<div th:each="c : ${CARS}">
+								<div class="col-md-3 col-sm-6 col-xs-12">
+									<a th:href="@{/animalcenter/animalcenterpage(send_code=${c.animalCenter.animalInsertCode})}" class="thumbnail">
+										<img th:src="'/files/'+${c.animalCenter.animalPicture}" style="width:125px; height:125px;">
+									</a>
+									<table>
+										<tr>
+											<th>번호 | </th>
+											<th>[[${c.animalCenter.animalCenterNumber}]]</th>
+										</tr>
+										<tr>
+											<td>성별 | </td>
+											<td>[[${c.animalCenter.animalGender}]]</td>
+										</tr>
+										<tr>
+											<td>나이 | </td>
+											<td>[[${c.animalCenter.animalAge}]]</td>
+										</tr>
+										<tr>
+											<td>무게 | </td>
+											<td>[[${c.animalCenter.animalWeight}]]</td>
+										</tr>
+										<tr>
+											<td>특징 | </td>
+											<td>[[${c.animalCenter.animalCharacter}]]</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-xs-12 col-md-5">
 					<div class="card">
 						<div class="header">
 							<h2>보유중인 유기동물</h2>
 						</div>
-						<div class="body">
-							<canvas id="pie_chart" height="224" width="448" style="display: block; width: 448px; height: 224px;"></canvas>
+						<div class="body" style="height:320px">
+							<canvas id="pie_chart"></canvas>
 						</div>
 						
 						<div th:each="c : ${cnt}">
@@ -62,60 +157,53 @@
 						</div>
 					</div>
 				</div>
-			</div>
+            </div>
 			<div class="row">
-				<div class="card">
-					<div class="header">
-						<h2>분양가능한 동물</h2>
-					</div>
-					<div class="body">
-						<div class="table-responsive" style="overflow: hidden;">
-		                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
-		                        <thead>
-			                            <tr role="row">
-			                            	<th></th>
-			                            	<th><div class="align-center">동물번호</div></th>
-			                            	<th><div class="align-center">상태</div></th>
-			                            	<th><div class="align-center">등록날짜</div></th>
-			                            	<th><div class="align-center">분양날짜</div></th>
-			                            	<th><div class="align-center">담당자</div></th>
-			                            	<th><div class="align-center">보호공간</div></th>
-			                            	<th data-orderable="false"><div class="align-center">수정</div></th>
-			                            	<th data-orderable="false"><div class="align-center">삭제</div></th>
-			                            </tr>
-			                        </thead>
-		                        <tbody>
-				                        <tr th:each="CARS, i : ${CARS}" class="odd">
-				                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-			                              	<td><div class="align-center">[[${CARS.animalCenter.animalCenterNumber}]]
-			                              		<a th:href="@{/animalcenter/animalcenterpage(send_code=${CARS.animalCenter.animalInsertCode})}">(동물 상세보기)</a></div></td>
-			                               	<td><div class="align-center">[[${CARS.animalInformation}]]</div></td>
-			                               	<td><div class="align-center">[[${CARS.companionRegisterDate}]]</div></td>
-			                               	<td><div class="align-center">[[${CARS.cancleCompanionInDate}]]</div></td>
-			                               	<td><div class="align-center">[[${CARS.staff.staffName}]]</div></td>
-			                               	<td th:if="${proSpace[i.index].animalInsertCode} == null">
-			                            	<div class="align-center">
-				                            	<a th:href="@{/protection/animalProtection}">보호 공간 등록</a>
-			                            	</div>
-			                            	</td>
-				                            <td th:unless="${proSpace[i.index].animalInsertCode} == null">
-				                            	<div class="align-center">
-					                            	[[${proSpace[i.index].animalInsertCode}]]
-				                            	</div>
-			                            	</td>
-			                               	<td><div class="align-center">
-			                                	<a th:href="@{/companionanimalregister/companionAnimalRegisterUpdate(send_code=${CARS.animalCenter.animalInsertCode}, 
-			                                												companionAnimalRegisterCode=${CARS.companionAnimalRegisterCode})}" style="color: #9E9E9E">
-			                       				<i class="material-icons">update</i></a></div>
-			                      			</td>
-			                      			<td><div class="align-center">
-						                       	<a class="delete" th:data-myurl="'/companionanimalregister/companionAnimalRegisterDelete?companionAnimalRegisterCode=' + ${CARS.companionAnimalRegisterCode}" href="javascript:void(0)">
-						                       	<i class="material-icons">delete</i></a></div>
-				                      		</td>
-				                        </tr>
-			                    </tbody>
-		                    </table>
-		                </div>
+				<div class="col-md-12">
+					<div class="card">
+						<div class="header">
+							<h2>후기 관리 리스트</h2>
+						</div>
+						<div class="body">
+							<div class="table-responsive" style="overflow: hidden;">
+			                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
+			                        <thead>
+				                            <tr role="row">
+				                            	<th></th>
+				                            	<th><div class="align-center">회원 아이디</div></th>
+				                            	<th><div class="align-center">회원 이름</div></th>
+				                            	<th><div class="align-center">등록 횟수</div></th>
+				                            	<th><div class="align-center">누락 횟수</div></th>
+				                            	<th><div class="align-center">등록 날짜</div></th>
+				                            	<th><div class="align-center">후기관리 날짜</div></th>
+				                            	<th><div class="align-center">담당자</div></th>
+				                            	<th data-orderable="false"><div class="align-center">수정</div></th>
+				                            	<th data-orderable="false"><div class="align-center">삭제</div></th>
+				                            </tr>
+				                        </thead>
+			                        <tbody>
+					                        <tr th:each="RVL, i : ${RVL}" class="odd">
+					                        	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
+				                              	<td><div class="align-center">[[${RVL.member.memberId}]]</div></td>
+				                              	<td><div class="align-center">[[${RVL.member.memberName}]]</div></td>
+				                              	<td><div class="align-center">[[${RVL.reviewCount}]]</div></td>
+				                              	<td><div class="align-center">[[${RVL.reviewOmissionCount}]]</div></td>
+				                              	<td><div class="align-center">[[${RVL.reviewDate}]]</div></td>
+				                              	<td><div class="align-center">[[${RVL.reviewManagementPeriod}]]</div></td>
+				                              	<td><div class="align-center">[[${RVL.staff.staffName}]]</div></td>
+				                                <td><div class="align-center">
+				                                	<a th:href="@{/review/reviewUpdate(reviewCode=${RVL.reviewCode})}" style="color: #9E9E9E">
+				                       				<i class="material-icons">update</i></a></div>
+				                      			</td>
+				                      			<td><div class="align-center">
+							                       	<a class = "delete" th:data-myurl="'/review/reviewDelete?reviewCode=' + ${RVL.reviewCode}" href="javascript:void(0)">
+							                       	<i class="material-icons">delete</i></a></div>
+					                      		</td>
+					                        </tr>
+				                    </tbody>
+			                    </table>
+			                </div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -138,7 +226,7 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 	<script>
 		$(function(){
-			$('#startBtn').click(function(){
+			$('#startBtn2').click(function(){
 				console.log("!!!!!");
 				swal('출근 하시겠습니까?', {
 					title:'경고',
@@ -155,7 +243,7 @@
 				});
 			});
 			
-			$('#endBtn').click(function(){
+			$('#endBtn2').click(function(){
 				swal('퇴근 하시겠습니까?', {
 					title:'경고',
 					icon:'info',
@@ -182,6 +270,32 @@
     			"aaSorting": []
     		});
 			
+			//삭제 유효성
+    		$('.delete').click(function(){
+    			swal({
+					title: '경고',
+					text: '삭제하시겠습니까?', 
+					icon: 'error',
+					buttons: true,
+				})
+    			.then((Delete) => {
+    				var val = $(this).data('myurl');
+    				console.log(val);
+    				if(Delete){
+    					swal({
+    							title: '확인',
+    							text: "정말로 삭제하시겠습니까?", 
+    					      	icon: "warning",
+    					      	buttons: true,
+    					    })
+    					    .then((value) => {
+    					    	if(value) location.href = val;
+    					    });
+    				}else{
+    					console.log('취소');
+    				}
+    			});
+    		});
 		});
 		
 		var cnt = document.getElementsByClassName('aniType');
