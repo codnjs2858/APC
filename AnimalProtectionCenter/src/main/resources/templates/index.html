@@ -3,6 +3,17 @@
   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
   layout:decorator="@{layout/default}">
 <th:block layout:fragment="customCss">
+	<style>
+		.linkBtn {
+			padding: 20px;
+			margin-bottom: 30px
+		}
+		::-webkit-scrollbar { display: none; }
+		.boardTr :hover{
+			cursor: pointer;
+			
+		}
+	</style>
 </th:block>
 
 <th:block layout:fragment="customTitle">
@@ -15,52 +26,83 @@
  	<section class="content">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-xs-12 col-md-12 col-lg-9">
 					<div class="card">
 						<div class="body">
 							<img src="/images/indexImage.jpg" style="width: 100%; max-height:400px; display:block; margin-right: auto; margin-left: auto;">
 						</div>
 					</div>
 				</div>
+				<div class="col-xs-6 col-md-4 col-lg-3">
+					<button type="button" class="btn bg-orange btn-block btn-lg linkBtn" data-url="/companionanimalregister/companionAnimalListPage">
+						<div class="demo-google-material-icon"> 
+							<span class="icon-name font-20">분양 동물 보기</span> 
+							<i class="material-icons">search</i> 
+						</div>
+					</button>
+					<button type="button" class="btn bg-amber btn-block btn-lg linkBtn" data-url="/adoption/adoptionReview">
+						<div class="demo-google-material-icon"> 
+							<span class="icon-name font-20">입양 심사 받기</span> 
+							<i class="material-icons">check</i> 
+						</div>
+					</button>
+					<div class="card">
+						<div class="header bg-light-blue">
+							<h2>보유중인 유기동물</h2>
+						</div>
+						<div class="body">
+							<canvas id="pie_chart" height="224" width="448" style="display: block; width: 448px; height: 224px;"></canvas>
+						</div>
+						<div th:each="c : ${cnt}">
+							<input type="hidden" class="aniType" th:value="${c.cnt}">
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12 col-md-6">
+				<div class="col-xs-12 col-md-12">
 					<div class="card">
-						<div class="header">
+						<div class="header bg-red">
 							<h2>공고게시판</h2>
 						</div>
 						<div class="body">
-							<table id="dataTable3" class="table table-bordered table-striped table-hover">
+							<table class="table">
 								<thead>
 							        <tr>
-							            <th data-orderable="false"></th>
+							        	<th></th>
 							            <th><div class="align-center">제목</div></th>
 							            <th><div class="align-center">작성자</div></th>
 							            <th><div class="align-center">작성시간</div></th>
 							        </tr>
 							    </thead>
 							    <tbody>
-							        <tr th:each="s, i : ${selectNoticeList}">
-							            <th scope="row">[[${i.count}]]</th>
-							            <td><div class="align-center">[[${s.board_title}]]</div></td>
-							            <td><div class="align-center">[[${s.member_id}]]</div></td>
-							            <td><div class="align-center">[[${s.board_date}]]</div></td>
+							        <tr th:each="s, i : ${selectNoticeList}" class="boardTr" th:data-code="${s.board_code}">
+							        	<th:block th:if="${i.count} <= 5">
+							        		<td><div class="align-center">[[${i.count}]]</div></td>
+								            <td><div class="align-center">[[${s.board_title}]]</div></td>
+								            <td><div class="align-center">[[${s.member_id}]]</div></td>
+								            <td><div class="align-center">[[${s.board_date}]]</div></td>
+							        	</th:block>
 							        </tr>
 							    </tbody>
 							</table>
+							<div class="col-md-offset-11">
+								<a href="/board/notice">
+									<span class="label bg-red">게시판 더 보기</span>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-xs-12 col-md-6">
 					<div class="card">
-						<div class="header">
-							<h2>분실신고</h2>
+						<div class="header bg-amber">
+							<h2>동물을 잃어버렸어요 !</h2>
 						</div>
 						<div class="body">
-							<table id="dataTable2" class="table table-bordered table-striped table-hover">
+							<table class="table">
 								<thead>
 							        <tr>
-							            <th data-orderable="false"></th>
 			                            <th><div class="align-center">동물 종류</div></th>
 			                            <th><div class="align-center">이름</div></th>
 			                            <th><div class="align-center">특징</div></th>
@@ -70,44 +112,28 @@
 							    </thead>
 							    <tbody>
 							        <tr th:each="l, i : ${lostReportAniamlList}">
-							            <th scope="row">[[${i.count}]]</th>
-							            <td><div class="align-center">[[${l.animalType.animalType}]]</div></td>
-							            <td><div class="align-center">[[${l.animalName}]]</div></td>
-							            <td><div class="align-center">[[${l.animaFeature}]]</div></td>
-							            <td><div class="align-center">[[${l.animalGender}]]</div></td>
-							            <td><div class="align-center">[[${l.lostReportLocation}]]</div></td>
+							        	<th:block th:if="${i.count} <= 5">
+								            <td><div class="align-center">[[${l.animalType.animalType}]]</div></td>
+								            <td><div class="align-center">[[${l.animalName}]]</div></td>
+								            <td><div class="align-center">[[${l.animaFeature}]]</div></td>
+								            <td><div class="align-center">[[${l.animalGender}]]</div></td>
+								            <td><div class="align-center">[[${l.lostReportLocation}]]</div></td>
+							        	</th:block>
 							        </tr>
 							    </tbody>
 							</table>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
 				<div class="col-xs-12 col-md-6">
 					<div class="card">
-						<div class="header">
-							<h2>보유중인 유기동물</h2>
+						<div class="header bg-amber">
+							<h2>동물을 주웠어요!</h2>
 						</div>
 						<div class="body">
-							<canvas id="pie_chart" height="224" width="448" style="display: block; width: 448px; height: 224px;"></canvas>
-						</div>
-						
-						<div th:each="c : ${cnt}">
-							<input type="hidden" class="aniType" th:value="${c.cnt}">
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-md-6">
-					<div class="card">
-						<div class="header">
-							<h2>유기신고</h2>
-						</div>
-						<div class="body">
-							<table id="dataTable" class="dataTable table table-bordered table-striped table-hover">
+							<table class="table">
 	                        <thead>
 	                            <tr>
-		                            <th data-orderable="false"></th>
 		                            <th><div class="align-center">동물 종류</div></th>
 		                            <th><div class="align-center">발견장소</div></th>
 		                            <th><div class="align-center">품종</div></th>
@@ -117,12 +143,13 @@
 	                        </thead>
 	                        <tbody>
 	                            <tr th:each=" srl, i : ${searchReportAnimalList}">
-	                             	<td><div class="align-center">[[${i.size - i.index}]]</div></td>
-	                             	<td><div class="align-center">[[${srl.animalType.animalType}]]</div></td>
-	                             	<td><div class="align-center">[[${srl.animalLocation}]]</div></td>
-	                             	<td><div class="align-center">[[${srl.animalType.animalTypeSub}]]</div></td>
-	                             	<td><div class="align-center">[[${srl.animalGender}]]</div></td>
-	                             	<td><div class="align-center">[[${srl.animalDetail}]]</div></td>
+	                            	<th:block th:if="${i.count} <= 5">
+		                             	<td><div class="align-center">[[${srl.animalType.animalType}]]</div></td>
+		                             	<td><div class="align-center">[[${srl.animalLocation}]]</div></td>
+		                             	<td><div class="align-center">[[${srl.animalType.animalTypeSub}]]</div></td>
+		                             	<td><div class="align-center">[[${srl.animalGender}]]</div></td>
+		                             	<td><div class="align-center">[[${srl.animalDetail}]]</div></td>
+	                            	</th:block>
 	                            </tr>
 	                        </tbody>
 	                    </table>
@@ -136,45 +163,18 @@
 
 <th:block layout:fragment="customFooterScript">
 	<script src="/plugins/chartjs/Chart.bundle.js"></script>	
-	<!-- Jquery DataTable Plugin Js -->
-    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
-    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 	<script>
 		$(function(){
 			new Chart(document.getElementById('pie_chart').getContext('2d'), getChartJs('pie'));
 
-			$('#dataTable').dataTable({
-				paging: false,
-				searching: false,
-				select:false,
-				ordering: false,
-				scrollY: 250,
-    			"aaSorting": []
-    		});
-			
-			$('#dataTable2').dataTable({
-				paging: false,
-				searching: false,
-				select:false,
-				ordering: false,
-				scrollY: 250,
-    			"aaSorting": []
+			$('.linkBtn').click(function(){
+				var url = $(this).data('url');
+				location.href = url;
 			});
 			
-			$('#dataTable3').dataTable({
-				paging: false,
-				searching: false,
-				select:false,
-				ordering: false,
-				scrollY: 250,
-    			"aaSorting": []
+			$('.boardTr').click(function(){
+				var code = $(this).data('code');
+				location.href = '/board/Posts?board_code='+code;
 			});
 		});
 		
