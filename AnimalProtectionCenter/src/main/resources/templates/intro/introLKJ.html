@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customCss">
+	<style>
+		.form-group .form-line:after{
+			border-bottom: none;
+		}
+		::-webkit-scrollbar { display: none; }
+	</style>
+</th:block>
+
+<th:block layout:fragment="customTitle">
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customContents">
+ 	<section class="content">
+		<div class="card">
+			<div class="header">
+				<h2>팀 개인별 소개</h2>
+			</div>
+			<div class="header">
+				<div class="row">
+					<div class="col-md-2">
+						<a href="javascript:void(0);" class="thumbnail">
+							<img src="/images/lkj.jpg">
+                        </a>
+					</div>
+					<div class="col-md-3">
+						<div class="m-b-25">
+							<h2 class="font-bold col-blue-grey">PROFILE</h2>
+						</div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">person</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="이경진(kyungjin Lee)" readonly="readonly">
+			                        <label class="form-label">성명</label>
+			                    </div>
+							</div>
+		                </div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">cake</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="1988.09.04" readonly="readonly">
+			                        <label class="form-label">생년월일</label>
+			                    </div>
+							</div>
+						</div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">location_on</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="전라북도 전주시" readonly="readonly">
+			                        <label class="form-label">주소</label>
+			                    </div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="m-b-25">
+							<h2 class="font-bold col-blue-grey">CONTACTS</h2>
+						</div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">forum</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="https://blog.naver.com/kyungjin0904" readonly="readonly">
+			                        <label class="form-label">블로그</label>
+			                    </div>
+							</div>
+		                </div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">email</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="kyungjin0904@naver.com" readonly="readonly">
+			                        <label class="form-label">Email</label>
+			                    </div>
+							</div>
+						</div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">phone</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="010-2486-7615" readonly="readonly">
+			                        <label class="form-label">Phone</label>
+			                    </div>
+			            	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="body">
+				<p class="lead col-blue-grey">담당 작업</p>
+				<div class="row clearfix">
+					<div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
+		                <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+		                    <div class="panel panel-default">
+		                        <div class="panel-heading" role="tab" id="headingOne_1">
+		                            <h4 class="panel-title">
+		                                <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_1" aria-expanded="false" aria-controls="collapseOne_1" class="collapsed">
+					                    	<i class="material-icons">keyboard_arrow_down</i>
+					                    	신고관리
+		                                </a>
+		                            </h4>
+		                        </div>
+		                        <div id="collapseOne_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_1" aria-expanded="false" style="height: 0px;">
+		                            <div class="panel-body">
+		                            	<p class="font-bold">유기동물 보호 센터 신고관리</p>
+                               			<p>- 센터에 신고된 유기유실신고를 관리할수있습니다.</p>
+                               			<p>- 센터에 신고된 분실신고를 관리할수있습니다.</p>
+                               			<p>- 유기유실신고와 분실신고를 종합관리 할수있습니다.</p>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="panel panel-default">
+		                        <div class="panel-heading" role="tab" id="headingTwo_1">
+		                            <h4 class="panel-title">
+		                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseTwo_1" aria-expanded="false" aria-controls="collapseTwo_1">
+	                                   		<i class="material-icons">keyboard_arrow_down</i>
+	                                   		회원관리
+		                                </a>
+		                            </h4>
+		                        </div>
+		                        <div id="collapseTwo_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_1" aria-expanded="false">
+		                            <div class="panel-body">
+		                               	<p class="font-bold">회원 등록,수정,삭제</p>
+		                               	<p>- 회원을등록,수정,삭제 할 수 있습니다.</p>
+		                               	<p>- 회원을 리스트를 확인할 수 있습니다</p>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="panel panel-default">
+		                        <div class="panel-heading" role="tab" id="headingThree_1">
+		                            <h4 class="panel-title">
+		                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseThree_1" aria-expanded="false" aria-controls="collapseThree_1">
+		                                	<i class="material-icons">keyboard_arrow_down</i>
+		                                   	레이아웃 분리
+		                                </a>
+		                            </h4>
+		                        </div>
+		                        <div id="collapseThree_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_1" aria-expanded="false">
+		                            <div class="panel-body">
+										<p class="font-bold">회원,관리자 헤드,헤더,풋터,레프트메뉴분리</p>
+										<p>-회원,관리자 default페이지구현</p>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="panel panel-default">
+		                        <div class="panel-heading" role="tab" id="headingfour_1">
+		                            <h4 class="panel-title">
+		                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapsefour_1" aria-expanded="false" aria-controls="collapseThree_1">
+		                                	<i class="material-icons">keyboard_arrow_down</i>
+		                                   	 로그인
+		                                </a>
+		                            </h4>
+		                        </div>
+		                        <div id="collapsefour_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfour_1" aria-expanded="false">
+		                            <div class="panel-body">
+		                               	<p class="font-bold">로그인 화면, 처리</p>
+		                               	<p>- 로그인을 할 수 있습니다.</p>
+		                               	<p>- 권한 별로 로그인 할 수 있습니다.</p>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="panel panel-default">
+		                        <div class="panel-heading" role="tab" id="headingfive_1">
+		                            <h4 class="panel-title">
+		                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapsefive_1" aria-expanded="false" aria-controls="collapseThree_1">
+		                                	<i class="material-icons">keyboard_arrow_down</i>
+	                                   		메인 화면
+		                                </a>
+		                            </h4>
+		                        </div>
+		                        <div id="collapsefive_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfive_1" aria-expanded="false">
+		                            <div class="panel-body">
+		                               	<p class="font-bold">회원 메인화면, 관리자 메인화면</p>
+		                               	<p>- 회원 메인화면에서 분양가능한 유기동물, 보호중인 유기동물 수, 입양심사, 공고게시판, 유기, 분실 게시판을 확인 할 수 있습니다.</p>
+		                               	<p>- 관리자 메인화면에서 쪽지, 보호중인 유기동물 수, 분양가능한 동물, 후기관리 리스트를 확인할 수 있고 근태관리를 할 수 있습니다.</p>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		    	</div>
+			</div>
+			<div class="body">
+           		<div>
+					<form action="/admin" method="post">
+		            	<button class="btn btn-block bg-red waves-effect" type="submit">유기동물보호센터 가기</button>
+		            </form>
+           		</div>
+           		
+           	</div>
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>
