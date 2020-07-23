@@ -2,30 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	  <!-- Footer1 -->
             <div class="legal" id="footer" th:fragment="footerFragment">
-                <div class="copyright">
-                    &copy; 2020 <a href="javascript:void(0);">AnimalProtectionCenter</a>.
-                </div>
-                <div class="version">
-                    <b>Version: </b> 1.0.2
-                    <ul>
-                    <li th:if="${session.SLEVEL} eq level_code_01 or ${session.SLEVEL} eq level_code_02" class="pull-right"><a th:href="@{/admin}">관리자</a></li>
-                    </ul>
-                </div>
+            	<th:block th:unless="${session.SLEVEL} eq level_code_01 or ${session.SLEVEL} eq level_code_02">
+	                <div class="copyright">
+	                    &copy; 2020 <a href="javascript:void(0);">AnimalProtectionCenter</a>.
+	                </div>
+	                <div class="version">
+	                    <b>Version: </b> 1.0.2
+	                    <ul>
+	                    </ul>
+	                </div>
+            	</th:block>
+            	<th:block th:if="${session.SLEVEL} eq level_code_01 or ${session.SLEVEL} eq level_code_02">
+	                <div class="version">
+	                	<a th:href="@{/admin}">
+	                		<button type="button" class="btn bg-amber btn-block btn-lg waves-effect">관리자 페이지로 가기</button>
+	                	</a>
+	                </div>
+            	</th:block>
             </div>
             <!-- #Footer -->
             
      
 	  <!-- Footer2 -->
             <div class="legal" id="footer" th:fragment="footer2Fragment">
-                <div class="copyright">
-                    &copy; 2020 <a href="javascript:void(0);">AnimalProtectionCenter</a>.
-                </div>
-                <div class="version">
-                    <b>Version: </b> 1.0.2
-                    <ul>
-                    <li class="pull-right"><a th:href="@{/}">회원</a></li>
-                    </ul>
-             	 </div>
+            	<th:block th:unless="${session.SLEVEL} eq level_code_01 or ${session.SLEVEL} eq level_code_02">
+	                <div class="copyright">
+	                    &copy; 2020 <a href="javascript:void(0);">AnimalProtectionCenter</a>.
+	                </div>
+	                <div class="version">
+	                    <b>Version: </b> 1.0.2
+	                    <ul>
+	                    </ul>
+	                </div>
+            	</th:block>
+            	<th:block th:if="${session.SLEVEL} eq level_code_01 or ${session.SLEVEL} eq level_code_02">
+	                <div class="version">
+	                	<a th:href="@{/index}">
+	                		<button type="button" class="btn bg-red btn-block btn-lg waves-effect">회원 페이지로 가기</button>
+	                	</a>
+	                </div>
+            	</th:block>
             </div>
             <!-- #Footer --> 
             
