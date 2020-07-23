@@ -64,11 +64,11 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>발견신고 수정</h2>
+                            <h2>유실신고 상세보기</h2>
                         </div>
                         <div class="body">
-                            <form id="form_validation" action="/reportlist/updateSearchlist" enctype="multipart/form-data" method="POST">
-                             <input type="hidden" class="form-control" name="searchReportCode" readonly="readonly" th:value="${SearchAnimalDetail.searchReportCode}">
+                            <form id="form_validation" action="/reportlist/updateLostlist" enctype="multipart/form-data" method="POST">
+                             <input type="hidden" class="form-control" name="lostReportCode" readonly="readonly" th:value="${lostAniDetail.lostReportCode}">
                            
                                 <div class="row clearfix">
                                <div class="col-sm-4">
@@ -83,7 +83,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                         <label>신고 취소 날짜
-                                            <input id="deldate" type="text" name="searchReportOutDate"class="form-control" th:value="${SearchAnimalDetail?.searchReportOutDate}">
+                                            <input id="deldate" readonly="readonly" type="text" name="lostReportOutDate"class="form-control" th:value="${lostAniDetail?.lostReportOutDate}">
                                         </div>
                                         </label>
                                         
@@ -93,7 +93,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                         <label>발견한 날짜
-                                            <input id="finddate" type="date" name="searchReportInDate"class="form-control" th:value="${SearchAnimalDetail.searchReportInDate}">
+                                            <input id="finddate" readonly="readonly"  type="date" name="lostReportInDate"class="form-control" th:value="${lostAniDetail.lostReportInDate}">
                                         </div>
                                         </label>
                                         
@@ -101,10 +101,24 @@
                                 </div>
                               
                           </div>
+                         		 <div class="form-group">
+                                    <div class="form-line">
+                                    	<label>신고코드
+                                        <input id="findlocation" readonly="readonly" type="text" class="form-control" name="lostReportLocation" th:value="${lostAniDetail.lostReportCode}" >
+                                        </label>
+                                    </div>
+                                </div>
                                  <div class="form-group">
                                     <div class="form-line">
                                     	<label>발견장소
-                                        <input id="findlocation" type="text" class="form-control" name="animalLocation" th:value="${SearchAnimalDetail.animalLocation}" >
+                                        <input id="findlocation" readonly="readonly" type="text" class="form-control" name="lostReportLocation" th:value="${lostAniDetail.lostReportLocation}" >
+                                        </label>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <div class="form-line">
+                                    	<label>동물이름
+                                        <input id="findAnimalName" readonly="readonly" type="text" class="form-control" name="animalName" th:value="${lostAniDetail.animalName}" >
                                         </label>
                                     </div>
                                 </div>
@@ -113,19 +127,18 @@
                            
                                 <div class="form-group">
                                   <div id="genderradio" class="font-bold col-teal">성별</div>
-                                    <input type="radio" name="animalGender" id="male" value="수컷" class="with-gap">
-                                    <label for="male">수컷</label>
-
-                                    <input type="radio" name="animalGender" id="female" value="암컷" class="with-gap">
-                                    <label for="female" class="m-l-20">암컷</label>
-                                    
-                                    <input type="radio" name="animalGender" id="middle" value="중성화" class="with-gap">
-                                    <label for="middle" class="m-l-20">중성화</label>
+                                    <input th:if="${lostAniDetail.animalGender}=='숫컷'" checked="checked" readonly="readonly" type="radio" name="animalGender" id="male" value="수컷" class="with-gap">
+                                    		<label for="male">수컷</label>
+										<input th:if="${lostAniDetail.animalGender}=='암컷'" checked="checked"  type="radio" name="animalGender" readonly="readonly" id="female" value="암컷" class="with-gap" >
+                                    		<label for="female" class="m-l-20">암컷</label>
+                                   
+                                    	<input th:if="${lostAniDetail.animalGender}=='중성화'"  checked="checked" type="radio" name="animalGender" readonly="readonly" id="middle" value="중성화" class="with-gap">
+                                    		<label for="middle" class="m-l-20">중성화</label>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                    		 <label>발견정황에 대해 간단히 서술해주세요
-                                        <textarea id="detail" name="animalDetail" th:text="${SearchAnimalDetail.animalDetail}"  cols="30" rows="5" class="form-control no-resize"></textarea>
+                                        <textarea id="detail" readonly="readonly" name="animaFeature" th:text="${lostAniDetail.animaFeature}"  cols="30" rows="5" class="form-control no-resize"></textarea>
                                         </label>
                                     </div>
                                 </div>
@@ -136,21 +149,16 @@
                                     <p>
                                         <b>동물종류</b>
                                     </p>
-                                    <select id="animalType" class="form-control show-tick" >
-                                        <option value="">-축종선택-</option>
-                                        <option value="강아지" th:selected="(${SearchAnimalDetail.animalType?.animalType} == '강아지')">강아지</option>
-                                        <option value="고양이" th:selected="(${SearchAnimalDetail.animalType?.animalType} == '고양이')">고양이</option>
-                                        <option value="기타" th:selected="(${SearchAnimalDetail.animalType?.animalType} == '기타')">기타</option>
-                                    </select>
+     									 <input type="text" readonly="readonly" th:value="${lostAniDetail.animalType.animalType}">
+
 
                                 </div>
                                 <div class="col-md-3">
 	                                 <p>
 	                                 	<b>동물종류</b>
 	                                 </p>
-	                                <select id="subType" name="animalTypeCode">
-                              			<option value="">==축종을 선택해주세요==</option>
-	                                </select>
+		                                <input type="text" readonly="readonly" th:value="${lostAniDetail.animalType.animalTypeSub}">
+
                                 </div>
                                
                                </div> 
@@ -164,17 +172,21 @@
 										<b>동물 사진</b>
 										<div class="m-t-10">
 											<a href="javascript:void(0);" class="thumbnail">
-												<img id="aImage" th:src="'/files/'+${SearchAnimalDetail.animalPicture}" class="img-responsive">
+												<img id="aImage" th:src="'/files/'+${lostAniDetail.lostAnimalPicture}" class="img-responsive">
 											</a>
 									    	<input type="file" name="animalPicture2" id="output">
-									    	<input type="hidden" name="animalPicture" th:value="${SearchAnimalDetail.animalPicture}">
+									    	<input type="hidden" name="animalPicture" th:value="${lostAniDetail.lostAnimalPicture}">
 										</div>
 									</div>
 				           		</div>
                             </div>
                         </div>
-                                <button class="btn btn-primary waves-effect" type="submit" id="submit">수정</button>
-<!--                                 <a class="btn btn-primary waves-effect" data-toggle="modal" data-color="red" th:data-data="${session.SID}" data-title="정말 신고 취소하시겠습니까?" href="#modalTarget" id="cancel">신고 취소</a> -->
+                                <div class="align-center" th:if="${LostReportAnimal?.lostReportOutDate==null}">
+				            		<a class="delete" th:href="'/reportlist/lostReportCancel?lostReportCode=' + ${lostAniDetail.lostReportCode}" >
+				            			<button class="btn btn-primary waves-effect" type="button" id="cancel">분실신고취소</button>
+				            		</a>							            	
+							 	</div>
+							 	
                             </form>
                             </br>
                       
@@ -216,6 +228,8 @@
  <th:block layout:fragment="customFooterScript">
 	<script>
 	$(function(){
+	
+		
 			//이미지 미리보기
 			function readURL(input) {
 		        if (input.files && input.files[0]) {

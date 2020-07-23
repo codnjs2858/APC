@@ -79,8 +79,11 @@ public class AnimalReportService {
 	 */
 
 	public int deleteReportManager(ReportManger reportManger) {
-	  
-		return animalReportMapper.deleteReportManger(reportManger); 
+		if(reportManger.getSearchReport()!=null) {
+		return animalReportMapper.deletesearchReportManger(reportManger); 
+	
+		}
+		return animalReportMapper.deletelostReportManger(reportManger); 
 	}
 	/**
 	 * 유기신고에서 삭제
@@ -109,12 +112,24 @@ public class AnimalReportService {
 	public int searchReportCancel(SearchReportAnimal searchReportAnimal) {
 		return animalReportMapper.searchReportCancel(searchReportAnimal);
 	}
+	
+	public int lostReportCancel(LostReportAnimal lostReportAnimal) {
+		return animalReportMapper.lostReportCancel(lostReportAnimal);
+	}
+	
+	
 	/**
 	 * searchReport신고 update
 	 * @param searchReportAnimal
 	 * @return
 	 */
+	
+	public int updateLostReportAnimal(LostReportAnimal lostReportAnimal) {
+		
+		return animalReportMapper.updateLostReportAnimal(lostReportAnimal);
+	}
 	public int updateSearchReport(SearchReportAnimal searchReportAnimal) {
+		System.out.println(searchReportAnimal+"<-searchReportAnimal service");
 		return animalReportMapper.updateSearchReport(searchReportAnimal);
 	}
 	public int updateReportManager(ReportManger reportManager) {

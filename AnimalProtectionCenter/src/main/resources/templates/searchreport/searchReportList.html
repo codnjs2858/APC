@@ -55,6 +55,7 @@
 	                        <thead>
 	                           	<tr>
 						 			<th>번호</th>
+						 			<th>신고코드</th>
 						 			<th>신고취소여부</th>
 						 			<th>등록인</th>
 						 			<th>내용</th>
@@ -71,6 +72,7 @@
 	                            <tr th:each="m,i:${searchReportList}" id="searchinfo" th:data-code="${m.searchReportCode}">
 						 			
 						 			<td>[[${i.count}]]</td>
+						 			<td>[[${m.searchReportCode}]]</td>
 						 			<td th:if=${m.searchReportOutDate==null}>접수</td>
 						 			<td th:unless=${m.searchReportOutDate==null}>신고취소</td>
 						 			<td>[[${m.member.memberId}]]</td>
@@ -82,17 +84,23 @@
 		                            	<a th:href="@{/reportlist/searchReportView(searchReportCode=${m.searchReportCode})}">
 	                       				<i class="material-icons"></i>상세보기</a></div>
 	                      			</td>
-	                      			 <td><div class="align-center">
+	                      			 
+	                      			 <td th:if=${m.searchReportOutDate==null}><div class="align-center">
 		                            	<a th:href="@{/reportlist/updateforgetSearchlist(searchReportCode=${m.searchReportCode})}">
 	                       				<i class="material-icons">update</i></a></div>
 	                      			</td>
+	                      			 <td th:unless=${m.searchReportOutDate==null}><div class="align-center">
+		                            		<button type="button" class="update" id="update">
+		                      					<i class="material-icons">update</i>
+		                      				</button>
+	                      			</td>
 	                      			
 			 						<td>
-	                      				<div class="align-center">
+	                      				<div class="align-center" th:if=${m.member.memberId}==${session.SID}>
 		                      				<button type="button" class="delete" th:data-myurl="@{/reportlist/deletelist(searchReportCode=${m.searchReportCode})}" >
 		                      					<i class="material-icons">delete</i>
 		                      				</button>
-	                      				</div>	
+	                      				</div>
 	                      			</td> 
 	                      			
 	                      			
@@ -124,6 +132,25 @@
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
     <script>
     	$(function(){
+    		
+    		$('.update').click(function(){
+    			swal({
+					title: '읽기만 가능한 게시글입니다',
+					text: '신고접수가 취소로 완료되어 읽기만 가능합니다 ', 
+					icon: 'error',
+					
+				})
+    		
+    		})
+    		$('.delete2').click(function(){
+    			swal({
+					title: '삭제불가능합니다',
+					text: '본인이 작성한 글만 삭제 가능합니다', 
+					icon: 'error',
+					
+				})
+    		
+    		})
 	    	//데이터 테이블
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
