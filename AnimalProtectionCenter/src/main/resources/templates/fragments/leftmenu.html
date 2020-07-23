@@ -351,54 +351,36 @@
             
 	<!--회원 화면 Left Sidebar -->
 	<aside id="leftsidebar" class="sidebar"  th:fragment="leftmenuFragment">
+		<!-- User Info -->
+		<div class="user-info">
+	    	<div class="image">
+	        	<img src="/images/user.png" width="48" height="60" alt="User" />
+	    	</div>
+			<div th:if="${session.SID}==null" class="info-container">
+				<a th:href="@{/member/login}" style="color: yellow;">로그인 - 경</a>
+				<a th:href="@{/addMember}" style="color: yellow;">회원가입 - 경</a>
+			</div>
+			<div th:if="${session.SID}!=null" class="info-container">
+			    <div class="name">[[${session.SID}]] [[${session.SNAME}]]</div>
+			    <div class="btn-group user-helper-dropdown">
+			        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+			        <ul class="dropdown-menu pull-right">
+			            <li><a href="/my/myPage"><i class="material-icons">person</i>내정보 - 충</a></li>
+			            <li role="seperator" class="divider"></li>
+			            <li><a href="javascript:void(0);"><i class="material-icons">group</i>#작성글보기</a></li>
+			            <li><a th:href="@{/member/logout}"><i class="material-icons">input</i>로그아웃 - 경</a></li>
+			        </ul>
+			    </div>
+			</div>
+		</div>
+		<!-- User Info end -->
 		<!-- 회원 Menu -->
 		<div class="menu">
 		    <ul class="list">
-		    	<th:block th:if="${session.SID}==null">
-		        	<div class="user-info" style="height:90px;">
-		        		<div>
-	        				<div style="float: left; width:49px; height:48px;">
-			        			<i class="material-icons" style="color: #fff; font-size: 40px;">pets</i>
-        					</div>
-        					<h4 style="color: #fff; position: relative;">로그인 해주세요</h4>
-        					<span style="color: #fff;">초간단 무료 회원가입</span>
-		        		</div>
-		        	</div>
-			        <li class="header" style="padding: 0px;">
-		        		<div class="row" style="margin: 0px -15px;">
-		        			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0px">
-	                               <a th:href="@{/login}" style="padding:0px"><button type="button" class="btn btn-block waves-effect">로그인</button></a>
-	                           </div>
-		        			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0px">
-                               <a th:href="@{/member/addMember}" style="padding:0px"><button type="button" class="btn btn-block waves-effect">회원가입</button></a>
-                           </div>
-		        		</div>
-		        	</li>
-		    	</th:block>
-		    	<th:block th:if="${session.SID}!=null">
-		    		<div class="user-info" style="height:90px;">
-		    			<div>
-	        				<div class="image" style="float: left">
-			        			<img src="/images/user.png" width="48" height="48" alt="User" />
-	        				</div>
-	        				<h4 style="color: #fff;"> [[${session.SNAME}]]님 환영합니다</h4>
-	        				<span style="color: #fff;">[[${session.SID}]]</span>
-		    			</div>
-		        	</div>
-		        	<li class="header" style="padding: 0px;">
-						<div class="row" style="margin: 0px -15px;">
-		        			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0px">
-                                <a href="/my/myPage" style="padding:0px"><button type="button" class="btn btn-block waves-effect">내 정보</button></a>
-                            </div>
-		        			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0px">
-                                <a th:href="@{/member/logout}" style="padding:0px"><button type="button" class="btn btn-block waves-effect">로그아웃</button></a>
-                            </div>
-		        		</div>
-		        	</li>
-		    	</th:block>
+		        <li class="header">회원</li>
 		        <!-- home -->
 		        <li class="active">
-		        	<a th:href="@{/index}">
+		        	<a th:href="@{/}">
 		            	<i class="material-icons">home</i>
 		            	<span>Home</span>
 		        	</a>
@@ -452,13 +434,10 @@
 		            </a>
 		            <ul class="ml-menu">
 		                <li>
-		                    <a href="#">#신고게시판</a>
-		                </li>
-		                <li>
-		                    <a th:href="@{/reportlist/searchReport}">유기,유실 신고 - 경</a>
+		                    <a th:href="@{/reportlist/searchReportList}">유기,유실 신고 게시판</a>
 		                </li>
 		                  <li>
-		                    <a href="/reportlist/lostreport">분실 신고 - 경</a>
+		                    <a href="/reportlist/lostReportList">분실 신고 게시판</a>
 		                </li>
 		                 <li>
 		                    <a href="#">#반환(찾음) 신고</a>

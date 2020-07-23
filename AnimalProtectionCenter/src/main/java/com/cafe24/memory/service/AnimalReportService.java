@@ -63,13 +63,13 @@ public class AnimalReportService {
 	 * @return List<SearchReportAnimal>
 	 */
 	public List<SearchReportAnimal> selectSearchReportAnimal(SearchReportAnimal searchReportAnimal){
-		return animalReportMapper.selectSearchReportAnimal();
+		return animalReportMapper.selectSearchReportAnimal(searchReportAnimal);
 	}
 	public List<SearchReportAnimal> selectSearchReportAnimal(){
 		return animalReportMapper.selectSearchReportAnimal();
 	}
 	public List<LostReportAnimal> selectLostReportAnimal(LostReportAnimal lostReportAnimal){
-		return animalReportMapper.selectLostReportAnimal();
+		return animalReportMapper.selectLostReportAnimal(lostReportAnimal);
 	}
 	public List<LostReportAnimal> selectLostReportAnimal(){
 		return animalReportMapper.selectLostReportAnimal();
@@ -79,8 +79,11 @@ public class AnimalReportService {
 	 */
 
 	public int deleteReportManager(ReportManger reportManger) {
-	  
-		return animalReportMapper.deleteReportManger(reportManger); 
+		if(reportManger.getSearchReport()!=null) {
+		return animalReportMapper.deletesearchReportManger(reportManger); 
+	
+		}
+		return animalReportMapper.deletelostReportManger(reportManger); 
 	}
 	/**
 	 * 유기신고에서 삭제
@@ -100,5 +103,36 @@ public class AnimalReportService {
 		return animalReportMapper.deleteSearchReportAnimal(searchReportAnimal);
 	  
 	}  
-	 
+	
+	/**
+	 * 신고취소버튼 클릭시 신고 취소한 오늘날짜 로 db에 업데이트
+	 * @param searchReportAnimal
+	 * @return
+	 */
+	public int searchReportCancel(SearchReportAnimal searchReportAnimal) {
+		return animalReportMapper.searchReportCancel(searchReportAnimal);
+	}
+	
+	public int lostReportCancel(LostReportAnimal lostReportAnimal) {
+		return animalReportMapper.lostReportCancel(lostReportAnimal);
+	}
+	
+	
+	/**
+	 * searchReport신고 update
+	 * @param searchReportAnimal
+	 * @return
+	 */
+	
+	public int updateLostReportAnimal(LostReportAnimal lostReportAnimal) {
+		
+		return animalReportMapper.updateLostReportAnimal(lostReportAnimal);
+	}
+	public int updateSearchReport(SearchReportAnimal searchReportAnimal) {
+		System.out.println(searchReportAnimal+"<-searchReportAnimal service");
+		return animalReportMapper.updateSearchReport(searchReportAnimal);
+	}
+	public int updateReportManager(ReportManger reportManager) {
+		return animalReportMapper.updateReportManager(reportManager);
+		}
 }

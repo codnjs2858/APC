@@ -63,10 +63,12 @@
 		<association property="searchReport" javaType="SearchReportAnimal"> 
 			<result property="searchReportCode" column="report_code"></result><!--search_report_code로 하면 안된다  -->
 			<result property="animalLocation" column="animal_location"></result>
+			<result property="searchReportInDate" column="search_report_in_date"></result>
 		</association>
 		<association property="lostReport" javaType="LostReportAnimal">
 			<result property="lostReportCode" column="lost_report_code"></result>		
-			<result property="lostReportLocation" column="lost_report_location"></result>		
+			<result property="lostReportLocation" column="lost_report_location"></result>
+			<result property="lostReportInDate" column="lost_report_in_date"></result>		
 		</association>
 		<association property="member" javaType="Member">
 			<result property="memberId" column="member_id"></result>		
@@ -98,8 +100,8 @@
 			fROM tb_lost_report;
 		</selectKey>
 	INSERT INTO tb_lost_report
-	(lost_report_code, animal_code, animal_name, animal_gender, animal_feature, member_id, lost_report_state, lost_report_in_date, lost_report_location)
-	VALUES (#{lostReportCode},#{animalType.animalTypeCode} ,#{animalName} , #{animalGender}, #{animaFeature}, #{member.memberId}, #{lostReportState} , NOW(),#{lostReportLocation})
+	(lost_report_code, animal_code, animal_name, animal_gender, animal_feature, member_id, lost_report_state, lost_report_in_date, lost_report_location,lost_animal_picture)
+	VALUES (#{lostReportCode},#{animalType.animalTypeCode} ,#{animalName} , #{animalGender}, #{animaFeature}, #{member.memberId}, #{lostReportState} , NOW(),#{lostReportLocation},#{lostAnimalPicture})
 	
 	</insert>
 	<insert id="insertAniSearchReportManager" parameterType="ReportManger">
@@ -130,6 +132,20 @@
 				,null
 			 )
 	</insert>
+	<update id="searchReportCancel"  parameterType="SearchReportAnimal">
+		UPDATE tb_search_report
+		SET
+			search_report_out_date=CURDATE()
+		WHERE search_report_code=#{searchReportCode};
+	</update>
+	
+	<update id="lostReportCancel" parameterType="LostReportAnimal">
+		UPDATE tb_lost_report
+		SET
+			lost_report_out_date=CURDATE()
+		WHERE lost_report_code=#{lostReportCode}
+	</update>
+	
 	<insert id="insertAniLostReportManager" parameterType="ReportManger">
 		<selectKey resultType="String" order="BEFORE" keyProperty="acceptCode">
 			SELECT (
@@ -178,7 +194,7 @@
 		from tb_search_report AS s join tb_animal_type AS a
 		ON s.animal_code=a.animal_type_code
 		<where>
-		 <if test="searchReportCode!=null and searchReportCode !=''.toString()"> s.search_report_code=#{searchReport.searchReportCode}</if>
+		 <if test="searchReportCode!=null and searchReportCode !=''.toString()"> s.search_report_code=#{searchReportCode}</if>
 		</where>	
 		;
 	</select>
@@ -188,18 +204,22 @@
 		tb_lost_report AS l JOIN tb_animal_type AS a
 		ON l.animal_code=a.animal_type_code
 		<where>
-		 <if test="lostReportCode!=null and lostReportCode !=''.toString()">l.lost_report_code=#{LostReportAnimal.lostReportCode}</if>
+		 <if test="lostReportCode!=null and lostReportCode !=''.toString()">l.lost_report_code=#{lostReportCode}</if>
 		</where>
 		;
 	</select>
 	
-	<delete id="deleteReportManger" parameterType="ReportManger">
-		DELETE FROM tb_report_manager;
-		<where>
-		 <if test="lostReport!=null and lostReport !=''.toString()">lost_report_code=#{lostReport.lostReportCode}</if>
-		 <if test="searchReport!=null and searchReport !=''.toString()">report_code=#{searchReport.searchReportCode}</if>
-		 <if test="acceptCode!=null and acceptCode !=''.toString()"> and accept_code=#{acceptCode}</if>
-		</where>
+	<delete id="deletelostReportManger" parameterType="ReportManger">
+		DELETE FROM tb_report_manager
+		where lost_report_code=#{lostReport.lostReportCode}
+		
+		
+	</delete>
+	<delete id="deletesearchReportManger" parameterType="ReportManger">
+		DELETE FROM tb_report_manager
+		where
+		report_code=#{searchReport.searchReportCode}
+		
 		
 	</delete>
 	
@@ -210,4 +230,49 @@
 	<delete id="deleteLostReportAnimal" parameterType="LostReportAnimal">
 		DELETE FROM tb_lost_report WHERE lost_report_code=#{lostReportCode}
 	</delete>
+	
+	<update id="updateLostReportAnimal" parameterType="LostReportAnimal">
+		UPDATE tb_lost_report
+		SET
+			animal_code=#{animalType.animalTypeCode},
+			animal_name=#{animalName},
+			animal_gender=#{animalGender},
+			animal_feature=#{animaFeature},
+			lost_animal_picture=#{lostAnimalPicture},
+			lost_report_in_date=#{lostReportInDate},
+			lost_report_location=#{lostReportLocation}
+		WHERE lost_report_code=#{lostReportCode}
+	</update>
+
+	
+	<update id="updateSearchReport"  parameterType="SearchReportAnimal">
+		UPDATE tb_search_report
+		SET
+			animal_code=#{animalType.animalTypeCode},
+			animal_gender=#{animalGender},
+			animal_detail=#{animalDetail},
+			animal_location=#{animalLocation},
+			animal_picture=#{animalPicture},
+			search_report_in_date=#{searchReportInDate}
+		WHERE search_report_code=#{searchReportCode}
+	</update>
+	
+	<update id="updateReportManager" parameterType="ReportManger">
+		UPDATE tb_report_manager
+		SET
+			<if test="searchReport!=null and searchReport !=''.toString()">
+			accept_in_date=#{searchReport.searchReportInDate},
+			report_location=#{searchReport.animalLocation}
+			</if>
+			 <if test="lostReport!=null and lostReport !=''.toString()">
+			 accept_in_date=#{lostReport.lostReportInDate},
+			 report_location=#{lostReport.lostReportLocation}
+			 </if>
+		<where>
+		 <if test="lostReport!=null and lostReport !=''.toString()">lost_report_code=#{lostReport.lostReportCode} </if>
+		 <if test="searchReport!=null and searchReport !=''.toString()">report_code=#{searchReport.searchReportCode}</if>
+		</where>
+	</update>
+	
+	
 </mapper>

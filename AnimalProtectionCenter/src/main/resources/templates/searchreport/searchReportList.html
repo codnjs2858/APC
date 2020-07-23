@@ -43,6 +43,9 @@
 	                    	<a th:if="${session.SLEVEL}=='level_code_01' OR ${session.SLEVEL}=='level_code_02'" th:href="@{/reportlist/reportManager}">
 		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">전체보기</button>
 	                    	</a>
+	                    	<a th:unless="${session.SLEVEL}=='level_code_01' OR ${session.SLEVEL}=='level_code_02'" th:href="@{/reportlist/searchReport}">
+		                        <button class="btn btn-default btn-lg btn-block waves-effect" type="button">유기동물 신고하기</button>
+	                    	</a>
 	                    	
 	                    </div>
 	                  
@@ -51,45 +54,53 @@
 	                    <table id="dataTabelEaxm1" class="table table-bordered table-striped table-hover">
 	                        <thead>
 	                           	<tr>
-						 			<th>index</th>
-						 			<th>유기동물코드</th>
-						 			<th>유기동물타입</th>
-						 			<th>유기동물종류</th>
-						 			<th>유기동물성별</th>
+						 			<th>번호</th>
+						 			<th>신고코드</th>
+						 			<th>신고취소여부</th>
 						 			<th>등록인</th>
-						 			<th>유기동물상세</th>
+						 			<th>내용</th>
 						 			<th>발견장소</th>
-						 			<th>유기동물사진</th>
 						 			<th>신고등록날짜</th>
 						 			<th>신고취소날짜</th>
-						 		<!-- 	<th>수정</th>-->
+						 			<th>상세보기</th>
+						 			<th>수정</th>
 						 			<th>삭제</th> 
 			 					</tr>
 			 		
 	                        </thead>
 	                        <tbody>
-	                            <tr th:each="m,i:${searchReportList}" th:data-code="${m.searchReportCode}">
+	                            <tr th:each="m,i:${searchReportList}" id="searchinfo" th:data-code="${m.searchReportCode}">
+						 			
 						 			<td>[[${i.count}]]</td>
 						 			<td>[[${m.searchReportCode}]]</td>
-						 			<td>[[${m.animalType.animalType}]]</td>
-						 			<td>[[${m.animalType.animalTypeSub}]]</td>
-						 			<td>[[${m.animalGender}]]</td>
+						 			<td th:if=${m.searchReportOutDate==null}>접수</td>
+						 			<td th:unless=${m.searchReportOutDate==null}>신고취소</td>
 						 			<td>[[${m.member.memberId}]]</td>
 						 			<td>[[${m.animalDetail}]]</td>
 						 			<td>[[${m.animalLocation}]]</td>
-						 			<td>[[${m.animalPicture}]]</td>
 						 			<td>[[${m.searchReportInDate}]]</td>
 						 			<td>[[${m.searchReportOutDate}]]</td>
-			 						<!-- <td>
-		                            	<a th:href="@{/reportlist/searchReportUpdate(searchReportCode=${m.member.memberId})}">
+			 						<td><div class="align-center">
+		                            	<a th:href="@{/reportlist/searchReportView(searchReportCode=${m.searchReportCode})}">
+	                       				<i class="material-icons"></i>상세보기</a></div>
+	                      			</td>
+	                      			 
+	                      			 <td th:if=${m.searchReportOutDate==null}><div class="align-center">
+		                            	<a th:href="@{/reportlist/updateforgetSearchlist(searchReportCode=${m.searchReportCode})}">
 	                       				<i class="material-icons">update</i></a></div>
-	                      			</td>-->
-	                      			<td>
-	                      				<div class="align-center">
+	                      			</td>
+	                      			 <td th:unless=${m.searchReportOutDate==null}><div class="align-center">
+		                            		<button type="button" class="update" id="update">
+		                      					<i class="material-icons">update</i>
+		                      				</button>
+	                      			</td>
+	                      			
+			 						<td>
+	                      				<div class="align-center" th:if=${m.member.memberId}==${session.SID}>
 		                      				<button type="button" class="delete" th:data-myurl="@{/reportlist/deletelist(searchReportCode=${m.searchReportCode})}" >
 		                      					<i class="material-icons">delete</i>
 		                      				</button>
-	                      				</div>	
+	                      				</div>
 	                      			</td> 
 	                      			
 	                      			
@@ -100,18 +111,18 @@
 				</div>
 			</div>
 		</div>
+
 	</section>
 
  </th:block> 
  
-  <th:block layout:fragment="customHeadScript">
+<th:block layout:fragment="customHeadScript">
  	
- </th:block> 
-	 
+</th:block> 
 <th:block layout:fragment="customFooterScript">
- 	<!-- Jquery DataTable Plugin Js -->
+    <!-- Jquery DataTable Plugin Js -->
     <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
-    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
     <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
     <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
@@ -119,16 +130,38 @@
     <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
- 	<script>
+    <script>
     	$(function(){
+    		
+    		$('.update').click(function(){
+    			swal({
+					title: '읽기만 가능한 게시글입니다',
+					text: '신고접수가 취소로 완료되어 읽기만 가능합니다 ', 
+					icon: 'error',
+					
+				})
+    		
+    		})
+    		$('.delete2').click(function(){
+    			swal({
+					title: '삭제불가능합니다',
+					text: '본인이 작성한 글만 삭제 가능합니다', 
+					icon: 'error',
+					
+				})
+    		
+    		})
+	    	//데이터 테이블
     		$('#dataTabelEaxm1').dataTable({
     			"aaSorting": []
     		});
-    		
+	    	
+	    	//삭제 유효성
     		$('.delete').click(function(){
-    			swal('삭제하시겠습니까?', {
-					title:'경고',
-					icon:'error',
+    			swal({
+					title: '경고',
+					text: '삭제하시겠습니까?', 
+					icon: 'error',
 					buttons: true,
 				})
     			.then((Delete) => {
@@ -137,8 +170,8 @@
     				if(Delete){
     					swal({
     							title: '확인',
+    							text: "정말로 삭제하시겠습니까?", 
     					      	icon: "warning",
-    					      	text:"정말로 삭제하시겠습니까?",
     					      	buttons: true,
     					    })
     					    .then((value) => {
@@ -149,10 +182,8 @@
     				}
     			});
     		});
-			
     	});
-    </script>
- 
- </th:block>
- 
+	</script>
+</th:block>	 
+
 </html>

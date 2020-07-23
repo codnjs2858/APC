@@ -67,7 +67,7 @@
                             <h2>유기동물 발견신고</h2>
                         </div>
                         <div class="body">
-                            <form id="form_validation" action="/reportlist/searchReport" method="POST">
+                            <form id="form_validation" action="/reportlist/searchReport" enctype="multipart/form-data" method="POST">
                            
                                 <div class="row clearfix">
                                <div class="col-sm-4">
@@ -158,12 +158,14 @@
        					<div class="form-group">
                             <div class="form-line">
                             <label>사진등록</label>
-                                <input type="file" name="animalPicture"class="form-control">
-                                
+                                <input type="file" name="animalPicture2"  accept="image/*" class="form-control" id="photo">
+                                <a href="javascript:void(0);" class="thumbnail">
+									<img id="output" src="http://placehold.it/500x300" class="img-responsive">
+								</a>
                             </div>
                         </div>
                                 <button class="btn btn-primary waves-effect" type="submit" id="submit">SUBMIT</button>
-                                <a class="btn btn-primary waves-effect" data-toggle="modal" data-color="red" th:data-data="${session.SID}" data-title="정말 신고 취소하시겠습니까?" href="#modalTarget" id="cancel">신고 취소</a>
+<!--                                 <a class="btn btn-primary waves-effect" data-toggle="modal" data-color="red" th:data-data="${session.SID}" data-title="정말 신고 취소하시겠습니까?" href="#modalTarget" id="cancel">신고 취소</a> -->
                             </form>
                             </br>
                       
@@ -205,7 +207,20 @@
  <th:block layout:fragment="customFooterScript">
 	<script>
 	$(function(){
-		
+			//이미지 미리보기
+			function readURL(input) {
+		        if (input.files && input.files[0]) {
+		            var reader = new FileReader();
+		            reader.onload = function(e) {
+		                $('#output').attr('src', e.target.result);
+		            }
+		            reader.readAsDataURL(input.files[0]);
+		        }
+		   	}
+		    $("#photo").change(function() {
+		        readURL(this);
+		    });
+			
 			$('#modalTarget').on('show.bs.modal', function (event) {
 		        var color = $(event.relatedTarget).data('color');
 		        var data = $(event.relatedTarget).data('data');

@@ -76,7 +76,7 @@
                             <h2>유기동물 분실신고</h2>
                         </div>
                         <div class="body">
-                            <form id="form_validation" action="/reportlist/lostReport" method="POST">
+                            <form id="form_validation" action="/reportlist/lostReport" enctype="multipart/form-data" method="POST">
                                 <div class="form-group">
                                     <div class="form-line">
                                     	<label>세션아이디
@@ -173,14 +173,14 @@
                              <div class="form-group">
                             <div class="form-line">
                             <label>사진등록</label>
-                                <input type="file" name="lostAnimalPicture"class="form-control">
+                                <input type="file" name="lostAnimalPicture2"class="form-control">
                                 
                             </div>
                         </div>
        					  </div> 
        					  
                                 <button class="btn btn-primary waves-effect" type="submit">분실신고</button>
-                                <button class="btn btn-primary waves-effect" type="button" id="cancel">분실신고취소</button>
+                                
                             </form>
                         </div>
                     </div>
@@ -195,11 +195,23 @@
 
 
 <th:block layout:fragment="customFooterScript">
-
-	<script>
-	
-	</script>
-	
+		<!-- Jquery DataTable Plugin Js -->
+    <script src="/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script>
+    	$(function(){
+    		//이미지 깨짐
+			$('img').on("error",function(){
+				$(this).attr('src','http://placehold.it/500x300');
+			});
+    	}
 </th:block>
  
 </html>
