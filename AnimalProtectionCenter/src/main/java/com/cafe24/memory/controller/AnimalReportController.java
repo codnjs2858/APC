@@ -141,15 +141,23 @@ public class AnimalReportController {
 	 * @return
 	 */
 	@GetMapping("/reportManagerDetail")
-	public String reportManagerUpdate(LostReportAnimal lostReportAnimal,SearchReportAnimal searchReportAnimal,Model model) {
-	
-		if(lostReportAnimal!=null) {
-		model.addAttribute("lostAniDetail", animalReportService.selectLostReportAnimal(lostReportAnimal).get(0));
+	public String reportManagerDetail(LostReportAnimal lostReportAnimal,SearchReportAnimal searchReportAnimal,Model model) {
+		System.out.println("lostReportAnimal->"+lostReportAnimal);
+		System.out.println("searchReportAnimal->"+searchReportAnimal);
+		LostReportAnimal lostAniDetail=null;
+		SearchReportAnimal SearchAnimalDetail=null;
+		if(lostReportAnimal.getLostReportCode()!=null && !"".equals(lostReportAnimal.getLostReportCode())) {
+			System.out.println(1);
+			lostAniDetail= animalReportService.selectLostReportAnimal(lostReportAnimal).get(0);
+			System.out.println("lostAniDetail->"+lostAniDetail);
+		model.addAttribute("lostAniDetail",lostAniDetail);
 		return "reportlist/lostAnimalDetail";
 		}
-		else if(searchReportAnimal!=null){
-		System.out.println(searchReportAnimal);
-		model.addAttribute("SearchAnimalDetail", animalReportService.selectSearchReportAnimal(searchReportAnimal).get(0));	
+		else if(searchReportAnimal.getSearchReportCode()!=null && !"".equals(searchReportAnimal.getSearchReportCode())){
+			System.out.println(2);
+			SearchAnimalDetail=animalReportService.selectSearchReportAnimal(searchReportAnimal).get(0);
+			model.addAttribute("SearchAnimalDetail", SearchAnimalDetail);
+			System.out.println("SearchAnimalDetail->"+SearchAnimalDetail);
 		return "reportlist/SearchAnimalDetail";
 		}
 		return "redirect:/reportlist/reportManager";
@@ -158,19 +166,27 @@ public class AnimalReportController {
 	public String deletelist(ReportManger reportManager,LostReportAnimal lostReportAnimal,SearchReportAnimal searchReportAnimal) {
 		System.out.println("/deletelist->>lostReportAnimal->"+lostReportAnimal);
 		System.out.println("/deletelist->>searchReportAnimal->"+searchReportAnimal);
+		System.out.println("/deletelist->>reportManager->"+reportManager);
 		String re=null;
-		if(lostReportAnimal!=null) {
+		int result=0;
+		if(lostReportAnimal.getLostReportCode()!=null && !"".equals(lostReportAnimal.getLostReportCode())) {
 			reportManager.setLostReport(lostReportAnimal);
 			System.out.println("/deletelist->>reportManager->"+reportManager);
-			animalReportService.deleteReportManager(reportManager);
-			animalReportService.deleteLostReportAnimal(lostReportAnimal);
+			result=animalReportService.deleteReportManager(reportManager);
+			System.out.println("ReportManager삭제 결과->"+result);
+			result=animalReportService.deleteLostReportAnimal(lostReportAnimal);
+			System.out.println("LostReportAnimal삭제 결과->"+result);
 			re= "redirect:/reportlist/lostReportList";
 		}
-		else if(searchReportAnimal!=null){
+		else if(searchReportAnimal.getSearchReportCode()!=null && !"".equals(searchReportAnimal.getSearchReportCode())){
 			reportManager.setSearchReport(searchReportAnimal);
 			System.out.println("/deletelist->>reportManager->"+reportManager);
-			animalReportService.deleteReportManager(reportManager);
-			animalReportService.deleteSearchReportAnimal(searchReportAnimal);
+			
+			result=animalReportService.deleteReportManager(reportManager);
+			System.out.println("ReportManager삭제 결과->"+result);
+			
+			result=animalReportService.deleteSearchReportAnimal(searchReportAnimal);
+			System.out.println("searchReport삭제 결과->"+result);
 			re= "redirect:/reportlist/searchReportList";
 		}
 		return re;
@@ -190,7 +206,9 @@ public class AnimalReportController {
 	public String lostReportView(LostReportAnimal lostReportAnimal,AnimalType animalType,Model model) {
 
 		List<LostReportAnimal> LostReList=animalReportService.selectLostReportAnimal(lostReportAnimal);
+		System.out.println("LostReList->"+LostReList);
 		LostReportAnimal LostReport=LostReList.get(0);
+		System.out.println("LostReport->"+LostReport);
 		model.addAttribute("lostAniDetail", LostReport);
 		return "reportlist/LostAnimalDetail";
 	}
@@ -240,15 +258,19 @@ public class AnimalReportController {
 	public String updateLostlist(LostReportAnimal lostReportAnimal,Member member,AnimalType animalType,ReportManger reportManager, @RequestParam("animalPicture2") MultipartFile file) {
 		lostReportAnimal.setMember(member);
 		lostReportAnimal.setAnimalType(animalType);
+		System.out.println("lostReportAnimal->"+lostReportAnimal);
+		int result=0;
 		if(file != null && !"".equals(file.getOriginalFilename())) {
 			storageService.deleteFile(lostReportAnimal.getLostAnimalPicture());
 			storageService.store(file);	
 			lostReportAnimal.setLostAnimalPicture(file.getOriginalFilename());
 		}
-		animalReportService.updateLostReportAnimal(lostReportAnimal);
+		result=animalReportService.updateLostReportAnimal(lostReportAnimal);
+		System.out.println(result+"<-LostReportAnimalt 수정 결과");
 		reportManager.setLostReport(lostReportAnimal);
 		reportManager.setMember(member);
-		animalReportService.updateReportManager(reportManager);
+		result=animalReportService.updateReportManager(reportManager);
+		System.out.println(result+"<-ReportManager 수정 결과");
 		
 		
 		return "redirect:/reportlist/lostReportList";
