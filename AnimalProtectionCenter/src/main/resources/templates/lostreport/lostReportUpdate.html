@@ -68,7 +68,7 @@
                         </div>
                         <div class="body">
                             <form id="form_validation" action="/reportlist/updateLostlist" enctype="multipart/form-data" method="POST">
-                             <input type="hidden" class="form-control" name="lostReportCode" readonly="readonly" th:value="${lostReport.lostReportCode}">
+                           
                            
                                 <div class="row clearfix">
                                <div class="col-sm-4">
@@ -76,6 +76,7 @@
                                     <div class="form-line">
                                        <label >세션아이디</label>
                                         <input type="text" class="form-control" name="memberId" readonly="readonly" th:value="${session.SID}">
+                                        <input type="hidden" class="form-control" name="lostReportCode" readonly="readonly" th:value="${lostReport.lostReportCode}">
                                     </div>
                                 </div>
                                 </div>
