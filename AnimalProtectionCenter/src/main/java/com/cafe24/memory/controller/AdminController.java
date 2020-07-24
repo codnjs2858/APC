@@ -56,6 +56,27 @@ public class AdminController {
 		return "intro/introSMY";
 	}
 	
+	@GetMapping("/introSMY")
+	public String introSMY() {
+		return "intro/introSMY";
+	}
+	@GetMapping("/introLKJ")
+	public String introLKJ() {
+		return "intro/introLKJ";
+	}
+	@GetMapping("/introSCW")
+	public String introSCW() {
+		return "intro/introSCW";
+	}
+	@GetMapping("/introSCK")
+	public String introSCK() {
+		return "intro/introSCK";
+	}
+	@GetMapping("/introJSY")
+	public String introJSY() {
+		return "intro/introJSY";
+	}
+	
 	@RequestMapping("/index")
 	public String index(Model model) {
 		//여기에서 고양이 보내주고 하면 될듯 
