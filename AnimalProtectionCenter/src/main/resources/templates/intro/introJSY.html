@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="@{layout/default}">
+<th:block layout:fragment="customCss">
+	<style>
+		.form-group .form-line:after{
+			border-bottom: none;
+		}
+		::-webkit-scrollbar { display: none; }
+	</style>
+</th:block>
+
+<th:block layout:fragment="customTitle">
+</th:block> 
+
+<th:block layout:fragment="customHeadScript">
+</th:block> 
+
+<th:block layout:fragment="customContents">
+ 	<section class="content">
+		<div class="card">
+			<div class="header">
+				<h2>팀 개인별 소개</h2>
+			</div>
+			<div class="header">
+				<div class="row">
+					<div class="col-md-2">
+						<a href="javascript:void(0);" class="thumbnail">
+							<img src="/images/jsy.png">
+                        </a>
+					</div>
+					<div class="col-md-3">
+						<div class="m-b-25">
+							<h2 class="font-bold col-blue-grey">PROFILE</h2>
+						</div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">person</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="조성윤(SEONGYUN JO)" readonly="readonly">
+			                        <label class="form-label">성명</label>
+			                    </div>
+							</div>
+		                </div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">cake</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="2004.10.02" readonly="readonly">
+			                        <label class="form-label">생년월일</label>
+			                    </div>
+							</div>
+						</div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">location_on</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="전라북도 전주시" readonly="readonly">
+			                        <label class="form-label">주소</label>
+			                    </div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="m-b-25">
+							<h2 class="font-bold col-blue-grey">CONTACTS</h2>
+						</div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">forum</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="https://blog.naver.com/zpqls3063" readonly="readonly">
+			                        <label class="form-label">블로그</label>
+			                    </div>
+							</div>
+		                </div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">email</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="zpqls3063@naver.com" readonly="readonly">
+			                        <label class="form-label">Email</label>
+			                    </div>
+							</div>
+						</div>
+						<div class="form-group form-float">
+							<div class="input-group">
+								<span class="input-group-addon">
+		                            <i class="material-icons">phone</i>
+		                        </span>
+								<div class="form-line">
+			                        <input type="text" class="form-control" value="010-4075-3063" readonly="readonly">
+			                        <label class="form-label">Phone</label>
+			                    </div>
+			            	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="body">
+				<p class="lead col-blue-grey">담당 작업</p>
+				<div class="row clearfix">
+					<div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
+		                <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+		                    <div class="panel panel-default">
+		                        <div class="panel-heading" role="tab" id="headingOne_1">
+		                            <h4 class="panel-title">
+		                                <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_1" aria-expanded="false" aria-controls="collapseOne_1" class="collapsed">
+					                    	<i class="material-icons">keyboard_arrow_down</i>
+					                    	입양심사
+		                                </a>
+		                            </h4>
+		                        </div>
+		                        <div id="collapseOne_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_1" aria-expanded="false" style="height: 0px;">
+		                            <div class="panel-body">
+		                            	<p class="font-bold">유기동물 입양을 위한 심사 관리</p>
+                               			<p>- 회원의 입양심사 점수 채점</p>
+                               			<p>- 입양심사 결과 검토</p>
+                               			<p>- 입양심사 문제 수정</p>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="panel panel-default">
+		                        <div class="panel-heading" role="tab" id="headingTwo_1">
+		                            <h4 class="panel-title">
+		                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseTwo_1" aria-expanded="false" aria-controls="collapseTwo_1">
+	                                   		<i class="material-icons">keyboard_arrow_down</i>
+	                                   		게시판
+		                                </a>
+		                            </h4>
+		                        </div>
+		                        <div id="collapseTwo_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_1" aria-expanded="false">
+		                            <div class="panel-body">
+		                               	<p class="font-bold">게시판</p>
+		                               	<p>- 게시판 내의 부적절한 게시글 삭제</p>
+		                               	<p>- 필요한 카테고리의 게시판 추가</p>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="panel panel-default">
+		                        <div class="panel-heading" role="tab" id="headingThree_1">
+		                            <h4 class="panel-title">
+		                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseThree_1" aria-expanded="false" aria-controls="collapseThree_1">
+		                                	<i class="material-icons">keyboard_arrow_down</i>
+		                                   	쪽지
+		                                </a>
+		                            </h4>
+		                        </div>
+		                        <div id="collapseThree_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_1" aria-expanded="false">
+		                            <div class="panel-body">
+										<p class="font-bold">쪽지</p>
+										<p>-회원간 쪽지 주고받기 기능</p>
+		                            </div>
+		                        </div>
+		                    </div>
+		                
+		                </div>
+		            </div>
+		    	</div>
+			</div>
+			<div class="body">
+           		<div>
+					<form action="/admin" method="post">
+		            	<button class="btn btn-block bg-red waves-effect" type="submit">유기동물보호센터 가기</button>
+		            </form>
+           		</div>
+           		
+           	</div>
+		</div>
+	</section>
+</th:block> 
+
+<th:block layout:fragment="customFooterScript">
+</th:block>
+ 
+</html>
