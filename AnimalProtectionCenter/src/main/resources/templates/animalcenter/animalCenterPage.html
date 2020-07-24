@@ -143,14 +143,14 @@
 			           			<li>[[${dlist.animalDisposalPastureInfo}]]</li>
 		           			</th:block>
 		           			<th:block th:if="${dlist.animalDisposalResult} == '반환'">
-			           			<li>반환인:[[${dlist.centerReturn.centerReturnName}]]</li>
-			           			<li>반환인 주소:[[${dlist.centerReturn.centerReturnAddress}]]</li>
-			           			<li>반환인 연락처:[[${dlist.centerReturn.centerReturnPhone}]]</li>
+			           			<li>반환인:[[${dlist.centerReturn?.centerReturnName}]]</li>
+			           			<li>반환인 주소:[[${dlist.centerReturn?.centerReturnAddress}]]</li>
+			           			<li>반환인 연락처:[[${dlist.centerReturn?.centerReturnPhone}]]</li>
 			           			<li th:if="${returnDate} != null">반환날짜 : [[${returnDate}]]</li>
 		           			</th:block>
 		           			<th:block th:if="${dlist.animalDisposalResult} == '입양'">
 			           			<li>분양인 : [[${dlist.adoptee.member.memberName}]]</li>
-			           			<li>분양인 주소 : [[${dlist.adoptee.member.memberAddr}]]</li>
+			           			<li>분양인 주소 : [[${dlist.adoptee.member.memberAddr2}]]</li>
 			           			<li>분양인 연락처 : [[${dlist.adoptee.member.memberPhone}]]</li>
 			           			<li th:if="${adopteeDate} != null">분양 날짜 : [[${adopteeDate}]]</li>
 		           			</th:block>
