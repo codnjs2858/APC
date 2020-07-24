@@ -207,6 +207,34 @@
  <th:block layout:fragment="customFooterScript">
 	<script>
 	$(function(){
+		var animalGender=$('input[name="animalGender]")');
+		var count=0;
+		$('#submit').click(function(){
+			var userform=$('#form_validation');
+			if($('#finddate').val()==null||$('#finddate').val()==''){
+				alert('날짜를 입력해주세요');
+				return;
+				
+			}if($('#findlocation').val()==null||$('#findlocation').val()==''){
+				alert('발견장소를 입력해주세요');
+				return;
+				
+			}for(var i=0;i<animalGender.length;i++){
+				if(animalGender[i].checked){
+					var count=1;
+				}
+			}
+			if(count!=1){
+				alert('성별를 입력해주세요');
+				return;
+			}
+			userform.submit();
+			if(userform.animalDetail==null||userform.animalDetail==''){
+				alert('발견정황을 입력해주세요');
+				return;	
+			}
+		})
+		
 			//이미지 미리보기
 			function readURL(input) {
 		        if (input.files && input.files[0]) {
