@@ -53,7 +53,7 @@ public class AdminController {
 		if(send_code != null) {
 			session.setAttribute("com", staffService.selectStaffList(send_code));
 		}
-		return "intro/introSMY";
+		return "intro/introSCK";
 	}
 	
 	@GetMapping("/introSMY")

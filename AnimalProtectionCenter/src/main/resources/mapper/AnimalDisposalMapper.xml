@@ -29,7 +29,7 @@
 				<result property="memberId" column="member_id"/>
 				<result property="memberName" column="member_name"/>
 				<result property="memberPhone" column="member_phone"/>
-				<result property="memberAddr" column="member_addr"/>
+				<result property="memberAddr2" column="member_addr2"/>
 			</association>
 		</association>
 	</resultMap>
