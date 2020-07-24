@@ -34,12 +34,11 @@
 	VALUES (#{memberId}, #{memberPw}, 'level_code_03', #{memberName}, #{memberPhone}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3}, #{memberAddr4}, #{memberEmail}, NOW())
 	</insert>
 	
-	<delete id="deleteMember" parameterType="Member">
-		DELETE 
-		FROM 
-			tb_member 
-		WHERE 
-			member_id = #{memberId};
+	<!-- 프로시저 사용 삭제 -->
+	<delete id="deleteMember" statementType="CALLABLE">
+		
+		CALL deletemember(#{memberId});
+		
 	</delete>
 	
 	<update id="updateMember" parameterType="Member">

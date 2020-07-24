@@ -53,27 +53,7 @@ public class AdminController {
 		if(send_code != null) {
 			session.setAttribute("com", staffService.selectStaffList(send_code));
 		}
-		return "intro/introSCK";
-	}
-	
-	@GetMapping("/introSCW")
-	public String introSCW() {
-		return "intro/introSCW";
-	}
-	
-	@GetMapping("/introLKJ")
-	public String introLKJ() {
-		return "intro/introLKJ";
-	}
-	
-	@GetMapping("/introSMY")
-	public String introSMY() {
 		return "intro/introSMY";
-	}
-	
-	@GetMapping("/introJSY")
-	public String introJSY() {
-		return "intro/introJSY";
 	}
 	
 	@RequestMapping("/index")
